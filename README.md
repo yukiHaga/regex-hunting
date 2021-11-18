@@ -106,5 +106,8 @@
 ## 画面遷移図
 https://www.figma.com/file/VNjsqixD6sQPJy7ljlJiV0/portfolio?node-id=260%3A2
 
+## ER図
+https://drive.google.com/file/d/1Wt1Jky-odYixeLBXB-iN9J81D6O10I15/view?usp=sharing
+
 ## なぜこのサービスを作りたいのか？
 正規表現を勉強した際に、"いくつかの文字列を一つの形式で表現できる"ことにとても感動しました。そのため、この感動を他の人にも体験してほしいと感じました。しかし、初学者向けに正規表現を解説している本は少ないです。自分が経験した感動を他の人にも体験してほしいので、今回のような学習ハードルを解消するサービスを作ろうと決めました。
