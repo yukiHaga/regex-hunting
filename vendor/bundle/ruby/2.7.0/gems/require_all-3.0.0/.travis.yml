@@ -1,0 +1,16 @@
+rvm:
+ - 2.5.0
+ - 2.4.3
+ - 2.3.6
+ - jruby-19mode
+ - rbx-3
+ - ruby-head
+notifications:
+  recipients:
+    - jarmo.p@gmail.com
+matrix:
+  allow_failures:
+    - rvm: ruby-head
+    - rvm: jruby-19mode
+    - rvm: rbx-3
+
