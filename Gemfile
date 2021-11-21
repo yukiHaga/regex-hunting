@@ -52,7 +52,7 @@ group :development do
   # help to kill N+1 queries and unused eager loading
   gem 'bullet'
   # RailsAdmin is a Rails engine that provides an easy-to-use interface for managing your data
-  gem 'rails_admin'
+  # gem 'rails_admin', '~> 2.0.0'
 end
 
 group :production do
@@ -61,3 +61,5 @@ end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
+
+gem 'sprockets', '~> 3.7.2'
