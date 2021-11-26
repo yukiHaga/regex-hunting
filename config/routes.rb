@@ -7,7 +7,7 @@ Rails.application.routes.draw do
 
       resources :user, only: :create do
         get 'my-page', to: 'my_pages#index'
-        get 'percent', to: 'percents#get_correct_percent'
+        get 'percent', to: 'percents#get_correct_percents'
         get 'account-settings', to: 'account_settings#update'
         get 'title-settings', to: 'title_settings#update'
       end

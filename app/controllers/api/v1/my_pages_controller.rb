@@ -1,19 +1,23 @@
 class Api::V1::MyPagesController < ApplicationController
   def index
-    # 今日を含めた1ヶ月分の各日におけるゲーム頻度に関する処理
-    # モデルに移す。
+    # 今日を含めた1ヶ月分の各日における初級ゲーム頻度に関する処理
+    # デフォルトで初級のみにする
+    # モデルに移す
     today = Date.today
     beginning_day = today.beginning_of_month
     last_day = today.end_of_month
     this_month = beginning_day..last_day
-    game_managements_per_month = current_user.game_managements.where(play_date: this_month)
+    game_managements_per_month = current_user.game_managements.where(difficulty_level: "初級",
+                                                                     play_date: this_month)
     # 今月の各日におけるゲーム回数
+    # これに関しては、全ての難易度を含めて日にちでグループ化する
     # play_date(key)とカウント数(value)を持つハッシュがgame_frequencies_per_monthに代入
-    game_frequencies_per_month = game_managements_per_month.group(:play_date).count
+    game_frequencies_per_month = current_user.game_managements.where(play_date: this_month).
+                                                               group(:play_date).count
 
     # 1ヶ月分の各日における正解率に関する処理
-    # 重複している日付の正答率も含まれている。
-    # デフォルトで1ヶ月
+    # 重複している日付の正答率も含まれている
+    # デフォルトで初級の1ヶ月
     # モデルに移す。
     temporary_correct_percents_per_month = game_managements_per_month.map do |game_management|
                          correct = game_management.solved_questions.where(judgement: :correct)
@@ -38,14 +42,14 @@ class Api::V1::MyPagesController < ApplicationController
     uniq_correct_percents_per_month = max_correct_percents_per_month.uniq
 
     # 解放したタイトルデータ
-    # モデルに移す。
+    # モデルに移す
     release_titles = current_user.release_titles
     owned_titles = release_titles.map do |release_title|
                      {name: release_title.title[:name], release_date: release_title[:release_date]}
                    end
 
     # 解放していないタイトルデータ
-    # モデルに移す。
+    # モデルに移す
     release_title_names = current_user.has_titles.pluck(:name)
     unavailable_titles = Title.where.not(name: release_title_names)
 
