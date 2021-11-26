@@ -23,7 +23,7 @@ class Api::V1::MyPagesController < ApplicationController
                          correct = game_management.solved_questions.where(judgement: :correct)
                          incorrect = game_management.solved_questions.where(judgement: :incorrect)
                          play_date = game_management[:play_date]
-                         correct_percent = (correct * (correct + incorrect)) * 100
+                         correct_percent = (correct / (correct + incorrect)) * 100
                          {play_date: play_date, correct_percent: correct_percent}
                        end
 
