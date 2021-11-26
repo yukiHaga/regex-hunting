@@ -3,16 +3,16 @@ class Api::V1::GameManagementsController < ApplicationController
 
   def start
     # ゲームに関する処理
-    @game_management = current_user ?
-                         current_user.game_managements.create(difficulty_level: params[:difficulty_level],
-                                                              game_result: "progress",
-                                                              result_time: Time.zone.now,
-                                                              play_date: Date.today)
-                       :
-                         GameManagement.new(difficulty_level: params[:difficulty_level],
-                                            game_result: "progress",
-                                            result_time: Time.zone.now,
-                                            play_date: Date.today)
+    game_management = current_user ?
+                        current_user.game_managements.create(difficulty_level: params[:difficulty_level],
+                                                             game_result: "progress",
+                                                             result_time: Time.zone.now,
+                                                             play_date: Date.today)
+                      :
+                        GameManagement.new(difficulty_level: params[:difficulty_level],
+                                           game_result: "progress",
+                                           result_time: Time.zone.now,
+                                           play_date: Date.today)
 
     # 問題に関する処理
     indices = Question.pluck(:id)
@@ -21,16 +21,16 @@ class Api::V1::GameManagementsController < ApplicationController
       search_indices << search_index
       indices.delete(search_index)
     end
-    @questions = Question.where(id: search_indices, difficulty_level: params[:difficulty_level]);
+    questions = Question.where(id: search_indices, difficulty_level: params[:difficulty_level]);
 
     # モンスターに関する処理
-    @monster = Monster.find_by(difficulty_level: params[:difficulty_level])
+    monster = Monster.find_by(difficulty_level: params[:difficulty_level])
 
     # レンダリング
     render json: {
-      game_management: @game_management,
-      question: @questions,
-      monster: @monster
+      game_management: game_management,
+      question: questions,
+      monster: monster
     }, status: :created
   end
 
@@ -64,12 +64,12 @@ class Api::V1::GameManagementsController < ApplicationController
     # release_titles <<は、Userモデルに記述する。
     # Userモデルのrelease_titlesは、throughをつけなくて良い。中間テーブルだけにデータを直接入れる。
     if params[:release_title]
-      @title = Title.find_by(name: params[:release_title][:name])
-      current_user.release_titles << @title.release_titles.
-                                            build(release_date: params[:release_title][:release_date])
+      title = Title.find_by(name: params[:release_title][:name])
+      current_user.release_titles << title.release_titles.
+                                           build(release_date: params[:release_title][:release_date])
     end
 
     # レンダリング
-    render json: {}, status: :ok
+    render json: {}, status: :created
   end
 end
