@@ -1,5 +1,6 @@
 class Api::V1::PercentsController < ApplicationController
   def get_correct_percents
+    # 検索期間が決定したら、このアクションが呼び出される
     # 検索期間に応じた初級, 中級, 上級のゲーム管理データを取得
     beginning_day = params[:search_term][:beginning_day]
     last_day = params[:search_term][:last_day]
