@@ -7,7 +7,7 @@ class Api::V1::MyPagesController < ApplicationController
     beginning_day = today.beginning_of_month
     last_day = today.end_of_month
     this_month = beginning_day..last_day
-    game_managements_per_month = current_user.game_managements.where(play_date: this_month)
+    game_managements_per_month = current_user.game_managements.where(play_date: this_month, game_result: :win)
     # 今月の各日におけるゲーム回数
     # これに関しては、全ての難易度を含めて日にちでグループ化する
     # play_date(key)とカウント数(value)を持つハッシュがgame_frequencies_per_monthに代入

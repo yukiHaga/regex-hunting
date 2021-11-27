@@ -19,8 +19,10 @@ class Api::V1::RankingsController < ApplicationController
   end
 
   def get_top_three(difficulty_level)
-    fastest_result_time = GameManagement.where(difficulty_level: difficulty_level).minimum(:result_time)
+    fastest_result_time = GameManagement.where(difficulty_level: difficulty_level, game_result: :win).
+                                         minimum(:result_time)
     top_three_game_managements = GameManagement.where(difficulty_level: difficulty_level,
+                                                      game_result: :win,
                                                       result_time: fastest_result_time..
                                                      ).
                                                 limit(3)

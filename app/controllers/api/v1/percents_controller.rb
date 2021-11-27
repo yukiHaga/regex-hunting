@@ -5,7 +5,7 @@ class Api::V1::PercentsController < ApplicationController
     beginning_day = params[:search_term][:beginning_day]
     last_day = params[:search_term][:last_day]
     this_month = beginning_day..last_day
-    game_managements_per_month = current_user.game_managements.where(play_date: this_month)
+    game_managements_per_month = current_user.game_managements.where(play_date: this_month, game_result: :win)
 
     # 取得した全てのゲーム管理データ対して、正答率を計算する
     temporary_elementary_correct_percents_per_month = []
