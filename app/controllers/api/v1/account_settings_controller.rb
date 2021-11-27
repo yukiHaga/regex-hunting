@@ -1,7 +1,9 @@
 class Api::V1::AccountSettingsController < ApplicationController
   def update
     current_user.update!(user_params)
-    render json: {}, status: :ok
+    render json: {
+      user: current_user
+    }, status: :ok
   end
 
   private
