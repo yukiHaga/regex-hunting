@@ -5,13 +5,16 @@ Rails.application.routes.draw do
       get 'start', to: 'game_managements#start'
       post 'finish', to: 'game_managements#finish'
 
-      resources :user, only: %i(create update) do
+      resources :user, only: :create do
         get 'my-page', to: 'my_pages#index'
-        get 'ranking', to: 'rankings#index'
-        get 'percent', to: 'percents#get_correct_percent'
+        get 'percent', to: 'percents#get_correct_percents'
+        get 'account-settings', to: 'account_settings#update'
+        get 'title-settings', to: 'title_settings#update'
       end
+      get 'ranking', to: 'rankings#index'
       post 'login', to: 'user_sessions#create'
       delete 'logout', to: 'user_sessions#destroy'
+      resources :password_resets, only: %i[create edit update]
     end
   end
 end
