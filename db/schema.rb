@@ -15,7 +15,7 @@ ActiveRecord::Schema.define(version: 2021_11_28_072448) do
   create_table "game_managements", force: :cascade do |t|
     t.integer "difficulty_level", default: 0, null: false
     t.integer "game_result", default: 0, null: false
-    t.datetime "result_time", null: false
+    t.time "result_time", default: "2000-01-01 00:00:00", null: false
     t.date "play_date", null: false
     t.integer "user_id", null: false
     t.datetime "created_at", precision: 6, null: false
