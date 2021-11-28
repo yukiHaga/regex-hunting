@@ -5,7 +5,7 @@ Rails.application.routes.draw do
       get 'start', to: 'game_managements#start'
       post 'finish', to: 'game_managements#finish'
 
-      resources :user, only: :create do
+      resources :users, only: :create do
         get 'my-page', to: 'my_pages#index'
         get 'percent', to: 'percents#get_correct_percents'
         get 'account-settings', to: 'account_settings#update'

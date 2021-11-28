@@ -2,7 +2,6 @@ class Api::V1::UserSessionsController < ApplicationController
   skip_before_action :require_login, only: :create
 
   def create
-    binding.pry
     user = login(params[:email], params[:password])
     if user
       render json: {
