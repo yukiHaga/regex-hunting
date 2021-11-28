@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_11_22_142141) do
+ActiveRecord::Schema.define(version: 2021_11_28_072448) do
 
   create_table "game_managements", force: :cascade do |t|
     t.integer "difficulty_level", default: 0, null: false
@@ -66,6 +66,22 @@ ActiveRecord::Schema.define(version: 2021_11_22_142141) do
     t.string "name", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "users", force: :cascade do |t|
+    t.string "name", null: false
+    t.integer "rank", default: 1, null: false
+    t.integer "total_experience", default: 0, null: false
+    t.integer "maximum_experience_per_rank", default: 500, null: false
+    t.integer "temporary_experience", default: 0, null: false
+    t.integer "public_rank", default: 0, null: false
+    t.integer "active_title", default: 0, null: false
+    t.string "email", null: false
+    t.string "crypted_password"
+    t.string "salt"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["email"], name: "index_users_on_email", unique: true
   end
 
   add_foreign_key "game_managements", "users"
