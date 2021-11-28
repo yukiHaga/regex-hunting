@@ -8,7 +8,7 @@ class Api::V1::TitleSettingsController < ApplicationController
           total_experience: current_user[:total_experience],
           maximum_experience_per_rank: current_user[:maximum_experience_per_rank],
           temporary_experience: current_user[:temporary_experience],
-          public_rank: current_user[:public_rank],
+          open_rank: current_user[:open_rank],
           active_title: current_user[:active_title],
           email: current_user[:email]
         }

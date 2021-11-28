@@ -10,6 +10,5 @@ class GameManagement < ApplicationRecord
   enum difficulty_level: { 初級: 0, 中級: 1, 上級: 2 }
   enum game_result: { progress: 0, win: 1, lose: 2 }
   validates :difficulty_level, :game_result, :result_time, :play_date, :user_id, presence: true
-  # Userモデルを作るまでは、以下のバリデーションをコメンアウトする。
-  # validates :user, presence: true, if: -> { user_id.present? }
+  validates :user, presence: true, if: -> { user_id.present? }
 end

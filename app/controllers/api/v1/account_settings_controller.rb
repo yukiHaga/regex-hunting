@@ -8,7 +8,7 @@ class Api::V1::AccountSettingsController < ApplicationController
           total_experience: current_user[:total_experience],
           maximum_experience_per_rank: current_user[:maximum_experience_per_rank],
           temporary_experience: current_user[:temporary_experience],
-          public_rank: current_user[:public_rank],
+          open_rank: current_user[:open_rank],
           active_title: current_user[:active_title],
           email: current_user[:email]
         }
@@ -21,6 +21,6 @@ class Api::V1::AccountSettingsController < ApplicationController
   private
 
   def user_params
-    params.require(:user).permit(:name, :email, :pulic_rank)
+    params.require(:user).permit(:name, :email, :open_rank)
   end
 end
