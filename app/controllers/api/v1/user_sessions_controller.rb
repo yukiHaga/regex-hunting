@@ -18,7 +18,7 @@ class Api::V1::UserSessionsController < ApplicationController
         }
       }, status: :ok
     else
-      render json: {errors: user.errors}, status: :bad_request
+      render json: {errors: user.errors}, status: :not_found
     end
   end
 
