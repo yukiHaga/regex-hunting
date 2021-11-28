@@ -6,7 +6,7 @@ class SorceryCore < ActiveRecord::Migration[6.0]
       t.integer :total_experience, null: false, default: 0
       t.integer :maximum_experience_per_rank, null: false, default: 500
       t.integer :temporary_experience, null: false, default: 0
-      t.integer :public_rank, null: false, default: 0
+      t.integer :open_rank, null: false, default: 0
       t.integer :active_title, null: false, default: 0
 
       # sorcery
