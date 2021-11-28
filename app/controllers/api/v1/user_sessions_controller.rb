@@ -2,6 +2,7 @@ class Api::V1::UserSessionsController < ApplicationController
   skip_before_action :require_login, only: :create
 
   def create
+    binding.pry
     user = login(params[:email], params[:password])
     if user
       render json: {
@@ -11,7 +12,7 @@ class Api::V1::UserSessionsController < ApplicationController
           total_experience: user[:total_experience],
           maximum_experience_per_rank: user[:maximum_experience_per_rank],
           temporary_experience: user[:temporary_experience],
-          public_rank: user[:public_rank],
+          open_rank: user[:open_rank],
           active_title: user[:active_title],
           email: user[:email]
         }
@@ -25,4 +26,9 @@ class Api::V1::UserSessionsController < ApplicationController
     logout
     render json: {}, status: :ok
   end
+
+  private
+
+  def form_authenticity_token; end
+
 end
