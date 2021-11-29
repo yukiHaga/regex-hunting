@@ -1,4 +1,6 @@
 class Api::V1::MyPagesController < ApplicationController
+  after_action :set_csrf_token_header, only: :index
+
   def index
     # 今日を含めた1ヶ月分の各日における初級, 中級, 上級ゲーム頻度に関する処理
     # デフォルトで1ヶ月にする

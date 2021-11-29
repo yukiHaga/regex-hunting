@@ -1,4 +1,6 @@
 class Api::V1::TitleSettingsController < ApplicationController
+  after_action :set_csrf_token_header, only: :update
+
   def update
     if current_user.update(active_title: params[:user][:select_title])
       render json: {

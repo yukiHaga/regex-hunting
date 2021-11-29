@@ -1,5 +1,7 @@
 class Api::V1::GameManagementsController < ApplicationController
   MIN_TIMES = 10
+  skip_before_action :verify_authenticity_token, only: :start
+  after_action :set_csrf_token_header, only: :start
 
   def start
     # ゲームに関する処理
