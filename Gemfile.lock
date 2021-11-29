@@ -80,6 +80,8 @@ GEM
     debug_inspector (1.1.0)
     erubi (1.10.0)
     erubis (2.7.0)
+    faker (2.19.0)
+      i18n (>= 1.6, < 2)
     faraday (1.8.0)
       faraday-em_http (~> 1.0)
       faraday-em_synchrony (~> 1.0)
@@ -245,6 +247,7 @@ DEPENDENCIES
   brakeman
   bullet
   byebug
+  faker
   listen (~> 3.2)
   pg
   pry-byebug
