@@ -1,4 +1,6 @@
 class Api::V1::PercentsController < ApplicationController
+  after_action :set_csrf_token_header, only: :get_correct_percents
+
   def get_correct_percents
     # 検索期間が決定したら、このアクションが呼び出される
     # 検索期間に応じた初級, 中級, 上級のゲーム管理データを取得

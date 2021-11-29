@@ -1,4 +1,6 @@
 class Api::V1::AccountSettingsController < ApplicationController
+  after_action :set_csrf_token_header, only: :update
+
   def update
     if current_user.update(user_params)
       render json: {
