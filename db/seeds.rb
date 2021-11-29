@@ -5,41 +5,32 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
-3.times do |n|
-  user = User.new(
-    name: Faker::Name.unique.first_name,
-    email: Faker::Internet.unique.email,
-    password: "3150test",
-    password_confirmation: "3150test"
-  )
 
-  5.times do |m|
-    game_management = user.game_managements.build(
-      difficulty_level: :初級,
-      game_result: :win,
-      result_time: "00:04:3#{m}",
-      play_date: Faker::Date.between(from: '2021-12-01', to: '2021-12-10')
-    )
-    10.times do |t|
-      game_management.solved_questions.build(
-        judgement: :correct,
-        question_id: t + 1
-      )
-    end
-  end
+# モンスター
+Monster.create!(
+  name: "スクータム",
+  max_hp: 100,
+  attack: 50,
+  defence: 50,
+)
 
-  3.times do |t|
-    user.release_titles.build(
-      release_date: Faker::Date.between(from: '2021-12-01', to: '2021-12-10'),
-      title_id: t + 1
-    )
-  end
+Monster.create!(
+  name: "カスアリウス",
+  max_hp: 100,
+  attack: 100,
+  defence: 100,
+)
 
-  user.save!
-end
+Monster.create!(
+  name: "オルファ・ラパクス",
+  max_hp: 100,
+  attack: 150,
+  defence: 100,
+)
 
+# タイトル
 10.times do |s|
-  title.create!(
+  Title.create!(
     name: User.active_titles.keys[s]
   )
 end
@@ -133,3 +124,43 @@ Question.create!(
   commentary: "ル(ネッサン|ームサービ|ーフテラ)スの(ネッサン|ームサービ|ーフテラ)は、ネッサン, ームサービ, ーフテラのどれかの文字を表します。そのため、ル(ネッサン|ームサービ|ーフテラ)スは、ルネッサンス, ルームサービス, ルーフテラスを表す正規表現であることが分かります。ル.+?スで書き換え可能です",
   difficulty_level: "初級"
 )
+
+# ユーザー
+3.times do |n|
+  user = User.new(
+    name: Faker::Name.unique.first_name,
+    email: Faker::Internet.unique.email,
+    password: "315#{n}test",
+    password_confirmation: "315#{n}test"
+  )
+  user.save!
+
+  # ゲームマネジメント
+  5.times do |m|
+    game_management = user.game_managements.build(
+      difficulty_level: :初級,
+      game_result: :win,
+      result_time: "00:04:3#{m}",
+      play_date: Faker::Date.between(from: '2021-12-01', to: '2021-12-10')
+    )
+    game_management.save!
+
+    # クエスション
+    10.times do |t|
+      game_management.solved_questions.build(
+        judgement: :correct,
+        question_id: t + 1
+      )
+    end
+    game_management.save!
+  end
+
+  # リリースタイトル
+  3.times do |t|
+    user.release_titles.build(
+      release_date: Faker::Date.between(from: '2021-12-01', to: '2021-12-10'),
+      title_id: t + 1
+    )
+  end
+  user.save!
+end
