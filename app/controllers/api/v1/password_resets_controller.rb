@@ -25,7 +25,7 @@ class Api::V1::PasswordResetsController < ApplicationController
     if user.change_password(params[:user][:password])
       render json: {}, status: :ok
     else
-      render json: {}, status: :ok
+      render json: {errors: user.errors}, status: :bad_request
     end
   end
 end
