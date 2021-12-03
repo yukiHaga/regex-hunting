@@ -33,7 +33,7 @@ function App() {
         <Route 
           exact 
           path="/users/:user_id/my-page" 
-          element={<AccountSettings />} 
+          element={<MyPages />} 
         />
 
         {/* ランキングページ */}
