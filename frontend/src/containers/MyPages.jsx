@@ -4,6 +4,6 @@ export const MyPages = () => {
   return (
     <>
       MYページ
-    <>
+    </>
   );
 };

@@ -4,6 +4,6 @@ export const PasswordResets = () => {
   return (
     <>
       パスワードリセット画面
-    <>
+    </>
   );
 };

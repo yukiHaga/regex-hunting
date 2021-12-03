@@ -4,6 +4,6 @@ export const PrivacyPolicies = () => {
   return (
     <>
       プライバシーポリシー画面
-    <>
+    </>
   );
 };

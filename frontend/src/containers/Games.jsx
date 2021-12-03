@@ -4,6 +4,6 @@ export const Games = () => {
   return (
     <>
       ゲーム画面
-    <>
+    </>
   );
 };

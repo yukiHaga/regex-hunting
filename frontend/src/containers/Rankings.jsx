@@ -4,6 +4,6 @@ export const Rankings = () => {
   return (
     <>
       ランキング一覧画面
-    <>
+    </>
   );
 };

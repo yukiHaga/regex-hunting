@@ -4,6 +4,6 @@ export const UseTreaties = () => {
   return (
     <>
       利用規約画面
-    <>
+    </>
   );
 };

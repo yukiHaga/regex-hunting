@@ -4,6 +4,6 @@ export const AccountSettings = () => {
   return (
     <>
       アカウント設定画面
-    <>
+    </>
   );
 };

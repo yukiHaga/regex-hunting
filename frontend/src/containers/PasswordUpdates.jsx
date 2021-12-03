@@ -4,6 +4,6 @@ export const PasswordUpdates = () => {
   return (
     <>
       パスワード更新画面
-    <>
+    </>
   );
 };
