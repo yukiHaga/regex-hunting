@@ -26,7 +26,6 @@ const HeaderTitleImage = styled.img`
 
 const Nav = styled.nav`
   height: 52px;
-  font-weight: bold;
   line-height: 52px;
   margin-right: 40px;
 `;
