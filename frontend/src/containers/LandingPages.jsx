@@ -4,6 +4,9 @@ import React, { Fragment, useEffect } from 'react';
 import { postUserSession, } from '../apis/login'; 
 // deleteUserSession 
 
+// Header
+import { Header } from '../components/Header.jsx'
+
 export const LandingPages = () => { 
 
   // ユーザーをログインさせる。

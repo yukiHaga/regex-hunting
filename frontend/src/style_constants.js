@@ -1,7 +1,7 @@
 // 色を決める際に、定義定義する。
 export const COLORS = {
   MAIN: '#618A12',
-  SUB: '#F6F6DC'
+  SUB: '#F6F6DC',
   BORDER: '#e2e2e2',
   SUB_TEXT: '#545454',
   FONT_STROKE: '#030002',

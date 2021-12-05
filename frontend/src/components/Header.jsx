@@ -1,27 +1,59 @@
-import React, { Fragment, useEffect } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 
-// images
+// Images
 import TitleImage from '../images/title.png';
 
-// colors
-import COLORS from '../style_constants.js';
+// Colors
+import { COLORS } from '../style_constants.js';
 
-const HeaderWrapepr = styled.div`
+// Link
+import { Link } from 'react-router-dom';
+
+const HeaderWrapper = styled.div`
   display: flex;
-  justify-content: flex-start;
+  justify-content: space-between;
   background-color: ${COLORS.MAIN};
 `;
 
 const HeaderTitleImage = styled.img`
-  height: 42px;
   width: 245px;
+  height: 42px;
+  padding: 5px;
+  margin-left: 10px;
+  object-fit: contain;
+`;
+
+const Nav = styled.nav`
+  height: 52px;
+  font-weight: bold;
+  line-height: 52px;
+  margin-right: 40px;
+`;
+
+const HeaderLink = styled(Link)`
+  margin-left: 20px; 
+  text-decoration: none;
+  color: ${COLORS.SUB};
 `;
 
 export const Header = () => {
   return (
-    <HeaderWrapper>
-      <HeaderTitleImage src={TitleImage} alt="main logo" />
-    </HeaderWrapper>
+    <>
+      <HeaderWrapper>
+        <HeaderTitleImage src={TitleImage} alt="main logo" />  
+        <Nav>
+          <HeaderLink to={`/rankings`}>
+            ランキング
+          </HeaderLink>
+          <HeaderLink to={`/login`}>
+            ログイン
+          </HeaderLink>
+          <HeaderLink to={`/singup`}> 
+            新規会員登録
+          </HeaderLink>
+        </Nav>
+      </HeaderWrapper>
+    </>
   );
 };
