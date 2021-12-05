@@ -21,69 +21,71 @@ import { PasswordUpdates } from './containers/PasswordUpdates.jsx';
 // App Component
 function App() {
   return (
-    <Router>
-      <Routes>
-        {/* LPページ */}
-        <Route 
-          exact path="/" 
-          element={<LandingPages />} 
-        />
+    <React.StrictMode>
+      <Router>
+        <Routes>
+          {/* LPページ */}
+          <Route 
+            exact path="/" 
+            element={<LandingPages />} 
+          />
 
-        {/* マイページ */}
-        <Route 
-          exact 
-          path="/users/:user_id/my-page" 
-          element={<MyPages />} 
-        />
+          {/* マイページ */}
+          <Route 
+            exact 
+            path="/users/:user_id/my-page" 
+            element={<MyPages />} 
+          />
 
-        {/* ランキングページ */}
-        <Route 
-          exact path="/rankings" 
-          element={<Rankings />} 
-        />
+          {/* ランキングページ */}
+          <Route 
+            exact path="/rankings" 
+            element={<Rankings />} 
+          />
 
-        {/* アカウント設定ページ */}
-        <Route 
-          exact 
-          path="/users/:user_id/account-settings" 
-          element={<AccountSettings />} 
-        />
+          {/* アカウント設定ページ */}
+          <Route 
+            exact 
+            path="/users/:user_id/account-settings" 
+            element={<AccountSettings />} 
+          />
 
-        {/* ゲームページ */}
-        <Route
-          exact
-          path="/games/:difficulty_level/start"
-          element={<Games />}
-        />
+          {/* ゲームページ */}
+          <Route
+            exact
+            path="/games/:difficulty_level/start"
+            element={<Games />}
+          />
 
-        {/* 利用規約ページ */}
-        <Route 
-          exact path="/policy" 
-          element={<UseTreaties />} 
-        />
+          {/* 利用規約ページ */}
+          <Route 
+            exact path="/policy" 
+            element={<UseTreaties />} 
+          />
 
-        {/* プライバシーポリシーページ */}
-        <Route 
-          exact path="/privacy_policy" 
-          element={<PrivacyPolicies />} 
-        />
+          {/* プライバシーポリシーページ */}
+          <Route 
+            exact path="/privacy_policy" 
+            element={<PrivacyPolicies />} 
+          />
 
-        {/* パスワードリセット申請ページ */}
-        <Route 
-          exact 
-          path="/users/password/new" 
-          element={<PasswordResets />} 
-        />
+          {/* パスワードリセット申請ページ */}
+          <Route 
+            exact 
+            path="/users/password/new" 
+            element={<PasswordResets />} 
+          />
 
-        {/* パスワード更新ページ */}
-        {/* exactの場合、リセットパスワードトークンがURLに含まれていたら反応ないかも*/}
-        <Route 
-          exact 
-          path="/users/password/edit" 
-          element={<PasswordUpdates />} 
-        />
-      </Routes>
-    </Router>
+          {/* パスワード更新ページ */}
+          {/* exactの場合、リセットパスワードトークンがURLに含まれていたら反応ないかも*/}
+          <Route 
+            exact 
+            path="/users/password/edit" 
+            element={<PasswordUpdates />} 
+          />
+        </Routes>
+      </Router>
+    </React.StrictMode>
   );
 };
 
