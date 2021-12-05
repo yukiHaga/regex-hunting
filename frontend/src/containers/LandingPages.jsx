@@ -22,7 +22,7 @@ export const LandingPages = () => {
 
   return (
     <>
-      LPページ
+      <Header />
     </>
   );
 };
