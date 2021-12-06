@@ -5,8 +5,8 @@ export const COLORS = {
   BORDER: '#e2e2e2',
   SUB_TEXT: '#545454',
   FONT_STROKE: '#030002',
-  RED: 'FF6347',
-  BLUE: '0066B3'
+  RED: '#FF6347',
+  BLUE: '#0066B3'
 }
 
 // フォントサイズを決める際に、適宜定義する。

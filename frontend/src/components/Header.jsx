@@ -7,8 +7,8 @@ import TitleImage from '../images/title.png';
 // Colors
 import { COLORS } from '../style_constants.js';
 
-// Link
-import { Link } from 'react-router-dom';
+// BaseLink
+import { BaseLink } from './shared_style.js';
 
 const HeaderWrapper = styled.div`
   display: flex;
@@ -16,6 +16,7 @@ const HeaderWrapper = styled.div`
   background-color: ${COLORS.MAIN};
   position: fixed;
   width: 100%;
+  z-index: 1;
 `;
 
 const HeaderTitleImage = styled.img`
@@ -26,34 +27,42 @@ const HeaderTitleImage = styled.img`
   object-fit: contain;
 `;
 
-const Nav = styled.nav`
-  height: 52px;
-  line-height: 52px;
+const HeaderNav = styled.nav`
   margin-right: 40px;
 `;
 
-const HeaderLink = styled(Link)`
-  margin-left: 20px; 
-  text-decoration: none;
+const HeaderTitleLink = styled(BaseLink)``;
+
+const HeaderNavLink = styled(BaseLink)`
+  height: 52px;
+  line-height: 52px;
+  display: inline-block;
   color: ${COLORS.SUB};
+  margin-left: 20px; 
+  :hover {
+    opacity: 0.7;
+    border-bottom: solid ${COLORS.SUB};
+  }
 `;
 
 export const Header = () => {
   return (
     <>
       <HeaderWrapper>
-        <HeaderTitleImage src={TitleImage} alt="main logo" />  
-        <Nav>
-          <HeaderLink to={`/rankings`}>
+        <HeaderTitleLink to={`/`}>
+          <HeaderTitleImage src={TitleImage} alt="main logo" />  
+        </HeaderTitleLink>
+        <HeaderNav>
+          <HeaderNavLink to={`/rankings`}>
             ランキング
-          </HeaderLink>
-          <HeaderLink to={`/login`}>
+          </HeaderNavLink>
+          <HeaderNavLink to={`/login`}>
             ログイン
-          </HeaderLink>
-          <HeaderLink to={`/singup`}> 
+          </HeaderNavLink>
+          <HeaderNavLink to={`/singup`}> 
             新規会員登録
-          </HeaderLink>
-        </Nav>
+          </HeaderNavLink>
+        </HeaderNav>
       </HeaderWrapper>
     </>
   );
