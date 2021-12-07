@@ -65,7 +65,7 @@ function App() {
 
           {/* プライバシーポリシーページ */}
           <Route 
-            exact path="/privacy_policy" 
+            exact path="/privacy-policy" 
             element={<PrivacyPolicies />} 
           />
 

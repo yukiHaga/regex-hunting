@@ -14,6 +14,7 @@ import MainMonsterImage from '../images/intermediate.png';
 import { Header } from '../components/Header.jsx';
 import { SubTitle } from '../components/SubTitle.jsx';
 import { StartButton } from '../components/Buttons/StartButton.jsx'
+import { Footer } from '../components/Footer.jsx';
 
 // メインのラッパー
 const MainWrapper = styled.div`
@@ -88,6 +89,7 @@ export const LandingPages = () => {
         <SubTitle />
         <StartButton />
       </MainWrapper>
+      <Footer />
     </>
   );
 };
