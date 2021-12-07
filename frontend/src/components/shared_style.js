@@ -15,6 +15,15 @@ export const BaseLink = styled(Link)`
   text-decoration: none;
 `;
 
+// モーダルへのリンクとなるコンポーネント
+export const ModalLink = styled.div`
+  cursor: pointer;
+  :hover {
+    opacity: 0.7;
+  }
+  text-decoration: none;
+`;
+
 // ボタンの元となるコンポーネント
 export const BaseButton = styled.button`
   cursor: pointer;

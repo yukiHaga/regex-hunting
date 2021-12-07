@@ -1,4 +1,4 @@
-import React, { Fragment, useEffect } from 'react';
+import React, { Fragment, useEffect, useState } from 'react';
 import styled from 'styled-components';
 
 // ログイン関係のAPIコール関数
@@ -64,6 +64,15 @@ const MainMonsterImageCover = styled.img`
 
 export const LandingPages = () => { 
 
+  // モーダルに関するstateの初期値
+  const loginInitialState = {
+    isOpenDialog: false,
+    modalType: null
+  }
+
+  // モーダルを管理するstate
+  const [state, setState] = useState(loginInitialState);
+
   // ユーザーをログインさせる。
   useEffect(() => {
     postUserSession({
@@ -80,7 +89,10 @@ export const LandingPages = () => {
 
   return (
     <>
-      <Header />
+      <Header onClickModalLink={(modalType) => setState({
+        isOpenDialog: true,
+        modalType: modalType
+      })}/>
       <MainWrapper>
         <MainTitleImageCover src={MainTitleImage} alt="main-title"/>
         <Filter />
