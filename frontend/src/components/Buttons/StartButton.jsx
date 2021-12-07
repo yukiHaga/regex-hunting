@@ -6,6 +6,7 @@ import { RedRoundButton } from '../shared_style';
 const StartButtonWrapper = styled(RedRoundButton)`
   border-style: none;
   margin-top: 45px;
+  margin-bottom: 140px;
 `;
 
 const StartButtonTextWrapper = styled.div`
