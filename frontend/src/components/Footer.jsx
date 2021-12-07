@@ -8,6 +8,7 @@ import { COLORS } from '../style_constants.js';
 import { BaseLink } from './shared_style.js';
 
 const FooterWrapper = styled.div`
+  height: 55px;
   display: flex;
   justify-content: start;
   background-color: ${COLORS.BROWN};
