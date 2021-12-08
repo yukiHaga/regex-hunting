@@ -7,8 +7,9 @@ export const COLORS = {
   FONT_STROKE: '#030002',
   RED: '#FF6347',
   BLUE: '#0066B3',
-  BROWN: '#8C705A'
+  BROWN: '#8C705A',
   WHITE: '#ffffff'
+}
 
 // フォントサイズを決める際に、適宜定義する。
 export const FONT_SIZE = {

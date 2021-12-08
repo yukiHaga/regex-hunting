@@ -12,7 +12,6 @@ import { COLORS } from '../style_constants.js';
 
 // Images
 import LoginImage from '../images/login.png';
-import BackGroundImage from '../images/background.png';
 
 // フォーム関係のコンポーネント
 import FormControl from '@material-ui/core/FormControl';
