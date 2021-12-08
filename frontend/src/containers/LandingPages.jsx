@@ -3,7 +3,7 @@ import styled from 'styled-components';
 
 // ログイン関係のAPIコール関数
 // deleteUserSession 
-import { postUserSession, } from '../apis/login'; 
+import { postUserSession } from '../apis/login'; 
 
 // Image
 import MainTitleImage from '../images/main_title.png';
@@ -15,6 +15,7 @@ import { Header } from '../components/Header.jsx';
 import { SubTitle } from '../components/SubTitle.jsx';
 import { StartButton } from '../components/Buttons/StartButton.jsx'
 import { Footer } from '../components/Footer.jsx';
+import { LoginDialog } from '../components/LoginDialog.jsx';
 
 // メインのラッパー
 const MainWrapper = styled.div`
@@ -102,6 +103,16 @@ export const LandingPages = () => {
         <StartButton />
       </MainWrapper>
       <Footer />
+      {
+        state.isOpenDialog && state.modalType === "login" &&
+          <LoginDialog 
+            isOpen={state.isOpenDialog}
+            onClose={() => setState({
+              isOpenDialog: false,
+              modalType: null
+            })}
+          />
+      }
     </>
   );
 };

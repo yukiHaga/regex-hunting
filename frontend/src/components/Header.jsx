@@ -8,7 +8,7 @@ import TitleImage from '../images/title.png';
 import { COLORS } from '../style_constants.js';
 
 // BaseLink
-import { BaseLink ModalLink} from './shared_style.js';
+import { BaseLink, ModalLink} from './shared_style.js';
 
 const HeaderWrapper = styled.div`
   display: flex;
