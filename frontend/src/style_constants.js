@@ -9,7 +9,9 @@ export const COLORS = {
   BLUE: '#0066B3',
   BROWN: '#8C705A',
   WHITE: '#ffffff',
-  BLACK: '#666666'
+  BLACK: '#666666',
+  PINK: '#F7ADC3',
+  LIGHT_BLUE: '#66BBFF',
 }
 
 // フォントサイズを決める際に、適宜定義する。
