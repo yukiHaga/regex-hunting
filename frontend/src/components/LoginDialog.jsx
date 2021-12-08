@@ -16,6 +16,9 @@ import LoginImage from '../images/login.png';
 // BaseLink
 import { BaseLink } from './shared_style.js';
 
+// LoginButton
+import { LoginButton } from '../components/Buttons/LoginButton.jsx'
+
 // フォーム関係のコンポーネント
 import FormControl from '@material-ui/core/FormControl';
 import InputLabel from '@material-ui/core/InputLabel';
@@ -42,11 +45,37 @@ const CustomDialogContent = styled(DialogContent)`
 
 const CustomFilledInput = styled(FilledInput)`
   width: 400px;
-  margin-bottom: 30px;
+  margin-bottom: 25px;
 `;
 
-const DescriptionWrapper = styled.div``;
-const CustomBaseLink = styled(BaseLink)``;
+const DescriptionWrapper = styled.div`
+  color: ${COLORS.BLACK};
+  margin-bottom: 20px;
+`;
+
+const CustomBaseLink = styled(BaseLink)`
+  color: ${COLORS.BLUE};
+`;
+
+const DirectionWrapper = styled.div`
+  color: ${COLORS.BLACK};
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  &:before {
+    border-top: 1px solid;
+    content: "";
+    width: 110px;
+    margin-right: 25px;
+  }
+  &:after {
+    border-top: 1px solid;
+    content: "";
+    width: 110px;
+    margin-left: 25px;
+  }
+
+`;
 
 export const LoginDialog = ({
   isOpen,
@@ -54,7 +83,7 @@ export const LoginDialog = ({
 }) => {
 
   // useForm
-  const { control, handleSubmit } = useForm(); 
+  const { control, handleSubmit } = useForm({ shouldUnregister: false }); 
 
   // Formの検証後に呼び出される関数
   const onSubmit = data => { console.log(data) }
@@ -72,15 +101,13 @@ export const LoginDialog = ({
             <Controller 
               name="EmailBox"
               control={control}
-              render={({ field: { onChange, onBlur, value }}) => (
+              render={({ field }) => (
                 <FormControl variant="filled">              
                   <InputLabel htmlFor="component-filled">メールアドレス</InputLabel>
                   <CustomFilledInput
+                    {...field}
                     type="email"
                     id="component-filled"
-                    value={value}
-                    onBlur={onBlur}
-                    onChange={onChange}
                     label="email"
                   />
                 </FormControl>              
@@ -89,26 +116,28 @@ export const LoginDialog = ({
             <Controller 
               name="PasswordBox"
               control={control}
-              render={({ field: { onChange, onBlur, value }}) => (
+              render={({ field }) => (
                 <FormControl variant="filled">              
                   <InputLabel htmlFor="component-filled">パスワード</InputLabel>
                   <CustomFilledInput
+                    {...field}
                     type="password"
                     id="component-filled"
-                    value={value}
-                    onBlur={onBlur}
-                    onChange={onChange}
                     label="password"
                   />
                 </FormControl>              
               )}
             />
+            <LoginButton />
             <DescriptionWrapper>
-              パスワードをお忘れの方は
+              パスワードを忘れた場合は
               <CustomBaseLink to={'/users/password/new'}>
                 こちら
               </CustomBaseLink>
             </DescriptionWrapper>
+            <DirectionWrapper>
+              または
+            </DirectionWrapper>
           </form>
         </CustomDialogContent>
       </CustomDialogInnerWrapper>

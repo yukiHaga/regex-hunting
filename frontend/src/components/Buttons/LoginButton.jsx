@@ -5,29 +5,29 @@ import { BlueRoundButton } from '../shared_style';
 
 const LoginButtonWrapper = styled(BlueRoundButton)`
   border-style: none;
-  margin-top: 45px;
-  margin-bottom: 140px;
+  margin-bottom: 15px;
 `;
 
 const LoginButtonTextWrapper = styled.div`
-  width: 230px;
-  height: 58px;
+  width: 390px;
+  height: 50px;
   color: white;
   font-family: YuGothic;
   font-style: normal;
-  font-size: 36px;
+  font-size: 20px;
   font-weight: 500;
   text-align: center;
+  line-height: 50px;
 `;
 
 export const LoginButton = () => {
   return (
     <>
-      <StartButtonWrapper type="button">
-        <StartButtonTextWrapper>
+      <LoginButtonWrapper type="submit">
+        <LoginButtonTextWrapper>
           ログイン
-        </StartButtonTextWrapper>
-      </StartButtonWrapper>
+        </LoginButtonTextWrapper>
+      </LoginButtonWrapper>
     </>
   );
 };
