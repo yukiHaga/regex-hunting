@@ -8,7 +8,7 @@ import TitleImage from '../images/title.png';
 import { COLORS } from '../style_constants.js';
 
 // BaseLink
-import { BaseLink, ModalLink} from './shared_style.js';
+import { BaseLink, ModalLink } from './shared_style.js';
 
 const HeaderWrapper = styled.div`
   display: flex;
@@ -33,7 +33,6 @@ const HeaderNav = styled.nav`
 
 const HeaderTitleLink = styled(BaseLink)``;
 
-/*
 const HeaderNavLink = styled(BaseLink)`
   height: 52px;
   line-height: 52px;
@@ -45,7 +44,6 @@ const HeaderNavLink = styled(BaseLink)`
     border-bottom: solid ${COLORS.SUB};
   }
 `;
-*/
 
 const HeaderNavModalLink = styled(ModalLink)`
   height: 52px;
