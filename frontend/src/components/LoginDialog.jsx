@@ -129,16 +129,17 @@ export const LoginDialog = ({
               )}
             />
             <LoginButton />
-            <DescriptionWrapper>
-              パスワードを忘れた場合は
-              <CustomBaseLink to={'/users/password/new'}>
-                こちら
-              </CustomBaseLink>
-            </DescriptionWrapper>
-            <DirectionWrapper>
-              または
-            </DirectionWrapper>
           </form>
+          <DescriptionWrapper>
+            パスワードを忘れた場合は
+            <CustomBaseLink to={'/users/password/new'}>
+              こちら
+            </CustomBaseLink>
+          </DescriptionWrapper>
+          <DirectionWrapper>
+            または
+          </DirectionWrapper>
+          
         </CustomDialogContent>
       </CustomDialogInnerWrapper>
     </Dialog>
