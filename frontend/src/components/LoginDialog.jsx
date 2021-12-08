@@ -13,6 +13,9 @@ import { COLORS } from '../style_constants.js';
 // Images
 import LoginImage from '../images/login.png';
 
+// BaseLink
+import { BaseLink } from './shared_style.js';
+
 // フォーム関係のコンポーネント
 import FormControl from '@material-ui/core/FormControl';
 import InputLabel from '@material-ui/core/InputLabel';
@@ -22,7 +25,7 @@ const CustomDialogInnerWrapper = styled.div`
   padding: 20px;
   background-color: ${COLORS.WHITE};
   text-align: center;
-`
+`;
 
 const CustomDialogTitleImage = styled.img`
   height: 50px;
@@ -39,8 +42,11 @@ const CustomDialogContent = styled(DialogContent)`
 
 const CustomFilledInput = styled(FilledInput)`
   width: 400px;
-  margin-bottom: 40px;
-`
+  margin-bottom: 30px;
+`;
+
+const DescriptionWrapper = styled.div``;
+const CustomBaseLink = styled(BaseLink)``;
 
 export const LoginDialog = ({
   isOpen,
@@ -97,6 +103,12 @@ export const LoginDialog = ({
                 </FormControl>              
               )}
             />
+            <DescriptionWrapper>
+              パスワードをお忘れの方は
+              <CustomBaseLink to={'/users/password/new'}>
+                こちら
+              </CustomBaseLink>
+            </DescriptionWrapper>
           </form>
         </CustomDialogContent>
       </CustomDialogInnerWrapper>
