@@ -28,10 +28,11 @@ import { ColoredGoogleIcon } from './Icons/CustomIcon.js';
 import { ColoredTwitterIcon } from './Icons/CustomIcon.js';
 import { ColoredGitHubIcon } from './Icons/CustomIcon.js';
 
-// sentence
+// Sentence
 import { PasswordResetSentence } from './Sentences/PasswordResetSentence.jsx';
 import { SignUpSentence } from './Sentences/SignUpSentence.jsx';
 import { OrDirectionSentence } from './Sentences/OrDirectionSentence.jsx';
+import { InputErrorSentence } from './Sentences/InputErrorSentence.jsx';
 
 const CustomDialogInnerWrapper = styled.div`
   padding-top: 10px;
@@ -56,13 +57,6 @@ const CustomDialogContent = styled(DialogContent)`
 const CustomFilledInput = styled(FilledInput)`
   width: 400px;
   margin-bottom: 16px;
-`;
-
-const DangerText = styled.p`
-  text-align: left;
-  margin-top: 0px;
-  margin-bottom: 32px;
-  color: ${COLORS.RED};
 `;
 
 export const LoginDialog = ({
@@ -124,7 +118,9 @@ export const LoginDialog = ({
                 </FormControl>              
               )}
             />
-            {errors.EmailBox && <DangerText>{errors.EmailBox.message}</DangerText>}
+            {errors.EmailBox && <InputErrorSentence>
+                                  {errors.EmailBox.message}
+                                </InputErrorSentence>}
             <Controller 
               name="PasswordBox"
               control={control}
@@ -141,7 +137,9 @@ export const LoginDialog = ({
                 </FormControl>              
               )}
             />
-            {errors.PasswordBox && <DangerText>{errors.PasswordBox.message}</DangerText>}
+            {errors.PasswordBox && <InputErrorSentence>
+                                     {errors.PasswordBox.message}
+                                   </InputErrorSentence>}
             <LoginButton />
           </form>
           <PasswordResetSentence />
