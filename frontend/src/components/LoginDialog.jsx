@@ -26,6 +26,7 @@ import FilledInput from '@mui/material/FilledInput';
 import { GoogleIcon } from './Icons/index.js';
 import { TwitterIcon } from './Icons/index.js';
 import { GitHubIcon } from './Icons/index.js';
+import { CloseIcon } from './Icons/index.js';
 
 // sentence
 import { PasswordResetSentence } from './Sentences/PasswordResetSentence.jsx';
@@ -33,11 +34,24 @@ import { SignUpSentence } from './Sentences/SignUpSentence.jsx';
 import { OrDirectionSentence } from './Sentences/OrDirectionSentence.jsx';
 
 const CustomDialogInnerWrapper = styled.div`
-  padding-top: 20px;
-  padding-right: 20px;
-  padding-left: 20px;
+  padding-top: 10px;
+  padding-right: 10px;
+  padding-left: 10px;
   background-color: ${COLORS.WHITE};
   text-align: center;
+`;
+
+const CustomDialogCloseIconWrapper = styled.div`
+  display: flex;
+  justify-content: end;
+  cursor: pointer;
+  :hover {
+    opacity: 0.7;
+  }
+`
+
+const CustomDialogCloseIcon = styled(CloseIcon)`
+  color: ${COLORS.BLACK};
 `;
 
 const CustomDialogTitleImage = styled.img`
@@ -87,6 +101,9 @@ export const LoginDialog = ({
       onClose={onClose}
     >
       <CustomDialogInnerWrapper> 
+        <CustomDialogCloseIconWrapper>
+          <CustomDialogCloseIcon onClick={onClose} fontSize="small" /> 
+        </CustomDialogCloseIconWrapper>
         <CustomDialogTitleImage src={LoginImage} alt="Login" />
         <CustomDialogContent>
           <form onSubmit={handleSubmit(onSubmit, onErrors)}>
