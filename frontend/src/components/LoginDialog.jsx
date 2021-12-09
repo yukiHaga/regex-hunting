@@ -25,6 +25,9 @@ import FormControl from '@material-ui/core/FormControl';
 import InputLabel from '@material-ui/core/InputLabel';
 import FilledInput from '@material-ui/core/FilledInput';
 
+// Icon
+import { GoogleIcon } from '../components/Icons/index.js';
+
 const CustomDialogInnerWrapper = styled.div`
   padding: 20px;
   background-color: ${COLORS.WHITE};
@@ -76,6 +79,10 @@ const DirectionWrapper = styled.div`
     margin-left: 25px;
   }
 
+`;
+
+const ColoredGoogleIcon = styled(GoogleIcon)`
+  color: ${COLORS.PINK};
 `;
 
 export const LoginDialog = ({
@@ -140,8 +147,12 @@ export const LoginDialog = ({
           <DirectionWrapper>
             または
           </DirectionWrapper>
-          <OAuthLoginButton url="/#" color={${COLORS.PINK}} image={} type="Google">
-          
+          <OAuthLoginButton 
+            url="/#" 
+            color={COLORS.PINK} 
+            icon={<ColoredGoogleIcon />} 
+            type="Google"
+          />
         </CustomDialogContent>
       </CustomDialogInnerWrapper>
     </Dialog>
