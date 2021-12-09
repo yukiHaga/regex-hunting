@@ -23,10 +23,10 @@ import FormControl from '@mui/material/FormControl';
 import InputLabel from '@mui/material/InputLabel';
 import FilledInput from '@mui/material/FilledInput';
 
-// Icon
-import { GoogleIcon } from './Icons/index.js';
-import { TwitterIcon } from './Icons/index.js';
-import { GitHubIcon } from './Icons/index.js';
+// CustomIcon
+import { ColoredGoogleIcon } from './Icons/CustomIcon.js';
+import { ColoredTwitterIcon } from './Icons/CustomIcon.js';
+import { ColoredGitHubIcon } from './Icons/CustomIcon.js';
 
 // sentence
 import { PasswordResetSentence } from './Sentences/PasswordResetSentence.jsx';
@@ -56,19 +56,6 @@ const CustomDialogContent = styled(DialogContent)`
 const CustomFilledInput = styled(FilledInput)`
   width: 400px;
   margin-bottom: 16px;
-`;
-
-
-const ColoredGoogleIcon = styled(GoogleIcon)`
-  color: ${COLORS.WHITE};
-`;
-
-const ColoredTwitterIcon = styled(TwitterIcon)`
-  color: ${COLORS.WHITE};
-`;
-
-const ColoredGitHubIcon = styled(GitHubIcon)`
-  color: ${COLORS.WHITE};
 `;
 
 const DangerText = styled.p`
