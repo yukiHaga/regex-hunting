@@ -13,9 +13,6 @@ import { COLORS } from '../style_constants.js';
 // Images
 import LoginImage from '../images/login.png';
 
-// BaseLink
-import { BaseLink } from './shared_style.js';
-
 // Button
 import { LoginButton } from '../components/Buttons/LoginButton.jsx'
 import { OAuthLoginButton } from '../components/Buttons/OAuthLoginButton.jsx';
@@ -29,6 +26,11 @@ import FilledInput from '@mui/material/FilledInput';
 import { GoogleIcon } from '../components/Icons/index.js';
 import { TwitterIcon } from '../components/Icons/index.js';
 import { GitHubIcon } from '../components/Icons/index.js';
+
+// sentence
+import { PasswordResetSentence } from './PasswordResetSentence.jsx';
+import { SignUpSentence } from './SignUpSentence.jsx';
+import { OrDirectionSentence } from './OrDirectionSentence.jsx';
 
 const CustomDialogInnerWrapper = styled.div`
   padding-top: 20px;
@@ -53,40 +55,6 @@ const CustomDialogContent = styled(DialogContent)`
 const CustomFilledInput = styled(FilledInput)`
   width: 400px;
   margin-bottom: 16px;
-`;
-
-const LoginDescriptionWrapper = styled.div`
-  color: ${COLORS.BLACK};
-  margin-bottom: 20px;
-`;
-
-const SignupDescriptionWrapper = styled.div`
-  color: ${COLORS.BLACK};
-  margin-top: 15px;
-`;
-
-const CustomBaseLink = styled(BaseLink)`
-  color: ${COLORS.BLUE};
-`;
-
-const DirectionWrapper = styled.div`
-  color: ${COLORS.BLACK};
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  &:before {
-    border-top: 1px solid;
-    content: "";
-    width: 110px;
-    margin-right: 25px;
-  }
-  &:after {
-    border-top: 1px solid;
-    content: "";
-    width: 110px;
-    margin-left: 25px;
-  }
-  margin-bottom: 15px;
 `;
 
 const ColoredGoogleIcon = styled(GoogleIcon)`
@@ -154,15 +122,8 @@ export const LoginDialog = ({
             />
             <LoginButton />
           </form>
-          <LoginDescriptionWrapper>
-            パスワードを忘れた場合は
-            <CustomBaseLink to={'/users/password/new'}>
-              こちら
-            </CustomBaseLink>
-          </LoginDescriptionWrapper>
-          <DirectionWrapper>
-            または
-          </DirectionWrapper>
+          <PasswordResetSentence />
+          <OrDirectionSentence />
           <OAuthLoginButton 
             url="/#" 
             color={COLORS.PINK} 
@@ -181,12 +142,7 @@ export const LoginDialog = ({
             icon={<ColoredGitHubIcon fontSize="large" />} 
             type="GitHub"
           />
-          <SignupDescriptionWrapper>
-            アカウントをお持ちではないですか？&nbsp;&nbsp; 
-            <CustomBaseLink to={'/users/password/new'}>
-              新規登録
-            </CustomBaseLink>
-          </SignupDescriptionWrapper>
+          <SignUpSentence />
         </CustomDialogContent>
       </CustomDialogInnerWrapper>
     </Dialog>
