@@ -58,6 +58,7 @@ const CustomFilledInput = styled(FilledInput)`
   margin-bottom: 16px;
 `;
 
+
 const ColoredGoogleIcon = styled(GoogleIcon)`
   color: ${COLORS.WHITE};
 `;
@@ -70,17 +71,45 @@ const ColoredGitHubIcon = styled(GitHubIcon)`
   color: ${COLORS.WHITE};
 `;
 
+const DangerText = styled.p`
+  text-align: left;
+  margin-top: 0px;
+  margin-bottom: 16px;
+  color: ${COLORS.RED};
+`;
+
 export const LoginDialog = ({
   isOpen,
   onClose
 }) => {
 
   // useForm
-  const { control, handleSubmit } = useForm({ shouldUnregister: false }); 
+  const { control, handleSubmit, formState: { errors } } = useForm({ 
+                                                             mode: 'all',
+                                                             shouldUnregister: false 
+                                                           }); 
 
   // Formの検証後に呼び出される関数
-  const onSubmit = data => { console.log(data) }
-  const onErrors = data => { console.log(data) }
+  const onSubmit = data => { console.log(data) };
+  const onErrors = data => { console.log(data) };
+
+  // Formのバリデーション
+  const registerOptions = {
+    email: { 
+      required: "メールアドレスを入力してください。", 
+      pattern: {
+        value: /^[A-Za-z0-9]{1}[A-Za-z0-9_.-]*@{1}[A-Za-z0-9_.-]{1,}.[A-Za-z0-9]{1,}$/,
+        message: "英数字, @, ドメインが含まれたメールアドレスを入力してください。"
+      }
+    },
+    password: {
+      required: "パスワードを入力してください。",
+      minLength: {
+        value: 8,
+        message: "8文字以上のパスワードを入力してください。"
+      }
+    }
+  };
 
   return(
     <Dialog
@@ -95,6 +124,7 @@ export const LoginDialog = ({
             <Controller 
               name="EmailBox"
               control={control}
+              rules={registerOptions.email}
               render={({ field }) => (
                 <FormControl variant="filled">              
                   <InputLabel htmlFor="component-filled">メールアドレス</InputLabel>
@@ -107,9 +137,11 @@ export const LoginDialog = ({
                 </FormControl>              
               )}
             />
+            {errors.EmailBox && <DangerText>{errors.EmailBox.message}</DangerText>}
             <Controller 
               name="PasswordBox"
               control={control}
+              rules={registerOptions.password}
               render={({ field }) => (
                 <FormControl variant="filled">              
                   <InputLabel htmlFor="component-filled">パスワード</InputLabel>
@@ -122,6 +154,7 @@ export const LoginDialog = ({
                 </FormControl>              
               )}
             />
+            {errors.PasswordBox && <DangerText>{errors.PasswordBox.message}</DangerText>}
             <LoginButton />
           </form>
           <PasswordResetSentence />
