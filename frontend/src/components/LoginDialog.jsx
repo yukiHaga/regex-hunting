@@ -27,9 +27,13 @@ import FilledInput from '@mui/material/FilledInput';
 
 // Icon
 import { GoogleIcon } from '../components/Icons/index.js';
+import { TwitterIcon } from '../components/Icons/index.js';
+import { GitHubIcon } from '../components/Icons/index.js';
 
 const CustomDialogInnerWrapper = styled.div`
-  padding: 20px;
+  padding-top: 20px;
+  padding-right: 20px;
+  padding-left: 20px;
   background-color: ${COLORS.WHITE};
   text-align: center;
 `;
@@ -39,7 +43,6 @@ const CustomDialogTitleImage = styled.img`
   width: 80px
   object-fit: contain;
   padding: 8px 23px;
-  margin-bottom: 20px;
 `;
 
 const CustomDialogContent = styled(DialogContent)`
@@ -49,12 +52,17 @@ const CustomDialogContent = styled(DialogContent)`
 
 const CustomFilledInput = styled(FilledInput)`
   width: 400px;
-  margin-bottom: 25px;
+  margin-bottom: 16px;
 `;
 
-const DescriptionWrapper = styled.div`
+const LoginDescriptionWrapper = styled.div`
   color: ${COLORS.BLACK};
   margin-bottom: 20px;
+`;
+
+const SignupDescriptionWrapper = styled.div`
+  color: ${COLORS.BLACK};
+  margin-top: 15px;
 `;
 
 const CustomBaseLink = styled(BaseLink)`
@@ -78,11 +86,19 @@ const DirectionWrapper = styled.div`
     width: 110px;
     margin-left: 25px;
   }
-
+  margin-bottom: 15px;
 `;
 
 const ColoredGoogleIcon = styled(GoogleIcon)`
-  color: ${COLORS.PINK};
+  color: ${COLORS.WHITE};
+`;
+
+const ColoredTwitterIcon = styled(TwitterIcon)`
+  color: ${COLORS.WHITE};
+`;
+
+const ColoredGitHubIcon = styled(GitHubIcon)`
+  color: ${COLORS.WHITE};
 `;
 
 export const LoginDialog = ({
@@ -138,21 +154,39 @@ export const LoginDialog = ({
             />
             <LoginButton />
           </form>
-          <DescriptionWrapper>
+          <LoginDescriptionWrapper>
             パスワードを忘れた場合は
             <CustomBaseLink to={'/users/password/new'}>
               こちら
             </CustomBaseLink>
-          </DescriptionWrapper>
+          </LoginDescriptionWrapper>
           <DirectionWrapper>
             または
           </DirectionWrapper>
           <OAuthLoginButton 
             url="/#" 
             color={COLORS.PINK} 
-            icon={<ColoredGoogleIcon />} 
+            icon={<ColoredGoogleIcon fontSize="large" />} 
             type="Google"
           />
+          <OAuthLoginButton 
+            url="/#" 
+            color={COLORS.LIGHT_BLUE} 
+            icon={<ColoredTwitterIcon fontSize="large" />} 
+            type="Twitter"
+          />
+          <OAuthLoginButton 
+            url="/#" 
+            color={COLORS.BLACK} 
+            icon={<ColoredGitHubIcon fontSize="large" />} 
+            type="GitHub"
+          />
+          <SignupDescriptionWrapper>
+            アカウントをお持ちではないですか？&nbsp;&nbsp; 
+            <CustomBaseLink to={'/users/password/new'}>
+              新規登録
+            </CustomBaseLink>
+          </SignupDescriptionWrapper>
         </CustomDialogContent>
       </CustomDialogInnerWrapper>
     </Dialog>

@@ -5,32 +5,40 @@ import styled from 'styled-components';
 import { COLORS } from '../../style_constants.js';
 
 import { BaseLink } from '../shared_style';
+import { RoundButton  } from '../shared_style';
 
-const OAuthLoginButtonWrapper = styled(BaseLink)`
+const OAuthLoginButtonWrapper = styled(RoundButton)`
+  margin-bottom: 8px;
+  background-color: ${(props) => props.backgroundcolor || COLORS.BLUE};
+  width: 400px;
+  height: 50px;
   border-style: none;
-  margin-top: 45px;
-  margin-bottom: 140px;
-  border-radius: 3px;
-  background-color: ${(props) => props.backGroundColor || COLORS.BLUE};
+  display: flex;
+  align-items: center;
+  justify-content: center;
 `;
 
-const OAuthLoginButtonTextWrapper = styled.div`
-  width: 390px;
-  height: 50px;
+const OAuthLoginButtonIconWrapper = styled.div`
+  margin-right: 5px;
+`;
+
+const OAuthLoginButtonTextWrapper = styled(BaseLink)`
+  display: block;
   color: white;
   font-family: YuGothic;
   font-style: normal;
-  font-size: 36px;
+  font-size: 20px;
   font-weight: 500;
-  text-align: center;
 `;
 
 export const OAuthLoginButton = ({url, color, icon, type}) => {
   return (
     <>
-      <OAuthLoginButtonWrapper to={url} backGroundColor={color}>
-        {icon}
-        <OAuthLoginButtonTextWrapper>
+      <OAuthLoginButtonWrapper backgroundcolor={color}>
+        <OAuthLoginButtonIconWrapper> 
+          {icon}
+        </OAuthLoginButtonIconWrapper>
+        <OAuthLoginButtonTextWrapper to={url}>
           {`${type}で続ける`}
         </OAuthLoginButtonTextWrapper>
       </OAuthLoginButtonWrapper>
