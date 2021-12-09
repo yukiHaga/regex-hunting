@@ -16,6 +16,7 @@ import LoginImage from '../images/login.png';
 // Button
 import { LoginButton } from './Buttons/LoginButton.jsx'
 import { OAuthLoginButton } from './Buttons/OAuthLoginButton.jsx';
+import { CloseButton } from './Buttons/CloseButton.jsx';
 
 // フォーム関係のコンポーネント
 import FormControl from '@mui/material/FormControl';
@@ -26,7 +27,6 @@ import FilledInput from '@mui/material/FilledInput';
 import { GoogleIcon } from './Icons/index.js';
 import { TwitterIcon } from './Icons/index.js';
 import { GitHubIcon } from './Icons/index.js';
-import { CloseIcon } from './Icons/index.js';
 
 // sentence
 import { PasswordResetSentence } from './Sentences/PasswordResetSentence.jsx';
@@ -39,19 +39,6 @@ const CustomDialogInnerWrapper = styled.div`
   padding-left: 10px;
   background-color: ${COLORS.WHITE};
   text-align: center;
-`;
-
-const CustomDialogCloseIconWrapper = styled.div`
-  display: flex;
-  justify-content: end;
-  cursor: pointer;
-  :hover {
-    opacity: 0.7;
-  }
-`
-
-const CustomDialogCloseIcon = styled(CloseIcon)`
-  color: ${COLORS.BLACK};
 `;
 
 const CustomDialogTitleImage = styled.img`
@@ -101,9 +88,7 @@ export const LoginDialog = ({
       onClose={onClose}
     >
       <CustomDialogInnerWrapper> 
-        <CustomDialogCloseIconWrapper>
-          <CustomDialogCloseIcon onClick={onClose} fontSize="small" /> 
-        </CustomDialogCloseIconWrapper>
+        <CloseButton onClose={onClose} fontSize="small" /> 
         <CustomDialogTitleImage src={LoginImage} alt="Login" />
         <CustomDialogContent>
           <form onSubmit={handleSubmit(onSubmit, onErrors)}>
