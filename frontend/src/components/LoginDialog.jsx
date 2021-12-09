@@ -14,8 +14,8 @@ import { COLORS } from '../style_constants.js';
 import LoginImage from '../images/login.png';
 
 // Button
-import { LoginButton } from '../components/Buttons/LoginButton.jsx'
-import { OAuthLoginButton } from '../components/Buttons/OAuthLoginButton.jsx';
+import { LoginButton } from './Buttons/LoginButton.jsx'
+import { OAuthLoginButton } from './Buttons/OAuthLoginButton.jsx';
 
 // フォーム関係のコンポーネント
 import FormControl from '@mui/material/FormControl';
@@ -23,14 +23,14 @@ import InputLabel from '@mui/material/InputLabel';
 import FilledInput from '@mui/material/FilledInput';
 
 // Icon
-import { GoogleIcon } from '../components/Icons/index.js';
-import { TwitterIcon } from '../components/Icons/index.js';
-import { GitHubIcon } from '../components/Icons/index.js';
+import { GoogleIcon } from './Icons/index.js';
+import { TwitterIcon } from './Icons/index.js';
+import { GitHubIcon } from './Icons/index.js';
 
 // sentence
-import { PasswordResetSentence } from './PasswordResetSentence.jsx';
-import { SignUpSentence } from './SignUpSentence.jsx';
-import { OrDirectionSentence } from './OrDirectionSentence.jsx';
+import { PasswordResetSentence } from './Sentences/PasswordResetSentence.jsx';
+import { SignUpSentence } from './Sentences/SignUpSentence.jsx';
+import { OrDirectionSentence } from './Sentences/OrDirectionSentence.jsx';
 
 const CustomDialogInnerWrapper = styled.div`
   padding-top: 20px;

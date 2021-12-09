@@ -2,10 +2,10 @@ import React from 'react';
 import styled from 'styled-components';
 
 // DescriptonWrapper
-import { DescriptionWrapper } from './shared_style.js';
+import { DescriptionWrapper } from '../shared_style.js';
 
 // BlueBaseLink
-import { BlueBaseLink } from './shared_style.js';
+import { BlueBaseLink } from '../shared_style.js';
 
 // SignUpSentenceWrapepr
 const SignUpSentenceWrapper = styled(DescriptionWrapper)`
