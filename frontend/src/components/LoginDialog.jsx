@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 
 // ダイアログ
-import { DialogContent, Dialog } from '@material-ui/core';
+import { DialogContent, Dialog } from '@mui/material';
 
 // React Hook Form
 import { useForm, Controller } from "react-hook-form";
@@ -21,9 +21,9 @@ import { LoginButton } from '../components/Buttons/LoginButton.jsx'
 import { OAuthLoginButton } from '../components/Buttons/OAuthLoginButton.jsx';
 
 // フォーム関係のコンポーネント
-import FormControl from '@material-ui/core/FormControl';
-import InputLabel from '@material-ui/core/InputLabel';
-import FilledInput from '@material-ui/core/FilledInput';
+import FormControl from '@mui/material/FormControl';
+import InputLabel from '@mui/material/InputLabel';
+import FilledInput from '@mui/material/FilledInput';
 
 // Icon
 import { GoogleIcon } from '../components/Icons/index.js';
