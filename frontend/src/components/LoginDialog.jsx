@@ -16,8 +16,9 @@ import LoginImage from '../images/login.png';
 // BaseLink
 import { BaseLink } from './shared_style.js';
 
-// LoginButton
+// Button
 import { LoginButton } from '../components/Buttons/LoginButton.jsx'
+import { OAuthLoginButton } from '../components/Buttons/OAuthLoginButton.jsx';
 
 // フォーム関係のコンポーネント
 import FormControl from '@material-ui/core/FormControl';
@@ -139,6 +140,7 @@ export const LoginDialog = ({
           <DirectionWrapper>
             または
           </DirectionWrapper>
+          <OAuthLoginButton url="/#" color={${COLORS.PINK}} image={} type="Google">
           
         </CustomDialogContent>
       </CustomDialogInnerWrapper>

@@ -1,17 +1,25 @@
 import React, { Fragment } from 'react'; 
 import styled from 'styled-components';
 
-import { RedRoundButton } from '../shared_style';
+// Colors
+import { COLORS } from '../style_constants.js';
 
-const StartButtonWrapper = styled(RedRoundButton)`
+import { BaseLink } from '../shared_style';
+
+const OAuthLoginButtonWrapper = styled(BaseLink)`
   border-style: none;
   margin-top: 45px;
   margin-bottom: 140px;
+  border-radius: 3px;
+  background-color: ${(props) => props.backGroundColor || ${ COLORS.BLUE } };
 `;
 
-const StartButtonTextWrapper = styled.div`
-  width: 230px;
-  height: 58px;
+const OAuthLoginButtonImage = styled.img`
+  height: 50px;
+`;
+const OAuthLoginButtonTextWrapper = styled.div`
+  width: 390px;
+  height: 50px;
   color: white;
   font-family: YuGothic;
   font-style: normal;
@@ -20,14 +28,15 @@ const StartButtonTextWrapper = styled.div`
   text-align: center;
 `;
 
-export const StartButton = () => {
+export const OAuthLoginButton = ({url, color, image, type}) => {
   return (
     <>
-      <StartButtonWrapper type="button">
-        <StartButtonTextWrapper>
-          start
-        </StartButtonTextWrapper>
-      </StartButtonWrapper>
+      <OAuthLoginButtonWrapper to={url} backGroundColor={color}>
+        <OAuthLoginButtonImage src={image} alt="oauth-login-image">
+        <OAuthLoginButtonTextWrapper>
+          {`${type}で続ける`}
+        </OAuthLoginButtonTextWrapper>
+      </OAuthLoginButtonWrapper>
     </>
   );
 };
