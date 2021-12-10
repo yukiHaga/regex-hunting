@@ -6,8 +6,22 @@ import { COLORS } from '../style_constants';
 // Link
 import { Link } from 'react-router-dom';
 
-// リンクの元となるコンポーネント
+// 基本的なリンクとなるコンポーネント
 export const BaseLink = styled(Link)`
+  cursor: pointer;
+  :hover {
+    opacity: 0.7;
+  }
+  text-decoration: none;
+`;
+
+// ブルーのリンク
+export const BlueBaseLink = styled(BaseLink)`
+  color: ${COLORS.BLUE};
+`;
+
+// モーダルへのリンクとなるコンポーネント
+export const ModalLink = styled.div`
   cursor: pointer;
   :hover {
     opacity: 0.7;
@@ -47,4 +61,9 @@ export const BlueRoundButton = styled(BaseButton)`
 export const GreenRoundButton = styled(BaseButton)`
   border-radius: 3px;
   background-color: ${COLORS.MAIN};
+`;
+
+// テキストのラッパー
+export const DescriptionWrapper = styled.div`
+  color: ${COLORS.BLACK};
 `;

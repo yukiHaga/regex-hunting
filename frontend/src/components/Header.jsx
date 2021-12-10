@@ -8,7 +8,7 @@ import TitleImage from '../images/title.png';
 import { COLORS } from '../style_constants.js';
 
 // BaseLink
-import { BaseLink } from './shared_style.js';
+import { BaseLink, ModalLink } from './shared_style.js';
 
 const HeaderWrapper = styled.div`
   display: flex;
@@ -45,7 +45,20 @@ const HeaderNavLink = styled(BaseLink)`
   }
 `;
 
-export const Header = () => {
+const HeaderNavModalLink = styled(ModalLink)`
+  height: 52px;
+  line-height: 52px;
+  display: inline-block;
+  color: ${COLORS.SUB};
+  margin-left: 20px; 
+  :hover {
+    opacity: 0.7;
+    border-bottom: solid ${COLORS.SUB};
+  }
+`;
+
+// LPページに定義してあるstateを更新する関数をpropsとして渡した
+export const Header = ({onClickModalLink}) => {
   return (
     <>
       <HeaderWrapper>
@@ -56,12 +69,12 @@ export const Header = () => {
           <HeaderNavLink to={`/rankings`}>
             ランキング
           </HeaderNavLink>
-          <HeaderNavLink to={`/login`}>
+          <HeaderNavModalLink onClick={() => onClickModalLink("login")}>
             ログイン
-          </HeaderNavLink>
-          <HeaderNavLink to={`/singup`}> 
+          </HeaderNavModalLink>
+          <HeaderNavModalLink onClick={() => onClickModalLink("signup")}>
             新規会員登録
-          </HeaderNavLink>
+          </HeaderNavModalLink>
         </HeaderNav>
       </HeaderWrapper>
     </>

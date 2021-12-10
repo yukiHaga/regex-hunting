@@ -1,9 +1,9 @@
-import React, { Fragment, useEffect } from 'react';
+import React, { Fragment, useEffect, useState } from 'react';
 import styled from 'styled-components';
 
 // ログイン関係のAPIコール関数
 // deleteUserSession 
-import { postUserSession, } from '../apis/login'; 
+import { postUserSession } from '../apis/login'; 
 
 // Image
 import MainTitleImage from '../images/main_title.png';
@@ -15,6 +15,7 @@ import { Header } from '../components/Header.jsx';
 import { SubTitle } from '../components/SubTitle.jsx';
 import { StartButton } from '../components/Buttons/StartButton.jsx'
 import { Footer } from '../components/Footer.jsx';
+import { LoginDialog } from '../components/LoginDialog.jsx';
 
 // メインのラッパー
 const MainWrapper = styled.div`
@@ -64,6 +65,15 @@ const MainMonsterImageCover = styled.img`
 
 export const LandingPages = () => { 
 
+  // モーダルに関するstateの初期値
+  const loginInitialState = {
+    isOpenDialog: false,
+    modalType: null
+  }
+
+  // モーダルを管理するstate
+  const [state, setState] = useState(loginInitialState);
+
   // ユーザーをログインさせる。
   useEffect(() => {
     postUserSession({
@@ -80,7 +90,10 @@ export const LandingPages = () => {
 
   return (
     <>
-      <Header />
+      <Header onClickModalLink={(modalType) => setState({
+        isOpenDialog: true,
+        modalType: modalType
+      })}/>
       <MainWrapper>
         <MainTitleImageCover src={MainTitleImage} alt="main-title"/>
         <Filter />
@@ -90,6 +103,16 @@ export const LandingPages = () => {
         <StartButton />
       </MainWrapper>
       <Footer />
+      {
+        state.isOpenDialog && state.modalType === "login" &&
+          <LoginDialog 
+            isOpen={state.isOpenDialog}
+            onClose={() => setState({
+              isOpenDialog: false,
+              modalType: null
+            })}
+          />
+      }
     </>
   );
 };

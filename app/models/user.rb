@@ -20,10 +20,10 @@ class User < ApplicationRecord
                      }
   validates :name, presence: true, length: { maximum: 10 }
 
-  REGEX_PATTERN = /\A(?=.*?[a-z])(?=.*?[\W_])[!-~]+\z/
+  REGEX_PATTERN = /\A[A-Za-z0-9]{1}[A-Za-z0-9_.-]*@{1}[A-Za-z0-9_.-]{1,}.[A-Za-z0-9]{1,}\z/
   validates :email, presence: true, format: { with: REGEX_PATTERN }
   validates :email, uniqueness: true
-  validates :password, length: { minimum: 3 }, if: -> { new_record? || changes[:crypted_password] }
+  validates :password, length: { minimum: 8 }, if: -> { new_record? || changes[:crypted_password] }
   validates :password, confirmation: true, if: -> { new_record? || changes[:crypted_password] }
   validates :password_confirmation, presence: true, if: -> { new_record? || changes[:crypted_password] }
 end
