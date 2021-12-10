@@ -29,7 +29,7 @@ import { ColoredTwitterIcon } from './Icons/CustomIcon.js';
 import { ColoredGitHubIcon } from './Icons/CustomIcon.js';
 
 // Sentence
-import { SignUpSentence } from './Sentences/SignUpSentence.jsx';
+import { HaveAccountSentence } from './Sentences/HaveAccountSentence.jsx';
 import { OrDirectionSentence } from './Sentences/OrDirectionSentence.jsx';
 import { InputErrorSentence } from './Sentences/InputErrorSentence.jsx';
 import { CreateAccountSentence } from './Sentences/CreateAccountSentence.jsx';
@@ -241,7 +241,7 @@ export const SignUpDialog = ({
             icon={<ColoredGitHubIcon fontSize="large" />} 
             type="GitHub"
           />
-          <SignUpSentence />
+          <HaveAccountSentence />
         </CustomDialogContent>
       </CustomDialogInnerWrapper>
     </Dialog>
