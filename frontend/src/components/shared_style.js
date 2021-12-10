@@ -66,4 +66,6 @@ export const GreenRoundButton = styled(BaseButton)`
 // テキストのラッパー
 export const DescriptionWrapper = styled.div`
   color: ${COLORS.BLACK};
+  font-family: YuGothic;
+  font-style: normal;
 `;

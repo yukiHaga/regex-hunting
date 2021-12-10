@@ -16,6 +16,7 @@ import { SubTitle } from '../components/SubTitle.jsx';
 import { StartButton } from '../components/Buttons/StartButton.jsx'
 import { Footer } from '../components/Footer.jsx';
 import { LoginDialog } from '../components/LoginDialog.jsx';
+import { SignUpDialog } from '../components/SignUpDialog.jsx';
 
 // メインのラッパー
 const MainWrapper = styled.div`
@@ -68,7 +69,7 @@ export const LandingPages = () => {
   // モーダルに関するstateの初期値
   const loginInitialState = {
     isOpenDialog: false,
-    modalType: null
+    modalType: ""
   }
 
   // モーダルを管理するstate
@@ -109,7 +110,21 @@ export const LandingPages = () => {
             isOpen={state.isOpenDialog}
             onClose={() => setState({
               isOpenDialog: false,
-              modalType: null
+              modalType: ""
+            })}
+          />
+      }
+      {
+        state.isOpenDialog && state.modalType === "signUp" &&
+          <SignUpDialog 
+            isOpen={state.isOpenDialog}
+            onClose={() => setState({
+              isOpenDialog: false,
+              modalType: ""
+            })}
+            onClick={() => setState({
+              isOpenDialog: true,
+              modalType: "login"
             })}
           />
       }
