@@ -9,33 +9,35 @@ import { BlueBaseLink } from '../shared_style.js';
 
 // LoginDescriptionWrapepr
 const CreateAccountSentenceWrapper = styled(DescriptionWrapper)`
-  margin-bottom: 20px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  padding 0 24px;
+  text-align: center;
 `;
 
 const CreateAccountAgreeSentenceWrapper = styled(DescriptionWrapper)`
+  display: inline-block;
+  text-align: left;
+  margin-bottom: 5px;
 `;
 
-const CreateAccountRankingSentenceWrapper = styled(DescriptionWrapper)`
-`;
-
-// に同意するものとします。
 export const CreateAccountSentence = () => {
   return (
     <>
       <CreateAccountSentenceWrapper>
         <CreateAccountAgreeSentenceWrapper>
           アカウントを作成することにより、
-          <BlueBaseLink to={'/users/password/new'}>
+          <BlueBaseLink to={'/policy'}>
             利用規約
           </BlueBaseLink>
-          および
-          <BlueBaseLink to={'/users/password/new'}>
+          および<br/>
+          <BlueBaseLink to={'/privacy-policy'}>
             プライバシーポリシー
           </BlueBaseLink>
+          に同意するものとします。
+          <br/>ユーザー名はランキングに表示されます。
+          <br/>(アカウント設定で編集や非表示が可能です)
         </CreateAccountAgreeSentenceWrapper>
-        <CreateAccountRankingSentenceWrapper>
-          ユーザー名はランキングに表示されます。（設定で非表示が可能です）
-        </CreateAccountRankingSentenceWrapper>
       </CreateAccountSentenceWrapper>
     </>
   );
