@@ -11,8 +11,7 @@ import { useForm, Controller } from "react-hook-form";
 import { COLORS } from '../style_constants.js';
 
 // Images
-import LoginImage from '../images/login.png';
-
+import SignUpImage from '../images/sign_up.png';
 // Button
 import { LoginButton } from './Buttons/LoginButton.jsx'
 import { OAuthLoginButton } from './Buttons/OAuthLoginButton.jsx';
@@ -103,7 +102,7 @@ export const SignUpDialog = ({
     >
       <CustomDialogInnerWrapper> 
         <CloseButton onClose={onClose} fontSize="small" /> 
-        <CustomDialogTitleImage src={LoginImage} alt="Login" />
+        <CustomDialogTitleImage src={SignUpImage} alt="SignUp" />
         <CustomDialogContent>
           <form onSubmit={handleSubmit(onSubmit, onErrors)}>
             <Controller 
