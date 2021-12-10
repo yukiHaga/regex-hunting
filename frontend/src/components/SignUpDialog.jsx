@@ -62,7 +62,7 @@ const CustomFilledInput = styled(FilledInput)`
 export const SignUpDialog = ({
   isOpen,
   onClose,
-  onClickLoginModalLink
+  onClick
 }) => {
 
   // useForm
@@ -136,7 +136,6 @@ export const SignUpDialog = ({
     <Dialog
       open={isOpen}
       onClose={onClose}
-      onClickLoginModalLink={onClickLoginModalLink}
     >
       <CustomDialogInnerWrapper> 
         <CloseButton onClose={onClose} fontSize="small" /> 
@@ -147,6 +146,7 @@ export const SignUpDialog = ({
             <Controller 
               name="NameBox"
               control={control}
+              defaultValue=""
               rules={registerOptions.name}
               render={({ field }) => (
                 <FormControl variant="filled">              
@@ -166,6 +166,7 @@ export const SignUpDialog = ({
             <Controller 
               name="EmailBox"
               control={control}
+              defaultValue=""
               rules={registerOptions.email}
               render={({ field }) => (
                 <FormControl variant="filled">              
@@ -185,6 +186,7 @@ export const SignUpDialog = ({
             <Controller 
               name="PasswordBox"
               control={control}
+              defaultValue=""
               rules={registerOptions.password}
               render={({ field }) => (
                 <FormControl variant="filled">              
@@ -204,6 +206,7 @@ export const SignUpDialog = ({
             <Controller 
               name="PasswordConfirmationBox"
               control={control}
+              defaultValue=""
               rules={registerOptions.passwordConfirmation}
               render={({ field }) => (
                 <FormControl variant="filled">              
@@ -243,7 +246,7 @@ export const SignUpDialog = ({
             icon={<ColoredGitHubIcon fontSize="large" />} 
             type="GitHub"
           />
-          <HaveAccountSentence onClickLoginModalLink={onClickLoginModalLink} />
+          <HaveAccountSentence onClick={onClick} />
         </CustomDialogContent>
       </CustomDialogInnerWrapper>
     </Dialog>
