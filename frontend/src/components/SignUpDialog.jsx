@@ -29,7 +29,6 @@ import { ColoredTwitterIcon } from './Icons/CustomIcon.js';
 import { ColoredGitHubIcon } from './Icons/CustomIcon.js';
 
 // Sentence
-import { PasswordResetSentence } from './Sentences/PasswordResetSentence.jsx';
 import { SignUpSentence } from './Sentences/SignUpSentence.jsx';
 import { OrDirectionSentence } from './Sentences/OrDirectionSentence.jsx';
 import { InputErrorSentence } from './Sentences/InputErrorSentence.jsx';
@@ -223,7 +222,6 @@ export const SignUpDialog = ({
                                                </InputErrorSentence>}
             <LoginButton />
           </form>
-          <PasswordResetSentence />
           <OrDirectionSentence />
           <OAuthLoginButton 
             url="/#" 
