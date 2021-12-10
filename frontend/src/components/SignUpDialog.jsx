@@ -12,6 +12,7 @@ import { COLORS } from '../style_constants.js';
 
 // Images
 import SignUpImage from '../images/sign_up.png';
+
 // Button
 import { LoginButton } from './Buttons/LoginButton.jsx'
 import { OAuthLoginButton } from './Buttons/OAuthLoginButton.jsx';
@@ -32,6 +33,7 @@ import { PasswordResetSentence } from './Sentences/PasswordResetSentence.jsx';
 import { SignUpSentence } from './Sentences/SignUpSentence.jsx';
 import { OrDirectionSentence } from './Sentences/OrDirectionSentence.jsx';
 import { InputErrorSentence } from './Sentences/InputErrorSentence.jsx';
+import { CreateAccountSentence } from './Sentences/CreateAccountSentence.jsx';
 
 const CustomDialogInnerWrapper = styled.div`
   padding-top: 10px;
@@ -103,6 +105,7 @@ export const SignUpDialog = ({
       <CustomDialogInnerWrapper> 
         <CloseButton onClose={onClose} fontSize="small" /> 
         <CustomDialogTitleImage src={SignUpImage} alt="SignUp" />
+        <CreateAccountSentence />
         <CustomDialogContent>
           <form onSubmit={handleSubmit(onSubmit, onErrors)}>
             <Controller 
