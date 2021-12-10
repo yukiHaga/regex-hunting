@@ -122,6 +122,10 @@ export const LandingPages = () => {
               isOpenDialog: false,
               modalType: null
             })}
+            onClickLoginModalLink={() => setState({
+              isOpenDialog: true,
+              modalType: "login"
+            })}
           />
       }
     </>

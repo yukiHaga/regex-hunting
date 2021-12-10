@@ -61,7 +61,8 @@ const CustomFilledInput = styled(FilledInput)`
 
 export const SignUpDialog = ({
   isOpen,
-  onClose
+  onClose,
+  onClickLoginModalLink
 }) => {
 
   // useForm
@@ -135,6 +136,7 @@ export const SignUpDialog = ({
     <Dialog
       open={isOpen}
       onClose={onClose}
+      onClickLoginModalLink={onClickLoginModalLink}
     >
       <CustomDialogInnerWrapper> 
         <CloseButton onClose={onClose} fontSize="small" /> 
@@ -241,7 +243,7 @@ export const SignUpDialog = ({
             icon={<ColoredGitHubIcon fontSize="large" />} 
             type="GitHub"
           />
-          <HaveAccountSentence />
+          <HaveAccountSentence onClickLoginModalLink={onClickLoginModalLink} />
         </CustomDialogContent>
       </CustomDialogInnerWrapper>
     </Dialog>

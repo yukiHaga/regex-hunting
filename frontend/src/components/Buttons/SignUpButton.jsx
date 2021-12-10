@@ -3,10 +3,6 @@ import styled from 'styled-components';
 
 import { BlueRoundButton } from '../shared_style';
 
-// Colors
-import { COLORS } from '../../style_constants.js';
-
-
 const SignUpButtonWrapper = styled(BlueRoundButton)`
   border-style: none;
   margin-bottom: 15px;

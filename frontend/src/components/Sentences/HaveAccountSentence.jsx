@@ -12,12 +12,13 @@ const HaveAccountSentenceWrapper = styled(DescriptionWrapper)`
   margin-top: 15px;
 `;
 
-export const HaveAccountSentence = () => {
+export const HaveAccountSentence = ({onClickLoginModalLink}) => {
+  console.log(onClickLoginModalLink);
   return (
     <>
       <HaveAccountSentenceWrapper>
         すでにアカウントをお持ちですか？&nbsp;&nbsp; 
-        <BlueBaseLink to={'#'}>
+        <BlueBaseLink to={'#'} onClick={onClickLoginModalLink}>
           ログイン
         </BlueBaseLink>
       </HaveAccountSentenceWrapper>
