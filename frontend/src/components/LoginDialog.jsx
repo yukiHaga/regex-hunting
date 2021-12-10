@@ -88,6 +88,10 @@ export const LoginDialog = ({
       minLength: {
         value: 8,
         message: "8文字以上のパスワードを入力してください。"
+      },
+      pattern: {
+        value: /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?\d)[!-~]+$/,
+        message: "大文字, 小文字, 数字が含まれたメールアドレスを入力してください。"
       }
     }
   };
