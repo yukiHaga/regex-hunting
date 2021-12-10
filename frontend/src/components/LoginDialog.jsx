@@ -65,10 +65,10 @@ export const LoginDialog = ({
 }) => {
 
   // useForm
-  const { control, handleSubmit, formState: { errors } } = useForm({ 
-                                                             mode: 'all',
-                                                             shouldUnregister: false 
-                                                           }); 
+  const { control, handleSubmit, formState: { errors, isValid } } = useForm({ 
+                                                                      mode: 'all',
+                                                                      shouldUnregister: false 
+                                                                    }); 
 
   // Formの検証後に呼び出される関数
   const onSubmit = data => { console.log(data) };
@@ -144,7 +144,7 @@ export const LoginDialog = ({
             {errors.PasswordBox && <InputErrorSentence>
                                      {errors.PasswordBox.message}
                                    </InputErrorSentence>}
-            <LoginButton />
+            <LoginButton disabled={!isValid} />
           </form>
           <PasswordResetSentence />
           <OrDirectionSentence />
