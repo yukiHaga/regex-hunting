@@ -80,7 +80,7 @@ export const LoginDialog = ({
       required: "メールアドレスを入力してください。", 
       pattern: {
         value: /^[A-Za-z0-9]{1}[A-Za-z0-9_.-]*@{1}[A-Za-z0-9_.-]{1,}.[A-Za-z0-9]{1,}$/,
-        message: "英数字, @, ドメインが含まれたメールアドレスを入力してください。"
+        message: "英数字, @, ドメインが含まれるメールアドレスを入力してください。"
       }
     },
     password: {
@@ -91,7 +91,7 @@ export const LoginDialog = ({
       },
       pattern: {
         value: /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?\d)[!-~]+$/,
-        message: "大文字, 小文字, 数字が含まれたメールアドレスを入力してください。"
+        message: "大文字, 小文字, 数字が含まれるパスワードを入力してください。"
       }
     }
   };
