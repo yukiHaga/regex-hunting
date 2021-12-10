@@ -77,6 +77,17 @@ export const SignUpDialog = ({
 
   // Formのバリデーション
   const registerOptions = {
+    name: {
+      required: "名前を入力してください。",
+      minLength: {
+        value: 2,
+        message: "2文字以上の名前を入力してください。"
+      },
+      maxLength: {
+        value: 10,
+        message: "10文字以下の名前を入力してください。"
+      },
+    },
     email: { 
       required: "メールアドレスを入力してください。", 
       pattern: {
@@ -89,6 +100,17 @@ export const SignUpDialog = ({
       minLength: {
         value: 8,
         message: "8文字以上のパスワードを入力してください。"
+      },
+      pattern: {
+        value: /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?\d)[!-~]+$/,
+        message: "大文字, 小文字, 数字が含まれるパスワードを入力してください。"
+      }
+    },
+    passwordConfirmation: {
+      required: "確認用のパスワードを入力してください。",
+      minLength: {
+        value: 8,
+        message: "8文字以上の確認用パスワードを入力してください。"
       },
       pattern: {
         value: /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?\d)[!-~]+$/,
@@ -172,7 +194,7 @@ export const SignUpDialog = ({
               render={({ field }) => (
                 <FormControl variant="filled">              
                   <InputLabel htmlFor="password-confirmation-component-filled">
-                    パスワード確認
+                    パスワード(確認用)
                   </InputLabel>
                   <CustomFilledInput
                     {...field}
