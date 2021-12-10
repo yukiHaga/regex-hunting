@@ -112,11 +112,11 @@ export const LoginDialog = ({
               rules={registerOptions.email}
               render={({ field }) => (
                 <FormControl variant="filled">              
-                  <InputLabel htmlFor="component-filled">メールアドレス</InputLabel>
+                  <InputLabel htmlFor="email-component-filled">メールアドレス</InputLabel>
                   <CustomFilledInput
                     {...field}
                     type="email"
-                    id="component-filled"
+                    id="email-component-filled"
                     label="email"
                   />
                 </FormControl>              
@@ -131,11 +131,11 @@ export const LoginDialog = ({
               rules={registerOptions.password}
               render={({ field }) => (
                 <FormControl variant="filled">              
-                  <InputLabel htmlFor="component-filled">パスワード</InputLabel>
+                  <InputLabel htmlFor="password-component-filled">パスワード</InputLabel>
                   <CustomFilledInput
                     {...field}
                     type="password"
-                    id="component-filled"
+                    id="password-component-filled"
                     label="password"
                   />
                 </FormControl>              
