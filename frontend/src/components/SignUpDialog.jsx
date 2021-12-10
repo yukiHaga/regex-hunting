@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import styled from 'styled-components';
 
 // ダイアログ
@@ -66,10 +66,20 @@ export const SignUpDialog = ({
 }) => {
 
   // useForm
-  const { control, handleSubmit, formState: { errors } } = useForm({ 
-                                                             mode: 'all',
-                                                             shouldUnregister: false 
-                                                           }); 
+  const { control, handleSubmit, formState: { errors }, watch } = useForm({ 
+                                                                    mode: 'all',
+                                                                    shouldUnregister: false 
+                                                                  }); 
+
+  // refObject(password)を定義
+  // refObjectのcurrentプロパティにwatchの初期値("")を代入
+  // watchは、PasswordBoxというname属性を持つinput要素を監視している。
+  // useRefを使う理由は、モーダルのコンポーネント内で値を保持する為。
+  // useRefの場合、変数の値を更新しても再レンダリングは起きない。
+  // モーダルコンポーネントが再レンダリングするたびに、
+  // password.currentにwatchしている値が代入される。
+  const password = useRef();
+  password.current = watch("PasswordBox", "")
 
   // Formの検証後に呼び出される関数
   const onSubmit = data => { console.log(data) };
@@ -115,7 +125,10 @@ export const SignUpDialog = ({
       pattern: {
         value: /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?\d)[!-~]+$/,
         message: "大文字, 小文字, 数字が含まれるパスワードを入力してください。"
-      }
+      },
+      validate: {
+        confirmPassword: (value) => value === password.current || "パスワードが一致しません。" 
+      }  
     }
   };
 
