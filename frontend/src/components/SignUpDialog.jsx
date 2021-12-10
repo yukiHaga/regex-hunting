@@ -109,6 +109,25 @@ export const SignUpDialog = ({
         <CustomDialogContent>
           <form onSubmit={handleSubmit(onSubmit, onErrors)}>
             <Controller 
+              name="NameBox"
+              control={control}
+              rules={registerOptions.name}
+              render={({ field }) => (
+                <FormControl variant="filled">              
+                  <InputLabel htmlFor="name-component-filled">名前</InputLabel>
+                  <CustomFilledInput
+                    {...field}
+                    type="text"
+                    id="name-component-filled"
+                    label="name"
+                  />
+                </FormControl>              
+              )}
+            />
+            {errors.NameBox && <InputErrorSentence>
+                                  {errors.NameBox.message}
+                                </InputErrorSentence>}
+            <Controller 
               name="EmailBox"
               control={control}
               rules={registerOptions.email}
@@ -146,6 +165,27 @@ export const SignUpDialog = ({
             {errors.PasswordBox && <InputErrorSentence>
                                      {errors.PasswordBox.message}
                                    </InputErrorSentence>}
+            <Controller 
+              name="PasswordConfirmationBox"
+              control={control}
+              rules={registerOptions.passwordConfirmation}
+              render={({ field }) => (
+                <FormControl variant="filled">              
+                  <InputLabel htmlFor="password-confirmation-component-filled">
+                    パスワード確認
+                  </InputLabel>
+                  <CustomFilledInput
+                    {...field}
+                    type="password"
+                    id="password-confirmation-component-filled"
+                    label="password-confirmation"
+                  />
+                </FormControl>              
+              )}
+            />
+            {errors.PasswordConfirmationBox && <InputErrorSentence>
+                                                 {errors.PasswordConfirmationBox.message}
+                                               </InputErrorSentence>}
             <LoginButton />
           </form>
           <PasswordResetSentence />
