@@ -69,7 +69,7 @@ export const LandingPages = () => {
   // モーダルに関するstateの初期値
   const loginInitialState = {
     isOpenDialog: false,
-    modalType: null
+    modalType: ""
   }
 
   // モーダルを管理するstate
@@ -110,7 +110,7 @@ export const LandingPages = () => {
             isOpen={state.isOpenDialog}
             onClose={() => setState({
               isOpenDialog: false,
-              modalType: null
+              modalType: ""
             })}
           />
       }
@@ -120,7 +120,7 @@ export const LandingPages = () => {
             isOpen={state.isOpenDialog}
             onClose={() => setState({
               isOpenDialog: false,
-              modalType: null
+              modalType: ""
             })}
             onClickLoginModalLink={() => setState({
               isOpenDialog: true,

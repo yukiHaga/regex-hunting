@@ -13,7 +13,6 @@ const HaveAccountSentenceWrapper = styled(DescriptionWrapper)`
 `;
 
 export const HaveAccountSentence = ({onClickLoginModalLink}) => {
-  console.log(onClickLoginModalLink);
   return (
     <>
       <HaveAccountSentenceWrapper>
