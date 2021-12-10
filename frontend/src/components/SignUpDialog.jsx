@@ -14,7 +14,7 @@ import { COLORS } from '../style_constants.js';
 import SignUpImage from '../images/sign_up.png';
 
 // Button
-import { LoginButton } from './Buttons/LoginButton.jsx'
+import { SignUpButton } from './Buttons/SignUpButton.jsx'
 import { OAuthLoginButton } from './Buttons/OAuthLoginButton.jsx';
 import { CloseButton } from './Buttons/CloseButton.jsx';
 
@@ -220,7 +220,7 @@ export const SignUpDialog = ({
             {errors.PasswordConfirmationBox && <InputErrorSentence>
                                                  {errors.PasswordConfirmationBox.message}
                                                </InputErrorSentence>}
-            <LoginButton />
+            <SignUpButton />
           </form>
           <OrDirectionSentence />
           <OAuthLoginButton 
