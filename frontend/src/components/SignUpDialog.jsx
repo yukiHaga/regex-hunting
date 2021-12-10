@@ -140,8 +140,8 @@ export const SignUpDialog = ({
       <CustomDialogInnerWrapper> 
         <CloseButton onClose={onClose} fontSize="small" /> 
         <CustomDialogTitleImage src={SignUpImage} alt="SignUp" />
-        <CreateAccountSentence />
         <CustomDialogContent>
+          <CreateAccountSentence />
           <form onSubmit={handleSubmit(onSubmit, onErrors)}>
             <Controller 
               name="NameBox"
