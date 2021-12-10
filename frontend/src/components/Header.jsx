@@ -73,7 +73,7 @@ export const Header = ({onClickModalLink}) => {
             ログイン
           </HeaderNavModalLink>
           <HeaderNavModalLink onClick={() => onClickModalLink("signUp")}>
-            新規会員登録
+            無料会員登録
           </HeaderNavModalLink>
         </HeaderNav>
       </HeaderWrapper>
