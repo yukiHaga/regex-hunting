@@ -3,9 +3,15 @@ import styled from 'styled-components';
 
 import { BlueRoundButton } from '../shared_style';
 
+// Colors
+import { COLORS } from '../../style_constants.js';
+
+
 const SignUpButtonWrapper = styled(BlueRoundButton)`
   border-style: none;
   margin-bottom: 15px;
+  opacity: ${(props) => props.disabled ? 0.3 : 1};
+  pointer-events: ${(props) => props.disabled ? 'none' : 'auto'};
 `;
 
 const SignUpButtonTextWrapper = styled.div`
@@ -20,10 +26,10 @@ const SignUpButtonTextWrapper = styled.div`
   line-height: 50px;
 `;
 
-export const SignUpButton = () => {
+export const SignUpButton = ({disabled}) => {
   return (
     <>
-      <SignUpButtonWrapper type="submit">
+      <SignUpButtonWrapper type="submit" disabled={disabled}>
         <SignUpButtonTextWrapper>
           新規登録
         </SignUpButtonTextWrapper>
