@@ -64,6 +64,6 @@ export const GreenRoundButton = styled(BaseButton)`
 `;
 
 // テキストのラッパー
-export const DescriptionWrapper = styled.div`
+export const DescriptionWrapper = styled.p`
   color: ${COLORS.BLACK};
 `;
