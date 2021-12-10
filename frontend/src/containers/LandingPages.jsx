@@ -16,6 +16,7 @@ import { SubTitle } from '../components/SubTitle.jsx';
 import { StartButton } from '../components/Buttons/StartButton.jsx'
 import { Footer } from '../components/Footer.jsx';
 import { LoginDialog } from '../components/LoginDialog.jsx';
+import { SignUpDialog } from '../components/SignUpDialog.jsx';
 
 // メインのラッパー
 const MainWrapper = styled.div`
@@ -106,6 +107,16 @@ export const LandingPages = () => {
       {
         state.isOpenDialog && state.modalType === "login" &&
           <LoginDialog 
+            isOpen={state.isOpenDialog}
+            onClose={() => setState({
+              isOpenDialog: false,
+              modalType: null
+            })}
+          />
+      }
+      {
+        state.isOpenDialog && state.modalType === "signUp" &&
+          <SignUpDialog 
             isOpen={state.isOpenDialog}
             onClose={() => setState({
               isOpenDialog: false,
