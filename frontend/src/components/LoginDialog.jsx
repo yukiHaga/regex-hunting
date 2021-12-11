@@ -12,6 +12,9 @@ import {
   loginReducer,
 } from '../reducers/login';
 
+// useNavigate
+import { useNavigate } from "react-router-dom";
+
 // ダイアログ
 import { DialogContent, Dialog } from '@mui/material';
 
@@ -79,6 +82,9 @@ export const LoginDialog = ({
   // useReducer
   const [state, dispatch] = useReducer(loginReducer, initialState);
 
+  // navigate
+  let navigate = useNavigate();
+
   // useForm
   const { 
     control, 
@@ -109,9 +115,13 @@ export const LoginDialog = ({
           user: data.user
         }
       });
-      window.location.reload();
-    });
+    }).then(() => 
+      navigate('/my-page')
+    );
   };
+
+  // フォームエラー時の関数
+  // フォームエラーかどうかはpostUserSessionで確認するので、こいつはいずれ消す
   const onErrors = data => { console.log(data) };
 
   // Formのバリデーション

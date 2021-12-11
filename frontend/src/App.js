@@ -33,7 +33,7 @@ function App() {
           {/* マイページ */}
           <Route 
             exact 
-            path="/users/:user_id/my-page" 
+            path="/my-page" 
             element={<MyPages />} 
           />
 
