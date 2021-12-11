@@ -93,7 +93,7 @@ export const LoginDialog = ({
   // dataにはフォームに入力したデータが入る
   // dataを実引数としてpostUserSeesionを呼び出した後、
   // postUserSessionで取得したdataを実引数として、dispatchを実行
-  const onSubmit = ({data: {EmailBox, PasswordBox}}) => { 
+  const onSubmit = ({EmailBox, PasswordBox}) => { 
     dispatch({ type: loginActionTyps.FETCHING });
     postUserSession({
       user: {
