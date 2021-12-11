@@ -48,6 +48,9 @@ import { SignUpSentence } from './Sentences/SignUpSentence.jsx';
 import { OrDirectionSentence } from './Sentences/OrDirectionSentence.jsx';
 import { InputErrorSentence } from './Sentences/InputErrorSentence.jsx';
 
+// HTTP_STATUS_CODE
+import { HTTP_STATUS_CODE } from '../constants';
+
 const CustomDialogInnerWrapper = styled.div`
   padding-top: 10px;
   padding-right: 10px;
@@ -102,7 +105,7 @@ export const LoginDialog = ({
   // reducer側でちゃんとstateは更新されている。
   // しかし、この関数内でstateをコンソール出力できない。
   const onSubmit = ({EmailBox, PasswordBox}) => { 
-    dispatch({ type: loginActionTyps.FETCHING });
+    dispatch({ type: loginActionTyps.POSTING });
     postUserSession({
       user: {
         email: EmailBox,
@@ -110,14 +113,21 @@ export const LoginDialog = ({
       }
     }).then((data) => {
       dispatch({
-        type: loginActionTyps.FETCH_SUCCESS,
+        type: loginActionTyps.POST_SUCCESS,
         payload: {
           user: data.user
         }
       });
     }).then(() => 
       navigate('/my-page')
-    );
+    ).catch((e) => {
+      console.log(e)
+      if(e.response.status === HTTP_STATUS_CODE.NOT_ACCEPTABLE){
+        console.log(e);
+      } else {
+        throw e;
+      }
+    })
   };
 
   // フォームエラー時の関数
@@ -196,7 +206,9 @@ export const LoginDialog = ({
             {errors.PasswordBox && <InputErrorSentence>
                                      {errors.PasswordBox.message}
                                    </InputErrorSentence>}
-            <LoginButton disabled={!isValid} />
+            <LoginButton 
+              disabled={!isValid} 
+            />
           </form>
           <PasswordResetSentence />
           <OrDirectionSentence />

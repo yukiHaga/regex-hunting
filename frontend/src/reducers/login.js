@@ -3,7 +3,7 @@ import { REQUEST_STATE } from '../constants';
 // useReducerで使うinitialStateを定義
 // デフォルトでstateにfetchStateというプロパティが入っている
 export const initialState = {
-  fetchState: REQUEST_STATE.INITIAL,
+  postState: REQUEST_STATE.INITIAL,
   user: {}
 };
 
@@ -12,20 +12,20 @@ export const initialState = {
 // loginActionTypsがFETCHINGなら、REQUEST_STATEはLOADING
 // loginActionTypsがFETCH_SUCCESSなら、REQUEST_STATEはOK
 export const loginActionTyps = {
-  FETCHING: 'FETCHING',
-  FETCH_SUCCESS: 'FETCH_SUCCESS'
+  POSTING: 'POSTING',
+  POST_SUCCESS: 'POST_SUCCESS'
 }
 
 export const loginReducer = (state, action) => {
   switch (action.type) {
-    case loginActionTyps.FETCHING:
+    case loginActionTyps.POSTING:
       return {
         ...state,
-        fetchState: REQUEST_STATE.LOADING
+        postState: REQUEST_STATE.LOADING
       };
-    case loginActionTyps.FETCH_SUCCESS:
+    case loginActionTyps.POST_SUCCESS:
       return {
-        fetchState: REQUEST_STATE.OK,
+        postState: REQUEST_STATE.OK,
         user: action.payload.user
       };
     default:
