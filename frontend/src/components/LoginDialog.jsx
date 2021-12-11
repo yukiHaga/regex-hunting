@@ -93,6 +93,8 @@ export const LoginDialog = ({
   // dataにはフォームに入力したデータが入る
   // dataを実引数としてpostUserSeesionを呼び出した後、
   // postUserSessionで取得したdataを実引数として、dispatchを実行
+  // reducer側でちゃんとstateは更新されている。
+  // しかし、この関数内でstateをコンソール出力できない。
   const onSubmit = ({EmailBox, PasswordBox}) => { 
     dispatch({ type: loginActionTyps.FETCHING });
     postUserSession({
@@ -100,16 +102,15 @@ export const LoginDialog = ({
         email: EmailBox,
         password: PasswordBox
       }
-    })
-      .then((data) => {
-        dispatch({
-          type: loginActionTyps.FETCH_SUCCESS,
-          payload: {
-            user: data.user
-          }
-        })
+    }).then((data) => {
+      dispatch({
+        type: loginActionTyps.FETCH_SUCCESS,
+        payload: {
+          user: data.user
+        }
       });
-    console.log(state);
+      window.location.reload();
+    });
   };
   const onErrors = data => { console.log(data) };
 
