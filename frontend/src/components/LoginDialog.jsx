@@ -110,6 +110,7 @@ export const LoginDialog = ({
             <Controller 
               name="EmailBox"
               control={control}
+              defaultValue=""
               rules={registerOptions.email}
               render={({ field }) => (
                 <FormControl variant="filled">              
@@ -129,6 +130,7 @@ export const LoginDialog = ({
             <Controller 
               name="PasswordBox"
               control={control}
+              defaultValue=""
               rules={registerOptions.password}
               render={({ field }) => (
                 <FormControl variant="filled">              
