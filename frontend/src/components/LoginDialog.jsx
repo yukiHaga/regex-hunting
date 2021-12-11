@@ -1,5 +1,16 @@
-import React from 'react';
+import React, { useReducer } from 'react';
 import styled from 'styled-components';
+
+// ログイン関係のAPIコール関数
+// deleteUserSession 
+import { postUserSession } from '../apis/login'; 
+
+// reducer
+import {
+  initialState,
+  loginActionTyps,
+  loginReducer,
+} from '../reducers/login';
 
 // ダイアログ
 import { DialogContent, Dialog } from '@mui/material';
@@ -65,14 +76,41 @@ export const LoginDialog = ({
   onClick
 }) => {
 
+  // useReducer
+  const [state, dispatch] = useReducer(loginReducer, initialState);
+
   // useForm
-  const { control, handleSubmit, formState: { errors, isValid } } = useForm({ 
-                                                                      mode: 'all',
-                                                                      shouldUnregister: false 
-                                                                    }); 
+  const { 
+    control, 
+    handleSubmit, 
+    formState: { errors, isValid } 
+  } = useForm({
+        mode: 'all',
+        shouldUnregister: false 
+      }); 
 
   // Formの検証後に呼び出される関数
-  const onSubmit = data => { console.log(data) };
+  // dataにはフォームに入力したデータが入る
+  // dataを実引数としてpostUserSeesionを呼び出した後、
+  // postUserSessionで取得したdataを実引数として、dispatchを実行
+  const onSubmit = ({data: {EmailBox, PasswordBox}}) => { 
+    dispatch({ type: loginActionTyps.FETCHING });
+    postUserSession({
+      user: {
+        email: EmailBox,
+        password: PasswordBox
+      }
+    })
+      .then((data) => {
+        dispatch({
+          type: loginActionTyps.FETCH_SUCCESS,
+          payload: {
+            user: data.user
+          }
+        })
+      });
+    console.log(state);
+  };
   const onErrors = data => { console.log(data) };
 
   // Formのバリデーション

@@ -2,12 +2,12 @@ import axios from 'axios';
 import { userSessionsCreate, userSessionsDestroy } from '../urls/index';
 
 // ログインするためのAPIコール関数
-export const postUserSession = async (params) => {
+export const postUserSession = async ({user: {email, password}}) => {
   try {
     const response = await axios.post(userSessionsCreate,
       {
-        email: params.user.email,
-        password: params.user.password
+        email: email,
+        password: password
       }
     );
     return response.data;

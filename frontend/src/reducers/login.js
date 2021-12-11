@@ -1,6 +1,7 @@
 import { REQUEST_STATE } from '../constants';
 
 // useReducerで使うinitialStateを定義
+// デフォルトでstateにfetchStateというプロパティが入っている
 export const initialState = {
   fetchState: REQUEST_STATE.INITIAL,
   user: {}
@@ -20,12 +21,12 @@ export const loginReducer = (state, action) => {
     case loginActionTyps.FETCHING:
       return {
         ...state,
-        fetchState: REQUEST_STATE.LOADING,
+        fetchState: REQUEST_STATE.LOADING
       };
-    case restaurantsActionTyps.FETCH_SUCCESS:
+    case loginActionTyps.FETCH_SUCCESS:
       return {
         fetchState: REQUEST_STATE.OK,
-        user: action.payload.user,
+        user: action.payload.user
       };
     default:
       throw new Error();
