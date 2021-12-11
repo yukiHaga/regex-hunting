@@ -112,6 +112,10 @@ export const LandingPages = () => {
               isOpenDialog: false,
               modalType: ""
             })}
+            onClick={() => setState({
+              isOpenDialog: true,
+              modalType: "signUp"
+            })}
           />
       }
       {

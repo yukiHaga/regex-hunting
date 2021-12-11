@@ -61,7 +61,8 @@ const CustomFilledInput = styled(FilledInput)`
 
 export const LoginDialog = ({
   isOpen,
-  onClose
+  onClose,
+  onClick
 }) => {
 
   // useForm
@@ -166,7 +167,7 @@ export const LoginDialog = ({
             icon={<ColoredGitHubIcon fontSize="large" />} 
             type="GitHub"
           />
-          <SignUpSentence />
+          <SignUpSentence onClick={onClick} />
         </CustomDialogContent>
       </CustomDialogInnerWrapper>
     </Dialog>
