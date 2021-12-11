@@ -61,14 +61,15 @@ const CustomFilledInput = styled(FilledInput)`
 
 export const LoginDialog = ({
   isOpen,
-  onClose
+  onClose,
+  onClick
 }) => {
 
   // useForm
-  const { control, handleSubmit, formState: { errors } } = useForm({ 
-                                                             mode: 'all',
-                                                             shouldUnregister: false 
-                                                           }); 
+  const { control, handleSubmit, formState: { errors, isValid } } = useForm({ 
+                                                                      mode: 'all',
+                                                                      shouldUnregister: false 
+                                                                    }); 
 
   // Formの検証後に呼び出される関数
   const onSubmit = data => { console.log(data) };
@@ -109,6 +110,7 @@ export const LoginDialog = ({
             <Controller 
               name="EmailBox"
               control={control}
+              defaultValue=""
               rules={registerOptions.email}
               render={({ field }) => (
                 <FormControl variant="filled">              
@@ -128,6 +130,7 @@ export const LoginDialog = ({
             <Controller 
               name="PasswordBox"
               control={control}
+              defaultValue=""
               rules={registerOptions.password}
               render={({ field }) => (
                 <FormControl variant="filled">              
@@ -144,7 +147,7 @@ export const LoginDialog = ({
             {errors.PasswordBox && <InputErrorSentence>
                                      {errors.PasswordBox.message}
                                    </InputErrorSentence>}
-            <LoginButton />
+            <LoginButton disabled={!isValid} />
           </form>
           <PasswordResetSentence />
           <OrDirectionSentence />
@@ -166,7 +169,7 @@ export const LoginDialog = ({
             icon={<ColoredGitHubIcon fontSize="large" />} 
             type="GitHub"
           />
-          <SignUpSentence />
+          <SignUpSentence onClick={onClick} />
         </CustomDialogContent>
       </CustomDialogInnerWrapper>
     </Dialog>

@@ -12,12 +12,12 @@ const SignUpSentenceWrapper = styled(DescriptionWrapper)`
   margin-top: 15px;
 `;
 
-export const SignUpSentence = () => {
+export const SignUpSentence = ({onClick}) => {
   return (
     <>
       <SignUpSentenceWrapper>
         アカウントをお持ちではないですか？&nbsp;&nbsp; 
-        <BlueBaseLink to={'#'}>
+        <BlueBaseLink to={'#'} onClick={onClick}>
           新規登録
         </BlueBaseLink>
       </SignUpSentenceWrapper>
