@@ -121,7 +121,7 @@ export const LoginDialog = ({
     }).then(() => 
       navigate('/my-page')
     ).catch((e) => {
-      console.log(e)
+      console.log(e.response)
       if(e.response.status === HTTP_STATUS_CODE.NOT_ACCEPTABLE){
         console.log(e);
       } else {

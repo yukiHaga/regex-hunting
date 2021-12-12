@@ -3,12 +3,9 @@ class Api::V1::UserSessionsController < ApplicationController
   skip_before_action :verify_authenticity_token, only: :create
   after_action :set_csrf_token_header, only: :create
 
-  # 本当はActiveRecord::RecordNotFoundだが、レコードがないという事実を教えたくないので、
-  # Not Acceptableにした。
   def create
-    raise StandardError
     user = login(params[:email], params[:password])
-    raise Not Acceptable unless user
+    raise ActiveRecord::RecordNotFound unless user
     render json: {
       user: {
         name: user[:name],
