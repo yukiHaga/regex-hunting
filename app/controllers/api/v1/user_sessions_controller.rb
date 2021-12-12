@@ -7,6 +7,7 @@ class Api::V1::UserSessionsController < ApplicationController
     user = login(params[:email], params[:password])
     raise ActiveRecord::RecordNotFound unless user
     render json: {
+      session: true,
       user: {
         name: user[:name],
         rank: user[:rank],
@@ -22,7 +23,7 @@ class Api::V1::UserSessionsController < ApplicationController
 
   def destroy
     logout
-    render json: {}, status: :ok
+    render json: { session: false }, status: :ok
   end
 
   private

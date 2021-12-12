@@ -7,6 +7,7 @@ class Api::V1::UsersController < ApplicationController
     user = User.new(user_params)
     if user.save
       render json: {
+        session: true,
         user: {
           name: user[:name],
           rank: user[:rank],
