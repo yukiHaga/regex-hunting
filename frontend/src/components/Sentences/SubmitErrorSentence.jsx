@@ -6,7 +6,7 @@ import { COLORS } from '../../style_constants.js';
 
 const DangerText = styled.p`
   text-align: left;
-  margin-top: 0px;
+  margin-top: 8px;
   margin-bottom: 16px;
   color: ${COLORS.RED};
 `;
