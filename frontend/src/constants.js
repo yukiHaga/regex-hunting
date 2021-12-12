@@ -7,5 +7,6 @@ export const REQUEST_STATE = {
 
 // クライアント側のエラーを表す定数
 export const HTTP_STATUS_CODE = {
+  NOT_FOUND: 404;
   NOT_ACCEPTABLE: 406,
 }
