@@ -29,6 +29,7 @@ module Api::ExceptionHandler
   end
 
   def render_500
+    binding.pry
     render json: {
       errors: {
         title: 'Internal Server Error',

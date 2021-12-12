@@ -4,6 +4,7 @@ class Api::V1::UserSessionsController < ApplicationController
   after_action :set_csrf_token_header, only: :create
 
   def create
+    raise StandardError
     user = login(params[:email], params[:password])
     raise ActiveRecord::RecordNotFound unless user
     render json: {
