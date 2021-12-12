@@ -58,7 +58,7 @@ const HeaderNavModalLink = styled(ModalLink)`
 `;
 
 // LPページに定義してあるstateを更新する関数をpropsとして渡した
-export const Header = ({onClickModalLink}) => {
+export const Header = ({onClickLink}) => {
   return (
     <>
       <HeaderWrapper>
@@ -69,10 +69,10 @@ export const Header = ({onClickModalLink}) => {
           <HeaderNavLink to={`/rankings`}>
             ランキング
           </HeaderNavLink>
-          <HeaderNavModalLink onClick={() => onClickModalLink("login")}>
+          <HeaderNavModalLink onClick={() => onClickLink("login")}>
             ログイン
           </HeaderNavModalLink>
-          <HeaderNavModalLink onClick={() => onClickModalLink("signUp")}>
+          <HeaderNavModalLink onClick={() => onClickLink("signUp")}>
             無料会員登録
           </HeaderNavModalLink>
         </HeaderNav>

@@ -73,7 +73,7 @@ export const LandingPages = () => {
 
   return (
     <>
-      <Header onClickModalLink={(modalType) => setState({
+      <Header onClickLink={(modalType) => setState({
         isOpenDialog: true,
         modalType: modalType
       })}/>
