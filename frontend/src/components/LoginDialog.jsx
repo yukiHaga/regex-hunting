@@ -47,6 +47,7 @@ import { PasswordResetSentence } from './Sentences/PasswordResetSentence.jsx';
 import { SignUpSentence } from './Sentences/SignUpSentence.jsx';
 import { OrDirectionSentence } from './Sentences/OrDirectionSentence.jsx';
 import { InputErrorSentence } from './Sentences/InputErrorSentence.jsx';
+import { SubmitErrorSentence } from './Sentences/SubmitErrorSentence.jsx';
 
 // HTTP_STATUS_CODE
 import { HTTP_STATUS_CODE } from '../constants';
@@ -121,12 +122,11 @@ export const LoginDialog = ({
     }).then(() => 
       navigate('/my-page')
     ).catch((e) => {
-      console.log(e.response)
       if(e.response.status === HTTP_STATUS_CODE.NOT_FOUND){
         dispatch({
           type: loginActionTyps.POST_FAILURE,
           payload: {
-            errors: e.response.data
+            errors: e.response.data.errors
           }
         });
       } else {
@@ -170,7 +170,7 @@ export const LoginDialog = ({
         <CloseButton onClose={onClose} fontSize="small" /> 
         <CustomDialogTitleImage src={LoginImage} alt="Login" />
         <CustomDialogContent>
-          <form onSubmit={handleSubmit(onSubmit, onErrors)}>
+          <form onSubmit={handleSubmit(onSubmit)}>
             <Controller 
               name="EmailBox"
               control={control}
@@ -214,6 +214,9 @@ export const LoginDialog = ({
             <LoginButton 
               disabled={!isValid} 
             />
+            {state.errors.title === 'Record Not Found' && <SubmitErrorSentence>
+                                                             {state.errors.detail}
+                                                          </SubmitErrorSentence>}
           </form>
           <PasswordResetSentence />
           <OrDirectionSentence />

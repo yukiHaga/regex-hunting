@@ -5,7 +5,6 @@ import { BlueRoundButton } from '../shared_style';
 
 const LoginButtonWrapper = styled(BlueRoundButton)`
   border-style: none;
-  margin-bottom: 15px;
   opacity: ${(props) => props.disabled ? 0.3 : 1};
   pointer-events: ${(props) => props.disabled ? 'none' : 'auto'};
 `;
