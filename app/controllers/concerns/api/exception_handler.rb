@@ -6,6 +6,7 @@ module Api::ExceptionHandler
   included do
     rescue_from StandardError, with: :render_500
     rescue_from ActiveRecord::RecordNotFound, with: :render_404
+    rescue_from Not Acceptable, with: :render_406
   end
 
   private
@@ -28,8 +29,17 @@ module Api::ExceptionHandler
     }, status: :not_found
   end
 
-  def render_500
+  def render_406
     binding.pry
+    render json: {
+      errors: {
+        title: 'Not Acceptable',
+        detail: 'メールアドレスもしくはパスワードが不正です。'
+      }
+    }, status: :not_acceptable
+  end
+
+  def render_500
     render json: {
       errors: {
         title: 'Internal Server Error',
