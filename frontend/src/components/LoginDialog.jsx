@@ -113,7 +113,6 @@ export const LoginDialog = ({
         password: PasswordBox
       }
     }).then((data) => {
-      console.log(data);
       dispatch({
         type: loginActionTyps.POST_SUCCESS,
         payload: {
