@@ -4,6 +4,7 @@ class Api::V1::UserSessionsController < ApplicationController
   after_action :set_csrf_token_header, only: :create
 
   def create
+    binding.pry
     user = login(params[:email], params[:password])
     if user
       render json: {
@@ -19,7 +20,7 @@ class Api::V1::UserSessionsController < ApplicationController
         }
       }, status: :ok
     else
-      render json: {errors: user.errors}, status: :not_found
+      render json: {errors: "ユーザーが見つかりませんでした"}, status: :not_found
     end
   end
 
