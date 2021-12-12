@@ -12,6 +12,7 @@ export const postUserSession = async ({user: {email, password}}) => {
     );
     return response.data;
   } catch(e) {
+    console.log(e.response);
     throw e;
   }
 };
