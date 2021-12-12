@@ -1,10 +1,6 @@
 import React, { Fragment, useState } from 'react';
 import styled from 'styled-components';
 
-// ログイン関係のAPIコール関数
-// deleteUserSession 
-import { postUserSession } from '../apis/login'; 
-
 // Image
 import MainTitleImage from '../images/main_title.png';
 import BackGroundImage from '../images/background.png';
