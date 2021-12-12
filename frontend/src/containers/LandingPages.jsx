@@ -1,4 +1,4 @@
-import React, { Fragment, useEffect, useState } from 'react';
+import React, { Fragment, useState } from 'react';
 import styled from 'styled-components';
 
 // ログイン関係のAPIコール関数
@@ -74,20 +74,6 @@ export const LandingPages = () => {
 
   // モーダルを管理するstate
   const [state, setState] = useState(loginInitialState);
-
-  // ユーザーをログインさせる。
-  useEffect(() => {
-    postUserSession({
-      user: {
-        email: 'glen@stroman.com',
-        password: '3150test' 
-      }
-    })
-    .then((data) => {
-      console.log(data);
-      console.log("ログインが成功した");
-    })
-  }, []);
 
   return (
     <>
