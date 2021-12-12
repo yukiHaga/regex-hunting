@@ -1,4 +1,5 @@
 class ApplicationController < ActionController::API
+  include Api::ExceptionHandler
   include ActionController::RequestForgeryProtection
   include ActionController::Cookies
   protect_from_forgery with: :exception
