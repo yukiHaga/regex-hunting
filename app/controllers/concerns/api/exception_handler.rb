@@ -23,7 +23,7 @@ module Api::ExceptionHandler
     render json: {
       errors: {
         title: 'Record Not Found',
-        detail: 'ユーザーが存在しません。'
+        detail: 'メールアドレスもしくはパスワードが不正です。'
       }
     }, status: :not_found
   end
