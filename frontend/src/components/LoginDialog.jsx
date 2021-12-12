@@ -135,10 +135,6 @@ export const LoginDialog = ({
     })
   };
 
-  // フォームエラー時の関数
-  // フォームエラーかどうかはpostUserSessionで確認するので、こいつはいずれ消す
-  const onErrors = data => { console.log(data) };
-
   // Formのバリデーション
   const registerOptions = {
     email: { 
