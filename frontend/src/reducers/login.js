@@ -4,7 +4,8 @@ import { REQUEST_STATE } from '../constants';
 // デフォルトでstateにfetchStateというプロパティが入っている
 export const initialState = {
   postState: REQUEST_STATE.INITIAL,
-  user: {}
+  user: {},
+  errors: {}
 };
 
 // useReducerで使うActonTypsを定義
@@ -13,7 +14,8 @@ export const initialState = {
 // loginActionTypsがFETCH_SUCCESSなら、REQUEST_STATEはOK
 export const loginActionTyps = {
   POSTING: 'POSTING',
-  POST_SUCCESS: 'POST_SUCCESS'
+  POST_SUCCESS: 'POST_SUCCESS',
+  POST_FAILURE: 'POST_FAILURE'
 }
 
 export const loginReducer = (state, action) => {
@@ -25,8 +27,15 @@ export const loginReducer = (state, action) => {
       };
     case loginActionTyps.POST_SUCCESS:
       return {
+        ...state,
         postState: REQUEST_STATE.OK,
         user: action.payload.user
+      };
+    case loginActionTyps.POST_FAILURE:
+      return {
+        ...state,
+        postState: REQUEST_STATE.OK,
+        errors: action.payload.errors
       };
     default:
       throw new Error();

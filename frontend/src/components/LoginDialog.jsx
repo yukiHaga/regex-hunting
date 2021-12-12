@@ -123,7 +123,12 @@ export const LoginDialog = ({
     ).catch((e) => {
       console.log(e.response)
       if(e.response.status === HTTP_STATUS_CODE.NOT_FOUND){
-        console.log(e);
+        dispatch({
+          type: loginActionTyps.POST_FAILURE,
+          payload: {
+            errors: e.response.data
+          }
+        });
       } else {
         throw e;
       }
