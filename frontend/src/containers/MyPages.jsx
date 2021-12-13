@@ -45,7 +45,14 @@ export const MyPages = () => {
         throw e;
       }
     })
-  }, []);
+  }, [
+    dispatch, 
+    requestUserActionTyps.REQUEST, 
+    requestUserActionTyps.REQUEST_SUCCESS,
+    requestUserActionTyps.REQUEST_FAILURE
+  ]);
+
+  console.log(requestUserState);
 
   return (
     <>
