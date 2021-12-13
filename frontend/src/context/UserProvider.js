@@ -3,20 +3,22 @@ import React, { useState, createContext } from "react";
 // UserContextというコンテキストオブジェクトを作成
 export const UserContext = createContext();
 
-export const UserProvider = ({children}) => {
+// Reducer関連をインポート
+import {
+  initialState,
+  requestUserActionTyps,
+  requestUserReducer,
+} from '../reducers/requestUser.js';
 
-  // userStateの初期値
-  const userInitialState = {
-    session: false,
-    user: {}
-  }
+export const UserProvider = ({children}) => {
  
-  const [ userState, setUserState ] = useState(userInitialState);
+  const [requestUserState, dispatch] = useReducer(requestUserReducer, initialState);
 
   // useContext(UserContext)でこのvalueがstateとして取得できる。
   const value = {
-    userState,
-    setUserState
+    requestUserState,
+    dispatch,
+    requestUserActionTyps,
   };
 
   return (
