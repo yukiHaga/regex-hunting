@@ -13,6 +13,8 @@ export const postUserSession = async ({user: {email, password}}) => {
       },
       { withCredentials: true }
     );
+    console.log(response);
+    axios.defaults.headers.common['X-CSRF-Token'] = response.headers['x-csrf-token'];
     return response.data;
   } catch(e) {
     throw e;
@@ -20,9 +22,11 @@ export const postUserSession = async ({user: {email, password}}) => {
 };
 
 // ログアウトするためのAPIコール関数
-export const deleteUserSession = async (params) => {
+export const deleteUserSession = async () => {
   try {
-    const response = await axios.delete(userSessionsDestroy);
+    const response = await axios.delete(userSessionsDestroy,
+      { withCredentials: true }
+    );
     return response.data;
   } catch(e) {
     throw e;

@@ -10,6 +10,7 @@ export const checkLoginStatus = async () => {
       userSessionsExist,
       { withCredentials: true }
     );
+    axios.defaults.headers.common['X-CSRF-Token'] = response.headers['x-csrf-token'];
     return response.data;
   } catch(e) {
     throw e;

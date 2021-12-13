@@ -21,7 +21,7 @@ export const BlueBaseLink = styled(BaseLink)`
 `;
 
 // モーダルへのリンクとなるコンポーネント
-export const ModalLink = styled.div`
+export const FakeLink = styled.div`
   cursor: pointer;
   :hover {
     opacity: 0.7;
