@@ -1,16 +1,9 @@
-import React, { useReducer, useContext } from 'react';
+import React, { useContext } from 'react';
 import styled from 'styled-components';
 
 // ログイン関係のAPIコール関数
 // deleteUserSession 
 import { postUserSession } from '../apis/login'; 
-
-// reducer
-import {
-  initialState,
-  loginActionTyps,
-  loginReducer,
-} from '../reducers/login';
 
 // useNavigate
 import { useNavigate } from "react-router-dom";
@@ -86,22 +79,15 @@ export const LoginDialog = ({
   onClick
 }) => {
 
-  // useReducer
-  const [state, dispatch] = useReducer(loginReducer, initialState);
-
   // useContext
-  const {userState, setUserState} = useContext(UserContext);
+  const {
+    requestUserState, 
+    dispatch, 
+    requestUserActionTyps
+  } = useContext(UserContext);
 
   // navigate
   let navigate = useNavigate();
-
-  // Login情報をuserStateに保存させるための関数
-  const successfulLogin = (user) => {
-    setUserState({
-      session: true,
-      user: user
-    });
-  };
 
   // useForm
   const { 
@@ -120,21 +106,25 @@ export const LoginDialog = ({
   // reducer側でちゃんとstateは更新されている。
   // しかし、この関数内でstateをコンソール出力できない。
   const onSubmit = ({EmailBox, PasswordBox}) => { 
-    dispatch({ type: loginActionTyps.POSTING });
+    dispatch({ type: requestUserActionTyps.REQUEST });
     postUserSession({
       user: {
         email: EmailBox,
         password: PasswordBox
       }
     }).then((data) => {
-      dispatch({type: loginActionTyps.POST_SUCCESS});
-      successfulLogin(data.user);
+      dispatch({
+        type: requestUserActionTyps.REQUEST_SUCCESS,
+        payload: {
+          user: data.user
+        }
+      });
     }).then(() => 
       navigate('/my-page')
     ).catch((e) => {
       if(e.response.status === HTTP_STATUS_CODE.NOT_FOUND){
         dispatch({
-          type: loginActionTyps.POST_FAILURE,
+          type: requestUserActionTyps.REQUEST_FAILURE,
           payload: {
             errors: e.response.data.errors
           }
