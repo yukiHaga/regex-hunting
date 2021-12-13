@@ -1,20 +1,20 @@
-import React, { createContext } from "react";
-
-// UserContextというコンテキストオブジェクトを作成
-export const UserContext = createContext();
+import React, { createContext, useReducer } from "react";
 
 // Reducer関連をインポート
 import {
   initialState,
   requestUserActionTyps,
-  requestUserReducer,
+  requestUserReducer
 } from '../reducers/requestUser.js';
+
+// UserContextというコンテキストオブジェクトを作成
+export const UserContext = createContext();
 
 export const UserProvider = ({children}) => {
  
   const [requestUserState, dispatch] = useReducer(requestUserReducer, initialState);
 
-  // useContext(UserContext)でこのvalueがstateとして取得できる。
+  // useContext(UserContext)でこのvalueが分割代入で取得できる。
   const value = {
     requestUserState,
     dispatch,
