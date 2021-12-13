@@ -210,9 +210,12 @@ export const LoginDialog = ({
             <LoginButton 
               disabled={!isValid} 
             />
-            {state.errors.title === 'Record Not Found' && <SubmitErrorSentence>
-                                                             {state.errors.detail}
-                                                          </SubmitErrorSentence>}
+            {
+              requestUserState.errors.title === 'Record Not Found' && 
+                <SubmitErrorSentence>
+                  {requestUserState.errors.detail}
+                </SubmitErrorSentence>
+            }
           </form>
           <PasswordResetSentence />
           <OrDirectionSentence />

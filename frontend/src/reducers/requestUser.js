@@ -25,7 +25,7 @@ export const requestUserReducer = (state, action) => {
     case requestUserActionTyps.REQUEST:
       return {
         ...state,
-        requestUserState: REQUEST_STATE.LOADING
+        requestUserState: REQUEST_STATE.LOADING,
         userState: {
           session: false,
           user: {}
