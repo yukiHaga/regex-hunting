@@ -1,4 +1,4 @@
-import React, { useState, createContext } from "react";
+import React, { createContext } from "react";
 
 // UserContextというコンテキストオブジェクトを作成
 export const UserContext = createContext();
