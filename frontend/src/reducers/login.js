@@ -4,7 +4,6 @@ import { REQUEST_STATE } from '../constants';
 // デフォルトでstateにfetchStateというプロパティが入っている
 export const initialState = {
   postState: REQUEST_STATE.INITIAL,
-  user: {},
   errors: {}
 };
 
@@ -29,7 +28,6 @@ export const loginReducer = (state, action) => {
       return {
         ...state,
         postState: REQUEST_STATE.OK,
-        user: action.payload.user
       };
     case loginActionTyps.POST_FAILURE:
       return {

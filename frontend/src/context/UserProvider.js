@@ -1,24 +1,27 @@
 import React, { useState, createContext } from "react";
 
 // UserContextというコンテキストオブジェクトを作成
-export const UserContext = createContext;
+export const UserContext = createContext();
 
 export const UserProvider = ({children}) => {
 
-  // モーダルに関するstateの初期値
+  // userStateの初期値
   const userInitialState = {
     session: false,
     user: {}
   }
+ 
+  const [ userState, setUserState ] = useState(userInitialState);
 
-  const [ state, setState ] = useState(userInitialState);
-
+  // useContext(UserContext)でこのvalueがstateとして取得できる。
   const value = {
-    value,
-    setState
+    userState,
+    setUserState
   };
 
   return (
     <UserContext.Provider value={value}>
-  )
+      {children}
+    </UserContext.Provider>
+  );
 };

@@ -1,4 +1,4 @@
-import React, { useReducer } from 'react';
+import React, { useReducer, useContext } from 'react';
 import styled from 'styled-components';
 
 // ログイン関係のAPIコール関数
@@ -52,6 +52,9 @@ import { SubmitErrorSentence } from './Sentences/SubmitErrorSentence.jsx';
 // HTTP_STATUS_CODE
 import { HTTP_STATUS_CODE } from '../constants';
 
+// Contextオブジェクト
+import { UserContext } from "../context/UserProvider.js";
+
 const CustomDialogInnerWrapper = styled.div`
   padding-top: 10px;
   padding-right: 10px;
@@ -86,8 +89,19 @@ export const LoginDialog = ({
   // useReducer
   const [state, dispatch] = useReducer(loginReducer, initialState);
 
+  // useContext
+  const {userState, setUserState} = useContext(UserContext);
+
   // navigate
   let navigate = useNavigate();
+
+  // Login情報をuserStateに保存させるための関数
+  const successfulLogin = (user) => {
+    setUserState({
+      session: true,
+      user: user
+    });
+  };
 
   // useForm
   const { 
@@ -113,12 +127,8 @@ export const LoginDialog = ({
         password: PasswordBox
       }
     }).then((data) => {
-      dispatch({
-        type: loginActionTyps.POST_SUCCESS,
-        payload: {
-          user: data.user
-        }
-      });
+      dispatch({type: loginActionTyps.POST_SUCCESS});
+      successfulLogin(data.user);
     }).then(() => 
       navigate('/my-page')
     ).catch((e) => {
