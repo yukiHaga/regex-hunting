@@ -52,8 +52,4 @@ class Api::V1::UserSessionsController < ApplicationController
     end
   end
 
-  private
-
-  def form_authenticity_token; end
-
 end
