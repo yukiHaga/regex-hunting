@@ -18,44 +18,46 @@ export const MyPages = () => {
   // requestUserStateには、requestState, userState, errorsが格納されている
   // userStateにはsessionとuserが格納されている
   const { 
-    requestUserState, 
+    requestUserState: {userState},
     dispatch, 
     requestUserActionTyps
   } = useContext(UserContext);
 
   useEffect(() => {
-    dispatch({ type: requestUserActionTyps.REQUEST });
-    checkLoginStatus().then((data) => {
-      dispatch({
-        type: requestUserActionTyps.REQUEST_SUCCESS,
-        payload: {
-          user: data.user
-        }
-      });
-    }).catch((e) => {
-      if(e.response.status === HTTP_STATUS_CODE.NOT_FOUND){
+    if(userState.session === false){
+      dispatch({ type: requestUserActionTyps.REQUEST });
+      checkLoginStatus().then((data) => {
         dispatch({
-          type: requestUserActionTyps.REQUEST_FAILURE,
+          type: requestUserActionTyps.REQUEST_SUCCESS,
           payload: {
-            errors: e.response.data.errors
+            session: data.session,
+            user: data.user
           }
         });
-      } else {
-        throw e;
-      }
-    })
+      }).catch((e) => {
+        if(e.response.status === HTTP_STATUS_CODE.NOT_FOUND){
+          dispatch({
+            type: requestUserActionTyps.REQUEST_FAILURE,
+            payload: {
+              errors: e.response.data.errors
+            }
+          });
+        } else {
+          throw e;
+        }
+      })
+    }
   }, [
     dispatch, 
+    userState.session,
     requestUserActionTyps.REQUEST, 
     requestUserActionTyps.REQUEST_SUCCESS,
     requestUserActionTyps.REQUEST_FAILURE
   ]);
 
-  console.log(requestUserState);
-
   return (
     <>
-      <Header />
+      <Header /> 
     </>
   );
 };

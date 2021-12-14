@@ -1,7 +1,7 @@
 class Api::V1::UserSessionsController < ApplicationController
-  skip_before_action :require_login, only: %i(create logged_in?)
-  skip_before_action :verify_authenticity_token, only: %i(create logged_in?)
-  after_action :set_csrf_token_header, only: %i(create logged_in?)
+  skip_before_action :require_login, only: %i(create current_user_logged_in? destroy)
+  skip_before_action :verify_authenticity_token, only: %i(create current_user_logged_in?)
+  after_action :set_csrf_token_header, only: %i(create current_user_logged_in?)
 
   def create
     user = login(params[:email], params[:password])
@@ -29,7 +29,7 @@ class Api::V1::UserSessionsController < ApplicationController
     }, status: :ok
   end
 
-  def logged_in?
+  def current_user_logged_in?
     if current_user
       render json: {
         session: true,

@@ -13,7 +13,6 @@ export const postUserSession = async ({user: {email, password}}) => {
       },
       { withCredentials: true }
     );
-    console.log(response);
     axios.defaults.headers.common['X-CSRF-Token'] = response.headers['x-csrf-token'];
     return response.data;
   } catch(e) {

@@ -14,7 +14,7 @@ Rails.application.routes.draw do
       get 'ranking', to: 'rankings#index'
       post 'login', to: 'user_sessions#create'
       delete 'logout', to: 'user_sessions#destroy'
-      get 'logged_in', to: 'user_sessions#logged_in?'
+      get 'current_user_logged_in', to: 'user_sessions#current_user_logged_in?'
       resources :password_resets, only: %i[create edit update]
     end
   end

@@ -94,6 +94,7 @@ export const LandingPages = () => {
         dispatch({
           type: requestUserActionTyps.REQUEST_SUCCESS,
           payload: {
+            session: data.session,
             user: data.user
           }
         });

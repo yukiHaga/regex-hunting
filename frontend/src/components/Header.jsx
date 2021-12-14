@@ -90,6 +90,7 @@ export const Header = ({onClickLink}) => {
       dispatch({
         type: requestUserActionTyps.REQUEST_SUCCESS,
         payload: {
+          session: data.session,
           user: data.user
         }
       });
@@ -108,6 +109,7 @@ export const Header = ({onClickLink}) => {
       }
     });
   };
+
 
   return (
     <>

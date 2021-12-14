@@ -10,7 +10,7 @@ export const usersCreate = `${DEFAULT_API_LOCALHOST}/users`;
 // ログイン関係
 export const userSessionsCreate = `${DEFAULT_API_LOCALHOST}/login`;
 export const userSessionsDestroy = `${DEFAULT_API_LOCALHOST}/logout`;
-export const userSessionsExist = `${DEFAULT_API_LOCALHOST}/logged_in`;
+export const userSessionsExist = `${DEFAULT_API_LOCALHOST}/current_user_logged_in`;
 
 // ランキング
 export const rankings = `${DEFAULT_API_LOCALHOST}/ranking`;

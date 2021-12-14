@@ -116,6 +116,7 @@ export const LoginDialog = ({
       dispatch({
         type: requestUserActionTyps.REQUEST_SUCCESS,
         payload: {
+          session: data.session,
           user: data.user
         }
       });

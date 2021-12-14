@@ -2,7 +2,7 @@ import { REQUEST_STATE } from '../constants';
 
 // useReddducerで使うinitialStateを定義
 export const initialState = {
-  requestUserState: REQUEST_STATE.INITIAL,
+  requestState: REQUEST_STATE.INITIAL,
   userState: {
     session: false,
     user: {}
@@ -25,27 +25,21 @@ export const requestUserReducer = (state, action) => {
     case requestUserActionTyps.REQUEST:
       return {
         ...state,
-        requestUserState: REQUEST_STATE.LOADING,
-        userState: {
-          session: false,
-          user: {}
-        },
-        errors: {}
+        requestState: REQUEST_STATE.LOADING,
       };
     case requestUserActionTyps.REQUEST_SUCCESS:
       return {
         ...state,
-        requestUserState: REQUEST_STATE.OK,
+        requestState: REQUEST_STATE.OK,
         userState: {
-          session: true,
+          session: action.payload.session,
           user: action.payload.user
         },
-        errors: {}
       };
     case requestUserActionTyps.REQUEST_FAILURE:
       return {
         ...state,
-        requestUserState: REQUEST_STATE.OK,
+        requestState: REQUEST_STATE.OK,
         userState: {
           session: false,
           user: {}

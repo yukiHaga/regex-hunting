@@ -1,4 +1,3 @@
-// REQUEST_STATEは、APIリクエスト中に画面がいまどういう状態なのか？を知るための定数
 export const REQUEST_STATE = {
   INITIAL: 'INITIAL',
   LOADING: 'LOADING',
