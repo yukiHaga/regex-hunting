@@ -130,8 +130,8 @@ Question.create!(
   user = User.new(
     name: Faker::Name.unique.first_name,
     email: Faker::Internet.unique.email,
-    password: "315#{n}test",
-    password_confirmation: "315#{n}test"
+    password: "315#{n}Test",
+    password_confirmation: "315#{n}Test"
   )
   user.save!
 

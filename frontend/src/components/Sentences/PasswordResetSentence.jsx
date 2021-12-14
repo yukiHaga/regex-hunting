@@ -9,6 +9,7 @@ import { BlueBaseLink } from '../shared_style.js';
 
 // LoginDescriptionWrapepr
 const PasswordResetSentenceWrapper = styled(DescriptionWrapper)`
+  margin-top: 15px;
   margin-bottom: 20px;
 `;
 

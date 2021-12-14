@@ -1,5 +1,12 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import styled from 'styled-components';
+
+// ログイン関係のAPIコール関数
+// deleteUserSession 
+import { postUserSession } from '../apis/login'; 
+
+// useNavigate
+import { useNavigate } from "react-router-dom";
 
 // ダイアログ
 import { DialogContent, Dialog } from '@mui/material';
@@ -33,6 +40,13 @@ import { PasswordResetSentence } from './Sentences/PasswordResetSentence.jsx';
 import { SignUpSentence } from './Sentences/SignUpSentence.jsx';
 import { OrDirectionSentence } from './Sentences/OrDirectionSentence.jsx';
 import { InputErrorSentence } from './Sentences/InputErrorSentence.jsx';
+import { SubmitErrorSentence } from './Sentences/SubmitErrorSentence.jsx';
+
+// HTTP_STATUS_CODE
+import { HTTP_STATUS_CODE } from '../constants';
+
+// Contextオブジェクト
+import { UserContext } from "../context/UserProvider.js";
 
 const CustomDialogInnerWrapper = styled.div`
   padding-top: 10px;
@@ -65,15 +79,62 @@ export const LoginDialog = ({
   onClick
 }) => {
 
+  // useContext
+  const {
+    requestUserState, 
+    dispatch, 
+    requestUserActionTyps
+  } = useContext(UserContext);
+
+  // navigate
+  let navigate = useNavigate();
+
   // useForm
-  const { control, handleSubmit, formState: { errors, isValid } } = useForm({ 
-                                                                      mode: 'all',
-                                                                      shouldUnregister: false 
-                                                                    }); 
+  const { 
+    control, 
+    handleSubmit, 
+    formState: { errors, isValid } 
+  } = useForm({
+        mode: 'all',
+        shouldUnregister: false 
+      }); 
 
   // Formの検証後に呼び出される関数
-  const onSubmit = data => { console.log(data) };
-  const onErrors = data => { console.log(data) };
+  // dataにはフォームに入力したデータが入る
+  // dataを実引数としてpostUserSeesionを呼び出した後、
+  // postUserSessionで取得したdataを実引数として、dispatchを実行
+  // reducer側でちゃんとstateは更新されている。
+  // しかし、この関数内でstateをコンソール出力できない。
+  const onSubmit = ({EmailBox, PasswordBox}) => { 
+    dispatch({ type: requestUserActionTyps.REQUEST });
+    postUserSession({
+      user: {
+        email: EmailBox,
+        password: PasswordBox
+      }
+    }).then((data) => {
+      dispatch({
+        type: requestUserActionTyps.REQUEST_SUCCESS,
+        payload: {
+          session: data.session,
+          user: data.user
+        }
+      });
+    }).then(() => 
+      navigate('/my-page')
+    ).catch((e) => {
+      if(e.response.status === HTTP_STATUS_CODE.NOT_FOUND){
+        dispatch({
+          type: requestUserActionTyps.REQUEST_FAILURE,
+          payload: {
+            errors: e.response.data.errors
+          }
+        });
+      } else {
+        throw e;
+      }
+    })
+  };
 
   // Formのバリデーション
   const registerOptions = {
@@ -106,7 +167,7 @@ export const LoginDialog = ({
         <CloseButton onClose={onClose} fontSize="small" /> 
         <CustomDialogTitleImage src={LoginImage} alt="Login" />
         <CustomDialogContent>
-          <form onSubmit={handleSubmit(onSubmit, onErrors)}>
+          <form onSubmit={handleSubmit(onSubmit)}>
             <Controller 
               name="EmailBox"
               control={control}
@@ -147,7 +208,15 @@ export const LoginDialog = ({
             {errors.PasswordBox && <InputErrorSentence>
                                      {errors.PasswordBox.message}
                                    </InputErrorSentence>}
-            <LoginButton disabled={!isValid} />
+            <LoginButton 
+              disabled={!isValid} 
+            />
+            {
+              requestUserState.errors.title === 'Record Not Found' && 
+                <SubmitErrorSentence>
+                  {requestUserState.errors.detail}
+                </SubmitErrorSentence>
+            }
           </form>
           <PasswordResetSentence />
           <OrDirectionSentence />

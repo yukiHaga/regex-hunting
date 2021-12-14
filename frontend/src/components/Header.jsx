@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import styled from 'styled-components';
 
 // Images
@@ -8,7 +8,19 @@ import TitleImage from '../images/title.png';
 import { COLORS } from '../style_constants.js';
 
 // BaseLink
-import { BaseLink, ModalLink } from './shared_style.js';
+import { BaseLink, FakeLink } from './shared_style.js';
+ 
+// Contextオブジェクト
+import { UserContext } from "../context/UserProvider.js";
+
+// ログイン関係のAPIコール関数
+import { deleteUserSession } from '../apis/login'; 
+
+// HTTP_STATUS_CODE
+import { HTTP_STATUS_CODE } from '../constants';
+
+// useNavigate
+import { useNavigate } from "react-router-dom";
 
 const HeaderWrapper = styled.div`
   display: flex;
@@ -45,7 +57,7 @@ const HeaderNavLink = styled(BaseLink)`
   }
 `;
 
-const HeaderNavModalLink = styled(ModalLink)`
+const HeaderNavFakeLink = styled(FakeLink)`
   height: 52px;
   line-height: 52px;
   display: inline-block;
@@ -57,8 +69,48 @@ const HeaderNavModalLink = styled(ModalLink)`
   }
 `;
 
-// LPページに定義してあるstateを更新する関数をpropsとして渡した
-export const Header = ({onClickModalLink}) => {
+// LPページの場合、onClickLinkはモーダル管理のstateを更新する関数
+// ログインしている場合、onClickLinkは何もない。
+export const Header = ({onClickLink}) => {
+
+  // navigate
+  let navigate = useNavigate();
+
+  // useContext
+  const {
+    requestUserState: { userState }, 
+    dispatch, 
+    requestUserActionTyps
+  } = useContext(UserContext);
+
+  // ログアウトを管理する関数
+  const handleLogout = () => {
+    dispatch({ type: requestUserActionTyps.REQUEST });
+    deleteUserSession().then((data) => {
+      dispatch({
+        type: requestUserActionTyps.REQUEST_SUCCESS,
+        payload: {
+          session: data.session,
+          user: data.user
+        }
+      });
+    }).then(() => 
+      navigate('/')
+    ).catch((e) => {
+      if(e.response.status === HTTP_STATUS_CODE.NOT_FOUND){
+        dispatch({
+          type: requestUserActionTyps.REQUEST_FAILURE,
+          payload: {
+            errors: e.response.data.errors
+          }
+        });
+      } else {
+        throw e;
+      }
+    });
+  };
+
+
   return (
     <>
       <HeaderWrapper>
@@ -69,12 +121,25 @@ export const Header = ({onClickModalLink}) => {
           <HeaderNavLink to={`/rankings`}>
             ランキング
           </HeaderNavLink>
-          <HeaderNavModalLink onClick={() => onClickModalLink("login")}>
-            ログイン
-          </HeaderNavModalLink>
-          <HeaderNavModalLink onClick={() => onClickModalLink("signUp")}>
-            無料会員登録
-          </HeaderNavModalLink>
+          {
+            userState.session === false && 
+              <>
+                <HeaderNavFakeLink onClick={() => onClickLink("login")}>
+                  ログイン
+                </HeaderNavFakeLink>
+                <HeaderNavFakeLink onClick={() => onClickLink("signUp")}>
+                  無料会員登録
+                </HeaderNavFakeLink>
+              </>
+          }
+          { 
+            userState.session && userState.user && 
+              <>
+                <HeaderNavFakeLink onClick={handleLogout}>
+                  ログアウト
+                </HeaderNavFakeLink>
+              </>
+          }
         </HeaderNav>
       </HeaderWrapper>
     </>

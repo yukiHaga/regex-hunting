@@ -1,9 +1,5 @@
-import React, { Fragment, useEffect, useState } from 'react';
+import React, { Fragment, useState, useEffect, useContext } from 'react';
 import styled from 'styled-components';
-
-// ログイン関係のAPIコール関数
-// deleteUserSession 
-import { postUserSession } from '../apis/login'; 
 
 // Image
 import MainTitleImage from '../images/main_title.png';
@@ -17,6 +13,15 @@ import { StartButton } from '../components/Buttons/StartButton.jsx'
 import { Footer } from '../components/Footer.jsx';
 import { LoginDialog } from '../components/LoginDialog.jsx';
 import { SignUpDialog } from '../components/SignUpDialog.jsx';
+
+// Contextオブジェクト
+import { UserContext } from "../context/UserProvider.js";
+
+// ログイン状態を確認するAPIコール関数
+import { checkLoginStatus } from '../apis/checkLoginStatus.js'; 
+
+// HTTP_STATUS_CODE
+import { HTTP_STATUS_CODE } from '../constants';
 
 // メインのラッパー
 const MainWrapper = styled.div`
@@ -75,23 +80,48 @@ export const LandingPages = () => {
   // モーダルを管理するstate
   const [state, setState] = useState(loginInitialState);
 
-  // ユーザーをログインさせる。
+  // useContext
+  const {
+    requestUserState, 
+    dispatch, 
+    requestUserActionTyps
+  } = useContext(UserContext);
+
   useEffect(() => {
-    postUserSession({
-      user: {
-        email: 'glen@stroman.com',
-        password: '3150test' 
-      }
-    })
-    .then((data) => {
-      console.log(data);
-      console.log("ログインが成功した");
-    })
-  }, []);
+    if(requestUserState.userState.session === true){
+      dispatch({ type: requestUserActionTyps.REQUEST });
+      checkLoginStatus().then((data) => {
+        dispatch({
+          type: requestUserActionTyps.REQUEST_SUCCESS,
+          payload: {
+            session: data.session,
+            user: data.user
+          }
+        });
+      }).catch((e) => {
+        if(e.response.status === HTTP_STATUS_CODE.NOT_FOUND){
+          dispatch({
+            type: requestUserActionTyps.REQUEST_FAILURE,
+            payload: {
+              errors: e.response.data.errors
+            }
+          });
+        } else {
+          throw e;
+        }
+      })
+    }
+  }, [
+    dispatch, 
+    requestUserState.userState.session,
+    requestUserActionTyps.REQUEST, 
+    requestUserActionTyps.REQUEST_SUCCESS,
+    requestUserActionTyps.REQUEST_FAILURE
+  ]);
 
   return (
     <>
-      <Header onClickModalLink={(modalType) => setState({
+      <Header onClickLink={(modalType) => setState({
         isOpenDialog: true,
         modalType: modalType
       })}/>
