@@ -23,7 +23,6 @@ export const MyPages = () => {
     requestUserActionTyps
   } = useContext(UserContext);
 
-
   useEffect(() => {
     dispatch({ type: requestUserActionTyps.REQUEST });
     checkLoginStatus().then((data) => {

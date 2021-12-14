@@ -120,7 +120,7 @@ export const Header = ({onClickLink}) => {
             ランキング
           </HeaderNavLink>
           {
-            userState.session === false && userState.user === {} && 
+            userState.session === false && 
               <>
                 <HeaderNavFakeLink onClick={() => onClickLink("login")}>
                   ログイン
