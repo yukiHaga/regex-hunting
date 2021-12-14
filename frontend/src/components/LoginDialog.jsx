@@ -121,7 +121,13 @@ export const LoginDialog = ({
         }
       });
     }).then(() => 
-      navigate('/my-page')
+      navigate('/my-page', { 
+        state: {
+          type: 'success', 
+          message: "ログインしました。", 
+          display: true
+        } 
+      })
     ).catch((e) => {
       if(e.response.status === HTTP_STATUS_CODE.NOT_FOUND){
         dispatch({
