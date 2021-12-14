@@ -1,4 +1,4 @@
-import React, { Fragment, useState } from 'react';
+import React, { Fragment, useState, useEffect, useContext } from 'react';
 import styled from 'styled-components';
 
 // Image
@@ -13,6 +13,15 @@ import { StartButton } from '../components/Buttons/StartButton.jsx'
 import { Footer } from '../components/Footer.jsx';
 import { LoginDialog } from '../components/LoginDialog.jsx';
 import { SignUpDialog } from '../components/SignUpDialog.jsx';
+
+// Contextオブジェクト
+import { UserContext } from "../context/UserProvider.js";
+
+// ログイン状態を確認するAPIコール関数
+import { checkLoginStatus } from '../apis/checkLoginStatus.js'; 
+
+// HTTP_STATUS_CODE
+import { HTTP_STATUS_CODE } from '../constants';
 
 // メインのラッパー
 const MainWrapper = styled.div`
@@ -70,6 +79,43 @@ export const LandingPages = () => {
 
   // モーダルを管理するstate
   const [state, setState] = useState(loginInitialState);
+
+  // useContext
+  const {
+    requestUserState, 
+    dispatch, 
+    requestUserActionTyps
+  } = useContext(UserContext);
+
+  useEffect(() => {
+    dispatch({ type: requestUserActionTyps.REQUEST });
+    checkLoginStatus().then((data) => {
+      dispatch({
+        type: requestUserActionTyps.REQUEST_SUCCESS,
+        payload: {
+          user: data.user
+        }
+      });
+    }).catch((e) => {
+      if(e.response.status === HTTP_STATUS_CODE.NOT_FOUND){
+        dispatch({
+          type: requestUserActionTyps.REQUEST_FAILURE,
+          payload: {
+            errors: e.response.data.errors
+          }
+        });
+      } else {
+        throw e;
+      }
+    })
+  }, [
+    dispatch, 
+    requestUserActionTyps.REQUEST, 
+    requestUserActionTyps.REQUEST_SUCCESS,
+    requestUserActionTyps.REQUEST_FAILURE
+  ]);
+
+  console.log(requestUserState);
 
   return (
     <>
