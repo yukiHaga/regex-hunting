@@ -3,7 +3,7 @@ import styled from 'styled-components';
 
 // Presentational Components
 import { Header } from '../components/Header.jsx';
-import { SessionFlashMessage } from '../components/SessionFlashMessage.jsx';
+import { SessionFlashMessage } from '../components/FlashMessages/SessionFlashMessage';
 
 // Contextオブジェクト
 import { UserContext } from "../context/UserProvider.js";
