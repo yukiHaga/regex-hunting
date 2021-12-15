@@ -1,5 +1,5 @@
 import React, { Fragment, useState, useEffect, useContext } from 'react';
-import {useLocation} from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 
 // Image
@@ -115,6 +115,9 @@ export const LandingPages = () => {
   // location
   const location = useLocation();
 
+  // navigation
+  const navigate = useNavigate();
+
   // 初めてLPページに訪れた場合、ログインしていないので、
   // 2回目のdispatchのdata.sessionはfalseとなる
   useEffect(() => {
@@ -164,6 +167,7 @@ export const LandingPages = () => {
           timeout={{ enter: 1200, exit: 1200 }} 
           mountOnEnter 
           unmountOnExit
+          addEndListener={() => (setTimeout(() => (navigate('/')), 4000))}
         >
           <AlertWrapper>
             <CustomAlert severity="success">
