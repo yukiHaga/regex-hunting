@@ -78,7 +78,7 @@ export const Header = ({onClickLink}) => {
 
   // useContext
   const {
-    requestUserState: { userState }, 
+    requestUserState: { sessionState, userState }, 
     dispatch, 
     requestUserActionTyps
   } = useContext(UserContext);
@@ -91,7 +91,8 @@ export const Header = ({onClickLink}) => {
         type: requestUserActionTyps.REQUEST_SUCCESS,
         payload: {
           session: data.session,
-          user: data.user
+          user: data.user,
+          flash: data.flash
         }
       });
     }).then(() => 
@@ -122,7 +123,7 @@ export const Header = ({onClickLink}) => {
             ランキング
           </HeaderNavLink>
           {
-            userState.session === false && 
+            sessionState === false && 
               <>
                 <HeaderNavFakeLink onClick={() => onClickLink("login")}>
                   ログイン
@@ -133,7 +134,7 @@ export const Header = ({onClickLink}) => {
               </>
           }
           { 
-            userState.session && userState.user && 
+            sessionState && userState && 
               <>
                 <HeaderNavFakeLink onClick={handleLogout}>
                   ログアウト

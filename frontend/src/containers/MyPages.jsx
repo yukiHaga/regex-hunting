@@ -1,5 +1,4 @@
-import React, { Fragment, useContext, useEffect, useState } from 'react';
-import {useLocation} from 'react-router-dom';
+import React, { Fragment, useContext, useEffect } from 'react';
 
 // フラッシュメッセージ関係のコンポーネント;
 import Alert from '@material-ui/lab/Alert';
@@ -39,38 +38,39 @@ const CustomAlert = styled(Alert)`
 
 export const MyPages = () => {
 
-
-  // navigateのパラメータを取得
-  const location = useLocation();
-  const [ flash, setFlash ] = useState(location.state);
-
-  const handleFlash = () => (
-    setFlash({
-      type: 'success',
-      message: 'ログインしました。',
-      display: false
-    })
-  );
-
   // useContext
   // requestUserStateには、requestState, userState, errorsが格納されている
   // userStateにはsessionとuserが格納されている
   const { 
-    requestUserState: {userState},
+    requestUserState: {sessionState, userState, flashState},
     dispatch, 
     requestUserActionTyps
   } = useContext(UserContext);
 
+  const handleFlash = () => {
+    dispatch({
+      type: requestUserActionTyps.REQUEST_SUCCESS,
+      payload: {
+        session: sessionState,
+        user: userState.user,
+        flash: { 
+          display: false,
+          success: "" 
+        }
+      }
+    });
+  };
+
   useEffect(() => {
-    if(userState.session === false){
+    if(sessionState === false){
       dispatch({ type: requestUserActionTyps.REQUEST });
       checkLoginStatus().then((data) => {
         dispatch({
           type: requestUserActionTyps.REQUEST_SUCCESS,
           payload: {
             session: data.session,
-            user: data.user
-            flashState: data.flashState
+            user: data.user,
+            flash: data.flash
           }
         });
       }).catch((e) => {
@@ -88,13 +88,13 @@ export const MyPages = () => {
     }
   }, [
     dispatch, 
-    userState.session,
+    sessionState,
     requestUserActionTyps.REQUEST, 
     requestUserActionTyps.REQUEST_SUCCESS,
     requestUserActionTyps.REQUEST_FAILURE
   ]);
 
-  console.log(flash);
+  console.log(sessionState);
  
   return (
     <>
@@ -103,7 +103,7 @@ export const MyPages = () => {
       
       <Slide 
         direction="left" 
-        in={Boolean(flash.display)} 
+        in={Boolean(flashState.display)} 
         timeout={{ enter: 1200, exit: 1200 }} 
         mountOnEnter 
         unmountOnExit
@@ -111,7 +111,7 @@ export const MyPages = () => {
       >
         <AlertWrapper>
           <CustomAlert severity="success">
-            {location.state.message}
+            {flashState.success}
           </CustomAlert>
         </AlertWrapper>
       </Slide>

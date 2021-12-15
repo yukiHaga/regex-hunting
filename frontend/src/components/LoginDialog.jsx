@@ -118,17 +118,11 @@ export const LoginDialog = ({
         payload: {
           session: data.session,
           user: data.user,
-          flashState: data.flashState
+          flash: data.flash
         }
       });
     }).then(() => 
-      navigate('/my-page', { 
-        state: {
-          type: 'success', 
-          message: "ログインしました。", 
-          display: true
-        } 
-      })
+      navigate('/my-page')
     ).catch((e) => {
       if(e.response.status === HTTP_STATUS_CODE.NOT_FOUND){
         dispatch({

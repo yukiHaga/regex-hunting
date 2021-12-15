@@ -82,7 +82,7 @@ export const LandingPages = () => {
 
   // useContext
   const {
-    requestUserState: { userState }, 
+    requestUserState: { sessionState }, 
     dispatch, 
     requestUserActionTyps
   } = useContext(UserContext);
@@ -90,15 +90,15 @@ export const LandingPages = () => {
   // 初めてLPページに訪れた場合、ログインしていないので、
   // 2回目のdispatchのdata.sessionはfalseとなる
   useEffect(() => {
-    if(userState.session === false){
+    if(sessionState === false){
       dispatch({ type: requestUserActionTyps.REQUEST });
       checkLoginStatus().then((data) => {
         dispatch({
           type: requestUserActionTyps.REQUEST_SUCCESS,
           payload: {
             session: data.session,
-            user: data.user
-            flashState: data.flashState
+            user: data.user,
+            flash: data.flash
           }
         });
       }).catch((e) => {
@@ -116,7 +116,7 @@ export const LandingPages = () => {
     }
   }, [
     dispatch, 
-    userState.session,
+    sessionState,
     requestUserActionTyps.REQUEST, 
     requestUserActionTyps.REQUEST_SUCCESS,
     requestUserActionTyps.REQUEST_FAILURE
