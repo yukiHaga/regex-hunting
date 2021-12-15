@@ -17,6 +17,9 @@ class Api::V1::UserSessionsController < ApplicationController
         open_rank: user[:open_rank],
         active_title: user[:active_title],
         email: user[:email]
+      },
+      flashState: {
+        success: "ログインしました。"
       }
     }, status: :ok
   end
@@ -25,7 +28,10 @@ class Api::V1::UserSessionsController < ApplicationController
     logout
     render json: {
       session: false,
-      user: {}
+      user: {},
+      flashState: {
+        success: "ログアウトしました。"
+      }
     }, status: :ok
   end
 
@@ -47,7 +53,10 @@ class Api::V1::UserSessionsController < ApplicationController
     else
       render json: {
         session: false,
-        user: {}
+        user: {},
+        flashState: {
+          success: "ログアウトしました。"
+        }
       }, status: :ok
     end
   end
