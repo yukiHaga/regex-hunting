@@ -7,7 +7,8 @@ import BackGroundImage from '../images/background.png';
 import MainMonsterImage from '../images/intermediate.png';
 
 // Presentational Components
-import { Header } from '../components/Header.jsx';
+import { Header } from '../components/Headers/Header.jsx';
+import { FakeHeader } from '../components/Headers/FakeHeader.jsx';
 import { SubTitle } from '../components/SubTitle.jsx';
 import { StartButton } from '../components/Buttons/StartButton.jsx'
 import { Footer } from '../components/Footer.jsx';
@@ -42,7 +43,6 @@ const BackGroundImageCover = styled.img`
   width: 1790px;
   height: 750px;
   position: absolute;
-  top: 52px;
   left: -350px;
   z-index: -3;
 `;
@@ -52,7 +52,6 @@ const Filter = styled.span`
   width: 1790px;
   height: 750px;
   position: absolute;
-  top: 52px;
   left: -350px;
   z-index: -1;
   background-color: rgba(102,102,102,0.5)
@@ -65,7 +64,6 @@ const MainMonsterImageCover = styled.img`
   object-fit: contain;
   z-index: -2;
   position: absolute;
-  top: 52px;
   left: 200px;
 `;
 
@@ -144,6 +142,7 @@ export const LandingPages = () => {
         isOpenDialog: true,
         modalType: modalType
       })}/>
+      <FakeHeader />
       <SessionFlashMessage 
         flashState={flashState} 
         sessionState={sessionState} 

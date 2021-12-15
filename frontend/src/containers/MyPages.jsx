@@ -2,7 +2,8 @@ import React, { Fragment, useContext, useEffect } from 'react';
 import styled from 'styled-components';
 
 // Presentational Components
-import { Header } from '../components/Header.jsx';
+import { Header } from '../components/Headers/Header.jsx';
+import { FakeHeader } from '../components/Headers/FakeHeader.jsx';
 import { SessionFlashMessage } from '../components/FlashMessages/SessionFlashMessage';
 
 // Contextオブジェクト
@@ -13,12 +14,6 @@ import { checkLoginStatus } from '../apis/checkLoginStatus.js';
 
 // HTTP_STATUS_CODE
 import { HTTP_STATUS_CODE } from '../constants';
-
-const FakeBlock = styled.div`
-  width: 100%;
-  height: 55px;
-  margin-bottom: 8px;
-`
 
 export const MyPages = () => {
 
@@ -81,7 +76,7 @@ export const MyPages = () => {
   return (
     <>
       <Header /> 
-      <FakeBlock />
+      <FakeHeader />
       <SessionFlashMessage 
         flashState={flashState} 
         sessionState={sessionState} 
