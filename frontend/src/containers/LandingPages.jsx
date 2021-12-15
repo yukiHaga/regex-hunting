@@ -13,6 +13,7 @@ import { StartButton } from '../components/Buttons/StartButton.jsx'
 import { Footer } from '../components/Footer.jsx';
 import { LoginDialog } from '../components/LoginDialog.jsx';
 import { SignUpDialog } from '../components/SignUpDialog.jsx';
+import { SessionFlashMessage } from '../components/FlashMessages/SessionFlashMessage';
 
 // Contextオブジェクト
 import { UserContext } from "../context/UserProvider.js";
@@ -82,10 +83,26 @@ export const LandingPages = () => {
 
   // useContext
   const {
-    requestUserState: { sessionState }, 
+    requestUserState: { sessionState, userState, flashState }, 
     dispatch, 
     requestUserActionTyps
   } = useContext(UserContext);
+
+
+  // フラッシュメッセージを管理する関数
+  const handleFlash = (sessionState, userState) => {
+    dispatch({
+      type: requestUserActionTyps.REQUEST_SUCCESS,
+      payload: {
+        session: sessionState,
+        user: userState.user,
+        flash: { 
+          display: false,
+          success: "" 
+        }
+      }
+    });
+  };
 
   // 初めてLPページに訪れた場合、ログインしていないので、
   // 2回目のdispatchのdata.sessionはfalseとなる
@@ -128,6 +145,12 @@ export const LandingPages = () => {
         isOpenDialog: true,
         modalType: modalType
       })}/>
+      <SessionFlashMessage 
+        flashState={flashState} 
+        sessionState={sessionState} 
+        userState={userState}
+        handleFlash={handleFlash} 
+      /> 
       <MainWrapper>
         <MainTitleImageCover src={MainTitleImage} alt="main-title"/>
         <Filter />

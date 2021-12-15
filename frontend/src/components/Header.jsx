@@ -26,9 +26,7 @@ const HeaderWrapper = styled.div`
   display: flex;
   justify-content: space-between;
   background-color: ${COLORS.MAIN};
-  position: fixed;
   width: 100%;
-  z-index: 1;
 `;
 
 const HeaderTitleImage = styled.img`
