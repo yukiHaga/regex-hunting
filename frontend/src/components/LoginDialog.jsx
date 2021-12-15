@@ -117,7 +117,8 @@ export const LoginDialog = ({
         type: requestUserActionTyps.REQUEST_SUCCESS,
         payload: {
           session: data.session,
-          user: data.user
+          user: data.user,
+          flashState: data.flashState
         }
       });
     }).then(() => 

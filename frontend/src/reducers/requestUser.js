@@ -7,6 +7,7 @@ export const initialState = {
     session: false,
     user: {}
   },
+  flashState: {},
   errors: {}
 };
 
@@ -35,6 +36,7 @@ export const requestUserReducer = (state, action) => {
           session: action.payload.session,
           user: action.payload.user
         },
+        flashState: action.payload.flashState 
       };
     case requestUserActionTyps.REQUEST_FAILURE:
       return {
@@ -44,6 +46,7 @@ export const requestUserReducer = (state, action) => {
           session: false,
           user: {}
         },
+        flashState: {}
         errors: action.payload.errors
       };
     default:

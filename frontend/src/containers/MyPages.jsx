@@ -70,6 +70,7 @@ export const MyPages = () => {
           payload: {
             session: data.session,
             user: data.user
+            flashState: data.flashState
           }
         });
       }).catch((e) => {
