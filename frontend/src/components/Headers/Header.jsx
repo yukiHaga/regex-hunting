@@ -28,6 +28,7 @@ const HeaderWrapper = styled.div`
   background-color: ${COLORS.MAIN};
   width: 100%;
   position: fixed;
+  z-index: 1;
 `;
 
 const HeaderTitleImage = styled.img`

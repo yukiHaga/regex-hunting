@@ -35,7 +35,7 @@ const MainTitleImageCover = styled.img`
   width: 1000px;
   height: 180px;
   object-fit: contain;
-  margin-top: 200px;
+  margin-top: 145px;
 `;
 
 // 背景画像
@@ -43,8 +43,9 @@ const BackGroundImageCover = styled.img`
   width: 1790px;
   height: 750px;
   position: absolute;
+  top: 55px;
   left: -350px;
-  z-index: -3;
+  z-index: -4;
 `;
 
 // フィルター
@@ -52,8 +53,9 @@ const Filter = styled.span`
   width: 1790px;
   height: 750px;
   position: absolute;
+  top: 55px;
   left: -350px;
-  z-index: -1;
+  z-index: -2;
   background-color: rgba(102,102,102,0.5)
 `;
 
@@ -62,8 +64,9 @@ const MainMonsterImageCover = styled.img`
   width: 1000px;
   height: 700px;
   object-fit: contain;
-  z-index: -2;
+  z-index: -3;
   position: absolute;
+  top: 55px;
   left: 200px;
 `;
 
@@ -104,7 +107,9 @@ export const LandingPages = () => {
   // 初めてLPページに訪れた場合、ログインしていないので、
   // 2回目のdispatchのdata.sessionはfalseとなる
   useEffect(() => {
-    if(sessionState === false){
+    console.log(sessionState);
+    console.log(flashState.display);
+    if(sessionState === false && flashState.display === false){
       dispatch({ type: requestUserActionTyps.REQUEST });
       checkLoginStatus().then((data) => {
         dispatch({
@@ -131,6 +136,7 @@ export const LandingPages = () => {
   }, [
     dispatch, 
     sessionState,
+    flashState.display,
     requestUserActionTyps.REQUEST, 
     requestUserActionTyps.REQUEST_SUCCESS,
     requestUserActionTyps.REQUEST_FAILURE
@@ -149,6 +155,7 @@ export const LandingPages = () => {
         userState={userState}
         handleFlash={handleFlash} 
       /> 
+      <FakeHeader />
       <MainWrapper>
         <MainTitleImageCover src={MainTitleImage} alt="main-title"/>
         <Filter />

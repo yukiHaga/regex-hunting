@@ -1,5 +1,4 @@
 import React, { Fragment, useContext, useEffect } from 'react';
-import styled from 'styled-components';
 
 // Presentational Components
 import { Header } from '../components/Headers/Header.jsx';
