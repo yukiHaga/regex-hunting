@@ -96,7 +96,7 @@ export const Header = ({onClickLink}) => {
         }
       });
     }).then(() => 
-      navigate('/')
+      navigate('/?user=logout', { state: { display: true, success: "ログアウトしました。"}})
     ).catch((e) => {
       if(e.response.status === HTTP_STATUS_CODE.NOT_FOUND){
         dispatch({

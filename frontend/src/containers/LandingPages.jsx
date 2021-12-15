@@ -1,4 +1,5 @@
 import React, { Fragment, useState, useEffect, useContext } from 'react';
+import {useLocation} from 'react-router-dom';
 import styled from 'styled-components';
 
 // Image
@@ -14,7 +15,10 @@ import { StartButton } from '../components/Buttons/StartButton.jsx'
 import { Footer } from '../components/Footer.jsx';
 import { LoginDialog } from '../components/LoginDialog.jsx';
 import { SignUpDialog } from '../components/SignUpDialog.jsx';
-import { SessionFlashMessage } from '../components/FlashMessages/SessionFlashMessage';
+
+// フラッシュメッセージ関係のコンポーネント;
+import Alert from '@material-ui/lab/Alert';
+import Slide from '@mui/material/Slide';
 
 // Contextオブジェクト
 import { UserContext } from "../context/UserProvider.js";
@@ -70,6 +74,26 @@ const MainMonsterImageCover = styled.img`
   left: 200px;
 `;
 
+const FakeBlock = styled.div`
+  height: 56px;
+`;
+
+// フラッシュ関連
+const CustomSlide = styled(Slide)`
+`;
+
+const AlertWrapper = styled.div`
+  display: flex;
+  justify-content: end;
+`;
+
+const CustomAlert = styled(Alert)`
+  width: 180px;
+  margin-top: 8px;
+  margin-right: 16px;
+  pointerEvents: 'none';
+`;
+
 export const LandingPages = () => { 
 
   // モーダルに関するstateの初期値
@@ -83,33 +107,18 @@ export const LandingPages = () => {
 
   // useContext
   const {
-    requestUserState: { sessionState, userState, flashState }, 
+    requestUserState: { sessionState }, 
     dispatch, 
     requestUserActionTyps
   } = useContext(UserContext);
 
-
-  // フラッシュメッセージを管理する関数
-  const handleFlash = (sessionState, userState) => {
-    dispatch({
-      type: requestUserActionTyps.REQUEST_SUCCESS,
-      payload: {
-        session: sessionState,
-        user: userState.user,
-        flash: { 
-          display: false,
-          success: "" 
-        }
-      }
-    });
-  };
+  // location
+  const location = useLocation();
 
   // 初めてLPページに訪れた場合、ログインしていないので、
   // 2回目のdispatchのdata.sessionはfalseとなる
   useEffect(() => {
-    console.log(sessionState);
-    console.log(flashState.display);
-    if(sessionState === false && flashState.display === false){
+    if(sessionState === false){
       dispatch({ type: requestUserActionTyps.REQUEST });
       checkLoginStatus().then((data) => {
         dispatch({
@@ -136,7 +145,6 @@ export const LandingPages = () => {
   }, [
     dispatch, 
     sessionState,
-    flashState.display,
     requestUserActionTyps.REQUEST, 
     requestUserActionTyps.REQUEST_SUCCESS,
     requestUserActionTyps.REQUEST_FAILURE
@@ -149,13 +157,21 @@ export const LandingPages = () => {
         modalType: modalType
       })}/>
       <FakeHeader />
-      <SessionFlashMessage 
-        flashState={flashState} 
-        sessionState={sessionState} 
-        userState={userState}
-        handleFlash={handleFlash} 
-      /> 
-      <FakeHeader />
+      <FakeBlock>
+        <CustomSlide 
+          direction="left" 
+          in={Boolean(location?.state?.display)} 
+          timeout={{ enter: 1200, exit: 1200 }} 
+          mountOnEnter 
+          unmountOnExit
+        >
+          <AlertWrapper>
+            <CustomAlert severity="success">
+              ログアウトしました。
+            </CustomAlert>
+          </AlertWrapper>
+        </CustomSlide>
+      </FakeBlock>
       <MainWrapper>
         <MainTitleImageCover src={MainTitleImage} alt="main-title"/>
         <Filter />

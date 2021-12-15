@@ -22,9 +22,8 @@ const CustomAlert = styled(Alert)`
 
 export const SessionFlashMessage = ({
   flashState,
-  sessionState, 
-  userState,
-  handleFlash 
+  handleFlash, 
+  userState
 }) => {
 
 
@@ -36,7 +35,7 @@ export const SessionFlashMessage = ({
         timeout={{ enter: 1200, exit: 1200 }} 
         mountOnEnter 
         unmountOnExit
-        addEndListener={() => (setTimeout(() => (handleFlash(sessionState, userState)), 4000))}
+        addEndListener={() => (setTimeout(() => (handleFlash(userState)), 4000))}
       >
         <AlertWrapper>
           <CustomAlert severity="success">

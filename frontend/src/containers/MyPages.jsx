@@ -25,11 +25,11 @@ export const MyPages = () => {
     requestUserActionTyps
   } = useContext(UserContext);
 
-  const handleFlash = (sessionState, userState) => {
+  const handleFlash = (userState) => {
     dispatch({
       type: requestUserActionTyps.REQUEST_SUCCESS,
       payload: {
-        session: sessionState,
+        session: false,
         user: userState.user,
         flash: { 
           display: false,
@@ -78,9 +78,8 @@ export const MyPages = () => {
       <FakeHeader />
       <SessionFlashMessage 
         flashState={flashState} 
-        sessionState={sessionState} 
-        userState={userState}
         handleFlash={handleFlash} 
+        userState={userState}
       /> 
     </>
   );
