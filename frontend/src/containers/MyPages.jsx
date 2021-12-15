@@ -1,12 +1,9 @@
 import React, { Fragment, useContext, useEffect } from 'react';
-
-// フラッシュメッセージ関係のコンポーネント;
-import Alert from '@material-ui/lab/Alert';
-import Slide from '@mui/material/Slide';
 import styled from 'styled-components';
 
 // Presentational Components
 import { Header } from '../components/Header.jsx';
+import { SessionFlashMessage } from '../components/SessionFlashMessage.jsx';
 
 // Contextオブジェクト
 import { UserContext } from "../context/UserProvider.js";
@@ -23,19 +20,6 @@ const FakeBlock = styled.div`
   margin-bottom: 8px;
 `
 
-const AlertWrapper = styled.div`
-  display: flex;
-  justify-content: end;
-  z-index: 1;
-`;
-
-const CustomAlert = styled(Alert)`
-  width: 180px;
-  margin-right: 16px;
-  pointerEvents: 'none';
-`
-
-
 export const MyPages = () => {
 
   // useContext
@@ -47,7 +31,7 @@ export const MyPages = () => {
     requestUserActionTyps
   } = useContext(UserContext);
 
-  const handleFlash = () => {
+  const handleFlash = (sessionState, userState) => {
     dispatch({
       type: requestUserActionTyps.REQUEST_SUCCESS,
       payload: {
@@ -94,27 +78,16 @@ export const MyPages = () => {
     requestUserActionTyps.REQUEST_FAILURE
   ]);
 
-  console.log(sessionState);
- 
   return (
     <>
       <Header /> 
       <FakeBlock />
-      
-      <Slide 
-        direction="left" 
-        in={Boolean(flashState.display)} 
-        timeout={{ enter: 1200, exit: 1200 }} 
-        mountOnEnter 
-        unmountOnExit
-        addEndListener={() => (setTimeout(handleFlash, 4000))}
-      >
-        <AlertWrapper>
-          <CustomAlert severity="success">
-            {flashState.success}
-          </CustomAlert>
-        </AlertWrapper>
-      </Slide>
+      <SessionFlashMessage 
+        flashState={flashState} 
+        sessionState={sessionState} 
+        userState={userState}
+        handleFlash={handleFlash} 
+      /> 
     </>
   );
 };
