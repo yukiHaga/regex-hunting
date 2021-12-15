@@ -26,7 +26,6 @@ import { HTTP_STATUS_CODE } from '../constants';
 
 // メインのラッパー
 const MainWrapper = styled.div`
-  position: relative;  
   text-align: center;
 `;
 
@@ -35,7 +34,7 @@ const MainTitleImageCover = styled.img`
   width: 1000px;
   height: 180px;
   object-fit: contain;
-  margin-top: 250px;
+  margin-top: 200px;
 `;
 
 // 背景画像

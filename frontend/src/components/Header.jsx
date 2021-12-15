@@ -27,6 +27,7 @@ const HeaderWrapper = styled.div`
   justify-content: space-between;
   background-color: ${COLORS.MAIN};
   width: 100%;
+  position: fixed;
 `;
 
 const HeaderTitleImage = styled.img`

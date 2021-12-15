@@ -13,7 +13,6 @@ const FooterWrapper = styled.div`
   justify-content: start;
   background-color: ${COLORS.BROWN};
   width: 100%;
-  z-index: 1;
 `;
 
 const FooterNav = styled.nav`
