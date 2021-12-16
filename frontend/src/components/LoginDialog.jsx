@@ -32,7 +32,6 @@ import FilledInput from '@mui/material/FilledInput';
 
 // CustomIcon
 import { ColoredGoogleIcon } from './Icons/CustomIcon.js';
-import { ColoredTwitterIcon } from './Icons/CustomIcon.js';
 import { ColoredGitHubIcon } from './Icons/CustomIcon.js';
 
 // Sentence
@@ -64,7 +63,7 @@ const CustomDialogTitleImage = styled.img`
 `;
 
 const CustomDialogContent = styled(DialogContent)`
-  height: 500px;
+  height: 440px;
   width: 400px;
 `;
 
@@ -226,12 +225,6 @@ export const LoginDialog = ({
             color={COLORS.PINK} 
             icon={<ColoredGoogleIcon fontSize="large" />} 
             type="Google"
-          />
-          <OAuthLoginButton 
-            url="/#" 
-            color={COLORS.LIGHT_BLUE} 
-            icon={<ColoredTwitterIcon fontSize="large" />} 
-            type="Twitter"
           />
           <OAuthLoginButton 
             url="/#" 

@@ -25,7 +25,6 @@ import FilledInput from '@mui/material/FilledInput';
 
 // CustomIcon
 import { ColoredGoogleIcon } from './Icons/CustomIcon.js';
-import { ColoredTwitterIcon } from './Icons/CustomIcon.js';
 import { ColoredGitHubIcon } from './Icons/CustomIcon.js';
 
 // Sentence
@@ -233,12 +232,6 @@ export const SignUpDialog = ({
             color={COLORS.PINK} 
             icon={<ColoredGoogleIcon fontSize="large" />} 
             type="Google"
-          />
-          <OAuthLoginButton 
-            url="/#" 
-            color={COLORS.LIGHT_BLUE} 
-            icon={<ColoredTwitterIcon fontSize="large" />} 
-            type="Twitter"
           />
           <OAuthLoginButton 
             url="/#" 
