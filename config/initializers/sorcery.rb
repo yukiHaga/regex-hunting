@@ -79,8 +79,13 @@ Rails.application.config.sorcery.configure do |config|
   # What providers are supported by this app
   # i.e. [:twitter, :facebook, :github, :linkedin, :xing, :google, :liveid, :salesforce, :slack, :line].
   # Default: `[]`
-  #
-  # config.external_providers =
+  config.external_providers = [:twitter, :facebook]
+
+  config.github.key = "your github key"
+  config.github.secret = "your github secret"
+  config.github.callback_url = ""
+  config.github.user_info_mapping = {:email => "email" }
+  config.github.scope = "user:email"
 
   # You can change it by your local ca_file. i.e. '/etc/pki/tls/certs/ca-bundle.crt'
   # Path to ca_file. By default use a internal ca-bundle.crt.
