@@ -8,15 +8,15 @@ import { DialogContent, Dialog } from '@mui/material';
 import { useForm, Controller } from "react-hook-form";
 
 // Colors
-import { COLORS } from '../style_constants.js';
+import { COLORS } from '../../style_constants.js';
 
 // Images
-import SignUpImage from '../images/sign_up.png';
+import SignUpImage from '../../images/sign_up.png';
 
 // Button
-import { SignUpButton } from './Buttons/SignUpButton.jsx'
-import { OAuthLoginButton } from './Buttons/OAuthLoginButton.jsx';
-import { CloseButton } from './Buttons/CloseButton.jsx';
+import { SignUpButton } from '../Buttons/SignUpButton.jsx'
+import { OAuthLoginButton } from '../Buttons/OAuthLoginButton.jsx';
+import { CloseButton } from '../Buttons/CloseButton.jsx';
 
 // フォーム関係のコンポーネント
 import FormControl from '@mui/material/FormControl';
@@ -24,14 +24,14 @@ import InputLabel from '@mui/material/InputLabel';
 import FilledInput from '@mui/material/FilledInput';
 
 // CustomIcon
-import { ColoredGoogleIcon } from './Icons/CustomIcon.js';
-import { ColoredGitHubIcon } from './Icons/CustomIcon.js';
+import { ColoredGoogleIcon } from '../Icons/CustomIcon.js';
+import { ColoredGitHubIcon } from '../Icons/CustomIcon.js';
 
 // Sentence
-import { HaveAccountSentence } from './Sentences/HaveAccountSentence.jsx';
-import { OrDirectionSentence } from './Sentences/OrDirectionSentence.jsx';
-import { InputErrorSentence } from './Sentences/InputErrorSentence.jsx';
-import { CreateAccountSentence } from './Sentences/CreateAccountSentence.jsx';
+import { HaveAccountSentence } from '../Sentences/HaveAccountSentence.jsx';
+import { OrDirectionSentence } from '../Sentences/OrDirectionSentence.jsx';
+import { InputErrorSentence } from '../Sentences/InputErrorSentence.jsx';
+import { CreateAccountSentence } from '../Sentences/CreateAccountSentence.jsx';
 
 const CustomDialogInnerWrapper = styled.div`
   padding-top: 10px;
