@@ -4,7 +4,7 @@
 # Available submodules are: :user_activation, :http_basic_auth, :remember_me,
 # :reset_password, :session_timeout, :brute_force_protection, :activity_logging,
 # :magic_login, :external
-Rails.application.config.sorcery.submodules = []
+Rails.application.config.sorcery.submodules = [:external]
 
 # Here you can configure each submodule's features.
 Rails.application.config.sorcery.configure do |config|
@@ -79,7 +79,7 @@ Rails.application.config.sorcery.configure do |config|
   # What providers are supported by this app
   # i.e. [:twitter, :facebook, :github, :linkedin, :xing, :google, :liveid, :salesforce, :slack, :line].
   # Default: `[]`
-  config.external_providers = [:twitter, :facebook]
+  config.external_providers = [:github]
 
   config.github.key = Rails.application.credentials.dig(:github, :key)
   config.github.secret = Rails.application.credentials.dig(:github, :secret)
