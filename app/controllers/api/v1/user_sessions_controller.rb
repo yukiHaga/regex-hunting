@@ -17,7 +17,7 @@ class Api::V1::UserSessionsController < ApplicationController
         open_rank: user[:open_rank],
         active_title: user[:active_title],
         email: user[:email]
-      }
+      },
     }, status: :ok
   end
 
@@ -25,7 +25,7 @@ class Api::V1::UserSessionsController < ApplicationController
     logout
     render json: {
       session: false,
-      user: {}
+      user: {},
     }, status: :ok
   end
 
@@ -42,12 +42,12 @@ class Api::V1::UserSessionsController < ApplicationController
           open_rank: current_user[:open_rank],
           active_title: current_user[:active_title],
           email: current_user[:email]
-        }
+        },
       }, status: :ok
     else
       render json: {
         session: false,
-        user: {}
+        user: {},
       }, status: :ok
     end
   end

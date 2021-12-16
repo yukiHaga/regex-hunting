@@ -1,10 +1,10 @@
 import { REQUEST_STATE } from '../constants';
 
-// useReddducerで使うinitialStateを定義
+// useReducerで使うinitialStateを定義
 export const initialState = {
   requestState: REQUEST_STATE.INITIAL,
+  sessionState: false,
   userState: {
-    session: false,
     user: {}
   },
   errors: {}
@@ -31,8 +31,8 @@ export const requestUserReducer = (state, action) => {
       return {
         ...state,
         requestState: REQUEST_STATE.OK,
+        sessionState: action.payload.session,
         userState: {
-          session: action.payload.session,
           user: action.payload.user
         },
       };
@@ -40,8 +40,8 @@ export const requestUserReducer = (state, action) => {
       return {
         ...state,
         requestState: REQUEST_STATE.OK,
+        sessionState: false,
         userState: {
-          session: false,
           user: {}
         },
         errors: action.payload.errors

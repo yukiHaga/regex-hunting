@@ -2,22 +2,22 @@ import React, { useContext } from 'react';
 import styled from 'styled-components';
 
 // Images
-import TitleImage from '../images/title.png';
+import TitleImage from '../../images/title.png';
 
 // Colors
-import { COLORS } from '../style_constants.js';
+import { COLORS } from '../../style_constants.js';
 
 // BaseLink
-import { BaseLink, FakeLink } from './shared_style.js';
+import { BaseLink, FakeLink } from '../shared_style.js';
  
 // Contextオブジェクト
-import { UserContext } from "../context/UserProvider.js";
+import { UserContext } from "../../context/UserProvider.js";
 
 // ログイン関係のAPIコール関数
-import { deleteUserSession } from '../apis/login'; 
+import { deleteUserSession } from '../../apis/login'; 
 
 // HTTP_STATUS_CODE
-import { HTTP_STATUS_CODE } from '../constants';
+import { HTTP_STATUS_CODE } from '../../constants';
 
 // useNavigate
 import { useNavigate } from "react-router-dom";
@@ -26,8 +26,8 @@ const HeaderWrapper = styled.div`
   display: flex;
   justify-content: space-between;
   background-color: ${COLORS.MAIN};
-  position: fixed;
   width: 100%;
+  position: fixed;
   z-index: 1;
 `;
 
@@ -78,7 +78,7 @@ export const Header = ({onClickLink}) => {
 
   // useContext
   const {
-    requestUserState: { userState }, 
+    requestUserState: { sessionState, userState }, 
     dispatch, 
     requestUserActionTyps
   } = useContext(UserContext);
@@ -91,11 +91,11 @@ export const Header = ({onClickLink}) => {
         type: requestUserActionTyps.REQUEST_SUCCESS,
         payload: {
           session: data.session,
-          user: data.user
+          user: data.user,
         }
       });
     }).then(() => 
-      navigate('/')
+      navigate('/?user=logout', { state: { display: true, success: "ログアウトしました。"}})
     ).catch((e) => {
       if(e.response.status === HTTP_STATUS_CODE.NOT_FOUND){
         dispatch({
@@ -122,7 +122,7 @@ export const Header = ({onClickLink}) => {
             ランキング
           </HeaderNavLink>
           {
-            userState.session === false && 
+            sessionState === false && 
               <>
                 <HeaderNavFakeLink onClick={() => onClickLink("login")}>
                   ログイン
@@ -133,7 +133,7 @@ export const Header = ({onClickLink}) => {
               </>
           }
           { 
-            userState.session && userState.user && 
+            sessionState && userState && 
               <>
                 <HeaderNavFakeLink onClick={handleLogout}>
                   ログアウト

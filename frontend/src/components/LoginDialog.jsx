@@ -32,7 +32,6 @@ import FilledInput from '@mui/material/FilledInput';
 
 // CustomIcon
 import { ColoredGoogleIcon } from './Icons/CustomIcon.js';
-import { ColoredTwitterIcon } from './Icons/CustomIcon.js';
 import { ColoredGitHubIcon } from './Icons/CustomIcon.js';
 
 // Sentence
@@ -64,7 +63,7 @@ const CustomDialogTitleImage = styled.img`
 `;
 
 const CustomDialogContent = styled(DialogContent)`
-  height: 500px;
+  height: 440px;
   width: 400px;
 `;
 
@@ -99,6 +98,7 @@ export const LoginDialog = ({
         shouldUnregister: false 
       }); 
 
+
   // Formの検証後に呼び出される関数
   // dataにはフォームに入力したデータが入る
   // dataを実引数としてpostUserSeesionを呼び出した後、
@@ -117,11 +117,11 @@ export const LoginDialog = ({
         type: requestUserActionTyps.REQUEST_SUCCESS,
         payload: {
           session: data.session,
-          user: data.user
+          user: data.user,
         }
       });
     }).then(() => 
-      navigate('/my-page')
+      navigate('/my-page?user=login', { state: { display: true, success: "ログインしました。"}})
     ).catch((e) => {
       if(e.response.status === HTTP_STATUS_CODE.NOT_FOUND){
         dispatch({
@@ -225,12 +225,6 @@ export const LoginDialog = ({
             color={COLORS.PINK} 
             icon={<ColoredGoogleIcon fontSize="large" />} 
             type="Google"
-          />
-          <OAuthLoginButton 
-            url="/#" 
-            color={COLORS.LIGHT_BLUE} 
-            icon={<ColoredTwitterIcon fontSize="large" />} 
-            type="Twitter"
           />
           <OAuthLoginButton 
             url="/#" 
