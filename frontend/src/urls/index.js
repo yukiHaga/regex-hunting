@@ -1,4 +1,6 @@
 const DEFAULT_API_LOCALHOST = 'http://localhost:3000/api/v1';
+const CONST.GITHUB.APP_ID = '420fbaef8a45fb65c5a9';
+const CONST.GITHUB.REDIRECT_URL = 'http://localhost:3000/oauth/github/callback?provider=github';
 
 // ゲーム関係
 export const gameManagementsStart = `${DEFAULT_API_LOCALHOST}/start`;
@@ -11,6 +13,9 @@ export const usersCreate = `${DEFAULT_API_LOCALHOST}/users`;
 export const userSessionsCreate = `${DEFAULT_API_LOCALHOST}/login`;
 export const userSessionsDestroy = `${DEFAULT_API_LOCALHOST}/logout`;
 export const userSessionsExist = `${DEFAULT_API_LOCALHOST}/current_user_logged_in`;
+
+// OAuth
+export const gitHubOAuthURL = `https://github.com/login/oauth/authorize?client_id=${CONST.GITHUB.APP_ID}&redirect_url=${CONST.GITHUB.REDIRECT_URL}&scope=user:email`;
 
 // ランキング
 export const rankings = `${DEFAULT_API_LOCALHOST}/ranking`;
