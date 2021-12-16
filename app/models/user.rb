@@ -1,7 +1,8 @@
 class User < ApplicationRecord
   authenticates_with_sorcery!
   class << self; undef :open; end
-
+  authenticates_with_sorcery!
+  has_many :authentications, dependent: :destroy
   has_many :game_managements, dependent: :destroy
   has_many :release_titles, dependent: :destroy
   accepts_nested_attributes_for :authentications
