@@ -15,10 +15,7 @@ import { StartButton } from '../components/Buttons/StartButton.jsx'
 import { Footer } from '../components/Footer.jsx';
 import { LoginDialog } from '../components/LoginDialog.jsx';
 import { SignUpDialog } from '../components/SignUpDialog.jsx';
-
-// フラッシュメッセージ関係のコンポーネント;
-import Alert from '@material-ui/lab/Alert';
-import Slide from '@mui/material/Slide';
+import { SessionFlashMessage } from '../components/FlashMessages/SessionFlashMessage.jsx';
 
 // Contextオブジェクト
 import { UserContext } from "../context/UserProvider.js";
@@ -74,24 +71,9 @@ const MainMonsterImageCover = styled.img`
   left: 200px;
 `;
 
+// フラッシュメッセージでレイアウトが変化しないためのブロック要素
 const FakeBlock = styled.div`
   height: 56px;
-`;
-
-// フラッシュ関連
-const CustomSlide = styled(Slide)`
-`;
-
-const AlertWrapper = styled.div`
-  display: flex;
-  justify-content: end;
-`;
-
-const CustomAlert = styled(Alert)`
-  width: 180px;
-  margin-top: 8px;
-  margin-right: 16px;
-  pointerEvents: 'none';
 `;
 
 export const LandingPages = () => { 
@@ -129,7 +111,6 @@ export const LandingPages = () => {
           payload: {
             session: data.session,
             user: data.user,
-            flash: data.flash
           }
         });
       }).catch((e) => {
@@ -161,20 +142,11 @@ export const LandingPages = () => {
       })}/>
       <FakeHeader />
       <FakeBlock>
-        <CustomSlide 
-          direction="left" 
-          in={Boolean(location?.state?.display)} 
-          timeout={{ enter: 1200, exit: 1200 }} 
-          mountOnEnter 
-          unmountOnExit
-          addEndListener={() => (setTimeout(() => (navigate('/')), 4000))}
-        >
-          <AlertWrapper>
-            <CustomAlert severity="success">
-              ログアウトしました。
-            </CustomAlert>
-          </AlertWrapper>
-        </CustomSlide>
+        <SessionFlashMessage
+          location={location}
+          navigate={navigate}
+          url='/'
+        />
       </FakeBlock>
       <MainWrapper>
         <MainTitleImageCover src={MainTitleImage} alt="main-title"/>

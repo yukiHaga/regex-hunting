@@ -1,12 +1,12 @@
 import React, { Fragment } from 'react';
+import styled from 'styled-components';
 
 // フラッシュメッセージ関係のコンポーネント;
 import Alert from '@material-ui/lab/Alert';
 import Slide from '@mui/material/Slide';
-import styled from 'styled-components';
 
 const CustomSlide = styled(Slide)`
-`
+`;
 
 const AlertWrapper = styled.div`
   display: flex;
@@ -18,12 +18,12 @@ const CustomAlert = styled(Alert)`
   margin-top: 8px;
   margin-right: 16px;
   pointerEvents: 'none';
-`
+`;
 
 export const SessionFlashMessage = ({
-  flashState,
-  handleFlash, 
-  userState
+  location,
+  navigate,
+  url
 }) => {
 
 
@@ -31,15 +31,15 @@ export const SessionFlashMessage = ({
     <>
       <CustomSlide 
         direction="left" 
-        in={Boolean(flashState.display)} 
-        timeout={{ enter: 1200, exit: 1200 }} 
+        in={Boolean(location?.state?.display)} 
+        timeout={{ enter: 1500, exit: 1000 }} 
         mountOnEnter 
         unmountOnExit
-        addEndListener={() => (setTimeout(() => (handleFlash(userState)), 4000))}
+        addEndListener={() => (setTimeout(() => (navigate(url)), 2500))}
       >
         <AlertWrapper>
           <CustomAlert severity="success">
-            {flashState.success}
+            {location?.state?.success}
           </CustomAlert>
         </AlertWrapper>
       </CustomSlide>

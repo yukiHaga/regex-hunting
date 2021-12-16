@@ -7,10 +7,6 @@ export const initialState = {
   userState: {
     user: {}
   },
-  flashState: {
-    display: false,
-    success: ""
-  },
   errors: {}
 };
 
@@ -39,7 +35,6 @@ export const requestUserReducer = (state, action) => {
         userState: {
           user: action.payload.user
         },
-        flashState: action.payload.flash 
       };
     case requestUserActionTyps.REQUEST_FAILURE:
       return {
@@ -49,7 +44,6 @@ export const requestUserReducer = (state, action) => {
         userState: {
           user: {}
         },
-        flashState: {},
         errors: action.payload.errors
       };
     default:

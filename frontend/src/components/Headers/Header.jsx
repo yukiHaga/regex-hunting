@@ -92,7 +92,6 @@ export const Header = ({onClickLink}) => {
         payload: {
           session: data.session,
           user: data.user,
-          flash: data.flash
         }
       });
     }).then(() => 

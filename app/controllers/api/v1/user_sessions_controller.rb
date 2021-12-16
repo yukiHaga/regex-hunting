@@ -18,10 +18,6 @@ class Api::V1::UserSessionsController < ApplicationController
         active_title: user[:active_title],
         email: user[:email]
       },
-      flash: {
-        display: true,
-        success: "ログインしました。"
-      }
     }, status: :ok
   end
 
@@ -30,10 +26,6 @@ class Api::V1::UserSessionsController < ApplicationController
     render json: {
       session: false,
       user: {},
-      flash: {
-        display: true,
-        success: "ログアウトしました。"
-      }
     }, status: :ok
   end
 
@@ -51,19 +43,11 @@ class Api::V1::UserSessionsController < ApplicationController
           active_title: current_user[:active_title],
           email: current_user[:email]
         },
-        flash: {
-          display: false,
-          success: ""
-        }
       }, status: :ok
     else
       render json: {
         session: false,
         user: {},
-        flash: {
-          display: false,
-          success: ""
-        }
       }, status: :ok
     end
   end
