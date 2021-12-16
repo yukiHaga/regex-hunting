@@ -81,11 +81,10 @@ Rails.application.config.sorcery.configure do |config|
   # Default: `[]`
   config.external_providers = [:twitter, :facebook]
 
-  config.github.key = "your github key"
-  config.github.secret = "your github secret"
-  config.github.callback_url = ""
-  config.github.user_info_mapping = {:email => "email" }
-  config.github.scope = "user:email"
+  config.github.key = Rails.application.credentials.dig(:github, :key)
+  config.github.secret = Rails.application.credentials.dig(:github, :secret)
+  config.github.callback_url = Rails.application.credentials.dig(:github, :callback_url)
+  config.github.user_info_mapping = {email: "email", name: "name"}
 
   # You can change it by your local ca_file. i.e. '/etc/pki/tls/certs/ca-bundle.crt'
   # Path to ca_file. By default use a internal ca-bundle.crt.
@@ -548,7 +547,7 @@ Rails.application.config.sorcery.configure do |config|
     # Class which holds the various external provider data for this user.
     # Default: `nil`
     #
-    # user.authentications_class =
+    user.authentications_class = Authentication
 
     # User's identifier in the `authentications` class.
     # Default: `:user_id`
