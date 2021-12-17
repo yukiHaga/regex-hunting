@@ -32,6 +32,7 @@ export const deleteUserSession = async () => {
   }
 };
 
+// ローディング画面から、OAuthログインさせるためのAPIコール関数。
 export const postExternalAuth = async ({
   code,
   provider
