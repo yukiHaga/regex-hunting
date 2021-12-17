@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { userSessionsCreate, userSessionsDestroy } from '../urls/index';
+import { userSessionsCreate, userSessionsDestroy, gitHubOAuthPost } from '../urls/index';
 
 // ログインするためのAPIコール関数
 // postの第3引数にwithCredentials: trueを指定することで、
@@ -26,6 +26,25 @@ export const deleteUserSession = async () => {
     const response = await axios.delete(userSessionsDestroy,
       { withCredentials: true }
     );
+    return response.data;
+  } catch(e) {
+    throw e;
+  }
+};
+
+export const postExternalAuth = async ({
+  code,
+  provider
+}) => {
+  try {
+    const response = await axios.post(gitHubOAuthPost,
+      {
+        code: code,
+        provider: provider
+      },
+      { withCredentials: true }
+    );
+    axios.defaults.headers.common['X-CSRF-Token'] = response.headers['x-csrf-token'];
     return response.data;
   } catch(e) {
     throw e;

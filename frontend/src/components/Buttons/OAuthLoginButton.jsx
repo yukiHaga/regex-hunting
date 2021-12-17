@@ -4,8 +4,6 @@ import styled from 'styled-components';
 // Colors
 import { COLORS } from '../../style_constants.js';
 
-import { BaseLink } from '../shared_style';
-import { RoundButton  } from '../shared_style';
 import { AnchorRoundButton } from '../shared_style';
 
 const OAuthLoginButtonWrapper = styled(AnchorRoundButton)`
@@ -28,17 +26,6 @@ const OAuthLoginButtonWrapper = styled(AnchorRoundButton)`
 const OAuthLoginButtonIconWrapper = styled.div`
   margin-right: 5px;
 `;
-
-/*
-const OAuthLoginButtonTextWrapper = styled(BaseLink)`
-  display: block;
-  color: white;
-  font-family: YuGothic;
-  font-style: normal;
-  font-size: 20px;
-  font-weight: 500;
-`;
-*/
 
 export const OAuthLoginButton = ({url, color, icon, type}) => {
   return (

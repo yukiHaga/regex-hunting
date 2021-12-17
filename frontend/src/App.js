@@ -17,6 +17,7 @@ import { UseTreaties } from './containers/UseTreaties.jsx';
 import { PrivacyPolicies } from './containers/PrivacyPolicies.jsx';
 import { PasswordResets } from './containers/PasswordResets.jsx';
 import { PasswordUpdates } from './containers/PasswordUpdates.jsx';
+import { ExternalAuth } from './containers/ExternalAuth.jsx';
 
 // Provider
 import { UserProvider } from "./context/UserProvider.js";
