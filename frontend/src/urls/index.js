@@ -15,7 +15,7 @@ export const userSessionsDestroy = `${DEFAULT_API_LOCALHOST}/logout`;
 export const userSessionsExist = `${DEFAULT_API_LOCALHOST}/current_user_logged_in`;
 
 // OAuth
-export const gitHubOAuth = `https://github.com/login/oauth/authorize?client_id=${GITHUB_APP_ID}&redirect_url=${GITHUB_REDIRECT_URL}&scope=user:email`;
+export const gitHubOAuth = `https://github.com/login/oauth/authorize?client_id=${GITHUB_APP_ID}&redirect_url=${GITHUB_REDIRECT_URL}&scope=user:email&state=xyz`;
 export const gitHubOAuthPost = `${DEFAULT_API_LOCALHOST}/oauth/callback`;
 
 // ランキング
