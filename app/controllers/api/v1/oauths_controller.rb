@@ -3,6 +3,20 @@ class Api::V1::OauthsController < ApplicationController
   skip_before_action :verify_authenticity_token
   after_action :set_csrf_token_header
 
+  def oauth
+    if !logged_in?
+      binding.pryr
+      login_at(params[:provider])
+      render json: {
+        url: 'ログインしました'
+      }, status: :ok
+    else
+      render json: {
+        url: 'ログインできませんでした。'
+      }, status: :bad_request
+    end
+  end
+
   # login_from・・・ユーザが外部認証済みでDBに登録されているか確認するメソッド
   # 登録されていればログインをしtrueを返却する。登録されていなければfalseを返す。
   # create_from・・・login_fromでfalseの場合にユーザ登録をするメソッド。
@@ -47,7 +61,7 @@ class Api::V1::OauthsController < ApplicationController
           session: false,
           user: {},
         }, status: :bad_request
-        end
+      end
     end
   end
 end
