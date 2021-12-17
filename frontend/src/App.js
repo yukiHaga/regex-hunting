@@ -37,7 +37,7 @@ function App() {
 
             {/* OAuth用のページ */}
             <Route 
-              exact path="/oauth/github/callback" 
+            exact path="/callback/:provider" 
               element={<ExternalAuth />} 
             />
 

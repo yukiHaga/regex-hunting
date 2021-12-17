@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useSearchParams, useNavigate } from "react-router-dom";
+import { useSearchParams, useNavigate, useParams } from "react-router-dom";
 import CircularProgress from '@material-ui/core/CircularProgress';
 
 // OAuth関係のAPIコール関数
@@ -46,7 +46,7 @@ export const ExternalAuth = () => {
   const [searchParams] = useSearchParams();
 
   const code = searchParams.get('code');
-  const provider = searchParams.get('provider');
+  const { provider } = useParams();
   const [requestStatus, setRequestStatus] = useState(BEFORE);
 
   const request = () => {
