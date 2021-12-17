@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+//import Button from '@mui/material/Button';
 
 // constants
 import { COLORS } from '../style_constants';
@@ -38,6 +39,21 @@ export const BaseButton = styled.button`
   :focus {
     outline: 0;
   }
+`;
+
+// 別サイトへのリンクボタンとなるコンポーネント
+export const AnchorBaseButton = styled.a`
+  cursor: pointer;
+  :hover {
+    opacity: 0.7;
+  }
+  :focus {
+    outline: 0;
+  }
+`;
+
+export const AnchorRoundButton = styled(AnchorBaseButton)`
+  border-radius: 3px;
 `;
 
 // 角丸なボタン

@@ -47,6 +47,9 @@ import { HTTP_STATUS_CODE } from '../../constants';
 // Contextオブジェクト
 import { UserContext } from "../../context/UserProvider.js";
 
+// OAuthのURL
+import { gitHubOAuthURL } from '../../urls/index'; 
+
 const CustomDialogInnerWrapper = styled.div`
   padding-top: 10px;
   padding-right: 10px;
@@ -227,7 +230,7 @@ export const LoginDialog = ({
             type="Google"
           />
           <OAuthLoginButton 
-            url="/#" 
+            url={gitHubOAuthURL}
             color={COLORS.BLACK} 
             icon={<ColoredGitHubIcon fontSize="large" />} 
             type="GitHub"
