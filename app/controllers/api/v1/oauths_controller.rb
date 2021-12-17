@@ -9,6 +9,7 @@ class Api::V1::OauthsController < ApplicationController
   # auto_login・・・メールアドレスやパスワードを使わずuserとしてログインする。
   # 主にユーザー作成後に、自動ログインさせたい時に使う。
   def callback
+    binding.pry
     provider = params[:provider]
     if user = login_from(provider)
       render json: {
