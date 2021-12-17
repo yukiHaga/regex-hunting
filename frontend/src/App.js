@@ -34,6 +34,12 @@ function App() {
               element={<LandingPages />} 
             />
 
+            {/* OAuth用のページ */}
+            <Route 
+              exact path="/oauth/github/callback" 
+              element={<ExternalAuth />} 
+            />
+
             {/* マイページ */}
             <Route 
               exact 
