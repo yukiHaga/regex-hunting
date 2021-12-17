@@ -27,6 +27,7 @@ class Api::V1::OauthsController < ApplicationController
       }, status: :ok
     else
       begin
+        binding.pry
         user = create_from(provider)
         reset_session
         auto_login(user)

@@ -85,6 +85,7 @@ Rails.application.config.sorcery.configure do |config|
   config.github.secret = Rails.application.credentials.dig(:github, :secret)
   config.github.callback_url = Rails.application.credentials.dig(:github, :callback_url)
   config.github.user_info_mapping = {email: "email", name: "name"}
+  config.github.scope = "user:email"
 
   # You can change it by your local ca_file. i.e. '/etc/pki/tls/certs/ca-bundle.crt'
   # Path to ca_file. By default use a internal ca-bundle.crt.
