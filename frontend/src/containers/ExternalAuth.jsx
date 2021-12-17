@@ -1,45 +1,17 @@
-import React, { useState } from "react";
+import React, { useEffect } from "react";
 import { useSearchParams, useNavigate, useParams } from "react-router-dom";
 import CircularProgress from '@material-ui/core/CircularProgress';
+import styled from 'styled-components';
 
 // OAuth関係のAPIコール関数
 import { postExternalAuth } from '../apis/login'; 
 
-const BEFORE = "BEFORE";
-const DOING = "DOING";
-
-/*
-  const onSubmit = ({EmailBox, PasswordBox}) => { 
-    dispatch({ type: requestUserActionTyps.REQUEST });
-    postUserSession({
-      user: {
-        email: EmailBox,
-        password: PasswordBox
-      }
-    }).then((data) => {
-      dispatch({
-        type: requestUserActionTyps.REQUEST_SUCCESS,
-        payload: {
-          session: data.session,
-          user: data.user,
-        }
-      });
-    }).then(() => 
-      navigate('/my-page?user=login', { state: { display: true, success: "ログインしました。"}})
-    ).catch((e) => {
-      if(e.response.status === HTTP_STATUS_CODE.NOT_FOUND){
-        dispatch({
-          type: requestUserActionTyps.REQUEST_FAILURE,
-          payload: {
-            errors: e.response.data.errors
-          }
-        });
-      } else {
-        throw e;
-      }
-    })
-  };
-*/
+const CustomDiv = styled.div`
+  display: flex;
+  height: 100vh;
+  justify-content: center;
+  align-items: center;
+`;
 
 export const ExternalAuth = () => {
   const navigate = useNavigate();
@@ -47,10 +19,11 @@ export const ExternalAuth = () => {
 
   const code = searchParams.get('code');
   const { provider } = useParams();
-  const [requestStatus, setRequestStatus] = useState(BEFORE);
 
-  const request = () => {
-    setRequestStatus(DOING);
+  // ExternalAuthコンポーネントの初回レンダリング時に、
+  // ユーザーをログインさせるかのアクションへリクエストを出す
+  useEffect(() => {
+    console.log("request関数の中");
     postExternalAuth({ 
       code, 
       provider 
@@ -65,15 +38,11 @@ export const ExternalAuth = () => {
         });
       }
     });
-  };
-
-  if (requestStatus === BEFORE) {
-    request();
-  }
+  }, [code, provider, navigate]);
 
   return (
-    <div>
+    <CustomDiv>
       <CircularProgress />
-    </div>
+    </CustomDiv>
   );
 };
