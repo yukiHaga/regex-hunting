@@ -1,0 +1,14 @@
+{
+  "name": "regex-hunting",
+  "version": "1.0.0",
+  "description": "web applications for studying regex",
+  "main": "index.js",
+  "repository": "https://github.com/yukiHaga/regex-hunting.git",
+  "author": "Yuki Haga",
+  "license": "MIT",
+  "scripts": {
+    "build": "cd frontend && yarn install && yarn build && cd ..",
+    "deploy": "cp -a frontend/build/. public/",
+    "heroku-postbuild": "yarn build && yarn deploy && echo 'Client built!'"
+  }
+}
