@@ -18,14 +18,14 @@ export const ExternalAuth = () => {
   const [searchParams] = useSearchParams();
 
   const code = searchParams.get('code');
-  const state = searchParams.get('state');
+  const callBackState = searchParams.get('state');
   const { provider } = useParams();
 
   // ExternalAuthコンポーネントの初回レンダリング時に、
   // ユーザーをログインさせるかのアクションへリクエストを出す
   useEffect(() => {
     console.log("request関数の中");
-    if (state === 'xyz') {
+    if (callBackState === 'xyz') {
       postExternalAuth({ 
         code, 
         provider 
@@ -45,7 +45,7 @@ export const ExternalAuth = () => {
         state: { display: true, success: "アカウントが見つかりません。"}
       });
     }
-  }, [code, provider, navigate]);
+  }, [callBackState, code, provider, navigate]);
 
   return (
     <CustomDiv>

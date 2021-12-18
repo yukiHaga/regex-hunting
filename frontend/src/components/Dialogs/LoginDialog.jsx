@@ -48,7 +48,7 @@ import { HTTP_STATUS_CODE } from '../../constants';
 import { UserContext } from "../../context/UserProvider.js";
 
 // OAuthのURL
-import { gitHubOAuth } from '../../urls/index'; 
+import { gitHubOAuth, googleOAuth } from '../../urls/index'; 
 
 const CustomDialogInnerWrapper = styled.div`
   padding-top: 10px;
@@ -224,7 +224,7 @@ export const LoginDialog = ({
           <PasswordResetSentence />
           <OrDirectionSentence />
           <OAuthLoginButton 
-            url="/#" 
+            url={googleOAuth} 
             color={COLORS.PINK} 
             icon={<ColoredGoogleIcon fontSize="large" />} 
             type="Google"
