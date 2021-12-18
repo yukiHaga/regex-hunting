@@ -32,7 +32,7 @@ export const SessionFlashMessage = ({
       <CustomSlide 
         direction="left" 
         in={Boolean(location?.state?.display)} 
-        timeout={{ enter: 1500, exit: 1000 }} 
+        timeout={{ enter: 1000, exit: 1000 }} 
         mountOnEnter 
         unmountOnExit
         addEndListener={() => (setTimeout(() => (navigate(url)), 2500))}

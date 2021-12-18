@@ -13,8 +13,8 @@ import { FakeHeader } from '../components/Headers/FakeHeader.jsx';
 import { SubTitle } from '../components/SubTitle.jsx';
 import { StartButton } from '../components/Buttons/StartButton.jsx'
 import { Footer } from '../components/Footer.jsx';
-import { LoginDialog } from '../components/LoginDialog.jsx';
-import { SignUpDialog } from '../components/SignUpDialog.jsx';
+import { LoginDialog } from '../components/Dialogs/LoginDialog.jsx';
+import { SignUpDialog } from '../components/Dialogs/SignUpDialog.jsx';
 import { SessionFlashMessage } from '../components/FlashMessages/SessionFlashMessage.jsx';
 
 // Contextオブジェクト

@@ -17,6 +17,7 @@ import { UseTreaties } from './containers/UseTreaties.jsx';
 import { PrivacyPolicies } from './containers/PrivacyPolicies.jsx';
 import { PasswordResets } from './containers/PasswordResets.jsx';
 import { PasswordUpdates } from './containers/PasswordUpdates.jsx';
+import { ExternalAuth } from './containers/ExternalAuth.jsx';
 
 // Provider
 import { UserProvider } from "./context/UserProvider.js";
@@ -34,10 +35,15 @@ function App() {
               element={<LandingPages />} 
             />
 
+            {/* OAuth用のページ */}
+            <Route 
+              exact path="/callback/:provider/" 
+              element={<ExternalAuth />} 
+            />
+
             {/* マイページ */}
             <Route 
-              exact 
-              path="/my-page" 
+              exact path="/my-page" 
               element={<MyPages />} 
             />
 
@@ -49,15 +55,13 @@ function App() {
 
             {/* アカウント設定ページ */}
             <Route 
-              exact 
-              path="/users/:user_id/account-settings" 
+              exact path="/users/:user_id/account-settings" 
               element={<AccountSettings />} 
             />
 
             {/* ゲームページ */}
             <Route
-              exact
-              path="/games/:difficulty_level/start"
+              exact path="/games/:difficulty_level/start"
               element={<Games />}
             />
 
@@ -75,16 +79,14 @@ function App() {
 
             {/* パスワードリセット申請ページ */}
             <Route 
-              exact 
-              path="/users/password/new" 
+              exact path="/users/password/new" 
               element={<PasswordResets />} 
             />
 
             {/* パスワード更新ページ */}
             {/* exactの場合、リセットパスワードトークンがURLに含まれていたら反応ないかも*/}
             <Route 
-              exact 
-              path="/users/password/edit" 
+              exact path="/users/password/edit" 
               element={<PasswordUpdates />} 
             />
           </Routes>

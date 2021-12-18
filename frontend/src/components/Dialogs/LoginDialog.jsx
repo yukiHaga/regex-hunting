@@ -3,7 +3,7 @@ import styled from 'styled-components';
 
 // ログイン関係のAPIコール関数
 // deleteUserSession 
-import { postUserSession } from '../apis/login'; 
+import { postUserSession } from '../../apis/login'; 
 
 // useNavigate
 import { useNavigate } from "react-router-dom";
@@ -15,15 +15,15 @@ import { DialogContent, Dialog } from '@mui/material';
 import { useForm, Controller } from "react-hook-form";
 
 // Colors
-import { COLORS } from '../style_constants.js';
+import { COLORS } from '../../style_constants.js';
 
 // Images
-import LoginImage from '../images/login.png';
+import LoginImage from '../../images/login.png';
 
 // Button
-import { LoginButton } from './Buttons/LoginButton.jsx'
-import { OAuthLoginButton } from './Buttons/OAuthLoginButton.jsx';
-import { CloseButton } from './Buttons/CloseButton.jsx';
+import { LoginButton } from '../Buttons/LoginButton.jsx'
+import { OAuthLoginButton } from '../Buttons/OAuthLoginButton.jsx';
+import { CloseButton } from '../Buttons/CloseButton.jsx';
 
 // フォーム関係のコンポーネント
 import FormControl from '@mui/material/FormControl';
@@ -31,21 +31,24 @@ import InputLabel from '@mui/material/InputLabel';
 import FilledInput from '@mui/material/FilledInput';
 
 // CustomIcon
-import { ColoredGoogleIcon } from './Icons/CustomIcon.js';
-import { ColoredGitHubIcon } from './Icons/CustomIcon.js';
+import { ColoredGoogleIcon } from '../Icons/CustomIcon.js';
+import { ColoredGitHubIcon } from '../Icons/CustomIcon.js';
 
 // Sentence
-import { PasswordResetSentence } from './Sentences/PasswordResetSentence.jsx';
-import { SignUpSentence } from './Sentences/SignUpSentence.jsx';
-import { OrDirectionSentence } from './Sentences/OrDirectionSentence.jsx';
-import { InputErrorSentence } from './Sentences/InputErrorSentence.jsx';
-import { SubmitErrorSentence } from './Sentences/SubmitErrorSentence.jsx';
+import { PasswordResetSentence } from '../Sentences/PasswordResetSentence.jsx';
+import { SignUpSentence } from '../Sentences/SignUpSentence.jsx';
+import { OrDirectionSentence } from '../Sentences/OrDirectionSentence.jsx';
+import { InputErrorSentence } from '../Sentences/InputErrorSentence.jsx';
+import { SubmitErrorSentence } from '../Sentences/SubmitErrorSentence.jsx';
 
 // HTTP_STATUS_CODE
-import { HTTP_STATUS_CODE } from '../constants';
+import { HTTP_STATUS_CODE } from '../../constants';
 
 // Contextオブジェクト
-import { UserContext } from "../context/UserProvider.js";
+import { UserContext } from "../../context/UserProvider.js";
+
+// OAuthのURL
+import { gitHubOAuth, googleOAuth } from '../../urls/index'; 
 
 const CustomDialogInnerWrapper = styled.div`
   padding-top: 10px;
@@ -221,13 +224,13 @@ export const LoginDialog = ({
           <PasswordResetSentence />
           <OrDirectionSentence />
           <OAuthLoginButton 
-            url="/#" 
+            url={googleOAuth} 
             color={COLORS.PINK} 
             icon={<ColoredGoogleIcon fontSize="large" />} 
             type="Google"
           />
           <OAuthLoginButton 
-            url="/#" 
+            url={gitHubOAuth}
             color={COLORS.BLACK} 
             icon={<ColoredGitHubIcon fontSize="large" />} 
             type="GitHub"
