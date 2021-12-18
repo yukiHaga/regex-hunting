@@ -87,6 +87,12 @@ Rails.application.config.sorcery.configure do |config|
   config.github.user_info_mapping = {email: "email", name: "name"}
   config.github.scope = "user:email"
 
+  config.google.key = Rails.application.credentials.dig(:google, :key)
+  config.google.secret = Rails.application.credentials.dig(:google, :secret)
+  config.google.callback_url = Rails.application.credentials.dig(:google, :callback_url)
+  config.google.user_info_mapping = {email: "email", name: "givenName"}
+  config.google.scope = "https://www.googleapis.com/auth/userinfo.email https://www.googleapis.com/auth/userinfo.profile"
+
   # You can change it by your local ca_file. i.e. '/etc/pki/tls/certs/ca-bundle.crt'
   # Path to ca_file. By default use a internal ca-bundle.crt.
   # Default: `'path/to/ca_file'`
