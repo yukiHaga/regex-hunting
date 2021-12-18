@@ -23,7 +23,7 @@ export const gitHubOAuth = `https://github.com/login/oauth/authorize?client_id=$
 export const defaultOAuthPost = `${DEFAULT_API_LOCALHOST}/oauth/callback`;
 
 // Google
-export const googleOAuth = `https://accounts.google.com/o/oauth2/auth?response_type=code&client_id=${GOOGLE_APP_ID}&redirect_uri=${GOOGLE_REDIRECT_URL}&scope=email&state=xyz&access_type=offline&approval_prompt=force`;
+export const googleOAuth = `https://accounts.google.com/o/oauth2/auth?response_type=code&client_id=${GOOGLE_APP_ID}&redirect_uri=${GOOGLE_REDIRECT_URL}&scope=profile&state=xyz&access_type=offline&approval_prompt=force`;
 
 // ランキング
 export const rankings = `${DEFAULT_API_LOCALHOST}/ranking`;
