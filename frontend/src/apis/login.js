@@ -41,7 +41,7 @@ export const postExternalAuth = async ({
     const response = await axios.post(defaultOAuthPost,
       {
         code: code,
-        provider: provider
+        provider: provider,
       },
       { withCredentials: true }
     );
