@@ -69,3 +69,6 @@ gem 'sprockets', '~> 3.7.2'
 
 # User authentication
 gem 'sorcery'
+
+# APIとクライアント側を一つのコマンドで動かす為に導入する。
+gem 'foreman'

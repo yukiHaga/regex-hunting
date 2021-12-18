@@ -25,3 +25,6 @@ production:
   adapter: postgresql
   encoding: unicode
   pool: 5 
+  database: regex_hunting_production
+  username: <%= Rails.application.credentials.dig(:postgresql, :username) %>
+  password: <%= Rails.application.credentials.dig(:postgresql, :password) %>

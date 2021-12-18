@@ -1,5 +1,9 @@
 Rails.application.routes.draw do
-  # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
+  # React Routerを本番環境で動かす為に必要なルーティング
+  get '*path', to: "application#fallback_index_html", constraints: ->(request) do
+    !request.xhr? && request.format.html?
+  end
+
   namespace :api do
     namespace :v1 do
       get 'start', to: 'game_managements#start'
