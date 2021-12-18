@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { userSessionsCreate, userSessionsDestroy, gitHubOAuthPost } from '../urls/index';
+import { userSessionsCreate, userSessionsDestroy, defaultOAuthPost } from '../urls/index';
 
 // ログインするためのAPIコール関数
 // postの第3引数にwithCredentials: trueを指定することで、
@@ -38,7 +38,7 @@ export const postExternalAuth = async ({
   provider
 }) => {
   try {
-    const response = await axios.post(gitHubOAuthPost,
+    const response = await axios.post(defaultOAuthPost,
       {
         code: code,
         provider: provider

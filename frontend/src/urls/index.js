@@ -1,6 +1,9 @@
 const DEFAULT_API_LOCALHOST = 'http://localhost:3000/api/v1';
 const GITHUB_APP_ID = '420fbaef8a45fb65c5a9';
 const GITHUB_REDIRECT_URL = 'http://localhost:3001/callback/github/';
+const GOOGLE_APP_ID = '63383229438-hjv5021k3b43jjkf182772mg9mh6uvp9.apps.googleusercontent.com';
+const GOOGLE_REDIRECT_URL = 'http://localhost:3001/callback/google/';
+
 
 // ゲーム関係
 export const gameManagementsStart = `${DEFAULT_API_LOCALHOST}/start`;
@@ -15,8 +18,12 @@ export const userSessionsDestroy = `${DEFAULT_API_LOCALHOST}/logout`;
 export const userSessionsExist = `${DEFAULT_API_LOCALHOST}/current_user_logged_in`;
 
 // OAuth
+// Github
 export const gitHubOAuth = `https://github.com/login/oauth/authorize?client_id=${GITHUB_APP_ID}&redirect_url=${GITHUB_REDIRECT_URL}&scope=user:email&state=xyz`;
-export const gitHubOAuthPost = `${DEFAULT_API_LOCALHOST}/oauth/callback`;
+export const defaultOAuthPost = `${DEFAULT_API_LOCALHOST}/oauth/callback`;
+
+// Google
+export const googleOAuth = `https://accounts.google.com/o/oauth2/auth?response_type=code&client_id=${GOOGLE_APP_ID}&redirect_url=${GOOGLE_REDIRECT_URL}&scope=email&access_type=offline&approval_prompt=force`;
 
 // ランキング
 export const rankings = `${DEFAULT_API_LOCALHOST}/ranking`;
