@@ -4,9 +4,11 @@ class Api::V1::UsersController < ApplicationController
   after_action :set_csrf_token_header, only: :create
 
   def create
-    binding.pry
     user = User.new(user_params)
+    raise ActiveRecord::RecordNotFound unless user.valid?
     if user.save
+      reset_session
+      auto_login(user)
       render json: {
         session: true,
         user: {
