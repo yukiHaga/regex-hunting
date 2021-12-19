@@ -1,8 +1,12 @@
 Rails.application.routes.draw do
   # React Routerを本番環境で動かす為に必要なルーティング
+  # 開発環境の時はコメントアウトしておく
+  # 本番環境の場合、React Routerを動かす為にコメントアウトを外す。
+=begin
   get '*path', to: "application#fallback_index_html", constraints: ->(request) do
     !request.xhr? && request.format.html?
   end
+=end
 
   namespace :api do
     namespace :v1 do

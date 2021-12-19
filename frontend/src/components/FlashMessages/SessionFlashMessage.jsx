@@ -14,7 +14,7 @@ const AlertWrapper = styled.div`
 `;
 
 const CustomAlert = styled(Alert)`
-  width: 180px;
+  width: 220px;
   margin-top: 8px;
   margin-right: 16px;
   pointerEvents: 'none';
