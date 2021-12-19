@@ -24,7 +24,6 @@ export const ExternalAuth = () => {
   // ExternalAuthコンポーネントの初回レンダリング時に、
   // ユーザーをログインさせるかのアクションへリクエストを出す
   useEffect(() => {
-    console.log("request関数の中");
     if (callBackState === 'xyz') {
       postExternalAuth({ 
         code, 
