@@ -10,5 +10,10 @@
     "build": "cd frontend && yarn install && yarn build && cd ..",
     "deploy": "cp -a frontend/build/. public/",
     "heroku-postbuild": "yarn build && yarn deploy && echo 'Client built!'"
+  },
+  "engines": {
+    "node": "12.14.0",
+    "npm": "6.13.4",
+    "yarn": "1.22.10"
   }
 }
