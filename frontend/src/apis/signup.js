@@ -11,10 +11,12 @@ export const postUser = async ({user: {
   try {
     const response = await axios.post(usersCreate,
       {
-        name: name,
-        email: email,
-        password: password,
-        password_confirmation: password_confirmation
+        user: {
+          name: name,
+          email: email,
+          password: password,
+          password_confirmation: password_confirmation
+        }
       },
       { withCredentials: true }
     );
