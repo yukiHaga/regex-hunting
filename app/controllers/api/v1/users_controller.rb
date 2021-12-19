@@ -5,7 +5,7 @@ class Api::V1::UsersController < ApplicationController
 
   def create
     user = User.new(user_params)
-    raise ActiveRecord::RecordNotFound unless user.valid?
+    raise ActiveRecord::RecordNotFound, user.errors.full_messages unless user.valid?
     if user.save
       reset_session
       auto_login(user)
