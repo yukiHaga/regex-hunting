@@ -97,9 +97,9 @@ export const LoginDialog = ({
     handleSubmit, 
     formState: { errors, isValid } 
   } = useForm({
-        mode: 'all',
-        shouldUnregister: false 
-      }); 
+    mode: 'all',
+    shouldUnregister: false 
+  }); 
 
 
   // Formの検証後に呼び出される関数

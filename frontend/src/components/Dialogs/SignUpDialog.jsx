@@ -1,11 +1,17 @@
-import React, { useRef } from 'react';
+import React, { useRef, useContext } from 'react';
 import styled from 'styled-components';
+
+// 新規会員登録関係のAPIコール関数
+import { postUser } from '../../apis/signup.js'; 
 
 // ダイアログ
 import { DialogContent, Dialog } from '@mui/material';
 
 // React Hook Form
 import { useForm, Controller } from "react-hook-form";
+
+// useNavigate
+import { useNavigate } from "react-router-dom";
 
 // Colors
 import { COLORS } from '../../style_constants.js';
@@ -32,6 +38,16 @@ import { HaveAccountSentence } from '../Sentences/HaveAccountSentence.jsx';
 import { OrDirectionSentence } from '../Sentences/OrDirectionSentence.jsx';
 import { InputErrorSentence } from '../Sentences/InputErrorSentence.jsx';
 import { CreateAccountSentence } from '../Sentences/CreateAccountSentence.jsx';
+import { SubmitErrorSentence } from '../Sentences/SubmitErrorSentence.jsx';
+
+// HTTP_STATUS_CODE
+import { HTTP_STATUS_CODE } from '../../constants';
+
+// Contextオブジェクト
+import { UserContext } from "../../context/UserProvider.js";
+
+// OAuthのURL
+import { gitHubOAuth, googleOAuth } from '../../urls/index'; 
 
 const CustomDialogInnerWrapper = styled.div`
   padding-top: 10px;
@@ -64,11 +80,26 @@ export const SignUpDialog = ({
   onClick
 }) => {
 
+  // useContext
+  const {
+    requestUserState, 
+    dispatch, 
+    requestUserActionTyps
+  } = useContext(UserContext);
+
+  // navigate
+  let navigate = useNavigate();
+
   // useForm
-  const { control, handleSubmit, formState: { errors, isValid }, watch } = useForm({ 
-                                                                    mode: 'all',
-                                                                    shouldUnregister: false 
-                                                                  }); 
+  const { 
+    control, 
+    handleSubmit, 
+    formState: { errors, isValid }, 
+    watch 
+  } = useForm({ 
+    mode: 'all',
+    shouldUnregister: false 
+  }); 
 
   // refObject(password)を定義
   // refObjectのcurrentプロパティにwatchの初期値("")を代入
@@ -81,8 +112,48 @@ export const SignUpDialog = ({
   password.current = watch("PasswordBox", "")
 
   // Formの検証後に呼び出される関数
-  const onSubmit = data => { console.log(data) };
-  const onErrors = data => { console.log(data) };
+  // dataにはフォームに入力したデータが入る
+  // dataを実引数としてpostUserSeesionを呼び出した後、
+  // postUserSessionで取得したdataを実引数として、dispatchを実行
+  // reducer側でちゃんとstateは更新されている。
+  // しかし、この関数内でstateをコンソール出力できない。
+  const onSubmit = ({
+    NameBox,
+    EmailBox, 
+    PasswordBox,
+    PasswordConfirmationBox
+  }) => { 
+    dispatch({ type: requestUserActionTyps.REQUEST });
+    postUser({
+      user: {
+        name: NameBox,
+        email: EmailBox,
+        password: PasswordBox,
+        password_confirmation: PasswordConfirmationBox
+      }
+    }).then((data) => {
+      dispatch({
+        type: requestUserActionTyps.REQUEST_SUCCESS,
+        payload: {
+          session: data.session,
+          user: data.user,
+        }
+      });
+    }).then(() => 
+      navigate('/my-page?user=login', { state: { display: true, success: "ログインしました。"}})
+    ).catch((e) => {
+      if(e.response.status === HTTP_STATUS_CODE.NOT_FOUND){
+        dispatch({
+          type: requestUserActionTyps.REQUEST_FAILURE,
+          payload: {
+            errors: e.response.data.errors
+          }
+        });
+      } else {
+        throw e;
+      }
+    })
+  };
 
   // Formのバリデーション
   const registerOptions = {
@@ -141,7 +212,7 @@ export const SignUpDialog = ({
         <CustomDialogTitleImage src={SignUpImage} alt="SignUp" />
         <CustomDialogContent>
           <CreateAccountSentence />
-          <form onSubmit={handleSubmit(onSubmit, onErrors)}>
+          <form onSubmit={handleSubmit(onSubmit)}>
             <Controller 
               name="NameBox"
               control={control}
@@ -225,16 +296,23 @@ export const SignUpDialog = ({
                                                  {errors.PasswordConfirmationBox.message}
                                                </InputErrorSentence>}
             <SignUpButton disabled={!isValid} />
+
+            {
+              requestUserState.errors.title === 'Record Not Found' && 
+                <SubmitErrorSentence>
+                  {requestUserState.errors.detail}
+                </SubmitErrorSentence>
+            }
           </form>
           <OrDirectionSentence />
           <OAuthLoginButton 
-            url="/#" 
+            url={googleOAuth}
             color={COLORS.PINK} 
             icon={<ColoredGoogleIcon fontSize="large" />} 
             type="Google"
           />
           <OAuthLoginButton 
-            url="/#" 
+            url={gitHubOAuth}
             color={COLORS.BLACK} 
             icon={<ColoredGitHubIcon fontSize="large" />} 
             type="GitHub"

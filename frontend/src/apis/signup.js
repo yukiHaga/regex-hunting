@@ -9,13 +9,13 @@ export const postUser = async ({user: {
   password_confirmation
 }}) => {
   try {
-    const response = await axios.post(userCreate,
+    const response = await axios.post(usersCreate,
       {
-        name: name
+        name: name,
         email: email,
         password: password,
         password_confirmation: password_confirmation
-      }
+      },
       { withCredentials: true }
     );
     axios.defaults.headers.common['X-CSRF-Token'] = response.headers['x-csrf-token'];
