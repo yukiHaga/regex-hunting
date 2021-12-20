@@ -38,6 +38,9 @@ import { HTTP_STATUS_CODE } from '../constants';
 // Colors
 import { COLORS } from '../style_constants.js';
 
+// react-scroll
+import { Link as Scroll } from 'react-scroll';
+
 // メインのラッパー
 const MainWrapper = styled.div`
   text-align: center;
@@ -229,7 +232,9 @@ export const LandingPages = () => {
         <SubText color={COLORS.SUB}>
           正規表現を学ぶ狩りに出よう
         </SubText>
-        <StartButton />
+        <Scroll to="gameContent" smooth={true}>
+          <StartButton />
+        </Scroll>
       </MainWrapper>
       <SecondWrapper>
         <SubText >
@@ -254,7 +259,7 @@ export const LandingPages = () => {
         </RankingDescriptionSentence>
         <FourthRaknkingImageCover src={RaknkingImage} alt="ranking" />
       </FourthWrapper>
-      <FifthWrapper>
+      <FifthWrapper id="gameContent">
         <GameStartDescriptionSentence>
           3種類の難易度のゲームをクリアして、正規表現を極めよう！
         </GameStartDescriptionSentence>
