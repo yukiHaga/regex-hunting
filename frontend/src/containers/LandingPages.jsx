@@ -8,6 +8,8 @@ import BackGroundImage from '../images/background.png';
 import MainMonsterImage from '../images/intermediate.png';
 import BattleSceneImage from '../images/battle_scene.png';
 import MyPageImage from '../images/my_page_image.png';
+import RaknkingImage from '../images/ranking_image.png';
+
 
 // Presentational Components
 import { Header } from '../components/Headers/Header.jsx';
@@ -19,6 +21,7 @@ import { LoginDialog } from '../components/Dialogs/LoginDialog.jsx';
 import { SignUpDialog } from '../components/Dialogs/SignUpDialog.jsx';
 import { SessionFlashMessage } from '../components/FlashMessages/SessionFlashMessage.jsx';
 import { GameDescriptionSentence } from '../components/Sentences/GameDescriptionSentence.jsx';
+import { RankingDescriptionSentence } from '../components/Sentences/RankingDescriptionSentence.jsx';
 
 // Contextオブジェクト
 import { UserContext } from "../context/UserProvider.js";
@@ -110,6 +113,22 @@ const ThirdMyPageImageCover = styled.img`
   width: 650px;
   height: 400px;
   object-fit: contain;
+  margin-bottom: 20px;
+`;
+
+// フォースのラッパー
+const FourthWrapper = styled.div`
+  text-align: center;
+  background-color: ${COLORS.SUB};
+  padding-top: 110px;
+`;
+
+// ランキング画像
+const FourthRaknkingImageCover = styled.img`
+  width: 650px;
+  height: 400px;
+  object-fit: contain;
+  margin-top: 40px;
   margin-bottom: 20px;
 `;
 
@@ -212,6 +231,12 @@ export const LandingPages = () => {
           確認できます。
         </GameDescriptionSentence>
       </ThirdWrapper>
+      <FourthWrapper>
+        <RankingDescriptionSentence>
+          全世界のハンターと競走して、正規表現マスターになろう！
+        </RankingDescriptionSentence>
+        <FourthRaknkingImageCover src={RaknkingImage} alt="ranking" />
+      </FourthWrapper>
       <Footer />
       {
         state.isOpenDialog && state.modalType === "login" &&
