@@ -6,7 +6,6 @@ import { DescriptionWrapper } from '../shared_style.js';
 
 const GameDescriptionWrapper = styled(DescriptionWrapper)`
   text-align: center;
-  margin-bottom: 16px;
 `;
 
 const GameDescriptionSentenceWrapper = styled(DescriptionWrapper)`
@@ -19,13 +18,12 @@ const GameDescriptionSentenceWrapper = styled(DescriptionWrapper)`
   line-height: 36px;
 `;
 
-export const GameDescriptionSentence = () => {
+export const GameDescriptionSentence = ({children}) => {
   return (
     <>
       <GameDescriptionWrapper>
         <GameDescriptionSentenceWrapper>
-          Regex Huntingは、凶悪なモンスターを倒しながら<br/>
-          正規表現が学べるゲーム型学習サービスです。
+          {children}
         </GameDescriptionSentenceWrapper>
       </GameDescriptionWrapper>
     </>

@@ -7,6 +7,7 @@ import MainTitleImage from '../images/main_title.png';
 import BackGroundImage from '../images/background.png';
 import MainMonsterImage from '../images/intermediate.png';
 import BattleSceneImage from '../images/battle_scene.png';
+import MyPageImage from '../images/my_page_image.png';
 
 // Presentational Components
 import { Header } from '../components/Headers/Header.jsx';
@@ -94,7 +95,22 @@ const SecondBattleSceneImageCover = styled.img`
   height: 400px;
   object-fit: contain;
   margin-top: 40px;
-  margin-bottom: 40px;
+  margin-bottom: 20px;
+`;
+
+// サードのラッパー
+const ThirdWrapper = styled.div`
+  text-align: center;
+  background-color: ${COLORS.SUB};
+  padding-top: 110px;
+`;
+
+// マイページ画像
+const ThirdMyPageImageCover = styled.img`
+  width: 650px;
+  height: 400px;
+  object-fit: contain;
+  margin-bottom: 20px;
 `;
 
 export const LandingPages = () => { 
@@ -184,8 +200,18 @@ export const LandingPages = () => {
           What's Regex Hunting ?
         </SubText>
         <SecondBattleSceneImageCover src={BattleSceneImage} alt="battle-scene"/>
-        <GameDescriptionSentence />
+        <GameDescriptionSentence>
+          Regex Huntingは、凶悪なモンスターを倒しながら<br/>
+          正規表現が学べるゲーム型学習サービスです。
+        </GameDescriptionSentence>
       </SecondWrapper>
+      <ThirdWrapper>
+        <ThirdMyPageImageCover src={MyPageImage} alt="my-page" />
+        <GameDescriptionSentence>
+          アカウント作成すると、学習頻度や正答率の推移を<br/> 
+          確認できます。
+        </GameDescriptionSentence>
+      </ThirdWrapper>
       <Footer />
       {
         state.isOpenDialog && state.modalType === "login" &&
