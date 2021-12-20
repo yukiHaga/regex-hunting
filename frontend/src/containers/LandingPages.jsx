@@ -9,7 +9,7 @@ import MainMonsterImage from '../images/intermediate.png';
 import BattleSceneImage from '../images/battle_scene.png';
 import MyPageImage from '../images/my_page_image.png';
 import RaknkingImage from '../images/ranking_image.png';
-
+import ElementaryGameContentImage from '../images/elementary_game_content.png';
 
 // Presentational Components
 import { Header } from '../components/Headers/Header.jsx';
@@ -23,6 +23,7 @@ import { SessionFlashMessage } from '../components/FlashMessages/SessionFlashMes
 import { GameDescriptionSentence } from '../components/Sentences/GameDescriptionSentence.jsx';
 import { RankingDescriptionSentence } from '../components/Sentences/RankingDescriptionSentence.jsx';
 import { GameStartDescriptionSentence } from '../components/Sentences/GameStartDescriptionSentence.jsx';
+import { GameContent } from '../components/GameContents/GameContent.jsx';
 
 // Contextオブジェクト
 import { UserContext } from "../context/UserProvider.js";
@@ -140,6 +141,12 @@ const FifthWrapper = styled.div`
   padding-top: 100px;
 `;
 
+// ゲームコンテンツのラッパー
+const GameContentWrapper = styled.div`
+  display: flex;
+  justify-content: space-evenly;
+`
+
 export const LandingPages = () => { 
 
   // モーダルに関するstateの初期値
@@ -249,6 +256,11 @@ export const LandingPages = () => {
         <GameStartDescriptionSentence>
           3種類の難易度のゲームをクリアして、正規表現を極めよう！
         </GameStartDescriptionSentence>
+        <GameContentWrapper> 
+          <GameContent difficulty-level: '初級' src={ElementaryGameContentImage} />
+          <GameContent difficulty-level: '中級' src={ElementaryGameContentImage} />
+          <GameContent difficulty-level: '上級' src={ElementaryGameContentImage} />
+        </GameContentWrapper>
       </FifthWrapper>
       <Footer />
       {
