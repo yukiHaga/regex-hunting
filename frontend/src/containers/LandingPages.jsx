@@ -10,6 +10,7 @@ import BattleSceneImage from '../images/battle_scene.png';
 import MyPageImage from '../images/my_page_image.png';
 import RaknkingImage from '../images/ranking_image.png';
 import ElementaryGameContentImage from '../images/elementary_game_content.png';
+import IntermediateGameContentImage from '../images/intermediate_game_content.png';
 
 // Presentational Components
 import { Header } from '../components/Headers/Header.jsx';
@@ -131,21 +132,22 @@ const FourthRaknkingImageCover = styled.img`
   height: 400px;
   object-fit: contain;
   margin-top: 40px;
-  margin-bottom: 20px;
 `;
 
 // フィフスのラッパー
 const FifthWrapper = styled.div`
   text-align: center;
   background-color: ${COLORS.SUB};
-  padding-top: 100px;
+  padding-top: 140px;
+  padding-bottom: 150px;
 `;
 
 // ゲームコンテンツのラッパー
 const GameContentsWrapper = styled.div`
+  padding-top: 80px;
   display: flex;
   justify-content: space-evenly;
-`
+`;
 
 export const LandingPages = () => { 
 
@@ -257,9 +259,9 @@ export const LandingPages = () => {
           3種類の難易度のゲームをクリアして、正規表現を極めよう！
         </GameStartDescriptionSentence>
         <GameContentsWrapper> 
-          <GameContent difficulty-level: '初級' src={ElementaryGameContentImage} />
-          <GameContent difficulty-level: '中級' src={ElementaryGameContentImage} />
-          <GameContent difficulty-level: '上級' src={ElementaryGameContentImage} />
+          <GameContent difficulty='初級' image={ElementaryGameContentImage} />
+          <GameContent difficulty='中級' image={IntermediateGameContentImage} />
+          <GameContent difficulty='上級' image={IntermediateGameContentImage} />
         </GameContentsWrapper>
       </FifthWrapper>
       <Footer />

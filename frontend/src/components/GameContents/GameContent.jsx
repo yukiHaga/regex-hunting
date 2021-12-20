@@ -7,6 +7,7 @@ import { COLORS } from '../../style_constants.js';
 const GameContentWrapper = styled.div`
   background-color: ${COLORS.WHITE};
   width: 350px;
+  height: 386px;
 `;
 
 const GameContentTitleWrapper = styled.div`
@@ -19,6 +20,7 @@ const GameContentTitleWrapper = styled.div`
   line-height: 36px;
   color: ${COLORS.BLACK};
   text-align: center;
+  background-color: ${COLORS.SUB};
 `;
 
 const GameContentDescriptionWrapper = styled.div`
@@ -35,85 +37,65 @@ const GameContentImageWrapper = styled.img`
   border: 2px solid ${COLORS.BLACK};
 `;
 
-// GameContentMainWrapper
+const GameContentMainWrapper = styled.div`
+  test-align: center;
+  width: 350px;
+  height: 350px;
+  padding-top: 10px;
+`;
 
-// GameContentSentenceWrapper
+const GameContentSentenceWrapper = styled.div`
+  width: 300px;
+  display: inline-block;
+  text-align: left;
+  font-family: YuGothic;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 27px;
+  color: ${COLORS.BLACK};
+`;
 
 // GameContentStartWrapper
 
 // LPページの場合、onClickLinkはモーダル管理のstateを更新する関数
 // ログインしている場合、onClickLinkは何もない。
-export const Header = ({onClickLink}) => {
+export const GameContent = ({difficulty, image}) => {
 
-  // navigate
-  let navigate = useNavigate();
-
-  // useContext
-  const {
-    requestUserState: { sessionState, userState }, 
-    dispatch, 
-    requestUserActionTyps
-  } = useContext(UserContext);
-
-  // ログアウトを管理する関数
-  const handleLogout = () => {
-    dispatch({ type: requestUserActionTyps.REQUEST });
-    deleteUserSession().then((data) => {
-      dispatch({
-        type: requestUserActionTyps.REQUEST_SUCCESS,
-        payload: {
-          session: data.session,
-          user: data.user,
-        }
-      });
-    }).then(() => 
-      navigate('/?user=logout', { state: { display: true, success: "ログアウトしました。"}})
-    ).catch((e) => {
-      if(e.response.status === HTTP_STATUS_CODE.NOT_FOUND){
-        dispatch({
-          type: requestUserActionTyps.REQUEST_FAILURE,
-          payload: {
-            errors: e.response.data.errors
-          }
-        });
-      } else {
-        throw e;
-      }
-    });
+  const difficultySentence = (difficulty) => {
+    let sentence;
+    switch (difficulty){
+      case '初級':
+        sentence = '基礎的なメタ文字をマスターして、スクータムの群れを倒そう！'
+        break;
+      case '中級':
+        sentence = '複数の文字列を表す正規表現をマスターして、カスアリウスの群れを倒そう！'
+        break;
+      case '上級':
+        sentence = 'パスワードの正規表現をマスターして、オルファ・ラパクスを倒そう！'
+        break;
+      default:
+        sentence = 'エラーが発生しています。'
+        break;
+    }
+    return sentence;
   };
-
 
   return (
     <>
-      <HeaderWrapper>
-        <HeaderTitleLink to={`/`}>
-          <HeaderTitleImage src={TitleImage} alt="main logo" />  
-        </HeaderTitleLink>
-        <HeaderNav>
-          <HeaderNavLink to={`/rankings`}>
-            ランキング
-          </HeaderNavLink>
-          {
-            sessionState === false && 
-              <>
-                <HeaderNavFakeLink onClick={() => onClickLink("login")}>
-                  ログイン
-                </HeaderNavFakeLink>
-                <HeaderNavFakeLink onClick={() => onClickLink("signUp")}>
-                  無料会員登録
-                </HeaderNavFakeLink>
-              </>
-          }
-          { 
-            sessionState && userState && 
-              <>
-                <HeaderNavFakeLink onClick={handleLogout}>
-                  ログアウト
-                </HeaderNavFakeLink>
-              </>
-          }
-        </HeaderNav>
-      </HeaderWrapper>
+      <GameContentWrapper>
+        <GameContentTitleWrapper>
+          {`${difficulty}編`}
+        </GameContentTitleWrapper>
+        <GameContentDescriptionWrapper>
+          <GameContentImageWrapper src={image} />
+          <GameContentMainWrapper>
+            <GameContentSentenceWrapper>
+              {(difficultySentence(difficulty))}
+            </GameContentSentenceWrapper>
+          </GameContentMainWrapper>
+        </GameContentDescriptionWrapper>
+      </GameContentWrapper>
     </>
   );
 };
