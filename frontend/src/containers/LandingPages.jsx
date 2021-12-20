@@ -6,11 +6,12 @@ import styled from 'styled-components';
 import MainTitleImage from '../images/main_title.png';
 import BackGroundImage from '../images/background.png';
 import MainMonsterImage from '../images/intermediate.png';
+import BattleSceneImage from '../images/battle_scene.png';
 
 // Presentational Components
 import { Header } from '../components/Headers/Header.jsx';
 import { FakeHeader } from '../components/Headers/FakeHeader.jsx';
-import { SubTitle } from '../components/SubTitle.jsx';
+import { SubText } from '../components/SubText.jsx';
 import { StartButton } from '../components/Buttons/StartButton.jsx'
 import { Footer } from '../components/Footer.jsx';
 import { LoginDialog } from '../components/Dialogs/LoginDialog.jsx';
@@ -25,6 +26,9 @@ import { checkLoginStatus } from '../apis/checkLoginStatus.js';
 
 // HTTP_STATUS_CODE
 import { HTTP_STATUS_CODE } from '../constants';
+
+// Colors
+import { COLORS } from '../style_constants.js';
 
 // メインのラッパー
 const MainWrapper = styled.div`
@@ -74,6 +78,12 @@ const MainMonsterImageCover = styled.img`
 // フラッシュメッセージでレイアウトが変化しないためのブロック要素
 const FakeBlock = styled.div`
   height: 56px;
+`;
+
+// メインのラッパー
+const SecondWrapper = styled.div`
+  text-align: center;
+  background-color: ${COLORS.SUB};
 `;
 
 export const LandingPages = () => { 
@@ -153,9 +163,11 @@ export const LandingPages = () => {
         <Filter />
         <MainMonsterImageCover src={MainMonsterImage} alt="main-monster" />
         <BackGroundImageCover src={BackGroundImage} alt="back-ground"/> 
-        <SubTitle />
+        <SubText />
         <StartButton />
       </MainWrapper>
+      <SecondWrapper>
+      </SecondWrapper>
       <Footer />
       {
         state.isOpenDialog && state.modalType === "login" &&

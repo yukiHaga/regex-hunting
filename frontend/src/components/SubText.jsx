@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { COLORS } from '../style_constants';
 
-const SubTitleWrapper = styled.div`
+const SubTextWrapper = styled.div`
   width: 624px;
   height: 72px;
   font-family: YuGothic;
@@ -14,7 +14,7 @@ const SubTitleWrapper = styled.div`
   margin: 0 auto;
 `;
 
-export const SubTitle = () => {
+export const SubText = () => {
   return (
     <>
       <SubTitleWrapper>
