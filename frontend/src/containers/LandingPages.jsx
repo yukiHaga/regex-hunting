@@ -233,7 +233,7 @@ export const LandingPages = () => {
       </ThirdWrapper>
       <FourthWrapper>
         <RankingDescriptionSentence>
-          全世界のハンターと競走して、正規表現マスターになろう！
+          全世界のハンターと競走して、正規表現を極めよう！
         </RankingDescriptionSentence>
         <FourthRaknkingImageCover src={RaknkingImage} alt="ranking" />
       </FourthWrapper>
