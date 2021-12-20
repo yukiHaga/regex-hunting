@@ -95,7 +95,7 @@ const SecondBattleSceneImageCover = styled.img`
   height: 400px;
   object-fit: contain;
   margin-top: 40px;
-  margin-bottom: 40px;
+  margin-bottom: 20px;
 `;
 
 // サードのラッパー
@@ -110,7 +110,7 @@ const ThirdMyPageImageCover = styled.img`
   width: 650px;
   height: 400px;
   object-fit: contain;
-  margin-bottom: 40px;
+  margin-bottom: 20px;
 `;
 
 export const LandingPages = () => { 
