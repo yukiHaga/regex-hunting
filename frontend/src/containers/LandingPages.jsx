@@ -247,8 +247,7 @@ export const LandingPages = () => {
       </FourthWrapper>
       <FifthWrapper>
         <GameStartDescriptionSentence>
-          3種類の難易度のゲームをクリアして、<br/>
-          正規表現を極めよう！
+          3種類の難易度のゲームをクリアして、正規表現を極めよう！
         </GameStartDescriptionSentence>
       </FifthWrapper>
       <Footer />
