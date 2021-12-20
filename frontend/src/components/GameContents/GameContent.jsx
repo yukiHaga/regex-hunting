@@ -1,6 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
 
+import { GameStartButton } from '../Buttons/GameStartButton.jsx';
+
 // Colors
 import { COLORS } from '../../style_constants.js';
 
@@ -56,7 +58,11 @@ const GameContentSentenceWrapper = styled.div`
   color: ${COLORS.BLACK};
 `;
 
-// GameContentStartWrapper
+const GameContentStartWrapper = styled.div`
+  display: flex;
+  justify-content: center;
+  padding-top: 30px;
+`;
 
 // LPページの場合、onClickLinkはモーダル管理のstateを更新する関数
 // ログインしている場合、onClickLinkは何もない。
@@ -66,19 +72,38 @@ export const GameContent = ({difficulty, image}) => {
     let sentence;
     switch (difficulty){
       case '初級':
-        sentence = '基礎的なメタ文字をマスターして、スクータムの群れを倒そう！'
+        sentence = '基礎的なメタ文字をマスターして、スクータムの群れを倒そう！';
         break;
       case '中級':
-        sentence = '複数の文字列を表す正規表現をマスターして、カスアリウスの群れを倒そう！'
+        sentence = '文字列を表す正規表現をマスターして、カスアリウスの群れを倒そう！';
         break;
       case '上級':
-        sentence = 'パスワードの正規表現をマスターして、オルファ・ラパクスを倒そう！'
+        sentence = 'パスワードの正規表現をマスターして、オルファ・ラパクスを倒そう！';
         break;
       default:
-        sentence = 'エラーが発生しています。'
+        sentence = 'エラーが発生しています。';
         break;
-    }
+    };
     return sentence;
+  };
+
+  const conversionDifficulty = (difficulty) => {
+    let englishDifficulty;
+    switch (difficulty){
+      case '初級':
+        englishDifficulty = 'elementary';
+        break;
+      case '中級':
+        englishDifficulty = 'intermediate';
+        break;
+      case '上級':
+        englishDifficulty = 'advanced'
+        break;
+      default:
+        englishDifficulty = 'error'
+        break;
+    };
+    return englishDifficulty;
   };
 
   return (
@@ -93,6 +118,9 @@ export const GameContent = ({difficulty, image}) => {
             <GameContentSentenceWrapper>
               {(difficultySentence(difficulty))}
             </GameContentSentenceWrapper>
+            <GameContentStartWrapper>
+              <GameStartButton difficulty={(conversionDifficulty(difficulty))}/>
+            </GameContentStartWrapper>
           </GameContentMainWrapper>
         </GameContentDescriptionWrapper>
       </GameContentWrapper>
