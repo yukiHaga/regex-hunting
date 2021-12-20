@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { COLORS } from '../style_constants';
 
-const SubTitleWrapper = styled.div`
+const SubTextWrapper = styled.div`
   width: 624px;
   height: 72px;
   font-family: YuGothic;
@@ -10,16 +10,16 @@ const SubTitleWrapper = styled.div`
   font-weight: bold;
   font-size: 40px;
   line-height: 72px;
-  color: ${COLORS.SUB};
+  color: ${(props) => props.color || COLORS.BLACK};
   margin: 0 auto;
 `;
 
-export const SubTitle = () => {
+export const SubText = ({color, children}) => {
   return (
     <>
-      <SubTitleWrapper>
-        正規表現を学ぶ狩りに出よう
-      </SubTitleWrapper>
+      <SubTextWrapper color={color}>
+        {children}
+      </SubTextWrapper>
     </>
   );
 };
