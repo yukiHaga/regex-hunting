@@ -142,7 +142,7 @@ const FifthWrapper = styled.div`
 `;
 
 // ゲームコンテンツのラッパー
-const GameContentWrapper = styled.div`
+const GameContentsWrapper = styled.div`
   display: flex;
   justify-content: space-evenly;
 `
@@ -256,11 +256,11 @@ export const LandingPages = () => {
         <GameStartDescriptionSentence>
           3種類の難易度のゲームをクリアして、正規表現を極めよう！
         </GameStartDescriptionSentence>
-        <GameContentWrapper> 
+        <GameContentsWrapper> 
           <GameContent difficulty-level: '初級' src={ElementaryGameContentImage} />
           <GameContent difficulty-level: '中級' src={ElementaryGameContentImage} />
           <GameContent difficulty-level: '上級' src={ElementaryGameContentImage} />
-        </GameContentWrapper>
+        </GameContentsWrapper>
       </FifthWrapper>
       <Footer />
       {
