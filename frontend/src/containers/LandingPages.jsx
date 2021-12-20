@@ -17,6 +17,7 @@ import { Footer } from '../components/Footer.jsx';
 import { LoginDialog } from '../components/Dialogs/LoginDialog.jsx';
 import { SignUpDialog } from '../components/Dialogs/SignUpDialog.jsx';
 import { SessionFlashMessage } from '../components/FlashMessages/SessionFlashMessage.jsx';
+import { GameDescriptionSentence } from '../components/Sentences/GameDescriptionSentence.jsx';
 
 // Contextオブジェクト
 import { UserContext } from "../context/UserProvider.js";
@@ -93,6 +94,7 @@ const SecondBattleSceneImageCover = styled.img`
   height: 400px;
   object-fit: contain;
   margin-top: 40px;
+  margin-bottom: 40px;
 `;
 
 export const LandingPages = () => { 
@@ -182,6 +184,7 @@ export const LandingPages = () => {
           What's Regex Hunting ?
         </SubText>
         <SecondBattleSceneImageCover src={BattleSceneImage} alt="battle-scene"/>
+        <GameDescriptionSentence />
       </SecondWrapper>
       <Footer />
       {
