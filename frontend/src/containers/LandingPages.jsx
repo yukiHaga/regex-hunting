@@ -80,10 +80,19 @@ const FakeBlock = styled.div`
   height: 56px;
 `;
 
-// メインのラッパー
+// セカンドのラッパー
 const SecondWrapper = styled.div`
   text-align: center;
   background-color: ${COLORS.SUB};
+  padding-top: 80px;
+`;
+
+// 戦闘画像
+const SecondBattleSceneImageCover = styled.img`
+  width: 650px;
+  height: 400px;
+  object-fit: contain;
+  margin-top: 40px;
 `;
 
 export const LandingPages = () => { 
@@ -163,10 +172,16 @@ export const LandingPages = () => {
         <Filter />
         <MainMonsterImageCover src={MainMonsterImage} alt="main-monster" />
         <BackGroundImageCover src={BackGroundImage} alt="back-ground"/> 
-        <SubText />
+        <SubText color={COLORS.SUB}>
+          正規表現を学ぶ狩りに出よう
+        </SubText>
         <StartButton />
       </MainWrapper>
       <SecondWrapper>
+        <SubText >
+          What's Regex Hunting ?
+        </SubText>
+        <SecondBattleSceneImageCover src={BattleSceneImage} alt="battle-scene"/>
       </SecondWrapper>
       <Footer />
       {
