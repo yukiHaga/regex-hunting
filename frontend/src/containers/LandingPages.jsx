@@ -22,6 +22,7 @@ import { SignUpDialog } from '../components/Dialogs/SignUpDialog.jsx';
 import { SessionFlashMessage } from '../components/FlashMessages/SessionFlashMessage.jsx';
 import { GameDescriptionSentence } from '../components/Sentences/GameDescriptionSentence.jsx';
 import { RankingDescriptionSentence } from '../components/Sentences/RankingDescriptionSentence.jsx';
+import { GameStartDescriptionSentence } from '../components/Sentences/GameStartDescriptionSentence.jsx';
 
 // Contextオブジェクト
 import { UserContext } from "../context/UserProvider.js";
@@ -132,6 +133,13 @@ const FourthRaknkingImageCover = styled.img`
   margin-bottom: 20px;
 `;
 
+// フィフスのラッパー
+const FifthWrapper = styled.div`
+  text-align: center;
+  background-color: ${COLORS.SUB};
+  padding-top: 100px;
+`;
+
 export const LandingPages = () => { 
 
   // モーダルに関するstateの初期値
@@ -233,10 +241,16 @@ export const LandingPages = () => {
       </ThirdWrapper>
       <FourthWrapper>
         <RankingDescriptionSentence>
-          全世界のハンターと競走して、正規表現を極めよう！
+          全世界のハンターと競争して、最強の正規表現ハンターを目指そう！
         </RankingDescriptionSentence>
         <FourthRaknkingImageCover src={RaknkingImage} alt="ranking" />
       </FourthWrapper>
+      <FifthWrapper>
+        <GameStartDescriptionSentence>
+          3種類の難易度のゲームをクリアして、<br/>
+          正規表現を極めよう！
+        </GameStartDescriptionSentence>
+      </FifthWrapper>
       <Footer />
       {
         state.isOpenDialog && state.modalType === "login" &&
