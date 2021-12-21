@@ -25,6 +25,7 @@ import { GameDescriptionSentence } from '../components/Sentences/GameDescription
 import { RankingDescriptionSentence } from '../components/Sentences/RankingDescriptionSentence.jsx';
 import { GameStartDescriptionSentence } from '../components/Sentences/GameStartDescriptionSentence.jsx';
 import { GameContent } from '../components/GameContents/GameContent.jsx';
+import { BoundDescriptionSentence } from '../components/Sentences/BoundDescriptionSentence.jsx';
 
 // Contextオブジェクト
 import { UserContext } from "../context/UserProvider.js";
@@ -235,6 +236,7 @@ export const LandingPages = () => {
         <Scroll to="gameContent" smooth={true}>
           <StartButton />
         </Scroll>
+        <BoundDescriptionSentence />
       </MainWrapper>
       <SecondWrapper>
         <SubText >
