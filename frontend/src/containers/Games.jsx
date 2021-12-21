@@ -1,5 +1,5 @@
 import React, { Fragment, useEffect, useContext } from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useParams, useLocation, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 
 // Image
@@ -105,6 +105,8 @@ export const Games = () => {
     requestUserActionTyps
   } = useContext(UserContext);
 
+  const { difficulty } = useParams();
+
   // location
   const location = useLocation();
 
@@ -158,9 +160,14 @@ export const Games = () => {
             </SlideWrapper>
             <BattleBlockWrapper>
               <MonsterBlockWrapper>
-                <ElementaryMonster />
-                <ElementaryMonster />
-                <ElementaryMonster />
+                {
+                  difficulty === 'elementary' && 
+                    <>
+                      <ElementaryMonster />
+                      <ElementaryMonster />
+                      <ElementaryMonster />
+                    </>
+                }
               </MonsterBlockWrapper>
               <QuestionBlockWrapper>
               </QuestionBlockWrapper>

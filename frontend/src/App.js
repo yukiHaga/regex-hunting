@@ -61,7 +61,7 @@ function App() {
 
             {/* ゲームページ */}
             <Route
-              exact path="/games/:difficulty_level/start"
+              exact path="/games/:difficulty/start"
               element={<Games />}
             />
 
