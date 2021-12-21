@@ -1,5 +1,9 @@
 import React, { Fragment, useEffect, useContext } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
+import styled from 'styled-components';
+
+// Image
+import BackGroundImage from '../images/background.png';
 
 // Presentational Components
 import { Header } from '../components/Headers/Header.jsx';
@@ -13,6 +17,20 @@ import { checkLoginStatus } from '../apis/checkLoginStatus.js';
 
 // HTTP_STATUS_CODE
 import { HTTP_STATUS_CODE } from '../constants';
+
+// MainContentのラッパー
+const MainContentWrapper = styled.div`
+`;
+
+// 背景画像
+const BackGroundImageCover = styled.img`
+  width: 1790px;
+  height: 734px;
+  position: absolute;
+  top: 55px;
+  left: -350px;
+  z-index: -4;
+`;
 
 export const Games = () => {
 
@@ -67,7 +85,9 @@ export const Games = () => {
     <>
       <Header />
       <FakeHeader />
-      ゲーム画面
+      <MainContentWrapper>
+        <BackGroundImageCover src={BackGroundImage} />
+      </MainContentWrapper>
     </>
   );
 };
