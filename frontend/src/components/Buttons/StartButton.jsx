@@ -1,6 +1,10 @@
 import React, { Fragment } from 'react'; 
 import styled from 'styled-components';
 
+// Colors
+import { COLORS } from '../../style_constants.js';
+
+// Button
 import { RedRoundButton } from '../shared_style';
 
 const StartButtonWrapper = styled(RedRoundButton)`
@@ -12,7 +16,7 @@ const StartButtonWrapper = styled(RedRoundButton)`
 const StartButtonTextWrapper = styled.div`
   width: 230px;
   height: 58px;
-  color: white;
+  color: ${COLORS.SUB};
   font-family: YuGothic;
   font-style: normal;
   font-size: 36px;
