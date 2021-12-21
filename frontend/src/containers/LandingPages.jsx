@@ -9,7 +9,8 @@ import MainMonsterImage from '../images/intermediate.png';
 import BattleSceneImage from '../images/battle_scene.png';
 import MyPageImage from '../images/my_page_image.png';
 import RaknkingImage from '../images/ranking_image.png';
-
+import ElementaryGameContentImage from '../images/elementary_game_content.png';
+import IntermediateGameContentImage from '../images/intermediate_game_content.png';
 
 // Presentational Components
 import { Header } from '../components/Headers/Header.jsx';
@@ -22,6 +23,9 @@ import { SignUpDialog } from '../components/Dialogs/SignUpDialog.jsx';
 import { SessionFlashMessage } from '../components/FlashMessages/SessionFlashMessage.jsx';
 import { GameDescriptionSentence } from '../components/Sentences/GameDescriptionSentence.jsx';
 import { RankingDescriptionSentence } from '../components/Sentences/RankingDescriptionSentence.jsx';
+import { GameStartDescriptionSentence } from '../components/Sentences/GameStartDescriptionSentence.jsx';
+import { GameContent } from '../components/GameContents/GameContent.jsx';
+import { BoundDescriptionSentence } from '../components/Sentences/BoundDescriptionSentence.jsx';
 
 // Contextオブジェクト
 import { UserContext } from "../context/UserProvider.js";
@@ -34,6 +38,9 @@ import { HTTP_STATUS_CODE } from '../constants';
 
 // Colors
 import { COLORS } from '../style_constants.js';
+
+// react-scroll
+import { Link as Scroll } from 'react-scroll';
 
 // メインのラッパー
 const MainWrapper = styled.div`
@@ -129,7 +136,21 @@ const FourthRaknkingImageCover = styled.img`
   height: 400px;
   object-fit: contain;
   margin-top: 40px;
-  margin-bottom: 20px;
+`;
+
+// フィフスのラッパー
+const FifthWrapper = styled.div`
+  text-align: center;
+  background-color: ${COLORS.SUB};
+  padding-top: 140px;
+  padding-bottom: 150px;
+`;
+
+// ゲームコンテンツのラッパー
+const GameContentsWrapper = styled.div`
+  padding-top: 80px;
+  display: flex;
+  justify-content: space-evenly;
 `;
 
 export const LandingPages = () => { 
@@ -212,10 +233,15 @@ export const LandingPages = () => {
         <SubText color={COLORS.SUB}>
           正規表現を学ぶ狩りに出よう
         </SubText>
-        <StartButton />
+        <Scroll to="gameContent" smooth={true}>
+          <StartButton />
+        </Scroll>
+        <Scroll to="what'sRegex" smooth={true}>
+          <BoundDescriptionSentence />
+        </Scroll>
       </MainWrapper>
-      <SecondWrapper>
-        <SubText >
+      <SecondWrapper id="what'sRegex">
+        <SubText>
           What's Regex Hunting ?
         </SubText>
         <SecondBattleSceneImageCover src={BattleSceneImage} alt="battle-scene"/>
@@ -233,10 +259,20 @@ export const LandingPages = () => {
       </ThirdWrapper>
       <FourthWrapper>
         <RankingDescriptionSentence>
-          全世界のハンターと競走して、正規表現を極めよう！
+          全世界のハンターと競争して、最強の正規表現ハンターを目指そう！
         </RankingDescriptionSentence>
         <FourthRaknkingImageCover src={RaknkingImage} alt="ranking" />
       </FourthWrapper>
+      <FifthWrapper id="gameContent">
+        <GameStartDescriptionSentence>
+          3種類の難易度のゲームをクリアして、正規表現を極めよう！
+        </GameStartDescriptionSentence>
+        <GameContentsWrapper> 
+          <GameContent difficulty='初級' image={ElementaryGameContentImage} />
+          <GameContent difficulty='中級' image={IntermediateGameContentImage} />
+          <GameContent difficulty='上級' image={IntermediateGameContentImage} />
+        </GameContentsWrapper>
+      </FifthWrapper>
       <Footer />
       {
         state.isOpenDialog && state.modalType === "login" &&
