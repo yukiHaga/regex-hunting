@@ -18,7 +18,7 @@ import { checkLoginStatus } from '../apis/checkLoginStatus.js';
 // HTTP_STATUS_CODE
 import { HTTP_STATUS_CODE } from '../constants';
 
-// MainContentのラッパー
+// MainContentWrapperコンポーネント
 const MainContentWrapper = styled.div`
 `;
 
@@ -30,6 +30,38 @@ const BackGroundImageCover = styled.img`
   top: 55px;
   left: -350px;
   z-index: -4;
+`;
+
+// MainGameContentWrapperコンポーネント
+const MainGameContentWrapper = styled.div`
+`;
+
+// GameBlockWrapperコンポーネント
+const GameBlockWrapper = styled.div`
+`;
+
+// CodeBlockWrapperコンポーネント
+const CodeBlockWrapper = styled.div`
+`;
+
+// GageBlockWrapperコンポーネント
+const GageBlockWrapper = styled.div`
+`;
+
+// SlideWrapperコンポーネント
+const SlideWrapper = styled.div`
+`;
+
+// BattleBlockWrapperコンポーネント
+const BattleBlockWrapper = styled.div`
+`;
+
+// MonsterBlockWrapperコンポーネント
+const MonsterBlockWrapper = styled.div`
+`;
+
+// QuestionBlockWrapperコンポーネント
+const QuestionBlockWrapper = styled.div`
 `;
 
 export const Games = () => {
@@ -87,6 +119,22 @@ export const Games = () => {
       <FakeHeader />
       <MainContentWrapper>
         <BackGroundImageCover src={BackGroundImage} />
+        <MainGameContentWrapper>
+          <GameBlockWrapper>
+            <SlideWrapper>
+            </SlideWrapper>
+            <BattleBlockWrapper>
+              <MonsterBlockWrapper>
+              </MonsterBlockWrapper>
+              <QuestionBlockWrapper>
+              </QuestionBlockWrapper>
+            </BattleBlockWrapper>
+          </GameBlockWrapper>
+          <CodeBlockWrapper>
+          </CodeBlockWrapper>
+          <GageBlockWrapper>
+          </GageBlockWrapper>
+        </MainGameContentWrapper>
       </MainContentWrapper>
     </>
   );
