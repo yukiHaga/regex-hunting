@@ -9,6 +9,7 @@ import BackGroundImage from '../images/background.png';
 import { Header } from '../components/Headers/Header.jsx';
 import { FakeHeader } from '../components/Headers/FakeHeader.jsx';
 import { MetaMenuBar } from '../components/Games/MetaMenuBar.jsx';
+import { ElementaryMonster } from '../components/Games/ElementaryMonster.jsx';
 import { Footer } from '../components/Footer.jsx';
 
 // Contextオブジェクト
@@ -51,20 +52,23 @@ const SlideWrapper = styled.div`
 `;
 
 // BattleBlockWrapperコンポーネント
+// background-color: #F6F6DC;  
 const BattleBlockWrapper = styled.div`
   margin-left: 25px;
   height: 498px;
   width: 920px;
-  background-color: #F6F6DC;
 `;
 
 // MonsterBlockWrapperコンポーネント
+// background-color: #666666;
 const MonsterBlockWrapper = styled.div`
   height: 370px;
   width: 900px;
-  background-color: #666666;
   margin: 0 auto;
   margin-top: 10px;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: end;
 `;
 
 // QuestionBlockWrapperコンポーネント
@@ -154,6 +158,9 @@ export const Games = () => {
             </SlideWrapper>
             <BattleBlockWrapper>
               <MonsterBlockWrapper>
+                <ElementaryMonster />
+                <ElementaryMonster />
+                <ElementaryMonster />
               </MonsterBlockWrapper>
               <QuestionBlockWrapper>
               </QuestionBlockWrapper>
