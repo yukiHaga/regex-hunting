@@ -8,6 +8,8 @@ import BackGroundImage from '../images/background.png';
 // Presentational Components
 import { Header } from '../components/Headers/Header.jsx';
 import { FakeHeader } from '../components/Headers/FakeHeader.jsx';
+import { MetaMenuBar } from '../components/Games/MetaMenuBar.jsx';
+import { Footer } from '../components/Footer.jsx';
 
 // Contextオブジェクト
 import { UserContext } from "../context/UserProvider.js";
@@ -20,6 +22,7 @@ import { HTTP_STATUS_CODE } from '../constants';
 
 // MainContentWrapperコンポーネント
 const MainContentWrapper = styled.div`
+  padding-top: 36px;
 `;
 
 // 背景画像
@@ -38,14 +41,9 @@ const MainGameContentWrapper = styled.div`
 
 // GameBlockWrapperコンポーネント
 const GameBlockWrapper = styled.div`
-`;
-
-// CodeBlockWrapperコンポーネント
-const CodeBlockWrapper = styled.div`
-`;
-
-// GageBlockWrapperコンポーネント
-const GageBlockWrapper = styled.div`
+  display: flex;
+  justify-content: start;
+  padding-left: 20px;
 `;
 
 // SlideWrapperコンポーネント
@@ -54,14 +52,44 @@ const SlideWrapper = styled.div`
 
 // BattleBlockWrapperコンポーネント
 const BattleBlockWrapper = styled.div`
+  margin-left: 25px;
+  height: 498px;
+  width: 920px;
+  background-color: #F6F6DC;
 `;
 
 // MonsterBlockWrapperコンポーネント
 const MonsterBlockWrapper = styled.div`
+  height: 370px;
+  width: 900px;
+  background-color: #666666;
+  margin: 0 auto;
+  margin-top: 10px;
 `;
 
 // QuestionBlockWrapperコンポーネント
 const QuestionBlockWrapper = styled.div`
+  height: 108px;
+  width: 900px;
+  background-color: #666666;
+  margin: 0 auto;
+  margin-top: 10px;
+`;
+
+// CodeBlockWrapperコンポーネント
+const CodeBlockWrapper = styled.div`
+  height: 70px;
+  width: 100%;
+  background-color: #666666;
+  margin-top: 13px;
+`;
+
+// GageBlockWrapperコンポーネント
+const GageBlockWrapper = styled.div`
+  height: 50px;
+  width: 100%;
+  background-color: #F6F6DC;
+  margin-top: 13px;
 `;
 
 export const Games = () => {
@@ -122,6 +150,7 @@ export const Games = () => {
         <MainGameContentWrapper>
           <GameBlockWrapper>
             <SlideWrapper>
+              <MetaMenuBar />
             </SlideWrapper>
             <BattleBlockWrapper>
               <MonsterBlockWrapper>
@@ -136,6 +165,7 @@ export const Games = () => {
           </GageBlockWrapper>
         </MainGameContentWrapper>
       </MainContentWrapper>
+      <Footer />
     </>
   );
 };
