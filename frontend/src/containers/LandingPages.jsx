@@ -236,10 +236,12 @@ export const LandingPages = () => {
         <Scroll to="gameContent" smooth={true}>
           <StartButton />
         </Scroll>
-        <BoundDescriptionSentence />
+        <Scroll to="what'sRegex" smooth={true}>
+          <BoundDescriptionSentence />
+        </Scroll>
       </MainWrapper>
-      <SecondWrapper>
-        <SubText >
+      <SecondWrapper id="what'sRegex">
+        <SubText>
           What's Regex Hunting ?
         </SubText>
         <SecondBattleSceneImageCover src={BattleSceneImage} alt="battle-scene"/>
