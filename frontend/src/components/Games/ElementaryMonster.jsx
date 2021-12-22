@@ -18,7 +18,7 @@ const ElementaryMonsterWrapper = styled.img`
 const HpGageWrapper = styled.div`
   width: 160px;
   height: 15px;
-  border: 1px solid ${COLORS.SUB};
+  border: 1px solid ${COLORS.GAGE_GRAY};
   box-sizing: border-box;
   border-radius: 3px;
   background-color: ${COLORS.LIGHT_BLUE};
