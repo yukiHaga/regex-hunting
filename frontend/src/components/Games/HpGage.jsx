@@ -4,14 +4,16 @@ import styled from 'styled-components';
 // Colors
 import { COLORS } from '../../style_constants.js';
 
-const TimeGageWrapper = styled.div`
+const HpGageWrapper = styled.div`
   background-color: ${COLORS.LIGHT_BLACK};
-  border-radius: 3px 3px 0 0;
+  border-radius: 0 0 3px 3px;
   width: 100%;
-  height: 36px;
+  height: 31px;
   display: flex;
   box-sizing: border-box;
-  border: 5px solid;
+  border-left: 5px solid;
+  border-right: 5px solid;
+  border-bottom: 5px solid;
   border-color: ${COLORS.GAGE_GRAY};
 `;
 
@@ -29,23 +31,23 @@ const TypeWrapper = styled.div`
 
 const GageWrapper = styled.div`
   height: 100%;
-  width: 60%;
-  background-color: ${COLORS.YELLOW};
+  width: 80%;
+  background-color: ${COLORS.LIGHT_BLUE};
   box-sizing: border-box;
   border: none;
   outline: none;
 `;
 
-export const TimeGage = () => {
+export const HpGage = () => {
   return (
     <>
-      <TimeGageWrapper>
+      <HpGageWrapper>
         <TypeWrapper>
-          TIME
+          HP
         </TypeWrapper>
         <GageWrapper>
         </GageWrapper>
-      </TimeGageWrapper>
+      </HpGageWrapper>
     </>
   );
 };

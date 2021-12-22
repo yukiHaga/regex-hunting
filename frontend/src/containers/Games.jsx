@@ -13,6 +13,7 @@ import { ElementaryMonster } from '../components/Games/ElementaryMonster.jsx';
 import { QuestionBlock } from '../components/Games/QuestionBlock.jsx';
 import { CodeBlock } from '../components/Games/CodeBlock.jsx';
 import { TimeGage } from '../components/Games/TimeGage.jsx';
+import { HpGage } from '../components/Games/HpGage.jsx';
 import { Footer } from '../components/Footer.jsx';
 
 
@@ -92,7 +93,6 @@ const CodeBlockWrapper = styled.div`
 const GageBlockWrapper = styled.div`
   height: 66px;
   width: 100%;
-  background-color: #F6F6DC;
   margin-top: 13px;
 `;
 
@@ -179,6 +179,7 @@ export const Games = () => {
           </CodeBlockWrapper>
           <GageBlockWrapper>
             <TimeGage />
+            <HpGage />
           </GageBlockWrapper>
         </MainGameContentWrapper>
       </MainContentWrapper>
