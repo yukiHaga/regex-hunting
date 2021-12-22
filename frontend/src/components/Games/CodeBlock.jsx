@@ -22,8 +22,8 @@ const AnchorWrapper = styled.div`
   font-family: YuGothic;
   font-style: normal;
   font-weight: 500;
-  margin-left: 10px;
-  margin-right: 10px;
+  margin-left: 15px;
+  margin-right: 15px;
 `;
 
 const CodeBlockTextWrapper = styled.div`
