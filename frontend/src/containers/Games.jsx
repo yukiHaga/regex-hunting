@@ -12,7 +12,9 @@ import { MetaMenuBar } from '../components/Games/MetaMenuBar.jsx';
 import { ElementaryMonster } from '../components/Games/ElementaryMonster.jsx';
 import { QuestionBlock } from '../components/Games/QuestionBlock.jsx';
 import { CodeBlock } from '../components/Games/CodeBlock.jsx';
+import { TimeGage } from '../components/Games/TimeGage.jsx';
 import { Footer } from '../components/Footer.jsx';
+
 
 // Contextオブジェクト
 import { UserContext } from "../context/UserProvider.js";
@@ -176,6 +178,7 @@ export const Games = () => {
             <CodeBlock />
           </CodeBlockWrapper>
           <GageBlockWrapper>
+            <TimeGage />
           </GageBlockWrapper>
         </MainGameContentWrapper>
       </MainContentWrapper>

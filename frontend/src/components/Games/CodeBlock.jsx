@@ -26,18 +26,6 @@ const AnchorWrapper = styled.div`
   margin-right: 15px;
 `;
 
-/*
-const CodeBlockTextWrapper = styled.div`
-  height: 53px;
-  font-size: 23px;
-  line-height: 53px;
-  color: ${COLORS.WHITE};
-  font-family: YuGothic;
-  font-style: normal;
-  font-weight: 500;
-`;
-*/
-
 const CodeBlockInput = styled.input`
   height: 51px;
   width: 700px;
