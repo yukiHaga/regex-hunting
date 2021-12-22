@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 
 // Colors
@@ -26,6 +26,7 @@ const AnchorWrapper = styled.div`
   margin-right: 15px;
 `;
 
+/*
 const CodeBlockTextWrapper = styled.div`
   height: 53px;
   font-size: 23px;
@@ -35,29 +36,34 @@ const CodeBlockTextWrapper = styled.div`
   font-style: normal;
   font-weight: 500;
 `;
+*/
+
+const CodeBlockInput = styled.input`
+  height: 51px;
+  width: 700px;
+  font-size: 23px;
+  line-height: 51px;
+  background-color: ${COLORS.LIGHT_BLACK};
+  color: ${COLORS.WHITE};
+  font-family: YuGothic;
+  font-style: normal;
+  font-weight: 500;
+  outline: none;
+  border: none;
+  text-align: center;
+`;
 
 export const CodeBlock = () => {
 
   const [state, setState] = useState("");
 
-  const keyFunction = useCallback((e) => {
-    setState( prevState => {
-      const newState = prevState + e.key; 
-      return newState;
-    } );
-  }, []);
+  const handleInput = (e) => {
+    setState(e.target.value);
+  }
 
-  // useEffectの第一引数の副作用関数は、コンポーネントの初回レンダリング時、
-  // および、keyFunctionが変化したときに実行される
-  // クリーンアップ関数はコンポーネントがアンマウント, 副作用関数が再実行
-  // された時に実行される。クリーンアップ関数を副作用関数の戻り値として返すことで、
-  // コンポーネントがレンダリングされるたびにイベントの登録が重複するのを防ぐことができる
   useEffect(() => {
-    document.addEventListener("keydown", keyFunction, false);
-    return () => {
-      document.removeEventListener("keydown", keyFunction, false);
-    }
-  }, [keyFunction]);
+    document.getElementById('code-block').focus();
+  }, []);
 
   return (
     <>
@@ -65,9 +71,12 @@ export const CodeBlock = () => {
         <AnchorWrapper>
           /
         </AnchorWrapper>
-        <CodeBlockTextWrapper>
-          {state} 
-        </CodeBlockTextWrapper>
+        <CodeBlockInput 
+          type='text' 
+          id='code-block' 
+          value={state} 
+          onChange={(e) => handleInput(e)} 
+        />
         <AnchorWrapper>
           /g
         </AnchorWrapper>
