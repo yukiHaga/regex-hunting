@@ -55,15 +55,6 @@ const TargetSentenceWrapper = styled.div`
   font-weight: 500;
 `;
 
-/*
-const QuestionSentenceWrapper = styled.div`
-  background-color: ${COLORS.OCHER};
-  border-radius: 3px;
-  width: 795px;
-  height: 54px;
-`;
-*/
-
 export const QuestionBlock = () => {
   return (
     <>

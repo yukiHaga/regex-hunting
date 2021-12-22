@@ -10,8 +10,9 @@ import { Header } from '../components/Headers/Header.jsx';
 import { FakeHeader } from '../components/Headers/FakeHeader.jsx';
 import { MetaMenuBar } from '../components/Games/MetaMenuBar.jsx';
 import { ElementaryMonster } from '../components/Games/ElementaryMonster.jsx';
-import { Footer } from '../components/Footer.jsx';
 import { QuestionBlock } from '../components/Games/QuestionBlock.jsx';
+import { CodeBlock } from '../components/Games/CodeBlock.jsx';
+import { Footer } from '../components/Footer.jsx';
 
 // Contextオブジェクト
 import { UserContext } from "../context/UserProvider.js";
@@ -45,7 +46,7 @@ const MainGameContentWrapper = styled.div`
 const GameBlockWrapper = styled.div`
   display: flex;
   justify-content: start;
-  padding-left: 30px;
+  padding-left: 33px;
 `;
 
 // SlideWrapperコンポーネント
@@ -57,14 +58,14 @@ const SlideWrapper = styled.div`
 const BattleBlockWrapper = styled.div`
   height: 498px;
   width: 920px;
-  margin-left: 5px;
+  margin-left: 7px;
 `;
 
 // MonsterBlockWrapperコンポーネント
 const MonsterBlockWrapper = styled.div`
   height: 370px;
   width: 900px;
-  margin-left: 40px;
+  margin-left: 43px;
   margin-top: 10px;
   display: flex;
   justify-content: space-evenly;
@@ -81,15 +82,13 @@ const QuestionBlockWrapper = styled.div`
 
 // CodeBlockWrapperコンポーネント
 const CodeBlockWrapper = styled.div`
-  height: 70px;
-  width: 100%;
-  background-color: #666666;
+  height: 53px;
   margin-top: 13px;
 `;
 
 // GageBlockWrapperコンポーネント
 const GageBlockWrapper = styled.div`
-  height: 50px;
+  height: 66px;
   width: 100%;
   background-color: #F6F6DC;
   margin-top: 13px;
@@ -174,6 +173,7 @@ export const Games = () => {
             </BattleBlockWrapper>
           </GameBlockWrapper>
           <CodeBlockWrapper>
+            <CodeBlock />
           </CodeBlockWrapper>
           <GageBlockWrapper>
           </GageBlockWrapper>

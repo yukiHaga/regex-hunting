@@ -13,6 +13,7 @@ export const COLORS = {
   PINK: '#F7ADC3',
   LIGHT_BLUE: '#66BBFF',
   GRAY: '#C4C4C4',
+  LIGHT_BLACK: '#666666',
   OCHER: '#D3AA6B'
 }
 
