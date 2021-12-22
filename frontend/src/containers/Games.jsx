@@ -11,6 +11,7 @@ import { FakeHeader } from '../components/Headers/FakeHeader.jsx';
 import { MetaMenuBar } from '../components/Games/MetaMenuBar.jsx';
 import { ElementaryMonster } from '../components/Games/ElementaryMonster.jsx';
 import { Footer } from '../components/Footer.jsx';
+import { QuestionBlock } from '../components/Games/QuestionBlock.jsx';
 
 // Contextオブジェクト
 import { UserContext } from "../context/UserProvider.js";
@@ -44,7 +45,7 @@ const MainGameContentWrapper = styled.div`
 const GameBlockWrapper = styled.div`
   display: flex;
   justify-content: start;
-  padding-left: 20px;
+  padding-left: 30px;
 `;
 
 // SlideWrapperコンポーネント
@@ -54,17 +55,16 @@ const SlideWrapper = styled.div`
 // BattleBlockWrapperコンポーネント
 // background-color: #F6F6DC;  
 const BattleBlockWrapper = styled.div`
-  margin-left: 25px;
   height: 498px;
   width: 920px;
+  margin-left: 5px;
 `;
 
 // MonsterBlockWrapperコンポーネント
-// background-color: #666666;
 const MonsterBlockWrapper = styled.div`
   height: 370px;
   width: 900px;
-  margin: 0 auto;
+  margin-left: 40px;
   margin-top: 10px;
   display: flex;
   justify-content: space-evenly;
@@ -73,11 +73,10 @@ const MonsterBlockWrapper = styled.div`
 
 // QuestionBlockWrapperコンポーネント
 const QuestionBlockWrapper = styled.div`
-  height: 108px;
-  width: 900px;
-  background-color: #666666;
+  height: 104px;
+  width: 860px;
   margin: 0 auto;
-  margin-top: 10px;
+  margin-top: 13px;
 `;
 
 // CodeBlockWrapperコンポーネント
@@ -170,6 +169,7 @@ export const Games = () => {
                 }
               </MonsterBlockWrapper>
               <QuestionBlockWrapper>
+                <QuestionBlock />
               </QuestionBlockWrapper>
             </BattleBlockWrapper>
           </GameBlockWrapper>

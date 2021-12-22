@@ -12,7 +12,8 @@ export const COLORS = {
   BLACK: '#333333',
   PINK: '#F7ADC3',
   LIGHT_BLUE: '#66BBFF',
-  GRAY: '#C4C4C4'
+  GRAY: '#C4C4C4',
+  OCHER: '#D3AA6B'
 }
 
 // フォントサイズを決める際に、適宜定義する。
