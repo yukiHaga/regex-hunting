@@ -63,7 +63,7 @@ export const QuestionBlock = () => {
           <DifficultyWrapper>
             初級
           </DifficultyWrapper>
-          イグアノスの群れが現れた。
+          イグアノスの群れが現れた！
           <TargetSentenceWrapper>
           </TargetSentenceWrapper>
         </QuestionWrapper>
