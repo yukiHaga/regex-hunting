@@ -19,7 +19,7 @@ const HpGageWrapper = styled.div`
 
 const TypeWrapper = styled.div`
   height: 26px;
-  width: 77px;
+  width: 120px;
   font-size: 18px;
   line-height: 26px;
   background-color: ${COLORS.GAGE_GRAY};
