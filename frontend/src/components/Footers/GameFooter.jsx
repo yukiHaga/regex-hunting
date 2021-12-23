@@ -2,10 +2,10 @@ import React from 'react';
 import styled from 'styled-components';
 
 // Colors
-import { COLORS } from '../style_constants.js';
+import { COLORS } from '../../style_constants.js';
 
 // BaseLink
-import { BaseLink } from './shared_style.js';
+import { FakeLink } from '../shared_style.js';
 
 const FooterWrapper = styled.div`
   height: 55px;
@@ -19,7 +19,7 @@ const FooterNav = styled.nav`
   margin-left: 20px;
 `;
 
-const FooterNavLink = styled(BaseLink)`
+const FooterNavFakeLink = styled(FakeLink)`
   height: 52px;
   line-height: 52px;
   display: inline-block;
@@ -31,17 +31,15 @@ const FooterNavLink = styled(BaseLink)`
   }
 `;
 
-export const Footer = () => {
+
+export const GameFooter = () => {
   return (
     <>
       <FooterWrapper>
         <FooterNav>
-          <FooterNavLink to={`/policy`}>
-            利用規約
-          </FooterNavLink>
-          <FooterNavLink to={`/privacy-policy`}>
-            プライバシーポリシー
-          </FooterNavLink>
+          <FooterNavFakeLink>
+            スライドを見る
+          </FooterNavFakeLink>
         </FooterNav>
       </FooterWrapper>
     </>

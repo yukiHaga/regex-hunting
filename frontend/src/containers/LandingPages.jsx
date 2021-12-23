@@ -17,7 +17,7 @@ import { Header } from '../components/Headers/Header.jsx';
 import { FakeHeader } from '../components/Headers/FakeHeader.jsx';
 import { SubText } from '../components/SubText.jsx';
 import { StartButton } from '../components/Buttons/StartButton.jsx'
-import { Footer } from '../components/Footer.jsx';
+import { Footer } from '../components/Footers/Footer.jsx';
 import { LoginDialog } from '../components/Dialogs/LoginDialog.jsx';
 import { SignUpDialog } from '../components/Dialogs/SignUpDialog.jsx';
 import { SessionFlashMessage } from '../components/FlashMessages/SessionFlashMessage.jsx';
