@@ -56,6 +56,7 @@ const GameBlockWrapper = styled.div`
 
 // SlideWrapperコンポーネント
 const SlideWrapper = styled.div`
+  box-shadow: 0 0px 20px rgba(0,0,0,0.2);
 `;
 
 // BattleBlockWrapperコンポーネント
@@ -83,12 +84,14 @@ const QuestionBlockWrapper = styled.div`
   width: 860px;
   margin: 0 auto;
   margin-top: 13px;
+  box-shadow: 0 0px 20px rgba(0,0,0,0.2);
 `;
 
 // CodeBlockWrapperコンポーネント
 const CodeBlockWrapper = styled.div`
   height: 53px;
   margin-top: 13px;
+  box-shadow: 0 0px 20px rgba(0,0,0,0.2);
 `;
 
 // GageBlockWrapperコンポーネント

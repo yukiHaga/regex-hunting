@@ -35,6 +35,7 @@ export const BaseButton = styled.button`
   cursor: pointer;
   :hover {
     opacity: 0.7;
+    box-shadow: 0 0 2px rgba(0,0,0,0.2);
   }
   :focus {
     outline: 0;

@@ -11,6 +11,11 @@ const StartButtonWrapper = styled(RedRoundButton)`
   border-style: none;
   margin-top: 45px;
   margin-bottom: 101px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.3);
+  transition: 0.3s;
+  :hover {
+    box-shadow: 0 0 2px rgba(0,0,0,0.2);
+  }
 `;
 
 const StartButtonTextWrapper = styled.div`

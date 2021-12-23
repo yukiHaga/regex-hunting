@@ -27,6 +27,7 @@ const HeaderWrapper = styled.div`
   justify-content: space-between;
   background-color: ${COLORS.MAIN};
   width: 100%;
+  box-shadow: 0 3px 6px rgba(0,0,0,0.2);
   position: fixed;
   z-index: 1;
 `;
