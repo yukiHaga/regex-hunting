@@ -2,10 +2,10 @@ import React from 'react';
 import styled from 'styled-components';
 
 // Colors
-import { COLORS } from '../style_constants.js';
+import { COLORS } from '../../style_constants.js';
 
 // BaseLink
-import { BaseLink } from './shared_style.js';
+import { BaseLink } from '../shared_style.js';
 
 const FooterWrapper = styled.div`
   height: 55px;

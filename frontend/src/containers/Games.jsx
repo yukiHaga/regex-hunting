@@ -14,7 +14,7 @@ import { QuestionBlock } from '../components/Games/QuestionBlock.jsx';
 import { CodeBlock } from '../components/Games/CodeBlock.jsx';
 import { TimeGage } from '../components/Games/TimeGage.jsx';
 import { HpGage } from '../components/Games/HpGage.jsx';
-import { Footer } from '../components/Footer.jsx';
+import { Footer } from '../components/Footers/Footer.jsx';
 
 
 // Contextオブジェクト
