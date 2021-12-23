@@ -5,7 +5,7 @@ import styled from 'styled-components';
 import { COLORS } from '../../style_constants.js';
 
 const MetaMenuBarWrapper = styled.div`
-  background-color: ${COLORS.SUB};
+  background-color: ${COLORS.MAIN};
   border-radius: 3px;
   height: 490px;
   width: 220px;
@@ -14,19 +14,56 @@ const MetaMenuBarWrapper = styled.div`
 `;
 
 const TitleWrapper = styled.div`
-  height: 60px;
+  height: 50px;
   font-size: 21px;
-  line-height: 60px;
-  color: ${COLORS.BLACK};
+  line-height: 50px;
+  color: ${COLORS.SUB};
   font-family: YuGothic;
-  font-weight: normal;
+  font-weight: bold;
   text-align: center;
 `;
 
+// white-space: nowrapは、カラム内のテキストを折り返さない為に使う
+// overflow-x: autoは横スクロールを可能にする。
+// overflow-y: autoは縦スクロールを可能にする。
 const MetaContentWrapper = styled.div`
-
+  height: 440px;
+  white-space: nowrap;
+  overflow-x: auto; 
+  overflow-y: auto;
 `;
 
+const CustomTable = styled.table`
+  border-collapse: collapse;
+  color: ${COLORS.BLACK};
+  background-color: ${COLORS.SUB};
+  font-family: YuGothic;
+  font-weight: normal;
+`;
+
+const CustomTh = styled.th`
+  padding: 8px 6px; 
+  background-color: ${COLORS.OCHER};
+  position: sticky;
+  top: 0;
+  border-left: solid 1px #c79344;
+  border-right: solid 1px #c79344;
+`;
+
+const MeaningTh = styled(CustomTh)`
+  text-align: left;
+`;
+
+const CustomTd = styled.td`
+  border: solid 1px #c79344;
+  padding: 8px 6px; 
+`;
+
+const MetaTd = styled(CustomTd)`
+  text-align: center;
+`;
+
+// キャプチャ関係は問題で出てこないので、消した
 export const MetaMenuBar = () => {
   return (
     <>
@@ -35,128 +72,122 @@ export const MetaMenuBar = () => {
           メタ文字一覧
         </TitleWrapper>
         <MetaContentWrapper>
-          <table>
+          <CustomTable>
             <tr>
-              <th>メタ文字</th> <th>意味</th>
+              <CustomTh>メタ文字</CustomTh> <MeaningTh>意味</MeaningTh>
             </tr>
             <tr>
-              <td>\d</td> <td>1桁の数字</td>
+              <MetaTd>\d</MetaTd> <CustomTd>1桁の数字</CustomTd>
             </tr>
             <tr>
-              <td>[0-9]</td> <td>1桁の数字</td>
+              <MetaTd>[0-9]</MetaTd> <CustomTd>1桁の数字</CustomTd>
             </tr>
             <tr>
-              <td>\d+</td> <td>1桁以上の数字</td>
+              <MetaTd>\d+</MetaTd> <CustomTd>1桁以上の数字</CustomTd>
             </tr>
             <tr>
-              <td>{'{'}n,m}</td> <td>直前の文字がn個以上、m個以下</td>
+              <MetaTd>{'{'}n,m}</MetaTd> <CustomTd>直前の文字がn個以上、m個以下</CustomTd>
             </tr>
             <tr>
-              <td>{'{'}n}</td> <td>直前の文字がちょうどn個</td>
+              <MetaTd>{'{'}n}</MetaTd> <CustomTd>直前の文字がちょうどn個</CustomTd>
             </tr>
             <tr>
-              <td>{'{'}n,}</td> <td>直前の文字がn個以下</td>
+              <MetaTd>{'{'}n,}</MetaTd> <CustomTd>直前の文字がn個以下</CustomTd>
             </tr>
             <tr>
-              <td>{'{'},n}</td> <td>直前の文字がn個以下</td>
+              <MetaTd>{'{'},n}</MetaTd> <CustomTd>直前の文字がn個以下</CustomTd>
             </tr>
             <tr>
-              <td>[AB]</td> <td>A, Bのいずれか1文字(A, Bは任意の1文字)</td>
+              <MetaTd>[AB]</MetaTd> <CustomTd>A, Bのいずれか1文字(A, Bは任意の1文字)</CustomTd>
             </tr>
             <tr>
-              <td>[ABC]</td> <td>A, B, Cのいずれか1文字(A, B, Cは任意の1文字)</td>
+              <MetaTd>[ABC]</MetaTd> <CustomTd>A, B, Cのいずれか1文字(A, B, Cは任意の1文字)</CustomTd>
             </tr>
             <tr>
-              <td>[a-z]</td> <td>小文字アルファベットのいずれか1文字</td>
+              <MetaTd>[a-z]</MetaTd> <CustomTd>小文字アルファベットのいずれか1文字</CustomTd>
             </tr>
             <tr>
-              <td>?</td> <td>直前の文字が1文字または無し</td>
+              <MetaTd>?</MetaTd> <CustomTd>直前の文字が1文字または無し</CustomTd>
             </tr>
             <tr>
-              <td>(2文字以上の文字列)?</td> <td>直前の文字が2文字以上の文字列または無し</td>
+              <MetaTd>(ABC)?</MetaTd> <CustomTd>文字列ABCまたは無し</CustomTd>
             </tr>
             <tr>
-              <td>.</td> <td>任意の1文字</td>
+              <MetaTd>.</MetaTd> <CustomTd>任意の1文字</CustomTd>
             </tr>
             <tr>
-              <td>\n</td> <td>改行</td>
+              <MetaTd>\n</MetaTd> <CustomTd>改行</CustomTd>
             </tr>
             <tr>
-              <td>+</td> <td>直前の文字が1文字以上</td>
+              <MetaTd>+</MetaTd> <CustomTd>直前の文字が1文字以上</CustomTd>
             </tr>
             <tr>
-              <td>*</td> <td>直前の文字が0文字以上</td>
+              <MetaTd>*</MetaTd> <CustomTd>直前の文字が0文字以上</CustomTd>
             </tr>
             <tr>
-              <td>.+</td> <td>任意の文字が1文字以上(貪欲なマッチ)</td>
+              <MetaTd>.+</MetaTd> <CustomTd>任意の文字が1文字以上(貪欲なマッチ)</CustomTd>
             </tr>
             <tr>
-              <td>.*</td> <td>任意の文字が0文字以上(貪欲なマッチ)</td>
+              <MetaTd>.*</MetaTd> <CustomTd>任意の文字が0文字以上(貪欲なマッチ)</CustomTd>
             </tr>
             <tr>
-              <td>[^A]*</td> <td>A以外の任意の文字が0文字以上</td>
+              <MetaTd>[^A]*</MetaTd> <CustomTd>A以外の任意の文字が0文字以上</CustomTd>
             </tr>
             <tr>
-              <td>.+?</td> <td>任意の文字が1文字以上(控えめなマッチ)</td>
+              <MetaTd>.+?</MetaTd> <CustomTd>任意の文字が1文字以上(控えめなマッチ)</CustomTd>
             </tr>
             <tr>
-              <td>.*?</td> <td>任意の文字が0文字以上(控えめなマッチ)</td>
+              <MetaTd>.*?</MetaTd> <CustomTd>任意の文字が0文字以上(控えめなマッチ)</CustomTd>
             </tr>
             <tr>
-              <td>()</td> <td>()内をキャプチャする。</td>
+              <MetaTd>()</MetaTd> <CustomTd>グループ化。 ()内をキャプチャする機能も併せ持つ。</CustomTd>
             </tr>
             <tr>
-              <td>(?{"<"}name>pattern)</td> <td>名前付きキャプチャ(nameはキャプチャ名)</td>
+              <MetaTd>(?:)</MetaTd> <CustomTd>()と?:を合わせると、キャプチャをしなくなる。</CustomTd>
             </tr>
             <tr>
-              <td>\k{"<"}name></td> <td>名前付きキャプチャで取得した文字列</td>
+              <MetaTd>\w</MetaTd> <CustomTd>[a-zA-Z0-9_]</CustomTd>
             </tr>
             <tr>
-              <td>(?:)</td> <td>()と?:を合わせると、キャプチャをしなくなる。</td>
+              <MetaTd>^</MetaTd> <CustomTd>行頭を表す。</CustomTd>
             </tr>
             <tr>
-              <td>\w</td> <td>[a-zA-Z0-9_]</td>
+              <MetaTd>$</MetaTd> <CustomTd>行末を表す。</CustomTd>
             </tr>
             <tr>
-              <td>^</td> <td>行頭を表す。</td>
+              <MetaTd>\t</MetaTd> <CustomTd>タブ文字</CustomTd>
             </tr>
             <tr>
-              <td>$</td> <td>行末を表す。</td>
+              <MetaTd>[ \t]+</MetaTd> <CustomTd>スペースまたはタブ文字が1文字以上(貪欲なマッチ)</CustomTd>
             </tr>
             <tr>
-              <td>\t</td> <td>タブ文字</td>
+              <MetaTd>\r</MetaTd> <CustomTd>復帰文字</CustomTd>
             </tr>
             <tr>
-              <td>[ \t]+</td> <td>スペースまたはタブ文字が1文字以上(貪欲なマッチ)</td>
+              <MetaTd>\s</MetaTd> <CustomTd>[ \t\r\n\f]</CustomTd>
             </tr>
             <tr>
-              <td>\r</td> <td>復帰文字</td>
+              <MetaTd>ABC|DEF</MetaTd> <CustomTd>文字列ABCまたは文字列DEF</CustomTd>
             </tr>
             <tr>
-              <td>\s</td> <td>[ \t\r\n\f]</td>
+              <MetaTd>\b</MetaTd> <CustomTd>単語の境界を表す。</CustomTd>
             </tr>
             <tr>
-              <td>ABC|DEF</td> <td>文字列ABCまたは文字列DEF</td>
+              <MetaTd>\B</MetaTd> <CustomTd>単語の境界以外を表す。</CustomTd>
             </tr>
             <tr>
-              <td>\b</td> <td>単語の境界を表す。</td>
+              <MetaTd>(?{"<"}=abc)</MetaTd> <CustomTd>文字列abcの直後を表す(肯定の後読み)</CustomTd>
             </tr>
             <tr>
-              <td>\B</td> <td>単語の境界以外を表す。</td>
+              <MetaTd>(?=abc)</MetaTd> <CustomTd>文字列abcの直前を表す(肯定の先読み)</CustomTd>
             </tr>
             <tr>
-              <td>(?{"<"}=abc)</td> <td>文字列abcの直後を表す(肯定の後読み)</td>
+              <MetaTd>(?{"<!"}abc)</MetaTd> <CustomTd>文字列abc以外の直後を表す(否定の後読み)</CustomTd>
             </tr>
             <tr>
-              <td>(?=abc)</td> <td>文字列abcの直前を表す(肯定の先読み)</td>
+              <MetaTd>(?!abc)</MetaTd> <CustomTd>文字列abc以外の直前を表す(否定の先読み)</CustomTd>
             </tr>
-            <tr>
-              <td>(?{"<!"}abc)</td> <td>文字列abc以外の直後を表す(否定の後読み)</td>
-            </tr>
-            <tr>
-              <td>(?!abc)</td> <td>文字列abc以外の直前を表す(否定の先読み)</td>
-            </tr>
-          </table>
+          </CustomTable>
         </MetaContentWrapper>
       </MetaMenuBarWrapper>
     </>
