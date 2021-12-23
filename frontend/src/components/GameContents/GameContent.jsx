@@ -28,6 +28,7 @@ const GameContentTitleWrapper = styled.div`
 const GameContentDescriptionWrapper = styled.div`
   width: 350px;
   height: 350px;
+  box-shadow: 0 0px 20px rgba(0,0,0,0.2);
 `;
 
 // ブロック要素じゃないので、もしかしたら直列に並ばないかも
