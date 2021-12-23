@@ -10,6 +10,8 @@ import { Header } from '../components/Headers/Header.jsx';
 import { FakeHeader } from '../components/Headers/FakeHeader.jsx';
 import { MetaMenuBar } from '../components/Games/MetaMenuBar.jsx';
 import { ElementaryMonster } from '../components/Games/ElementaryMonster.jsx';
+import { IntermediateMonster } from '../components/Games/IntermediateMonster.jsx';
+import { AdvancedMonster } from '../components/Games/AdvancedMonster.jsx';
 import { QuestionBlock } from '../components/Games/QuestionBlock.jsx';
 import { CodeBlock } from '../components/Games/CodeBlock.jsx';
 import { TimeGage } from '../components/Games/TimeGage.jsx';
@@ -168,9 +170,22 @@ export const Games = () => {
                       <ElementaryMonster />
                     </>
                 }
+                {
+                  difficulty === 'intermediate' &&
+                    <>
+                      <IntermediateMonster />
+                    </>
+                }
+                {
+                  difficulty === 'advanced' &&
+                    <>
+                      <AdvancedMonster />
+                    </>
+      
+                }
               </MonsterBlockWrapper>
               <QuestionBlockWrapper>
-                <QuestionBlock />
+                <QuestionBlock difficulty={difficulty} />
               </QuestionBlockWrapper>
             </BattleBlockWrapper>
           </GameBlockWrapper>

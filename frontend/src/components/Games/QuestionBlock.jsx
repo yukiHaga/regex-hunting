@@ -32,7 +32,7 @@ const DifficultyWrapper = styled.div`
   height: 53px;
   font-size: 23px;
   line-height: 53px;
-  color: ${COLORS.WHITE};
+  color: ${COLORS.SUB};
   text-align: center;
   font-family: YuGothic;
   font-style: normal;
@@ -55,7 +55,7 @@ const TargetSentenceWrapper = styled.div`
   font-weight: 500;
 `;
 
-export const QuestionBlock = () => {
+export const QuestionBlock = ({ difficulty }) => {
   return (
     <>
       <QuestionBlockWrapper>
@@ -63,7 +63,24 @@ export const QuestionBlock = () => {
           <DifficultyWrapper>
             初級
           </DifficultyWrapper>
-          イグアノスの群れが現れた！
+          {
+            difficulty === "elementary" &&
+            <>
+              スクータムの群れが現れた！
+            </>
+          }
+          {
+            difficulty === "intermediate" &&
+            <>
+              カスアリウスの群れが現れた！
+            </>
+          }
+          {
+            difficulty === "advanced" &&
+            <>
+              オルファ・ラパクスが現れた！
+            </>
+          }
           <TargetSentenceWrapper>
           </TargetSentenceWrapper>
         </QuestionWrapper>
