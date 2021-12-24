@@ -1,4 +1,4 @@
-import React, { Fragment, useEffect, useContext } from 'react';
+import React, { useState, Fragment, useEffect, useContext } from 'react';
 import { useParams, useLocation, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 
@@ -25,7 +25,7 @@ import { UserContext } from "../context/UserProvider.js";
 // ログイン状態を確認するAPIコール関数
 import { checkLoginStatus } from '../apis/checkLoginStatus.js'; 
 
-// 
+// ゲームステータス, 問題, モンスターデータを取得する関数 
 import { getGameStart } from '../apis/gameQuestion.js'; 
 
 // HTTP_STATUS_CODE
@@ -121,6 +121,16 @@ export const Games = () => {
   // navigation
   const navigate = useNavigate();
 
+  // ゲーム初期状態のstate
+  const initialState = {
+    game_management: {},
+    questions: [],
+    monster: {}
+  }
+
+  // ゲーム状態を管理するstate
+  const [gameState, setGameState] = useState(initialState);
+
   // React Routerで画面遷移するとユーザーが保持できないので、
   // useEffectで再度リクエストを出す。
   useEffect(() => {
@@ -147,8 +157,26 @@ export const Games = () => {
         }
       })
     }
+    getGameStart(difficulty).then((data) => {
+      setGameState({
+        game_management: data.game_management,
+        questions: data.questions,
+        monster: data.monster
+      }); 
+    }).catch((e) => {
+      if(e.response.status === HTTP_STATUS_CODE.NOT_FOUND){
+        setGameState({
+          game_management: {},
+          questions: [],
+          monster: {}
+        }); 
+      } else {
+        throw e;
+      }
+    });
   }, [
     dispatch, 
+    difficulty,
     sessionState,
     requestUserActionTyps.REQUEST, 
     requestUserActionTyps.REQUEST_SUCCESS,
