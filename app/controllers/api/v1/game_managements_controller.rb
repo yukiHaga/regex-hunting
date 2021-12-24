@@ -6,27 +6,37 @@ class Api::V1::GameManagementsController < ApplicationController
   def start
     # ゲームに関する処理
     game_management = current_user ?
-                        current_user.game_managements.create(difficulty_level: params[:difficulty_level],
-                                                             game_result: "progress",
-                                                             result_time: Time.zone.now,
-                                                             play_date: Date.today)
+                        current_user.game_managements.
+                          create(
+                            difficulty: params[:difficulty],
+                            game_result: "progress",
+                            result_time: Time.zone.now,
+                            play_date: Date.today
+                          )
                       :
-                        GameManagement.new(difficulty_level: params[:difficulty_level],
-                                           game_result: "progress",
-                                           result_time: Time.zone.now,
-                                           play_date: Date.today)
+                        GameManagement.new(
+                          difficulty: params[:difficulty],
+                          game_result: "progress",
+                          result_time: Time.zone.now,
+                          play_date: Date.today
+                        )
 
     # 問題に関する処理
-    indices = Question.pluck(:id)
+    # indicesは、全てのQuestionのidが格納された変数
+    # sampleメソッドは、配列の要素を1個ランダムに返す
+    # search_indicesという配列に取得したidを格納する
+    # Array#deleteで、indicesからsearch_indexの値を削除する
+    indices = Question.where(difficulty: params[:difficulty]).pluck(:id)
+    search_indices = []
     MIN_TIMES.times do
       search_index = indices.sample
       search_indices << search_index
       indices.delete(search_index)
     end
-    questions = Question.where(id: search_indices, difficulty_level: params[:difficulty_level]);
+    questions = Question.where(id: search_indices, difficulty: params[:difficulty]);
 
     # モンスターに関する処理
-    monster = Monster.find_by(difficulty_level: params[:difficulty_level])
+    monster = Monster.find_by(difficulty: params[:difficulty])
 
     # レンダリング
     render json: {
