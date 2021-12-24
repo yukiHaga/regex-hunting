@@ -41,7 +41,7 @@ Question.create!(
   target_sentence: "A a 9",
   sample_answer: "\\w",
   commentary: "\\wはa~zまたはA~Zまたは0~9または_の中の1文字を表します。[a-zA-Z\\d]でもOKです。",
-  difficulty_level: "初級"
+  difficulty: "elementary"
 )
 
 # 2問目
@@ -50,7 +50,7 @@ Question.create!(
   target_sentence: "100, 200, 300",
   sample_answer: "\d{3}",
   commentary: "\\d{3}は3桁の数字を表します。",
-  difficulty_level: "初級"
+  difficulty: "elementary"
 )
 
 # 3問目
@@ -59,7 +59,7 @@ Question.create!(
   target_sentence: "1000, 10000, 100000",
   sample_answer: "\\d{4,6}",
   commentary: "\\d{4,6}は4桁~6桁の数字を表します。",
-  difficulty_level: "初級"
+  difficulty: "elementary"
 )
 
 # 4問目
@@ -68,7 +68,7 @@ Question.create!(
   target_sentence: "アメ, アキ, アカ",
   sample_answer: "ア[メキカ]",
   commentary: "ア[メキカ]の[メキカ]は、メ, キ, カのどれか1文字を表します。そのため、ア[メキカ]は、アメ, アキ, アカを表す正規表現であると分かります。ア.でもOKです。",
-  difficulty_level: "初級"
+  difficulty: "elementary"
 )
 
 # 5問目
@@ -77,7 +77,7 @@ Question.create!(
   target_sentence: "アキチ, アイチ, アケチ",
   sample_answer: "ア[キイケ]チ",
   commentary: "\\ア[キイケ]チの[キイケ]は、キ, イ, ケのどれか1文字を表します。そのため、ア[キイケ]チは、アキチ, アイチ, アケチを表す正規表現であると分かります。ア.チでもOKです。",
-  difficulty_level: "初級"
+  difficulty: "elementary"
 )
 
 # 6問目
@@ -86,7 +86,7 @@ Question.create!(
   target_sentence: "アキチ, アイチ, アイールサンチ",
   sample_answer: "ア(キ|イ|イールサン)チ",
   commentary: "ア(キ|イ|イールサン)チの(キ|イ|イールサン)は、キ, イ, イールサンのどれかの文字を表します。そのため、ア(キ|イ|イールサン)チは、アキチ, アイチ, アイールサンチを表す正規表現であると分かります。ア([キイ]|イールサン)チ,  ア.+?チでもOKです。",
-  difficulty_level: "初級"
+  difficulty: "elementary"
 )
 
 # 7問目
@@ -95,7 +95,7 @@ Question.create!(
   target_sentence: "すもものうち すもももものうち すもももももももものうち",
   sample_answer: "す.+?のうち",
   commentary: "す.+?のうちの.+は、一文字以上の文字列を表します。?を後ろにつけることでマッチの範囲を最短にできます。そのため、す.+?のうちは、すもものうち すもももものうち すもももももももものうちを表す正規表現であることが分かります。",
-  difficulty_level: "初級"
+  difficulty: "elementary"
 )
 
 # 8問目
@@ -104,7 +104,7 @@ Question.create!(
   target_sentence: "アイス ザイス イス",
   sample_answer: "[アザ]?イス",
   commentary: "[アザ]?イスの[アザ]は、ア, ザのどれか1文字を表します。また、?をつけることで、直前の文字がマッチ対象の文字列に含まれなくてもOKになります。そのため、[アザ]?イスは、アイス, ザイス, イスを表す正規表現であると分かります。",
-  difficulty_level: "初級"
+  difficulty: "elementary"
 )
 
 # 9問目
@@ -113,7 +113,7 @@ Question.create!(
   target_sentence: "アタッチ アプローチ アパッチ",
   sample_answer: "ア(タッ|プロー|パッ)チ",
   commentary: "ア(タッ|プロー|パッ)チの(タッ|プロー|パッ)は、タッ, プロー, パッのどれかの文字を表します。そのため、ア(タッ|プロー|パッ)チは、アタッチ, アプローチ, アパッチを表す正規表現であることが分かります。ア.+?チでもOKです。",
-  difficulty_level: "初級"
+  difficulty: "elementary"
 )
 
 # 10問目
@@ -122,7 +122,7 @@ Question.create!(
   target_sentence: "ルネッサンス ルームサービス ルーフテラス",
   sample_answer: "ル(ネッサン|ームサービ|ーフテラ)ス",
   commentary: "ル(ネッサン|ームサービ|ーフテラ)スの(ネッサン|ームサービ|ーフテラ)は、ネッサン, ームサービ, ーフテラのどれかの文字を表します。そのため、ル(ネッサン|ームサービ|ーフテラ)スは、ルネッサンス, ルームサービス, ルーフテラスを表す正規表現であることが分かります。ル.+?スで書き換え可能です",
-  difficulty_level: "初級"
+  difficulty: "elementary"
 )
 
 # ユーザー
@@ -138,7 +138,7 @@ Question.create!(
   # ゲームマネジメント
   5.times do |m|
     game_management = user.game_managements.build(
-      difficulty_level: :初級,
+      difficulty: :elementary,
       game_result: :win,
       result_time: "00:04:3#{m}",
       play_date: Faker::Date.between(from: '2021-12-01', to: '2021-12-10')
