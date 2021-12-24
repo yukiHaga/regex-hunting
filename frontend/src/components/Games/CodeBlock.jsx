@@ -39,6 +39,18 @@ const CodeBlockInput = styled.input`
   outline: none;
   border: none;
   text-align: center;
+  ::placeholder {
+    color: #eeeeee;
+    opacity: 0.5;
+  };
+  ::-webkit-input-placeholder {
+    color: #eeeeee;
+    opacity: 0.5;
+  };
+  :-ms-input-placeholder {
+    color: #eeeeee;
+    opacity: 0.5;
+  }
 `;
 
 export const CodeBlock = () => {
@@ -64,6 +76,7 @@ export const CodeBlock = () => {
           id='code-block' 
           value={state} 
           onChange={(e) => handleInput(e)} 
+          placeholder="Input Your Regex"
         />
         <AnchorWrapper>
           /g
