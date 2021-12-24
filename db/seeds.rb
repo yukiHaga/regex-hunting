@@ -12,6 +12,7 @@ Monster.create!(
   max_hp: 100,
   attack: 50,
   defence: 50,
+  difficulty: "elementary"
 )
 
 Monster.create!(
@@ -19,6 +20,7 @@ Monster.create!(
   max_hp: 100,
   attack: 100,
   defence: 100,
+  difficulty: "intermediate"
 )
 
 Monster.create!(
@@ -26,6 +28,7 @@ Monster.create!(
   max_hp: 100,
   attack: 150,
   defence: 100,
+  difficulty: "advanced"
 )
 
 # タイトル

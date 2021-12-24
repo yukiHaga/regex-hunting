@@ -37,6 +37,7 @@ ActiveRecord::Schema.define(version: 2021_12_16_054722) do
     t.integer "max_hp", null: false
     t.integer "attack", null: false
     t.integer "defence", null: false
+    t.integer "difficulty", default: 0, null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
