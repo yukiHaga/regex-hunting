@@ -15,18 +15,12 @@ export const initialState = {
 // requestUserActionTypsがREQUESTなら、REQUEST_STATEはLOADING
 // requestUserActionTypsがREQUEST_SUCCESSなら、REQUEST_STATEはOK
 export const requestUserActionTyps = {
-  REQUEST: 'REQUEST',
   REQUEST_SUCCESS: 'REQUEST_SUCCESS',
   REQUEST_FAILURE: 'REQUEST_FAILURE'
 }
 
 export const requestUserReducer = (state, action) => {
   switch (action.type) {
-    case requestUserActionTyps.REQUEST:
-      return {
-        ...state,
-        requestState: REQUEST_STATE.LOADING,
-      };
     case requestUserActionTyps.REQUEST_SUCCESS:
       return {
         ...state,
