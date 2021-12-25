@@ -1,4 +1,4 @@
-import React, { Fragment, useState, useEffect, useContext } from 'react';
+import React, { Fragment, useState, useLayoutEffect, useContext } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 
@@ -179,9 +179,8 @@ export const LandingPages = () => {
 
   // 初めてLPページに訪れた場合、ログインしていないので、
   // 2回目のdispatchのdata.sessionはfalseとなる
-  useEffect(() => {
+  useLayoutEffect(() => {
     if(sessionState === false){
-      dispatch({ type: requestUserActionTyps.REQUEST });
       checkLoginStatus().then((data) => {
         dispatch({
           type: requestUserActionTyps.REQUEST_SUCCESS,
@@ -206,7 +205,6 @@ export const LandingPages = () => {
   }, [
     dispatch, 
     sessionState,
-    requestUserActionTyps.REQUEST, 
     requestUserActionTyps.REQUEST_SUCCESS,
     requestUserActionTyps.REQUEST_FAILURE
   ]);

@@ -11,9 +11,6 @@ export const initialState = {
 };
 
 // useReducerで使うActonTypsを定義
-// REQUEST_STATEは、INITIAL, LOADING, OKの3つである
-// requestUserActionTypsがREQUESTなら、REQUEST_STATEはLOADING
-// requestUserActionTypsがREQUEST_SUCCESSなら、REQUEST_STATEはOK
 export const requestUserActionTyps = {
   REQUEST_SUCCESS: 'REQUEST_SUCCESS',
   REQUEST_FAILURE: 'REQUEST_FAILURE'
