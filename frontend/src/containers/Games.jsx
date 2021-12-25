@@ -1,4 +1,4 @@
-import React, { useState, Fragment, useEffect, useContext } from 'react';
+import React, { useState, Fragment, useLayoutEffect, useContext } from 'react';
 import { useParams, useLocation, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 
@@ -139,9 +139,8 @@ export const Games = () => {
   // のどれかが変化したらuseEffectが実行される。
   // stateが変化しても、依存配列の要素が変化していないなら、
   // useEffectは実行されない                    
-  useEffect(() => {
+  useLayoutEffect(() => {
     if(sessionState === false){
-      dispatch({ type: requestUserActionTyps.REQUEST });
       checkLoginStatus().then((data) => {
         dispatch({
           type: requestUserActionTyps.REQUEST_SUCCESS,
