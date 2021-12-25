@@ -1,6 +1,6 @@
-import React, { useLayoutEffect } from 'react';
+import React from 'react';
 import styled from 'styled-components';
-import TypeWriterEffect from 'react-typewriter-effect';
+import TypeWriterEffect from 'react-typewriter-effect'; 
 
 // Colors
 import { COLORS } from '../../style_constants.js';
@@ -57,12 +57,6 @@ const TargetSentenceWrapper = styled.div`
 `;
 
 export const QuestionBlock = ({ difficulty }) => {
-
-  const messageAudio = new Audio(音声ファイルパス);
-
-  useLayoutEffect(() => {
-    messageAudio.play()
-  }, [])
 
   return (
     <>
