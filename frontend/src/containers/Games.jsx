@@ -162,23 +162,25 @@ export const Games = () => {
         }
       })
     }
-    getGameStart(difficulty).then((data) => {
-      setGameState({
-        game_management: data.game_management,
-        questions: data.questions,
-        monster: data.monster
-      }); 
-    }).catch((e) => {
-      if(e.response.status === HTTP_STATUS_CODE.NOT_FOUND){
+    if(gameState.game_management === {}){
+      getGameStart(difficulty).then((data) => {
         setGameState({
-          game_management: {},
-          questions: [],
-          monster: {}
+          game_management: data.game_management,
+          questions: data.questions,
+          monster: data.monster
         }); 
-      } else {
-        throw e;
-      }
-    });
+      }).catch((e) => {
+        if(e.response.status === HTTP_STATUS_CODE.NOT_FOUND){
+          setGameState({
+            game_management: {},
+            questions: [],
+            monster: {}
+          }); 
+        } else {
+          throw e;
+        }
+      });
+    }
   }, [
     dispatch, 
     difficulty,
