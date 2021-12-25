@@ -27,7 +27,6 @@ class Api::V1::GameManagementsController < ApplicationController
     # sampleメソッドは、配列の要素を1個ランダムに返す
     # search_indicesという配列に取得したidを格納する
     # Array#deleteで、indicesからsearch_indexの値を削除する
-    binding.pry
     indices = Question.where(difficulty: params[:difficulty]).pluck(:id)
     search_indices = []
     MIN_TIMES.times do
