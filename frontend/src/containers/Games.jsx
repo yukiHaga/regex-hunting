@@ -26,7 +26,7 @@ import { UserContext } from "../context/UserProvider.js";
 import { checkLoginStatus } from '../apis/checkLoginStatus.js'; 
 
 // ゲームステータス, 問題, モンスターデータを取得する関数 
-import { getGameStart } from '../apis/gameQuestion.js'; 
+import { getGameStart } from '../apis/gameManagement.js'; 
 
 // HTTP_STATUS_CODE
 import { HTTP_STATUS_CODE } from '../constants';
