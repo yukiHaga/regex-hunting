@@ -1,4 +1,4 @@
-import React, { useState, Fragment, useLayoutEffect, useContext } from 'react';
+import React, { useState, Fragment, useEffect, useContext } from 'react';
 import { useParams, useLocation, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 
@@ -125,7 +125,10 @@ export const Games = () => {
   const initialState = {
     game_management: {},
     questions: [],
-    monster: {}
+    monster: {},
+    correct_questions: [],
+    incorrect_questions: [],
+    sentence: "",
   }
 
   // ゲーム状態を管理するstate
@@ -139,7 +142,7 @@ export const Games = () => {
   // のどれかが変化したらuseEffectが実行される。
   // stateが変化しても、依存配列の要素が変化していないなら、
   // useEffectは実行されない                    
-  useLayoutEffect(() => {
+  useEffect(() => {
     if(sessionState === false){
       checkLoginStatus().then((data) => {
         dispatch({
@@ -165,6 +168,8 @@ export const Games = () => {
     if(sessionState === false){
       getGameStart(difficulty).then((data) => {
         setGameState({
+          ...gameState,
+          sentence: data.questions["0"].sentence,
           game_management: data.game_management,
           questions: data.questions,
           monster: data.monster
@@ -172,9 +177,7 @@ export const Games = () => {
       }).catch((e) => {
         if(e.response.status === HTTP_STATUS_CODE.NOT_FOUND){
           setGameState({
-            game_management: {},
-            questions: [],
-            monster: {}
+            ...gameState,
           }); 
         } else {
           throw e;
@@ -228,7 +231,7 @@ export const Games = () => {
                 }
               </MonsterBlockWrapper>
               <QuestionBlockWrapper>
-                <QuestionBlock difficulty={difficulty} />
+                <QuestionBlock difficulty={difficulty} sentence={gameState.sentence}/>
               </QuestionBlockWrapper>
             </BattleBlockWrapper>
           </GameBlockWrapper>

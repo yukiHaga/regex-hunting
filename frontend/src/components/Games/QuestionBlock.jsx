@@ -56,7 +56,7 @@ const TargetSentenceWrapper = styled.div`
   font-weight: 500;
 `;
 
-export const QuestionBlock = ({ difficulty }) => {
+export const QuestionBlock = ({ difficulty, sentence }) => {
 
   return (
     <>
@@ -84,7 +84,7 @@ export const QuestionBlock = ({ difficulty }) => {
                 }}
                 startDelay={1000}
                 cursorColor={`${COLORS.BLACK}`}
-                text="スクータムの群れが現れた！"
+                text={sentence || "スクータムの群れが現れた！"}
                 typeSpeed={50}
                 hideCursorAfterText={true}
               />
