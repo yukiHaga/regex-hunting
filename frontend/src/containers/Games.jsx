@@ -162,7 +162,7 @@ export const Games = () => {
         }
       })
     }
-    if(gameState.game_management === {}){
+    if(sessionState === false){
       getGameStart(difficulty).then((data) => {
         setGameState({
           game_management: data.game_management,
