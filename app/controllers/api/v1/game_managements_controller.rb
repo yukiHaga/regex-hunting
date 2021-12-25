@@ -8,7 +8,7 @@ class Api::V1::GameManagementsController < ApplicationController
     # ゲームに関する処理
     game_management = current_user ?
                         current_user.game_managements.
-                          create(
+                          build(
                             difficulty: params[:difficulty],
                             game_result: "progress",
                             result_time: Time.zone.now,
@@ -54,9 +54,13 @@ class Api::V1::GameManagementsController < ApplicationController
     # ゲーム管理に関する処理
     # solved_questionsの2箇所は、GameManagementモデルに記述して一つにまとめる。
     # GameManagementモデルのsoleved_questonsは、throughをつけなくて良い。中間テーブルだけにデータを直接入れる。
-    game_management = current_user.game_managements.find(params[:game_management][:id])
-    game_management.assign_attributes(game_result: params[:game_managemet][:game_result],
-                                      result_time: params[:game_management][:result_time])
+    game_management = current_user.game_managements.
+                        build(
+                          difficulty: params[:game_management][:difficulty],
+                          game_result: params[:game_management][:game_result],
+                          result_time: params[:game_management][:result_time],
+                          play_date: Date.today
+                        )
     game_management.save!
     correct_questions = params[:judgement][:correct]
     incorrect_questions = params[:judgement][:incorrect]
