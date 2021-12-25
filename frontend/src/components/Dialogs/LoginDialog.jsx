@@ -109,7 +109,6 @@ export const LoginDialog = ({
   // reducer側でちゃんとstateは更新されている。
   // しかし、この関数内でstateをコンソール出力できない。
   const onSubmit = ({EmailBox, PasswordBox}) => { 
-    dispatch({ type: requestUserActionTyps.REQUEST });
     postUserSession({
       user: {
         email: EmailBox,
