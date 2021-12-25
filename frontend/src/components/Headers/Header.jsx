@@ -86,7 +86,6 @@ export const Header = ({onClickLink}) => {
 
   // ログアウトを管理する関数
   const handleLogout = () => {
-    dispatch({ type: requestUserActionTyps.REQUEST });
     deleteUserSession().then((data) => {
       dispatch({
         type: requestUserActionTyps.REQUEST_SUCCESS,
@@ -110,7 +109,6 @@ export const Header = ({onClickLink}) => {
       }
     });
   };
-
 
   return (
     <>
