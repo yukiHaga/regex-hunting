@@ -133,6 +133,12 @@ export const Games = () => {
 
   // React Routerで画面遷移するとユーザーが保持できないので、
   // useEffectで再度リクエストを出す。
+  // 初回レンダリング時および、
+  // dispatch, difficulty, sessionState, requestUserActionTyps.REQUEST, 
+  // requestUserActionTyps.REQUEST_SUCCESS, requestUserActionTyps.REQUEST_FAILURE
+  // のどれかが変化したらuseEffectが実行される。
+  // stateが変化しても、依存配列の要素が変化していないなら、
+  // useEffectは実行されない                    
   useEffect(() => {
     if(sessionState === false){
       dispatch({ type: requestUserActionTyps.REQUEST });
@@ -182,6 +188,8 @@ export const Games = () => {
     requestUserActionTyps.REQUEST_SUCCESS,
     requestUserActionTyps.REQUEST_FAILURE
   ]);
+
+  console.log(gameState);
 
   return (
     <>
