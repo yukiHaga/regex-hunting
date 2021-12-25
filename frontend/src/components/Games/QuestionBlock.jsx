@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useLayoutEffect } from 'react';
 import styled from 'styled-components';
+import TypeWriterEffect from 'react-typewriter-effect';
 
 // Colors
 import { COLORS } from '../../style_constants.js';
@@ -56,6 +57,13 @@ const TargetSentenceWrapper = styled.div`
 `;
 
 export const QuestionBlock = ({ difficulty }) => {
+
+  const messageAudio = new Audio(音声ファイルパス);
+
+  useLayoutEffect(() => {
+    messageAudio.play()
+  }, [])
+
   return (
     <>
       <QuestionBlockWrapper>
@@ -66,7 +74,26 @@ export const QuestionBlock = ({ difficulty }) => {
           {
             difficulty === "elementary" &&
             <>
-              スクータムの群れが現れた！
+              <TypeWriterEffect
+                textStyle={{ 
+                  fontSize: '23px',
+                  color: `${COLORS.BLACK}`,
+                  fontFamily: 'YuGothic',
+                  fontStyle: 'normal',
+                  fontWeight: 500,
+                  textAlign: 'center',
+                  lineHeight: '53px',
+                  backGroundColor: `${COLORS.OCHER}`,
+                  borderRadius: '3px',
+                  width: '860px',
+                  height: '53px',
+                }}
+                startDelay={1000}
+                cursorColor={`${COLORS.BLACK}`}
+                text="スクータムの群れが現れた！"
+                typeSpeed={50}
+                hideCursorAfterText={true}
+              />
             </>
           }
           {
