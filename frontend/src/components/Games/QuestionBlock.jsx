@@ -112,13 +112,14 @@ export const QuestionBlock = ({
   // 問題1のセンテンスに自動で切り替わる
   useEffect(() => {
     if (sentence && sentenceState.sentence === getMonsterSentence(difficulty)){
-      setTimeout(() => {
+      const timer = setTimeout(() => {
         setSentenceState({
           sentence: sentence,
           target_sentence: target_sentence,
           difficulty: getJpDifficulty(difficulty)
         });
       }, 3000);
+      return () => clearTimeout(timer);
     };
   }, [
     difficulty,
