@@ -1,12 +1,11 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
-import TypeWriterEffect from 'react-typewriter-effect'; 
 
 // Colors
 import { COLORS } from '../../style_constants.js';
 
 const QuestionBlockWrapper = styled.div`
-  background-color: ${COLORS.GRAY};
+  background-color: ${COLORS.SUB};
   border-radius: 3px;
   width: 860px;
   height: 106px;
@@ -58,50 +57,78 @@ const TargetSentenceWrapper = styled.div`
 
 export const QuestionBlock = ({ difficulty, sentence }) => {
 
+  // モンスター名を取得する関数
+  const getMonsterSentence = (difficulty) => {
+    let monsterName;
+    switch (difficulty){
+      case 'elementary':
+        monsterName = 'スクータムの群れ';
+        break;
+      case 'intermediate':
+        monsterName = 'カスアリウスの群れ';
+        break;
+      case 'advanced':
+        monsterName = 'オルファラ・ラパクス';
+        break;
+      default:
+        console.log('エラーが起きました');
+    }
+    return `${monsterName}が現れた！`;
+  };
+
+  // 難易度を日本語に変換する関数
+  const getJpDifficulty = (difficulty) => {
+    let jpDifficulty;
+    switch (difficulty){
+      case 'elementary':
+        jpDifficulty = '初級';
+        break;
+      case 'intermediate':
+        jpDifficulty = '中級';
+        break;
+      case 'advanced':
+        jpDifficulty = '上級';
+        break;
+      default:
+        console.log('エラーが起きました');
+    }
+    return jpDifficulty;
+  };
+
+  const initialState = {
+    sentence: getMonsterSentence(difficulty),
+    difficulty: getJpDifficulty(difficulty)
+  };
+
+  const [sentenceState, setSentenceState] = useState(initialState);
+
+  // 最初のメッセージからsetTimeOutを制御するif文
+  // このuseEffectがあるおかげで、最初のモンスターセンテンスが
+  // 問題1のセンテンスに自動で切り替わる
+  useEffect(() => {
+    if (sentence && sentenceState.sentence === getMonsterSentence(difficulty)){
+      setTimeout(() => {
+        setSentenceState({
+          sentence: sentence,
+          difficulty: getJpDifficulty(difficulty)
+        });
+      }, 3000);
+    };
+  }, [
+    difficulty,
+    sentence,
+    sentenceState.sentence
+  ]);
+
+  console.log(sentence);
   return (
     <>
       <QuestionBlockWrapper>
         <QuestionWrapper>
           <DifficultyWrapper>
-            初級
+            {sentenceState.difficulty}
           </DifficultyWrapper>
-          {
-            difficulty === "elementary" &&
-            <>
-              <TypeWriterEffect
-                textStyle={{ 
-                  fontSize: '23px',
-                  color: `${COLORS.BLACK}`,
-                  fontFamily: 'YuGothic',
-                  fontStyle: 'normal',
-                  fontWeight: 500,
-                  textAlign: 'center',
-                  lineHeight: '53px',
-                  backGroundColor: `${COLORS.OCHER}`,
-                  borderRadius: '3px',
-                  width: '860px',
-                  height: '53px',
-                }}
-                startDelay={1000}
-                cursorColor={`${COLORS.BLACK}`}
-                text={sentence || "スクータムの群れが現れた！"}
-                typeSpeed={50}
-                hideCursorAfterText={true}
-              />
-            </>
-          }
-          {
-            difficulty === "intermediate" &&
-            <>
-              カスアリウスの群れが現れた！
-            </>
-          }
-          {
-            difficulty === "advanced" &&
-            <>
-              オルファ・ラパクスが現れた！
-            </>
-          }
+          {sentenceState.sentence}
           <TargetSentenceWrapper>
           </TargetSentenceWrapper>
         </QuestionWrapper>
