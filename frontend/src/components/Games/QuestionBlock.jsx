@@ -58,7 +58,7 @@ const TargetSentenceWrapper = styled.div`
 export const QuestionBlock = ({ 
   difficulty, 
   sentence,
-  target_sentence
+  target_sentence,
 }) => {
 
   // モンスター名を取得する関数

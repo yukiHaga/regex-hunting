@@ -54,12 +54,23 @@ const CodeBlockInput = styled.input`
 `;
 
 // 日本語にmaxlengh属性は聞かない
-export const CodeBlock = () => {
+export const CodeBlock = ({
+  gameState, 
+  setGameState,
+  target_sentence,
+  sample_answer
+}) => {
 
-  const [state, setState] = useState("");
+  const [codeState, setCodeState] = useState("");
 
+  // ユーザーがinputした結果をコードブロックに反映させつつ、
+  // inputした結果とtarget_sentenceが一致したかを判定する関数
   const handleInput = (e) => {
-    setState(e.target.value);
+    setCodeState(e.target.value);
+    console.log(e.target.value);
+    setGameState({
+      ...gameState,
+    });
   }
 
   useEffect(() => {
@@ -75,7 +86,7 @@ export const CodeBlock = () => {
         <CodeBlockInput 
           type='text' 
           id='code-block' 
-          value={state} 
+          value={codeState} 
           maxLength={30}
           onChange={(e) => handleInput(e)} 
           placeholder="Input Your Regex"
