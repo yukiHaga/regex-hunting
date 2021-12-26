@@ -53,6 +53,7 @@ const CodeBlockInput = styled.input`
   }
 `;
 
+// 日本語にmaxlengh属性は聞かない
 export const CodeBlock = () => {
 
   const [state, setState] = useState("");
@@ -75,6 +76,7 @@ export const CodeBlock = () => {
           type='text' 
           id='code-block' 
           value={state} 
+          maxLength={30}
           onChange={(e) => handleInput(e)} 
           placeholder="Input Your Regex"
         />

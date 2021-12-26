@@ -129,6 +129,7 @@ export const Games = () => {
     correct_questions: [],
     incorrect_questions: [],
     sentence: "",
+    target_sentence: "",
   }
 
   // ゲーム状態を管理するstate
@@ -165,19 +166,27 @@ export const Games = () => {
         }
       })
     }
-    if(sessionState === false){
+    if(sessionState === false && !Object.keys(gameState.game_management).length){
       getGameStart(difficulty).then((data) => {
         setGameState({
-          ...gameState,
           sentence: data.questions["0"].sentence,
+          target_sentence: data.questions["0"].target_sentence,
           game_management: data.game_management,
           questions: data.questions,
-          monster: data.monster
+          monster: data.monster,
+          correct_questions: [],
+          incorrect_questions: [],
         }); 
       }).catch((e) => {
         if(e.response.status === HTTP_STATUS_CODE.NOT_FOUND){
           setGameState({
-            ...gameState,
+            game_management: {},
+            questions: [],
+            monster: {},
+            correct_questions: [],
+            incorrect_questions: [],
+            sentence: "",
+            target_sentence: "",
           }); 
         } else {
           throw e;
@@ -187,6 +196,7 @@ export const Games = () => {
   }, [
     dispatch, 
     difficulty,
+    gameState.game_management,
     sessionState,
     requestUserActionTyps.REQUEST, 
     requestUserActionTyps.REQUEST_SUCCESS,
@@ -231,7 +241,11 @@ export const Games = () => {
                 }
               </MonsterBlockWrapper>
               <QuestionBlockWrapper>
-                <QuestionBlock difficulty={difficulty} sentence={gameState.sentence}/>
+                <QuestionBlock 
+                  difficulty={difficulty} 
+                  sentence={gameState.sentence}
+                  target_sentence={gameState.target_sentence}
+                />
               </QuestionBlockWrapper>
             </BattleBlockWrapper>
           </GameBlockWrapper>

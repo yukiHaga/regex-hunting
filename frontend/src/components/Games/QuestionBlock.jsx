@@ -55,7 +55,11 @@ const TargetSentenceWrapper = styled.div`
   font-weight: 500;
 `;
 
-export const QuestionBlock = ({ difficulty, sentence }) => {
+export const QuestionBlock = ({ 
+  difficulty, 
+  sentence,
+  target_sentence
+}) => {
 
   // モンスター名を取得する関数
   const getMonsterSentence = (difficulty) => {
@@ -97,6 +101,7 @@ export const QuestionBlock = ({ difficulty, sentence }) => {
 
   const initialState = {
     sentence: getMonsterSentence(difficulty),
+    target_sentence: "",
     difficulty: getJpDifficulty(difficulty)
   };
 
@@ -110,6 +115,7 @@ export const QuestionBlock = ({ difficulty, sentence }) => {
       setTimeout(() => {
         setSentenceState({
           sentence: sentence,
+          target_sentence: target_sentence,
           difficulty: getJpDifficulty(difficulty)
         });
       }, 3000);
@@ -117,10 +123,10 @@ export const QuestionBlock = ({ difficulty, sentence }) => {
   }, [
     difficulty,
     sentence,
+    target_sentence,
     sentenceState.sentence
   ]);
 
-  console.log(sentence);
   return (
     <>
       <QuestionBlockWrapper>
@@ -130,6 +136,12 @@ export const QuestionBlock = ({ difficulty, sentence }) => {
           </DifficultyWrapper>
           {sentenceState.sentence}
           <TargetSentenceWrapper>
+            {
+              sentenceState.target_sentence &&
+                sentenceState.target_sentence.split('').map((value, index) => (
+                  <span key={index}>{value}</span>     
+                ))
+            }
           </TargetSentenceWrapper>
         </QuestionWrapper>
       </QuestionBlockWrapper>
