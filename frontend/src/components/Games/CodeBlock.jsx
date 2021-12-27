@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import styled from 'styled-components';
 
 // Colors
@@ -26,7 +26,7 @@ const AnchorWrapper = styled.div`
   margin-right: 15px;
 `;
 
-const CodeBlockInput = styled.input`
+const CodeBlockDiv = styled.div`
   height: 51px;
   width: 700px;
   font-size: 23px;
@@ -61,22 +61,65 @@ export const CodeBlock = ({
   sample_answer
 }) => {
 
-  const [codeState, setCodeState] = useState("");
-
-  // ユーザーがinputした結果をコードブロックに反映させつつ、
-  // inputした結果とtarget_sentenceが一致したかを判定する関数
-  const handleInput = (e) => {
-    setCodeState(e.target.value);
-    const input_sentence = e.target.value;
-
-    setGameState({
-      ...gameState,
-    });
-  }
+  const [inputState, setCodeState] = useState("");
+  const refObject = useRef("");
 
   useEffect(() => {
-    document.getElementById('code-block').focus();
+    // 入力をコントロールするイベントリスナー
+    document.addEventListener("keypress", (e) => {
+      if(e.key !== 'Enter') {
+        setCodeState((prev) => prev + e.key);
+      }
+    });
+
+    // バックスペースをコントロールするイベントリスナー
+    document.addEventListener("keydown", (e) => {
+      if(e.key === 'Backspace') {
+        setCodeState((prev) => prev.slice(0, -1));
+      }
+    });
+
+    // イベントを消すクリーンアップ関数を返す
+    return () => {
+      document.removeEventListener("keypress", (e) => {
+        if(e.key !== 'Enter') {
+          setCodeState((prev) => prev + e.key);
+        }
+      });
+
+      document.removeEventListener("keydown", (e) => {
+        if(e.key === 'Backspace') {
+          setCodeState((prev) => prev.slice(0, -1));
+        }
+      });
+    }
   }, []);
+
+  // パターンに一致した文字列を配列として返す関数
+  // matchAllはIteratorを返す
+  // indexは、string[1]のように使うために必要
+  const getMatchWords = (
+    target_sentence,
+    regex_pattern
+  ) => {
+    const matchesIterator = target_sentence.matchAll(regex_pattern);
+    const match_words = [];
+    for (const match of matchesIterator) {
+      match_words.push({
+        match: match[0], 
+        index: match.index, 
+        input: match.input
+      })
+    }
+    return match_words
+  }
+
+  // ユーザーがinputした結果をコードブロックに反映させる関数
+  /*
+  const handleInput = (e) => {
+    setCodeState(e.target.value);
+  }
+  */
 
   return (
     <>
@@ -84,14 +127,9 @@ export const CodeBlock = ({
         <AnchorWrapper>
           /
         </AnchorWrapper>
-        <CodeBlockInput 
-          type='text' 
-          id='code-block' 
-          value={codeState} 
-          maxLength={30}
-          onChange={(e) => handleInput(e)} 
-          placeholder="Input Your Regex"
-        />
+        <CodeBlockDiv>
+          {inputState}
+        </CodeBlockDiv>
         <AnchorWrapper>
           /g
         </AnchorWrapper>
