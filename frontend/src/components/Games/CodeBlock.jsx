@@ -67,7 +67,8 @@ export const CodeBlock = ({
   // inputした結果とtarget_sentenceが一致したかを判定する関数
   const handleInput = (e) => {
     setCodeState(e.target.value);
-    console.log(e.target.value);
+    const input_sentence = e.target.value;
+
     setGameState({
       ...gameState,
     });
