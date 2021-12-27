@@ -50,7 +50,7 @@ const CodeBlockInput = styled.input`
   :-ms-input-placeholder {
     color: #eeeeee;
     opacity: 0.5;
-  }
+  };
 `;
 
 // 日本語にmaxlengh属性は聞かない
