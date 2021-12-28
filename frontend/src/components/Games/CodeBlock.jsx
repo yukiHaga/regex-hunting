@@ -72,8 +72,7 @@ const CodeBlockDiv = styled.div`
 export const CodeBlock = ({
   gameState, 
   setGameState,
-  target_sentence,
-  sample_answer
+  target_sentence
 }) => {
 
   const [inputState, setCodeState] = useState("");

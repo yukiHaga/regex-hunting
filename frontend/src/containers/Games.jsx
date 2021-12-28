@@ -252,6 +252,7 @@ export const Games = () => {
                   sentence={gameState.sentence}
                   target_sentence={gameState.target_sentence}
                   match_words={gameState.match_words}
+                  sample_answer={gameState.sample_answer}
                 />
               </QuestionBlockWrapper>
             </BattleBlockWrapper>
@@ -261,7 +262,6 @@ export const Games = () => {
               gameState={gameState} 
               setGameState={setGameState}
               target_sentence={gameState.target_sentence}
-              sample_answer={gameState.sample_answer}
             />
           </CodeBlockWrapper>
           <GageBlockWrapper>
