@@ -3,6 +3,10 @@ import styled, { keyframes } from 'styled-components';
 
 // Colors
 import { COLORS } from '../../style_constants.js';
+import TypeSound from '../../sounds/type.mp3';
+import BackSound from '../../sounds/back.mp3';
+import ErrorSound from '../../sounds/error.mp3';
+import DecisionSound from '../../sounds/decision.mp3';
 
 const CodeBlockWrapper = styled.div`
   background-color: ${COLORS.LIGHT_BLACK};
@@ -102,12 +106,16 @@ export const CodeBlock = ({
   useEffect(() => {
     const handlekeyPress = (e) => {
       if(e.key !== 'Enter') {
+        const audio = new Audio(TypeSound);
+        audio.play();
         setCodeState((prev) => prev + e.key);
       }
     }
 
     const handleBackSpace = (e) => {
       if(e.key === 'Backspace') {
+        const audio = new Audio(BackSound);
+        audio.play();
         setCodeState((prev) => prev.slice(0, -1));
       }
     };
@@ -117,13 +125,16 @@ export const CodeBlock = ({
         if(e.key === 'Enter') {
           const input_regex = inputRefObject.current.innerText;
           const match_words = getMatchWords(target_sentence, input_regex);
+          const audio = new Audio(DecisionSound);
+          audio.play();
           setGameState({
             ...gameState,
             match_words: match_words
           })
         }
       } catch(e) {
-        console.log("catchブロック", e);
+        const audio = new Audio(ErrorSound);
+        audio.play();
       }
     };
 
