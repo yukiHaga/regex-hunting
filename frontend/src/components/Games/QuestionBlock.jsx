@@ -112,6 +112,7 @@ export const QuestionBlock = ({
 
   const initialState = {
     sentence: getMonsterSentence(difficulty),
+    sentence_num: "",
     target_sentence: "",
     difficulty: getJpDifficulty(difficulty)
   };
@@ -126,6 +127,7 @@ export const QuestionBlock = ({
       const timer = setTimeout(() => {
         setSentenceState({
           sentence: sentence,
+          sentence_num: "Q1",
           target_sentence: target_sentence,
           difficulty: getJpDifficulty(difficulty)
         });
@@ -144,7 +146,7 @@ export const QuestionBlock = ({
       <QuestionBlockWrapper>
         <QuestionWrapper>
           <DifficultyWrapper>
-            {sentenceState.difficulty}
+            {sentenceState.sentence_num || sentenceState.difficulty}
           </DifficultyWrapper>
           {sentenceState.sentence}
           <TargetSentenceWrapper>
