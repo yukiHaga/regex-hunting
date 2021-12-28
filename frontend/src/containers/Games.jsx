@@ -131,7 +131,7 @@ export const Games = () => {
     sentence: "",
     target_sentence: "",
     sample_answer: [],
-    match_words: []
+    match_array: []
   }
 
   // ゲーム状態を管理するstate
@@ -179,7 +179,7 @@ export const Games = () => {
           correct_questions: [],
           incorrect_questions: [],
           sample_answer: data.questions["0"].sample_answer,
-          match_words: []
+          match_array: []
         }); 
       }).catch((e) => {
         if(e.response.status === HTTP_STATUS_CODE.NOT_FOUND){
@@ -192,7 +192,7 @@ export const Games = () => {
             sentence: "",
             target_sentence: "",
             sample_answer: [],
-            match_words: []
+            match_array: []
           }); 
         } else {
           throw e;
@@ -251,7 +251,7 @@ export const Games = () => {
                   difficulty={difficulty} 
                   sentence={gameState.sentence}
                   target_sentence={gameState.target_sentence}
-                  match_words={gameState.match_words}
+                  match_array={gameState.match_array}
                 />
               </QuestionBlockWrapper>
             </BattleBlockWrapper>

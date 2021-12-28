@@ -64,7 +64,7 @@ export const QuestionBlock = ({
   difficulty, 
   sentence,
   target_sentence,
-  match_words
+  match_array
 }) => {
 
   // モンスター名を取得する関数
@@ -106,8 +106,8 @@ export const QuestionBlock = ({
   };
 
   // マッチしたインデックスを取得する関数
-  const matchIndices = (match_words) => {
-    return match_words.map((value) => value.index)
+  const matchIndices = (match_array) => {
+    return match_array.map((value) => value.index)
   }
 
   const initialState = {
@@ -153,7 +153,7 @@ export const QuestionBlock = ({
                 sentenceState.target_sentence.split('').map((value, index) => (
                   <CustomSpan 
                     key={index} 
-                    backgroundcolor={matchIndices(match_words).includes(index)}
+                    backgroundcolor={matchIndices(match_array).includes(index)}
                   >
                     {value}
                   </CustomSpan>     

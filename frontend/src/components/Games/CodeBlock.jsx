@@ -89,15 +89,15 @@ export const CodeBlock = ({
     try {
       const regex_object = new RegExp(`${input_regex}`, 'g');
       const matchesIterator = target_sentence.matchAll(regex_object);
-      const match_words = [];
+      const match_array = [];
       for (const match of matchesIterator) {
-        match_words.push({
+        match_array.push({
           match: match[0], 
           index: match.index, 
           input: match.input
         })
       }
-      return match_words;
+      return match_array;
     } catch(e) {
       throw e;
     }
@@ -124,12 +124,13 @@ export const CodeBlock = ({
       try {
         if(e.key === 'Enter') {
           const input_regex = inputRefObject.current.innerText;
-          const match_words = getMatchWords(target_sentence, input_regex);
+          const input_match_array = getMatchWords(target_sentence, input_regex);
+          const sample_match_array = getMatchWords(target_sentence, sample_answer);
           const audio = new Audio(DecisionSound);
           audio.play();
           setGameState({
             ...gameState,
-            match_words: match_words
+            match_array: input_match_array
           })
         }
       } catch(e) {
