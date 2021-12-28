@@ -131,7 +131,8 @@ export const Games = () => {
     sentence: "",
     target_sentence: "",
     sample_answer: [],
-    match_array: []
+    match_array: [],
+    question_finish: false
   }
 
   // ゲーム状態を管理するstate
@@ -179,7 +180,8 @@ export const Games = () => {
           correct_questions: [],
           incorrect_questions: [],
           sample_answer: data.questions["0"].sample_answer,
-          match_array: []
+          match_array: [],
+          question_finish: false
         }); 
       }).catch((e) => {
         if(e.response.status === HTTP_STATUS_CODE.NOT_FOUND){
@@ -192,7 +194,8 @@ export const Games = () => {
             sentence: "",
             target_sentence: "",
             sample_answer: [],
-            match_array: []
+            match_array: [],
+            question_finish: false
           }); 
         } else {
           throw e;

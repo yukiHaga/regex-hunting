@@ -82,7 +82,7 @@ export const CodeBlock = ({
   // パターンに一致した文字列を配列として返す関数
   // matchAllはIteratorを返す
   // indexは、string[1]のように使うために必要
-  const getMatchWords = (
+  const getMatchArray = (
     target_sentence,
     input_regex
   ) => {
@@ -103,6 +103,25 @@ export const CodeBlock = ({
     }
   }
 
+  // getMatchArrayの戻り値を、マッチした文字列を要素とした配列に加工する関数
+  const getMatchWords = (
+    match_array
+  ) => {
+    return match_array.map((value) => value.match);
+  };
+
+  // マッチした配列と答えのマッチした配列が一致しているかを返す関数
+  const getQuestionFinish = (
+    input_match_words,
+    sample_match_words
+  ) => {
+    return Boolean(
+      !sample_match_words.filter((value) => {
+        return !input_match_words.includes(value);
+      }).length
+    )
+  };
+
   useEffect(() => {
     const handlekeyPress = (e) => {
       if(e.key !== 'Enter') {
@@ -110,7 +129,7 @@ export const CodeBlock = ({
         audio.play();
         setCodeState((prev) => prev + e.key);
       }
-    }
+    };
 
     const handleBackSpace = (e) => {
       if(e.key === 'Backspace') {
@@ -124,14 +143,24 @@ export const CodeBlock = ({
       try {
         if(e.key === 'Enter') {
           const input_regex = inputRefObject.current.innerText;
-          const input_match_array = getMatchWords(target_sentence, input_regex);
-          const sample_match_array = getMatchWords(target_sentence, sample_answer);
+          const input_match_array = getMatchArray(target_sentence, input_regex);
+          const sample_match_array = getMatchArray(target_sentence, sample_answer);
+          const input_match_words = getMatchWords(input_match_array);
+          const sample_match_words = getMatchWords(sample_match_array);
+          const question_finish = getQuestionFinish(input_match_words, sample_match_words); 
           const audio = new Audio(DecisionSound);
           audio.play();
-          setGameState({
-            ...gameState,
-            match_array: input_match_array
-          })
+          question_finish ? 
+            setGameState({
+              ...gameState,
+              match_array: input_match_array,
+              question_finish: question_finish
+            })
+          : 
+            setGameState({
+              ...gameState,
+              match_array: input_match_array,
+            })
         }
       } catch(e) {
         const audio = new Audio(ErrorSound);
@@ -159,7 +188,8 @@ export const CodeBlock = ({
   }, [
     gameState, 
     setGameState, 
-    target_sentence
+    target_sentence,
+    sample_answer
   ]);
 
   return (
