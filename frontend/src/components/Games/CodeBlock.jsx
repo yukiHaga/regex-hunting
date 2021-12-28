@@ -138,7 +138,7 @@ export const CodeBlock = ({
         setCodeState((prev) => prev.slice(0, -1));
       }
     };
-   
+
     const handleEnter = (e) => {
       try {
         if(e.key === 'Enter') {
@@ -150,17 +150,22 @@ export const CodeBlock = ({
           const question_finish = getQuestionFinish(input_match_words, sample_match_words); 
           const audio = new Audio(DecisionSound);
           audio.play();
-          question_finish ? 
+          if(question_finish) {
+            gameState.correct_questions.push(gameState.questions[0]);
+            gameState.questions.shift();
             setGameState({
               ...gameState,
               match_array: input_match_array,
-              question_finish: question_finish
+              question_finish: question_finish,
+              correct_questions: gameState.correct_questions,
+              questions: gameState.questions
             })
-          : 
+          } else {
             setGameState({
               ...gameState,
               match_array: input_match_array,
             })
+          }
         }
       } catch(e) {
         const audio = new Audio(ErrorSound);

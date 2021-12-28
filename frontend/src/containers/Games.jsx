@@ -255,6 +255,7 @@ export const Games = () => {
                   sentence={gameState.sentence}
                   target_sentence={gameState.target_sentence}
                   match_array={gameState.match_array}
+                  question_finish={gameState.question_finish}
                 />
               </QuestionBlockWrapper>
             </BattleBlockWrapper>
