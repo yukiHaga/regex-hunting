@@ -251,6 +251,7 @@ export const Games = () => {
                   difficulty={difficulty} 
                   sentence={gameState.sentence}
                   target_sentence={gameState.target_sentence}
+                  match_words={gameState.match_words}
                 />
               </QuestionBlockWrapper>
             </BattleBlockWrapper>

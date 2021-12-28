@@ -55,10 +55,15 @@ const TargetSentenceWrapper = styled.div`
   font-weight: 500;
 `;
 
+const CustomSpan = styled.span`
+  background-color: ${(props) => props.backgroundcolor && COLORS.BLUE };
+`;
+
 export const QuestionBlock = ({ 
   difficulty, 
   sentence,
   target_sentence,
+  match_words
 }) => {
 
   // モンスター名を取得する関数
@@ -98,6 +103,11 @@ export const QuestionBlock = ({
     }
     return jpDifficulty;
   };
+
+  // マッチしたインデックスを取得する関数
+  const matchIndices = (match_words) => {
+    return match_words.map((value) => value.index)
+  }
 
   const initialState = {
     sentence: getMonsterSentence(difficulty),
@@ -140,7 +150,12 @@ export const QuestionBlock = ({
             {
               sentenceState.target_sentence &&
                 sentenceState.target_sentence.split('').map((value, index) => (
-                  <span key={index}>{value}</span>     
+                  <CustomSpan 
+                    key={index} 
+                    backgroundcolor={matchIndices(match_words).includes(index)}
+                  >
+                    {value}
+                  </CustomSpan>     
                 ))
             }
           </TargetSentenceWrapper>
