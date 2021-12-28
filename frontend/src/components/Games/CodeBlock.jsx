@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import styled from 'styled-components';
+import styled, { keyframes } from 'styled-components';
 
 // Colors
 import { COLORS } from '../../style_constants.js';
@@ -24,6 +24,13 @@ const AnchorWrapper = styled.div`
   font-weight: 500;
   margin-left: 15px;
   margin-right: 15px;
+`;
+
+const blink = keyframes`
+  0% { opacity: 0;}
+  50% { opacity: 0;}
+  51% { opacity: 1;}
+  100% { opacity: 1;}
 `;
 
 const CodeBlockDiv = styled.div`
@@ -51,6 +58,10 @@ const CodeBlockDiv = styled.div`
     color: #eeeeee;
     opacity: 0.5;
   };
+  &:after {
+    content: "_"; 
+    animation: ${blink} 1s infinite;
+  };
 `;
 
 // 日本語にmaxlengh属性は聞かない
@@ -62,64 +73,82 @@ export const CodeBlock = ({
 }) => {
 
   const [inputState, setCodeState] = useState("");
-  const refObject = useRef("");
-
-  useEffect(() => {
-    // 入力をコントロールするイベントリスナー
-    document.addEventListener("keypress", (e) => {
-      if(e.key !== 'Enter') {
-        setCodeState((prev) => prev + e.key);
-      }
-    });
-
-    // バックスペースをコントロールするイベントリスナー
-    document.addEventListener("keydown", (e) => {
-      if(e.key === 'Backspace') {
-        setCodeState((prev) => prev.slice(0, -1));
-      }
-    });
-
-    // イベントを消すクリーンアップ関数を返す
-    return () => {
-      document.removeEventListener("keypress", (e) => {
-        if(e.key !== 'Enter') {
-          setCodeState((prev) => prev + e.key);
-        }
-      });
-
-      document.removeEventListener("keydown", (e) => {
-        if(e.key === 'Backspace') {
-          setCodeState((prev) => prev.slice(0, -1));
-        }
-      });
-    }
-  }, []);
+  const inputRefObject = useRef("");
 
   // パターンに一致した文字列を配列として返す関数
   // matchAllはIteratorを返す
   // indexは、string[1]のように使うために必要
   const getMatchWords = (
     target_sentence,
-    regex_pattern
+    input_regex
   ) => {
-    const matchesIterator = target_sentence.matchAll(regex_pattern);
-    const match_words = [];
-    for (const match of matchesIterator) {
-      match_words.push({
-        match: match[0], 
-        index: match.index, 
-        input: match.input
-      })
+    try {
+      const regex_object = new RegExp(`${input_regex}`, 'g');
+      const matchesIterator = target_sentence.matchAll(regex_object);
+      const match_words = [];
+      for (const match of matchesIterator) {
+        match_words.push({
+          match: match[0], 
+          index: match.index, 
+          input: match.input
+        })
+      }
+      return match_words;
+    } catch(e) {
+      throw e;
     }
-    return match_words
   }
 
-  // ユーザーがinputした結果をコードブロックに反映させる関数
-  /*
-  const handleInput = (e) => {
-    setCodeState(e.target.value);
-  }
-  */
+  useEffect(() => {
+    const handlekeyPress = (e) => {
+      if(e.key !== 'Enter') {
+        setCodeState((prev) => prev + e.key);
+      }
+    }
+
+    const handleBackSpace = (e) => {
+      if(e.key === 'Backspace') {
+        setCodeState((prev) => prev.slice(0, -1));
+      }
+    };
+   
+    const handleEnter = (e) => {
+      try {
+        if(e.key === 'Enter') {
+          const input_regex = inputRefObject.current.innerText;
+          const match_words = getMatchWords(target_sentence, input_regex);
+          setGameState({
+            ...gameState,
+            match_words: match_words
+          })
+        }
+      } catch(e) {
+        console.log("catchブロック", e);
+      }
+    };
+
+    // 入力をコントロールするイベントリスナー
+    document.addEventListener("keypress", handlekeyPress);
+
+    // バックスペースをコントロールするイベントリスナー
+    document.addEventListener("keydown", handleBackSpace);
+
+    // エンターキーをコントロールするイベントリスナー
+    document.addEventListener("keydown", handleEnter);
+
+    // イベントを消すクリーンアップ関数を返す
+    return () => {
+      document.removeEventListener("keypress", handlekeyPress);
+
+      document.removeEventListener("keydown", handleBackSpace);
+
+      document.removeEventListener("keydown", handleEnter);
+    }
+  }, [
+    gameState, 
+    setGameState, 
+    target_sentence
+  ]);
 
   return (
     <>
@@ -127,7 +156,7 @@ export const CodeBlock = ({
         <AnchorWrapper>
           /
         </AnchorWrapper>
-        <CodeBlockDiv>
+        <CodeBlockDiv ref={inputRefObject}>
           {inputState}
         </CodeBlockDiv>
         <AnchorWrapper>
