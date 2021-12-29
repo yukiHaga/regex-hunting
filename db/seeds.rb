@@ -11,7 +11,7 @@ Monster.create!(
   name: "スクータム",
   max_hp: 100,
   attack: 50,
-  defence: 50,
+  defence: 10,
   difficulty: "elementary"
 )
 
@@ -19,7 +19,7 @@ Monster.create!(
   name: "カスアリウス",
   max_hp: 100,
   attack: 100,
-  defence: 100,
+  defence: 10,
   difficulty: "intermediate"
 )
 
@@ -27,7 +27,7 @@ Monster.create!(
   name: "オルファ・ラパクス",
   max_hp: 100,
   attack: 150,
-  defence: 100,
+  defence: 10,
   difficulty: "advanced"
 )
 
