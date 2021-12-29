@@ -264,7 +264,6 @@ export const Games = () => {
                     <>
                       <AdvancedMonster />
                     </>
-      
                 }
               </MonsterBlockWrapper>
               <QuestionBlockWrapper>
@@ -288,6 +287,7 @@ export const Games = () => {
               monster_max_hp={gameState.monster_max_hp}
               monster_attack={gameState.monster_attack}
               monster_defence={gameState.monster_defence}
+              question_finish={gameState.question_finish}
             />
           </CodeBlockWrapper>
           <GageBlockWrapper>

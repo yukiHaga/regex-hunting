@@ -81,7 +81,8 @@ export const CodeBlock = ({
   monster_hp,
   monster_max_hp,
   monster_attack,
-  monster_defence
+  monster_defence,
+  question_finish
 }) => {
 
   const [inputState, setCodeState] = useState("");
@@ -153,25 +154,29 @@ export const CodeBlock = ({
       }
     };
 
+    // question_finishがfalseならEnterを押せるようにする
     const handleEnter = (e) => {
       try {
-        if(e.key === 'Enter') {
+        if(e.key === 'Enter' && question_finish === false) {
           const input_regex = inputRefObject.current.innerText;
           const input_match_array = getMatchArray(target_sentence, input_regex);
           const sample_match_array = getMatchArray(target_sentence, sample_answer);
           const input_match_words = getMatchWords(input_match_array);
           const sample_match_words = getMatchWords(sample_match_array);
-          const question_finish = getQuestionFinish(input_match_words, sample_match_words); 
+          const current_question_finish = getQuestionFinish(
+            input_match_words, 
+            sample_match_words
+          ); 
           const audio = new Audio(DecisionSound);
           audio.play();
-          if(question_finish) {
+          if(current_question_finish) {
             gameState.correct_questions.push(gameState.questions[0]);
             gameState.questions.shift();
             const current_hp = monster_hp - calculateDamage(monster_defence);
             setGameState({
               ...gameState,
               match_array: input_match_array,
-              question_finish: question_finish,
+              question_finish: current_question_finish,
               correct_questions: gameState.correct_questions,
               questions: gameState.questions,
               monster_hp: current_hp
