@@ -3,10 +3,13 @@ import styled, { keyframes } from 'styled-components';
 
 // Colors
 import { COLORS } from '../../style_constants.js';
+
+// Sounds
 import TypeSound from '../../sounds/type.mp3';
 import BackSound from '../../sounds/back.mp3';
 import ErrorSound from '../../sounds/error.mp3';
 import DecisionSound from '../../sounds/decision.mp3';
+import CutMonster from '../../sounds/cut.mp3';
 
 // プレイヤーの攻撃力が定義してある定数
 // プレイヤーのアタックは20で固定とする
@@ -173,6 +176,8 @@ export const CodeBlock = ({
             gameState.correct_questions.push(gameState.questions[0]);
             gameState.questions.shift();
             const current_hp = monster_hp - calculateDamage(monster_defence);
+            const audio = new Audio(CutMonster);
+            audio.play();
             setGameState({
               ...gameState,
               match_array: input_match_array,
@@ -217,7 +222,8 @@ export const CodeBlock = ({
     target_sentence,
     sample_answer,
     monster_hp,
-    monster_defence
+    monster_defence,
+    question_finish
   ]);
 
   return (
