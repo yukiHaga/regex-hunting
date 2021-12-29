@@ -242,14 +242,17 @@ export const Games = () => {
                       <ElementaryMonster 
                         monster_hp={gameState.monster_hp}
                         monster_max_hp={gameState.monster_max_hp}
+                        question_finish={gameState.question_finish}
                       />
                       <ElementaryMonster 
                         monster_hp={gameState.monster_hp}
                         monster_max_hp={gameState.monster_max_hp}
+                        question_finish={gameState.question_finish}
                       />
                       <ElementaryMonster 
                         monster_hp={gameState.monster_hp}
                         monster_max_hp={gameState.monster_max_hp}
+                        question_finish={gameState.question_finish}
                       />
                     </>
                 }
