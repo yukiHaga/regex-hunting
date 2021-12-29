@@ -125,7 +125,10 @@ export const Games = () => {
   const initialState = {
     game_management: {},
     questions: [],
-    monster: {},
+    monster_attack: {},
+    monster_defence: {},
+    monster_hp: 0,
+    monster_max_hp: 0,
     correct_questions: [],
     incorrect_questions: [],
     sentence: "",
@@ -176,7 +179,10 @@ export const Games = () => {
           target_sentence: data.questions["0"].target_sentence,
           game_management: data.game_management,
           questions: data.questions,
-          monster: data.monster,
+          monster_attack: data.monster.attack,
+          monster_defence: data.monster.defence,
+          monster_hp: data.monster.max_hp,
+          monster_max_hp: data.monster.max_hp,
           correct_questions: [],
           incorrect_questions: [],
           sample_answer: data.questions["0"].sample_answer,
@@ -188,14 +194,17 @@ export const Games = () => {
           setGameState({
             game_management: {},
             questions: [],
-            monster: {},
             correct_questions: [],
             incorrect_questions: [],
             sentence: "",
             target_sentence: "",
             sample_answer: [],
             match_array: [],
-            question_finish: false
+            question_finish: false,
+            monster_attack: {},
+            monster_defence: {},
+            monster_hp: 0,
+            monster_max_hp: 0,
           }); 
         } else {
           throw e;
@@ -231,15 +240,12 @@ export const Games = () => {
                   difficulty === 'elementary' && 
                     <>
                       <ElementaryMonster 
-                        monster = {gameState.monster}
                         question_finish={gameState.question_finish}
                       />
                       <ElementaryMonster 
-                        monster = {gameState.monster}
                         question_finish={gameState.question_finish}
                       />
                       <ElementaryMonster 
-                        monster = {gameState.monster}
                         question_finish={gameState.question_finish}
                       />
                     </>
