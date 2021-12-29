@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 
 // Colors
@@ -24,14 +24,16 @@ const HpGageWrapper = styled.div`
 `;
 
 const InnerHpGageWrapper = styled.div`
-  width: ${(props) => props.question_finish || '160px'};
+  width: ${(props) => `${160 * (props.monster_hp / props.monster_max_hp)}px`};
+  transition: 0.5s;
   height: 15px;
   border-radius: 3px;
   background-color: ${COLORS.LIGHT_BLUE};
 `;
 
 export const ElementaryMonster = ({
-  question_finish 
+  monster_hp,
+  monster_max_hp
 }) => {
 
 
@@ -40,7 +42,10 @@ export const ElementaryMonster = ({
       <ElementaryWrapper>
         <ElementaryMonsterWrapper src={ElementaryMonsterImage} />
         <HpGageWrapper>
-          <InnerHpGageWrapper question_finish={question_finish}/>
+          <InnerHpGageWrapper 
+            monster_hp={monster_hp} 
+            monster_max_hp={monster_max_hp}
+          />
         </HpGageWrapper>
       </ElementaryWrapper>
     </>

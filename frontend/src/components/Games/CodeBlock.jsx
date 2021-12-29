@@ -8,6 +8,10 @@ import BackSound from '../../sounds/back.mp3';
 import ErrorSound from '../../sounds/error.mp3';
 import DecisionSound from '../../sounds/decision.mp3';
 
+// プレイヤーの攻撃力が定義してある定数
+// プレイヤーのアタックは20で固定とする
+import { PLAYER_STATUS } from '../../constants.js';
+
 const CodeBlockWrapper = styled.div`
   background-color: ${COLORS.LIGHT_BLACK};
   border-radius: 3px;
@@ -73,7 +77,11 @@ export const CodeBlock = ({
   gameState, 
   setGameState,
   target_sentence,
-  sample_answer
+  sample_answer,
+  monster_hp,
+  monster_max_hp,
+  monster_attack,
+  monster_defence
 }) => {
 
   const [inputState, setCodeState] = useState("");
@@ -122,6 +130,12 @@ export const CodeBlock = ({
     )
   };
 
+  // モンスターに与えるダメージを計算する関数
+  const calculateDamage = (defence) => {
+    const damage = PLAYER_STATUS.ATTACK - defence;
+    return damage;
+  };
+
   useEffect(() => {
     const handlekeyPress = (e) => {
       if(e.key !== 'Enter') {
@@ -153,18 +167,20 @@ export const CodeBlock = ({
           if(question_finish) {
             gameState.correct_questions.push(gameState.questions[0]);
             gameState.questions.shift();
+            const current_hp = monster_hp - calculateDamage(monster_defence);
             setGameState({
               ...gameState,
               match_array: input_match_array,
               question_finish: question_finish,
               correct_questions: gameState.correct_questions,
-              questions: gameState.questions
-            })
+              questions: gameState.questions,
+              monster_hp: current_hp
+            });
           } else {
             setGameState({
               ...gameState,
               match_array: input_match_array,
-            })
+            });
           }
         }
       } catch(e) {
@@ -194,7 +210,9 @@ export const CodeBlock = ({
     gameState, 
     setGameState, 
     target_sentence,
-    sample_answer
+    sample_answer,
+    monster_hp,
+    monster_defence
   ]);
 
   return (

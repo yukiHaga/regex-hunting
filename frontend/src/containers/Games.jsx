@@ -240,13 +240,16 @@ export const Games = () => {
                   difficulty === 'elementary' && 
                     <>
                       <ElementaryMonster 
-                        question_finish={gameState.question_finish}
+                        monster_hp={gameState.monster_hp}
+                        monster_max_hp={gameState.monster_max_hp}
                       />
                       <ElementaryMonster 
-                        question_finish={gameState.question_finish}
+                        monster_hp={gameState.monster_hp}
+                        monster_max_hp={gameState.monster_max_hp}
                       />
                       <ElementaryMonster 
-                        question_finish={gameState.question_finish}
+                        monster_hp={gameState.monster_hp}
+                        monster_max_hp={gameState.monster_max_hp}
                       />
                     </>
                 }
@@ -281,6 +284,10 @@ export const Games = () => {
               setGameState={setGameState}
               target_sentence={gameState.target_sentence}
               sample_answer={gameState.sample_answer}
+              monster_hp={gameState.monster_hp}
+              monster_max_hp={gameState.monster_max_hp}
+              monster_attack={gameState.monster_attack}
+              monster_defence={gameState.monster_defence}
             />
           </CodeBlockWrapper>
           <GageBlockWrapper>
