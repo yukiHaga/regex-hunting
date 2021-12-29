@@ -53,7 +53,7 @@ export const ElementaryMonster = ({
   // モンスターに与えるダメージを計算する関数
   // プレイヤーのアタックは20で固定とする
   const calculateDamage = () => {
-
+    const damage = deffence - 20;
   }
 
   useEffect(() => {
