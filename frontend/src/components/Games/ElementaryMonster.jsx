@@ -5,6 +5,7 @@ import styled from 'styled-components';
 import { COLORS } from '../../style_constants.js';
 
 import ElementaryMonsterImage from '../../images/elementary.png'; 
+import { PLAYER_STATUS } from '../../constants.js';
 
 const ElementaryWrapper = styled.div`
 `;
@@ -24,7 +25,7 @@ const HpGageWrapper = styled.div`
 `;
 
 const InnerHpGageWrapper = styled.div`
-  width: 150px;
+  width: ${(props) => `${props.width}px`};
   height: 15px;
   border-radius: 3px;
   background-color: ${COLORS.LIGHT_BLUE};
@@ -44,6 +45,7 @@ export const ElementaryMonster = ({
     name: name,
     hp: max_hp,
     max_hp: max_hp,
+    width: 160,
     attack: attack,
     defence: defence,
   }
@@ -52,22 +54,34 @@ export const ElementaryMonster = ({
 
   // モンスターに与えるダメージを計算する関数
   // プレイヤーのアタックは20で固定とする
-  const calculateDamage = () => {
-    const damage = deffence - 20;
+  const calculateDamage = (defence) => {
+    const damage = PLAYER_STATUS.ATTACK - defence;
+    return damage;
   }
 
+  // 問題終了ごとに、ダメージを計算して画面表示させるためのuseEffect
   useEffect(() => {
     if(question_finish) {
-
+      const current_hp = monsterState.hp - calculateDamage(monsterState.defence);
+      setMonsterState((prev) => ({
+        ...prev,
+        width: prev.width * (current_hp / max_hp)  
+      }));
     }
-  }, [])
+  }, [
+    max_hp,
+    monsterState.defence,
+    monsterState.hp,
+    question_finish
+  ])
+  console.log(monsterState);
 
   return (
     <>
       <ElementaryWrapper>
         <ElementaryMonsterWrapper src={ElementaryMonsterImage} />
         <HpGageWrapper>
-          <InnerHpGageWrapper />
+          <InnerHpGageWrapper width={monsterState.width}/>
         </HpGageWrapper>
       </ElementaryWrapper>
     </>
