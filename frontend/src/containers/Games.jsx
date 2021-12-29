@@ -230,9 +230,18 @@ export const Games = () => {
                 {
                   difficulty === 'elementary' && 
                     <>
-                      <ElementaryMonster />
-                      <ElementaryMonster />
-                      <ElementaryMonster />
+                      <ElementaryMonster 
+                        monster = {gameState.monster}
+                        question_finish={gameState.question_finish}
+                      />
+                      <ElementaryMonster 
+                        monster = {gameState.monster}
+                        question_finish={gameState.question_finish}
+                      />
+                      <ElementaryMonster 
+                        monster = {gameState.monster}
+                        question_finish={gameState.question_finish}
+                      />
                     </>
                 }
                 {

@@ -69,7 +69,7 @@ export const QuestionBlock = ({
 }) => {
 
   // モンスター名を取得する関数
-  const getMonsterSentence = (difficulty) => {
+  const getMonsterName = (difficulty) => {
     let monsterName;
     switch (difficulty){
       case 'elementary':
@@ -84,7 +84,7 @@ export const QuestionBlock = ({
       default:
         console.log('エラーが起きました');
     }
-    return `${monsterName}が現れた！`;
+    return monsterName;
   };
 
   // 難易度を日本語に変換する関数
@@ -112,7 +112,7 @@ export const QuestionBlock = ({
   }
 
   const initialState = {
-    sentence: getMonsterSentence(difficulty),
+    sentence: `${getMonsterName(difficulty)}が現れた！`,
     sentence_num: "",
     target_sentence: "",
     difficulty: getJpDifficulty(difficulty)
@@ -124,7 +124,7 @@ export const QuestionBlock = ({
   // このuseEffectがあるおかげで、最初のモンスターセンテンスが
   // 問題1のセンテンスに自動で切り替わる
   useEffect(() => {
-    if (sentence && sentenceState.sentence === getMonsterSentence(difficulty)){
+    if (sentence && sentenceState.sentence === `${getMonsterName(difficulty)}が現れた！`){
       const timer = setTimeout(() => {
         setSentenceState({
           sentence: sentence,
@@ -140,6 +140,20 @@ export const QuestionBlock = ({
     sentence,
     target_sentence,
     sentenceState.sentence
+  ]);
+
+  // question_finishがtrueの時に実行されるuseEffect
+  // ダメージセンテンスがQuestionBlockに表示される
+  useEffect(() => {
+    if(question_finish) {
+      setSentenceState((prev) => ({
+        ...prev,
+        sentence: `${getMonsterName(difficulty)}に10のダメージ`,
+      }))
+    }
+  },[
+    question_finish,
+    difficulty
   ]);
 
   return (
