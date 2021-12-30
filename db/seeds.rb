@@ -43,7 +43,7 @@ Question.create!(
   sentence: "A, a, 9の全てにマッチするメタ文字を入力せよ。",
   target_sentence: "A a 9",
   sample_answer: "\\w",
-  commentary: "\\wはa~zまたはA~Zまたは0~9または_の中の1文字を表します。[a-zA-Z\\d]でもOKです。",
+  commentary: "\\wはa~z, A~Z, 0~9, _の中の1文字を表します。[a-zA-Z\\d]で書き換え可能です。",
   difficulty: "elementary"
 )
 
