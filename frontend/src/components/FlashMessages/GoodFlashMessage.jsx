@@ -5,19 +5,41 @@ import styled from 'styled-components';
 import Alert from '@material-ui/lab/Alert';
 import Slide from '@mui/material/Slide';
 
+// Colors
+import { COLORS } from '../../style_constants.js';
+
 const CustomSlide = styled(Slide)`
 `;
 
-const AlertWrapper = styled.div`
+const GoodFlashMessageWrapper = styled.div`
   display: flex;
   justify-content: end;
 `;
 
-const CustomAlert = styled(Alert)`
-  width: 220px;
-  margin-top: 8px;
-  margin-right: 16px;
+const GoodMessageTitle = styled.div`
+  font-family: Raleway;
+  font-style: italic;
+  font-weight: bold;
+  font-size: 32px;
+  color: ${COLORS.MAIN};
+  padding-top: 5px;
+  padding-bottom: 5px;
+`;
+
+const GoodMessage = styled.div`
+  width: 190px;
+  height: 150px;
   pointerEvents: 'none';
+  background-color: ${COLORS.SUB};
+  color: ${COLORS.BLACK};
+  font-family: YuGothic;
+  font-style: normal;
+  font-size: 16px;
+  font-weight: 500;
+  border-radius: 5px;
+  padding-left: 30px;
+  padding-right: 30px;
+  padding-bottom: 5px;
 `;
 
 export const GoodFlashMessage = ({
@@ -35,11 +57,14 @@ export const GoodFlashMessage = ({
         mountOnEnter 
         unmountOnExit
       >
-        <AlertWrapper>
-          <CustomAlert severity="success">
+        <GoodFlashMessageWrapper>
+          <GoodMessage severity="success">
+            <GoodMessageTitle>
+              Good
+            </GoodMessageTitle>
             {commentary}
-          </CustomAlert>
-        </AlertWrapper>
+          </GoodMessage>
+        </GoodFlashMessageWrapper>
       </CustomSlide>
     </>
   );

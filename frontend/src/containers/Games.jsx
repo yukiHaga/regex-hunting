@@ -17,7 +17,7 @@ import { CodeBlock } from '../components/Games/CodeBlock.jsx';
 import { TimeGage } from '../components/Games/TimeGage.jsx';
 import { HpGage } from '../components/Games/HpGage.jsx';
 import { GameFooter } from '../components/Footers/GameFooter.jsx';
-
+import { GoodFlashMessage } from '../components/FlashMessages/GoodFlashMessage.jsx'
 
 // Contextオブジェクト
 import { UserContext } from "../context/UserProvider.js";
@@ -104,6 +104,12 @@ const GageBlockWrapper = styled.div`
   margin-top: 13px;
 `;
 
+// Goodメッセージを出すためのコンポーネント
+const CustomGoodFlashMessage = styled(GoodFlashMessage)`
+  position: relative;
+  z-index: 1;
+`;
+
 export const Games = () => {
 
   // useContext
@@ -135,6 +141,7 @@ export const Games = () => {
     target_sentence: "",
     sample_answer: [],
     match_array: [],
+    commentary: "",
     question_finish: false
   }
 
@@ -187,6 +194,7 @@ export const Games = () => {
           incorrect_questions: [],
           sample_answer: data.questions["0"].sample_answer,
           match_array: [],
+          commentary: data.questions["0"].commentary,
           question_finish: false
         }); 
       }).catch((e) => {
@@ -205,6 +213,7 @@ export const Games = () => {
             monster_defence: {},
             monster_hp: 0,
             monster_max_hp: 0,
+            commentary: ""
           }); 
         } else {
           throw e;
@@ -279,6 +288,13 @@ export const Games = () => {
                 />
               </QuestionBlockWrapper>
             </BattleBlockWrapper>
+            {  
+              gameState.question_finish && 
+                <CustomGoodFlashMessage 
+                  question_finish={gameState.question_finish}
+                  commentary={gameState.commentary}
+                />
+            }
           </GameBlockWrapper>
           <CodeBlockWrapper>
             <CodeBlock 
