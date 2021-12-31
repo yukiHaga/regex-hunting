@@ -117,20 +117,8 @@ export const MetaMenuBar = () => {
                 <CustomTd>小文字アルファベットのいずれか1文字</CustomTd>
               </tr>
               <tr>
-                <MetaTd>?</MetaTd> 
-                <CustomTd>直前の文字が1文字または無し</CustomTd>
-              </tr>
-              <tr>
-                <MetaTd>(ABC)?</MetaTd> 
-                <CustomTd>文字列ABCまたは無し</CustomTd>
-              </tr>
-              <tr>
                 <MetaTd>.</MetaTd> 
                 <CustomTd>任意の1文字</CustomTd>
-              </tr>
-              <tr>
-                <MetaTd>\n</MetaTd> 
-                <CustomTd>改行</CustomTd>
               </tr>
               <tr>
                 <MetaTd>+</MetaTd> 
@@ -147,6 +135,30 @@ export const MetaMenuBar = () => {
               <tr>
                 <MetaTd>.*</MetaTd> 
                 <CustomTd>任意の文字が0文字以上(貪欲なマッチ)</CustomTd>
+              </tr>
+              <tr>
+                <MetaTd>ABC|DEF</MetaTd> 
+                <CustomTd>文字列ABCまたは文字列DEF</CustomTd>
+              </tr>
+              <tr>
+                <MetaTd>ABC|DEF|GHR</MetaTd> 
+                <CustomTd>文字列ABCまたは文字列DEFまたは文字列GHR</CustomTd>
+              </tr>
+              <tr>
+                <MetaTd>\w</MetaTd> 
+                <CustomTd>[a-zA-Z0-9_]</CustomTd>
+              </tr>
+              <tr>
+                <MetaTd>?</MetaTd> 
+                <CustomTd>直前の文字が1文字または無し</CustomTd>
+              </tr>
+              <tr>
+                <MetaTd>(ABC)?</MetaTd> 
+                <CustomTd>文字列ABCまたは無し</CustomTd>
+              </tr>
+              <tr>
+                <MetaTd>\n</MetaTd> 
+                <CustomTd>改行</CustomTd>
               </tr>
               <tr>
                 <MetaTd>[^A]*</MetaTd> 
@@ -167,10 +179,6 @@ export const MetaMenuBar = () => {
               <tr>
                 <MetaTd>(?:)</MetaTd> 
                 <CustomTd>()と?:を合わせると、キャプチャをしなくなる。</CustomTd>
-              </tr>
-              <tr>
-                <MetaTd>\w</MetaTd> 
-                <CustomTd>[a-zA-Z0-9_]</CustomTd>
               </tr>
               <tr>
                 <MetaTd>^</MetaTd> 
@@ -195,14 +203,6 @@ export const MetaMenuBar = () => {
               <tr>
                 <MetaTd>\s</MetaTd> 
                 <CustomTd>[ \t\r\n\f]</CustomTd>
-              </tr>
-              <tr>
-                <MetaTd>ABC|DEF</MetaTd> 
-                <CustomTd>文字列ABCまたは文字列DEF</CustomTd>
-              </tr>
-              <tr>
-                <MetaTd>ABC|DEF|GHR</MetaTd> 
-                <CustomTd>文字列ABCまたは文字列DEFまたは文字列GHR</CustomTd>
               </tr>
               <tr>
                 <MetaTd>\b</MetaTd> 
