@@ -168,12 +168,15 @@ export const QuestionBlock = ({
     difficulty
   ]);
 
+  console.log(questions);
+  console.log(gameState);
+
   return (
     <>
       <QuestionBlockWrapper>
         <QuestionWrapper>
           <DifficultyWrapper>
-            {sentenceState.sentence_num || sentenceState.difficulty}
+            {sentenceState.sentence_num || sentenceState.jpDifficulty}
           </DifficultyWrapper>
           {sentenceState.sentence}
           <TargetSentenceWrapper>
