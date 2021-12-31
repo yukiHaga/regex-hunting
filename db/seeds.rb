@@ -40,91 +40,109 @@ end
 
 # 1問目
 Question.create!(
-  sentence: "A, a, 9の全てにマッチするメタ文字を入力せよ。",
-  target_sentence: "A a 9",
-  sample_answer: "\\w",
-  commentary: "\\wはa~z, A~Z, 0~9, _の中の1文字を表します。[a-zA-Z\\d]で書き換え可能です。",
+  sentence: "1, 5, 9の全てにマッチする正規表現を入力せよ。",
+  target_sentence: "1, 5, 9",
+  sample_answer: "\\d",
+  commentary: "\\dは1桁の数字を表します。[0-9]で書き換え可能です。",
   difficulty: "elementary"
 )
 
 # 2問目
 Question.create!(
-  sentence: "100, 200, 300の全てにマッチする正規表現を入力せよ。",
-  target_sentence: "100, 200, 300",
-  sample_answer: "\\d{3}",
-  commentary: "\\d{3}は3桁の数字を表します。",
+  sentence: "10, 20, 30の全てにマッチする正規表現を入力せよ。",
+  target_sentence: "10, 20, 30",
+  sample_answer: "\\d{2}",
+  commentary: "\\d{2}は2桁の数字を表します。\\d+でマッチさせることもできます。",
   difficulty: "elementary"
 )
 
 # 3問目
 Question.create!(
-  sentence: "1000, 10000, 100000の全てにマッチする正規表現を入力せよ。",
-  target_sentence: "1000, 10000, 100000",
-  sample_answer: "\\d{4,6}",
-  commentary: "\\d{4,6}は4桁~6桁の数字を表します。",
+  sentence: "100, 1000, 10000の全てにマッチする正規表現を入力せよ。",
+  target_sentence: "100, 1000, 10000",
+  sample_answer: "\\d{3,5}",
+  commentary: "\\d{3,5}は3桁~5桁の数字を表します。\\d+でマッチさせることもできます。",
   difficulty: "elementary"
 )
 
 # 4問目
 Question.create!(
-  sentence: "アメ, アキ, アカの全てにマッチする正規表現を入力せよ。",
-  target_sentence: "アメ, アキ, アカ",
-  sample_answer: "ア[メキカ]",
-  commentary: "ア[メキカ]の[メキカ]は、メ, キ, カのどれか1文字を表します。そのため、ア[メキカ]は、アメ, アキ, アカを表す正規表現であると分かります。ア.でもOKです。",
+  sentence: "1000, 10000, 100000にマッチする正規表現を入力せよ。",
+  target_sentence: "10, 100, 1000, 10000, 100000",
+  sample_answer: "\\d{4,6}",
+  commentary: "\\d{4,6}は4桁~6桁の数字を表します。\\d{4,}でマッチさせることもできます。",
   difficulty: "elementary"
 )
 
 # 5問目
 Question.create!(
-  sentence: "アキチ, アイチ, アケチの全てにマッチする正規表現を入力せよ。",
-  target_sentence: "アキチ, アイチ, アケチ",
-  sample_answer: "ア[キイケ]チ",
-  commentary: "\\ア[キイケ]チの[キイケ]は、キ, イ, ケのどれか1文字を表します。そのため、ア[キイケ]チは、アキチ, アイチ, アケチを表す正規表現であると分かります。ア.チでもOKです。",
+  sentence: "A, B, Zの全てにマッチする正規表現を入力せよ。",
+  target_sentence: "A, B, Z",
+  sample_answer: "\\[ABZ]",
+  commentary: "\\[ABZ]はA, B, Zのどれか一文字を表します。[A-Z]でマッチさせることもできます。",
   difficulty: "elementary"
 )
 
 # 6問目
 Question.create!(
-  sentence: "アキチ, アイチ, アイールサンチの全てにマッチする正規表現を入力せよ。",
-  target_sentence: "アキチ, アイチ, アイールサンチ",
-  sample_answer: "ア(キ|イ|イールサン)チ",
-  commentary: "ア(キ|イ|イールサン)チの(キ|イ|イールサン)は、キ, イ, イールサンのどれかの文字を表します。そのため、ア(キ|イ|イールサン)チは、アキチ, アイチ, アイールサンチを表す正規表現であると分かります。ア([キイ]|イールサン)チ,  ア.+?チでもOKです。",
+  sentence: "A, 9, Zの全てにマッチする正規表現を入力せよ。",
+  target_sentence: "A, 9, Z",
+  sample_answer: "\\[A9Z]",
+  commentary: "\\[A9Z]はA, 9, Zのどれか一文字を表します。\\wでマッチさせることもできます。",
   difficulty: "elementary"
 )
 
 # 7問目
 Question.create!(
-  sentence: "すもものうち, すもももものうち, すもももももももものうちの全てにマッチする正規表現を入力せよ。",
-  target_sentence: "すもものうち すもももものうち すもももももももものうち",
-  sample_answer: "す.+?のうち",
-  commentary: "す.+?のうちの.+は、一文字以上の文字列を表します。?を後ろにつけることでマッチの範囲を最短にできます。そのため、す.+?のうちは、すもものうち すもももものうち すもももももももものうちを表す正規表現であることが分かります。",
+  sentence: "A, a, 9の全てにマッチするメタ文字を入力せよ。",
+  target_sentence: "A, a, 9",
+  sample_answer: "\\w",
+  commentary: "\\wはa~z, A~Z, 0~9, _の中の1文字を表します。[a-zA-Z\\d]で書き換え可能です。",
   difficulty: "elementary"
 )
 
 # 8問目
 Question.create!(
-  sentence: "アイス ザイス イスの全てにマッチする正規表現を入力せよ",
-  target_sentence: "アイス ザイス イス",
-  sample_answer: "[アザ]?イス",
-  commentary: "[アザ]?イスの[アザ]は、ア, ザのどれか1文字を表します。また、?をつけることで、直前の文字がマッチ対象の文字列に含まれなくてもOKになります。そのため、[アザ]?イスは、アイス, ザイス, イスを表す正規表現であると分かります。",
+  sentence: "aaa, aaaa, aaaaaの全てにマッチする正規表現を入力せよ。",
+  target_sentence: "aaa, aaaa, aaaaa, a, aa",
+  sample_answer: "a{3,5}",
+  commentary: "a{3,5}はaaa, aaaa, aaaaaを表します。",
   difficulty: "elementary"
 )
 
 # 9問目
 Question.create!(
-  sentence: "アタッチ アプローチ アパッチの全てにマッチする正規表現を入力せよ",
-  target_sentence: "アタッチ アプローチ アパッチ",
-  sample_answer: "ア(タッ|プロー|パッ)チ",
-  commentary: "ア(タッ|プロー|パッ)チの(タッ|プロー|パッ)は、タッ, プロー, パッのどれかの文字を表します。そのため、ア(タッ|プロー|パッ)チは、アタッチ, アプローチ, アパッチを表す正規表現であることが分かります。ア.+?チでもOKです。",
+  sentence: "X, y, Zの全てにマッチする正規表現を入力せよ。",
+  target_sentence: "X, y, Z",
+  sample_answer: "[XyZ]",
+  commentary: "[XyZ]はX, y, Zを表します。\\w, [a-zA-Z]でマッチさせることもできます。",
   difficulty: "elementary"
 )
 
 # 10問目
 Question.create!(
-  sentence: "ルネッサンス ルームサービス ルーフテラスの全てにマッチする正規表現を入力せよ",
-  target_sentence: "ルネッサンス ルームサービス ルーフテラス",
-  sample_answer: "ル(ネッサン|ームサービ|ーフテラ)ス",
-  commentary: "ル(ネッサン|ームサービ|ーフテラ)スの(ネッサン|ームサービ|ーフテラ)は、ネッサン, ームサービ, ーフテラのどれかの文字を表します。そのため、ル(ネッサン|ームサービ|ーフテラ)スは、ルネッサンス, ルームサービス, ルーフテラスを表す正規表現であることが分かります。ル.+?スで書き換え可能です",
+  sentence: "aaa, bbb, cccの全てにマッチする正規表現を入力せよ。",
+  target_sentence: "aaa, bbb, ccc",
+  sample_answer: "aaa|bbb|ccc",
+  commentary: "aaa|bbb|cccはaaa, bbb, cccを表します。[a-z]{3}でマッチさせることもできます。",
+  difficulty: "elementary"
+)
+
+# 11問目
+Question.create!(
+  sentence: "aaa, baaa, caの全てにマッチする正規表現を入力せよ。",
+  target_sentence: "aaa, baaa, ca",
+  sample_answer: "aaa|baaa|ca",
+  commentary: "aaa|baaa|caはaaa, baaa, caを表します。[a-z]{2,4}で書き換え可能です。",
+  difficulty: "elementary"
+)
+
+# 12問目
+Question.create!(
+  sentence: "aaa, 999, cccの全てにマッチする正規表現を入力せよ。",
+  target_sentence: "aaa, 999, ccc",
+  sample_answer: "aaa|999|ccc",
+  commentary: "aaa|999|cccはaaa, 999, cccを表します。\w{3}でマッチさせることもできます。",
   difficulty: "elementary"
 )
 
