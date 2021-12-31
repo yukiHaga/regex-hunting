@@ -113,11 +113,6 @@ export const QuestionBlock = ({
     return jpDifficulty;
   };
 
-  // マッチしたインデックスを取得する関数
-  const matchIndices = (match_array) => {
-    return match_array.map((value) => value.index)
-  }
-
   // 最初のメッセージからsetTimeOutを制御するif文
   // このuseEffectがあるおかげで、最初のモンスターセンテンスが
   // 問題1のセンテンスに自動で切り替わる
