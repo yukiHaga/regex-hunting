@@ -191,6 +191,7 @@ export const CodeBlock = ({
               next_commentary: prev.questions["0"].commentary
             }));
             audio.play();
+            setCodeState("");
           } else {
             setGameState({
               ...gameState,
