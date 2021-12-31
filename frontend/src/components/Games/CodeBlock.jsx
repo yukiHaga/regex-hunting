@@ -177,7 +177,6 @@ export const CodeBlock = ({
             gameState.questions.shift();
             const current_hp = monster_hp - calculateDamage(monster_defence);
             const audio = new Audio(CutMonster);
-            audio.play();
             setGameState({
               ...gameState,
               match_array: input_match_array,
@@ -186,6 +185,7 @@ export const CodeBlock = ({
               questions: gameState.questions,
               monster_hp: current_hp
             });
+            audio.play();
           } else {
             setGameState({
               ...gameState,
