@@ -79,7 +79,7 @@ Question.create!(
   sentence: "A, B, Zの全てにマッチする正規表現を入力せよ。",
   target_sentence: "A, B, Z",
   sample_answer: "\\[ABZ]",
-  commentary: "\\[ABZ]はA, B, Zのどれか一文字を表します。[A-Z]でマッチさせることもできます。",
+  commentary: "[ABZ]はA, B, Zのどれか一文字を表します。[A-Z]でマッチさせることもできます。",
   difficulty: "elementary"
 )
 
@@ -88,7 +88,7 @@ Question.create!(
   sentence: "A, 9, Zの全てにマッチする正規表現を入力せよ。",
   target_sentence: "A, 9, Z",
   sample_answer: "\\[A9Z]",
-  commentary: "\\[A9Z]はA, 9, Zのどれか一文字を表します。\\wでマッチさせることもできます。",
+  commentary: "[A9Z]はA, 9, Zのどれか一文字を表します。\\wでマッチさせることもできます。",
   difficulty: "elementary"
 )
 
