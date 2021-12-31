@@ -93,6 +93,14 @@ export const CodeBlock = ({
   const [inputState, setCodeState] = useState("");
   const inputRefObject = useRef("");
 
+  // regex_objectを生成する関数
+  const getRegexObject = (
+    input_regex
+  ) => {
+    const input_regex_object = new RegExp(`(${input_regex})`, 'g');
+    return input_regex_object;
+  }
+
   // パターンに一致した文字列を配列として返す関数
   // matchAllはIteratorを返す
   // indexは、string[1]のように使うために必要
@@ -164,6 +172,7 @@ export const CodeBlock = ({
       try {
         if(e.key === 'Enter' && question_finish === false) {
           const input_regex = inputRefObject.current.innerText;
+          const input_regex_object = getRegexObject(input_regex); 
           const input_match_array = getMatchArray(target_sentence, input_regex);
           const sample_match_array = getMatchArray(target_sentence, sample_answer);
           const input_match_words = getMatchWords(input_match_array);
@@ -181,6 +190,7 @@ export const CodeBlock = ({
             const audio = new Audio(CutMonsterSound);
             setGameState((prev) => ({
               ...prev,
+              input_regex_object: input_regex_object,
               match_array: input_match_array,
               question_finish: current_question_finish,
               correct_questions: prev.correct_questions,
@@ -195,6 +205,7 @@ export const CodeBlock = ({
           } else {
             setGameState({
               ...gameState,
+              input_regex_object: input_regex_object,
               match_array: input_match_array,
             });
           }

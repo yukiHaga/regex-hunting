@@ -71,7 +71,8 @@ export const QuestionBlock = ({
   match_array,
   question_finish,
   gameState,
-  setGameState
+  setGameState,
+  input_regex_object
 }) => {
 
   // モンスター名を取得する関数
@@ -166,6 +167,7 @@ export const QuestionBlock = ({
           question_finish: false,
           match_array: [],
           sample_answer: prev.questions["0"].sample_answer,
+          input_regex_object: {}
         }));
       }, 2000);
       return () => clearTimeout(timer);
@@ -179,6 +181,8 @@ export const QuestionBlock = ({
     next_target_sentence,
   ]);
 
+  const reactStringReplace = require('react-string-replace');
+
   return (
     <>
       <QuestionBlockWrapper>
@@ -190,12 +194,12 @@ export const QuestionBlock = ({
           <TargetSentenceWrapper>
             {
               target_sentence &&
-                target_sentence.split('').map((value, index) => (
+                reactStringReplace(target_sentence, input_regex_object, (match, i) => (
                   <CustomSpan 
-                    key={index} 
-                    backgroundcolor={matchIndices(match_array).includes(index)}
+                    key={i} 
+                    backgroundcolor={i}
                   >
-                    {value}
+                    {match}
                   </CustomSpan>     
                 ))
             }
