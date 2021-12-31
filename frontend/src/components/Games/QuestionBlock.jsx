@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import styled from 'styled-components';
 
 // Colors
@@ -63,11 +63,16 @@ const CustomSpan = styled.span`
 export const QuestionBlock = ({ 
   difficulty, 
   sentence,
+  next_sentence,
   target_sentence,
+  next_target_sentence,
+  sentence_num,
+  next_sentence_num,
   match_array,
   question_finish,
   gameState,
-  questions
+  questions,
+  setGameState
 }) => {
 
   // モンスター名を取得する関数
@@ -113,27 +118,18 @@ export const QuestionBlock = ({
     return match_array.map((value) => value.index)
   }
 
-  const initialState = {
-    sentence: `${getMonsterName(difficulty)}が現れた！`,
-    sentence_num: "",
-    target_sentence: "",
-    jpDifficulty: getJpDifficulty(difficulty)
-  };
-
-  const [sentenceState, setSentenceState] = useState(initialState);
-
   // 最初のメッセージからsetTimeOutを制御するif文
   // このuseEffectがあるおかげで、最初のモンスターセンテンスが
   // 問題1のセンテンスに自動で切り替わる
   useEffect(() => {
-    if (sentence && sentenceState.sentence === `${getMonsterName(difficulty)}が現れた！`){
+    if (sentence === `${getMonsterName(difficulty)}が現れた！`){
       const timer = setTimeout(() => {
-        setSentenceState({
-          sentence: sentence,
-          sentence_num: "Q1",
-          target_sentence: target_sentence,
-          jpDifficulty: getJpDifficulty(difficulty)
-        });
+        setGameState((prev) => ({
+          ...prev,
+          sentence: next_sentence,
+          sentence_num: next_sentence_num,
+          target_sentence: next_target_sentence,
+        }));
       }, 3000);
       return () => clearTimeout(timer);
     };
@@ -141,7 +137,10 @@ export const QuestionBlock = ({
     difficulty,
     sentence,
     target_sentence,
-    sentenceState.sentence
+    next_sentence,
+    next_sentence_num,
+    next_target_sentence,
+    setGameState
   ]);
 
   // question_finishがtrueの時に実行されるuseEffect
@@ -149,40 +148,38 @@ export const QuestionBlock = ({
   // その後、次の問題のセンテンスが表示される
   useEffect(() => {
     if(question_finish) {
-      setSentenceState((prev) => ({
+      setGameState((prev) => ({
         ...prev,
         sentence: `${getMonsterName(difficulty)}に10ダメージ`,
       }))
       const timer = setTimeout(() => {
-        setSentenceState({
+        setGameState((prev) => ({
+          ...prev,
           sentence: "次の問題",
           sentence_num: "Q2",
           target_sentence: "アイウエオ",
-          jpDifficulty: getJpDifficulty(difficulty)
-        });
+        }));
       }, 3000);
       return () => clearTimeout(timer);
     }
   },[
     question_finish,
-    difficulty
+    difficulty,
+    setGameState
   ]);
-
-  console.log(questions);
-  console.log(gameState);
 
   return (
     <>
       <QuestionBlockWrapper>
         <QuestionWrapper>
           <DifficultyWrapper>
-            {sentenceState.sentence_num || sentenceState.jpDifficulty}
+            {sentence_num || getJpDifficulty(difficulty)}
           </DifficultyWrapper>
-          {sentenceState.sentence}
+          {sentence}
           <TargetSentenceWrapper>
             {
-              sentenceState.target_sentence &&
-                sentenceState.target_sentence.split('').map((value, index) => (
+              target_sentence &&
+                target_sentence.split('').map((value, index) => (
                   <CustomSpan 
                     key={index} 
                     backgroundcolor={matchIndices(match_array).includes(index)}

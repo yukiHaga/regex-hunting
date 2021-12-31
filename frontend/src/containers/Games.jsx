@@ -127,6 +127,25 @@ export const Games = () => {
   // navigation
   const navigate = useNavigate();
 
+  // モンスター名を取得する関数
+  const getMonsterName = (difficulty) => {
+    let monsterName;
+    switch (difficulty){
+      case 'elementary':
+        monsterName = 'スクータムの群れ';
+        break;
+      case 'intermediate':
+        monsterName = 'カスアリウスの群れ';
+        break;
+      case 'advanced':
+        monsterName = 'オルファラ・ラパクス';
+        break;
+      default:
+        console.log('エラーが起きました');
+    }
+    return monsterName;
+  };
+
   // ゲーム初期状態のstate
   const initialState = {
     game_management: {},
@@ -137,8 +156,12 @@ export const Games = () => {
     monster_max_hp: 0,
     correct_questions: [],
     incorrect_questions: [],
-    sentence: "",
+    sentence: `${getMonsterName(difficulty)}が現れた！`,
+    next_sentence: "",
+    sentence_num: "",
+    next_sentence_num: "",
     target_sentence: "",
+    next_target_sentence: "",
     sample_answer: [],
     match_array: [],
     commentary: "",
@@ -183,8 +206,12 @@ export const Games = () => {
     if(sessionState === false && !Object.keys(gameState.game_management).length){
       getGameStart(difficulty).then((data) => {
         setGameState({
-          sentence: data.questions["0"].sentence,
-          target_sentence: data.questions["0"].target_sentence,
+          sentence: `${getMonsterName(difficulty)}が現れた！`,
+          next_sentence: data.questions["0"].sentence,
+          sentence_num: "",
+          next_sentence_num: "Q1",
+          target_sentence: "",
+          next_target_sentence: data.questions["0"].target_sentence,
           game_management: data.game_management,
           questions: data.questions,
           monster_attack: data.monster.attack,
@@ -207,7 +234,11 @@ export const Games = () => {
             correct_questions: [],
             incorrect_questions: [],
             sentence: "",
+            next_sentence: "",
+            sentence_num: "",
+            next_sentence_num: "",
             target_sentence: "",
+            next_target_sentence: "",
             sample_answer: [],
             match_array: [],
             question_finish: false,
@@ -285,11 +316,16 @@ export const Games = () => {
                 <QuestionBlock 
                   difficulty={difficulty} 
                   sentence={gameState.sentence}
+                  next_sentence={gameState.next_sentence}
+                  sentence_num={gameState.sentence_num}
+                  next_sentence_num={gameState.next_sentence_num}
                   target_sentence={gameState.target_sentence}
+                  next_target_sentence={gameState.next_target_sentence}
                   match_array={gameState.match_array}
                   question_finish={gameState.question_finish}
                   gameState={gameState}
                   questions={gameState.questions}
+                  setGameState={setGameState}
                 />
               </QuestionBlockWrapper>
             </BattleBlockWrapper>
