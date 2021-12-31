@@ -65,7 +65,9 @@ export const QuestionBlock = ({
   sentence,
   target_sentence,
   match_array,
-  question_finish
+  question_finish,
+  gameState,
+  questions
 }) => {
 
   // モンスター名を取得する関数
