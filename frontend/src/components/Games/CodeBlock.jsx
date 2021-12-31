@@ -231,7 +231,6 @@ export const CodeBlock = ({
     question_finish,
   ]);
 
-  console.log(gameState);
   return (
     <>
       <CodeBlockWrapper>
