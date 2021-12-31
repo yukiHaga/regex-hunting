@@ -102,11 +102,7 @@ export const MetaMenuBar = () => {
               </tr>
               <tr>
                 <MetaTd>{'{'}n,}</MetaTd> 
-                <CustomTd>直前の文字がn個以下</CustomTd>
-              </tr>
-              <tr>
-                <MetaTd>{'{'},n}</MetaTd> 
-                <CustomTd>直前の文字がn個以下</CustomTd>
+                <CustomTd>直前の文字がn個以上</CustomTd>
               </tr>
               <tr>
                 <MetaTd>[AB]</MetaTd> 
@@ -203,6 +199,10 @@ export const MetaMenuBar = () => {
               <tr>
                 <MetaTd>ABC|DEF</MetaTd> 
                 <CustomTd>文字列ABCまたは文字列DEF</CustomTd>
+              </tr>
+              <tr>
+                <MetaTd>ABC|DEF|GHR</MetaTd> 
+                <CustomTd>文字列ABCまたは文字列DEFまたは文字列GHR</CustomTd>
               </tr>
               <tr>
                 <MetaTd>\b</MetaTd> 
