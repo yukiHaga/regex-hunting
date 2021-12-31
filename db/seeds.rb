@@ -103,7 +103,7 @@ Question.create!(
 
 # 8問目
 Question.create!(
-  sentence: "aaa, aaaa, aaaaaの全てにマッチする正規表現を入力せよ。",
+  sentence: "aaa, aaaa, aaaaaにマッチする正規表現を入力せよ。",
   target_sentence: "aaa, aaaa, aaaaa, a, aa",
   sample_answer: "a{3,5}",
   commentary: "a{3,5}はaaa, aaaa, aaaaaを表します。",
