@@ -327,7 +327,6 @@ export const Games = () => {
                   match_array={gameState.match_array}
                   question_finish={gameState.question_finish}
                   gameState={gameState}
-                  questions={gameState.questions}
                   setGameState={setGameState}
                 />
               </QuestionBlockWrapper>

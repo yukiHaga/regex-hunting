@@ -71,7 +71,6 @@ export const QuestionBlock = ({
   match_array,
   question_finish,
   gameState,
-  questions,
   setGameState
 }) => {
 
@@ -127,11 +126,11 @@ export const QuestionBlock = ({
         setGameState((prev) => ({
           ...prev,
           sentence: next_sentence,
-          next_sentence: questions["1"].sentence,
+          next_sentence: prev.questions["1"].sentence,
           sentence_num: next_sentence_num,
           next_sentence_num: prev.next_sentence_num + 1,
           target_sentence: next_target_sentence,
-          next_target_sentence: questions["1"].target_sentence
+          next_target_sentence: prev.questions["1"].target_sentence
         }));
       }, 3000);
       return () => clearTimeout(timer);
@@ -144,7 +143,6 @@ export const QuestionBlock = ({
     next_sentence_num,
     next_target_sentence,
     setGameState,
-    questions
   ]);
 
   // question_finishがtrueの時に実行されるuseEffect
@@ -160,14 +158,14 @@ export const QuestionBlock = ({
         setGameState((prev) => ({
           ...prev,
           sentence: next_sentence,
-          next_sentence: questions["0"].sentence,
+          next_sentence: prev.questions["1"].sentence,
           sentence_num: next_sentence_num,
           next_sentence_num: prev.next_sentence_num + 1,
           target_sentence: next_target_sentence,
-          next_target_sentence: questions["0"].target_sentence,
+          next_target_sentence: prev.questions["1"].target_sentence,
           question_finish: false,
           match_array: [],
-          sample_answer: questions["0"].sample_answer,
+          sample_answer: prev.questions["1"].sample_answer,
         }));
       }, 3000);
       return () => clearTimeout(timer);
@@ -179,7 +177,6 @@ export const QuestionBlock = ({
     next_sentence,
     next_sentence_num,
     next_target_sentence,
-    questions
   ]);
 
   return (
