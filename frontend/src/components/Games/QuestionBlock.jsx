@@ -167,7 +167,7 @@ export const QuestionBlock = ({
           match_array: [],
           sample_answer: prev.questions["0"].sample_answer,
         }));
-      }, 3000);
+      }, 2000);
       return () => clearTimeout(timer);
     }
   },[
