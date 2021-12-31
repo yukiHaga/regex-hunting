@@ -142,7 +142,8 @@ export const Games = () => {
     sample_answer: [],
     match_array: [],
     commentary: "",
-    question_finish: false
+    question_finish: false,
+    flash_display: false
   }
 
   // ゲーム状態を管理するstate
@@ -195,7 +196,8 @@ export const Games = () => {
           sample_answer: data.questions["0"].sample_answer,
           match_array: [],
           commentary: data.questions["0"].commentary,
-          question_finish: false
+          question_finish: false,
+          flash_display: false
         }); 
       }).catch((e) => {
         if(e.response.status === HTTP_STATUS_CODE.NOT_FOUND){
@@ -209,6 +211,7 @@ export const Games = () => {
             sample_answer: [],
             match_array: [],
             question_finish: false,
+            flash_display: false,
             monster_attack: {},
             monster_defence: {},
             monster_hp: 0,
@@ -289,9 +292,9 @@ export const Games = () => {
               </QuestionBlockWrapper>
             </BattleBlockWrapper>
             {  
-              gameState.question_finish && 
+              gameState.flash_display && 
                 <CustomGoodFlashMessage 
-                  question_finish={gameState.question_finish}
+                  flash_display={gameState.flash_display}
                   commentary={gameState.commentary}
                 />
             }
@@ -307,6 +310,7 @@ export const Games = () => {
               monster_attack={gameState.monster_attack}
               monster_defence={gameState.monster_defence}
               question_finish={gameState.question_finish}
+              flash_display={gameState.flash_display}
             />
           </CodeBlockWrapper>
           <GageBlockWrapper>

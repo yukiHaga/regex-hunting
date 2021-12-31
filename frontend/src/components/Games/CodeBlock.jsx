@@ -85,7 +85,8 @@ export const CodeBlock = ({
   monster_max_hp,
   monster_attack,
   monster_defence,
-  question_finish
+  question_finish,
+  flash_display
 }) => {
 
   const [inputState, setCodeState] = useState("");
@@ -183,7 +184,8 @@ export const CodeBlock = ({
               question_finish: current_question_finish,
               correct_questions: gameState.correct_questions,
               questions: gameState.questions,
-              monster_hp: current_hp
+              monster_hp: current_hp,
+              flash_display: true
             });
             audio.play();
           } else {

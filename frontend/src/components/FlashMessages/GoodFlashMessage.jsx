@@ -43,7 +43,7 @@ const GoodMessage = styled.div`
 `;
 
 export const GoodFlashMessage = ({
-  question_finish,
+  flash_display,
   commentary
 }) => {
 
@@ -52,7 +52,7 @@ export const GoodFlashMessage = ({
     <>
       <CustomSlide 
         direction="left" 
-        in={question_finish} 
+        in={flash_display} 
         timeout={{ enter: 1000, exit: 1000 }} 
         mountOnEnter 
         unmountOnExit
