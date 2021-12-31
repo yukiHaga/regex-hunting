@@ -115,7 +115,7 @@ export const QuestionBlock = ({
     sentence: `${getMonsterName(difficulty)}が現れた！`,
     sentence_num: "",
     target_sentence: "",
-    difficulty: getJpDifficulty(difficulty)
+    jpDifficulty: getJpDifficulty(difficulty)
   };
 
   const [sentenceState, setSentenceState] = useState(initialState);
@@ -130,7 +130,7 @@ export const QuestionBlock = ({
           sentence: sentence,
           sentence_num: "Q1",
           target_sentence: target_sentence,
-          difficulty: getJpDifficulty(difficulty)
+          jpDifficulty: getJpDifficulty(difficulty)
         });
       }, 3000);
       return () => clearTimeout(timer);
@@ -144,12 +144,22 @@ export const QuestionBlock = ({
 
   // question_finishがtrueの時に実行されるuseEffect
   // ダメージセンテンスがQuestionBlockに表示される
+  // その後、次の問題のセンテンスが表示される
   useEffect(() => {
     if(question_finish) {
       setSentenceState((prev) => ({
         ...prev,
-        sentence: `${getMonsterName(difficulty)}に10のダメージ`,
+        sentence: `${getMonsterName(difficulty)}に10ダメージ`,
       }))
+      const timer = setTimeout(() => {
+        setSentenceState({
+          sentence: "次の問題",
+          sentence_num: "Q2",
+          target_sentence: "アイウエオ",
+          jpDifficulty: getJpDifficulty(difficulty)
+        });
+      }, 3000);
+      return () => clearTimeout(timer);
     }
   },[
     question_finish,
