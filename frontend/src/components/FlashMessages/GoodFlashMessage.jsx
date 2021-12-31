@@ -2,7 +2,6 @@ import React, { Fragment } from 'react';
 import styled from 'styled-components';
 
 // フラッシュメッセージ関係のコンポーネント;
-import Alert from '@material-ui/lab/Alert';
 import Slide from '@mui/material/Slide';
 
 // Colors
