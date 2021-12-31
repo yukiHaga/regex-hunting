@@ -86,7 +86,8 @@ export const CodeBlock = ({
   monster_attack,
   monster_defence,
   question_finish,
-  flash_display
+  flash_display,
+  commentary,
 }) => {
 
   const [inputState, setCodeState] = useState("");
@@ -178,15 +179,17 @@ export const CodeBlock = ({
             gameState.questions.shift();
             const current_hp = monster_hp - calculateDamage(monster_defence);
             const audio = new Audio(CutMonster);
-            setGameState({
-              ...gameState,
+            setGameState((prev) => ({
+              ...prev,
               match_array: input_match_array,
               question_finish: current_question_finish,
-              correct_questions: gameState.correct_questions,
-              questions: gameState.questions,
+              correct_questions: prev.correct_questions,
+              questions: prev.questions,
               monster_hp: current_hp,
-              flash_display: true
-            });
+              flash_display: true,
+              commentary: prev.next_commentary,
+              next_commentary: prev.questions["0"].commentary
+            }));
             audio.play();
           } else {
             setGameState({
@@ -225,9 +228,10 @@ export const CodeBlock = ({
     sample_answer,
     monster_hp,
     monster_defence,
-    question_finish
+    question_finish,
   ]);
 
+  console.log(gameState);
   return (
     <>
       <CodeBlockWrapper>

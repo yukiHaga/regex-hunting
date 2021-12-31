@@ -127,8 +127,11 @@ export const QuestionBlock = ({
         setGameState((prev) => ({
           ...prev,
           sentence: next_sentence,
+          next_sentence: questions["1"].sentence,
           sentence_num: next_sentence_num,
+          next_sentence_num: prev.next_sentence_num + 1,
           target_sentence: next_target_sentence,
+          next_target_sentence: questions["1"].target_sentence
         }));
       }, 3000);
       return () => clearTimeout(timer);
@@ -140,7 +143,8 @@ export const QuestionBlock = ({
     next_sentence,
     next_sentence_num,
     next_target_sentence,
-    setGameState
+    setGameState,
+    questions
   ]);
 
   // question_finishがtrueの時に実行されるuseEffect
@@ -155,9 +159,15 @@ export const QuestionBlock = ({
       const timer = setTimeout(() => {
         setGameState((prev) => ({
           ...prev,
-          sentence: "次の問題",
-          sentence_num: "Q2",
-          target_sentence: "アイウエオ",
+          sentence: next_sentence,
+          next_sentence: questions["0"].sentence,
+          sentence_num: next_sentence_num,
+          next_sentence_num: prev.next_sentence_num + 1,
+          target_sentence: next_target_sentence,
+          next_target_sentence: questions["0"].target_sentence,
+          question_finish: false,
+          match_array: [],
+          sample_answer: questions["0"].sample_answer,
         }));
       }, 3000);
       return () => clearTimeout(timer);
@@ -165,7 +175,11 @@ export const QuestionBlock = ({
   },[
     question_finish,
     difficulty,
-    setGameState
+    setGameState,
+    next_sentence,
+    next_sentence_num,
+    next_target_sentence,
+    questions
   ]);
 
   return (
@@ -173,7 +187,7 @@ export const QuestionBlock = ({
       <QuestionBlockWrapper>
         <QuestionWrapper>
           <DifficultyWrapper>
-            {sentence_num || getJpDifficulty(difficulty)}
+            {sentence_num ? `Q${sentence_num}` : getJpDifficulty(difficulty)}
           </DifficultyWrapper>
           {sentence}
           <TargetSentenceWrapper>

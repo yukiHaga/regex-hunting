@@ -158,13 +158,14 @@ export const Games = () => {
     incorrect_questions: [],
     sentence: `${getMonsterName(difficulty)}が現れた！`,
     next_sentence: "",
-    sentence_num: "",
-    next_sentence_num: "",
+    sentence_num: 0,
+    next_sentence_num: 0,
     target_sentence: "",
     next_target_sentence: "",
     sample_answer: [],
     match_array: [],
     commentary: "",
+    next_commentary: "",
     question_finish: false,
     flash_display: false
   }
@@ -209,7 +210,7 @@ export const Games = () => {
           sentence: `${getMonsterName(difficulty)}が現れた！`,
           next_sentence: data.questions["0"].sentence,
           sentence_num: "",
-          next_sentence_num: "Q1",
+          next_sentence_num: 1,
           target_sentence: "",
           next_target_sentence: data.questions["0"].target_sentence,
           game_management: data.game_management,
@@ -222,7 +223,8 @@ export const Games = () => {
           incorrect_questions: [],
           sample_answer: data.questions["0"].sample_answer,
           match_array: [],
-          commentary: data.questions["0"].commentary,
+          commentary: "",
+          next_commentary: data.questions["0"].commentary,
           question_finish: false,
           flash_display: false
         }); 
@@ -247,7 +249,8 @@ export const Games = () => {
             monster_defence: {},
             monster_hp: 0,
             monster_max_hp: 0,
-            commentary: ""
+            commentary: "",
+            next_commentary: ""
           }); 
         } else {
           throw e;
