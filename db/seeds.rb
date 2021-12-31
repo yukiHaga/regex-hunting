@@ -51,7 +51,7 @@ Question.create!(
 Question.create!(
   sentence: "100, 200, 300の全てにマッチする正規表現を入力せよ。",
   target_sentence: "100, 200, 300",
-  sample_answer: "\d{3}",
+  sample_answer: "\\d{3}",
   commentary: "\\d{3}は3桁の数字を表します。",
   difficulty: "elementary"
 )
