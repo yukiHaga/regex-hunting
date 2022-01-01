@@ -158,7 +158,7 @@ export const GameClearDialog = ({
             </tbody>
           </CustomTable>
           <ButtonsWrapper>
-            <RestartGameButton />
+            <RestartGameButton difficulty={difficulty} />
             <BackToTopButton />
           </ButtonsWrapper>
         </CustomDialogContent>
