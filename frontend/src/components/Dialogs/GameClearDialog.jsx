@@ -10,8 +10,11 @@ import { DialogContent, Dialog } from '@mui/material';
 // Colors
 import { COLORS } from '../../style_constants.js';
 
-// 
+// DescriptionWrapper 
 import { DescriptionWrapper } from '../shared_style.js'; 
+
+// Buttons
+import { BackToTopButton } from '../Buttons/BackToTopButton.jsx';
 
 // Images
 // import LoginImage from '../../images/login.png';
@@ -148,6 +151,7 @@ export const GameClearDialog = ({
               </tr>
             </tbody>
           </CustomTable>
+          <BackToTopButton />
         </CustomDialogContent>
       </CustomDialogInnerWrapper>
     </Dialog>
