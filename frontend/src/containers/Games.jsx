@@ -168,7 +168,8 @@ export const Games = () => {
     next_commentary: "",
     question_finish: false,
     flash_display: false,
-    input_regex_object: {}
+    input_regex_object: {},
+    key_available: false
   }
 
   // ゲーム状態を管理するstate
@@ -228,7 +229,8 @@ export const Games = () => {
           next_commentary: data.questions["0"].commentary,
           question_finish: false,
           flash_display: false,
-          input_regex_object: {}
+          input_regex_object: {},
+          key_available: false
         }); 
       }).catch((e) => {
         if(e.response.status === HTTP_STATUS_CODE.NOT_FOUND){
@@ -253,7 +255,8 @@ export const Games = () => {
             monster_max_hp: 0,
             commentary: "",
             next_commentary: "",
-            input_regex_object: {}
+            input_regex_object: {},
+            key_available: false
           }); 
         } else {
           throw e;
@@ -355,6 +358,7 @@ export const Games = () => {
               monster_defence={gameState.monster_defence}
               question_finish={gameState.question_finish}
               flash_display={gameState.flash_display}
+              key_available={gameState.key_available}
             />
           </CodeBlockWrapper>
           <GageBlockWrapper>

@@ -72,7 +72,7 @@ export const QuestionBlock = ({
   question_finish,
   gameState,
   setGameState,
-  input_regex_object
+  input_regex_object,
 }) => {
 
   // モンスター名を取得する関数
@@ -126,7 +126,8 @@ export const QuestionBlock = ({
           sentence_num: next_sentence_num,
           next_sentence_num: prev.next_sentence_num + 1,
           target_sentence: next_target_sentence,
-          next_target_sentence: prev.questions["1"].target_sentence
+          next_target_sentence: prev.questions["1"].target_sentence,
+          key_available: true
         }));
       }, 3000);
       return () => clearTimeout(timer);
@@ -149,6 +150,7 @@ export const QuestionBlock = ({
       setGameState((prev) => ({
         ...prev,
         sentence: `${getMonsterName(difficulty)}に10ダメージ`,
+        key_available: false
       }))
       const timer = setTimeout(() => {
         setGameState((prev) => ({
@@ -162,7 +164,8 @@ export const QuestionBlock = ({
           question_finish: false,
           match_array: [],
           sample_answer: prev.questions["0"].sample_answer,
-          input_regex_object: {}
+          input_regex_object: {},
+          key_available: true
         }));
       }, 2000);
       return () => clearTimeout(timer);

@@ -88,6 +88,7 @@ export const CodeBlock = ({
   question_finish,
   flash_display,
   commentary,
+  key_available
 }) => {
 
   const [inputState, setCodeState] = useState("");
@@ -152,7 +153,7 @@ export const CodeBlock = ({
 
   useEffect(() => {
     const handlekeyPress = (e) => {
-      if(e.key !== 'Enter') {
+      if(e.key !== 'Enter' && key_available === true) {
         const audio = new Audio(TypeSound);
         audio.play();
         setCodeState((prev) => prev + e.key);
@@ -160,7 +161,7 @@ export const CodeBlock = ({
     };
 
     const handleBackSpace = (e) => {
-      if(e.key === 'Backspace') {
+      if(e.key === 'Backspace' && key_available === true) {
         const audio = new Audio(BackSound);
         audio.play();
         setCodeState((prev) => prev.slice(0, -1));
@@ -170,7 +171,7 @@ export const CodeBlock = ({
     // question_finishがfalseならEnterを押せるようにする
     const handleEnter = (e) => {
       try {
-        if(e.key === 'Enter' && question_finish === false) {
+        if(e.key === 'Enter' && question_finish === false && key_available === true) {
           const input_regex = inputRefObject.current.innerText;
           const input_regex_object = getRegexObject(input_regex); 
           const input_match_array = getMatchArray(target_sentence, input_regex);
@@ -198,7 +199,8 @@ export const CodeBlock = ({
               monster_hp: current_hp,
               flash_display: true,
               commentary: prev.next_commentary,
-              next_commentary: prev.questions["0"].commentary
+              next_commentary: prev.questions["0"].commentary,
+              key_available: false
             }));
             audio.play();
             setCodeState("");
