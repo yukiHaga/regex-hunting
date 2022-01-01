@@ -377,6 +377,9 @@ export const Games = () => {
         gameState.game_result === "win" &&
           <GameClearDialog
             isOpen={gameState.game_result === "win"}
+            difficulty={difficulty} 
+            correct_questions={gameState.correct_questions}
+            incorrect_questions={gameState.incorrect_questions}
           />
       }
     </>
