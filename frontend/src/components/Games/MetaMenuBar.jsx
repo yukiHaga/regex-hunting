@@ -89,20 +89,16 @@ export const MetaMenuBar = () => {
                 <CustomTd>1桁の数字</CustomTd>
               </tr>
               <tr>
-                <MetaTd>\d+</MetaTd> 
-                <CustomTd>1桁以上の数字</CustomTd>
+                <MetaTd>\d{'{'}n,m}</MetaTd> 
+                <CustomTd>n桁以上、m桁以下の数字</CustomTd>
               </tr>
               <tr>
-                <MetaTd>{'{'}n,m}</MetaTd> 
-                <CustomTd>直前の文字がn個以上、m個以下</CustomTd>
+                <MetaTd>\d{'{'}n}</MetaTd> 
+                <CustomTd>n桁の数字</CustomTd>
               </tr>
               <tr>
-                <MetaTd>{'{'}n}</MetaTd> 
-                <CustomTd>直前の文字がちょうどn個</CustomTd>
-              </tr>
-              <tr>
-                <MetaTd>{'{'}n,}</MetaTd> 
-                <CustomTd>直前の文字がn個以上</CustomTd>
+                <MetaTd>\d{'{'}n,}</MetaTd> 
+                <CustomTd>n桁以上の数字</CustomTd>
               </tr>
               <tr>
                 <MetaTd>[AB]</MetaTd> 
@@ -115,6 +111,26 @@ export const MetaMenuBar = () => {
               <tr>
                 <MetaTd>[a-z]</MetaTd> 
                 <CustomTd>小文字アルファベットのいずれか1文字</CustomTd>
+              </tr>
+              <tr>
+                <MetaTd>[A-Z]</MetaTd> 
+                <CustomTd>大文字アルファベットのいずれか1文字</CustomTd>
+              </tr>
+              <tr>
+                <MetaTd>ABC|DEF</MetaTd> 
+                <CustomTd>文字列ABCまたは文字列DEF</CustomTd>
+              </tr>
+              <tr>
+                <MetaTd>ABC|DEF|GHR</MetaTd> 
+                <CustomTd>文字列ABCまたは文字列DEFまたは文字列GHR</CustomTd>
+              </tr>
+              <tr>
+                <MetaTd>\d+</MetaTd> 
+                <CustomTd>1桁以上の数字</CustomTd>
+              </tr>
+              <tr>
+                <MetaTd>\w</MetaTd> 
+                <CustomTd>[a-zA-Z0-9_]</CustomTd>
               </tr>
               <tr>
                 <MetaTd>.</MetaTd> 
@@ -135,18 +151,6 @@ export const MetaMenuBar = () => {
               <tr>
                 <MetaTd>.*</MetaTd> 
                 <CustomTd>任意の文字が0文字以上(貪欲なマッチ)</CustomTd>
-              </tr>
-              <tr>
-                <MetaTd>ABC|DEF</MetaTd> 
-                <CustomTd>文字列ABCまたは文字列DEF</CustomTd>
-              </tr>
-              <tr>
-                <MetaTd>ABC|DEF|GHR</MetaTd> 
-                <CustomTd>文字列ABCまたは文字列DEFまたは文字列GHR</CustomTd>
-              </tr>
-              <tr>
-                <MetaTd>\w</MetaTd> 
-                <CustomTd>[a-zA-Z0-9_]</CustomTd>
               </tr>
               <tr>
                 <MetaTd>?</MetaTd> 
