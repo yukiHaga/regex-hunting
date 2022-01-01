@@ -18,7 +18,7 @@ import { TimeGage } from '../components/Games/TimeGage.jsx';
 import { HpGage } from '../components/Games/HpGage.jsx';
 import { GameFooter } from '../components/Footers/GameFooter.jsx';
 import { GoodFlashMessage } from '../components/FlashMessages/GoodFlashMessage.jsx'
-import { GameFinishDialog } from '../components/Dialogs/GameFinishDialog.jsx'
+import { GameClearDialog } from '../components/Dialogs/GameClearDialog.jsx'
 
 // Contextオブジェクト
 import { UserContext } from "../context/UserProvider.js";
@@ -375,7 +375,7 @@ export const Games = () => {
       <GameFooter />
       {
         gameState.game_result === "win" &&
-          <GameFinishDialog
+          <GameClearDialog
             isOpen={gameState.game_result === "win"}
           />
       }

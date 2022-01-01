@@ -42,7 +42,7 @@ const CustomDialogContent = styled(DialogContent)`
   width: 400px;
 `;
 
-export const GameFinishDialog = ({
+export const GameClearDialog = ({
   isOpen,
 }) => {
 
