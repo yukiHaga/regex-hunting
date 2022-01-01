@@ -199,7 +199,7 @@ export const CodeBlock = ({
               monster_hp: current_hp,
               flash_display: true,
               commentary: prev.next_commentary,
-              next_commentary: prev.questions["0"].commentary,
+              next_commentary: prev?.questions["0"]?.commentary || "no_next_commentary",
               key_available: false
             }));
             audio.play();
