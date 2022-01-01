@@ -161,15 +161,15 @@ export const QuestionBlock = ({
             next_sentence: "no_sentence",
             sentence_num: 0,
             next_sentence_num: 0,
-            target_sentence: "no_target_sentence",
-            next_target_sentence: "no_target_sentence",
-            question_finish: false,
+            target_sentence: "",
+            next_target_sentence: "",
+            question_finish: true,
             match_array: [],
             sample_answer: "no_sample_answer",
             input_regex_object: {},
-            key_available: true
+            key_available: false
           }))
-        }, 2000);
+        }, 1000);
         return () => clearTimeout(timer);
       } else {
         const timer = setTimeout(() => {
