@@ -169,8 +169,8 @@ export const Games = () => {
     question_finish: false,
     flash_display: false,
     input_regex_object: {},
-    key_available: false
-    game_result: "";
+    key_available: false,
+    game_result: ""
   }
 
   // ゲーム状態を管理するstate
