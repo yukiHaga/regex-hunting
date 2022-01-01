@@ -142,7 +142,7 @@ Question.create!(
   sentence: "aaa, 999, cccの全てにマッチする正規表現を入力せよ。",
   target_sentence: "aaa, 999, ccc",
   sample_answer: "aaa|999|ccc",
-  commentary: "aaa|999|cccはaaa, 999, cccを表します。\w{3}でマッチさせることもできます。",
+  commentary: "aaa|999|cccはaaa, 999, cccを表します。\\w{3}でマッチさせることもできます。",
   difficulty: "elementary"
 )
 
