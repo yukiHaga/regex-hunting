@@ -15,6 +15,7 @@ import { DescriptionWrapper } from '../shared_style.js';
 
 // Buttons
 import { BackToTopButton } from '../Buttons/BackToTopButton.jsx';
+import { RestartGameButton } from '../Buttons/RestartGameButton.jsx';
 
 // Images
 // import LoginImage from '../../images/login.png';
@@ -96,6 +97,11 @@ const MetaTd = styled(CustomTd)`
   border-bottom:solid 1px silver;
 `;
 
+const ButtonsWrapper = styled.div`
+  display: flex;
+  justify-content: space-evenly;
+`;
+
 export const GameClearDialog = ({
   isOpen,
   difficulty,
@@ -151,7 +157,10 @@ export const GameClearDialog = ({
               </tr>
             </tbody>
           </CustomTable>
-          <BackToTopButton />
+          <ButtonsWrapper>
+            <RestartGameButton />
+            <BackToTopButton />
+          </ButtonsWrapper>
         </CustomDialogContent>
       </CustomDialogInnerWrapper>
     </Dialog>

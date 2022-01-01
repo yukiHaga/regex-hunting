@@ -6,7 +6,7 @@ import { BaseLink } from '../shared_style';
 // Colors
 import { COLORS } from '../../style_constants.js';
 
-const BackToTopButtonWrapper = styled(BaseLink)`
+const RestartGameButtonWrapper = styled(BaseLink)`
   margin-top: 30px;
   border-style: none;
   border-radius: 3px;
@@ -17,7 +17,7 @@ const BackToTopButtonWrapper = styled(BaseLink)`
   }
 `;
 
-const BackToTopButtonTextWrapper = styled.div`
+const RestartGameButtonTextWrapper = styled.div`
   width: 150px;
   height: 40px;
   border-radius: 3px;
@@ -28,19 +28,19 @@ const BackToTopButtonTextWrapper = styled.div`
   line-height: 40px;
   color: ${COLORS.WHITE};
   text-align: center;
-  background-color: ${COLORS.MAIN};
+  background-color: ${COLORS.BLUE};
   padding-top: 5px;
   padding-bottom: 5px;
 `;
 
-export const BackToTopButton = () => {
+export const RestartGameButton = ({ difficulty }) => {
   return (
     <>
-      <BackToTopButtonWrapper to={'/'}>
-        <BackToTopButtonTextWrapper>
-          トップへ戻る
-        </BackToTopButtonTextWrapper>
-      </BackToTopButtonWrapper>
+    <RestartGameButtonWrapper to={`/games/${difficulty}/start`}>
+        <RestartGameButtonTextWrapper>
+          もう一度始める
+        </RestartGameButtonTextWrapper>
+      </RestartGameButtonWrapper>
     </>
   );
 };
