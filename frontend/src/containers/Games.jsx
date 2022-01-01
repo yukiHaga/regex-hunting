@@ -170,6 +170,7 @@ export const Games = () => {
     flash_display: false,
     input_regex_object: {},
     key_available: false
+    game_result: "";
   }
 
   // ゲーム状態を管理するstate
@@ -230,7 +231,8 @@ export const Games = () => {
           question_finish: false,
           flash_display: false,
           input_regex_object: {},
-          key_available: false
+          key_available: false,
+          game_result: data.game_management.game_result
         }); 
       }).catch((e) => {
         if(e.response.status === HTTP_STATUS_CODE.NOT_FOUND){
@@ -256,7 +258,8 @@ export const Games = () => {
             commentary: "",
             next_commentary: "",
             input_regex_object: {},
-            key_available: false
+            key_available: false,
+            game_result: ""
           }); 
         } else {
           throw e;

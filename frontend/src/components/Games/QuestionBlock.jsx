@@ -167,7 +167,8 @@ export const QuestionBlock = ({
             match_array: [],
             sample_answer: "no_sample_answer",
             input_regex_object: {},
-            key_available: false
+            key_available: false,
+            game_result: "win"
           }))
         }, 1000);
         return () => clearTimeout(timer);
