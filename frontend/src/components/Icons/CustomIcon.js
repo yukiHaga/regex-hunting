@@ -14,7 +14,7 @@ export const ColoredGoogleIcon = styled(GoogleIcon)`
 `;
 
 export const ColoredTwitterIcon = styled(TwitterIcon)`
-  color: ${COLORS.WHITE};
+  color: ${COLORS.LIGHT_BLUE};
 `;
 
 export const ColoredGitHubIcon = styled(GitHubIcon)`
