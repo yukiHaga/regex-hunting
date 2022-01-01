@@ -73,6 +73,7 @@ export const QuestionBlock = ({
   gameState,
   setGameState,
   input_regex_object,
+  correct_questions
 }) => {
 
   // モンスター名を取得する関数
@@ -151,24 +152,44 @@ export const QuestionBlock = ({
         ...prev,
         sentence: `${getMonsterName(difficulty)}に10ダメージ`,
         key_available: false
-      }))
-      const timer = setTimeout(() => {
-        setGameState((prev) => ({
-          ...prev,
-          sentence: next_sentence,
-          next_sentence: prev?.questions["1"]?.sentence || "no_sentence",
-          sentence_num: next_sentence_num,
-          next_sentence_num: prev?.next_sentence_num + 1 || "no_sentence_num",
-          target_sentence: next_target_sentence,
-          next_target_sentence: prev?.questions["1"]?.target_sentence || "no_target_sentence",
-          question_finish: false,
-          match_array: [],
-          sample_answer: prev?.questions["0"]?.sample_answer || "no_sample_answer",
-          input_regex_object: {},
-          key_available: true
-        }));
-      }, 2000);
-      return () => clearTimeout(timer);
+      }));
+      if(correct_questions.length === 10) {
+        const timer = setTimeout(() => {
+          setGameState((prev) => ({
+            ...prev,
+            sentence: "ゲームクリア！",
+            next_sentence: "no_sentence",
+            sentence_num: 0,
+            next_sentence_num: 0,
+            target_sentence: "no_target_sentence",
+            next_target_sentence: "no_target_sentence",
+            question_finish: false,
+            match_array: [],
+            sample_answer: "no_sample_answer",
+            input_regex_object: {},
+            key_available: true
+          }))
+        }, 2000);
+        return () => clearTimeout(timer);
+      } else {
+        const timer = setTimeout(() => {
+          setGameState((prev) => ({
+            ...prev,
+            sentence: next_sentence,
+            next_sentence: prev?.questions["1"]?.sentence || "no_sentence",
+            sentence_num: next_sentence_num,
+            next_sentence_num: prev?.next_sentence_num + 1 || "no_sentence_num",
+            target_sentence: next_target_sentence,
+            next_target_sentence: prev?.questions["1"]?.target_sentence || "no_target_sentence",
+            question_finish: false,
+            match_array: [],
+            sample_answer: prev?.questions["0"]?.sample_answer || "no_sample_answer",
+            input_regex_object: {},
+            key_available: true
+          }));
+        }, 2000);
+        return () => clearTimeout(timer);
+      }
     }
   },[
     question_finish,
@@ -177,8 +198,10 @@ export const QuestionBlock = ({
     next_sentence,
     next_sentence_num,
     next_target_sentence,
+    correct_questions.length
   ]);
 
+  // マッチした箇所をリプレイスするライブラリをrequireしてくる
   const reactStringReplace = require('react-string-replace');
 
   return (

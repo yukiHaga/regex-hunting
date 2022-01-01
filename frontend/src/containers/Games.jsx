@@ -335,6 +335,7 @@ export const Games = () => {
                   gameState={gameState}
                   setGameState={setGameState}
                   input_regex_object={gameState.input_regex_object}
+                  correct_questions={gameState.correct_questions}
                 />
               </QuestionBlockWrapper>
             </BattleBlockWrapper>
