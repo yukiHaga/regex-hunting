@@ -42,7 +42,7 @@ class Api::V1::GameManagementsController < ApplicationController
     # レンダリング
     render json: {
       game_management: game_management,
-      questions: questions,
+      questions: questions.shuffle,
       monster: monster
     }, status: :created
   end
