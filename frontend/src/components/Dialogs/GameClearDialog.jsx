@@ -26,8 +26,10 @@ const CustomDialogInnerWrapper = styled.div`
   padding-top: 10px;
   padding-right: 10px;
   padding-left: 10px;
-  background-color: ${COLORS.WHITE};
+  background-color: ${COLORS.SUB};
   text-align: center;
+  height: 400px;
+  width: 550px;
 `;
 
 const CustomDialogTitleImage = styled.img`
@@ -38,8 +40,7 @@ const CustomDialogTitleImage = styled.img`
 `;
 
 const CustomDialogContent = styled(DialogContent)`
-  height: 440px;
-  width: 400px;
+  text-align: center;
 `;
 
 export const GameClearDialog = ({
@@ -55,6 +56,7 @@ export const GameClearDialog = ({
       open={isOpen}
     >
       <CustomDialogInnerWrapper> 
+        アイウエオ
         <CustomDialogContent>
           アイウエオ
         </CustomDialogContent>
