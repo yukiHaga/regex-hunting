@@ -243,6 +243,7 @@ export const CodeBlock = ({
     monster_hp,
     monster_defence,
     question_finish,
+    key_available
   ]);
 
   return (
