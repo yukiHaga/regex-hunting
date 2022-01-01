@@ -163,7 +163,7 @@ export const QuestionBlock = ({
           next_target_sentence: prev?.questions["1"]?.target_sentence || "no_target_sentence",
           question_finish: false,
           match_array: [],
-          sample_answer: prev.questions["0"].sample_answer,
+          sample_answer: prev?.questions["0"]?.sample_answer || "no_sample_answer",
           input_regex_object: {},
           key_available: true
         }));
