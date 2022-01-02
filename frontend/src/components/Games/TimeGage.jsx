@@ -4,6 +4,9 @@ import styled, { keyframes } from 'styled-components';
 // Colors
 import { COLORS } from '../../style_constants.js';
 
+// Sounds
+import AttackSound from '../../sounds/attack.mp3';
+
 const TimeGageWrapper = styled.div`
   background-color: ${COLORS.LIGHT_BLACK};
   border-radius: 3px 3px 0 0;
@@ -62,7 +65,8 @@ export const TimeGage = ({
   const timeOut = () => {
     gameState.incorrect_questions.push(gameState.questions[0]);
     gameState.questions.shift();
-    // const audio = new Audio(CutMonsterSound);
+    const audio = new Audio(AttackSound);
+    audio.play();
     setGameState((prev) => ({
       ...prev,
       question_judgement: "incorrect",
