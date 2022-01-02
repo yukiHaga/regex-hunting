@@ -90,7 +90,8 @@ export const GameClearDialog = ({
   correct_questions,
   incorrect_questions,
   setGameState,
-  getGameStart
+  getGameStart,
+  initialState
 }) => {
 
   return(
@@ -142,6 +143,7 @@ export const GameClearDialog = ({
               difficulty={difficulty}             
               setGameState={setGameState}
               getGameStart={getGameStart}
+              initialState={initialState}
             />
             <ResultShareButton />
             <BackToTopButton />

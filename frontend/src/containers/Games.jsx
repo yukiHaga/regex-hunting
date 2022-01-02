@@ -361,6 +361,7 @@ export const Games = () => {
             incorrect_questions={gameState.incorrect_questions}
             setGameState={setGameState}
             getGameStart={getGameStart}
+            initialState={initialState}
           />
       }
     </>

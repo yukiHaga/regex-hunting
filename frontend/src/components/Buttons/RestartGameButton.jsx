@@ -43,18 +43,22 @@ const RestartGameButtonTextWrapper = styled.div`
 export const RestartGameButton = ({ 
   difficulty,
   setGameState,
-  getGameStart
+  getGameStart,
+  initialState
 }) => {
 
   // リスタートを制御する関数
-  const handleRestart = (difficulty, setGameState, getGameStart) => {
+  const handleRestart = (
+    difficulty, 
+    setGameState, 
+    getGameStart,
+    initialState
+  ) => {
     getGameStart(difficulty).then((data) => {
       setGameState({
-        sentence: `${getMonsterName(difficulty)}が現れた！`,
+        ...initialState,
         next_sentence: data.questions["0"].sentence,
-        sentence_num: "",
         next_sentence_num: 1,
-        target_sentence: "",
         next_target_sentence: data.questions["0"].target_sentence,
         game_management: data.game_management,
         questions: data.questions,
@@ -62,46 +66,15 @@ export const RestartGameButton = ({
         monster_defence: data.monster.defence,
         monster_hp: data.monster.max_hp,
         monster_max_hp: data.monster.max_hp,
-        correct_questions: [],
-        incorrect_questions: [],
         sample_answer: data.questions["0"].sample_answer,
-        match_array: [],
-        commentary: "",
         next_commentary: data.questions["0"].commentary,
-        question_finish: false,
-        flash_display: false,
-        input_regex_object: {},
-        key_available: false,
-        game_result: data.game_management.game_result,
-        first_appearance: true
+        game_result: data.game_management.game_result
       }); 
     }).catch((e) => {
       if(e.response.status === HTTP_STATUS_CODE.NOT_FOUND){
         setGameState({
-          game_management: {},
-          questions: [],
-          correct_questions: [],
-          incorrect_questions: [],
-          sentence: "",
-          next_sentence: "",
-          sentence_num: "",
-          next_sentence_num: "",
-          target_sentence: "",
-          next_target_sentence: "",
-          sample_answer: [],
-          match_array: [],
-          question_finish: false,
-          flash_display: false,
-          monster_attack: {},
-          monster_defence: {},
-          monster_hp: 0,
-          monster_max_hp: 0,
-          commentary: "",
-          next_commentary: "",
-          input_regex_object: {},
-          key_available: false,
-          game_result: "",
-          first_appearance: true
+          ...initialState,
+          sentence: ""
         }); 
       } else {
         throw e;
@@ -112,7 +85,7 @@ export const RestartGameButton = ({
   return (
     <>
     <RestartGameButtonWrapper 
-      onClick={() => handleRestart(difficulty, setGameState, getGameStart)}
+      onClick={() => handleRestart(difficulty, setGameState, getGameStart, initialState)}
     >
         <RestartGameButtonTextWrapper>
           もう一度始める
