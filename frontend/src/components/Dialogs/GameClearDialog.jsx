@@ -107,7 +107,9 @@ export const GameClearDialog = ({
   isOpen,
   difficulty,
   correct_questions,
-  incorrect_questions
+  incorrect_questions,
+  setGameState,
+  getGameStart
 }) => {
 
   // navigate
@@ -159,7 +161,11 @@ export const GameClearDialog = ({
             </tbody>
           </CustomTable>
           <ButtonsWrapper>
-            <RestartGameButton difficulty={difficulty} />
+            <RestartGameButton 
+              difficulty={difficulty}             
+              setGameState={setGameState}
+              getGameStart={getGameStart}
+            />
             <ResultShareButton />
             <BackToTopButton />
           </ButtonsWrapper>

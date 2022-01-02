@@ -380,6 +380,8 @@ export const Games = () => {
             difficulty={difficulty} 
             correct_questions={gameState.correct_questions}
             incorrect_questions={gameState.incorrect_questions}
+            setGameState={setGameState}
+            getGameStart={getGameStart}
           />
       }
     </>
