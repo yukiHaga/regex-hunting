@@ -18,7 +18,9 @@ export const COLORS = {
   YELLOW: '#EBA12F',
   GAGE_GRAY: '#BBB8AA',
   WORD_BLUE: '#0066B3',
-  WORD_BACK: '#BFE4FF'
+  WORD_BACK: '#BFE4FF',
+  HP_YELLOW: '#ffd700',
+  HP_RED: '#ff4500'
 }
 
 // フォントサイズを決める際に、適宜定義する。
