@@ -134,15 +134,20 @@ export const CodeBlock = ({
   };
 
   // マッチした配列と答えのマッチした配列が一致しているかを返す関数
+  // ロジックに不備があったので、改善した
   const getQuestionFinish = (
     input_match_words,
     sample_match_words
   ) => {
-    return Boolean(
-      !sample_match_words.filter((value) => {
-        return !input_match_words.includes(value);
-      }).length
-    )
+    if(input_match_words.length > 0) {
+      return Boolean(
+        !input_match_words.filter((value, index) => {
+          return !(sample_match_words[index] === value);
+        }).length
+      );
+    } else {
+      return Boolean(false);
+    }
   };
 
   // モンスターに与えるダメージを計算する関数
