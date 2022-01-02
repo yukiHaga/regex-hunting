@@ -48,7 +48,7 @@ const GageWrapper = styled.div`
   box-sizing: border-box;
   border: none;
   outline: none;
-  animation: ${TimeGageAnime} 40s linear 1;
+  animation: ${(props) => props.time_active && TimeGageAnime} 40s linear 1;
 `;
 
 const GageOuterWrapper = styled.div`
@@ -58,7 +58,8 @@ const GageOuterWrapper = styled.div`
 
 export const TimeGage = ({
   gameState,
-  setGameState
+  setGameState,
+  time_active
 }) => {
 
   // タイムゲージが0になった時に実行される関数
@@ -86,7 +87,10 @@ export const TimeGage = ({
           TIME
         </TypeWrapper>
         <GageOuterWrapper>
-          <GageWrapper onAnimationEnd={timeOut} />
+          <GageWrapper 
+            onAnimationEnd={timeOut} 
+            time_active={time_active}
+          />
         </GageOuterWrapper>
       </TimeGageWrapper>
     </>

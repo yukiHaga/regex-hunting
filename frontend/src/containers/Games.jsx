@@ -159,7 +159,8 @@ export const Games = () => {
     key_available: false,
     game_result: "",
     first_appearance: true,
-    question_judgement: "progress"
+    question_judgement: "progress",
+    time_active: true
   }
 
   // ゲーム状態を管理するstate
@@ -344,6 +345,7 @@ export const Games = () => {
             <TimeGage 
               gameState={gameState} 
               setGameState={setGameState}
+              time_active={gameState.time_active}
             />
             <HpGage />
           </GageBlockWrapper>

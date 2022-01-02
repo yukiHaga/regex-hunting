@@ -194,7 +194,8 @@ export const QuestionBlock = ({
       setGameState((prev) => ({
         ...prev,
         sentence: `ハンターに10ダメージ`,
-        key_available: false
+        key_available: false,
+        time_active: false
       }));
       if(incorrect_questions.length === 3) {
         const timer = setTimeout(() => {
@@ -211,7 +212,8 @@ export const QuestionBlock = ({
             sample_answer: "no_sample_answer",
             input_regex_object: {},
             key_available: false,
-            game_result: "lose"
+            game_result: "lose",
+            time_active: false
           }));
         }, 1000);
         return () => clearTimeout(timer);
@@ -229,7 +231,8 @@ export const QuestionBlock = ({
             match_array: [],
             sample_answer: prev?.questions["0"]?.sample_answer || "no_sample_answer",
             input_regex_object: {},
-            key_available: true
+            key_available: true,
+            time_active: true
           }));
         }, 2000);
         return () => clearTimeout(timer);
