@@ -1,9 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
 
-// useNavigate
-import { useNavigate } from "react-router-dom";
-
 // ダイアログ
 import { DialogContent, Dialog } from '@mui/material';
 
@@ -18,15 +15,6 @@ import { BackToTopButton } from '../Buttons/BackToTopButton.jsx';
 import { RestartGameButton } from '../Buttons/RestartGameButton.jsx';
 import { ResultShareButton } from '../Buttons/ResultShareButton.jsx';
 
-// Images
-// import LoginImage from '../../images/login.png';
-
-// Button
-// import { CloseButton } from '../Buttons/CloseButton.jsx';
-
-// Sentence
-// import { PasswordResetSentence } from '../Sentences/PasswordResetSentence.jsx';
-
 // Contextオブジェクト
 import { UserContext } from "../../context/UserProvider.js";
 
@@ -38,13 +26,6 @@ const CustomDialogInnerWrapper = styled.div`
   text-align: center;
   height: 400px;
   width: 550px;
-`;
-
-const CustomDialogTitleImage = styled.img`
-  height: 50px;
-  width: 80px
-  object-fit: contain;
-  padding: 8px 23px;
 `;
 
 const CustomDialogTitleWrapper = styled.div`
@@ -112,10 +93,6 @@ export const GameClearDialog = ({
   getGameStart
 }) => {
 
-  // navigate
-  let navigate = useNavigate();
-
-  // <CustomDialogTitleImage src={LoginImage} alt="Login" />
   return(
     <Dialog
       open={isOpen}

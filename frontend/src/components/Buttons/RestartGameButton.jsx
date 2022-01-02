@@ -1,8 +1,6 @@
 import React, { Fragment } from 'react'; 
 import styled from 'styled-components';
 
-import { BaseLink } from '../shared_style';
-
 // Colors
 import { COLORS } from '../../style_constants.js';
 
