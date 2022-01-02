@@ -6,9 +6,6 @@ import { COLORS } from '../../style_constants.js';
 
 import ElementaryMonsterImage from '../../images/elementary.png'; 
 
-const ElementaryWrapper = styled.div`
-`;
-
 // 攻撃されたときのアニメーション
 const ElementaryMonsterFlash = keyframes`
   20%{
@@ -34,6 +31,23 @@ const FadeInAnime = keyframes`
   to {
     opacity: 1;
   }
+`;
+
+// 倒されたときのアニメーション
+const FadeOutAnime = keyframes`
+  from {
+    opacity: 1;
+  }
+
+  to {
+    opacity: 0;
+  }
+`;
+
+const ElementaryWrapper = styled.div`
+  animation-name: ${(props) => props.game_result === "win" && FadeOutAnime};
+  animation-duration: 3s;
+  animation-fill-mode: forwards;
 `;
 
 // 初登場時のモンスター
@@ -93,13 +107,16 @@ export const ElementaryMonster = ({
   monster_hp,
   monster_max_hp,
   question_finish,
-  first_appearance
+  first_appearance,
+  game_result
 }) => {
 
 
   return (
     <>
-      <ElementaryWrapper>
+      <ElementaryWrapper
+        game_result={game_result}
+      >
         {
           first_appearance ?
             <FirstElementaryMonsterWrapper 
