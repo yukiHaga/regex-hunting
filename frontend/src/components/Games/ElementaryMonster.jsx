@@ -67,12 +67,26 @@ const HpGageWrapper = styled.div`
   animation-fill-mode: forwards;
 `;
 
+// HPのカラーを取り扱う関数
+const handleColorType = (monster_hp) => {
+  switch (true) {
+    case monster_hp > 50:
+      return COLORS.LIGHT_BLUE;
+    case monster_hp <= 50 && monster_hp > 20:
+      return COLORS.HP_YELLOW;
+    case monster_hp <= 20:
+      return COLORS.HP_RED;
+    default:
+      return COLORS.LIGHT_BLUE;
+  }
+};
+
 const InnerHpGageWrapper = styled.div`
   width: ${(props) => `${160 * (props.monster_hp / props.monster_max_hp)}px`};
   transition: 0.5s;
   height: 15px;
   border-radius: 3px;
-  background-color: ${COLORS.LIGHT_BLUE};
+  background-color: ${(props) => handleColorType(props.monster_hp)};
 `;
 
 export const ElementaryMonster = ({
