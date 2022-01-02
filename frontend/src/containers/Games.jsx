@@ -32,6 +32,9 @@ import { getGameStart } from '../apis/gameManagement.js';
 // HTTP_STATUS_CODE
 import { HTTP_STATUS_CODE } from '../constants';
 
+// モンスター名を取得する関数
+import { getMonsterName } from '../functions/getMonsterName.js';
+
 // MainContentWrapperコンポーネント
 const MainContentWrapper = styled.div`
   padding-top: 36px;
@@ -127,25 +130,6 @@ export const Games = () => {
 
   // navigation
   const navigate = useNavigate();
-
-  // モンスター名を取得する関数
-  const getMonsterName = (difficulty) => {
-    let monsterName;
-    switch (difficulty){
-      case 'elementary':
-        monsterName = 'スクータムの群れ';
-        break;
-      case 'intermediate':
-        monsterName = 'カスアリウスの群れ';
-        break;
-      case 'advanced':
-        monsterName = 'オルファラ・ラパクス';
-        break;
-      default:
-        console.log('エラーが起きました');
-    }
-    return monsterName;
-  };
 
   // ゲーム初期状態のstate
   const initialState = {

@@ -4,6 +4,9 @@ import styled from 'styled-components';
 // Colors
 import { COLORS } from '../../style_constants.js';
 
+// モンスター名を取得する関数
+import { getMonsterName } from '../../functions/getMonsterName.js';
+
 const QuestionBlockWrapper = styled.div`
   background-color: ${COLORS.SUB};
   border-radius: 3px;
@@ -75,25 +78,6 @@ export const QuestionBlock = ({
   input_regex_object,
   correct_questions
 }) => {
-
-  // モンスター名を取得する関数
-  const getMonsterName = (difficulty) => {
-    let monsterName;
-    switch (difficulty){
-      case 'elementary':
-        monsterName = 'スクータムの群れ';
-        break;
-      case 'intermediate':
-        monsterName = 'カスアリウスの群れ';
-        break;
-      case 'advanced':
-        monsterName = 'オルファラ・ラパクス';
-        break;
-      default:
-        console.log('エラーが起きました');
-    }
-    return monsterName;
-  };
 
   // 難易度を日本語に変換する関数
   const getJpDifficulty = (difficulty) => {

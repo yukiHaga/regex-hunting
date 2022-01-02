@@ -7,6 +7,9 @@ import { COLORS } from '../../style_constants.js';
 // HTTP_STATUS_CODE
 import { HTTP_STATUS_CODE } from '../../constants';
 
+// モンスター名を取得する関数
+import { getMonsterName } from '../../functions/getMonsterName.js';
+
 const RestartGameButtonWrapper = styled.div`
   margin-top: 30px;
   border-style: none;
@@ -42,25 +45,6 @@ export const RestartGameButton = ({
   setGameState,
   getGameStart
 }) => {
-
-  // モンスター名を取得する関数
-  const getMonsterName = (difficulty) => {
-    let monsterName;
-    switch (difficulty){
-      case 'elementary':
-        monsterName = 'スクータムの群れ';
-        break;
-      case 'intermediate':
-        monsterName = 'カスアリウスの群れ';
-        break;
-      case 'advanced':
-        monsterName = 'オルファラ・ラパクス';
-        break;
-      default:
-        console.log('エラーが起きました');
-    }
-    return monsterName;
-  };
 
   // リスタートを制御する関数
   const handleRestart = (difficulty, setGameState, getGameStart) => {
