@@ -158,7 +158,8 @@ export const Games = () => {
     flash_display: false,
     input_regex_object: {},
     key_available: false,
-    game_result: ""
+    game_result: "",
+    first_appearance: true
   }
 
   // ゲーム状態を管理するstate
@@ -220,7 +221,8 @@ export const Games = () => {
           flash_display: false,
           input_regex_object: {},
           key_available: false,
-          game_result: data.game_management.game_result
+          game_result: data.game_management.game_result,
+          first_appearance: true
         }); 
       }).catch((e) => {
         if(e.response.status === HTTP_STATUS_CODE.NOT_FOUND){
@@ -247,7 +249,8 @@ export const Games = () => {
             next_commentary: "",
             input_regex_object: {},
             key_available: false,
-            game_result: ""
+            game_result: "",
+            first_appearance: true
           }); 
         } else {
           throw e;
@@ -296,16 +299,19 @@ export const Games = () => {
                         monster_hp={gameState.monster_hp}
                         monster_max_hp={gameState.monster_max_hp}
                         question_finish={gameState.question_finish}
+                        first_appearance={gameState.first_appearance}
                       />
                       <ElementaryMonster 
                         monster_hp={gameState.monster_hp}
                         monster_max_hp={gameState.monster_max_hp}
                         question_finish={gameState.question_finish}
+                        first_appearance={gameState.first_appearance}
                       />
                       <ElementaryMonster 
                         monster_hp={gameState.monster_hp}
                         monster_max_hp={gameState.monster_max_hp}
                         question_finish={gameState.question_finish}
+                        first_appearance={gameState.first_appearance}
                       />
                     </>
                 }

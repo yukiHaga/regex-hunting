@@ -72,7 +72,8 @@ export const RestartGameButton = ({
         flash_display: false,
         input_regex_object: {},
         key_available: false,
-        game_result: data.game_management.game_result
+        game_result: data.game_management.game_result,
+        first_appearance: true
       }); 
     }).catch((e) => {
       if(e.response.status === HTTP_STATUS_CODE.NOT_FOUND){
@@ -99,7 +100,8 @@ export const RestartGameButton = ({
           next_commentary: "",
           input_regex_object: {},
           key_available: false,
-          game_result: ""
+          game_result: "",
+          first_appearance: true
         }); 
       } else {
         throw e;

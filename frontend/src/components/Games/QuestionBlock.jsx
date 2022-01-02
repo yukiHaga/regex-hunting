@@ -112,7 +112,8 @@ export const QuestionBlock = ({
           next_sentence_num: prev.next_sentence_num + 1,
           target_sentence: next_target_sentence,
           next_target_sentence: prev.questions["1"].target_sentence,
-          key_available: true
+          key_available: true,
+          first_appearance: false
         }));
       }, 3000);
       return () => clearTimeout(timer);

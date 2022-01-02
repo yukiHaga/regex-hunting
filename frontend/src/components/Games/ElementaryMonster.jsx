@@ -9,6 +9,7 @@ import ElementaryMonsterImage from '../../images/elementary.png';
 const ElementaryWrapper = styled.div`
 `;
 
+// 攻撃されたときのアニメーション
 const ElementaryMonsterFlash = keyframes`
   20%{
     opacity: 0;
@@ -22,6 +23,28 @@ const ElementaryMonsterFlash = keyframes`
   80%{
     opacity: 1;
   }
+`;
+
+// 初登場のアニメーション
+const FadeInAnime = keyframes`
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+`;
+
+// 初登場時のモンスター
+const FirstElementaryMonsterWrapper = styled.img`
+  width: 211px;
+  height: 205px;
+  object-fit: contain;
+  animation-name: ${FadeInAnime};
+  animation-duration: 2s;
+  animation-fill-mode: forwards;
+  opacity: 0;
 `;
 
 const ElementaryMonsterWrapper = styled.img`
@@ -53,17 +76,25 @@ const InnerHpGageWrapper = styled.div`
 export const ElementaryMonster = ({
   monster_hp,
   monster_max_hp,
-  question_finish
+  question_finish,
+  first_appearance
 }) => {
 
 
   return (
     <>
       <ElementaryWrapper>
-        <ElementaryMonsterWrapper 
-          src={ElementaryMonsterImage} 
-          question_finish={question_finish}
-        />
+        {
+          first_appearance ?
+            <FirstElementaryMonsterWrapper 
+              src={ElementaryMonsterImage} 
+            />
+          :
+            <ElementaryMonsterWrapper 
+              src={ElementaryMonsterImage} 
+              question_finish={question_finish}
+            />
+        }
         <HpGageWrapper>
           <InnerHpGageWrapper 
             monster_hp={monster_hp} 
