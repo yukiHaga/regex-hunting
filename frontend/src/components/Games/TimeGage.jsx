@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import styled from 'styled-components';
+import styled, { keyframes } from 'styled-components';
 
 // Colors
 import { COLORS } from '../../style_constants.js';
@@ -27,13 +27,30 @@ const TypeWrapper = styled.div`
   text-align: center;
 `;
 
+// ゲージ減少のアニメーション
+const TimeGageAnime = keyframes`
+  from {
+    width: 100%;
+  }
+
+  to {
+    width: 0;
+  }
+`;
+
 const GageWrapper = styled.div`
   height: 100%;
-  width: 60%;
+  width: 100%;
   background-color: ${COLORS.YELLOW};
   box-sizing: border-box;
   border: none;
   outline: none;
+  animation: ${TimeGageAnime} 30s linear 1;
+`;
+
+const GageOuterWrapper = styled.div`
+  height: 100%;
+  width: 100%;
 `;
 
 export const TimeGage = () => {
@@ -43,8 +60,9 @@ export const TimeGage = () => {
         <TypeWrapper>
           TIME
         </TypeWrapper>
-        <GageWrapper>
-        </GageWrapper>
+        <GageOuterWrapper>
+          <GageWrapper />
+        </GageOuterWrapper>
       </TimeGageWrapper>
     </>
   );

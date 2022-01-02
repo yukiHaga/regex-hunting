@@ -31,7 +31,7 @@ const TypeWrapper = styled.div`
 
 const GageWrapper = styled.div`
   height: 100%;
-  width: 80%;
+  width: 100%;
   background-color: ${COLORS.LIGHT_BLUE};
   box-sizing: border-box;
   border: none;
