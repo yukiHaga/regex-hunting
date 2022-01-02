@@ -375,6 +375,7 @@ export const Games = () => {
           </CodeBlockWrapper>
           <GageBlockWrapper>
             <TimeGage 
+              gameState={gameState} 
               setGameState={setGameState}
             />
             <HpGage />

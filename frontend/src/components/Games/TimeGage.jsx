@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import styled, { keyframes } from 'styled-components';
 
 // Colors
@@ -45,7 +45,7 @@ const GageWrapper = styled.div`
   box-sizing: border-box;
   border: none;
   outline: none;
-  animation: ${TimeGageAnime} 30s linear 1;
+  animation: ${TimeGageAnime} 40s linear 1;
 `;
 
 const GageOuterWrapper = styled.div`
@@ -54,14 +54,24 @@ const GageOuterWrapper = styled.div`
 `;
 
 export const TimeGage = ({
+  gameState,
   setGameState
 }) => {
 
   // タイムゲージが0になった時に実行される関数
   const timeOut = () => {
+    gameState.incorrect_questions.push(gameState.questions[0]);
+    gameState.questions.shift();
+    // const audio = new Audio(CutMonsterSound);
     setGameState((prev) => ({
       ...prev,
-      question_judgement: "incorrect"
+      question_judgement: "incorrect",
+      incorrect_questions: prev.incorrect_questions,
+      questions: prev.questions,
+      flash_display: true,
+      commentary: prev.next_commentary,
+      next_commentary: prev?.questions["0"]?.commentary || "no_next_commentary",
+      key_available: false
     }));
   };
 
