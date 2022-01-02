@@ -153,7 +153,7 @@ export const QuestionBlock = ({
             input_regex_object: {},
             key_available: false,
             game_result: "win"
-          }))
+          }));
         }, 1000);
         return () => clearTimeout(timer);
       } else {

@@ -35,6 +35,9 @@ import { HTTP_STATUS_CODE } from '../constants';
 // モンスター名を取得する関数
 import { getMonsterName } from '../functions/getMonsterName.js';
 
+// ゲームクリア音
+import GameClearSound from '../sounds/game_clear.mp3';
+
 // MainContentWrapperコンポーネント
 const MainContentWrapper = styled.div`
   padding-top: 36px;
@@ -259,6 +262,16 @@ export const Games = () => {
     requestUserActionTyps.REQUEST, 
     requestUserActionTyps.REQUEST_SUCCESS,
     requestUserActionTyps.REQUEST_FAILURE
+  ]);
+
+  // ゲームクリア時の音
+  useEffect(() => {
+    if(gameState.game_result === "win") {
+      const audio = new Audio(GameClearSound);
+      audio.play();
+    }
+  }, [
+    gameState.game_result
   ]);
 
   console.log(gameState);
