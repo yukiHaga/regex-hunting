@@ -64,7 +64,7 @@ const ElementaryMonsterWrapper = styled.img`
   width: 211px;
   height: 205px;
   object-fit: contain;
-  animation-name: ${(props) => props.question_finish && ElementaryMonsterFlash};
+  animation-name: ${(props) => props.question_judgement === "correct" && ElementaryMonsterFlash};
   animation-duration: 1s;
   animation-timing-function: linear;
   animation-iteration-count: 1;
@@ -106,7 +106,7 @@ const InnerHpGageWrapper = styled.div`
 export const ElementaryMonster = ({
   monster_hp,
   monster_max_hp,
-  question_finish,
+  question_judgement,
   first_appearance,
   game_result
 }) => {
@@ -125,7 +125,7 @@ export const ElementaryMonster = ({
           :
             <ElementaryMonsterWrapper 
               src={ElementaryMonsterImage} 
-              question_finish={question_finish}
+              question_judgement={question_judgement}
             />
         }
         <HpGageWrapper

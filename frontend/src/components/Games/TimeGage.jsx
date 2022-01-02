@@ -53,7 +53,18 @@ const GageOuterWrapper = styled.div`
   width: 100%;
 `;
 
-export const TimeGage = () => {
+export const TimeGage = ({
+  setGameState
+}) => {
+
+  // タイムゲージが0になった時に実行される関数
+  const timeOut = () => {
+    setGameState((prev) => ({
+      ...prev,
+      question_judgement: "incorrect"
+    }));
+  };
+
   return (
     <>
       <TimeGageWrapper>
@@ -61,7 +72,7 @@ export const TimeGage = () => {
           TIME
         </TypeWrapper>
         <GageOuterWrapper>
-          <GageWrapper />
+          <GageWrapper onAnimationEnd={timeOut} />
         </GageOuterWrapper>
       </TimeGageWrapper>
     </>

@@ -85,7 +85,7 @@ export const CodeBlock = ({
   monster_max_hp,
   monster_attack,
   monster_defence,
-  question_finish,
+  question_judgement,
   flash_display,
   commentary,
   key_available
@@ -135,18 +135,23 @@ export const CodeBlock = ({
 
   // マッチした配列と答えのマッチした配列が一致しているかを返す関数
   // ロジックに不備があったので、改善した
-  const getQuestionFinish = (
+  const getQuestionJudgement = (
     input_match_words,
     sample_match_words
   ) => {
     if(input_match_words.length > 0) {
-      return Boolean(
-        !input_match_words.filter((value, index) => {
-          return !(sample_match_words[index] === value);
-        }).length
-      );
+      if(
+        Boolean(
+          !input_match_words.filter((value, index) => {
+            return !(sample_match_words[index] === value);
+          }).length
+      )) {
+        return "correct";
+      } else {
+        return "progress";
+      }
     } else {
-      return Boolean(false);
+      return "progress";
     }
   };
 
@@ -173,23 +178,23 @@ export const CodeBlock = ({
       }
     };
 
-    // question_finishがfalseならEnterを押せるようにする
+    // question_judgementがprogressならEnterを押せるようにする
     const handleEnter = (e) => {
       try {
-        if(e.key === 'Enter' && question_finish === false && key_available === true) {
+        if(e.key === 'Enter' && question_judgement === 'progress' && key_available === true) {
           const input_regex = inputRefObject.current.innerText;
           const input_regex_object = getRegexObject(input_regex); 
           const input_match_array = getMatchArray(target_sentence, input_regex);
           const sample_match_array = getMatchArray(target_sentence, sample_answer);
           const input_match_words = getMatchWords(input_match_array);
           const sample_match_words = getMatchWords(sample_match_array);
-          const current_question_finish = getQuestionFinish(
+          const current_question_judgement = getQuestionJudgement(
             input_match_words, 
             sample_match_words
           ); 
           const audio = new Audio(DecisionSound);
           audio.play();
-          if(current_question_finish) {
+          if(current_question_judgement === "correct") {
             gameState.correct_questions.push(gameState.questions[0]);
             gameState.questions.shift();
             const current_hp = monster_hp - calculateDamage(monster_defence);
@@ -198,7 +203,7 @@ export const CodeBlock = ({
               ...prev,
               input_regex_object: input_regex_object,
               match_array: input_match_array,
-              question_finish: current_question_finish,
+              question_judgement: current_question_judgement,
               correct_questions: prev.correct_questions,
               questions: prev.questions,
               monster_hp: current_hp,
@@ -247,7 +252,7 @@ export const CodeBlock = ({
     sample_answer,
     monster_hp,
     monster_defence,
-    question_finish,
+    question_judgement,
     key_available
   ]);
 

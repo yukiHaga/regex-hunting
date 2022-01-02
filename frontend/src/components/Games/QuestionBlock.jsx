@@ -72,11 +72,12 @@ export const QuestionBlock = ({
   sentence_num,
   next_sentence_num,
   match_array,
-  question_finish,
+  question_judgement,
   gameState,
   setGameState,
   input_regex_object,
-  correct_questions
+  correct_questions,
+  incorrect_questions
 }) => {
 
   // 難易度を日本語に変換する関数
@@ -128,11 +129,11 @@ export const QuestionBlock = ({
     setGameState,
   ]);
 
-  // question_finishがtrueの時に実行されるuseEffect
+  // question_judgementがcorrectの時に実行されるuseEffect
   // ダメージセンテンスがQuestionBlockに表示される
   // その後、次の問題のセンテンスが表示される
   useEffect(() => {
-    if(question_finish) {
+    if(question_judgement === "correct") {
       setGameState((prev) => ({
         ...prev,
         sentence: `${getMonsterName(difficulty)}に10ダメージ`,
@@ -148,7 +149,7 @@ export const QuestionBlock = ({
             next_sentence_num: 0,
             target_sentence: "",
             next_target_sentence: "",
-            question_finish: true,
+            question_judgement: "collect",
             match_array: [],
             sample_answer: "no_sample_answer",
             input_regex_object: {},
@@ -167,7 +168,7 @@ export const QuestionBlock = ({
             next_sentence_num: prev?.next_sentence_num + 1 || "no_sentence_num",
             target_sentence: next_target_sentence,
             next_target_sentence: prev?.questions["1"]?.target_sentence || "no_target_sentence",
-            question_finish: false,
+            question_judgement: "progress",
             match_array: [],
             sample_answer: prev?.questions["0"]?.sample_answer || "no_sample_answer",
             input_regex_object: {},
@@ -178,13 +179,70 @@ export const QuestionBlock = ({
       }
     }
   },[
-    question_finish,
+    question_judgement,
     difficulty,
     setGameState,
     next_sentence,
     next_sentence_num,
     next_target_sentence,
     correct_questions.length
+  ]);
+
+  // question_judgementがincorrectの時に実行されるuseEffect
+  useEffect(() => {
+    if(question_judgement === "incorrect") {
+      setGameState((prev) => ({
+        ...prev,
+        sentence: `ハンターに10ダメージ`,
+        key_available: false
+      }));
+      if(incorrect_questions.length === 3) {
+        const timer = setTimeout(() => {
+          setGameState((prev) => ({
+            ...prev,
+            sentence: "ゲームオーバー",
+            next_sentence: "no_sentence",
+            sentence_num: 0,
+            next_sentence_num: 0,
+            target_sentence: "",
+            next_target_sentence: "",
+            question_judgement: "incollect",
+            match_array: [],
+            sample_answer: "no_sample_answer",
+            input_regex_object: {},
+            key_available: false,
+            game_result: "lose"
+          }));
+        }, 1000);
+        return () => clearTimeout(timer);
+      } else {
+        const timer = setTimeout(() => {
+          setGameState((prev) => ({
+            ...prev,
+            sentence: next_sentence,
+            next_sentence: prev?.questions["1"]?.sentence || "no_sentence",
+            sentence_num: next_sentence_num,
+            next_sentence_num: prev?.next_sentence_num + 1 || "no_sentence_num",
+            target_sentence: next_target_sentence,
+            next_target_sentence: prev?.questions["1"]?.target_sentence || "no_target_sentence",
+            question_judgement: "progress",
+            match_array: [],
+            sample_answer: prev?.questions["0"]?.sample_answer || "no_sample_answer",
+            input_regex_object: {},
+            key_available: true
+          }));
+        }, 2000);
+        return () => clearTimeout(timer);
+      }
+    }
+  },[
+    question_judgement,
+    difficulty,
+    setGameState,
+    next_sentence,
+    next_sentence_num,
+    next_target_sentence,
+    incorrect_questions.length
   ]);
 
   // マッチした箇所をリプレイスするライブラリをrequireしてくる

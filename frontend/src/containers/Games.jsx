@@ -154,12 +154,12 @@ export const Games = () => {
     match_array: [],
     commentary: "",
     next_commentary: "",
-    question_finish: false,
     flash_display: false,
     input_regex_object: {},
     key_available: false,
     game_result: "",
-    first_appearance: true
+    first_appearance: true,
+    question_judgement: "progress"
   }
 
   // ゲーム状態を管理するstate
@@ -217,12 +217,12 @@ export const Games = () => {
           match_array: [],
           commentary: "",
           next_commentary: data.questions["0"].commentary,
-          question_finish: false,
           flash_display: false,
           input_regex_object: {},
           key_available: false,
           game_result: data.game_management.game_result,
-          first_appearance: true
+          first_appearance: true,
+          question_judgement: "progress"
         }); 
       }).catch((e) => {
         if(e.response.status === HTTP_STATUS_CODE.NOT_FOUND){
@@ -239,7 +239,6 @@ export const Games = () => {
             next_target_sentence: "",
             sample_answer: [],
             match_array: [],
-            question_finish: false,
             flash_display: false,
             monster_attack: {},
             monster_defence: {},
@@ -250,7 +249,8 @@ export const Games = () => {
             input_regex_object: {},
             key_available: false,
             game_result: "",
-            first_appearance: true
+            first_appearance: true,
+            question_judgement: "progress"
           }); 
         } else {
           throw e;
@@ -298,21 +298,21 @@ export const Games = () => {
                       <ElementaryMonster 
                         monster_hp={gameState.monster_hp}
                         monster_max_hp={gameState.monster_max_hp}
-                        question_finish={gameState.question_finish}
+                        question_judgement={gameState.question_judgement}
                         first_appearance={gameState.first_appearance}
                         game_result={gameState.game_result}
                       />
                       <ElementaryMonster 
                         monster_hp={gameState.monster_hp}
                         monster_max_hp={gameState.monster_max_hp}
-                        question_finish={gameState.question_finish}
+                        question_judgement={gameState.question_judgement}
                         first_appearance={gameState.first_appearance}
                         game_result={gameState.game_result}
                       />
                       <ElementaryMonster 
                         monster_hp={gameState.monster_hp}
                         monster_max_hp={gameState.monster_max_hp}
-                        question_finish={gameState.question_finish}
+                        question_judgement={gameState.question_judgement}
                         first_appearance={gameState.first_appearance}
                         game_result={gameState.game_result}
                       />
@@ -341,11 +341,12 @@ export const Games = () => {
                   target_sentence={gameState.target_sentence}
                   next_target_sentence={gameState.next_target_sentence}
                   match_array={gameState.match_array}
-                  question_finish={gameState.question_finish}
+                  question_judgement={gameState.question_judgement}
                   gameState={gameState}
                   setGameState={setGameState}
                   input_regex_object={gameState.input_regex_object}
                   correct_questions={gameState.correct_questions}
+                  incorrect_questions={gameState.incorrect_questions}
                 />
               </QuestionBlockWrapper>
             </BattleBlockWrapper>
@@ -367,13 +368,15 @@ export const Games = () => {
               monster_max_hp={gameState.monster_max_hp}
               monster_attack={gameState.monster_attack}
               monster_defence={gameState.monster_defence}
-              question_finish={gameState.question_finish}
+              question_judgement={gameState.question_judgement}
               flash_display={gameState.flash_display}
               key_available={gameState.key_available}
             />
           </CodeBlockWrapper>
           <GageBlockWrapper>
-            <TimeGage />
+            <TimeGage 
+              setGameState={setGameState}
+            />
             <HpGage />
           </GageBlockWrapper>
         </MainGameContentWrapper>
