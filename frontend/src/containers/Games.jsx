@@ -160,7 +160,7 @@ export const Games = () => {
     game_result: "",
     first_appearance: true,
     question_judgement: "progress",
-    time_active: true
+    time_active: false
   }
 
   // ゲーム状態を管理するstate
