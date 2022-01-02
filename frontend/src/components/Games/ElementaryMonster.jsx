@@ -42,9 +42,8 @@ const FirstElementaryMonsterWrapper = styled.img`
   height: 205px;
   object-fit: contain;
   animation-name: ${FadeInAnime};
-  animation-duration: 2s;
+  animation-duration: 3s;
   animation-fill-mode: forwards;
-  opacity: 0;
 `;
 
 const ElementaryMonsterWrapper = styled.img`
@@ -63,6 +62,9 @@ const HpGageWrapper = styled.div`
   border: 1px solid ${COLORS.GAGE_GRAY};
   border-radius: 3px;
   background-color: ${COLORS.LIGHT_BLACK};
+  animation-name: ${(props) => props.first_appearance && FadeInAnime};
+  animation-duration: 3s;
+  animation-fill-mode: forwards;
 `;
 
 const InnerHpGageWrapper = styled.div`
@@ -95,7 +97,9 @@ export const ElementaryMonster = ({
               question_finish={question_finish}
             />
         }
-        <HpGageWrapper>
+        <HpGageWrapper
+          first_appearance={first_appearance}
+        >
           <InnerHpGageWrapper 
             monster_hp={monster_hp} 
             monster_max_hp={monster_max_hp}
