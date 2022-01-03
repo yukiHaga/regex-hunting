@@ -17,6 +17,9 @@ import { UserContext } from "../../context/UserProvider.js";
 // タイトルカラーを取り扱う関数
 import { handleTitleColorType } from '../../functions/handleTitleColorType.js'
 
+// 戻るボタン
+import { BackToModalButton } from '../Buttons/BackToModalButton.jsx';
+
 const CustomDialogInnerWrapper = styled.div`
   padding-top: 10px;
   padding-right: 10px;
@@ -160,6 +163,7 @@ export const CheckAnswerDialog = ({
       open={isOpen}
     >
       <CustomDialogInnerWrapper> 
+        <BackToModalButton />
         <CustomDialogTitleWrapper title="Bad">
           Bad
         </CustomDialogTitleWrapper> 
