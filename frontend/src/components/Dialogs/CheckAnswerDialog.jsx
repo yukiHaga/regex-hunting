@@ -56,7 +56,6 @@ const QuestionBlockWrapper = styled.div`
   margin-bottom: 20px;
 `;
 
-
 const QuestionWrapper = styled.div`
   height: 80px;
   width: 450px;
@@ -72,6 +71,14 @@ const QuestionWrapper = styled.div`
   margin: 0 auto;
 `;
 
+const QuestionUpperWrapper = styled.div`
+ display: flex;
+`;
+
+const QuestionNumFakeWrapper = styled.div`
+  height: 40px;
+  width: 45px;
+`;
 const QuestionNumWrapper = styled.div`
   background-color: ${COLORS.MAIN};
   height: 40px;
@@ -86,6 +93,21 @@ const QuestionNumWrapper = styled.div`
   font-weight: 500;
   position: absolute;
   z-index: 1;
+`;
+
+const QuestionSentenceWrapper = styled.div`
+  text-align: left;
+  height: 40px;
+  padding-left: 10px;
+  overflow-x: scroll;
+`;
+
+const QuestionSentenceFlexWrapper = styled.div`
+  display: flex;
+`;
+
+const CustomSentence = styled.div`
+  white-space: nowrap;
 `;
 
 const TargetSentenceWrapper = styled.div`
@@ -149,10 +171,19 @@ export const CheckAnswerDialog = ({
             }) => (
               <QuestionBlockWrapper>
                 <QuestionWrapper>
-                  <QuestionNumWrapper>
-                    {`Q${sentence_num}`}
-                  </QuestionNumWrapper>
-                  {question.sentence}
+                  <QuestionUpperWrapper>
+                    <QuestionNumWrapper>
+                      {`Q${sentence_num}`}
+                    </QuestionNumWrapper>
+                    <QuestionNumFakeWrapper />
+                    <QuestionSentenceWrapper>
+                      <QuestionSentenceFlexWrapper>
+                        <CustomSentence>
+                          {question.sentence}
+                        </CustomSentence>
+                      </QuestionSentenceFlexWrapper>
+                    </QuestionSentenceWrapper>
+                  </QuestionUpperWrapper>
                   <TargetSentenceWrapper>
                     {question.target_sentence}
                   </TargetSentenceWrapper>
@@ -184,10 +215,19 @@ export const CheckAnswerDialog = ({
             }) => (
               <QuestionBlockWrapper>
                 <QuestionWrapper>
-                  <QuestionNumWrapper>
-                    {`Q${sentence_num}`}
-                  </QuestionNumWrapper>
-                  {question.sentence}
+                  <QuestionUpperWrapper>
+                    <QuestionNumWrapper>
+                      {`Q${sentence_num}`}
+                    </QuestionNumWrapper>
+                    <QuestionNumFakeWrapper />
+                    <QuestionSentenceWrapper>
+                      <QuestionSentenceFlexWrapper>
+                        <CustomSentence>
+                          {question.sentence}
+                        </CustomSentence>
+                      </QuestionSentenceFlexWrapper>
+                    </QuestionSentenceWrapper>
+                  </QuestionUpperWrapper>
                   <TargetSentenceWrapper>
                     {question.target_sentence}
                   </TargetSentenceWrapper>
