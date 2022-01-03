@@ -146,6 +146,24 @@ Question.create!(
   difficulty: "elementary"
 )
 
+# 13問目
+Question.create!(
+  sentence: "#, %, @の全てにマッチする正規表現を入力せよ。",
+  target_sentence: "#, %, @",
+  sample_answer: "[#%@]",
+  commentary: "[#%@]は#, %, @を表します。",
+  difficulty: "elementary"
+)
+
+# 14問目
+Question.create!(
+  sentence: "aaa, bbb, cccにマッチする正規表現を入力せよ。",
+  target_sentence: "aaa, bbb, ccc, ddd, eee",
+  sample_answer: "aaa|bbb|ccc",
+  commentary: "aaa|bbb|cccはaaa, 999, cccを表します。[abc]{3}でマッチさせることもできます。",
+  difficulty: "elementary"
+)
+
 # ユーザー
 3.times do |n|
   user = User.new(
