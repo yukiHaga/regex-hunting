@@ -11,6 +11,9 @@ import ErrorSound from '../../sounds/error.mp3';
 import DecisionSound from '../../sounds/decision.mp3';
 import CutMonsterSound from '../../sounds/cut.mp3';
 
+// 
+import { calculateDamage } from '../../functions/calculateDamage.js';
+
 const CodeBlockWrapper = styled.div`
   background-color: ${COLORS.LIGHT_BLACK};
   border-radius: 3px;
@@ -152,12 +155,6 @@ export const CodeBlock = ({
     }
   };
 
-  // ダメージを計算する関数
-  const calculateDamage = (attack, defence) => {
-    const damage = attack - defence;
-    return damage;
-  };
-
   useEffect(() => {
     const handlekeyPress = (e) => {
       if(e.key !== 'Enter' && key_available === true) {
@@ -251,7 +248,8 @@ export const CodeBlock = ({
     monster_hp,
     monster_defence,
     question_judgement,
-    key_available
+    key_available,
+    user_attack
   ]);
 
   return (
