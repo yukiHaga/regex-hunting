@@ -65,12 +65,16 @@ export const TimeGage = ({
   time_active,
   monster_attack,
   user_defence,
-  user_hp
+  user_hp,
+  sentence_num
 }) => {
 
   // タイムゲージが0になった時に実行される関数
   const timeOut = () => {
-    gameState.incorrect_questions.push(gameState.questions[0]);
+    gameState.incorrect_questions.push({
+      question: gameState.questions[0],
+      sentence_num: sentence_num
+    });
     gameState.questions.shift();
     const current_hp = user_hp - calculateDamage(monster_attack, user_defence);
     const audio = new Audio(AttackSound);

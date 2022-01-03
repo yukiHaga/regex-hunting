@@ -349,6 +349,7 @@ export const Games = () => {
               flash_display={gameState.flash_display}
               key_available={gameState.key_available}
               user_attack={gameState.user_attack}
+              sentence_num={gameState.sentence_num}
             />
           </CodeBlockWrapper>
           <GageBlockWrapper>
@@ -359,6 +360,7 @@ export const Games = () => {
               monster_attack={gameState.monster_attack}
               user_defence={gameState.user_defence}
               user_hp={gameState.user_hp}
+              sentence_num={gameState.sentence_num}
             />
             <HpGage 
               user_hp={gameState.user_hp}

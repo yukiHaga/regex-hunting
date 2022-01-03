@@ -143,15 +143,18 @@ export const CheckAnswerDialog = ({
         </CustomDialogTitleWrapper> 
         <CustomDialogContent>
           {
-            incorrect_questions.length ? incorrect_questions.map((value) => (
+            incorrect_questions.length ? incorrect_questions.map(({ 
+              question, 
+              sentence_num 
+            }) => (
               <QuestionBlockWrapper>
                 <QuestionWrapper>
                   <QuestionNumWrapper>
-                    Q1
+                    {`Q${sentence_num}`}
                   </QuestionNumWrapper>
-                  {value.sentence}
+                  {question.sentence}
                   <TargetSentenceWrapper>
-                    {value.target_sentence}
+                    {question.target_sentence}
                   </TargetSentenceWrapper>
                 </QuestionWrapper>
                 <CommentaryBlockWrapper>
@@ -159,7 +162,7 @@ export const CheckAnswerDialog = ({
                     解説
                   </CommentaryTitleWrapper>
                   <CommentaryWrapper>
-                    {value.commentary}
+                    {question.commentary}
                   </CommentaryWrapper>
                 </CommentaryBlockWrapper>
               </QuestionBlockWrapper>
@@ -175,15 +178,18 @@ export const CheckAnswerDialog = ({
         </CustomDialogTitleWrapper> 
         <CustomDialogContent>
           {
-            correct_questions.length ? correct_questions.map((value) => (
+            correct_questions.length ? correct_questions.map(({
+              question,
+              sentence_num 
+            }) => (
               <QuestionBlockWrapper>
                 <QuestionWrapper>
                   <QuestionNumWrapper>
-                    Q1
+                    {`Q${sentence_num}`}
                   </QuestionNumWrapper>
-                  {value.sentence}
+                  {question.sentence}
                   <TargetSentenceWrapper>
-                    {value.target_sentence}
+                    {question.target_sentence}
                   </TargetSentenceWrapper>
                 </QuestionWrapper>
                 <CommentaryBlockWrapper>
@@ -191,7 +197,7 @@ export const CheckAnswerDialog = ({
                     解説
                   </CommentaryTitleWrapper>
                   <CommentaryWrapper>
-                    {value.commentary}
+                    {question.commentary}
                   </CommentaryWrapper>
                 </CommentaryBlockWrapper>
               </QuestionBlockWrapper>

@@ -88,7 +88,8 @@ export const CodeBlock = ({
   flash_display,
   commentary,
   key_available,
-  user_attack
+  user_attack,
+  sentence_num
 }) => {
 
   const [inputState, setCodeState] = useState("");
@@ -189,7 +190,10 @@ export const CodeBlock = ({
           const audio = new Audio(DecisionSound);
           audio.play();
           if(current_question_judgement === "correct") {
-            gameState.correct_questions.push(gameState.questions[0]);
+            gameState.correct_questions.push({
+              question: gameState.questions[0],
+              sentence_num: sentence_num
+            });
             gameState.questions.shift();
             const current_hp = monster_hp - calculateDamage(user_attack, monster_defence);
             const audio = new Audio(CutMonsterSound);
@@ -249,7 +253,8 @@ export const CodeBlock = ({
     monster_defence,
     question_judgement,
     key_available,
-    user_attack
+    user_attack,
+    sentence_num
   ]);
 
   return (
