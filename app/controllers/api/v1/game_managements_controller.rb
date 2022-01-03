@@ -1,5 +1,5 @@
 class Api::V1::GameManagementsController < ApplicationController
-  MIN_TIMES = 12
+  MIN_TIMES = 14
   skip_before_action :require_login
   skip_before_action :verify_authenticity_token, only: :start
   after_action :set_csrf_token_header, only: :start
