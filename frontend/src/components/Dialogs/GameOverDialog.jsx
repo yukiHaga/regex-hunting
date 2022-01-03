@@ -18,6 +18,9 @@ import { ResultShareButton } from '../Buttons/ResultShareButton.jsx';
 // Contextオブジェクト
 import { UserContext } from "../../context/UserProvider.js";
 
+// Sentence
+import { CheackAnswerSentence } from '../Sentences/CheackAnswerSentence.jsx';
+
 const CustomDialogInnerWrapper = styled.div`
   padding-top: 10px;
   padding-right: 10px;
@@ -134,6 +137,9 @@ export const GameOverDialog = ({
               </tr>
             </tbody>
           </CustomTable>
+          <CheackAnswerSentence
+            setGameState={setGameState}
+          />
           <ButtonsWrapper>
             <RestartGameButton 
               difficulty={difficulty}             

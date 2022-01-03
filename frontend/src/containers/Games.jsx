@@ -166,7 +166,8 @@ export const Games = () => {
     game_result: "",
     first_appearance: true,
     question_judgement: "progress",
-    time_active: false
+    time_active: false,
+    check_answer: false
   }
 
   // ゲーム状態を管理するstate
@@ -367,7 +368,7 @@ export const Games = () => {
       </MainContentWrapper>
       <GameFooter />
       {
-        gameState.game_result === "win" &&
+        gameState.game_result === "win" && !gameState.check_answer &&
           <GameClearDialog
             isOpen={gameState.game_result === "win"}
             difficulty={difficulty} 
@@ -379,7 +380,19 @@ export const Games = () => {
           />
       }
       {
-        gameState.game_result === "lose" &&
+        gameState.game_result === "lose" && !gameState.check_answer &&
+          <GameOverDialog
+            isOpen={gameState.game_result === "lose"}
+            difficulty={difficulty} 
+            correct_questions={gameState.correct_questions}
+            incorrect_questions={gameState.incorrect_questions}
+            setGameState={setGameState}
+            getGameStart={getGameStart}
+            initialState={initialState}
+          />
+      }
+      {
+        gameState.check_answer && 
           <GameOverDialog
             isOpen={gameState.game_result === "lose"}
             difficulty={difficulty} 
