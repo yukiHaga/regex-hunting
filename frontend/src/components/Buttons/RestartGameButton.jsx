@@ -7,9 +7,6 @@ import { COLORS } from '../../style_constants.js';
 // HTTP_STATUS_CODE
 import { HTTP_STATUS_CODE } from '../../constants';
 
-// モンスター名を取得する関数
-import { getMonsterName } from '../../functions/getMonsterName.js';
-
 const RestartGameButtonWrapper = styled.div`
   margin-top: 30px;
   border-style: none;
