@@ -169,7 +169,14 @@ export const CheckAnswerDialog = ({
     >
       <CustomDialogInnerWrapper> 
         <BackToModalButtonWrapper>
-          <BackToModalButton />
+          <BackToModalButton 
+            onClick={
+              () => setGameState((prev) => ({
+                ...prev,
+                check_answer: false
+              }))
+            }
+          />
         </BackToModalButtonWrapper>
         <CustomDialogTitleWrapper title="Bad">
           Bad

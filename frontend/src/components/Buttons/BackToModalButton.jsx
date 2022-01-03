@@ -41,11 +41,12 @@ const BackToModalButtonTextWrapper = styled.div`
 `;
 
 export const BackToModalButton = ({
-  setGameState
+  onClick
 }) => {
+
   return (
     <>
-      <BackToModalButtonWrapper onClick={setGameState}>
+      <BackToModalButtonWrapper onClick={onClick}>
         <BackToModalButtonIconWrapper>
           <ArrowBackIcon />
         </BackToModalButtonIconWrapper>
