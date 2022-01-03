@@ -4,6 +4,9 @@ import styled from 'styled-components';
 // Colors
 import { COLORS } from '../../style_constants.js';
 
+// handleColorType 
+import { handleColorType } from '../../functions/handleColorType.js';
+
 const HpGageWrapper = styled.div`
   background-color: ${COLORS.LIGHT_BLACK};
   border-radius: 0 0 3px 3px;
@@ -29,24 +32,36 @@ const TypeWrapper = styled.div`
   text-align: center;
 `;
 
-const GageWrapper = styled.div`
+const GageOuterWrapper = styled.div`
   height: 100%;
   width: 100%;
-  background-color: ${COLORS.LIGHT_BLUE};
+`;
+
+const GageWrapper = styled.div`
+  height: 100%;
+  width: ${(props) => `${100 * (props.user_hp / props.user_max_hp)}%`};
+  background-color: ${(props) => handleColorType(props.user_hp)};
   box-sizing: border-box;
   border: none;
   outline: none;
 `;
 
-export const HpGage = () => {
+export const HpGage = ({
+  user_hp,
+  user_max_hp
+}) => {
   return (
     <>
       <HpGageWrapper>
         <TypeWrapper>
           HP
         </TypeWrapper>
-        <GageWrapper>
-        </GageWrapper>
+        <GageOuterWrapper>
+          <GageWrapper 
+            user_hp={user_hp}
+            user_max_hp={user_max_hp}
+          />
+        </GageOuterWrapper>
       </HpGageWrapper>
     </>
   );

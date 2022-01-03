@@ -4,7 +4,11 @@ import styled, { keyframes } from 'styled-components';
 // Colors
 import { COLORS } from '../../style_constants.js';
 
+// Image
 import ElementaryMonsterImage from '../../images/elementary.png'; 
+
+// handleColorType 
+import { handleColorType } from '../../functions/handleColorType.js';
 
 // 攻撃されたときのアニメーション
 const ElementaryMonsterFlash = keyframes`
@@ -80,20 +84,6 @@ const HpGageWrapper = styled.div`
   animation-duration: 3s;
   animation-fill-mode: forwards;
 `;
-
-// HPのカラーを取り扱う関数
-const handleColorType = (monster_hp) => {
-  switch (true) {
-    case monster_hp > 50:
-      return COLORS.LIGHT_BLUE;
-    case monster_hp <= 50 && monster_hp > 20:
-      return COLORS.HP_YELLOW;
-    case monster_hp <= 20:
-      return COLORS.HP_RED;
-    default:
-      return COLORS.LIGHT_BLUE;
-  }
-};
 
 const InnerHpGageWrapper = styled.div`
   width: ${(props) => `${160 * (props.monster_hp / props.monster_max_hp)}px`};

@@ -11,7 +11,7 @@ import ErrorSound from '../../sounds/error.mp3';
 import DecisionSound from '../../sounds/decision.mp3';
 import CutMonsterSound from '../../sounds/cut.mp3';
 
-// 
+// calculateDamage 
 import { calculateDamage } from '../../functions/calculateDamage.js';
 
 const CodeBlockWrapper = styled.div`

@@ -139,7 +139,7 @@ export const Games = () => {
     game_management: {},
     questions: [],
     user_hp: 100,
-    max_user_hp: 100,
+    user_max_hp: 100,
     user_attack: 20,
     user_defence: 30,
     monster_attack: {},
@@ -353,8 +353,14 @@ export const Games = () => {
               gameState={gameState} 
               setGameState={setGameState}
               time_active={gameState.time_active}
+              user_attack={gameState.user_attack}
+              monster_defence={gameState.user_defence}
+              user_hp={gameState.user_hp}
             />
-            <HpGage />
+            <HpGage 
+              user_hp={gameState.user_hp}
+              user_max_hp={gameState.user_max_hp}
+            />
           </GageBlockWrapper>
         </MainGameContentWrapper>
       </MainContentWrapper>

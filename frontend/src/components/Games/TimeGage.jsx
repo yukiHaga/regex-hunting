@@ -7,6 +7,9 @@ import { COLORS } from '../../style_constants.js';
 // Sounds
 import AttackSound from '../../sounds/attack.mp3';
 
+// calculateDamage 
+import { calculateDamage } from '../../functions/calculateDamage.js';
+
 const TimeGageWrapper = styled.div`
   background-color: ${COLORS.LIGHT_BLACK};
   border-radius: 3px 3px 0 0;
@@ -59,13 +62,17 @@ const GageOuterWrapper = styled.div`
 export const TimeGage = ({
   gameState,
   setGameState,
-  time_active
+  time_active,
+  user_attack,
+  monster_defence,
+  user_hp
 }) => {
 
   // タイムゲージが0になった時に実行される関数
   const timeOut = () => {
     gameState.incorrect_questions.push(gameState.questions[0]);
     gameState.questions.shift();
+    const current_hp = user_hp - calculateDamage(user_attack, monster_defence);
     const audio = new Audio(AttackSound);
     audio.play();
     setGameState((prev) => ({
@@ -77,7 +84,8 @@ export const TimeGage = ({
       flash_title: "Bad",
       commentary: prev.next_commentary,
       next_commentary: prev?.questions["0"]?.commentary || "no_next_commentary",
-      key_available: false
+      key_available: false,
+      user_hp: current_hp
     }));
   };
 
