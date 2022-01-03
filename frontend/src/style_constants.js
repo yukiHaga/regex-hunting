@@ -19,6 +19,7 @@ export const COLORS = {
   GAGE_GRAY: '#BBB8AA',
   WORD_BLUE: '#0066B3',
   WORD_BACK: '#BFE4FF',
+  OVER_BLACK: '#444444'
 }
 
 // フォントサイズを決める際に、適宜定義する。

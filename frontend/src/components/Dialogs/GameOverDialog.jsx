@@ -35,7 +35,7 @@ const CustomDialogTitleWrapper = styled.div`
   font-weight: bold;
   font-size: 50px;
   line-height: 74px;
-  color: ${COLORS.WHITE};
+  color: ${COLORS.OVER_BLACK};
   padding-top: 30px;
   -webkit-text-stroke: 6px ${COLORS.RED};
   position: relative;
