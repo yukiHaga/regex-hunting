@@ -33,7 +33,7 @@ const CustomDialogTitleWrapper = styled.div`
   height: 50px;
   font-size: 30px;
   line-height: 50px;
-  padding-top: 30px;
+  padding-top: 20px;
   font-family: Raleway;
   font-style: italic;
   font-weight: bold;
@@ -46,6 +46,11 @@ const CustomDialogTitleWrapper = styled.div`
 
 const CustomDialogContent = styled(DialogContent)`
   text-align: center;
+`;
+
+// backボタンのラッパー 
+// もしbackボタンを固定するなら使う
+const BackToModalButtonWrapper = styled.div`
 `;
 
 // background-color: ${COLORS.OCHER};
@@ -163,7 +168,9 @@ export const CheckAnswerDialog = ({
       open={isOpen}
     >
       <CustomDialogInnerWrapper> 
-        <BackToModalButton />
+        <BackToModalButtonWrapper>
+          <BackToModalButton />
+        </BackToModalButtonWrapper>
         <CustomDialogTitleWrapper title="Bad">
           Bad
         </CustomDialogTitleWrapper> 
