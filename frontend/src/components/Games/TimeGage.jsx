@@ -51,7 +51,7 @@ const GageWrapper = styled.div`
   box-sizing: border-box;
   border: none;
   outline: none;
-  animation: ${(props) => props.time_active && TimeGageAnime} 40s linear 1;
+  animation: ${(props) => props.time_active && TimeGageAnime} 30s linear 1;
 `;
 
 const GageOuterWrapper = styled.div`
