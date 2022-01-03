@@ -208,6 +208,7 @@ export const CodeBlock = ({
               questions: prev.questions,
               monster_hp: current_hp,
               flash_display: true,
+              flash_title: "Good",
               commentary: prev.next_commentary,
               next_commentary: prev?.questions["0"]?.commentary || "no_next_commentary",
               key_available: false

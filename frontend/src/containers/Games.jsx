@@ -17,7 +17,7 @@ import { CodeBlock } from '../components/Games/CodeBlock.jsx';
 import { TimeGage } from '../components/Games/TimeGage.jsx';
 import { HpGage } from '../components/Games/HpGage.jsx';
 import { GameFooter } from '../components/Footers/GameFooter.jsx';
-import { GoodFlashMessage } from '../components/FlashMessages/GoodFlashMessage.jsx'
+import { JudgementFlashMessage } from '../components/FlashMessages/JudgementFlashMessage.jsx'
 import { GameClearDialog } from '../components/Dialogs/GameClearDialog.jsx'
 
 // Contextオブジェクト
@@ -111,8 +111,8 @@ const GageBlockWrapper = styled.div`
   margin-top: 13px;
 `;
 
-// Goodメッセージを出すためのコンポーネント
-const CustomGoodFlashMessage = styled(GoodFlashMessage)`
+// Judgementメッセージを出すためのコンポーネント
+const CustomJudgementFlashMessage = styled(JudgementFlashMessage)`
   position: relative;
   z-index: 1;
 `;
@@ -155,6 +155,7 @@ export const Games = () => {
     commentary: "",
     next_commentary: "",
     flash_display: false,
+    flash_title: "",
     input_regex_object: {},
     key_available: false,
     game_result: "",
@@ -320,9 +321,10 @@ export const Games = () => {
             </BattleBlockWrapper>
             {  
               gameState.flash_display && 
-                <CustomGoodFlashMessage 
+                <CustomJudgementFlashMessage 
                   flash_display={gameState.flash_display}
                   commentary={gameState.commentary}
+                  flash_title={gameState.flash_title}
                 />
             }
           </GameBlockWrapper>

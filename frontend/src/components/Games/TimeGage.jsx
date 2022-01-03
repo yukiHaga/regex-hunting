@@ -74,6 +74,7 @@ export const TimeGage = ({
       incorrect_questions: prev.incorrect_questions,
       questions: prev.questions,
       flash_display: true,
+      flash_title: "Bad",
       commentary: prev.next_commentary,
       next_commentary: prev?.questions["0"]?.commentary || "no_next_commentary",
       key_available: false

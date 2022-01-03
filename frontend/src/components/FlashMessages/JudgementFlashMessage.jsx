@@ -10,22 +10,34 @@ import { COLORS } from '../../style_constants.js';
 const CustomSlide = styled(Slide)`
 `;
 
-const GoodFlashMessageWrapper = styled.div`
+const JudgementFlashMessageWrapper = styled.div`
   display: flex;
   justify-content: end;
 `;
 
-const GoodMessageTitle = styled.div`
+// タイトルカラーを取り扱う関数
+const handleTitleColorType = (flash_title) => {
+  switch (flash_title) {
+    case "Good":
+      return COLORS.MAIN;
+    case "Bad":
+      return COLORS.FLASH_RED;
+    default:
+      return COLORS.FLASH_RED;
+  }
+};
+
+const JudgementMessageTitle = styled.div`
   font-family: Raleway;
   font-style: italic;
   font-weight: bold;
   font-size: 32px;
-  color: ${COLORS.MAIN};
+  color: ${(props) => handleTitleColorType(props.flash_title)};
   padding-top: 5px;
   padding-bottom: 5px;
 `;
 
-const GoodMessage = styled.div`
+const JudgementMessage = styled.div`
   width: 190px;
   height: 150px;
   pointerEvents: 'none';
@@ -41,9 +53,10 @@ const GoodMessage = styled.div`
   padding-bottom: 5px;
 `;
 
-export const GoodFlashMessage = ({
+export const JudgementFlashMessage = ({
   flash_display,
-  commentary
+  commentary,
+  flash_title
 }) => {
 
   // addEndListener={() => (setTimeout(() => (navigate(url)), 2500))}
@@ -56,14 +69,14 @@ export const GoodFlashMessage = ({
         mountOnEnter 
         unmountOnExit
       >
-        <GoodFlashMessageWrapper>
-          <GoodMessage severity="success">
-            <GoodMessageTitle>
-              Good
-            </GoodMessageTitle>
+        <JudgementFlashMessageWrapper>
+          <JudgementMessage severity="success">
+            <JudgementMessageTitle flash_title={flash_title}>
+              {flash_title}
+            </JudgementMessageTitle>
             {commentary}
-          </GoodMessage>
-        </GoodFlashMessageWrapper>
+          </JudgementMessage>
+        </JudgementFlashMessageWrapper>
       </CustomSlide>
     </>
   );
