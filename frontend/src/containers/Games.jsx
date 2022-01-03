@@ -20,6 +20,7 @@ import { GameFooter } from '../components/Footers/GameFooter.jsx';
 import { JudgementFlashMessage } from '../components/FlashMessages/JudgementFlashMessage.jsx'
 import { GameClearDialog } from '../components/Dialogs/GameClearDialog.jsx'
 import { GameOverDialog } from '../components/Dialogs/GameOverDialog.jsx'
+import { CheckAnswerDialog } from '../components/Dialogs/CheckAnswerDialog.jsx'
 
 // Contextオブジェクト
 import { UserContext } from "../context/UserProvider.js";
@@ -393,14 +394,12 @@ export const Games = () => {
       }
       {
         gameState.check_answer && 
-          <GameOverDialog
-            isOpen={gameState.game_result === "lose"}
+          <CheckAnswerDialog
+            isOpen={gameState.check_answer}
             difficulty={difficulty} 
             correct_questions={gameState.correct_questions}
             incorrect_questions={gameState.incorrect_questions}
             setGameState={setGameState}
-            getGameStart={getGameStart}
-            initialState={initialState}
           />
       }
     </>

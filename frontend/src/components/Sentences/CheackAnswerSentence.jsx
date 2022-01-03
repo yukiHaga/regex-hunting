@@ -31,7 +31,7 @@ export const CheackAnswerSentence = ({
     <>
       <CheackAnswerSentenceWrapper>
         <BlueBaseLink to={'#'} onClick={handleAnswer}>
-          問題の答えを確認する
+          答えを確認する
         </BlueBaseLink>
       </CheackAnswerSentenceWrapper>
     </>

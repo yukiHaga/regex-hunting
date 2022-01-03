@@ -7,6 +7,10 @@ import Slide from '@mui/material/Slide';
 // Colors
 import { COLORS } from '../../style_constants.js';
 
+// handleTitleColorType
+// タイトルカラーを取り扱う関数
+import { handleTitleColorType } from '../../functions/handleTitleColorType.js'
+
 const CustomSlide = styled(Slide)`
 `;
 
@@ -14,18 +18,6 @@ const JudgementFlashMessageWrapper = styled.div`
   display: flex;
   justify-content: end;
 `;
-
-// タイトルカラーを取り扱う関数
-const handleTitleColorType = (flash_title) => {
-  switch (flash_title) {
-    case "Good":
-      return COLORS.MAIN;
-    case "Bad":
-      return COLORS.RED;
-    default:
-      return COLORS.RED;
-  }
-};
 
 const JudgementMessageTitle = styled.div`
   font-family: Raleway;
