@@ -345,6 +345,7 @@ export const Games = () => {
               question_judgement={gameState.question_judgement}
               flash_display={gameState.flash_display}
               key_available={gameState.key_available}
+              user_attack={user_attack}
             />
           </CodeBlockWrapper>
           <GageBlockWrapper>

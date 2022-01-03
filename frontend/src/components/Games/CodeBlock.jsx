@@ -11,10 +11,6 @@ import ErrorSound from '../../sounds/error.mp3';
 import DecisionSound from '../../sounds/decision.mp3';
 import CutMonsterSound from '../../sounds/cut.mp3';
 
-// プレイヤーの攻撃力が定義してある定数
-// プレイヤーのアタックは20で固定とする
-import { PLAYER_STATUS } from '../../constants.js';
-
 const CodeBlockWrapper = styled.div`
   background-color: ${COLORS.LIGHT_BLACK};
   border-radius: 3px;
@@ -88,7 +84,8 @@ export const CodeBlock = ({
   question_judgement,
   flash_display,
   commentary,
-  key_available
+  key_available,
+  user_attack
 }) => {
 
   const [inputState, setCodeState] = useState("");
@@ -155,9 +152,9 @@ export const CodeBlock = ({
     }
   };
 
-  // モンスターに与えるダメージを計算する関数
-  const calculateDamage = (defence) => {
-    const damage = PLAYER_STATUS.ATTACK - defence;
+  // ダメージを計算する関数
+  const calculateDamage = (attack, defence) => {
+    const damage = attack - defence;
     return damage;
   };
 
@@ -197,7 +194,7 @@ export const CodeBlock = ({
           if(current_question_judgement === "correct") {
             gameState.correct_questions.push(gameState.questions[0]);
             gameState.questions.shift();
-            const current_hp = monster_hp - calculateDamage(monster_defence);
+            const current_hp = monster_hp - calculateDamage(user_attack, monster_defence);
             const audio = new Audio(CutMonsterSound);
             setGameState((prev) => ({
               ...prev,

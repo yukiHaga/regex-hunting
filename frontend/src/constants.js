@@ -9,8 +9,3 @@ export const HTTP_STATUS_CODE = {
   NOT_FOUND: 404,
   NOT_ACCEPTABLE: 406
 };
-
-// プレイヤーのアタックのstate
-export const PLAYER_STATUS = {
-  ATTACK: 20
-};
