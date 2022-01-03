@@ -21,9 +21,9 @@ const handleTitleColorType = (flash_title) => {
     case "Good":
       return COLORS.MAIN;
     case "Bad":
-      return COLORS.FLASH_RED;
+      return COLORS.RED;
     default:
-      return COLORS.FLASH_RED;
+      return COLORS.RED;
   }
 };
 

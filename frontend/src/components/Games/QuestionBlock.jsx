@@ -201,7 +201,7 @@ export const QuestionBlock = ({
         key_available: false,
         time_active: false
       }));
-      if(incorrect_questions.length === 3) {
+      if(incorrect_questions.length === 5) {
         const timer = setTimeout(() => {
           setGameState((prev) => ({
             ...prev,

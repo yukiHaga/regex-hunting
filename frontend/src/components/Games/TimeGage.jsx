@@ -63,8 +63,8 @@ export const TimeGage = ({
   gameState,
   setGameState,
   time_active,
-  user_attack,
-  monster_defence,
+  monster_attack,
+  user_defence,
   user_hp
 }) => {
 
@@ -72,7 +72,7 @@ export const TimeGage = ({
   const timeOut = () => {
     gameState.incorrect_questions.push(gameState.questions[0]);
     gameState.questions.shift();
-    const current_hp = user_hp - calculateDamage(user_attack, monster_defence);
+    const current_hp = user_hp - calculateDamage(monster_attack, user_defence);
     const audio = new Audio(AttackSound);
     audio.play();
     setGameState((prev) => ({

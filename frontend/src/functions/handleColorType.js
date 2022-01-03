@@ -7,9 +7,9 @@ export const handleColorType = (hp) => {
     case hp > 50:
       return COLORS.LIGHT_BLUE;
     case hp <= 50 && hp > 20:
-      return COLORS.HP_YELLOW;
+      return COLORS.YELLOW;
     case hp <= 20:
-      return COLORS.HP_RED;
+      return COLORS.RED;
     default:
       return COLORS.LIGHT_BLUE;
   }

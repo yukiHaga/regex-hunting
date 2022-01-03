@@ -44,6 +44,7 @@ const GageWrapper = styled.div`
   box-sizing: border-box;
   border: none;
   outline: none;
+  transition: 0.5s;
 `;
 
 export const HpGage = ({

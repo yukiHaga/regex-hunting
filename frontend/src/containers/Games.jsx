@@ -353,8 +353,8 @@ export const Games = () => {
               gameState={gameState} 
               setGameState={setGameState}
               time_active={gameState.time_active}
-              user_attack={gameState.user_attack}
-              monster_defence={gameState.user_defence}
+              monster_attack={gameState.monster_attack}
+              user_defence={gameState.user_defence}
               user_hp={gameState.user_hp}
             />
             <HpGage 
