@@ -138,6 +138,10 @@ export const Games = () => {
   const initialState = {
     game_management: {},
     questions: [],
+    user_hp: 100,
+    max_user_hp: 100,
+    user_attack: 20,
+    user_defence: 30,
     monster_attack: {},
     monster_defence: {},
     monster_hp: 100,
