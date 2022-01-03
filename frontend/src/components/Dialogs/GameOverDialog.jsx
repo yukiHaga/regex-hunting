@@ -132,10 +132,6 @@ export const GameOverDialog = ({
                 <MetaTd>不正解数</MetaTd> 
                 <CustomTd>{ `${incorrect_questions.length || "0"}問` }</CustomTd>
               </tr>
-              <tr>
-                <MetaTd>クリアタイム</MetaTd> 
-                <CustomTd>5:00</CustomTd>
-              </tr>
             </tbody>
           </CustomTable>
           <ButtonsWrapper>
