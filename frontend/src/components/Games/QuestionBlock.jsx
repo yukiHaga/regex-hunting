@@ -77,7 +77,8 @@ export const QuestionBlock = ({
   setGameState,
   input_regex_object,
   correct_questions,
-  incorrect_questions
+  incorrect_questions,
+  game_description_open
 }) => {
 
   // 難易度を日本語に変換する関数
@@ -103,7 +104,7 @@ export const QuestionBlock = ({
   // このuseEffectがあるおかげで、最初のモンスターセンテンスが
   // 問題1のセンテンスに自動で切り替わる
   useEffect(() => {
-    if (sentence === `${getMonsterName(difficulty)}が現れた！`){
+    if (!game_description_open && sentence === `${getMonsterName(difficulty)}が現れた！`){
       const timer = setTimeout(() => {
         setGameState((prev) => ({
           ...prev,
