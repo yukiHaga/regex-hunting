@@ -51,7 +51,10 @@ const GageWrapper = styled.div`
   box-sizing: border-box;
   border: none;
   outline: none;
-  animation: ${(props) => props.time_active && TimeGageAnime} 30s linear 1;
+  animation: ${({
+    time_active,
+    game_description_open
+  }) => game_description_open && time_active && TimeGageAnime} 30s linear 1;
 `;
 
 const GageOuterWrapper = styled.div`
@@ -66,7 +69,8 @@ export const TimeGage = ({
   monster_attack,
   user_defence,
   user_hp,
-  sentence_num
+  sentence_num,
+  game_description_open
 }) => {
 
   // タイムゲージが0になった時に実行される関数
@@ -103,6 +107,7 @@ export const TimeGage = ({
           <GageWrapper 
             onAnimationEnd={timeOut} 
             time_active={time_active}
+            game_description_open={game_description_open}
           />
         </GageOuterWrapper>
       </TimeGageWrapper>
