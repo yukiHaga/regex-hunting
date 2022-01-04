@@ -94,7 +94,7 @@ Question.create!(
 
 # 7問目
 Question.create!(
-  sentence: "A, a, 9の全てにマッチするメタ文字を入力せよ。",
+  sentence: "A, a, 9の全てにマッチする正規表現を入力せよ。",
   target_sentence: "A, a, 9",
   sample_answer: "\\w",
   commentary: "\\wはa~z, A~Z, 0~9, _の中の1文字を表します。[a-zA-Z\\d]で書き換え可能です。",
