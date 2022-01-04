@@ -21,6 +21,7 @@ import { JudgementFlashMessage } from '../components/FlashMessages/JudgementFlas
 import { GameClearDialog } from '../components/Dialogs/GameClearDialog.jsx'
 import { GameOverDialog } from '../components/Dialogs/GameOverDialog.jsx'
 import { CheckAnswerDialog } from '../components/Dialogs/CheckAnswerDialog.jsx'
+import { ElementaryGameDescriptionDialog } from '../components/Dialogs/ElementaryGameDescriptionDialog.jsx'
 
 // Contextオブジェクト
 import { UserContext } from "../context/UserProvider.js";
@@ -184,7 +185,8 @@ export const Games = () => {
     time_active: false,
     check_answer: false,
     game_start_time: 0,
-    game_end_time: 0
+    game_end_time: 0,
+    game_description: false
   }
 
   // ゲーム状態を管理するstate
@@ -238,6 +240,7 @@ export const Games = () => {
           next_commentary: data.questions["0"].commentary,
           game_result: data.game_management.game_result,
           game_start_time: performance.now(),
+          game_description: true
         })); 
       }).catch((e) => {
         if(e.response.status === HTTP_STATUS_CODE.NOT_FOUND){
@@ -432,6 +435,13 @@ export const Games = () => {
             difficulty={difficulty} 
             correct_questions={gameState.correct_questions}
             incorrect_questions={gameState.incorrect_questions}
+            setGameState={setGameState}
+          />
+      }
+      {
+        gameState.game_description &&
+          <ElementaryGameDescriptionDialog
+            isOpen={gameState.game_description}
             setGameState={setGameState}
           />
       }
