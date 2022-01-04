@@ -309,6 +309,7 @@ export const Games = () => {
                         question_judgement={gameState.question_judgement}
                         first_appearance={gameState.first_appearance}
                         game_result={gameState.game_result}
+                        game_description_open={gameState.game_description_open}
                       />
                       <ElementaryMonster 
                         monster_hp={gameState.monster_hp}
@@ -316,6 +317,7 @@ export const Games = () => {
                         question_judgement={gameState.question_judgement}
                         first_appearance={gameState.first_appearance}
                         game_result={gameState.game_result}
+                        game_description_open={gameState.game_description_open}
                       />
                       <ElementaryMonster 
                         monster_hp={gameState.monster_hp}
@@ -323,6 +325,7 @@ export const Games = () => {
                         question_judgement={gameState.question_judgement}
                         first_appearance={gameState.first_appearance}
                         game_result={gameState.game_result}
+                        game_description_open={gameState.game_description_open}
                       />
                     </>
                 }
@@ -355,6 +358,7 @@ export const Games = () => {
                   input_regex_object={gameState.input_regex_object}
                   correct_questions={gameState.correct_questions}
                   incorrect_questions={gameState.incorrect_questions}
+                  game_description_open={gameState.game_description_open}
                 />
               </QuestionBlockWrapper>
             </BattleBlockWrapper>
@@ -382,6 +386,7 @@ export const Games = () => {
               key_available={gameState.key_available}
               user_attack={gameState.user_attack}
               sentence_num={gameState.sentence_num}
+              game_description_open={gameState.game_description_open}
             />
           </CodeBlockWrapper>
           <GageBlockWrapper>
@@ -393,6 +398,7 @@ export const Games = () => {
               user_defence={gameState.user_defence}
               user_hp={gameState.user_hp}
               sentence_num={gameState.sentence_num}
+              game_description_open={gameState.game_description_open}
             />
             <HpGage 
               user_hp={gameState.user_hp}
