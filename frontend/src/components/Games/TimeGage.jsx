@@ -5,7 +5,7 @@ import styled, { keyframes } from 'styled-components';
 import { COLORS } from '../../style_constants.js';
 
 // Sounds
-import AttackSound from '../../sounds/attack.mp3';
+import TackleSound from '../../sounds/tackle.mp3';
 
 // calculateDamage 
 import { calculateDamage } from '../../functions/calculateDamage.js';
@@ -77,7 +77,7 @@ export const TimeGage = ({
     });
     gameState.questions.shift();
     const current_hp = user_hp - calculateDamage(monster_attack, user_defence);
-    const audio = new Audio(AttackSound);
+    const audio = new Audio(TackleSound);
     audio.play();
     setGameState((prev) => ({
       ...prev,
