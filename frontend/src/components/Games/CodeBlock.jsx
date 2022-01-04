@@ -136,6 +136,7 @@ export const CodeBlock = ({
 
   // マッチした配列と答えのマッチした配列が一致しているかを返す関数
   // ロジックに不備があったので、改善した
+  // 正解判定のロジックなので、いつかまた修正が必要かもしれない
   const getQuestionJudgement = (
     input_match_words,
     sample_match_words
@@ -146,7 +147,7 @@ export const CodeBlock = ({
           !input_match_words.filter((value, index) => {
             return !(sample_match_words[index] === value);
           }).length
-      )) {
+      ) && input_match_words.length === sample_match_words.length) {
         return "correct";
       } else {
         return "progress";
