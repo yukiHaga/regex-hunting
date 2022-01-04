@@ -1,6 +1,6 @@
 import React, { useState, Fragment, useEffect, useLayoutEffect, useContext } from 'react';
 import { useParams, useLocation, useNavigate } from 'react-router-dom';
-import styled from 'styled-components';
+import styled, { keyframes } from 'styled-components';
 
 // Image
 import BackGroundImage from '../images/background.png';
@@ -58,8 +58,19 @@ const BackGroundImageCover = styled.img`
   z-index: -4;
 `;
 
+// 画面を揺らすアニメーション
+const ShockAnime = keyframes`
+  20% {-webkit-transform: translate(20px);}
+  40% {-webkit-transform: translate(-20px);}
+  60% {-webkit-transform: translate(10px);}
+  80% {-webkit-transform: translate(-10px);}
+`;
+
 // MainGameContentWrapperコンポーネント
 const MainGameContentWrapper = styled.div`
+  animation: ${
+    (props) => props.question_judgement === "incorrect" && ShockAnime
+  } 0.6s linear 1;
 `;
 
 // GameBlockWrapperコンポーネント
@@ -274,7 +285,9 @@ export const Games = () => {
       <FakeHeader />
       <MainContentWrapper>
         <BackGroundImageCover src={BackGroundImage} />
-        <MainGameContentWrapper>
+        <MainGameContentWrapper
+          question_judgement={gameState.question_judgement}
+        >
           <GameBlockWrapper>
             <SlideWrapper>
               <MetaMenuBar />
