@@ -87,6 +87,10 @@ const ButtonsWrapper = styled.div`
   justify-content: space-around;
 `;
 
+const ColorTimeSpan = styled.span`
+  color: ${({ milli_sec }) => milli_sec < 60000 && COLORS.RED }
+`;
+
 export const GameClearDialog = ({
   isOpen,
   difficulty,
@@ -99,6 +103,10 @@ export const GameClearDialog = ({
   game_end_time
 }) => {
 
+  // このミリ秒はタイムに色をつけるために使う
+  const milli_sec = game_end_time - game_start_time;
+
+  // タイムを計算してhh:mm:ssのフォーマットで出力する関数
   const getClearTime = (
     game_start_time, 
     game_end_time
@@ -154,7 +162,11 @@ export const GameClearDialog = ({
               </tr>
               <tr>
                 <MetaTd>クリアタイム</MetaTd> 
-                <CustomTd>{ getClearTime(game_start_time, game_end_time) }</CustomTd>
+                <CustomTd>
+                  <ColorTimeSpan milli_sec={milli_sec} >
+                    { getClearTime(game_start_time, game_end_time) }
+                  </ColorTimeSpan>
+                </CustomTd>
               </tr>
             </tbody>
           </CustomTable>
