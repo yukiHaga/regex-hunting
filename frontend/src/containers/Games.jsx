@@ -40,6 +40,9 @@ import { getMonsterName } from '../functions/getMonsterName.js';
 // ゲームクリア音
 import GameClearSound from '../sounds/game_clear.mp3';
 
+// ゲームオーバー音
+import GameOverSound from '../sounds/game_over.mp3';
+
 // MainContentWrapperコンポーネント
 const MainContentWrapper = styled.div`
   padding-top: 36px;
@@ -247,6 +250,16 @@ export const Games = () => {
   useEffect(() => {
     if(gameState.game_result === "win") {
       const audio = new Audio(GameClearSound);
+      audio.play();
+    }
+  }, [
+    gameState.game_result
+  ]);
+
+  // ゲームオーバーの音
+  useEffect(() => {
+    if(gameState.game_result === "lose") {
+      const audio = new Audio(GameOverSound);
       audio.play();
     }
   }, [
