@@ -21,7 +21,6 @@ import { handleTitleColorType } from '../../functions/handleTitleColorType.js'
 import { BackToModalButton } from '../Buttons/BackToModalButton.jsx';
 
 const CustomDialogInnerWrapper = styled.div`
-  padding-top: 10px;
   padding-right: 10px;
   padding-left: 10px;
   background-color: ${COLORS.SUB};
@@ -33,7 +32,7 @@ const CustomDialogTitleWrapper = styled.div`
   height: 50px;
   font-size: 30px;
   line-height: 50px;
-  padding-top: 20px;
+  padding-top: 50px;
   font-family: Raleway;
   font-style: italic;
   font-weight: bold;
@@ -51,6 +50,10 @@ const CustomDialogContent = styled(DialogContent)`
 // backボタンのラッパー 
 // もしbackボタンを固定するなら使う
 const BackToModalButtonWrapper = styled.div`
+  position: fixed;
+  background-color: ${COLORS.SUB};
+  width: 550px;
+  z-index: 2;
 `;
 
 // background-color: ${COLORS.OCHER};
