@@ -13,39 +13,72 @@ import { DescriptionWrapper } from '../shared_style.js';
 // Contextオブジェクト
 import { UserContext } from "../../context/UserProvider.js";
 
-const CustomDialogInnerWrapper = styled.div`
-  padding-top: 10px;
-  padding-right: 10px;
-  padding-left: 10px;
-  background-color: ${COLORS.SUB};
-  text-align: center;
-  height: 600px;
-  width: 1000px;
+// Image
+import ElementaryMonsterImage from '../../images/elementary.png'; 
+
+// NextButton
+import ArrowRightIcon from '@mui/icons-material/ArrowRight';
+
+// 画面全体にマスクを設置する設定
+// 画面の中央に要素を表示させる設定
+const MaskWrapper = styled.div`
+  position:fixed;
+  top:0;
+  left:0;
+  width:100%;
+  height:100%;
+  z-index: 1;
+  background-color:rgba(0,0,0,0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
 `;
 
-const CustomDialogTitleWrapper = styled.div`
-  height: 74px;
-  font-family: Helvetica;
+const ModalWrapper = styled.div`
+  z-index:2;
+  width: 70%;
+  height: 60%;
+  padding: 10px;
+  background-color: ${COLORS.SUB};
+  border-radius: 4px;
+  text-align: center;
+  padding: 36px;
+`;
+
+const TitleWrapper = styled.div`
+  font-family: YuGothic;
   font-style: normal;
   font-weight: bold;
-  font-size: 50px;
-  line-height: 74px;
-  color: ${COLORS.WHITE};
-  padding-top: 30px;
-  -webkit-text-stroke: 6px ${COLORS.MAIN};
-  position: relative;
+  font-size: 32px;
+  color: ${COLORS.BLACK};
 `;
 
-const CustomSpan = styled.span`
-  -webkit-text-stroke: 0;
-  position: absolute;
+const SentenceWrapper = styled.div`
+  font-family: YuGothic;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 20px;
+  display: inline-block;
+  text-align: left;
+  margin-top: 45px;
 `;
 
-const CustomDialogContent = styled(DialogContent)`
-  text-align: center;
+const MonsterImageBoxWrapper = styled.div`
+ text-align: right;
+ width: 80%;
+ margin-top: 45px;
 `;
 
-const CustomDialogContentSentence = styled(DescriptionWrapper)`
+const MonsterImageWrapper = styled.img`
+`;
+
+const ButtonLineWrapper = styled.div`
+  width: 100%;
+  text-align: right;
+`;
+
+const ButtonWrapper = styled.div`
+  font-size: 80px;
 `;
 
 export const ElementaryGameDescriptionDialog = ({
@@ -54,17 +87,28 @@ export const ElementaryGameDescriptionDialog = ({
 }) => {
 
   return(
-    <Dialog
-      open={isOpen}
-      maxWidth='xl'
-    >
-      <CustomDialogInnerWrapper> 
-        <CustomDialogContent>
-          <CustomDialogContentSentence>
-            正規表現とは？
-          </CustomDialogContentSentence>
-        </CustomDialogContent>
-      </CustomDialogInnerWrapper>
-    </Dialog>
+    <>
+      {
+        isOpen && 
+          <MaskWrapper>
+            <ModalWrapper>
+              <TitleWrapper>
+                初級編
+              </TitleWrapper>
+              <SentenceWrapper>
+        初級編を始める前に、正規表現とは何か?、どんなことができるのか？を学習しましょう。<br/>そして、初級編のゲームを通して、正規表現を作る際に使う基礎的なメタ文字をマスターしましょう！
+              </SentenceWrapper>
+              <MonsterImageBoxWrapper>
+                <MonsterImageWrapper src={ElementaryMonsterImage} />
+              </MonsterImageBoxWrapper>
+              <ButtonLineWrapper>
+                <ButtonWrapper>
+                  <ArrowRightIcon fontSize='inherit' />
+                </ButtonWrapper>
+              </ButtonLineWrapper>
+            </ModalWrapper>
+          </MaskWrapper>
+      }
+    </>
   );
 };
