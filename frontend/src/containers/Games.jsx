@@ -70,7 +70,7 @@ const ShockAnime = keyframes`
 const MainGameContentWrapper = styled.div`
   animation: ${
     (props) => props.question_judgement === "incorrect" && ShockAnime
-  } 0.6s linear 1;
+  } 0.5s linear 1;
 `;
 
 // GameBlockWrapperコンポーネント
