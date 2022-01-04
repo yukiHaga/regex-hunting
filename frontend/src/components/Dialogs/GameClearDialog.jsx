@@ -94,8 +94,25 @@ export const GameClearDialog = ({
   incorrect_questions,
   setGameState,
   getGameStart,
-  initialState
+  initialState,
+  game_start_time,
+  game_end_time
 }) => {
+
+  const getClearTime = (
+    game_start_time, 
+    game_end_time
+  ) => {
+    const milli_sec = game_end_time - game_start_time;
+    const sec = Math.floor(milli_sec/1000) % 60;
+    const min=Math.floor(milli_sec/1000/60) % 60;
+    const hours=Math.floor(milli_sec/1000/60/60)%24;
+
+    const hh = ('0' + hours).slice(-2);
+    const mm = ('0' + min).slice(-2);
+    const ss = ('0' + sec).slice(-2);
+    return `${hh}:${mm}:${ss}`;
+  };
 
   return(
     <Dialog
@@ -137,7 +154,7 @@ export const GameClearDialog = ({
               </tr>
               <tr>
                 <MetaTd>クリアタイム</MetaTd> 
-                <CustomTd>5:00</CustomTd>
+                <CustomTd>{ getClearTime(game_start_time, game_end_time) }</CustomTd>
               </tr>
             </tbody>
           </CustomTable>

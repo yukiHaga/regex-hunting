@@ -409,6 +409,8 @@ export const Games = () => {
             setGameState={setGameState}
             getGameStart={getGameStart}
             initialState={initialState}
+            game_start_time={gameState.game_start_time}
+            game_end_time={gameState.game_end_time}
           />
       }
       {
