@@ -157,7 +157,8 @@ export const QuestionBlock = ({
             input_regex_object: {},
             key_available: false,
             game_result: "win",
-            time_active: false
+            time_active: false,
+            game_end_time: performance.now()
           }));
         }, 1000);
         return () => clearTimeout(timer);
@@ -217,7 +218,8 @@ export const QuestionBlock = ({
             input_regex_object: {},
             key_available: false,
             game_result: "lose",
-            time_active: false
+            time_active: false,
+            game_end_time: performance.now()
           }));
         }, 1000);
         return () => clearTimeout(timer);
