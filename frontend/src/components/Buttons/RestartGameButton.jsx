@@ -65,7 +65,7 @@ export const RestartGameButton = ({
         monster_max_hp: data.monster.max_hp,
         sample_answer: data.questions["0"].sample_answer,
         next_commentary: data.questions["0"].commentary,
-        game_result: data.game_management.game_result
+        game_result: data.game_management.game_result,
         game_start_time: performance.now(),
       }); 
     }).catch((e) => {
