@@ -98,35 +98,40 @@ export const ElementaryMonster = ({
   monster_max_hp,
   question_judgement,
   first_appearance,
-  game_result
+  game_result,
+  game_description_open
 }) => {
 
 
   return (
     <>
-      <ElementaryWrapper
-        game_result={game_result}
-      >
-        {
-          first_appearance ?
-            <FirstElementaryMonsterWrapper 
-              src={ElementaryMonsterImage} 
-            />
-          :
-            <ElementaryMonsterWrapper 
-              src={ElementaryMonsterImage} 
-              question_judgement={question_judgement}
-            />
-        }
-        <HpGageWrapper
-          first_appearance={first_appearance}
-        >
-          <InnerHpGageWrapper 
-            monster_hp={monster_hp} 
-            monster_max_hp={monster_max_hp}
-          />
-        </HpGageWrapper>
-      </ElementaryWrapper>
+      {
+        !game_description_open && 
+          <ElementaryWrapper
+            game_result={game_result}
+          >
+            {
+              first_appearance ?
+                <FirstElementaryMonsterWrapper 
+                  src={ElementaryMonsterImage} 
+                />
+              :
+                <ElementaryMonsterWrapper 
+                  src={ElementaryMonsterImage} 
+                  question_judgement={question_judgement}
+                />
+            }
+            <HpGageWrapper
+              first_appearance={first_appearance}
+            >
+              <InnerHpGageWrapper 
+                monster_hp={monster_hp} 
+                monster_max_hp={monster_max_hp}
+              />
+            </HpGageWrapper>
+          </ElementaryWrapper>
+
+      }
     </>
   );
 };
