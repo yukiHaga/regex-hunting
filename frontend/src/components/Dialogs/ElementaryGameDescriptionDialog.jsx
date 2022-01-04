@@ -19,8 +19,8 @@ const CustomDialogInnerWrapper = styled.div`
   padding-left: 10px;
   background-color: ${COLORS.SUB};
   text-align: center;
-  height: 450px;
-  width: 550px;
+  height: 600px;
+  width: 1000px;
 `;
 
 const CustomDialogTitleWrapper = styled.div`
@@ -56,12 +56,9 @@ export const ElementaryGameDescriptionDialog = ({
   return(
     <Dialog
       open={isOpen}
+      maxWidth='xl'
     >
       <CustomDialogInnerWrapper> 
-        <CustomDialogTitleWrapper>
-          <CustomSpan>初級編</CustomSpan>
-          初級編
-        </CustomDialogTitleWrapper> 
         <CustomDialogContent>
           <CustomDialogContentSentence>
             正規表現とは？
