@@ -89,7 +89,8 @@ export const CodeBlock = ({
   commentary,
   key_available,
   user_attack,
-  sentence_num
+  sentence_num,
+  game_description_open
 }) => {
 
   const [inputState, setCodeState] = useState("");
@@ -158,92 +159,94 @@ export const CodeBlock = ({
   };
 
   useEffect(() => {
-    const handlekeyPress = (e) => {
-      if(e.key !== 'Enter' && key_available === true) {
-        const audio = new Audio(TypeSound);
-        audio.play();
-        setCodeState((prev) => prev + e.key);
-      }
-    };
-
-    const handleBackSpace = (e) => {
-      if(e.key === 'Backspace' && key_available === true) {
-        const audio = new Audio(BackSound);
-        audio.play();
-        setCodeState((prev) => prev.slice(0, -1));
-      }
-    };
-
-    // question_judgementがprogressならEnterを押せるようにする
-    const handleEnter = (e) => {
-      try {
-        if(e.key === 'Enter' && question_judgement === 'progress' && key_available === true) {
-          const input_regex = inputRefObject.current.innerText;
-          const input_regex_object = getRegexObject(input_regex); 
-          const input_match_array = getMatchArray(target_sentence, input_regex);
-          const sample_match_array = getMatchArray(target_sentence, sample_answer);
-          const input_match_words = getMatchWords(input_match_array);
-          const sample_match_words = getMatchWords(sample_match_array);
-          const current_question_judgement = getQuestionJudgement(
-            input_match_words, 
-            sample_match_words
-          ); 
-          const audio = new Audio(DecisionSound);
+    if(!game_description_open) {
+      const handlekeyPress = (e) => {
+        if(e.key !== 'Enter' && key_available === true) {
+          const audio = new Audio(TypeSound);
           audio.play();
-          if(current_question_judgement === "correct") {
-            gameState.correct_questions.push({
-              question: gameState.questions[0],
-              sentence_num: sentence_num
-            });
-            gameState.questions.shift();
-            const current_hp = monster_hp - calculateDamage(user_attack, monster_defence);
-            const audio = new Audio(CutMonsterSound);
-            setGameState((prev) => ({
-              ...prev,
-              input_regex_object: input_regex_object,
-              match_array: input_match_array,
-              question_judgement: current_question_judgement,
-              correct_questions: prev.correct_questions,
-              questions: prev.questions,
-              monster_hp: current_hp,
-              flash_display: true,
-              flash_title: "Good",
-              commentary: prev.next_commentary,
-              next_commentary: prev?.questions["0"]?.commentary || "no_next_commentary",
-              key_available: false
-            }));
-            audio.play();
-            setCodeState("");
-          } else {
-            setGameState({
-              ...gameState,
-              input_regex_object: input_regex_object,
-              match_array: input_match_array,
-            });
-          }
+          setCodeState((prev) => prev + e.key);
         }
-      } catch(e) {
-        const audio = new Audio(ErrorSound);
-        audio.play();
+      };
+
+      const handleBackSpace = (e) => {
+        if(e.key === 'Backspace' && key_available === true) {
+          const audio = new Audio(BackSound);
+          audio.play();
+          setCodeState((prev) => prev.slice(0, -1));
+        }
+      };
+
+      // question_judgementがprogressならEnterを押せるようにする
+      const handleEnter = (e) => {
+        try {
+          if(e.key === 'Enter' && question_judgement === 'progress' && key_available === true) {
+            const input_regex = inputRefObject.current.innerText;
+            const input_regex_object = getRegexObject(input_regex); 
+            const input_match_array = getMatchArray(target_sentence, input_regex);
+            const sample_match_array = getMatchArray(target_sentence, sample_answer);
+            const input_match_words = getMatchWords(input_match_array);
+            const sample_match_words = getMatchWords(sample_match_array);
+            const current_question_judgement = getQuestionJudgement(
+              input_match_words, 
+              sample_match_words
+            ); 
+            const audio = new Audio(DecisionSound);
+            audio.play();
+            if(current_question_judgement === "correct") {
+              gameState.correct_questions.push({
+                question: gameState.questions[0],
+                sentence_num: sentence_num
+              });
+              gameState.questions.shift();
+              const current_hp = monster_hp - calculateDamage(user_attack, monster_defence);
+              const audio = new Audio(CutMonsterSound);
+              setGameState((prev) => ({
+                ...prev,
+                input_regex_object: input_regex_object,
+                match_array: input_match_array,
+                question_judgement: current_question_judgement,
+                correct_questions: prev.correct_questions,
+                questions: prev.questions,
+                monster_hp: current_hp,
+                flash_display: true,
+                flash_title: "Good",
+                commentary: prev.next_commentary,
+                next_commentary: prev?.questions["0"]?.commentary || "no_next_commentary",
+                key_available: false
+              }));
+              audio.play();
+              setCodeState("");
+            } else {
+              setGameState({
+                ...gameState,
+                input_regex_object: input_regex_object,
+                match_array: input_match_array,
+              });
+            }
+          }
+        } catch(e) {
+          const audio = new Audio(ErrorSound);
+          audio.play();
+        }
+      };
+
+      // 入力をコントロールするイベントリスナー
+      document.addEventListener("keypress", handlekeyPress);
+
+      // バックスペースをコントロールするイベントリスナー
+      document.addEventListener("keydown", handleBackSpace);
+
+      // エンターキーをコントロールするイベントリスナー
+      document.addEventListener("keydown", handleEnter);
+
+      // イベントを消すクリーンアップ関数を返す
+      return () => {
+        document.removeEventListener("keypress", handlekeyPress);
+
+        document.removeEventListener("keydown", handleBackSpace);
+
+        document.removeEventListener("keydown", handleEnter);
       }
-    };
-
-    // 入力をコントロールするイベントリスナー
-    document.addEventListener("keypress", handlekeyPress);
-
-    // バックスペースをコントロールするイベントリスナー
-    document.addEventListener("keydown", handleBackSpace);
-
-    // エンターキーをコントロールするイベントリスナー
-    document.addEventListener("keydown", handleEnter);
-
-    // イベントを消すクリーンアップ関数を返す
-    return () => {
-      document.removeEventListener("keypress", handlekeyPress);
-
-      document.removeEventListener("keydown", handleBackSpace);
-
-      document.removeEventListener("keydown", handleEnter);
     }
   }, [
     gameState, 
@@ -255,7 +258,8 @@ export const CodeBlock = ({
     question_judgement,
     key_available,
     user_attack,
-    sentence_num
+    sentence_num,
+    game_description_open
   ]);
 
   return (

@@ -129,6 +129,7 @@ export const QuestionBlock = ({
     next_sentence_num,
     next_target_sentence,
     setGameState,
+    game_description_open
   ]);
 
   // question_judgementがcorrectの時に実行されるuseEffect
