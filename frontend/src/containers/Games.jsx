@@ -186,7 +186,7 @@ export const Games = () => {
     check_answer: false,
     game_start_time: 0,
     game_end_time: 0,
-    game_description: false
+    game_description_open: false
   }
 
   // ゲーム状態を管理するstate
@@ -240,7 +240,7 @@ export const Games = () => {
           next_commentary: data.questions["0"].commentary,
           game_result: data.game_management.game_result,
           game_start_time: performance.now(),
-          game_description: true
+          game_description_open: true
         })); 
       }).catch((e) => {
         if(e.response.status === HTTP_STATUS_CODE.NOT_FOUND){
@@ -439,9 +439,9 @@ export const Games = () => {
           />
       }
       {
-        gameState.game_description &&
+        gameState.game_description_open &&
           <ElementaryGameDescriptionDialog
-            isOpen={gameState.game_description}
+            isOpen={gameState.game_description_open}
             setGameState={setGameState}
           />
       }
