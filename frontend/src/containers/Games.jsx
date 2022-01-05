@@ -223,7 +223,7 @@ export const Games = () => {
         }
       })
     }
-    if(sessionState === false && !Object.keys(gameState.game_management).length){
+    if(!Object.keys(gameState.game_management).length){
       getGameStart(difficulty).then((data) => {
         setGameState((prev) => ({
           ...prev,
