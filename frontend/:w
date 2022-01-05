@@ -4,6 +4,9 @@ import styled from 'styled-components';
 // Colors
 import { COLORS } from '../../style_constants.js';
 
+// DescriptionWrapper 
+import { DescriptionWrapper } from '../shared_style.js'; 
+
 // Contextオブジェクト
 import { UserContext } from "../../context/UserProvider.js";
 
@@ -15,9 +18,6 @@ import ArrowRightIcon from '@mui/icons-material/ArrowRight';
 
 // PrevButton
 import ArrowLeftIcon from '@mui/icons-material/ArrowLeft';
-
-// Buttons
-import { BackToTopButton } from '../Buttons/BackToTopButton.jsx';
 
 // MUIのツールチップコンポーネントを使う
 // チラツキがあるからやっぱりやめた
@@ -69,17 +69,16 @@ const CarouselList = styled.li`
   list-style: none;
   background-color: ${COLORS.SUB};
   width: 1000px;
-  height: 550px;
+  height: 600px;
   padding-top: 30px;
   padding-left: 30px;
   padding-right: 30px;
   border-radius: 4px
 `;
 
-// 一枚あたりのスライド(ボタンは除く)
-// CarsolListの高さが550pxなので、ButtonLineWrapperの高さは自動的に150pxとなる
+// 一枚あたりのスライド
 const ModalWrapper = styled.div`
-  height: 450px;
+  height: 500px;
 `;
 
 const TitleWrapper = styled.div`
@@ -105,7 +104,7 @@ const SentenceWrapper = styled.div`
 const MonsterImageBoxWrapper = styled.div`
  text-align: right;
  width: 80%;
- margin-top: 80px;
+ margin-top: 70px;
 `;
 
 const MonsterImageWrapper = styled.img`
@@ -126,11 +125,6 @@ const ButtonWrapper = styled.div`
     outline: 0;
   }
   display: inline-block;
-`;
-
-const ButtonsWrapper = styled.div`
-  display: flex;
-  justify-content: space-around;
 `;
 
 export const ElementaryGameDescriptionDialog = ({
@@ -274,11 +268,11 @@ export const ElementaryGameDescriptionDialog = ({
                       ルール説明
                     </TitleWrapper>
                     <SentenceWrapper>
-                      初級編では、重要なメタ文字を使った正規表現を学習していきます。時間内に正しい正規表現を入力すると、モンスターに攻撃できます。モンスターのHPを0にしたらゲームクリアです！
+                      初級編では、正規表現を作る上で重要なメタ文字を学習していきます。時間内に正しい意味の正規表現を入力すると、モンスターに攻撃できます。モンスターのHPを0にしたらゲームクリアです！
                     </SentenceWrapper>
-                    <ButtonsWrapper>
-                      <BackToTopButton />
-                    </ButtonsWrapper>
+                    <MonsterImageBoxWrapper>
+                      <MonsterImageWrapper src={ElementaryMonsterImage} />
+                    </MonsterImageBoxWrapper>
                   </ModalWrapper>
                   <ButtonLineWrapper>
                     <ButtonWrapper onClick={changeSlideToLeft}>
