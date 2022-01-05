@@ -46,11 +46,11 @@ export const BackToModalButton = ({
 
   return (
     <>
-      <BackToModalButtonWrapper onClick={onClick}>
-        <BackToModalButtonIconWrapper>
+      <BackToModalButtonWrapper> 
+        <BackToModalButtonIconWrapper onClick={onClick}>
           <ArrowBackIcon />
         </BackToModalButtonIconWrapper>
-        <BackToModalButtonTextWrapper>
+        <BackToModalButtonTextWrapper onClick={onClick}>
           Back
         </BackToModalButtonTextWrapper>
       </BackToModalButtonWrapper>

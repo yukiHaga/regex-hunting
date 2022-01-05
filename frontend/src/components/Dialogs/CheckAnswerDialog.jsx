@@ -48,7 +48,7 @@ const CustomDialogContent = styled(DialogContent)`
 `;
 
 // backボタンのラッパー 
-// もしbackボタンを固定するなら使う
+// backボタンを固定してる
 const BackToModalButtonWrapper = styled.div`
   position: fixed;
   background-color: ${COLORS.SUB};
