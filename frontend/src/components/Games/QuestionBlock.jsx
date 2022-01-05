@@ -7,6 +7,9 @@ import { COLORS } from '../../style_constants.js';
 // モンスター名を取得する関数
 import { getMonsterName } from '../../functions/getMonsterName.js';
 
+// ユーザーがログインしているかを真偽値で返す関数
+import { hasUser } from '../../functions/hasUser.js';
+
 const QuestionBlockWrapper = styled.div`
   background-color: ${COLORS.SUB};
   border-radius: 3px;
