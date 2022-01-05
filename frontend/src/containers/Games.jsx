@@ -159,6 +159,7 @@ export const Games = () => {
     user_max_hp: 100,
     user_attack: 20,
     user_defence: 30,
+    has_user: false,
     rank: 1,
     total_experience: 0, 
     maximum_experience_per_rank: 500, 
@@ -250,6 +251,7 @@ export const Games = () => {
           game_result: data.game_management.game_result,
           game_start_time: performance.now(),
           game_description_open: true,
+          has_user: hasUser(user),
           rank: hasUser(user) ? 
             user.rank : prev.rank,
           total_experience: hasUser(user) ?
