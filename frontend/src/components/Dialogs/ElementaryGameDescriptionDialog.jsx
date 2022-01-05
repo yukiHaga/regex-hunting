@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 
 // ダイアログ
@@ -38,24 +38,33 @@ const Carousel = styled.div`
   height: 100%;
   text-align: center;
   margin: 0 auto;
-  overflow: hidden;
+  position: relative;
+  transition: right 0.5s ease;
+  right: ${({ widthState: { width } }) => `${width}px`};
 `;
 
 // 全てのスライドを包み込むラッパー
+// position: absoluteで全てのスライドを包み込むラッパーを、親要素を元にして固定しておく
+// 高さはpcの画面全体である
 const CarouselArea = styled.ul`
-  width: 6000px;
-  height: 100%;
+  width: 4400px;
   display: flex;
+  height: 100%;
   align-items: center;
+  padding-left: 185px;
+  padding-right: 140px;
+  position: absolute;
+  margin-top: 0px;
+  margin-bottom: 0px;
 `;
 
 // 一枚あたりのスライドのラッパー
 const CarouselList = styled.li`
-  margin-right: 30px;
+  margin-right: 40px;
   list-style: none;
   background-color: ${COLORS.SUB};
   width: 1000px;
-  height: 510px;
+  height: 540px;
   padding-top: 30px;
   padding-left: 30px;
   padding-right: 30px;
@@ -97,6 +106,7 @@ const MonsterImageWrapper = styled.img`
 const ButtonLineWrapper = styled.div`
   width: 100%;
   text-align: right;
+  margin-top: 30px;
 `;
 
 const ButtonWrapper = styled.div`
@@ -116,12 +126,29 @@ export const ElementaryGameDescriptionDialog = ({
   setGameState
 }) => {
 
+  const initialState = {
+    width: 0,
+    count: 0
+  };
+
+  const [widthState, setWidthState] = useState(initialState);
+
+  // stopメソッドを入れることでアニメーション1回毎に止める
+  // 代入されたスライド数 × リスト1枚分の幅を左に動かす
+  // 1095pxずらす
+  const changeSlideToRight = () => {
+    setWidthState((prev) => ({
+      width: prev.count === 3 ? prev.width : prev.width + 1095,
+      count: prev.count === 3 ? prev.count : prev.count + 1
+    }));
+  };
+
   return(
     <>
       {
         isOpen && 
           <MaskWrapper>
-            <Carousel>
+            <Carousel widthState={widthState}>
               <CarouselArea>
                 <CarouselList>
                   <ModalWrapper>
@@ -135,7 +162,7 @@ export const ElementaryGameDescriptionDialog = ({
                       <MonsterImageWrapper src={ElementaryMonsterImage} />
                     </MonsterImageBoxWrapper>
                     <ButtonLineWrapper>
-                      <ButtonWrapper>
+                      <ButtonWrapper onClick={changeSlideToRight}>
                         <ArrowRightIcon 
                           fontSize='inherit' 
                           sx={{ color: `${COLORS.BLACK}` }}
@@ -156,7 +183,7 @@ export const ElementaryGameDescriptionDialog = ({
                       <MonsterImageWrapper src={ElementaryMonsterImage} />
                     </MonsterImageBoxWrapper>
                     <ButtonLineWrapper>
-                      <ButtonWrapper>
+                      <ButtonWrapper onClick={changeSlideToRight}>
                         <ArrowRightIcon 
                           fontSize='inherit' 
                           sx={{ color: `${COLORS.BLACK}` }}
@@ -177,7 +204,7 @@ export const ElementaryGameDescriptionDialog = ({
                       <MonsterImageWrapper src={ElementaryMonsterImage} />
                     </MonsterImageBoxWrapper>
                     <ButtonLineWrapper>
-                      <ButtonWrapper>
+                      <ButtonWrapper onClick={changeSlideToRight}>
                         <ArrowRightIcon 
                           fontSize='inherit' 
                           sx={{ color: `${COLORS.BLACK}` }}
@@ -197,14 +224,6 @@ export const ElementaryGameDescriptionDialog = ({
                     <MonsterImageBoxWrapper>
                       <MonsterImageWrapper src={ElementaryMonsterImage} />
                     </MonsterImageBoxWrapper>
-                    <ButtonLineWrapper>
-                      <ButtonWrapper>
-                        <ArrowRightIcon 
-                          fontSize='inherit' 
-                          sx={{ color: `${COLORS.BLACK}` }}
-                        />
-                      </ButtonWrapper>
-                    </ButtonLineWrapper>
                   </ModalWrapper>
                 </CarouselList>
               </CarouselArea>
