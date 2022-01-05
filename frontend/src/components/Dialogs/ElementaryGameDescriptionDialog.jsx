@@ -285,7 +285,7 @@ export const ElementaryGameDescriptionDialog = ({
                     <OuterButtonsWrapper>
                       <ButtonsWrapper>
                         <FinallyBackToTopButton />
-                        <FinallyGameStartButton />
+                        <FinallyGameStartButton setGameState={setGameState} />
                       </ButtonsWrapper>
                     </OuterButtonsWrapper>
                   </ModalWrapper>

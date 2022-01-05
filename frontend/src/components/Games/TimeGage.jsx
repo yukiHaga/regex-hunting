@@ -54,7 +54,7 @@ const GageWrapper = styled.div`
   animation: ${({
     time_active,
     game_description_open
-  }) => game_description_open && time_active && TimeGageAnime} 30s linear 1;
+  }) => !game_description_open && time_active && TimeGageAnime} 30s linear 1;
 `;
 
 const GageOuterWrapper = styled.div`
