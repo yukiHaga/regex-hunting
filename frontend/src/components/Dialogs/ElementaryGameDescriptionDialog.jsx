@@ -18,6 +18,7 @@ import ArrowLeftIcon from '@mui/icons-material/ArrowLeft';
 
 // Buttons
 import { BackToTopButton } from '../Buttons/BackToTopButton.jsx';
+import { FinallyGameStartButton } from '../Buttons/FinallyGameStartButton.jsx';
 
 // MUIのツールチップコンポーネントを使う
 // チラツキがあるからやっぱりやめた
@@ -130,7 +131,7 @@ const ButtonWrapper = styled.div`
 
 const ButtonsWrapper = styled.div`
   display: flex;
-  justify-content: space-around;
+  justify-content: space-evenly;
 `;
 
 export const ElementaryGameDescriptionDialog = ({
@@ -278,6 +279,7 @@ export const ElementaryGameDescriptionDialog = ({
                     </SentenceWrapper>
                     <ButtonsWrapper>
                       <BackToTopButton />
+                      <FinallyGameStartButton />
                     </ButtonsWrapper>
                   </ModalWrapper>
                   <ButtonLineWrapper>
