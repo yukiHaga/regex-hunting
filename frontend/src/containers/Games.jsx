@@ -449,6 +449,7 @@ export const Games = () => {
           <ElementaryGameDescriptionDialog
             isOpen={gameState.game_description_open}
             setGameState={setGameState}
+            game_description_open={gameState.game_description_open}
           />
       }
     </>

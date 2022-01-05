@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 
 // Colors
@@ -20,7 +20,8 @@ import ArrowRightIcon from '@mui/icons-material/ArrowRight';
 import ArrowLeftIcon from '@mui/icons-material/ArrowLeft';
 
 // MUIのツールチップコンポーネントを使う
-import Tooltip from '@mui/material/Tooltip';
+// チラツキがあるからやっぱりやめた
+// import Tooltip from '@mui/material/Tooltip';
 
 // 画面全体にマスクを設置する設定
 // 画面の中央に要素を表示させる設定
@@ -126,7 +127,8 @@ const ButtonWrapper = styled.div`
 
 export const ElementaryGameDescriptionDialog = ({
   isOpen,
-  setGameState
+  setGameState,
+  game_description_open
 }) => {
 
   const initialState = {
@@ -147,10 +149,40 @@ export const ElementaryGameDescriptionDialog = ({
   // 左へ1095pxずらす
   const changeSlideToLeft = () => {
     setWidthState((prev) => ({
-      width: prev.width - 1095,
-      count: prev.count - 1
+      width: prev.count === 0 ? prev.width : prev.width - 1095,
+      count: prev.count === 0 ? prev.count : prev.count - 1
     }));
   };
+
+  useEffect(() => {
+    if(game_description_open) {
+      const handleRightkeyPress = (e) => {
+        if(e.key !== 'Enter' && e.key === 'ArrowRight') {
+          changeSlideToRight();
+        }
+      };
+
+      const handleLeftkeyPress = (e) => {
+        if(e.key !== 'Enter' && e.key === 'ArrowLeft') {
+          changeSlideToLeft();
+        }
+      };
+
+      // 入力をコントロールするイベントリスナー
+      document.addEventListener("keydown", handleRightkeyPress);
+
+      // 入力をコントロールするイベントリスナー
+      document.addEventListener("keydown", handleLeftkeyPress);
+
+      // イベントを消すクリーンアップ関数を返す
+      return () => {
+        document.removeEventListener("keydown", handleRightkeyPress);
+        document.removeEventListener("keydown", handleLeftkeyPress);
+      }
+    }
+  }, [
+    game_description_open
+  ]);
 
   return(
     <>
@@ -171,14 +203,12 @@ export const ElementaryGameDescriptionDialog = ({
                       <MonsterImageWrapper src={ElementaryMonsterImage} />
                     </MonsterImageBoxWrapper>
                     <ButtonLineWrapper>
-                      <Tooltip title="次へ進む" placement="top">
-                        <ButtonWrapper onClick={changeSlideToRight}>
-                          <ArrowRightIcon 
-                            fontSize='inherit' 
-                            sx={{ color: `${COLORS.BLACK}` }}
-                          />
-                        </ButtonWrapper>
-                      </Tooltip>
+                      <ButtonWrapper onClick={changeSlideToRight}>
+                        <ArrowRightIcon 
+                          fontSize='inherit' 
+                          sx={{ color: `${COLORS.BLACK}` }}
+                        />
+                      </ButtonWrapper>
                     </ButtonLineWrapper>
                   </ModalWrapper>
                 </CarouselList>
@@ -194,22 +224,18 @@ export const ElementaryGameDescriptionDialog = ({
                       <MonsterImageWrapper src={ElementaryMonsterImage} />
                     </MonsterImageBoxWrapper>
                     <ButtonLineWrapper>
-                      <Tooltip title="戻る" placement="top">
-                        <ButtonWrapper onClick={changeSlideToLeft}>
-                          <ArrowLeftIcon
-                            fontSize='inherit' 
-                            sx={{ color: `${COLORS.BLACK}` }}
-                          />
-                        </ButtonWrapper>
-                      </Tooltip>
-                      <Tooltip title="次へ進む" placement="top">
-                        <ButtonWrapper onClick={changeSlideToRight}>
-                          <ArrowRightIcon 
-                            fontSize='inherit' 
-                            sx={{ color: `${COLORS.BLACK}` }}
-                          />
-                        </ButtonWrapper>
-                      </Tooltip>
+                      <ButtonWrapper onClick={changeSlideToLeft}>
+                        <ArrowLeftIcon
+                          fontSize='inherit' 
+                          sx={{ color: `${COLORS.BLACK}` }}
+                        />
+                      </ButtonWrapper>
+                      <ButtonWrapper onClick={changeSlideToRight}>
+                        <ArrowRightIcon 
+                          fontSize='inherit' 
+                          sx={{ color: `${COLORS.BLACK}` }}
+                        />
+                      </ButtonWrapper>
                     </ButtonLineWrapper>
                   </ModalWrapper>
                 </CarouselList>
@@ -225,22 +251,18 @@ export const ElementaryGameDescriptionDialog = ({
                       <MonsterImageWrapper src={ElementaryMonsterImage} />
                     </MonsterImageBoxWrapper>
                     <ButtonLineWrapper>
-                      <Tooltip title="戻る" placement="top">
-                        <ButtonWrapper onClick={changeSlideToLeft}>
-                          <ArrowLeftIcon
-                            fontSize='inherit' 
-                            sx={{ color: `${COLORS.BLACK}` }}
-                          />
-                        </ButtonWrapper>
-                      </Tooltip>
-                      <Tooltip title="次へ進む" placement="top">
-                        <ButtonWrapper onClick={changeSlideToRight}>
-                          <ArrowRightIcon 
-                            fontSize='inherit' 
-                            sx={{ color: `${COLORS.BLACK}` }}
-                          />
-                        </ButtonWrapper>
-                      </Tooltip>
+                      <ButtonWrapper onClick={changeSlideToLeft}>
+                        <ArrowLeftIcon
+                          fontSize='inherit' 
+                          sx={{ color: `${COLORS.BLACK}` }}
+                        />
+                      </ButtonWrapper>
+                      <ButtonWrapper onClick={changeSlideToRight}>
+                        <ArrowRightIcon 
+                          fontSize='inherit' 
+                          sx={{ color: `${COLORS.BLACK}` }}
+                        />
+                      </ButtonWrapper>
                     </ButtonLineWrapper>
                   </ModalWrapper>
                 </CarouselList>
@@ -256,14 +278,12 @@ export const ElementaryGameDescriptionDialog = ({
                       <MonsterImageWrapper src={ElementaryMonsterImage} />
                     </MonsterImageBoxWrapper>
                     <ButtonLineWrapper>
-                      <Tooltip title="戻る" placement="top">
-                        <ButtonWrapper onClick={changeSlideToLeft}>
-                          <ArrowLeftIcon
-                            fontSize='inherit' 
-                            sx={{ color: `${COLORS.BLACK}` }}
-                          />
-                        </ButtonWrapper>
-                      </Tooltip>
+                      <ButtonWrapper onClick={changeSlideToLeft}>
+                        <ArrowLeftIcon
+                          fontSize='inherit' 
+                          sx={{ color: `${COLORS.BLACK}` }}
+                        />
+                      </ButtonWrapper>
                     </ButtonLineWrapper>
                   </ModalWrapper>
                 </CarouselList>
