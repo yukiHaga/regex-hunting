@@ -159,11 +159,6 @@ export const Games = () => {
     user_max_hp: 100,
     user_attack: 20,
     user_defence: 30,
-    has_user: false,
-    rank: 1,
-    total_experience: 0, 
-    maximum_experience_per_rank: 500, 
-    temporary_experience: 0, 
     monster_attack: {},
     monster_defence: {},
     monster_hp: 100,
@@ -191,16 +186,16 @@ export const Games = () => {
     check_answer: false,
     game_start_time: 0,
     game_end_time: 0,
-    game_description_open: false
+    game_description_open: false,
+    has_user: false,
+    rank: 1,
+    total_experience: 0, 
+    maximum_experience_per_rank: 500, 
+    temporary_experience: 0,
   }
 
   // ゲーム状態を管理するstate
   const [gameState, setGameState] = useState(initialState);
-
-  // useState.userが存在するかを判定する関数
-  const hasUser = (user) => {
-     return Object.keys(user).length
-  };
 
   // React Routerで画面遷移するとユーザーが保持できないので、
   // useEffectで再度リクエストを出す。
@@ -210,8 +205,11 @@ export const Games = () => {
   // のどれかが変化したらuseEffectが実行される。
   // stateが変化しても、依存配列の要素が変化していないなら、
   // useEffectは実行されない                    
+  // ログインしていたらsessionStateはtrueなので、最初のif文は実行されない。
+  // ログインしててリロードするとsessionStateはfalseなので、最初のif文が実行される。
   useLayoutEffect(() => {
     if(sessionState === false){
+      console.log("ifbunn");
       checkLoginStatus().then((data) => {
         dispatch({
           type: requestUserActionTyps.REQUEST_SUCCESS,
@@ -251,15 +249,6 @@ export const Games = () => {
           game_result: data.game_management.game_result,
           game_start_time: performance.now(),
           game_description_open: true,
-          has_user: hasUser(user),
-          rank: hasUser(user) ? 
-            user.rank : prev.rank,
-          total_experience: hasUser(user) ?
-            user.total_experience : prev.total_experience,
-          maximum_experience_per_rank: hasUser(user) ?
-            user.maximum_experience_per_rank : prev.maximum_experience_per_rank,
-          temporary_experience: hasUser(user) ?
-            user.temporary_experience : prev.temporary_experience
         })); 
       }).catch((e) => {
         if(e.response.status === HTTP_STATUS_CODE.NOT_FOUND){
@@ -280,7 +269,6 @@ export const Games = () => {
     requestUserActionTyps.REQUEST, 
     requestUserActionTyps.REQUEST_SUCCESS,
     requestUserActionTyps.REQUEST_FAILURE,
-    user
   ]);
 
   // ゲームクリア時の音
