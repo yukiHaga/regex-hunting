@@ -19,6 +19,9 @@ import ElementaryMonsterImage from '../../images/elementary.png';
 // NextButton
 import ArrowRightIcon from '@mui/icons-material/ArrowRight';
 
+// react-id-swiper
+import Swiper from 'react-id-swiper';
+
 // 画面全体にマスクを設置する設定
 // 画面の中央に要素を表示させる設定
 const MaskWrapper = styled.div`
@@ -61,6 +64,7 @@ const SentenceWrapper = styled.div`
   display: inline-block;
   text-align: left;
   margin-top: 45px;
+  color: ${COLORS.BLACK};
 `;
 
 const MonsterImageBoxWrapper = styled.div`
@@ -81,10 +85,29 @@ const ButtonWrapper = styled.div`
   font-size: 80px;
 `;
 
+const SwiperSlide = styled.div`
+`;
+
 export const ElementaryGameDescriptionDialog = ({
   isOpen,
   setGameState
 }) => {
+
+  /*
+    const params = {
+      slidesPerView: 1,
+      spaceBetween: 30,
+      loop: true,
+      pagination: {
+        el: '.swiper-pagination',
+        clickable: true
+      },
+      navigation: {
+        nextEl: '.swiper-button-next',
+        prevEl: '.swiper-button-prev'
+      }
+    }
+  */
 
   return(
     <>
@@ -92,20 +115,27 @@ export const ElementaryGameDescriptionDialog = ({
         isOpen && 
           <MaskWrapper>
             <ModalWrapper>
-              <TitleWrapper>
-                初級編
-              </TitleWrapper>
-              <SentenceWrapper>
-        初級編を始める前に、正規表現とは何か?、どんなことができるのか？を学習しましょう。<br/>そして、初級編のゲームを通して、正規表現を作る際に使う基礎的なメタ文字をマスターしましょう！
-              </SentenceWrapper>
-              <MonsterImageBoxWrapper>
-                <MonsterImageWrapper src={ElementaryMonsterImage} />
-              </MonsterImageBoxWrapper>
-              <ButtonLineWrapper>
-                <ButtonWrapper>
-                  <ArrowRightIcon fontSize='inherit' />
-                </ButtonWrapper>
-              </ButtonLineWrapper>
+              <Swiper>
+                <SwiperSlide>
+                  <TitleWrapper>
+                    初級編
+                  </TitleWrapper>
+                  <SentenceWrapper>
+            初級編を始める前に、正規表現とは何か?、どんなことができるのか？を学習しましょう。<br/>そして、初級編のゲームを通して、正規表現を作る際に使う基礎的なメタ文字をマスターしましょう！
+                  </SentenceWrapper>
+                  <MonsterImageBoxWrapper>
+                    <MonsterImageWrapper src={ElementaryMonsterImage} />
+                  </MonsterImageBoxWrapper>
+                  <ButtonLineWrapper>
+                    <ButtonWrapper>
+                      <ArrowRightIcon 
+                        fontSize='inherit' 
+                        sx={{ color: `${COLORS.BLACK}` }}
+                      />
+                    </ButtonWrapper>
+                  </ButtonLineWrapper>
+                </SwiperSlide>
+              </Swiper>
             </ModalWrapper>
           </MaskWrapper>
       }
