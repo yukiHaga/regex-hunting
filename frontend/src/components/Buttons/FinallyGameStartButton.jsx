@@ -4,9 +4,6 @@ import styled from 'styled-components';
 // Colors
 import { COLORS } from '../../style_constants.js';
 
-// HTTP_STATUS_CODE
-import { HTTP_STATUS_CODE } from '../../constants';
-
 const FinallyGameStartButtonWrapper = styled.div`
   margin-top: 30px;
   border-style: none;
