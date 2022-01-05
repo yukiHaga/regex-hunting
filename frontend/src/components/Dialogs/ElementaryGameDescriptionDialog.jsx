@@ -17,7 +17,7 @@ import ArrowRightIcon from '@mui/icons-material/ArrowRight';
 import ArrowLeftIcon from '@mui/icons-material/ArrowLeft';
 
 // Buttons
-import { BackToTopButton } from '../Buttons/BackToTopButton.jsx';
+import { FinallyBackToTopButton } from '../Buttons/FinallyBackToTopButton.jsx';
 import { FinallyGameStartButton } from '../Buttons/FinallyGameStartButton.jsx';
 
 // MUIのツールチップコンポーネントを使う
@@ -127,6 +127,11 @@ const ButtonWrapper = styled.div`
     outline: 0;
   }
   display: inline-block;
+`;
+
+const OuterButtonsWrapper = styled.div`
+  width: 80%;
+  margin: 0 auto;
 `;
 
 const ButtonsWrapper = styled.div`
@@ -277,10 +282,12 @@ export const ElementaryGameDescriptionDialog = ({
                     <SentenceWrapper>
                       初級編では、重要なメタ文字を使った正規表現を学習していきます。時間内に正しい正規表現を入力すると、モンスターに攻撃できます。モンスターのHPを0にしたらゲームクリアです！
                     </SentenceWrapper>
-                    <ButtonsWrapper>
-                      <BackToTopButton />
-                      <FinallyGameStartButton />
-                    </ButtonsWrapper>
+                    <OuterButtonsWrapper>
+                      <ButtonsWrapper>
+                        <FinallyBackToTopButton />
+                        <FinallyGameStartButton />
+                      </ButtonsWrapper>
+                    </OuterButtonsWrapper>
                   </ModalWrapper>
                   <ButtonLineWrapper>
                     <ButtonWrapper onClick={changeSlideToLeft}>
