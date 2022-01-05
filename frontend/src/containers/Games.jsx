@@ -138,7 +138,7 @@ export const Games = () => {
 
   // useContext
   const {
-    requestUserState: { sessionState, userState: { user } }, 
+    requestUserState: { sessionState }, 
     dispatch, 
     requestUserActionTyps
   } = useContext(UserContext);
@@ -367,6 +367,7 @@ export const Games = () => {
                   correct_questions={gameState.correct_questions}
                   incorrect_questions={gameState.incorrect_questions}
                   game_description_open={gameState.game_description_open}
+                  game_result={gameState.game_result}
                 />
               </QuestionBlockWrapper>
             </BattleBlockWrapper>

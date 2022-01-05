@@ -81,7 +81,8 @@ export const QuestionBlock = ({
   input_regex_object,
   correct_questions,
   incorrect_questions,
-  game_description_open
+  game_description_open,
+  game_result
 }) => {
 
   // 難易度を日本語に変換する関数
@@ -139,7 +140,7 @@ export const QuestionBlock = ({
   // ダメージセンテンスがQuestionBlockに表示される
   // その後、次の問題のセンテンスが表示される
   useEffect(() => {
-    if(question_judgement === "correct") {
+    if(game_result === "progress" && question_judgement === "correct") {
       setGameState((prev) => ({
         ...prev,
         sentence: `${getMonsterName(difficulty)}に10ダメージ`,
@@ -195,12 +196,13 @@ export const QuestionBlock = ({
     next_sentence,
     next_sentence_num,
     next_target_sentence,
-    correct_questions.length
+    correct_questions.length,
+    game_result
   ]);
 
   // question_judgementがincorrectの時に実行されるuseEffect
   useEffect(() => {
-    if(question_judgement === "incorrect") {
+    if(game_result === "progress" && question_judgement === "incorrect") {
       setGameState((prev) => ({
         ...prev,
         sentence: `ハンターに10ダメージ`,
@@ -256,7 +258,8 @@ export const QuestionBlock = ({
     next_sentence,
     next_sentence_num,
     next_target_sentence,
-    incorrect_questions.length
+    incorrect_questions.length,
+    game_result
   ]);
 
   // マッチした箇所をリプレイスするライブラリをrequireしてくる
