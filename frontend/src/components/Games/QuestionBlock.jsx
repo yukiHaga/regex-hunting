@@ -1,8 +1,11 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useContext } from 'react';
 import styled from 'styled-components';
 
 // Colors
 import { COLORS } from '../../style_constants.js';
+
+// Contextオブジェクト
+import { UserContext } from "../../context/UserProvider.js";
 
 // モンスター名を取得する関数
 import { getMonsterName } from '../../functions/getMonsterName.js';
@@ -85,6 +88,22 @@ export const QuestionBlock = ({
   game_result
 }) => {
 
+  // useContext
+  // userのデータを使うだけで、userを直接更新したりはしない
+  const {
+    requestUserState: { 
+      userState: { 
+        user,
+        user: {
+          rank,
+          total_experience,
+          maximum_experience_per_rank,
+          temporary_experience
+        } 
+      } 
+    } 
+  } = useContext(UserContext);
+
   // 難易度を日本語に変換する関数
   const getJpDifficulty = (difficulty) => {
     let jpDifficulty;
@@ -164,7 +183,16 @@ export const QuestionBlock = ({
             key_available: false,
             game_result: "win",
             time_active: false,
-            game_end_time: performance.now()
+            game_end_time: performance.now(),
+            has_user: hasUser(user),
+            rank: hasUser(user) ? 
+              rank : prev.rank,
+            total_experience: hasUser(user) ? 
+              total_experience + 200 : prev.total_experience,
+            maximum_experience_per_rank: hasUser(user) ? 
+              maximum_experience_per_rank  : prev.maximum_experience_per_rank,
+            temporary_experience: hasUser(user) ? 
+              temporary_experience + 200 : prev.temporary_experience
           }));
         }, 1000);
         return () => clearTimeout(timer);
@@ -197,7 +225,12 @@ export const QuestionBlock = ({
     next_sentence_num,
     next_target_sentence,
     correct_questions.length,
-    game_result
+    game_result,
+    user,
+    rank,
+    total_experience,
+    maximum_experience_per_rank,
+    temporary_experience
   ]);
 
   // question_judgementがincorrectの時に実行されるuseEffect
@@ -259,7 +292,7 @@ export const QuestionBlock = ({
     next_sentence_num,
     next_target_sentence,
     incorrect_questions.length,
-    game_result
+    game_result,
   ]);
 
   // マッチした箇所をリプレイスするライブラリをrequireしてくる
