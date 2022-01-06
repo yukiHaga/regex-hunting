@@ -191,6 +191,8 @@ export const QuestionBlock = ({
               total_experience + 200 : prev.total_experience,
             maximum_experience_per_rank: hasUser(user) ? 
               maximum_experience_per_rank  : prev.maximum_experience_per_rank,
+            prev_temporary_experience: hasUser(user) ?
+              temporary_experience : prev.prev_temporary_experience
             temporary_experience: hasUser(user) ? 
               temporary_experience + 200 : prev.temporary_experience
           }));

@@ -192,6 +192,7 @@ export const Games = () => {
     total_experience: 0, 
     maximum_experience_per_rank: 500, 
     temporary_experience: 0,
+    prev_temporary_experience: 0
   }
 
   // ゲーム状態を管理するstate
