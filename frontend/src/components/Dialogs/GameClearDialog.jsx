@@ -30,7 +30,7 @@ const CustomDialogInnerWrapper = styled.div`
   padding-left: 10px;
   background-color: ${COLORS.SUB};
   text-align: center;
-  height: 450px;
+  height: ${({has_user}) => has_user ? '500px' : '450px' };
   width: 550px;
 `;
 
@@ -135,7 +135,9 @@ export const GameClearDialog = ({
     <Dialog
       open={isOpen}
     >
-      <CustomDialogInnerWrapper> 
+      <CustomDialogInnerWrapper
+        has_user={has_user}
+      > 
         <CustomDialogTitleWrapper>
           <CustomSpan>GAME CLEAR</CustomSpan>
           GAME CLEAR

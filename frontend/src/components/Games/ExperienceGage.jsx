@@ -13,10 +13,10 @@ const ExperienceGageWrapper = styled.div`
 `;
 
 // ExperienceGageのExperienceの幅を取り扱う関数
-const handleExperienceGage = ({
+const handleExperienceGage = (
   temporary_experience,
   maximum_experience_per_rank
-}) => {
+) => {
   if(temporary_experience >= maximum_experience_per_rank) {
     return `${160 * (temporary_experience / maximum_experience_per_rank)}px`;
   } else {
@@ -25,7 +25,10 @@ const handleExperienceGage = ({
 };
 
 const InnerExperienceGageWrapper = styled.div`
-  width: ${(props) => handleExperienceGage(props)};
+  width: ${({
+    temporary_experience,
+    maximum_experience_per_rank
+  }) => handleExperienceGage(temporary_experience, maximum_experience_per_rank)};
   transition: 0.5s;
   height: 15px;
   border-radius: 3px;
