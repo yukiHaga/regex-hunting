@@ -430,6 +430,12 @@ export const Games = () => {
             initialState={initialState}
             game_start_time={gameState.game_start_time}
             game_end_time={gameState.game_end_time}
+            has_user={gameState.has_user}
+            rank={gameState.rank}
+            total_experience={gameState.total_experience} 
+            maximum_experience_per_rank={gameState.maximum_experience_per_rank} 
+            temporary_experience={gameState.temporary_experience}
+            prev_temporary_experience={gameState.prev_temporary_experience}
           />
       }
       {

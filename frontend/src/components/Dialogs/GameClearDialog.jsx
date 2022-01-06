@@ -21,6 +21,9 @@ import { UserContext } from "../../context/UserProvider.js";
 // Sentence
 import { CheackAnswerSentence } from '../Sentences/CheackAnswerSentence.jsx';
 
+// ExperienceGage
+import { ExperienceGage } from '../Games/ExperienceGage.jsx';
+
 const CustomDialogInnerWrapper = styled.div`
   padding-top: 10px;
   padding-right: 10px;
@@ -100,7 +103,13 @@ export const GameClearDialog = ({
   getGameStart,
   initialState,
   game_start_time,
-  game_end_time
+  game_end_time,
+  has_user,
+  rank,
+  total_experience, 
+  maximum_experience_per_rank, 
+  temporary_experience,
+  prev_temporary_experience
 }) => {
 
   // このミリ秒はタイムに色をつけるために使う
@@ -170,6 +179,16 @@ export const GameClearDialog = ({
               </tr>
             </tbody>
           </CustomTable>
+          {
+            has_user && 
+              <ExperienceGage 
+                rank={rank}
+                total_experience={total_experience}
+                maximum_experience_per_rank={maximum_experience_per_rank}
+                temporary_experience={temporary_experience} 
+                prev_temporary_experience={prev_temporary_experience}
+              />
+          }
           <CheackAnswerSentence
             setGameState={setGameState}
           />
