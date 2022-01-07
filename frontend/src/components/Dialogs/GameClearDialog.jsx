@@ -57,6 +57,7 @@ const CustomDialogContent = styled(DialogContent)`
 `;
 
 const CustomDialogContentSentence = styled(DescriptionWrapper)`
+  margin-bottom: 10px;
 `;
 
 const CustomTable = styled.table`
