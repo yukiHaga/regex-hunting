@@ -22,7 +22,7 @@ import { UserContext } from "../../context/UserProvider.js";
 import { CheackAnswerSentence } from '../Sentences/CheackAnswerSentence.jsx';
 
 // ExperienceGage
-import { ExperienceGage } from '../Games/ExperienceGage.jsx';
+import { DialogExperienceBox } from '../Games/DialogExperienceBox.jsx';
 
 const CustomDialogInnerWrapper = styled.div`
   padding-top: 10px;
@@ -30,7 +30,7 @@ const CustomDialogInnerWrapper = styled.div`
   padding-left: 10px;
   background-color: ${COLORS.SUB};
   text-align: center;
-  height: ${({has_user}) => has_user ? '500px' : '450px' };
+  height: ${({has_user}) => has_user ? '570px' : '450px' };
   width: 550px;
 `;
 
@@ -79,6 +79,25 @@ const CustomTd = styled.td`
 `;
 
 const MetaTd = styled(CustomTd)`
+  padding: 10px 40px; 
+  border: none;
+  text-align: left;
+  border-bottom:solid 1px silver;
+`;
+
+const ExperienceMetaTd = styled(CustomTd)`
+  padding: 10px 40px; 
+  border: none;
+  text-align: left;
+`;
+
+const ExperienceTd = styled(CustomTd)`
+  padding: 10px 40px; 
+  border: none;
+  text-align: right;
+`;
+
+const ExperienceGageTd = styled(CustomTd)`
   padding: 10px 40px; 
   border: none;
   text-align: left;
@@ -179,18 +198,30 @@ export const GameClearDialog = ({
                   </ColorTimeSpan>
                 </CustomTd>
               </tr>
+              {
+                has_user && 
+                  <>
+                    <tr>
+                      <ExperienceMetaTd>獲得経験値</ExperienceMetaTd> 
+                      <ExperienceTd>
+                        { temporary_experience }
+                      </ExperienceTd>
+                    </tr>
+                    <tr>
+                      <ExperienceGageTd colSpan={2}>
+                        <DialogExperienceBox 
+                          rank={rank}
+                          total_experience={total_experience}
+                          maximum_experience_per_rank={maximum_experience_per_rank}
+                          temporary_experience={temporary_experience} 
+                          prev_temporary_experience={prev_temporary_experience}
+                        />
+                      </ExperienceGageTd>
+                    </tr>
+                  </>
+              }
             </tbody>
           </CustomTable>
-          {
-            has_user && 
-              <ExperienceGage 
-                rank={rank}
-                total_experience={total_experience}
-                maximum_experience_per_rank={maximum_experience_per_rank}
-                temporary_experience={temporary_experience} 
-                prev_temporary_experience={prev_temporary_experience}
-              />
-          }
           <CheackAnswerSentence
             setGameState={setGameState}
           />
