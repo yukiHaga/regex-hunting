@@ -194,7 +194,8 @@ export const QuestionBlock = ({
             prev_temporary_experience: hasUser(user) ?
               temporary_experience : prev.prev_temporary_experience,
             temporary_experience: hasUser(user) ? 
-              temporary_experience + 200 : prev.temporary_experience
+              temporary_experience + 200 : prev.temporary_experience,
+            dialog_gage_up: true
           }));
         }, 1000);
         return () => clearTimeout(timer);

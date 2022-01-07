@@ -176,7 +176,8 @@ export const CheckAnswerDialog = ({
             onClick={
               () => setGameState((prev) => ({
                 ...prev,
-                check_answer: false
+                check_answer: false,
+                dialog_gage_up: false
               }))
             }
           />

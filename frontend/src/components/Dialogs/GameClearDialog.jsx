@@ -129,7 +129,8 @@ export const GameClearDialog = ({
   total_experience, 
   maximum_experience_per_rank, 
   temporary_experience,
-  prev_temporary_experience
+  prev_temporary_experience,
+  dialog_gage_up
 }) => {
 
   // このミリ秒はタイムに色をつけるために使う
@@ -216,6 +217,7 @@ export const GameClearDialog = ({
                           maximum_experience_per_rank={maximum_experience_per_rank}
                           temporary_experience={temporary_experience} 
                           prev_temporary_experience={prev_temporary_experience}
+                          dialog_gage_up={dialog_gage_up}
                         />
                       </ExperienceGageTd>
                     </tr>

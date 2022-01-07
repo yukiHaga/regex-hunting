@@ -42,8 +42,8 @@ const InnerExperienceGageWrapper = styled.div`
     temporary_experience,
     maximum_experience_per_rank
   }) => handleExperienceGage(temporary_experience, maximum_experience_per_rank)};
-  transition: 2s;
-  transition-timing-function: linear;
+  transition: ${({ dialog_gage_up }) => '2s' };
+  transition-timing-function: ${({ dialog_gage_up }) => 'linear' };
   height: 10px;
   border-radius: 3px;
   background-color: ${COLORS.EXPERIENCE};
@@ -54,11 +54,13 @@ export const DialogExperienceBox = ({
   total_experience,
   maximum_experience_per_rank, 
   temporary_experience,
-  prev_temporary_experience
+  prev_temporary_experience,
+  dialog_gage_up
 }) => {
 
   const initialState = {
-    temporary_experience: prev_temporary_experience,
+    temporary_experience: 
+      dialog_gage_up ? prev_temporary_experience : temporary_experience
   };
 
   const [ 
@@ -67,7 +69,7 @@ export const DialogExperienceBox = ({
   ] = useState(initialState);
 
   useEffect(() => {
-    if(temporaryExperienceState.temporary_experience === prev_temporary_experience){
+    if(dialog_gage_up){
       const timer = setTimeout(() => {
         const audio = new Audio(GageUpSounds);
         audio.play();
@@ -75,13 +77,12 @@ export const DialogExperienceBox = ({
           ...prev,
           temporary_experience: temporary_experience,
         }));
-      }, 1000);
+      }, 2000);
       return () => clearTimeout(timer);
     }
   },[
     temporary_experience,
-    prev_temporary_experience,
-    temporaryExperienceState.temporary_experience
+    dialog_gage_up
   ]);
 
   return (
@@ -94,6 +95,7 @@ export const DialogExperienceBox = ({
           <InnerExperienceGageWrapper 
             temporary_experience={temporaryExperienceState.temporary_experience}
             maximum_experience_per_rank={maximum_experience_per_rank}
+            dialog_gage_up={dialog_gage_up}
           />
         </ExperienceGageWrapper>
         <ExperienceTextWrapper>

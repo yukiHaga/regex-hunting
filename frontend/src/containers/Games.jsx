@@ -192,7 +192,8 @@ export const Games = () => {
     total_experience: 0, 
     maximum_experience_per_rank: 500, 
     temporary_experience: 0,
-    prev_temporary_experience: 0
+    prev_temporary_experience: 0,
+    dialog_gage_up: false
   }
 
   // ゲーム状態を管理するstate
@@ -436,6 +437,7 @@ export const Games = () => {
             maximum_experience_per_rank={gameState.maximum_experience_per_rank} 
             temporary_experience={gameState.temporary_experience}
             prev_temporary_experience={gameState.prev_temporary_experience}
+            dialog_gage_up={gameState.dialog_gage_up}
           />
       }
       {
