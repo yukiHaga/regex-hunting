@@ -47,7 +47,6 @@ const JudgementMessage = styled.div`
 
 export const JudgementFlashMessage = ({
   flash_display,
-  commentary,
   flash_title
 }) => {
 
@@ -66,7 +65,6 @@ export const JudgementFlashMessage = ({
             <JudgementMessageTitle flash_title={flash_title}>
               {flash_title}
             </JudgementMessageTitle>
-            {commentary}
           </JudgementMessage>
         </JudgementFlashMessageWrapper>
       </CustomSlide>

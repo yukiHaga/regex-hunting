@@ -377,7 +377,6 @@ export const Games = () => {
               gameState.flash_display && 
                 <CustomJudgementFlashMessage 
                   flash_display={gameState.flash_display}
-                  commentary={gameState.commentary}
                   flash_title={gameState.flash_title}
                 />
             }
