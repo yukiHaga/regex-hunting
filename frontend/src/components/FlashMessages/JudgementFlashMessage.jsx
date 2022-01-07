@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React, { Fragment, useState } from 'react';
 import styled from 'styled-components';
 
 // フラッシュメッセージ関係のコンポーネント;
@@ -31,7 +31,7 @@ const JudgementMessageTitle = styled.div`
 
 const JudgementMessage = styled.div`
   width: 190px;
-  height: 150px;
+  height: 50px;
   pointerEvents: 'none';
   background-color: ${COLORS.SUB};
   color: ${COLORS.BLACK};
@@ -47,10 +47,9 @@ const JudgementMessage = styled.div`
 
 export const JudgementFlashMessage = ({
   flash_display,
-  flash_title
+  flash_title,
 }) => {
 
-  // addEndListener={() => (setTimeout(() => (navigate(url)), 2500))}
   return (
     <>
       <CustomSlide 
@@ -61,7 +60,7 @@ export const JudgementFlashMessage = ({
         unmountOnExit
       >
         <JudgementFlashMessageWrapper>
-          <JudgementMessage severity="success">
+          <JudgementMessage>
             <JudgementMessageTitle flash_title={flash_title}>
               {flash_title}
             </JudgementMessageTitle>

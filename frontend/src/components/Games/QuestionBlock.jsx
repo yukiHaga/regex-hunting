@@ -164,7 +164,7 @@ export const QuestionBlock = ({
         ...prev,
         sentence: `${getMonsterName(difficulty)}に10ダメージ`,
         key_available: false,
-        time_active: false
+        time_active: false,
       }));
       if(correct_questions.length === 10) {
         const timer = setTimeout(() => {
@@ -195,7 +195,8 @@ export const QuestionBlock = ({
               temporary_experience : prev.prev_temporary_experience,
             temporary_experience: hasUser(user) ? 
               temporary_experience + 200 : prev.temporary_experience,
-            dialog_gage_up: true
+            dialog_gage_up: true,
+            flash_display: false
           }));
         }, 1000);
         return () => clearTimeout(timer);
@@ -214,7 +215,8 @@ export const QuestionBlock = ({
             sample_answer: prev?.questions["0"]?.sample_answer || "no_sample_answer",
             input_regex_object: {},
             key_available: true,
-            time_active: true
+            time_active: true,
+            flash_display: false
           }));
         }, 2000);
         return () => clearTimeout(timer);
@@ -262,7 +264,8 @@ export const QuestionBlock = ({
             key_available: false,
             game_result: "lose",
             time_active: false,
-            game_end_time: performance.now()
+            game_end_time: performance.now(),
+            flash_display: false
           }));
         }, 1000);
         return () => clearTimeout(timer);
@@ -281,7 +284,8 @@ export const QuestionBlock = ({
             sample_answer: prev?.questions["0"]?.sample_answer || "no_sample_answer",
             input_regex_object: {},
             key_available: true,
-            time_active: true
+            time_active: true,
+            flash_display: false
           }));
         }, 2000);
         return () => clearTimeout(timer);
