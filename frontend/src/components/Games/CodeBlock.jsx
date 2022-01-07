@@ -195,7 +195,8 @@ export const CodeBlock = ({
             if(current_question_judgement === "correct") {
               gameState.correct_questions.push({
                 question: gameState.questions[0],
-                sentence_num: sentence_num
+                sentence_num: sentence_num,
+                input_regex: input_regex
               });
               gameState.questions.shift();
               const current_hp = monster_hp - calculateDamage(user_attack, monster_defence);

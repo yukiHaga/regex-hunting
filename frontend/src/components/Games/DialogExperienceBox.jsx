@@ -18,7 +18,7 @@ const ExperienceTextWrapper = styled(DescriptionWrapper)`
 `;
 
 const ExperienceGageWrapper = styled.div`
-  width: 260px;
+  width: 253px;
   height: 10px;
   border: 1px solid ${COLORS.GAGE_GRAY};
   border-radius: 3px;

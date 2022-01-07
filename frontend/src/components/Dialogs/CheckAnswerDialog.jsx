@@ -59,7 +59,7 @@ const BackToModalButtonWrapper = styled.div`
 // background-color: ${COLORS.OCHER};
 const QuestionBlockWrapper = styled.div`
   width: 470px;
-  height: 180px;
+  height: ${({ good_or_bad }) => good_or_bad === "good" ? '270px' : '180px' };
   border-radius: 3px;
   background-color: ${COLORS.ANSWER_GRAY};
   margin: 0 auto;
@@ -132,6 +132,69 @@ const TargetSentenceWrapper = styled.div`
   text-align: center;
   font-family: YuGothic;
   font-style: normal;
+  font-weight: 500;
+`;
+
+const OuterCodeBlockWrapper = styled.div`
+  margin: 0 auto;
+  width: 450px;
+  margin-top: 10px;
+`;
+
+const CodeBlockWrapper = styled.div`
+  background-color: ${COLORS.LIGHT_BLACK};
+  border-radius: 3px;
+  width: 450px;
+  height: 40px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+`;
+
+const AnchorWrapper = styled.div`
+  height: 40px;
+  font-size: 16px;
+  line-height: 40px;
+  color: ${COLORS.WHITE};
+  font-family: YuGothic;
+  font-style: normal;
+  font-weight: 500;
+  margin-left: 15px;
+  margin-right: 15px;
+`;
+
+const CodeBlockDiv = styled.div`
+  height: 40px;
+  width: 450px;
+  font-size: 16px;
+  line-height: 40px;
+  background-color: ${COLORS.LIGHT_BLACK};
+  color: ${COLORS.WHITE};
+  font-family: YuGothic;
+  font-style: normal;
+  font-weight: 500;
+  outline: none;
+  border: none;
+  text-align: center;
+  ::placeholder {
+    color: #eeeeee;
+    opacity: 0.5;
+  };
+  ::-webkit-input-placeholder {
+    color: #eeeeee;
+    opacity: 0.5;
+  };
+  :-ms-input-placeholder {
+    color: #eeeeee;
+    opacity: 0.5;
+  };
+`;
+
+const CodeBlockTitleWrapper = styled.div`
+  font-size: 19px;
+  color: ${COLORS.BLACK};
+  text-align: left;
+  font-family: YuGothic;
   font-weight: 500;
 `;
 
@@ -233,9 +296,10 @@ export const CheckAnswerDialog = ({
           {
             correct_questions.length ? correct_questions.map(({
               question,
-              sentence_num 
+              sentence_num, 
+              input_regex
             }) => (
-              <QuestionBlockWrapper>
+              <QuestionBlockWrapper good_or_bad="good">
                 <QuestionWrapper>
                   <QuestionUpperWrapper>
                     <QuestionNumWrapper>
@@ -254,6 +318,22 @@ export const CheckAnswerDialog = ({
                     {question.target_sentence}
                   </TargetSentenceWrapper>
                 </QuestionWrapper>
+                <OuterCodeBlockWrapper>
+                  <CodeBlockTitleWrapper>
+                    あなたの回答
+                  </CodeBlockTitleWrapper>
+                  <CodeBlockWrapper>
+                    <AnchorWrapper>
+                      /
+                    </AnchorWrapper>
+                    <CodeBlockDiv>
+                      {input_regex}
+                    </CodeBlockDiv>
+                    <AnchorWrapper>
+                      /g
+                    </AnchorWrapper>
+                  </CodeBlockWrapper>
+                </OuterCodeBlockWrapper>
                 <CommentaryBlockWrapper>
                   <CommentaryTitleWrapper>
                     解説
