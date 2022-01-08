@@ -4,9 +4,6 @@ import styled from 'styled-components';
 // Colors
 import { COLORS } from '../../style_constants.js';
 
-// Contextオブジェクト
-import { UserContext } from "../../context/UserProvider.js";
-
 // Image
 import ElementaryMonsterImage from '../../images/elementary.png'; 
 
@@ -17,7 +14,6 @@ import ArrowRightIcon from '@mui/icons-material/ArrowRight';
 import ArrowLeftIcon from '@mui/icons-material/ArrowLeft';
 
 // Buttons
-import { FinallyBackToTopButton } from '../Buttons/FinallyBackToTopButton.jsx';
 import { FinallyGameStartButton } from '../Buttons/FinallyGameStartButton.jsx';
 
 // MUIのツールチップコンポーネントを使う
@@ -142,13 +138,14 @@ const ButtonsWrapper = styled.div`
 export const ElementaryGameDescriptionDialog = ({
   isOpen,
   setGameState,
-  game_description_open
+  game_description_open,
 }) => {
 
   const initialState = {
     width: 0,
     count: 0
   };
+
 
   const [widthState, setWidthState] = useState(initialState);
 
@@ -284,7 +281,6 @@ export const ElementaryGameDescriptionDialog = ({
                     </SentenceWrapper>
                     <OuterButtonsWrapper>
                       <ButtonsWrapper>
-                        <FinallyBackToTopButton />
                         <FinallyGameStartButton setGameState={setGameState} />
                       </ButtonsWrapper>
                     </OuterButtonsWrapper>

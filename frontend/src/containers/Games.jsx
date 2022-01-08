@@ -211,7 +211,6 @@ export const Games = () => {
   // ログインしててリロードするとsessionStateはfalseなので、最初のif文が実行される。
   useLayoutEffect(() => {
     if(sessionState === false){
-      console.log("ifbunn");
       checkLoginStatus().then((data) => {
         dispatch({
           type: requestUserActionTyps.REQUEST_SUCCESS,
