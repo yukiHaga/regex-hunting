@@ -56,7 +56,7 @@ export const postGameFinish = async ({
           maximum_experience_per_rank: maximum_experience_per_rank,
           temporary_experience: temporary_experience
         }
-      }
+      },
       { withCredentials: true }
     );
     axios.defaults.headers.common['X-CSRF-Token'] = response.headers['x-csrf-token'];

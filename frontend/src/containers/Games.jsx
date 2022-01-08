@@ -32,6 +32,9 @@ import { checkLoginStatus } from '../apis/checkLoginStatus.js';
 // ゲームステータス, 問題, モンスターデータを取得する関数 
 import { getGameStart } from '../apis/gameManagement.js'; 
 
+// ゲーム終了時の状態をサーバーへ送る関数 
+import { postGameFinish } from '../apis/gameManagement.js'; 
+
 // HTTP_STATUS_CODE
 import { HTTP_STATUS_CODE } from '../constants';
 
@@ -138,7 +141,7 @@ export const Games = () => {
 
   // useContext
   const {
-    requestUserState: { sessionState }, 
+    requestUserState: { sessionState, sendGameDataState }, 
     dispatch, 
     requestUserActionTyps
   } = useContext(UserContext);
@@ -293,12 +296,30 @@ export const Games = () => {
   ]);
 
   // ゲーム終了時のロジック
+  // 10問クリアした時だけ、ゲームのデータをサーバー側へ送る
+  // ゲーム失敗した時のデータも送ってしまうと、10問ちゃんとクリアしていない
+  // レコードが存在してしまう。
+  // 10問クリア。間違いなしの場合、14問クリアしたことにする。
+  // sendGameDataStateがfalse。gameState.game_resultがwinの時だけ発動
+  // そのため、絶対1回しか発動しない
   useEffect(() => {
-    if(gameState.game_result === "win" || gameState.game_result === "lose"){
-      postUserSession({
-        user: {
-          email: EmailBox,
-          password: PasswordBox
+    if(!sendGameDataState && gameState.game_result === "win"){
+      console.log("if文の中")
+      postGameFinish({
+        game_management: {
+          difficulty: difficulty, 
+          game_result: gameState.game_result,
+          result_time: gameState.result_time
+        },
+        judgement: {
+          correct: gameState.correct_questions.question, 
+          incorrect: gameState.incorrect_questions.question
+        },
+        current_user: {
+          rank: gameState.rank,
+          total_experience: gameState.total_experience,
+          maximum_experience_per_rank: gameState.maximum_experience,
+          temporary_experience: gameState.temporary_experience
         }
       }).then((data) => {
         dispatch({
@@ -306,11 +327,10 @@ export const Games = () => {
           payload: {
             session: data.session,
             user: data.user,
+            send_game_data: data.send_game_data
           }
         });
-      }).then(() => 
-        navigate('/my-page?user=login', { state: { display: true, success: "ログインしました。"}})
-      ).catch((e) => {
+      }).catch((e) => {
         if(e.response.status === HTTP_STATUS_CODE.NOT_FOUND){
           dispatch({
             type: requestUserActionTyps.REQUEST_FAILURE,
@@ -324,9 +344,20 @@ export const Games = () => {
       })
     }
   }, [
-
+    difficulty,
+    dispatch,
+    gameState.correct_questions.question,
+    gameState.game_result, 
+    gameState.incorrect_questions.question,
+    gameState.maximum_experience,
+    gameState.rank, 
+    gameState.result_time, 
+    gameState.temporary_experience, 
+    gameState.total_experience, 
+    requestUserActionTyps.REQUEST_FAILURE, 
+    requestUserActionTyps.REQUEST_SUCCESS,
+    sendGameDataState
   ]);
-
 
   console.log(gameState);
 
