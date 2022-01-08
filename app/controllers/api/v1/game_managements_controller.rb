@@ -48,6 +48,7 @@ class Api::V1::GameManagementsController < ApplicationController
   end
 
   def finish
+    binding.pry
     # 早期リターン
     # ログインユーザーが存在しないなら、ゲームデータをDBに保存しない
     return render json: {
@@ -72,13 +73,13 @@ class Api::V1::GameManagementsController < ApplicationController
     game_management.solved_questions << Array.new(correct_questions.length) do |i|
       SolvedQuestion.new(
         judgement: :correct,
-        question_id: correct_questions[i][:id]
+        question_id: correct_questions[i][:question][:id]
       )
     end
     game_management.solved_questions << Array.new(incorrect_questions.length) do |i|
       SolvedQuestion.new(
         judgement: :incorrect,
-        question_id: incorrect_questions[i][:id]
+        question_id: incorrect_questions[i][:question][:id]
       )
     end
 
