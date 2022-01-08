@@ -48,7 +48,6 @@ class Api::V1::GameManagementsController < ApplicationController
   end
 
   def finish
-    binding.pry
     # 早期リターン
     # ログインユーザーが存在しないなら、ゲームデータをDBに保存しない
     return render json: {
@@ -83,6 +82,7 @@ class Api::V1::GameManagementsController < ApplicationController
       )
     end
 
+    binding.pry
     game_management.save!
 
     # ログインユーザーに関する処理
