@@ -50,7 +50,11 @@ class Api::V1::GameManagementsController < ApplicationController
   def finish
     # 早期リターン
     # ログインユーザーが存在しないなら、ゲームデータをDBに保存しない
-    return render json: {}, status: :ok unless current_user
+    return render json: {
+      session: false,
+      user: {},
+      send_game_data: true
+    }, status: :ok unless current_user
 
     # ゲーム管理に関する処理
     # solved_questionsの2箇所は、GameManagementモデルに記述して一つにまとめる。
@@ -62,7 +66,7 @@ class Api::V1::GameManagementsController < ApplicationController
                           result_time: params[:game_management][:result_time],
                           play_date: Date.today
                         )
-    game_management.save!
+
     correct_questions = params[:judgement][:correct]
     incorrect_questions = params[:judgement][:incorrect]
     game_management.solved_questions << Array.new(correct_questions.length) do |i|
@@ -78,6 +82,8 @@ class Api::V1::GameManagementsController < ApplicationController
       )
     end
 
+    game_management.save!
+
     # ログインユーザーに関する処理
     # current_userにsaltやcrypted_passwordなどのカラムを含めてjsonを送ってはダメ
     current_user.update_attributes(params[:current_user])
@@ -92,6 +98,19 @@ class Api::V1::GameManagementsController < ApplicationController
     end
 
     # レンダリング
-    render json: {}, status: :created
+    render json: {
+      session: true,
+      user: {
+        name: current_user[:name],
+        rank: current_user[:rank],
+        total_experience: current_user[:total_experience],
+        maximum_experience_per_rank: current_user[:maximum_experience_per_rank],
+        temporary_experience: current_user[:temporary_experience],
+        open_rank: current_user[:open_rank],
+        active_title: current_user[:active_title],
+        email: current_user[:email]
+      },
+      send_game_data: true
+    }, status: :created
   end
 end
