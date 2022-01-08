@@ -292,6 +292,42 @@ export const Games = () => {
     gameState.game_result
   ]);
 
+  // ゲーム終了時のロジック
+  useEffect(() => {
+    if(gameState.game_result === "win" || gameState.game_result === "lose"){
+      postUserSession({
+        user: {
+          email: EmailBox,
+          password: PasswordBox
+        }
+      }).then((data) => {
+        dispatch({
+          type: requestUserActionTyps.REQUEST_SUCCESS,
+          payload: {
+            session: data.session,
+            user: data.user,
+          }
+        });
+      }).then(() => 
+        navigate('/my-page?user=login', { state: { display: true, success: "ログインしました。"}})
+      ).catch((e) => {
+        if(e.response.status === HTTP_STATUS_CODE.NOT_FOUND){
+          dispatch({
+            type: requestUserActionTyps.REQUEST_FAILURE,
+            payload: {
+              errors: e.response.data.errors
+            }
+          });
+        } else {
+          throw e;
+        }
+      })
+    }
+  }, [
+
+  ]);
+
+
   console.log(gameState);
 
   return (

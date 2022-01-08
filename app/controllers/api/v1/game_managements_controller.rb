@@ -49,6 +49,7 @@ class Api::V1::GameManagementsController < ApplicationController
 
   def finish
     # 早期リターン
+    # ログインユーザーが存在しないなら、ゲームデータをDBに保存しない
     return render json: {}, status: :ok unless current_user
 
     # ゲーム管理に関する処理
@@ -65,13 +66,17 @@ class Api::V1::GameManagementsController < ApplicationController
     correct_questions = params[:judgement][:correct]
     incorrect_questions = params[:judgement][:incorrect]
     game_management.solved_questions << Array.new(correct_questions.length) do |i|
-                                          SolvedQuestion.new(judgement: :correct,
-                                                             question_id: correct_questions[i][:id])
-                                        end
+      SolvedQuestion.new(
+        judgement: :correct,
+        question_id: correct_questions[i][:id]
+      )
+    end
     game_management.solved_questions << Array.new(incorrect_questions.length) do |i|
-                                          SolvedQuestion.new(judgement: :incorrect,
-                                                             question_id: incorrect_questions[i][:id])
-                                        end
+      SolvedQuestion.new(
+        judgement: :incorrect,
+        question_id: incorrect_questions[i][:id]
+      )
+    end
 
     # ログインユーザーに関する処理
     # current_userにsaltやcrypted_passwordなどのカラムを含めてjsonを送ってはダメ
@@ -83,7 +88,7 @@ class Api::V1::GameManagementsController < ApplicationController
     if params[:release_title]
       title = Title.find_by(name: params[:release_title][:name])
       current_user.release_titles << title.release_titles.
-                                           build(release_date: params[:release_title][:release_date])
+        build(release_date: params[:release_title][:release_date])
     end
 
     # レンダリング
