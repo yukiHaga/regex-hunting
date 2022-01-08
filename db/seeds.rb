@@ -175,11 +175,12 @@ Question.create!(
   user.save!
 
   # ゲームマネジメント
+  # 50000msなので、秒に換算すると50秒である
   5.times do |m|
     game_management = user.game_managements.build(
       difficulty: :elementary,
       game_result: :win,
-      result_time: "00:04:3#{m}",
+      result_time: "50000",
       play_date: Faker::Date.between(from: '2021-12-01', to: '2021-12-10')
     )
     game_management.save!
