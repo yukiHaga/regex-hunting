@@ -265,7 +265,18 @@ export const QuestionBlock = ({
             game_result: "lose",
             time_active: false,
             game_end_time: performance.now(),
-            flash_display: false
+            flash_display: false,
+            has_user: hasUser(user),
+            rank: hasUser(user) ? 
+              rank : prev.rank,
+            total_experience: hasUser(user) ? 
+              total_experience : prev.total_experience,
+            maximum_experience_per_rank: hasUser(user) ? 
+              maximum_experience_per_rank  : prev.maximum_experience_per_rank,
+            prev_temporary_experience: hasUser(user) ?
+              temporary_experience : prev.prev_temporary_experience,
+            temporary_experience: hasUser(user) ? 
+              temporary_experience : prev.temporary_experience,
           }));
         }, 1000);
         return () => clearTimeout(timer);
@@ -300,6 +311,11 @@ export const QuestionBlock = ({
     next_target_sentence,
     incorrect_questions.length,
     game_result,
+    user,
+    rank,
+    total_experience,
+    maximum_experience_per_rank,
+    temporary_experience
   ]);
 
   // マッチした箇所をリプレイスするライブラリをrequireしてくる

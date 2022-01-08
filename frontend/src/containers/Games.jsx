@@ -449,6 +449,12 @@ export const Games = () => {
             getGameStart={getGameStart}
             initialState={initialState}
             has_user={gameState.has_user}
+            rank={gameState.rank}
+            total_experience={gameState.total_experience}
+            maximum_experience_per_rank={gameState.maximum_experience_per_rank}
+            temporary_experience={gameState.temporary_experience} 
+            prev_temporary_experience={gameState.prev_temporary_experience}
+            dialog_gage_up={gameState.dialog_gage_up}
           />
       }
       {
