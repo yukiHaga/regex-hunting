@@ -20,10 +20,43 @@ export const getGameStart = async (difficulty) => {
 };
 
 // ゲームを終了させるためのAPI関数
-export const postGameStart = async (difficulty) => {
+export const postGameFinish = async ({
+  game_management: {
+    difficulty,
+    game_result,
+    result_time
+  },
+  judgement: {
+    correct,
+    incorrect
+  },
+  current_user: {
+    rank,
+    total_experience,
+    maximum_experience_per_rank,
+    temporary_experience
+  }
+}) => {
   try {
     const response = await axios.post(
-      `${gameManagementsStart}?difficulty=${difficulty}`,
+      `${gameManagementsFinish}`,
+      {
+        game_management: {
+          difficulty: difficulty,
+          game_result: game_result,
+          result_time: result_time
+        },
+        judgement: {
+          correct: correct,
+          incorrect: incorrect,
+        },
+        current_user: {
+          rank: rank,
+          total_experience: total_experience,
+          maximum_experience_per_rank: maximum_experience_per_rank,
+          temporary_experience: temporary_experience
+        }
+      }
       { withCredentials: true }
     );
     axios.defaults.headers.common['X-CSRF-Token'] = response.headers['x-csrf-token'];
