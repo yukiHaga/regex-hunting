@@ -236,6 +236,7 @@ export const Games = () => {
       })
     }
     if(!Object.keys(gameState.game_management).length){
+      console.log("Object.keysの中");
       getGameStart(difficulty).then((data) => {
         setGameState((prev) => ({
           ...prev,
@@ -347,9 +348,9 @@ export const Games = () => {
   }, [
     difficulty,
     dispatch,
-    gameState.correct_questions.question,
+    gameState.correct_questions,
     gameState.game_result, 
-    gameState.incorrect_questions.question,
+    gameState.incorrect_questions,
     gameState.maximum_experience,
     gameState.rank, 
     gameState.result_time, 
