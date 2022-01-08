@@ -303,6 +303,7 @@ export const Games = () => {
   // 10問クリア。間違いなしの場合、14問クリアしたことにする。
   // sendGameDataStateがfalse。gameState.game_resultがwinの時だけ発動
   // そのため、絶対1回しか発動しない
+  // result_timeの単位はミリ秒である。
   useEffect(() => {
     if(!sendGameDataState && gameState.game_result === "win"){
       console.log("if文の中");
@@ -311,7 +312,7 @@ export const Games = () => {
         game_management: {
           difficulty: difficulty, 
           game_result: gameState.game_result,
-          result_time: gameState.result_time
+          result_time: gameState.game_end_time - gameState.game_start_time
         },
         judgement: {
           correct: gameState.correct_questions, 
@@ -348,9 +349,11 @@ export const Games = () => {
   }, [
     difficulty,
     dispatch,
+    gameState.game_result,
     gameState.correct_questions,
-    gameState.game_result, 
     gameState.incorrect_questions,
+    gameState.game_end_time, 
+    gameState.game_start_time,
     gameState.maximum_experience,
     gameState.rank, 
     gameState.result_time, 
