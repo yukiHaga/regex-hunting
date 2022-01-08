@@ -38,6 +38,7 @@ export const postGameFinish = async ({
   }
 }) => {
   try {
+    console.log(correct);
     const response = await axios.post(
       `${gameManagementsFinish}`,
       {

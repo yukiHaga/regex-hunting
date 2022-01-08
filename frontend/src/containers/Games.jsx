@@ -304,7 +304,8 @@ export const Games = () => {
   // そのため、絶対1回しか発動しない
   useEffect(() => {
     if(!sendGameDataState && gameState.game_result === "win"){
-      console.log("if文の中")
+      console.log("if文の中");
+
       postGameFinish({
         game_management: {
           difficulty: difficulty, 
@@ -312,8 +313,8 @@ export const Games = () => {
           result_time: gameState.result_time
         },
         judgement: {
-          correct: gameState.correct_questions.question, 
-          incorrect: gameState.incorrect_questions.question
+          correct: gameState.correct_questions, 
+          incorrect: gameState.incorrect_questions
         },
         current_user: {
           rank: gameState.rank,
