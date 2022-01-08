@@ -449,6 +449,7 @@ export const Games = () => {
             setGameState={setGameState}
             getGameStart={getGameStart}
             initialState={initialState}
+            has_user={gameState.has_user}
           />
       }
       {
