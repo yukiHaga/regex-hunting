@@ -14,6 +14,7 @@ import { DescriptionWrapper } from '../shared_style.js';
 import { BackToTopButton } from '../Buttons/BackToTopButton.jsx';
 import { RestartGameButton } from '../Buttons/RestartGameButton.jsx';
 import { ResultShareButton } from '../Buttons/ResultShareButton.jsx';
+import { BackToMyPageButton } from '../Buttons/BackToMyPageButton.jsx';
 
 // Contextオブジェクト
 import { UserContext } from "../../context/UserProvider.js";
@@ -236,7 +237,12 @@ export const GameClearDialog = ({
               initialState={initialState}
             />
             <ResultShareButton />
-            <BackToTopButton />
+            {
+              has_user ?
+                <BackToMyPageButton />
+              : 
+                <BackToTopButton />
+            }
           </ButtonsWrapper>
         </CustomDialogContent>
       </CustomDialogInnerWrapper>
