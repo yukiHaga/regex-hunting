@@ -85,13 +85,23 @@ class Api::V1::GameManagementsController < ApplicationController
     game_management.save!
 
     # ログインユーザーのステータスを更新する処理
+    # ランクアップしている場合、temporary_experienceが0になる
     # current_userにsaltやcrypted_passwordなどのカラムを含めてjsonを送ってはダメ
-    current_user.update(
-      rank: params[:current_user][:rank],
-      total_experience: params[:current_user][:total_experience],
-      maximum_experience_per_rank: params[:current_user][:maximum_experience_per_rank],
-      temporary_experience: params[:current_user][:temporary_experience]
-    )
+    if temporary_experience >= maximum_experience_per_rank
+      current_user.update(
+        rank: params[:current_user][:rank] + 1,
+        total_experience: params[:current_user][:total_experience],
+        maximum_experience_per_rank: params[:current_user][:maximum_experience_per_rank] + 100,
+        temporary_experience: 0
+      )
+    else
+      current_user.update(
+        rank: params[:current_user][:rank],
+        total_experience: params[:current_user][:total_experience],
+        maximum_experience_per_rank: params[:current_user][:maximum_experience_per_rank],
+        temporary_experience: params[:current_user][:temporary_experience]
+      )
+    end
 
     # タイトルに関する処理
     # release_titles <<は、Userモデルに記述する。
