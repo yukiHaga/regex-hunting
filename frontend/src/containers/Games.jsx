@@ -306,7 +306,7 @@ export const Games = () => {
   // result_timeの単位はミリ秒である。
   useEffect(() => {
     if(!sendGameDataState && gameState.game_result === "win"){
-      console.log("if文の中");
+      console.log("ゲーム終了のif文の中");
 
       postGameFinish({
         game_management: {
