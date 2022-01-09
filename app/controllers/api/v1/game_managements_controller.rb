@@ -60,7 +60,7 @@ class Api::V1::GameManagementsController < ApplicationController
     # solved_questionsの2箇所は、GameManagementモデルに記述して一つにまとめる。
     # GameManagementモデルのsoleved_questonsは、throughをつけなくて良い。中間テーブルだけにデータを直接入れる。
     game_management = current_user.game_managements.
-                        build(
+                        create(
                           difficulty: params[:game_management][:difficulty],
                           game_result: params[:game_management][:game_result],
                           result_time: params[:game_management][:result_time],
@@ -82,12 +82,17 @@ class Api::V1::GameManagementsController < ApplicationController
       )
     end
 
-    binding.pry
     game_management.save!
 
-    # ログインユーザーに関する処理
+    binding.pry
+    # ログインユーザーのステータスを更新する処理
     # current_userにsaltやcrypted_passwordなどのカラムを含めてjsonを送ってはダメ
-    current_user.update_attributes(params[:current_user])
+    current_user.update(
+      rank: params[:current_user][:rank],
+      total_experience: params[:current_user][:total_experience],
+      maximum_experience_per_rank: params[:current_user][:maximum_experience_per_rank],
+      temporary_experience: params[:current_user][:temporary_experience]
+    )
 
     # タイトルに関する処理
     # release_titles <<は、Userモデルに記述する。
