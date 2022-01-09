@@ -43,16 +43,26 @@ class Api::V1::GameManagementsController < ApplicationController
     render json: {
       game_management: game_management,
       questions: questions.shuffle,
-      monster: monster
+      monster: monster,
+      user: {
+        rank: current_user ? current_user[:rank] : 1,
+        total_experience: current_user ? current_user[:total_experience] : 0,
+        maximum_experience_per_ran: current_user ?
+          current_user[:maximum_experience_per_ran] : 500,
+        temporary_experience: current_user ?
+          current_user[:temporary_experience] : 0,
+        prev_temporary_experience: current_user ?
+          current_user[:prev_temporary_experience] : 0
+      }
     }, status: :created
   end
 
+  # finishに送る際に作成されたデータを使ってゲーム結果画面を作るので、
+  # finishでゲーム関連のデータを返す必要は特にない
   def finish
     # 早期リターン
     # ログインユーザーが存在しないなら、ゲームデータをDBに保存しない
     return render json: {
-      session: false,
-      user: {},
       send_game_data: true
     }, status: :ok unless current_user
 
