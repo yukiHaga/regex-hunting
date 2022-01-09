@@ -87,7 +87,7 @@ class Api::V1::GameManagementsController < ApplicationController
     # ログインユーザーのステータスを更新する処理
     # ランクアップしている場合、temporary_experienceが0になる
     # current_userにsaltやcrypted_passwordなどのカラムを含めてjsonを送ってはダメ
-    if temporary_experience >= maximum_experience_per_rank
+    if params[:current_user][:temporary_experience] >= params[:current_user][:maximum_experience_per_rank]
       current_user.update(
         rank: params[:current_user][:rank] + 1,
         total_experience: params[:current_user][:total_experience],
