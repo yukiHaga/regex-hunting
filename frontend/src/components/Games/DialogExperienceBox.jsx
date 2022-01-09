@@ -9,6 +9,7 @@ import { DescriptionWrapper } from '../shared_style.js';
 
 // Sounds
 import GageUpSounds from '../../sounds/gage_up.mp3';
+import rankUpSounds from '../../sounds/game_clear.mp3';
 
 const ExperienceBoxWrapper = styled.div`
 `;
@@ -31,7 +32,7 @@ const handleExperienceGage = (
   maximum_experience_per_rank
 ) => {
   if(temporary_experience >= maximum_experience_per_rank) {
-    return `${260 * (temporary_experience / maximum_experience_per_rank)}px`;
+    return `${260 * (maximum_experience_per_rank / maximum_experience_per_rank)}px`;
   } else {
     return `${260 * (temporary_experience / maximum_experience_per_rank)}px`;
   }
@@ -55,7 +56,8 @@ export const DialogExperienceBox = ({
   maximum_experience_per_rank, 
   temporary_experience,
   prev_temporary_experience,
-  dialog_gage_up
+  dialog_gage_up,
+  setGameState
 }) => {
 
   const initialState = {
@@ -68,8 +70,9 @@ export const DialogExperienceBox = ({
     setTemporaryExperienceState 
   ] = useState(initialState);
 
+  // 最初にマウントされる際に実行されるuseEffect
   useEffect(() => {
-    if(dialog_gage_up){
+    if(dialog_gage_up) {
       const timer = setTimeout(() => {
         const audio = new Audio(GageUpSounds);
         audio.play();
@@ -83,6 +86,28 @@ export const DialogExperienceBox = ({
   },[
     temporary_experience,
     dialog_gage_up
+  ]);
+
+  // ランクアップの際に実行されるuseEffect
+  useEffect(() => {
+    if(temporary_experience >= maximum_experience_per_rank) {
+      const timer = setTimeout(() => {
+        const rankUpAudio = new Audio(rankUpSounds);
+        rankUpAudio.play();
+        setGameState((prev) => ({
+          ...prev,
+          rank: prev.rank + 1,
+          prev_temporary_experience: 0,
+          temporary_experience: temporary_experience - maximum_experience_per_rank,
+          maximum_experience_per_rank: maximum_experience_per_rank + 100,
+        }));
+      }, 4000);
+      return () => clearTimeout(timer);
+    }
+  },[
+    temporary_experience,
+    maximum_experience_per_rank, 
+    setGameState
   ]);
 
   return (
