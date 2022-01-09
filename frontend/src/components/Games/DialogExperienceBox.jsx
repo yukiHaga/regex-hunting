@@ -129,7 +129,7 @@ export const DialogExperienceBox = ({
         </ExperienceGageWrapper>
         <ExperienceTextWrapper>
           ランクアップに必要な経験値： { 
-            temporaryExperienceState.temporary_experience > maximum_experience_per_rank ?
+            temporaryExperienceState.temporary_experience >= maximum_experience_per_rank ?
               0
             :
               maximum_experience_per_rank - temporaryExperienceState.temporary_experience 
