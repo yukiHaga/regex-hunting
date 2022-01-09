@@ -124,7 +124,17 @@ class Api::V1::GameManagementsController < ApplicationController
 
     # レンダリング
     render json: {
-      send_game_data: true
+      send_game_data: true,
+      user: {
+        rank: current_user ? current_user[:rank] : 1,
+        total_experience: current_user ? current_user[:total_experience] : 0,
+        maximum_experience_per_ran: current_user ?
+          current_user[:maximum_experience_per_ran] : 500,
+        temporary_experience: current_user ?
+          current_user[:temporary_experience] : 0,
+        prev_temporary_experience: current_user ?
+          current_user[:temporary_experience] : 0
+      }
     }, status: :created
   end
 end
