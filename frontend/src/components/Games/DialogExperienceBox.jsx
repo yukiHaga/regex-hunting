@@ -89,6 +89,8 @@ export const DialogExperienceBox = ({
   ]);
 
   // ランクアップの際に実行されるuseEffect
+  // temporary_experienceは意味的に本来0でないといけないが、
+  // ゲージが上がるようなアクションを見せたいので、差分値を設定する
   useEffect(() => {
     if(temporary_experience >= maximum_experience_per_rank) {
       const timer = setTimeout(() => {
