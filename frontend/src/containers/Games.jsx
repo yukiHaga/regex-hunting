@@ -141,7 +141,7 @@ export const Games = () => {
 
   // useContext
   const {
-    requestUserState: { sessionState, sendGameDataState }, 
+    requestUserState: { sessionState }, 
     dispatch, 
     requestUserActionTyps
   } = useContext(UserContext);
@@ -196,7 +196,8 @@ export const Games = () => {
     maximum_experience_per_rank: 500, 
     temporary_experience: 0,
     prev_temporary_experience: 0,
-    dialog_gage_up: false
+    dialog_gage_up: false,
+    send_game_data: false
   }
 
   // ゲーム状態を管理するstate
@@ -301,11 +302,11 @@ export const Games = () => {
   // ゲーム失敗した時のデータも送ってしまうと、10問ちゃんとクリアしていない
   // レコードが存在してしまう。
   // 10問クリア。間違いなしの場合、14問クリアしたことにする。
-  // sendGameDataStateがfalse。gameState.game_resultがwinの時だけ発動
+  // gameState.send_game_dataがfalse。gameState.game_resultがwinの時だけ発動
   // そのため、絶対1回しか発動しない
   // result_timeの単位はミリ秒である。
   useEffect(() => {
-    if(!sendGameDataState && gameState.game_result === "win"){
+    if(!gameState.send_game_data && gameState.game_result === "win"){
       console.log("ゲーム終了のif文の中");
 
       postGameFinish({
@@ -325,22 +326,16 @@ export const Games = () => {
           temporary_experience: gameState.temporary_experience
         }
       }).then((data) => {
-        dispatch({
-          type: requestUserActionTyps.REQUEST_SUCCESS,
-          payload: {
-            session: data.session,
-            user: data.user,
-            send_game_data: data.send_game_data
-          }
-        });
+        setGameState((prev) => ({
+          ...prev,
+          send_game_data: data.send_game_data
+        })); 
       }).catch((e) => {
         if(e.response.status === HTTP_STATUS_CODE.NOT_FOUND){
-          dispatch({
-            type: requestUserActionTyps.REQUEST_FAILURE,
-            payload: {
-              errors: e.response.data.errors
-            }
-          });
+          setGameState((prev) => ({
+            ...prev,
+            send_game_data: true
+          })); 
         } else {
           throw e;
         }
@@ -348,7 +343,6 @@ export const Games = () => {
     }
   }, [
     difficulty,
-    dispatch,
     gameState.game_result,
     gameState.correct_questions,
     gameState.incorrect_questions,
@@ -359,9 +353,9 @@ export const Games = () => {
     gameState.result_time, 
     gameState.temporary_experience, 
     gameState.total_experience, 
+    gameState.send_game_data,
     requestUserActionTyps.REQUEST_FAILURE, 
     requestUserActionTyps.REQUEST_SUCCESS,
-    sendGameDataState
   ]);
 
   console.log(gameState);

@@ -8,7 +8,6 @@ export const initialState = {
     user: {}
   },
   errors: {},
-  sendGameDataState: false
 };
 
 // useReducerで使うActonTypsを定義
@@ -27,7 +26,6 @@ export const requestUserReducer = (state, action) => {
         userState: {
           user: action.payload.user
         },
-        sendGameDataState: action.payload.send_game_data ? true : false
       };
     case requestUserActionTyps.REQUEST_FAILURE:
       return {

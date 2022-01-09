@@ -67,6 +67,7 @@ export const RestartGameButton = ({
         next_commentary: data.questions["0"].commentary,
         game_result: data.game_management.game_result,
         game_start_time: performance.now(),
+        send_game_data: false
       }); 
     }).catch((e) => {
       if(e.response.status === HTTP_STATUS_CODE.NOT_FOUND){
