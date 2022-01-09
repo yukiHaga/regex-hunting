@@ -1,17 +1,11 @@
-import React, { useEffect, useContext } from 'react';
+import React, { useEffect } from 'react';
 import styled from 'styled-components';
 
 // Colors
 import { COLORS } from '../../style_constants.js';
 
-// Contextオブジェクト
-import { UserContext } from "../../context/UserProvider.js";
-
 // モンスター名を取得する関数
 import { getMonsterName } from '../../functions/getMonsterName.js';
-
-// ユーザーがログインしているかを真偽値で返す関数
-import { hasUser } from '../../functions/hasUser.js';
 
 // 各ゲームの獲得経験値を取得する関数
 import { getExperience } from '../../functions/getExperience.js';
@@ -88,24 +82,14 @@ export const QuestionBlock = ({
   correct_questions,
   incorrect_questions,
   game_description_open,
-  game_result
+  game_result,
+  has_user,
+  rank,
+  total_experience,
+  maximum_experience_per_rank,
+  temporary_experience,
+  prev_temporary_experience
 }) => {
-
-  // useContext
-  // userのデータを使うだけで、userを直接更新したりはしない
-  const {
-    requestUserState: { 
-      userState: { 
-        user,
-        user: {
-          rank,
-          total_experience,
-          maximum_experience_per_rank,
-          temporary_experience
-        } 
-      } 
-    } 
-  } = useContext(UserContext);
 
   // 難易度を日本語に変換する関数
   const getJpDifficulty = (difficulty) => {
@@ -187,16 +171,9 @@ export const QuestionBlock = ({
             game_result: "win",
             time_active: false,
             game_end_time: performance.now(),
-            has_user: hasUser(user),
-            rank: hasUser(user) ? 
-              rank : prev.rank,
-            total_experience: hasUser(user) ? 
+            total_experience: has_user ? 
               total_experience + getExperience(difficulty) : prev.total_experience,
-            maximum_experience_per_rank: hasUser(user) ? 
-              maximum_experience_per_rank : prev.maximum_experience_per_rank,
-            prev_temporary_experience: hasUser(user) ?
-              temporary_experience : prev.prev_temporary_experience,
-            temporary_experience: hasUser(user) ? 
+            temporary_experience: has_user ? 
               temporary_experience + getExperience(difficulty) : prev.temporary_experience,
             dialog_gage_up: true,
             flash_display: false
@@ -234,11 +211,11 @@ export const QuestionBlock = ({
     next_target_sentence,
     correct_questions.length,
     game_result,
-    user,
     rank,
     total_experience,
     maximum_experience_per_rank,
-    temporary_experience
+    temporary_experience,
+    has_user
   ]);
 
   // question_judgementがincorrectの時に実行されるuseEffect
@@ -269,17 +246,6 @@ export const QuestionBlock = ({
             time_active: false,
             game_end_time: performance.now(),
             flash_display: false,
-            has_user: hasUser(user),
-            rank: hasUser(user) ? 
-              rank : prev.rank,
-            total_experience: hasUser(user) ? 
-              total_experience : prev.total_experience,
-            maximum_experience_per_rank: hasUser(user) ? 
-              maximum_experience_per_rank  : prev.maximum_experience_per_rank,
-            prev_temporary_experience: hasUser(user) ?
-              temporary_experience : prev.prev_temporary_experience,
-            temporary_experience: hasUser(user) ? 
-              temporary_experience : prev.temporary_experience,
           }));
         }, 1000);
         return () => clearTimeout(timer);
@@ -314,7 +280,6 @@ export const QuestionBlock = ({
     next_target_sentence,
     incorrect_questions.length,
     game_result,
-    user,
     rank,
     total_experience,
     maximum_experience_per_rank,

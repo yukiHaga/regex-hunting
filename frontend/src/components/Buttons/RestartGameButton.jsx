@@ -67,7 +67,30 @@ export const RestartGameButton = ({
         next_commentary: data.questions["0"].commentary,
         game_result: data.game_management.game_result,
         game_start_time: performance.now(),
-        send_game_data: false
+        has_user: sessionState ? 
+          data.user.has_user 
+        : 
+          prev.has_user,
+        rank: sessionState ?
+          data.user.rank 
+        : 
+          prev.rank,
+        total_experience: sessionState ?
+          data.user.total_experience 
+        : 
+          prev.total_experience, 
+        maximum_experience_per_rank: sessionState ?
+          data.user.maximum_experience_per_rank 
+        : 
+          prev.maximum_experience_per_rank, 
+        temporary_experience: sessionState ?
+          data.user.temporary_experience
+        :
+          prev.temporary_experience,
+        prev_temporary_experience: sessionState ?
+          data.user.prev_temporary_experience
+        :
+          prev.prev_temporary_experience
       }); 
     }).catch((e) => {
       if(e.response.status === HTTP_STATUS_CODE.NOT_FOUND){

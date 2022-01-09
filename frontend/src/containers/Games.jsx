@@ -205,10 +205,8 @@ export const Games = () => {
 
   // React Routerで画面遷移するとユーザーが保持できないので、
   // useEffectで再度リクエストを出す。
-  // 初回レンダリング時および、
-  // dispatch, difficulty, sessionState, requestUserActionTyps.REQUEST, 
-  // requestUserActionTyps.REQUEST_SUCCESS, requestUserActionTyps.REQUEST_FAILURE
-  // のどれかが変化したらuseEffectが実行される。
+  // 初回レンダリング時および、依存配列の要素のどれかが
+  // 変化したらuseEffectが実行される。
   // stateが変化しても、依存配列の要素が変化していないなら、
   // useEffectは実行されない                    
   // ログインしていたらsessionStateはtrueなので、最初のif文は実行されない。
@@ -255,6 +253,30 @@ export const Games = () => {
           game_result: data.game_management.game_result,
           game_start_time: performance.now(),
           game_description_open: true,
+          has_user: sessionState ? 
+            data.user.has_user 
+          : 
+            prev.has_user,
+          rank: sessionState ?
+            data.user.rank 
+          : 
+            prev.rank,
+          total_experience: sessionState ?
+            data.user.total_experience 
+          : 
+            prev.total_experience, 
+          maximum_experience_per_rank: sessionState ?
+            data.user.maximum_experience_per_rank 
+          : 
+            prev.maximum_experience_per_rank, 
+          temporary_experience: sessionState ?
+            data.user.temporary_experience
+          :
+            prev.temporary_experience,
+          prev_temporary_experience: sessionState ?
+            data.user.prev_temporary_experience
+          :
+            prev.prev_temporary_experience
         })); 
       }).catch((e) => {
         if(e.response.status === HTTP_STATUS_CODE.NOT_FOUND){
@@ -435,6 +457,12 @@ export const Games = () => {
                   incorrect_questions={gameState.incorrect_questions}
                   game_description_open={gameState.game_description_open}
                   game_result={gameState.game_result}
+                  has_user={gameState.has_user}
+                  rank={gameState.rank}
+                  total_experience={gameState.total_experience} 
+                  maximum_experience_per_rank={gameState.maximum_experience_per_rank} 
+                  temporary_experience={gameState.temporary_experience}
+                  prev_temporary_experience={gameState.prev_temporary_experience}
                 />
               </QuestionBlockWrapper>
             </BattleBlockWrapper>
