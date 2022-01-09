@@ -32,9 +32,9 @@ const handleExperienceGage = (
   maximum_experience_per_rank
 ) => {
   if(temporary_experience >= maximum_experience_per_rank) {
-    return '253px';
+    return '100%';
   } else {
-    return `${253 * (temporary_experience / maximum_experience_per_rank)}px`;
+    return `${(temporary_experience / maximum_experience_per_rank) * 100}%`;
   }
 };
 
@@ -89,8 +89,10 @@ export const DialogExperienceBox = ({
   ]);
 
   // ランクアップの際に実行されるuseEffect
-  // temporary_experienceは意味的に本来0でないといけないが、
-  // ゲージが上がるようなアクションを見せたいので、差分値を設定する
+  // ゲージが上がるようなアクションを見せたかったが、temporary_experienceが
+  // サーバー側と整合性が取れなそうなので、ランクが上がったら、
+  // ゲージが0になるような仕様にする。
+  // 見た目はどうでも良く、サーバー側にちゃんとデータが入っていれば良い
   useEffect(() => {
     if(temporary_experience >= maximum_experience_per_rank) {
       const timer = setTimeout(() => {
@@ -100,7 +102,7 @@ export const DialogExperienceBox = ({
           ...prev,
           rank: prev.rank + 1,
           prev_temporary_experience: 0,
-          temporary_experience: temporary_experience - maximum_experience_per_rank,
+          temporary_experience: 0,
           maximum_experience_per_rank: maximum_experience_per_rank + 100,
         }));
       }, 4000);
@@ -127,7 +129,10 @@ export const DialogExperienceBox = ({
         </ExperienceGageWrapper>
         <ExperienceTextWrapper>
           ランクアップに必要な経験値： { 
-            maximum_experience_per_rank - temporaryExperienceState.temporary_experience 
+            temporaryExperienceState.temporary_experience > maximum_experience_per_rank ?
+              0
+            :
+              maximum_experience_per_rank - temporaryExperienceState.temporary_experience 
           }
         </ExperienceTextWrapper>
       </ExperienceBoxWrapper>
