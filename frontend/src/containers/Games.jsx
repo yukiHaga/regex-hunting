@@ -354,7 +354,7 @@ export const Games = () => {
     gameState.incorrect_questions,
     gameState.game_end_time, 
     gameState.game_start_time,
-    gameState.maximum_experience,
+    gameState.maximum_experience_per_rank,
     gameState.rank, 
     gameState.result_time, 
     gameState.temporary_experience, 
