@@ -350,7 +350,31 @@ export const Games = () => {
       }).then((data) => {
         setGameState((prev) => ({
           ...prev,
-          send_game_data: data.send_game_data
+          send_game_data: data.send_game_data,
+          has_user: sessionState ? 
+            true
+          : 
+            false,
+          rank: sessionState ?
+            data.user.rank 
+          : 
+            prev.rank,
+          total_experience: sessionState ?
+            data.user.total_experience 
+          : 
+            prev.total_experience, 
+          maximum_experience_per_rank: sessionState ?
+            data.user.maximum_experience_per_rank 
+          : 
+            prev.maximum_experience_per_rank, 
+          temporary_experience: sessionState ?
+            data.user.temporary_experience
+          :
+            prev.temporary_experience,
+          prev_temporary_experience: sessionState ?
+            data.user.prev_temporary_experience
+          :
+            prev.prev_temporary_experience
         })); 
       }).catch((e) => {
         if(e.response.status === HTTP_STATUS_CODE.NOT_FOUND){
@@ -530,6 +554,7 @@ export const Games = () => {
             temporary_experience={gameState.temporary_experience}
             prev_temporary_experience={gameState.prev_temporary_experience}
             dialog_gage_up={gameState.dialog_gage_up}
+            sessionState={sessionState}
           />
       }
       {

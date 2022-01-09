@@ -41,7 +41,8 @@ export const RestartGameButton = ({
   difficulty,
   setGameState,
   getGameStart,
-  initialState
+  initialState,
+  sessionState
 }) => {
 
   // リスタートを制御する関数
@@ -74,23 +75,23 @@ export const RestartGameButton = ({
         rank: sessionState ?
           data.user.rank 
         : 
-          prev.rank,
+          initialState.rank,
         total_experience: sessionState ?
           data.user.total_experience 
         : 
-          prev.total_experience, 
+          initialState.total_experience, 
         maximum_experience_per_rank: sessionState ?
           data.user.maximum_experience_per_rank 
         : 
-          prev.maximum_experience_per_rank, 
+          initialState.maximum_experience_per_rank, 
         temporary_experience: sessionState ?
           data.user.temporary_experience
         :
-          prev.temporary_experience,
+          initialState.temporary_experience,
         prev_temporary_experience: sessionState ?
           data.user.prev_temporary_experience
         :
-          prev.prev_temporary_experience
+          initialState.prev_temporary_experience
       }); 
     }).catch((e) => {
       if(e.response.status === HTTP_STATUS_CODE.NOT_FOUND){

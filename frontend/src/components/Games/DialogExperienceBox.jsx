@@ -93,6 +93,8 @@ export const DialogExperienceBox = ({
   // サーバー側と整合性が取れなそうなので、ランクが上がったら、
   // ゲージが0になるような仕様にする。
   // 見た目はどうでも良く、サーバー側にちゃんとデータが入っていれば良い
+  // 多分必要ないから消す
+  /*
   useEffect(() => {
     if(temporary_experience >= maximum_experience_per_rank) {
       const timer = setTimeout(() => {
@@ -113,6 +115,7 @@ export const DialogExperienceBox = ({
     maximum_experience_per_rank, 
     setGameState
   ]);
+  */
 
   return (
     <>

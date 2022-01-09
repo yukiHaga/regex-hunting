@@ -134,7 +134,8 @@ export const GameClearDialog = ({
   maximum_experience_per_rank, 
   temporary_experience,
   prev_temporary_experience,
-  dialog_gage_up
+  dialog_gage_up,
+  sessionState
 }) => {
 
   // このミリ秒はタイムに色をつけるために使う
@@ -240,6 +241,7 @@ export const GameClearDialog = ({
               setGameState={setGameState}
               getGameStart={getGameStart}
               initialState={initialState}
+              sessionState={sessionState}
             />
             <ResultShareButton />
             {
