@@ -254,9 +254,9 @@ export const Games = () => {
           game_start_time: performance.now(),
           game_description_open: true,
           has_user: sessionState ? 
-            data.user.has_user 
+            true
           : 
-            prev.has_user,
+            false,
           rank: sessionState ?
             data.user.rank 
           : 

@@ -68,9 +68,9 @@ export const RestartGameButton = ({
         game_result: data.game_management.game_result,
         game_start_time: performance.now(),
         has_user: sessionState ? 
-          data.user.has_user 
+          true
         : 
-          prev.has_user,
+          false,
         rank: sessionState ?
           data.user.rank 
         : 
