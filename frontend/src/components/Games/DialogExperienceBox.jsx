@@ -32,9 +32,9 @@ const handleExperienceGage = (
   maximum_experience_per_rank
 ) => {
   if(temporary_experience >= maximum_experience_per_rank) {
-    return `${260 * (maximum_experience_per_rank / maximum_experience_per_rank)}px`;
+    return '253px';
   } else {
-    return `${260 * (temporary_experience / maximum_experience_per_rank)}px`;
+    return `${253 * (temporary_experience / maximum_experience_per_rank)}px`;
   }
 };
 

@@ -223,6 +223,7 @@ export const GameClearDialog = ({
                           prev_temporary_experience={prev_temporary_experience}
                           dialog_gage_up={dialog_gage_up}
                           difficulty={difficulty}
+                          setGameState={setGameState}
                         />
                       </ExperienceGageTd>
                     </tr>
