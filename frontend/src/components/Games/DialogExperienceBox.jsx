@@ -9,7 +9,6 @@ import { DescriptionWrapper } from '../shared_style.js';
 
 // Sounds
 import GageUpSounds from '../../sounds/gage_up.mp3';
-import rankUpSounds from '../../sounds/game_clear.mp3';
 
 const ExperienceBoxWrapper = styled.div`
 `;

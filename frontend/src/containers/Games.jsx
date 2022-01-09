@@ -400,6 +400,7 @@ export const Games = () => {
     gameState.temporary_experience, 
     gameState.total_experience, 
     gameState.send_game_data,
+    sessionState,
     requestUserActionTyps.REQUEST_FAILURE, 
     requestUserActionTyps.REQUEST_SUCCESS,
   ]);
