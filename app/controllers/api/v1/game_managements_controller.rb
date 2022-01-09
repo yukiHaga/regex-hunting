@@ -52,7 +52,7 @@ class Api::V1::GameManagementsController < ApplicationController
         temporary_experience: current_user ?
           current_user[:temporary_experience] : 0,
         prev_temporary_experience: current_user ?
-          current_user[:prev_temporary_experience] : 0
+          current_user[:temporary_experience] : 0
       }
     }, status: :created
   end
