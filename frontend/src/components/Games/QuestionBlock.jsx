@@ -13,6 +13,9 @@ import { getMonsterName } from '../../functions/getMonsterName.js';
 // ユーザーがログインしているかを真偽値で返す関数
 import { hasUser } from '../../functions/hasUser.js';
 
+// 各ゲームの獲得経験値を取得する関数
+import { getExperience } from '../../functions/getExperience.js';
+
 const QuestionBlockWrapper = styled.div`
   background-color: ${COLORS.SUB};
   border-radius: 3px;
@@ -188,13 +191,13 @@ export const QuestionBlock = ({
             rank: hasUser(user) ? 
               rank : prev.rank,
             total_experience: hasUser(user) ? 
-              total_experience + 200 : prev.total_experience,
+              total_experience + getExperience(difficulty) : prev.total_experience,
             maximum_experience_per_rank: hasUser(user) ? 
-              maximum_experience_per_rank  : prev.maximum_experience_per_rank,
+              maximum_experience_per_rank : prev.maximum_experience_per_rank,
             prev_temporary_experience: hasUser(user) ?
               temporary_experience : prev.prev_temporary_experience,
             temporary_experience: hasUser(user) ? 
-              temporary_experience + 200 : prev.temporary_experience,
+              temporary_experience + getExperience(difficulty) : prev.temporary_experience,
             dialog_gage_up: true,
             flash_display: false
           }));

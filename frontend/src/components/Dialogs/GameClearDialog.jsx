@@ -25,6 +25,9 @@ import { CheackAnswerSentence } from '../Sentences/CheackAnswerSentence.jsx';
 // ExperienceGage
 import { DialogExperienceBox } from '../Games/DialogExperienceBox.jsx';
 
+// 各ゲームの獲得経験値を取得する関数
+import { getExperience } from '../../functions/getExperience.js';
+
 const CustomDialogInnerWrapper = styled.div`
   padding-top: 10px;
   padding-right: 10px;
@@ -207,7 +210,7 @@ export const GameClearDialog = ({
                     <tr>
                       <ExperienceMetaTd>獲得経験値</ExperienceMetaTd> 
                       <ExperienceTd>
-                        { temporary_experience }
+                        { getExperience(difficulty) }
                       </ExperienceTd>
                     </tr>
                     <tr>
@@ -219,6 +222,7 @@ export const GameClearDialog = ({
                           temporary_experience={temporary_experience} 
                           prev_temporary_experience={prev_temporary_experience}
                           dialog_gage_up={dialog_gage_up}
+                          difficulty={difficulty}
                         />
                       </ExperienceGageTd>
                     </tr>
