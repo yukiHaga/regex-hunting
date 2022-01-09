@@ -84,7 +84,6 @@ class Api::V1::GameManagementsController < ApplicationController
 
     game_management.save!
 
-    binding.pry
     # ログインユーザーのステータスを更新する処理
     # current_userにsaltやcrypted_passwordなどのカラムを含めてjsonを送ってはダメ
     current_user.update(
