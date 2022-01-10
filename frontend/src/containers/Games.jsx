@@ -22,6 +22,7 @@ import { GameClearDialog } from '../components/Dialogs/GameClearDialog.jsx'
 import { GameOverDialog } from '../components/Dialogs/GameOverDialog.jsx'
 import { CheckAnswerDialog } from '../components/Dialogs/CheckAnswerDialog.jsx'
 import { ElementaryGameDescriptionDialog } from '../components/Dialogs/ElementaryGameDescriptionDialog.jsx'
+import { RankUpDialog } from '../components/Dialogs/RankUpDialog.jsx';
 
 // Contextオブジェクト
 import { UserContext } from "../context/UserProvider.js";
@@ -197,7 +198,9 @@ export const Games = () => {
     temporary_experience: 0,
     prev_temporary_experience: 0,
     dialog_gage_up: false,
-    send_game_data: false
+    send_game_data: false,
+    rank_up: false,
+    active_title: "見習いハンター",
   }
 
   // ゲーム状態を管理するstate
@@ -276,7 +279,11 @@ export const Games = () => {
           prev_temporary_experience: sessionState ?
             data.user.prev_temporary_experience
           :
-            prev.prev_temporary_experience
+            prev.prev_temporary_experience,
+          active_title: sessionState ?
+            data.user.active_title
+          :
+            prev.active_title
         })); 
       }).catch((e) => {
         if(e.response.status === HTTP_STATUS_CODE.NOT_FOUND){
@@ -327,6 +334,7 @@ export const Games = () => {
   // gameState.send_game_dataがfalse。gameState.game_resultがwinの時だけ発動
   // そのため、絶対1回しか発動しない
   // result_timeの単位はミリ秒である。
+  // ユーザーがログインしていなくても送る。
   useEffect(() => {
     if(!gameState.send_game_data && gameState.game_result === "win"){
       console.log("ゲーム終了のif文の中");
@@ -345,7 +353,8 @@ export const Games = () => {
             rank: gameState.rank,
             total_experience: gameState.total_experience,
             maximum_experience_per_rank: gameState.maximum_experience_per_rank,
-            temporary_experience: gameState.temporary_experience
+            temporary_experience: gameState.temporary_experience,
+            active_title: gameState.active_title
           }
         }).then((data) => {
           setGameState((prev) => ({
@@ -375,7 +384,11 @@ export const Games = () => {
             prev_temporary_experience: sessionState ?
               data.user.prev_temporary_experience
             :
-              prev.prev_temporary_experience
+              prev.prev_temporary_experience,
+            active_title: sessionState ?
+              data.user.active_title
+            :
+              prev.active_title
           })); 
         }).catch((e) => {
           if(e.response.status === HTTP_STATUS_CODE.NOT_FOUND){
@@ -404,6 +417,7 @@ export const Games = () => {
     gameState.temporary_experience, 
     gameState.total_experience, 
     gameState.send_game_data,
+    gameState.active_title,
     sessionState,
     requestUserActionTyps.REQUEST_FAILURE, 
     requestUserActionTyps.REQUEST_SUCCESS,
@@ -597,6 +611,15 @@ export const Games = () => {
             isOpen={gameState.game_description_open}
             setGameState={setGameState}
             game_description_open={gameState.game_description_open}
+          />
+      }
+      {
+        gameState.rank_up && 
+          <RankUpDialog
+            isOpen={gameState.rank_up}
+            rank={gameState.rank}
+            active_title={gameState.active_title}
+            setGameState={setGameState}
           />
       }
     </>

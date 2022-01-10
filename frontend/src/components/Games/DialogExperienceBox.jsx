@@ -86,6 +86,25 @@ export const DialogExperienceBox = ({
     temporary_experience,
     dialog_gage_up
   ]);
+
+  // ランクアップモーダルを出すためのuseEffect
+  useEffect(() => {
+    if(dialog_gage_up && temporaryExperienceState.temporary_experience >= maximum_experience_per_rank ) {
+      const timer = setTimeout(() => {
+        setGameState((prev) => ({
+          ...prev,
+          rank_up: true,
+          dialog_gage_up: false
+        }));
+      }, 4000);
+      return () => clearTimeout(timer);
+    }
+  },[
+    dialog_gage_up,
+    temporaryExperienceState.temporary_experience,
+    maximum_experience_per_rank,
+    setGameState
+  ]);
  
   return (
     <>
