@@ -34,7 +34,8 @@ export const postGameFinish = async ({
     rank,
     total_experience,
     maximum_experience_per_rank,
-    temporary_experience
+    temporary_experience,
+    active_title
   }
 }) => {
   try {
@@ -54,7 +55,8 @@ export const postGameFinish = async ({
           rank: rank,
           total_experience: total_experience,
           maximum_experience_per_rank: maximum_experience_per_rank,
-          temporary_experience: temporary_experience
+          temporary_experience: temporary_experience,
+          active_title: active_title
         }
       },
       { withCredentials: true }
