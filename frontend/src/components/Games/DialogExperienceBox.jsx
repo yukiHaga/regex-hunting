@@ -69,6 +69,23 @@ export const DialogExperienceBox = ({
     setTemporaryExperienceState 
   ] = useState(initialState);
 
+  /*
+    } else if(dialog_gage_up && temporary_experience >= maximum_experience_per_rank)     {
+      const timer = setTimeout(() => {
+        const audio = new Audio(GageUpSounds);
+        audio.play();
+        setTemporaryExperienceState((prev) => ({
+          ...prev,
+          temporary_experience: temporary_experience,
+        }));
+        setGameState((prev) => ({
+          ...prev,
+          rank_up: true,
+          dialog_gage_up: false
+        }));
+      }, 2000);
+      return () => clearTimeout(timer);
+  */
   // 最初にマウントされた後に実行されるuseEffect
   useEffect(() => {
     if(dialog_gage_up) {
@@ -84,28 +101,11 @@ export const DialogExperienceBox = ({
     }
   },[
     temporary_experience,
-    dialog_gage_up
-  ]);
-
-  // ランクアップモーダルを出すためのuseEffect
-  useEffect(() => {
-    if(dialog_gage_up && temporaryExperienceState.temporary_experience >= maximum_experience_per_rank ) {
-      const timer = setTimeout(() => {
-        setGameState((prev) => ({
-          ...prev,
-          rank_up: true,
-          dialog_gage_up: false
-        }));
-      }, 4000);
-      return () => clearTimeout(timer);
-    }
-  },[
     dialog_gage_up,
-    temporaryExperienceState.temporary_experience,
     maximum_experience_per_rank,
     setGameState
   ]);
- 
+
   return (
     <>
       <ExperienceBoxWrapper>
