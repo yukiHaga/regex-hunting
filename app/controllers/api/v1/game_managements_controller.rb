@@ -111,7 +111,8 @@ class Api::V1::GameManagementsController < ApplicationController
         rank: params[:current_user][:rank],
         total_experience: params[:current_user][:total_experience],
         maximum_experience_per_rank: params[:current_user][:maximum_experience_per_rank],
-        temporary_experience: params[:current_user][:temporary_experience]
+        temporary_experience: params[:current_user][:temporary_experience],
+        active_title: params[:current_user][:active_title]
       )
     end
 
