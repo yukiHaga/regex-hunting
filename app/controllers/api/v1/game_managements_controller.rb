@@ -52,7 +52,9 @@ class Api::V1::GameManagementsController < ApplicationController
         temporary_experience: current_user ?
           current_user[:temporary_experience] : 0,
         prev_temporary_experience: current_user ?
-          current_user[:temporary_experience] : 0
+          current_user[:temporary_experience] : 0,
+        active_title: current_user ?
+          current_user[:active_title] : "見習いハンター"
       }
     }, status: :created
   end
@@ -116,11 +118,13 @@ class Api::V1::GameManagementsController < ApplicationController
     # タイトルに関する処理
     # release_titles <<は、Userモデルに記述する。
     # Userモデルのrelease_titlesは、throughをつけなくて良い。中間テーブルだけにデータを直接入れる。
+=begin
     if params[:release_title]
       title = Title.find_by(name: params[:release_title][:name])
       current_user.release_titles << title.release_titles.
         build(release_date: params[:release_title][:release_date])
     end
+=end
 
     # レンダリング
     render json: {
@@ -133,7 +137,9 @@ class Api::V1::GameManagementsController < ApplicationController
         temporary_experience: current_user ?
           current_user[:temporary_experience] : 0,
         prev_temporary_experience: current_user ?
-          current_user[:temporary_experience] : 0
+          current_user[:temporary_experience] : 0,
+        active_title: current_user ?
+          current_user[:active_title] : "見習いハンター"
       }
     }, status: :created
   end
