@@ -86,39 +86,7 @@ export const DialogExperienceBox = ({
     temporary_experience,
     dialog_gage_up
   ]);
-
-  // ランクアップの際に実行されるuseEffect
-  // ゲージが上がるようなアクションを見せたかったが、temporary_experienceが
-  // サーバー側と整合性が取れなそうなので、ランクが上がったら、
-  // ゲージが0になるような仕様にする。
-  // 見た目はどうでも良く、サーバー側にちゃんとデータが入っていれば良い
-  // 多分必要ないから消す
-  /*
-  useEffect(() => {
-    if(temporary_experience >= maximum_experience_per_rank) {
-      const timer = setTimeout(() => {
-        const rankUpAudio = new Audio(rankUpSounds);
-        rankUpAudio.play();
-        setGameState((prev) => ({
-          ...prev,
-          rank: prev.rank + 1,
-          prev_temporary_experience: 0,
-          temporary_experience: 0,
-          maximum_experience_per_rank: maximum_experience_per_rank + 100,
-        }));
-      }, 4000);
-      return () => clearTimeout(timer);
-    }
-  },[
-    temporary_experience,
-    maximum_experience_per_rank, 
-    setGameState
-  ]);
-  */
-
-  console.log(maximum_experience_per_rank);
-  console.log(temporaryExperienceState.temporary_experience);
-
+ 
   return (
     <>
       <ExperienceBoxWrapper>

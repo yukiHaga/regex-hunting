@@ -330,62 +330,66 @@ export const Games = () => {
   useEffect(() => {
     if(!gameState.send_game_data && gameState.game_result === "win"){
       console.log("ゲーム終了のif文の中");
-
-      postGameFinish({
-        game_management: {
-          difficulty: difficulty, 
-          game_result: gameState.game_result,
-          result_time: gameState.game_end_time - gameState.game_start_time
-        },
-        judgement: {
-          correct: gameState.correct_questions, 
-          incorrect: gameState.incorrect_questions
-        },
-        current_user: {
-          rank: gameState.rank,
-          total_experience: gameState.total_experience,
-          maximum_experience_per_rank: gameState.maximum_experience_per_rank,
-          temporary_experience: gameState.temporary_experience
-        }
-      }).then((data) => {
-        setGameState((prev) => ({
-          ...prev,
-          send_game_data: data.send_game_data,
-          has_user: sessionState ? 
-            true
-          : 
-            false,
-          rank: sessionState ?
-            data.user.rank 
-          : 
-            prev.rank,
-          total_experience: sessionState ?
-            data.user.total_experience 
-          : 
-            prev.total_experience, 
-          maximum_experience_per_rank: sessionState ?
-            data.user.maximum_experience_per_rank 
-          : 
-            prev.maximum_experience_per_rank, 
-          temporary_experience: sessionState ?
-            data.user.temporary_experience
-          :
-            prev.temporary_experience,
-          prev_temporary_experience: sessionState ?
-            data.user.prev_temporary_experience
-          :
-            prev.prev_temporary_experience
-        })); 
-      }).catch((e) => {
-        if(e.response.status === HTTP_STATUS_CODE.NOT_FOUND){
+      const timer = setTimeout(() => {
+        postGameFinish({
+          game_management: {
+            difficulty: difficulty, 
+            game_result: gameState.game_result,
+            result_time: gameState.game_end_time - gameState.game_start_time
+          },
+          judgement: {
+            correct: gameState.correct_questions, 
+            incorrect: gameState.incorrect_questions
+          },
+          current_user: {
+            rank: gameState.rank,
+            total_experience: gameState.total_experience,
+            maximum_experience_per_rank: gameState.maximum_experience_per_rank,
+            temporary_experience: gameState.temporary_experience
+          }
+        }).then((data) => {
           setGameState((prev) => ({
             ...prev,
-            send_game_data: true
+            send_game_data: data.send_game_data,
+            dialog_gage_up: false,
+            has_user: sessionState ? 
+              true
+            : 
+              false,
+            rank: sessionState ?
+              data.user.rank 
+            : 
+              prev.rank,
+            total_experience: sessionState ?
+              data.user.total_experience 
+            : 
+              prev.total_experience, 
+            maximum_experience_per_rank: sessionState ?
+              data.user.maximum_experience_per_rank 
+            : 
+              prev.maximum_experience_per_rank, 
+            temporary_experience: sessionState ?
+              data.user.temporary_experience
+            :
+              prev.temporary_experience,
+            prev_temporary_experience: sessionState ?
+              data.user.prev_temporary_experience
+            :
+              prev.prev_temporary_experience
           })); 
-        } else {
-          throw e;
-        }
-      })
+        }).catch((e) => {
+          if(e.response.status === HTTP_STATUS_CODE.NOT_FOUND){
+            setGameState((prev) => ({
+              ...prev,
+              send_game_data: true,
+              dialog_gage_up: false,
+            })); 
+          } else {
+            throw e;
+          }
+        })
+        }, 5000);
+      return () => clearTimeout(timer);
     }
   }, [
     difficulty,
