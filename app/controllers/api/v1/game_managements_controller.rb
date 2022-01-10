@@ -140,7 +140,10 @@ class Api::V1::GameManagementsController < ApplicationController
         prev_temporary_experience: current_user ?
           current_user[:temporary_experience] : 0,
         active_title: current_user ?
-          current_user[:active_title] : "見習いハンター"
+          current_user[:active_title] : "見習いハンター",
+        rank_up: current_user && params[:current_user][:temporary_experience] >= params[:current_user][:maximum_experience_per_rank] ?
+          true : false
+
       }
     }, status: :created
   end
