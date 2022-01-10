@@ -69,7 +69,7 @@ export const DialogExperienceBox = ({
     setTemporaryExperienceState 
   ] = useState(initialState);
 
-  // 最初にマウントされる際に実行されるuseEffect
+  // 最初にマウントされた後に実行されるuseEffect
   useEffect(() => {
     if(dialog_gage_up) {
       const timer = setTimeout(() => {
@@ -115,6 +115,9 @@ export const DialogExperienceBox = ({
     setGameState
   ]);
   */
+
+  console.log(maximum_experience_per_rank);
+  console.log(temporaryExperienceState.temporary_experience);
 
   return (
     <>
