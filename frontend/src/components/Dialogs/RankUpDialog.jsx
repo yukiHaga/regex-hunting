@@ -10,41 +10,48 @@ import { COLORS } from '../../style_constants.js';
 // DescriptionWrapper 
 import { DescriptionWrapper } from '../shared_style.js'; 
 
-// Contextオブジェクト
-import { UserContext } from "../../context/UserProvider.js";
-
-// handleTitleColorType
-// タイトルカラーを取り扱う関数
-import { handleTitleColorType } from '../../functions/handleTitleColorType.js'
-
 // 戻るボタン
 import { BackToModalButton } from '../Buttons/BackToModalButton.jsx';
+
+// Twitterボタン
+import { ResultShareButton } from '../Buttons/ResultShareButton.jsx';
 
 const CustomDialogInnerWrapper = styled.div`
   padding-right: 10px;
   padding-left: 10px;
+  padding-top: 10px;
   background-color: ${COLORS.SUB};
   text-align: center;
   width: 550px;
+  height: 570px;
 `;
 
 const CustomDialogTitleWrapper = styled.div`
-  height: 50px;
-  font-size: 30px;
-  line-height: 50px;
-  padding-top: 50px;
-  font-family: Raleway;
-  font-style: italic;
+  height: 74px;
+  font-family: Helvetica;
+  font-style: normal;
   font-weight: bold;
-  font-size: 32px;
-  color: ${(props) => handleTitleColorType(props.title)};
-  text-align: left;
-  padding-left: 40px;
-  padding-right: 40px;
+  font-size: 50px;
+  line-height: 74px;
+  color: ${COLORS.WHITE};
+  padding-top: 30px;
+  -webkit-text-stroke: 6px ${COLORS.MAIN};
+  position: relative;
+`;
+
+const CustomSpan = styled.span`
+  -webkit-text-stroke: 0;
+  position: absolute;
 `;
 
 const CustomDialogContent = styled(DialogContent)`
   text-align: center;
+`;
+
+const CustomDialogContentSentence = styled(DescriptionWrapper)`
+  display: inline-block;
+  text-align: left;
+  font-size: 18px;
 `;
 
 // backボタンのラッパー 
@@ -56,174 +63,46 @@ const BackToModalButtonWrapper = styled.div`
   z-index: 2;
 `;
 
-/*
-// background-color: ${COLORS.OCHER};
-const QuestionBlockWrapper = styled.div`
-  width: 470px;
-  height: ${({ good_or_bad }) => good_or_bad === "good" ? '270px' : '180px' };
-  border-radius: 3px;
-  background-color: ${COLORS.ANSWER_GRAY};
-  margin: 0 auto;
-  padding-top: 10px;
-  margin-bottom: 20px;
-`;
-
-const QuestionWrapper = styled.div`
-  height: 80px;
-  width: 450px;
-  border-radius: 3px;
-  background-color: ${COLORS.OCHER};
-  font-size: 16px;
-  line-height: 40px;
+const CustomTable = styled.table`
+  border-collapse: collapse;
   color: ${COLORS.BLACK};
-  font-family: YuGothic;
-  font-style: normal;
-  font-weight: 500;
-  text-align: center;
-  margin: 0 auto;
-`;
-
-const QuestionUpperWrapper = styled.div`
- display: flex;
-`;
-
-const QuestionNumFakeWrapper = styled.div`
-  height: 40px;
-  width: 45px;
-`;
-const QuestionNumWrapper = styled.div`
-  background-color: ${COLORS.MAIN};
-  height: 40px;
-  width: 45px;
-  border-radius: 3px;
-  font-size: 16px;
-  line-height: 40px;
-  color: ${COLORS.SUB};
-  text-align: center;
-  font-family: YuGothic;
-  font-style: normal;
-  font-weight: 500;
-  position: absolute;
-  z-index: 1;
-`;
-
-const QuestionSentenceWrapper = styled.div`
-  text-align: left;
-  height: 40px;
-  padding-left: 10px;
-  overflow-x: scroll;
-`;
-
-const QuestionSentenceFlexWrapper = styled.div`
-  display: flex;
-`;
-
-const CustomSentence = styled.div`
-  white-space: nowrap;
-`;
-
-const TargetSentenceWrapper = styled.div`
   background-color: ${COLORS.SUB};
-  border-radius: 3px;
-  width: 450px;
-  height: 40px;
-  font-size: 16px;
-  line-height: 40px;
-  color: ${COLORS.BLACK};
-  text-align: center;
   font-family: YuGothic;
-  font-style: normal;
-  font-weight: 500;
-`;
-
-const OuterCodeBlockWrapper = styled.div`
+  font-weight: normal;
+  font-size: 18px;
   margin: 0 auto;
-  width: 450px;
-  margin-top: 10px;
-`;
-
-const CodeBlockWrapper = styled.div`
-  background-color: ${COLORS.LIGHT_BLACK};
-  border-radius: 3px;
-  width: 450px;
-  height: 40px;
-  margin: 0 auto;
-  display: flex;
-  justify-content: space-between;
-`;
-
-const AnchorWrapper = styled.div`
-  height: 40px;
-  font-size: 16px;
-  line-height: 40px;
-  color: ${COLORS.WHITE};
-  font-family: YuGothic;
-  font-style: normal;
-  font-weight: 500;
-  margin-left: 15px;
-  margin-right: 15px;
-`;
-
-const CodeBlockDiv = styled.div`
-  height: 40px;
-  width: 450px;
-  font-size: 16px;
-  line-height: 40px;
-  background-color: ${COLORS.LIGHT_BLACK};
-  color: ${COLORS.WHITE};
-  font-family: YuGothic;
-  font-style: normal;
-  font-weight: 500;
-  outline: none;
+  margin-top: 25px;
   border: none;
+  width: 70%;
+`;
+
+const CustomTd = styled.td`
+  padding: 10px 40px; 
   text-align: center;
-  ::placeholder {
-    color: #eeeeee;
-    opacity: 0.5;
-  };
-  ::-webkit-input-placeholder {
-    color: #eeeeee;
-    opacity: 0.5;
-  };
-  :-ms-input-placeholder {
-    color: #eeeeee;
-    opacity: 0.5;
-  };
+  border: solid 1px silver;
+  font-size: 21px;
+  background-color: ${COLORS.OCHER};
 `;
 
-const CodeBlockTitleWrapper = styled.div`
-  font-size: 19px;
-  color: ${COLORS.BLACK};
-  text-align: left;
-  font-family: YuGothic;
-  font-weight: 500;
+const MetaTd = styled.td`
+  padding: 10px 40px; 
+  text-align: center;
+  border: solid 1px silver;
+  font-weight: bold;
+  font-size: 21px;
+  color: ${COLORS.SUB};
+  background-color: ${COLORS.MAIN};
 `;
 
-const CommentaryBlockWrapper = styled.div`
-  margin: 0 auto;
-  width: 450px;
-  margin-top: 10px;
-  margin-bottom: 10px;
+const ButtonsWrapper = styled.div`
+  display: flex;
+  justify-content: space-around;
 `;
-
-const CommentaryTitleWrapper = styled.div`
-  font-size: 19px;
-  color: ${COLORS.BLACK};
-  text-align: left;
-  font-family: YuGothic;
-  font-weight: 500;
-`;
-
-const CommentaryWrapper = styled.div`
-  font-size: 16px;
-  color: ${COLORS.BLACK};
-  text-align: left;
-  font-family: YuGothic;
-  font-weight: 500;
-`;
-*/
 
 // gameStateのrank_upがtrueの時に開くモーダル
+// サーバーに送ったゲームデータの戻り値のrank_upがtrueの場合、開く
+// このコンポーネントに渡るpropsは、サーバーに送ったゲームデータの戻り値のデータ
+// このrankはランクアップ後のランク値が格納されている
 export const RankUpDialog = ({
   isOpen,
   rank,
@@ -248,9 +127,39 @@ export const RankUpDialog = ({
           />
         </BackToModalButtonWrapper>
         <CustomDialogTitleWrapper title="Bad">
-          Bad
+          <CustomSpan>
+            RANK UP
+          </CustomSpan>
+          RANK UP
         </CustomDialogTitleWrapper> 
         <CustomDialogContent>
+          <CustomDialogContentSentence>
+            ランクアップおめでとうございます！<br />
+            {`ランク${rank - 1}からランク${rank}になりました。`}
+          </CustomDialogContentSentence>
+          <CustomTable>
+            <tbody>
+              <tr>
+                <MetaTd colSpan={2}>現在のランク</MetaTd> 
+              </tr>
+              <tr>
+                <CustomTd>{rank}</CustomTd>
+              </tr>
+            </tbody>
+          </CustomTable>
+          <CustomTable>
+            <tbody>
+              <tr>
+                <MetaTd colSpan={2}>現在の称号</MetaTd> 
+              </tr>
+              <tr>
+                <CustomTd>{active_title}</CustomTd>
+              </tr>
+            </tbody>
+          </CustomTable>
+          <ButtonsWrapper>
+            <ResultShareButton />
+          </ButtonsWrapper>
         </CustomDialogContent>
       </CustomDialogInnerWrapper>
     </Dialog>

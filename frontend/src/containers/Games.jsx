@@ -388,7 +388,11 @@ export const Games = () => {
             active_title: sessionState ?
               data.user.active_title
             :
-              prev.active_title
+              prev.active_title,
+            rank_up: sessionState?
+              data.user.rank_up
+            :
+              prev.rank_up
           })); 
         }).catch((e) => {
           if(e.response.status === HTTP_STATUS_CODE.NOT_FOUND){
@@ -401,7 +405,7 @@ export const Games = () => {
             throw e;
           }
         })
-        }, 5000);
+        }, 4000);
       return () => clearTimeout(timer);
     }
   }, [
