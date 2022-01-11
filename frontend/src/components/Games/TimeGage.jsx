@@ -75,7 +75,6 @@ export const TimeGage = ({
   user_defence,
   user_hp,
   sentence_num,
-  game_description_open,
   click_description_open
 }) => {
 
@@ -113,7 +112,6 @@ export const TimeGage = ({
           <GageWrapper 
             onAnimationEnd={timeOut} 
             time_active={time_active}
-            game_description_open={game_description_open}
             click_description_open={click_description_open}
           />
         </GageOuterWrapper>
