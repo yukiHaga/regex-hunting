@@ -90,7 +90,8 @@ export const CodeBlock = ({
   key_available,
   user_attack,
   sentence_num,
-  game_description_open
+  game_description_open,
+  click_meta_open
 }) => {
 
   const [inputState, setCodeState] = useState("");
@@ -159,7 +160,7 @@ export const CodeBlock = ({
   };
 
   useEffect(() => {
-    if(!game_description_open) {
+    if(!game_description_open && !click_meta_open) {
       const handlekeyPress = (e) => {
         if(e.key !== 'Enter' && key_available === true) {
           const audio = new Audio(TypeSound);
@@ -260,7 +261,8 @@ export const CodeBlock = ({
     key_available,
     user_attack,
     sentence_num,
-    game_description_open
+    game_description_open,
+    click_meta_open
   ]);
 
   return (

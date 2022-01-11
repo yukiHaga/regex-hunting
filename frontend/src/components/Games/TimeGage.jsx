@@ -58,8 +58,9 @@ const GageWrapper = styled.div`
     time_active,
   }) => time_active && TimeGageAnime} 30s linear 1;
   animation-play-state: ${({
-    click_description_open
-  }) => click_description_open ? 'paused' : 'running' };
+    click_description_open,
+    click_meta_open
+  }) => (click_description_open || click_meta_open) ? 'paused' : 'running' };
 `;
 
 const GageOuterWrapper = styled.div`
@@ -75,7 +76,8 @@ export const TimeGage = ({
   user_defence,
   user_hp,
   sentence_num,
-  click_description_open
+  click_description_open,
+  click_meta_open
 }) => {
 
   // タイムゲージが0になった時に実行される関数
@@ -113,6 +115,7 @@ export const TimeGage = ({
             onAnimationEnd={timeOut} 
             time_active={time_active}
             click_description_open={click_description_open}
+            click_meta_open={click_meta_open}
           />
         </GageOuterWrapper>
       </TimeGageWrapper>

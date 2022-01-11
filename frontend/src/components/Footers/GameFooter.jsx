@@ -46,6 +46,15 @@ export const GameFooter = ({
     }));
   }
 
+  // click_meta_openがtrueの時、
+  // メタ文字一覧のモーダルが開く
+  const handleMetaDialog = () => {
+    setGameState((prev) => ({
+      ...prev,  
+      click_meta_open: true
+    }));
+  }
+
   return (
     <>
       <FooterWrapper>
@@ -56,6 +65,7 @@ export const GameFooter = ({
             スライドを見る
           </FooterNavFakeLink>
           <FooterNavFakeLink 
+            onClick={handleMetaDialog}
           >
             メタ文字一覧
           </FooterNavFakeLink>

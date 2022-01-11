@@ -88,7 +88,8 @@ export const QuestionBlock = ({
   total_experience,
   maximum_experience_per_rank,
   temporary_experience,
-  prev_temporary_experience
+  prev_temporary_experience,
+  click_meta_open
 }) => {
 
   // 難易度を日本語に変換する関数
@@ -114,7 +115,7 @@ export const QuestionBlock = ({
   // このuseEffectがあるおかげで、最初のモンスターセンテンスが
   // 問題1のセンテンスに自動で切り替わる
   useEffect(() => {
-    if (!game_description_open && sentence === `${getMonsterName(difficulty)}が現れた！`){
+    if (!game_description_open && !click_meta_open && sentence === `${getMonsterName(difficulty)}が現れた！`){
       const timer = setTimeout(() => {
         setGameState((prev) => ({
           ...prev,
@@ -139,7 +140,8 @@ export const QuestionBlock = ({
     next_sentence_num,
     next_target_sentence,
     setGameState,
-    game_description_open
+    game_description_open,
+    click_meta_open
   ]);
 
   // question_judgementがcorrectの時に実行されるuseEffect

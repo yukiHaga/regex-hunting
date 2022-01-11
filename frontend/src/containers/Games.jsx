@@ -23,6 +23,7 @@ import { GameOverDialog } from '../components/Dialogs/GameOverDialog.jsx'
 import { CheckAnswerDialog } from '../components/Dialogs/CheckAnswerDialog.jsx'
 import { ElementaryGameDescriptionDialog } from '../components/Dialogs/ElementaryGameDescriptionDialog.jsx'
 import { RankUpDialog } from '../components/Dialogs/RankUpDialog.jsx';
+import { CheckMetaDialog } from '../components/Dialogs/CheckMetaDialog.jsx';
 
 // Contextオブジェクト
 import { UserContext } from "../context/UserProvider.js";
@@ -201,7 +202,8 @@ export const Games = () => {
     send_game_data: false,
     rank_up: false,
     active_title: "見習いハンター",
-    click_description_open: false
+    click_description_open: false,
+    click_meta_open: false
   }
 
   // ゲーム状態を管理するstate
@@ -511,6 +513,7 @@ export const Games = () => {
                   maximum_experience_per_rank={gameState.maximum_experience_per_rank} 
                   temporary_experience={gameState.temporary_experience}
                   prev_temporary_experience={gameState.prev_temporary_experience}
+                  click_meta_open={gameState.click_meta_open}
                 />
               </QuestionBlockWrapper>
             </BattleBlockWrapper>
@@ -538,6 +541,7 @@ export const Games = () => {
               user_attack={gameState.user_attack}
               sentence_num={gameState.sentence_num}
               game_description_open={gameState.game_description_open}
+              click_meta_open={gameState.click_meta_open}
             />
           </CodeBlockWrapper>
           <GageBlockWrapper>
@@ -550,6 +554,7 @@ export const Games = () => {
               user_hp={gameState.user_hp}
               sentence_num={gameState.sentence_num}
               click_description_open={gameState.click_description_open}
+              click_meta_open={gameState.click_meta_open}
             />
             <HpGage 
               user_hp={gameState.user_hp}
@@ -613,7 +618,7 @@ export const Games = () => {
           />
       }
       {
-        (gameState.game_description_open) &&
+        gameState.game_description_open &&
           <ElementaryGameDescriptionDialog
             isOpen={gameState.game_description_open}
             setGameState={setGameState}
@@ -629,6 +634,13 @@ export const Games = () => {
             active_title={gameState.active_title}
             setGameState={setGameState}
             rank_up={gameState.rank_up}
+          />
+      }
+      {
+        gameState.click_meta_open &&
+          <CheckMetaDialog
+            isOpen={gameState.click_meta_open}
+            setGameState={setGameState}
           />
       }
     </>
