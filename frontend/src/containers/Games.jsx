@@ -550,6 +550,7 @@ export const Games = () => {
               user_hp={gameState.user_hp}
               sentence_num={gameState.sentence_num}
               game_description_open={gameState.game_description_open}
+              click_description_open={gameState.click_description_open}
             />
             <HpGage 
               user_hp={gameState.user_hp}
