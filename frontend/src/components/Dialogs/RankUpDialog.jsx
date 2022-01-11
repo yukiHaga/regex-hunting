@@ -23,7 +23,7 @@ const CustomDialogInnerWrapper = styled.div`
   background-color: ${COLORS.SUB};
   text-align: center;
   width: 550px;
-  height: 570px;
+  height: 420px;
 `;
 
 const CustomDialogTitleWrapper = styled.div`
@@ -137,16 +137,6 @@ export const RankUpDialog = ({
             ランクアップおめでとうございます！<br />
             {`ランク${rank - 1}からランク${rank}になりました。`}
           </CustomDialogContentSentence>
-          <CustomTable>
-            <tbody>
-              <tr>
-                <MetaTd colSpan={2}>現在のランク</MetaTd> 
-              </tr>
-              <tr>
-                <CustomTd>{rank}</CustomTd>
-              </tr>
-            </tbody>
-          </CustomTable>
           <CustomTable>
             <tbody>
               <tr>
