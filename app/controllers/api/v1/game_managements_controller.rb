@@ -2,7 +2,7 @@ class Api::V1::GameManagementsController < ApplicationController
   MIN_TIMES = 14
   skip_before_action :require_login
   skip_before_action :verify_authenticity_token, only: :start
-  after_action :set_csrf_token_header, only: :start
+  after_action :set_csrf_token_header, only: %i(start finish)
 
   def start
     # ゲームに関する処理
@@ -143,7 +143,6 @@ class Api::V1::GameManagementsController < ApplicationController
           current_user[:active_title] : "見習いハンター",
         rank_up: current_user && params[:current_user][:temporary_experience] >= params[:current_user][:maximum_experience_per_rank] ?
           true : false
-
       }
     }, status: :created
   end
