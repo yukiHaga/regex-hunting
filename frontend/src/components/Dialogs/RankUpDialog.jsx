@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import styled from 'styled-components';
 
 // ダイアログ
@@ -15,6 +15,9 @@ import { BackToModalButton } from '../Buttons/BackToModalButton.jsx';
 
 // Twitterボタン
 import { ResultShareButton } from '../Buttons/ResultShareButton.jsx';
+
+// ランクアップ音
+import RankUpSound from '../../sounds/game_clear.mp3';
 
 const CustomDialogInnerWrapper = styled.div`
   padding-right: 10px;
@@ -107,8 +110,19 @@ export const RankUpDialog = ({
   isOpen,
   rank,
   active_title,
-  setGameState
+  setGameState,
+  rank_up
 }) => {
+
+  // ゲームクリア時の音
+  useEffect(() => {
+    if(rank_up) {
+      const audio = new Audio(RankUpSound);
+      audio.play();
+    }
+  }, [
+    rank_up
+  ]);
 
   return(
     <Dialog

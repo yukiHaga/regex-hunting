@@ -394,8 +394,6 @@ export const Games = () => {
             :
               prev.rank_up
           })); 
-          const audio = new Audio(GameClearSound);
-          audio.play();
         }).catch((e) => {
           if(e.response.status === HTTP_STATUS_CODE.NOT_FOUND){
             setGameState((prev) => ({
@@ -626,6 +624,7 @@ export const Games = () => {
             rank={gameState.rank}
             active_title={gameState.active_title}
             setGameState={setGameState}
+            rank_up={gameState.rank_up}
           />
       }
     </>
