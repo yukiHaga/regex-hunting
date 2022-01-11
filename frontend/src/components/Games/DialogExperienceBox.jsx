@@ -56,7 +56,7 @@ export const DialogExperienceBox = ({
   temporary_experience,
   prev_temporary_experience,
   dialog_gage_up,
-  setGameState
+  setGameState,
 }) => {
 
   const initialState = {

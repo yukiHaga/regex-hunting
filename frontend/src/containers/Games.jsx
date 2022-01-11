@@ -201,6 +201,7 @@ export const Games = () => {
     send_game_data: false,
     rank_up: false,
     active_title: "見習いハンター",
+    click_description_open: false
   }
 
   // ゲーム状態を管理するstate
@@ -557,7 +558,9 @@ export const Games = () => {
           </GageBlockWrapper>
         </MainGameContentWrapper>
       </MainContentWrapper>
-      <GameFooter />
+      <GameFooter 
+        setGameState={setGameState}
+      />
       {
         gameState.game_result === "win" && !gameState.rank_up && !gameState.check_answer &&
           <GameClearDialog
@@ -610,11 +613,12 @@ export const Games = () => {
           />
       }
       {
-        gameState.game_description_open &&
+        (gameState.game_description_open) &&
           <ElementaryGameDescriptionDialog
             isOpen={gameState.game_description_open}
             setGameState={setGameState}
             game_description_open={gameState.game_description_open}
+            click_description_open={gameState.click_description_open}
           />
       }
       {

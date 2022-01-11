@@ -32,19 +32,10 @@ const FooterNavFakeLink = styled(FakeLink)`
 `;
 
 
-export const GameFooter = ({
-  setGameState
-}) => {
-
-  // game_description_openがtrue, click_description_opneがtrueの時、
-  // スライドを見る用の説明モーダルが開く
-  const handleGameDescriptionDialog = () => {
-    setGameState((prev) => ({
-      ...prev,  
-      game_description_open: true,
-      click_description_open: true
-    }));
-  }
+export const GameFooter = (
+  handleGameDescriptionDialog,
+  handleMetaDialog
+) => {
 
   return (
     <>
@@ -56,6 +47,7 @@ export const GameFooter = ({
             スライドを見る
           </FooterNavFakeLink>
           <FooterNavFakeLink 
+            onClick={handleMetaDialog}
           >
             メタ文字一覧
           </FooterNavFakeLink>

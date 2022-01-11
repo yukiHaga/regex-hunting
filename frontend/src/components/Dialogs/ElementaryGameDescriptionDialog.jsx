@@ -15,6 +15,7 @@ import ArrowLeftIcon from '@mui/icons-material/ArrowLeft';
 
 // Buttons
 import { FinallyGameStartButton } from '../Buttons/FinallyGameStartButton.jsx';
+import { FinallyGameRestartButton } from '../Buttons/FinallyGameRestartButton.jsx';
 
 // MUIのツールチップコンポーネントを使う
 // チラツキがあるからやっぱりやめた
@@ -139,6 +140,7 @@ export const ElementaryGameDescriptionDialog = ({
   isOpen,
   setGameState,
   game_description_open,
+  click_description_open
 }) => {
 
   const initialState = {
@@ -281,7 +283,12 @@ export const ElementaryGameDescriptionDialog = ({
                     </SentenceWrapper>
                     <OuterButtonsWrapper>
                       <ButtonsWrapper>
-                        <FinallyGameStartButton setGameState={setGameState} />
+                        {
+                          click_description_open ?
+                            <FinallyGameRestartButton setGameState={setGameState} />
+                          :
+                            <FinallyGameStartButton setGameState={setGameState} />
+                        }
                       </ButtonsWrapper>
                     </OuterButtonsWrapper>
                   </ModalWrapper>
