@@ -159,6 +159,7 @@ export const CodeBlock = ({
     }
   };
 
+  // イベントリスナー
   useEffect(() => {
     if(!game_description_open && !click_meta_open) {
       const handlekeyPress = (e) => {
@@ -263,6 +264,17 @@ export const CodeBlock = ({
     sentence_num,
     game_description_open,
     click_meta_open
+  ]);
+
+  // question_judgementがfalseの時に実行される処理
+  // この処理のおかげで、時間内に解けなかった時、
+  // コードブロックを初期化してくれる
+  useEffect(() => {
+    if(question_judgement === 'incorrect') {
+      setCodeState("");
+    }
+  },[
+    question_judgement
   ]);
 
   return (
