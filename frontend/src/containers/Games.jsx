@@ -177,6 +177,8 @@ export const Games = () => {
     target_sentence: "",
     next_target_sentence: "",
     sample_answer: [],
+    hint: "",
+    next_hint: "",
     match_array: [],
     commentary: "",
     next_commentary: "",
@@ -255,6 +257,7 @@ export const Games = () => {
           monster_hp: data.monster.max_hp,
           monster_max_hp: data.monster.max_hp,
           sample_answer: data.questions["0"].sample_answer,
+          next_hint: data.questions["0"].hint,
           next_commentary: data.questions["0"].commentary,
           game_result: data.game_management.game_result,
           game_start_time: performance.now(),
@@ -443,7 +446,9 @@ export const Games = () => {
         >
           <GameBlockWrapper>
             <SlideWrapper>
-              <HintBar />
+              <HintBar 
+                hint={gameState.hint}
+              />
             </SlideWrapper>
             <BattleBlockWrapper>
               <MonsterBlockWrapper>
@@ -498,6 +503,7 @@ export const Games = () => {
                   next_sentence_num={gameState.next_sentence_num}
                   target_sentence={gameState.target_sentence}
                   next_target_sentence={gameState.next_target_sentence}
+                  next_hint={gameState.next_hint}
                   match_array={gameState.match_array}
                   question_judgement={gameState.question_judgement}
                   gameState={gameState}
