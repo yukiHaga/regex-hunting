@@ -44,6 +44,9 @@ const TimeGageAnime = keyframes`
   }
 `;
 
+// 問題が表示された瞬間、QuestionBlock.jsxによってtime_activeがtrueになるので、
+// アニメーションが動き出す
+// click_description_openがtrueだと、アニメーションが一時停止する
 const GageWrapper = styled.div`
   height: 100%;
   width: 100%;
@@ -53,9 +56,10 @@ const GageWrapper = styled.div`
   outline: none;
   animation: ${({
     time_active,
-    game_description_open
-  }) => !game_description_open && time_active && TimeGageAnime} 30s linear 1;
-  animation-play-state: ${({click_description_open}) => 'paused'};
+  }) => time_active && TimeGageAnime} 30s linear 1;
+  animation-play-state: ${({
+    click_description_open
+  }) => click_description_open ? 'paused' : 'running' };
 `;
 
 const GageOuterWrapper = styled.div`
