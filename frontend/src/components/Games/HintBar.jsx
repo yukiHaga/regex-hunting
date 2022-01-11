@@ -49,9 +49,9 @@ const MessageWrapper = styled.div`
 `;
 
 // ヒントを動的に出力するバー
-export const HintBar = (
+export const HintBar = ({
   hint
-) => {
+}) => {
   return (
     <>
       <HintBarWrapper>
