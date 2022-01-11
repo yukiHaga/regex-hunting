@@ -46,6 +46,7 @@ ActiveRecord::Schema.define(version: 2021_12_16_054722) do
     t.text "sentence", null: false
     t.string "target_sentence", null: false
     t.string "sample_answer", null: false
+    t.text "hint", null: false
     t.text "commentary", null: false
     t.integer "difficulty", default: 0, null: false
     t.datetime "created_at", precision: 6, null: false
