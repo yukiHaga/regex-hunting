@@ -4,7 +4,7 @@ import styled from 'styled-components';
 // Colors
 import { COLORS } from '../../style_constants.js';
 
-const MetaMenuBarWrapper = styled.div`
+const HintBarWrapper = styled.div`
   background-color: ${COLORS.MAIN};
   border-radius: 3px;
   height: 490px;
@@ -64,10 +64,10 @@ const MetaTd = styled(CustomTd)`
 `;
 
 // キャプチャ関係は問題で出てこないので、消した
-export const MetaMenuBar = () => {
+export const HintBar = () => {
   return (
     <>
-      <MetaMenuBarWrapper>
+      <HintBarWrapper>
         <TitleWrapper>
           メタ文字一覧
         </TitleWrapper>
@@ -235,7 +235,7 @@ export const MetaMenuBar = () => {
             </tbody>
           </CustomTable>
         </MetaContentWrapper>
-      </MetaMenuBarWrapper>
+      </HintBarWrapper>
     </>
   );
 };

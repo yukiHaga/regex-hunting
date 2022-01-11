@@ -8,7 +8,7 @@ import BackGroundImage from '../images/background.png';
 // Presentational Components
 import { Header } from '../components/Headers/Header.jsx';
 import { FakeHeader } from '../components/Headers/FakeHeader.jsx';
-import { MetaMenuBar } from '../components/Games/MetaMenuBar.jsx';
+import { HintBar } from '../components/Games/HintBar.jsx';
 import { ElementaryMonster } from '../components/Games/ElementaryMonster.jsx';
 import { IntermediateMonster } from '../components/Games/IntermediateMonster.jsx';
 import { AdvancedMonster } from '../components/Games/AdvancedMonster.jsx';
@@ -443,7 +443,7 @@ export const Games = () => {
         >
           <GameBlockWrapper>
             <SlideWrapper>
-              <MetaMenuBar />
+              <HintBar />
             </SlideWrapper>
             <BattleBlockWrapper>
               <MonsterBlockWrapper>
