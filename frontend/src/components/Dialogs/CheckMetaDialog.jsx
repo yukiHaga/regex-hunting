@@ -13,29 +13,10 @@ import { BackToModalButton } from '../Buttons/BackToModalButton.jsx';
 const CustomDialogInnerWrapper = styled.div`
   padding-right: 10px;
   padding-left: 10px;
-  padding-top: 10px;
   background-color: ${COLORS.SUB};
   text-align: center;
-  width: 550px;
-  height: 420px;
-`;
-
-const CustomDialogTitleWrapper = styled.div`
-  height: 74px;
-  font-family: Helvetica;
-  font-style: normal;
-  font-weight: bold;
-  font-size: 50px;
-  line-height: 74px;
-  color: ${COLORS.WHITE};
-  padding-top: 30px;
-  -webkit-text-stroke: 6px ${COLORS.MAIN};
-  position: relative;
-`;
-
-const CustomSpan = styled.span`
-  -webkit-text-stroke: 0;
-  position: absolute;
+  width: 623px;
+  height: 100%;
 `;
 
 const CustomDialogContent = styled(DialogContent)`
@@ -47,37 +28,26 @@ const CustomDialogContent = styled(DialogContent)`
 const BackToModalButtonWrapper = styled.div`
   position: fixed;
   background-color: ${COLORS.SUB};
-  width: 550px;
+  width: 600px;
   z-index: 2;
 `;
 
 const MetaMenuBarWrapper = styled.div`
   background-color: ${COLORS.MAIN};
   border-radius: 3px;
-  height: 490px;
-  width: 220px;
-  outline: 8px solid ${COLORS.GRAY};
+  height: 80%;
+  width: 90%;
   display: inline-block;
-`;
-
-const TitleWrapper = styled.div`
-  height: 50px;
-  font-size: 21px;
-  line-height: 50px;
-  color: ${COLORS.SUB};
-  font-family: YuGothic;
-  font-weight: bold;
-  text-align: center;
+  margin-top: 50px;
 `;
 
 // white-space: nowrapは、カラム内のテキストを折り返さない為に使う
 // overflow-x: autoは横スクロールを可能にする。
 // overflow-y: autoは縦スクロールを可能にする。
 const MetaContentWrapper = styled.div`
-  height: 440px;
+  height: 100%;
+  width: 100%;
   white-space: nowrap;
-  overflow-x: auto; 
-  overflow-y: auto;
 `;
 
 const CustomTable = styled.table`
@@ -91,14 +61,25 @@ const CustomTable = styled.table`
 const CustomTh = styled.th`
   padding: 8px 6px; 
   background-color: ${COLORS.OCHER};
-  position: sticky;
-  top: 0;
   border-left: solid 1px #c79344;
   border-right: solid 1px #c79344;
 `;
 
+const TitleTh = styled(CustomTh)`
+  background-color: ${COLORS.MAIN};
+  color: ${COLORS.SUB};
+  border-top: solid 1px #c79344;
+  border-bottom: solid 1px #c79344;
+  height: 30px;
+  font-size: 21px;
+  line-height: 30px;
+  font-family: YuGothic;
+  font-weight: bold;
+  text-align: center;
+`;
+
 const MeaningTh = styled(CustomTh)`
-  text-align: left;
+  text-align: center;
 `;
 
 const CustomTd = styled.td`
@@ -119,6 +100,7 @@ export const CheckMetaDialog = ({
   return(
     <Dialog
       open={isOpen}
+      maxWidth='xl'
     >
       <CustomDialogInnerWrapper> 
         <BackToModalButtonWrapper>
@@ -131,20 +113,14 @@ export const CheckMetaDialog = ({
             }
           />
         </BackToModalButtonWrapper>
-        <CustomDialogTitleWrapper title="Bad">
-          <CustomSpan>
-            メタ文字一覧
-          </CustomSpan>
-          メタ文字一覧
-        </CustomDialogTitleWrapper> 
         <CustomDialogContent>
           <MetaMenuBarWrapper>
-            <TitleWrapper>
-              メタ文字一覧
-            </TitleWrapper>
             <MetaContentWrapper>
               <CustomTable>
                 <thead>
+                  <tr>
+                    <TitleTh colSpan={2}>メタ文字一覧</TitleTh> 
+                  </tr>
                   <tr>
                     <CustomTh>メタ文字</CustomTh> 
                     <MeaningTh>意味</MeaningTh>
