@@ -559,7 +559,7 @@ export const Games = () => {
       </MainContentWrapper>
       <GameFooter />
       {
-        gameState.game_result === "win" && !gameState.check_answer &&
+        gameState.game_result === "win" && !gameState.rank_up && !gameState.check_answer &&
           <GameClearDialog
             isOpen={gameState.game_result === "win"}
             difficulty={difficulty} 
