@@ -39,7 +39,7 @@ const GageOuterWrapper = styled.div`
   height: 100%;
   width: 100%;
   background-color: ${COLORS.LIGHT_BLACK};
-  border-radius: 15px;
+  border-radius: 10px;
 `;
 
 const GageWrapper = styled.div`
@@ -50,7 +50,7 @@ const GageWrapper = styled.div`
   border: none;
   outline: none;
   transition: 0.5s;
-  border-radius: 15px;
+  border-radius: 10px;
 `;
 
 export const HpGage = ({

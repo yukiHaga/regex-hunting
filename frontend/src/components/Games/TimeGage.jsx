@@ -11,7 +11,7 @@ import TackleSound from '../../sounds/tackle.mp3';
 import { calculateDamage } from '../../functions/calculateDamage.js';
 
 const TimeGageWrapper = styled.div`
-  background-color: ${COLORS.LIGHT_BLACK};
+  background-color: ${COLORS.GAGE_GRAY};
   border-radius: 3px 3px 0 0;
   width: 100%;
   height: 36px;
@@ -44,6 +44,13 @@ const TimeGageAnime = keyframes`
   }
 `;
 
+const GageOuterWrapper = styled.div`
+  height: 100%;
+  width: 100%;
+  background-color: ${COLORS.LIGHT_BLACK};
+  border-radius: 10px;
+`;
+
 // 問題が表示された瞬間、QuestionBlock.jsxによってtime_activeがtrueになるので、
 // アニメーションが動き出す
 // click_description_openがtrueだと、アニメーションが一時停止する
@@ -61,11 +68,7 @@ const GageWrapper = styled.div`
     click_description_open,
     click_meta_open
   }) => (click_description_open || click_meta_open) ? 'paused' : 'running' };
-`;
-
-const GageOuterWrapper = styled.div`
-  height: 100%;
-  width: 100%;
+  border-radius: 10px;
 `;
 
 export const TimeGage = ({
