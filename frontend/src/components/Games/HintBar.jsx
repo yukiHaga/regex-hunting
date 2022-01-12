@@ -40,7 +40,8 @@ const OuterMessageWrapper = styled.div`
 
 const MessageWrapper = styled.div`
   display: inline-block;
-  text-align: left;
+  text-align: justify;
+  text-justify: inter-ideograph;
   color: ${COLORS.BLACK};
   font-family: YuGothic;
   font-style: normal;
