@@ -25,6 +25,9 @@ import { CheackAnswerSentence } from '../Sentences/CheackAnswerSentence.jsx';
 // ExperienceGage
 import { DialogExperienceBox } from '../Games/DialogExperienceBox.jsx';
 
+// モンスター名を取得する関数
+import { getMonsterName } from '../../functions/getMonsterName.js';
+
 const CustomDialogInnerWrapper = styled.div`
   padding-top: 10px;
   padding-right: 10px;
@@ -141,24 +144,9 @@ export const GameOverDialog = ({
           GAME OVER
         </CustomDialogTitleWrapper> 
         <CustomDialogContent>
-          {
-            difficulty === "elementary" &&
-              <CustomDialogContentSentence>
-                スクータムの群れの討伐に失敗しました...
-              </CustomDialogContentSentence>
-          }
-          {
-            difficulty === "intermediate" &&
-              <CustomDialogContentSentence>
-                カスアリウスの群れの討伐に失敗しました...
-              </CustomDialogContentSentence>
-          }
-          {
-            difficulty === "advanced" &&
-              <CustomDialogContentSentence>
-                オルファ・ラパクスの討伐に失敗しました...
-              </CustomDialogContentSentence>
-          }
+          <CustomDialogContentSentence>
+            {`${getMonsterName(difficulty)}の討伐に失敗しました...`}
+          </CustomDialogContentSentence>
           <CustomTable>
             <tbody>
               <tr>

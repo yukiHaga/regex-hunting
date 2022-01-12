@@ -28,6 +28,9 @@ import { DialogExperienceBox } from '../Games/DialogExperienceBox.jsx';
 // 各ゲームの獲得経験値を取得する関数
 import { getExperience } from '../../functions/getExperience.js';
 
+// モンスター名を取得する関数
+import { getMonsterName } from '../../functions/getMonsterName.js';
+
 const CustomDialogInnerWrapper = styled.div`
   padding-top: 10px;
   padding-right: 10px;
@@ -171,24 +174,9 @@ export const GameClearDialog = ({
           GAME CLEAR
         </CustomDialogTitleWrapper> 
         <CustomDialogContent>
-          {
-            difficulty === "elementary" &&
-              <CustomDialogContentSentence>
-                スクータムの群れの討伐に成功しました！
-              </CustomDialogContentSentence>
-          }
-          {
-            difficulty === "intermediate" &&
-              <CustomDialogContentSentence>
-                カスアリウスの群れの討伐に成功しました！
-              </CustomDialogContentSentence>
-          }
-          {
-            difficulty === "advanced" &&
-              <CustomDialogContentSentence>
-                オルファ・ラパクスの討伐に成功しました！
-              </CustomDialogContentSentence>
-          }
+          <CustomDialogContentSentence>
+            {`${getMonsterName(difficulty)}の討伐に成功しました！`}
+          </CustomDialogContentSentence>
           <CustomTable>
             <tbody>
               <tr>
