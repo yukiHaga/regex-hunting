@@ -1,5 +1,5 @@
 import React from 'react';
-import styled from 'styled-components';
+import styled, { keyframes } from 'styled-components';
 
 // Image
 import CutFlashImage from '../../images/moment_cut_image.png'; 
@@ -15,11 +15,24 @@ const Mask = styled.div`
   justify-content: center;
 `;
 
+// 攻撃されたときのアニメーション
+const FadeInAnime = keyframes`
+  0%{
+    opacity: 1;
+  }
+  100%{
+    opacity: 0;
+  }
+`;
+
 const CustomImage = styled.img`
   width: 80%;
   height: 50%;
   object-fit: contain;
   z-index: 2;
+  animation-name: ${FadeInAnime};
+  animation-duration: 1s;
+  animation-fill-mode: forwards;
 `;
 
 export const CutImage = () => {
