@@ -7,8 +7,11 @@ import { COLORS } from '../../style_constants.js';
 // handleColorType 
 import { handleColorType } from '../../functions/handleColorType.js';
 
-const HpGageWrapper = styled.div`
+/*
   background-color: ${COLORS.LIGHT_BLACK};
+  */
+const HpGageWrapper = styled.div`
+  background-color: ${COLORS.GAGE_GRAY};
   border-radius: 0 0 3px 3px;
   width: 100%;
   height: 31px;
@@ -35,6 +38,8 @@ const TypeWrapper = styled.div`
 const GageOuterWrapper = styled.div`
   height: 100%;
   width: 100%;
+  background-color: ${COLORS.LIGHT_BLACK};
+  border-radius: 15px;
 `;
 
 const GageWrapper = styled.div`
@@ -45,6 +50,7 @@ const GageWrapper = styled.div`
   border: none;
   outline: none;
   transition: 0.5s;
+  border-radius: 15px;
 `;
 
 export const HpGage = ({
