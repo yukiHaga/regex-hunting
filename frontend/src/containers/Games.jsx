@@ -24,6 +24,7 @@ import { CheckAnswerDialog } from '../components/Dialogs/CheckAnswerDialog.jsx'
 import { ElementaryGameDescriptionDialog } from '../components/Dialogs/ElementaryGameDescriptionDialog.jsx'
 import { RankUpDialog } from '../components/Dialogs/RankUpDialog.jsx';
 import { CheckMetaDialog } from '../components/Dialogs/CheckMetaDialog.jsx';
+import { CutImage } from '../components/Games/CutImage.jsx';
 
 // Contextオブジェクト
 import { UserContext } from "../context/UserProvider.js";
@@ -654,6 +655,10 @@ export const Games = () => {
             isOpen={gameState.click_meta_open}
             setGameState={setGameState}
           />
+      }
+      {
+        gameState.game_result === "progress" && gameState.question_judgement === "correct" && 
+          <CutImage />
       }
     </>
   );

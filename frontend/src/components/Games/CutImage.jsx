@@ -1,11 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
 
-// Colors
-import { COLORS } from '../../style_constants.js';
-
 // Image
-import CutImage from '../../images/cut_image.gif'; 
+import CutFlashImage from '../../images/moment_cut_image.png'; 
 
 const Mask = styled.div`
   position:fixed;
@@ -19,15 +16,17 @@ const Mask = styled.div`
 `;
 
 const CustomImage = styled.img`
-  z-index:2;
+  width: 80%;
+  height: 50%;
+  object-fit: contain;
+  z-index: 2;
 `;
 
-export const ElementaryMonster = ({
-}) => {
+export const CutImage = () => {
   return (
     <>
       <Mask>
-        <CustomImage src={CutImage} />
+        <CustomImage src={CutFlashImage} />
       </Mask>
     </>
   );
