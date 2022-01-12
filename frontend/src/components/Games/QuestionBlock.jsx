@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import styled from 'styled-components';
+import styled, { keyframes } from 'styled-components';
 
 // Colors
 import { COLORS } from '../../style_constants.js';
@@ -29,6 +29,14 @@ const QuestionWrapper = styled.div`
   font-style: normal;
   font-weight: 500;
   text-align: center;
+`;
+
+const SentenceWrapper = styled.div`
+  font-size: 23px;
+  color: ${COLORS.BLACK};
+  font-family: YuGothic;
+  font-style: normal;
+  font-weight: 500;
 `;
 
 const DifficultyWrapper = styled.div`
@@ -312,7 +320,9 @@ export const QuestionBlock = ({
           <DifficultyWrapper>
             {sentence_num ? `Q${sentence_num}` : getJpDifficulty(difficulty)}
           </DifficultyWrapper>
-          {sentence}
+          <SentenceWrapper>
+            {sentence}
+          </SentenceWrapper>
           <TargetSentenceWrapper>
             {
               target_sentence &&
