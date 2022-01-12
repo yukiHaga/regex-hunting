@@ -202,6 +202,7 @@ export const CodeBlock = ({
               });
               gameState.questions.shift();
               const current_hp = monster_hp - calculateDamage(user_attack, monster_defence);
+
               const audio = new Audio(CutMonsterSound);
               setGameState((prev) => ({
                 ...prev,
@@ -263,7 +264,7 @@ export const CodeBlock = ({
     user_attack,
     sentence_num,
     game_description_open,
-    click_meta_open
+    click_meta_open,
   ]);
 
   // question_judgementがfalseの時に実行される処理
