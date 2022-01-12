@@ -111,7 +111,9 @@ export const RankUpDialog = ({
   rank,
   active_title,
   setGameState,
-  rank_up
+  rank_up,
+  difficulty,
+  game_result
 }) => {
 
   // ゲームクリア時の音
@@ -162,7 +164,12 @@ export const RankUpDialog = ({
             </tbody>
           </CustomTable>
           <ButtonsWrapper>
-            <ResultShareButton />
+            <ResultShareButton 
+              rank_up={rank_up}
+              difficulty={difficulty}
+              game_result={game_result}
+              rank={rank}
+            />
           </ButtonsWrapper>
         </CustomDialogContent>
       </CustomDialogInnerWrapper>

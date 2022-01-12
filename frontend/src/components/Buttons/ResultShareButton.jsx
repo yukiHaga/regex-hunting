@@ -6,6 +6,9 @@ import { COLORS } from '../../style_constants.js';
 
 import { ColoredTwitterIcon } from '../Icons/CustomIcon.js';
 
+// モンスター名を取得する関数
+import { getMonsterName } from '../../functions/getMonsterName.js';
+
 const ResultShareButtonWrapper = styled.a`
   margin-top: 30px;
   border-style: none;
@@ -40,11 +43,32 @@ const ResultShareButtonTextWrapper = styled.div`
   justify-content: center;
 `;
 
-export const ResultShareButton = () => {
+export const ResultShareButton = ({
+  difficulty,
+  game_result,
+  rank_up,
+  rank,
+  clear_time
+}) => {
+
+  // Twitterカードのセンテンスを取得する関数
+  const getText = (difficulty, game_result, rank_up) => {
+    if(game_result === 'win' && !rank_up) {
+      return `${getMonsterName(difficulty)}の討伐に成功しました！ クリアタイムは${clear_time}です。`
+    } else if (game_result === 'lose' && !rank_up) {
+      return `${getMonsterName(difficulty)}の討伐に失敗しました...`
+    } else if (game_result === 'win' && rank_up) {
+      return `ランクアップしました！現在のランクは${rank}です。`
+    }
+  };
+
+  // 取得したセンテンスを変数textに代入
+  const text = getText(difficulty, game_result, rank_up);
+
   return (
     <>
     <ResultShareButtonWrapper 
-      href="https://twitter.com/share?url=http://localhost:3001/&text=初級編をクリアしました！&hashtags=RegexHunting,正規表現,ゲーム"
+      href={`https://twitter.com/share?url=http://localhost:3001/&text=${text}&hashtags=RegexHunting,正規表現,ゲーム`}
       target="_blank" 
       rel="noopener noreferrer"
     >

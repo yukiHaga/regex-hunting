@@ -135,7 +135,9 @@ export const GameClearDialog = ({
   temporary_experience,
   prev_temporary_experience,
   dialog_gage_up,
-  sessionState
+  sessionState,
+  game_result,
+  rank_up
 }) => {
 
   // このミリ秒はタイムに色をつけるために使う
@@ -243,7 +245,12 @@ export const GameClearDialog = ({
               initialState={initialState}
               sessionState={sessionState}
             />
-            <ResultShareButton />
+            <ResultShareButton 
+              difficulty={difficulty}             
+              game_result={game_result}
+              rank_up={rank_up}
+              clear_time={getClearTime(game_start_time, game_end_time)}
+            />
             {
               has_user ?
                 <BackToMyPageButton />

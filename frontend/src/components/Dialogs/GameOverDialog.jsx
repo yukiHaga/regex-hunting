@@ -124,7 +124,9 @@ export const GameOverDialog = ({
   maximum_experience_per_rank,
   temporary_experience,
   prev_temporary_experience,
-  dialog_gage_up
+  dialog_gage_up,
+  game_result,
+  rank_up
 }) => {
 
   return(
@@ -202,7 +204,11 @@ export const GameOverDialog = ({
               getGameStart={getGameStart}
               initialState={initialState}
             />
-            <ResultShareButton />
+            <ResultShareButton 
+              difficulty={difficulty}             
+              game_result={game_result}
+              rank_up={rank_up}
+            />
             {
               has_user ?
                 <BackToMyPageButton />
