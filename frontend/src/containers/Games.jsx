@@ -25,6 +25,7 @@ import { ElementaryGameDescriptionDialog } from '../components/Dialogs/Elementar
 import { RankUpDialog } from '../components/Dialogs/RankUpDialog.jsx';
 import { CheckMetaDialog } from '../components/Dialogs/CheckMetaDialog.jsx';
 import { CutImage } from '../components/Games/CutImage.jsx';
+import { ClawImage } from '../components/Games/ClawImage.jsx';
 
 // Contextオブジェクト
 import { UserContext } from "../context/UserProvider.js";
@@ -659,6 +660,10 @@ export const Games = () => {
       {
         gameState.game_result === "progress" && gameState.question_judgement === "correct" && 
           <CutImage />
+      }
+      {
+        gameState.game_result === "progress" && gameState.question_judgement === "incorrect" && 
+          <ClawImage />
       }
     </>
   );
