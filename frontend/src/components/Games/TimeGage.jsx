@@ -69,6 +69,10 @@ const GageWrapper = styled.div`
     click_meta_open
   }) => (click_description_open || click_meta_open) ? 'paused' : 'running' };
   border-radius: 10px;
+  background-image: -webkit-linear-gradient(transparent 0%,rgba(255,255,255,.3) 50%,transparent 50%,rgba(0,0,0,.1) 100%);
+  background-image:         linear-gradient(transparent 0%,rgba(255,255,255,.3) 50%,transparent 50%,rgba(0,0,0,.1) 100%);
+  box-shadow: 0 2px 2px 0 rgba(255,255,255,.2) inset,0 2px 10px 0 rgba(255,255,255,.5) inset,0 -2px 2px 0 rgba(0,0,0,.1) inset;
+  border: 1px solid rgba(0,0,0,.2);
 `;
 
 export const TimeGage = ({
