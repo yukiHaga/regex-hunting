@@ -19,10 +19,11 @@ const ExperienceTextWrapper = styled(DescriptionWrapper)`
 
 const ExperienceGageWrapper = styled.div`
   width: 253px;
-  height: 10px;
-  border: 1px solid ${COLORS.GAGE_GRAY};
-  border-radius: 3px;
+  height: 12px;
   background-color: ${COLORS.LIGHT_BLACK};
+  border-radius: 10px;
+  border: 1px solid #000;
+  box-shadow: inset 1px 1px 3px 0 rgba(0, 0, 0, 0.8), 1px 1px 0 0 rgba(255, 255, 255, 0.12);
 `;
 
 // ExperienceGageのExperienceの幅を取り扱う関数
@@ -45,8 +46,12 @@ const InnerExperienceGageWrapper = styled.div`
   transition: ${({ dialog_gage_up }) => '2s' };
   transition-timing-function: ${({ dialog_gage_up }) => 'linear' };
   height: 10px;
-  border-radius: 3px;
   background-color: ${COLORS.EXPERIENCE};
+  border-radius: 10px;
+  background-image: -webkit-linear-gradient(transparent 0%,rgba(255,255,255,.3) 50%,transparent 50%,rgba(0,0,0,.1) 100%);
+  background-image: linear-gradient(transparent 0%,rgba(255,255,255,.3) 50%,transparent 50%,rgba(0,0,0,.1) 100%);
+  box-shadow: 0 2px 2px 0 rgba(255,255,255,.2) inset,0 2px 10px 0 rgba(255,255,255,.5) inset,0 -2px 2px 0 rgba(0,0,0,.1) inset;
+  border: 1px solid rgba(0,0,0,.2);
 `;
 
 export const DialogExperienceBox = ({
