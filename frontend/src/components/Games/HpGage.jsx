@@ -46,7 +46,10 @@ const GageOuterWrapper = styled.div`
 
 const GageWrapper = styled.div`
   height: 100%;
-  width: ${(props) => `${100 * (props.user_hp / props.user_max_hp)}%`};
+  width: ${({
+    user_hp,
+    user_max_hp
+  }) => `${100 * (user_hp / user_max_hp)}%`};
   background-color: ${(props) => handleColorType(props.user_hp)};
   box-sizing: border-box;
   border: none;
@@ -70,10 +73,13 @@ export const HpGage = ({
           HP
         </TypeWrapper>
         <GageOuterWrapper>
-          <GageWrapper 
-            user_hp={user_hp}
-            user_max_hp={user_max_hp}
-          />
+          {
+            (user_hp / user_max_hp) !== 0 &&
+              <GageWrapper 
+                user_hp={user_hp}
+                user_max_hp={user_max_hp}
+              />
+          }
         </GageOuterWrapper>
       </HpGageWrapper>
     </>
