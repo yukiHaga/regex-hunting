@@ -7,6 +7,9 @@ import { Header } from '../components/Headers/Header.jsx';
 import { FakeHeader } from '../components/Headers/FakeHeader.jsx';
 import { SessionFlashMessage } from '../components/FlashMessages/SessionFlashMessage.jsx';
 
+// Images
+import TemporaryUserImage from '../images/temporary_user_image.png';
+
 // Contextオブジェクト
 import { UserContext } from "../context/UserProvider.js";
 
@@ -16,8 +19,55 @@ import { checkLoginStatus } from '../apis/checkLoginStatus.js';
 // HTTP_STATUS_CODE
 import { HTTP_STATUS_CODE } from '../constants';
 
+// Colors
+import { COLORS } from '../style_constants.js';
+
 const FakeBlock = styled.div`
+  background-color: ${COLORS.SUB};
   height: 56px;
+`;
+
+// メインのラッパー
+const MainWrapper = styled.div`
+  background-color: ${COLORS.SUB};
+  display: flex;
+`;
+
+// ステータスのラッパー
+const StatusWrapper = styled.div`
+  width: 722px;
+  height: 244px;
+  border-radius: 3px;
+  background-color: #FFFFFF;
+  margin-left: 40px;
+  display: flex
+`;
+
+// イメージのラッパー
+const ImageWrapper = styled.div`
+  width: 220px;
+  height: 220px;
+  background-color: ${COLORS.GRAY};
+  border-radius: 3px;
+`;
+
+// カスタムイメージ
+// imageタグだと縦横比を維持できない
+// background-imageだと縦横比を維持できる
+const CustomImage = styled.div`
+  background-image: url(${TemporaryUserImage});
+  width: 220px;
+  height: 220px;
+  border-radius: 50%;
+  background-size: cover;
+  background-position: center center;
+`;
+
+const TableWrapper = styled.div`
+  width: 502px;
+  height: 220px;
+  background-color: ${COLORS.GAGE_GRAY};
+  border-radius: 3px;
 `;
 
 export const MyPages = () => {
@@ -79,6 +129,15 @@ export const MyPages = () => {
           url='/my-page'
         />
       </FakeBlock>
+      <MainWrapper>
+        <StatusWrapper>
+          <ImageWrapper>
+            <CustomImage />
+          </ImageWrapper>
+          <TableWrapper>
+          </TableWrapper>
+        </StatusWrapper>
+      </MainWrapper>
     </>
   );
 };
