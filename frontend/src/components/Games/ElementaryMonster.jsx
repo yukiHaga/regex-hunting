@@ -77,12 +77,15 @@ const ElementaryMonsterWrapper = styled.img`
 const HpGageWrapper = styled.div`
   width: 160px;
   height: 15px;
-  border: 1px solid ${COLORS.GAGE_GRAY};
   border-radius: 3px;
   background-color: ${COLORS.LIGHT_BLACK};
   animation-name: ${(props) => props.first_appearance && FadeInAnime};
   animation-duration: 3s;
   animation-fill-mode: forwards;
+  border: 1px solid rgba(0,0,0,.2);
+  background-image: -webkit-linear-gradient(transparent 0%,rgba(255,255,255,.3) 50%,transparent 50%,rgba(0,0,0,.1) 100%);
+  background-image:         linear-gradient(transparent 0%,rgba(255,255,255,.3) 50%,transparent 50%,rgba(0,0,0,.1) 100%);
+  box-shadow: 0 2px 2px 0 rgba(255,255,255,.2) inset,0 2px 10px 0 rgba(255,255,255,.5) inset,0 -2px 2px 0 rgba(0,0,0,.1) inset;
 `;
 
 const InnerHpGageWrapper = styled.div`
@@ -91,6 +94,9 @@ const InnerHpGageWrapper = styled.div`
   height: 15px;
   border-radius: 3px;
   background-color: ${(props) => handleColorType(props.monster_hp)};
+  background-image: -webkit-linear-gradient(transparent 0%,rgba(255,255,255,.3) 50%,transparent 50%,rgba(0,0,0,.1) 100%);
+  background-image:         linear-gradient(transparent 0%,rgba(255,255,255,.3) 50%,transparent 50%,rgba(0,0,0,.1) 100%);
+  box-shadow: 0 2px 2px 0 rgba(255,255,255,.2) inset,0 2px 10px 0 rgba(255,255,255,.5) inset,0 -2px 2px 0 rgba(0,0,0,.1) inset;
 `;
 
 export const ElementaryMonster = ({
