@@ -40,10 +40,8 @@ const GageOuterWrapper = styled.div`
   width: 100%;
   background-color: ${COLORS.LIGHT_BLACK};
   border-radius: 10px;
-  background-image: -webkit-linear-gradient(transparent 0%,rgba(255,255,255,.3) 50%,transparent 50%,rgba(0,0,0,.1) 100%);
-  background-image: linear-gradient(transparent 0%,rgba(255,255,255,.3) 50%,transparent 50%,rgba(0,0,0,.1) 100%);
-  box-shadow: 0 2px 2px 0 rgba(255,255,255,.2) inset,0 2px 10px 0 rgba(255,255,255,.5) inset,0 -2px 2px 0 rgba(0,0,0,.1) inset;
-  border: 1px solid rgba(0,0,0,.2);
+  border: 1px solid #000;
+  box-shadow: inset 1px 1px 3px 0 rgba(0, 0, 0, 0.8), 1px 1px 0 0 rgba(255, 255, 255, 0.12);
 `;
 
 const GageWrapper = styled.div`
