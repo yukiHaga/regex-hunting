@@ -6,6 +6,7 @@ import styled from 'styled-components';
 import { Header } from '../components/Headers/Header.jsx';
 import { FakeHeader } from '../components/Headers/FakeHeader.jsx';
 import { SessionFlashMessage } from '../components/FlashMessages/SessionFlashMessage.jsx';
+import { StatusExperienceBox } from '../components/Games/StatusExperienceBox.jsx'
 
 // Images
 import TemporaryUserImage from '../images/temporary_user_image.png';
@@ -97,7 +98,7 @@ const NameTd = styled(CustomTd)`
   font-style: normal;
   font-weight: bold;
   font-size: 24px;
-  line-height: 40px;
+  line-height: 30px;
   text-align: left;
   color: ${COLORS.BLACK};
 `;
@@ -108,6 +109,10 @@ const MetaTd = styled(CustomTd)`
   text-align: left;
   border-bottom:solid 1px silver;
   font-weight: bold;
+`;
+
+const ExpTd = styled(CustomTd)`
+  text-align: left;
 `;
 
 export const MyPages = () => {
@@ -190,6 +195,15 @@ export const MyPages = () => {
                 <tr>
                   <MetaTd>称号</MetaTd> 
                   <CustomTd>{user.active_title}</CustomTd>
+                </tr>
+                <tr>
+                  <ExpTd colSpan={2}>
+                    <StatusExperienceBox 
+                      temporary_experience={user.temporary_experience}
+                      total_experience={user.total_experience}
+                      maximum_experience_per_rank={user.maximum_experience_per_rank}
+                    />
+                  </ExpTd>
                 </tr>
               </tbody>
             </CustomTable>
