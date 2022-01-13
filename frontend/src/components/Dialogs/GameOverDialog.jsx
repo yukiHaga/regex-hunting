@@ -34,7 +34,7 @@ const CustomDialogInnerWrapper = styled.div`
   padding-left: 10px;
   background-color: ${COLORS.SUB};
   text-align: center;
-  height: ${({has_user}) => has_user ? '520px' : '400px' };
+  height: ${({has_user}) => has_user ? '522px' : '400px' };
   width: 550px;
 `;
 
