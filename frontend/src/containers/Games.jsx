@@ -85,7 +85,7 @@ const MainGameContentWrapper = styled.div`
 const GameBlockWrapper = styled.div`
   display: flex;
   justify-content: start;
-  padding-left: 33px;
+  padding-left: 24px;
 `;
 
 // SlideWrapperコンポーネント
@@ -98,7 +98,6 @@ const SlideWrapper = styled.div`
 const BattleBlockWrapper = styled.div`
   height: 498px;
   width: 920px;
-  margin-left: 7px;
 `;
 
 // MonsterBlockWrapperコンポーネント
