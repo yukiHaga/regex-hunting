@@ -12,7 +12,7 @@ import { calculateDamage } from '../../functions/calculateDamage.js';
 
 const TimeGageWrapper = styled.div`
   background-color: ${COLORS.GAGE_GRAY};
-  border-radius: 3px 3px 0 0;
+  border-radius: 10px 10px 0 0;
   width: 100%;
   height: 36px;
   display: flex;
