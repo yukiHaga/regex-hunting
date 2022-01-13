@@ -31,7 +31,7 @@ const TitleWrapper = styled.div`
 const OuterMessageWrapper = styled.div`
   height: 50px;
   padding-left: 20px;
-  padding-right: 10px;
+  padding-right: 20px;
   padding-bottom: 5px;
   background-color: ${COLORS.SUB};
   text-align: center;
