@@ -5,12 +5,28 @@ import styled from 'styled-components';
 import { COLORS } from '../../style_constants.js';
 
 const HintBarWrapper = styled.div`
-  background-color: ${COLORS.SUB};
+  background-color: ${COLORS.GRAY};
   border-radius: 10px;
   height: 370px;
-  width: 220px;
-  border: 8px solid ${COLORS.GRAY};
+  width: 236px;
   display: inline-block;
+  position: relative;
+  background-image: -webkit-radial-gradient(transparent 0%,rgba(255,255,255,.3) 50%,transparent 50%,rgba(0,0,0,.1) 100%);
+  background-image: radial-gradient(transparent 0%,rgba(255,255,255,.3) 50%,transparent 50%,rgba(0,0,0,.1) 100%);
+  box-shadow: 0 2px 2px 0 rgba(255,255,255,.2) inset,0 2px 10px 0 rgba(255,255,255,.5) inset,0 -2px 2px 0 rgba(0,0,0,.1) inset;
+  border: 1px solid rgba(0,0,0,.2);
+`;
+
+const InnerHintBarWrapper = styled.div`
+  height: 355px;
+  width: 221px;
+  border-radius: 10px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translateY(-50%) translateX(-50%);
+  -webkit- transform: translateY(-50%) translateX(-50%);
+  background-color: ${COLORS.SUB};
 `;
 
 const TitleWrapper = styled.div`
@@ -55,14 +71,16 @@ export const HintBar = ({
   return (
     <>
       <HintBarWrapper>
-        <TitleWrapper>
-          Hint
-        </TitleWrapper>
-        <OuterMessageWrapper>
-          <MessageWrapper>
-            {hint}
-          </MessageWrapper>
-        </OuterMessageWrapper>
+        <InnerHintBarWrapper>
+          <TitleWrapper>
+            Hint
+          </TitleWrapper>
+          <OuterMessageWrapper>
+            <MessageWrapper>
+              {hint}
+            </MessageWrapper>
+          </OuterMessageWrapper>
+        </InnerHintBarWrapper>
       </HintBarWrapper>
     </>
   );
