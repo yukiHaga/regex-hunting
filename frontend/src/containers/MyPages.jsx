@@ -50,6 +50,7 @@ const ImageWrapper = styled.div`
   background-color: ${COLORS.WHITE};
   border-radius: 3px;
   align-self: center;
+  padding: 10px;
 `;
 
 // カスタムイメージ
