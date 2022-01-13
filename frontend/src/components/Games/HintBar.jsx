@@ -7,7 +7,7 @@ import { COLORS } from '../../style_constants.js';
 const HintBarWrapper = styled.div`
   background-color: ${COLORS.SUB};
   border-radius: 10px;
-  height: 380px;
+  height: 370px;
   width: 220px;
   border: 8px solid ${COLORS.GRAY};
   display: inline-block;
@@ -29,7 +29,6 @@ const TitleWrapper = styled.div`
 `;
 
 const OuterMessageWrapper = styled.div`
-  height: 50px;
   padding-left: 20px;
   padding-right: 20px;
   padding-bottom: 5px;
