@@ -1,4 +1,4 @@
-import React, { Fragment, useContext, useEffect } from 'react';
+import React, { Fragment, useContext, useLayoutEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 
@@ -31,9 +31,8 @@ export const MyPages = () => {
     requestUserActionTyps
   } = useContext(UserContext);
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     if(sessionState === false){
-      dispatch({ type: requestUserActionTyps.REQUEST });
       checkLoginStatus().then((data) => {
         dispatch({
           type: requestUserActionTyps.REQUEST_SUCCESS,

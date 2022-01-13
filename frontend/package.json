@@ -19,10 +19,15 @@
     "react-animations": "^1.0.0",
     "react-dom": "^17.0.2",
     "react-hook-form": "^7.21.0",
+    "react-id-swiper": "^4.0.0",
     "react-router-dom": "^6.0.2",
     "react-scripts": "4.0.3",
     "react-scroll": "^1.8.4",
+    "react-string-replace": "^0.4.4",
+    "react-typewriter-effect": "^1.1.0",
     "styled-components": "^5.3.3",
+    "swiper": "^7.4.1",
+    "typewriter-effect": "^2.18.2",
     "web-vitals": "^1.0.1"
   },
   "scripts": {

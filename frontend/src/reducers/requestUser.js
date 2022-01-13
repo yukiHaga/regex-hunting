@@ -7,26 +7,17 @@ export const initialState = {
   userState: {
     user: {}
   },
-  errors: {}
+  errors: {},
 };
 
 // useReducerで使うActonTypsを定義
-// REQUEST_STATEは、INITIAL, LOADING, OKの3つである
-// requestUserActionTypsがREQUESTなら、REQUEST_STATEはLOADING
-// requestUserActionTypsがREQUEST_SUCCESSなら、REQUEST_STATEはOK
 export const requestUserActionTyps = {
-  REQUEST: 'REQUEST',
   REQUEST_SUCCESS: 'REQUEST_SUCCESS',
   REQUEST_FAILURE: 'REQUEST_FAILURE'
 }
 
 export const requestUserReducer = (state, action) => {
   switch (action.type) {
-    case requestUserActionTyps.REQUEST:
-      return {
-        ...state,
-        requestState: REQUEST_STATE.LOADING,
-      };
     case requestUserActionTyps.REQUEST_SUCCESS:
       return {
         ...state,

@@ -32,13 +32,42 @@ const FooterNavFakeLink = styled(FakeLink)`
 `;
 
 
-export const GameFooter = () => {
+export const GameFooter = ({
+  setGameState
+}) => {
+
+  // game_description_openがtrue, click_description_opneがtrueの時、
+  // スライドを見る用の説明モーダルが開く
+  const handleGameDescriptionDialog = () => {
+    setGameState((prev) => ({
+      ...prev,  
+      game_description_open: true,
+      click_description_open: true
+    }));
+  }
+
+  // click_meta_openがtrueの時、
+  // メタ文字一覧のモーダルが開く
+  const handleMetaDialog = () => {
+    setGameState((prev) => ({
+      ...prev,  
+      click_meta_open: true
+    }));
+  }
+
   return (
     <>
       <FooterWrapper>
         <FooterNav>
-          <FooterNavFakeLink>
+          <FooterNavFakeLink
+            onClick={handleGameDescriptionDialog}
+          >
             スライドを見る
+          </FooterNavFakeLink>
+          <FooterNavFakeLink 
+            onClick={handleMetaDialog}
+          >
+            メタ文字一覧
           </FooterNavFakeLink>
         </FooterNav>
       </FooterWrapper>

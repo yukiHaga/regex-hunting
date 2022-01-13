@@ -123,7 +123,6 @@ export const SignUpDialog = ({
     PasswordBox,
     PasswordConfirmationBox
   }) => { 
-    dispatch({ type: requestUserActionTyps.REQUEST });
     postUser({
       user: {
         name: NameBox,
