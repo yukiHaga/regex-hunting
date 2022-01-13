@@ -6,10 +6,10 @@ import { COLORS } from '../../style_constants.js';
 
 const HintBarWrapper = styled.div`
   background-color: ${COLORS.SUB};
-  border-radius: 3px;
+  border-radius: 10px;
   height: 380px;
   width: 220px;
-  outline: 8px solid ${COLORS.GRAY};
+  border: 8px solid ${COLORS.GRAY};
   display: inline-block;
 `;
 
