@@ -69,6 +69,8 @@ const CustomImage = styled.div`
   border-radius: 50%;
   background-size: cover;
   background-position: center center;
+  border: 3px solid ${COLORS.GRAY};
+  box-shadow: inset 1px 1px 3px 0 rgba(0, 0, 0, 0.8), 1px 1px 0 0 rgba(255, 255, 255, 0.12);
 `;
 
 const TableWrapper = styled.div`
