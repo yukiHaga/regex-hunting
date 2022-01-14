@@ -17,6 +17,7 @@ class Api::V1::MyPagesController < ApplicationController
     game_frequencies_per_day = game_managements_per_month.group(:play_date).count
 
     # 1ヶ月分の各日における初級, 中級, 上級の正解率に関する処理
+    # 正答率はゲームクリアしているgame_managemetsのレコードに対して算出される
     # 重複している日付の正答率も含まれている
     # デフォルトで初級, 中級, 上級の1ヶ月
     # temはtemporaryの略。長いから省略した
@@ -26,9 +27,21 @@ class Api::V1::MyPagesController < ApplicationController
     temp_advanced_correct_percents = []
 
     game_managements_per_month.each do |game_management|
-      correct = game_management.solved_questions.where(judgement: :correct)
-      incorrect = game_management.solved_questions.where(judgement: :incorrect)
-      correct_percent = (correct / (correct + incorrect)) * 100
+      incorrect = game_management.solved_questions.where(judgement: :incorrect).count
+      correct_percent = case incorrect
+                        when 0
+                          100
+                        when 1
+                          90
+                        when 2
+                          80
+                        when 3
+                          70
+                        when 4
+                          60
+                        else
+                          0
+                        end
       play_date = game_management[:play_date]
       difficulty = game_management[:difficulty]
       case difficulty
@@ -54,6 +67,7 @@ class Api::V1::MyPagesController < ApplicationController
     end
 
     # 各日付における初級の最大正答率を導く処理
+    # 各日付毎の最大正答率を要素とした配列が、代入されている
     # 難易度ごとにやっている処理は同じなので、プライベートメソッドにした
     elementary_correct_percents = uniq_correct_percents(
                                     temp_elementary_correct_percents
