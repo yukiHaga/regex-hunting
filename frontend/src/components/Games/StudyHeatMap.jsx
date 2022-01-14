@@ -8,10 +8,19 @@ import { COLORS } from '../../style_constants.js';
 import CalendarHeatmap from 'react-calendar-heatmap';
 import 'react-calendar-heatmap/dist/styles.css';
 
+import { DescriptionWrapper } from '../../components/shared_style.js';
+
 const InnerStudyHeatMapWrapper = styled.div`
   width: 300px;
-  height: 300px;
   margin: 0 auto;
+`;
+
+const StudyHeatMapSentenceWrapper = styled(DescriptionWrapper)`
+  font-weight: bold;
+  font-size: 24px;
+  line-height: 40px;
+  display: inline-block;
+  text-align: left;
 `;
 
 export const StudyHeatMap = () => {
@@ -36,6 +45,9 @@ export const StudyHeatMap = () => {
   return (
     <>
       <InnerStudyHeatMapWrapper>
+        <StudyHeatMapSentenceWrapper>
+          学習カレンダー
+        </StudyHeatMapSentenceWrapper>
         <CalendarHeatmap
           startDate={prev_month_end_day}
           endDate={this_month_end_day}

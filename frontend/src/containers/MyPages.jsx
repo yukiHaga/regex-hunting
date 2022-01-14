@@ -38,6 +38,7 @@ const MainWrapper = styled.div`
 // Mainのfirstラッパー
 const MainFirstWrapper = styled.div`
   display: flex;
+  justify-content: space-around;
 `;
 
 // ステータスのラッパー
@@ -46,7 +47,6 @@ const StatusWrapper = styled.div`
   height: 260px;
   border-radius: 3px;
   background-color: ${COLORS.WHITE};
-  margin-left: 40px;
   box-shadow: 0 0px 20px rgba(0,0,0,0.2);
   display: flex
 `;
@@ -125,15 +125,7 @@ const ExpTd = styled(CustomTd)`
 
 const StudyHeatMapWrapper = styled.div`
   width: 400px;
-  background-color: ${COLORS.WHITE};
-  text-align: center;
-`;
-
-const StudyHeatMapSentenceWrapper = styled(DescriptionWrapper)`
-  font-weight: bold;
-  font-size: 24px;
-  line-height: 40px;
-  padding: 10px 30px; 
+  background-color: ${COLORS.SUB};
 `;
 
 export const MyPages = () => {
@@ -232,13 +224,9 @@ export const MyPages = () => {
             </TableWrapper>
           </StatusWrapper>
           <StudyHeatMapWrapper>
-            <StudyHeatMapSentenceWrapper>
-              学習カレンダー
-            </StudyHeatMapSentenceWrapper>
             <StudyHeatMap />
           </StudyHeatMapWrapper>
         </MainFirstWrapper>
-        アイウエオ
       </MainWrapper>
     </>
   );
