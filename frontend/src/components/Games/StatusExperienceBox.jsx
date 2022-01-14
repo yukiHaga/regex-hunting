@@ -7,9 +7,6 @@ import { COLORS } from '../../style_constants.js';
 // DescriptionWrapper 
 import { DescriptionWrapper } from '../shared_style.js';
 
-// Sounds
-import GageUpSounds from '../../sounds/gage_up.mp3';
-
 const ExperienceBoxWrapper = styled.div`
 `;
 

@@ -6,8 +6,10 @@ import styled from 'styled-components';
 import { Header } from '../components/Headers/Header.jsx';
 import { FakeHeader } from '../components/Headers/FakeHeader.jsx';
 import { SessionFlashMessage } from '../components/FlashMessages/SessionFlashMessage.jsx';
-import { StatusExperienceBox } from '../components/Games/StatusExperienceBox.jsx'
-
+import { StatusExperienceBox } from '../components/Games/StatusExperienceBox.jsx';
+import { StudyHeatMap } from '../components/Games/StudyHeatMap.jsx';
+import { DescriptionWrapper } from '../components/shared_style.js';
+ 
 // Images
 import TemporaryUserImage from '../images/temporary_user_image.png';
 
@@ -69,7 +71,7 @@ const CustomImage = styled.div`
   border-radius: 50%;
   background-size: cover;
   background-position: center center;
-  border: 3px solid ${COLORS.GRAY};
+  border: 3px solid silver;
   box-shadow: inset 1px 1px 3px 0 rgba(0, 0, 0, 0.8), 1px 1px 0 0 rgba(255, 255, 255, 0.12);
 `;
 
@@ -119,6 +121,19 @@ const MetaTd = styled(CustomTd)`
 const ExpTd = styled(CustomTd)`
   text-align: left;
   border: none;
+`;
+
+const StudyHeatMapWrapper = styled.div`
+  width: 400px;
+  background-color: ${COLORS.WHITE};
+  text-align: center;
+`;
+
+const StudyHeatMapSentenceWrapper = styled(DescriptionWrapper)`
+  font-weight: bold;
+  font-size: 24px;
+  line-height: 40px;
+  padding: 10px 30px; 
 `;
 
 export const MyPages = () => {
@@ -216,6 +231,12 @@ export const MyPages = () => {
               </CustomTable>
             </TableWrapper>
           </StatusWrapper>
+          <StudyHeatMapWrapper>
+            <StudyHeatMapSentenceWrapper>
+              学習カレンダー
+            </StudyHeatMapSentenceWrapper>
+            <StudyHeatMap />
+          </StudyHeatMapWrapper>
         </MainFirstWrapper>
         アイウエオ
       </MainWrapper>
