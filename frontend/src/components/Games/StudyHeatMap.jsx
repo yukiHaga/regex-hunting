@@ -8,6 +8,10 @@ import { COLORS } from '../../style_constants.js';
 import CalendarHeatmap from 'react-calendar-heatmap';
 import 'react-calendar-heatmap/dist/styles.css';
 
+// Tooltip
+import Tooltip from '@mui/material/Tooltip';
+
+// DescriptionWrapper
 import { DescriptionWrapper } from '../../components/shared_style.js';
 
 const InnerStudyHeatMapWrapper = styled.div`
