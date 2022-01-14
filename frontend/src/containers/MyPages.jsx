@@ -31,16 +31,21 @@ const FakeBlock = styled.div`
 // メインのラッパー
 const MainWrapper = styled.div`
   background-color: ${COLORS.SUB};
+`;
+
+// Mainのfirstラッパー
+const MainFirstWrapper = styled.div`
   display: flex;
 `;
 
 // ステータスのラッパー
 const StatusWrapper = styled.div`
   width: 722px;
-  height: 244px;
+  height: 260px;
   border-radius: 3px;
   background-color: ${COLORS.WHITE};
   margin-left: 40px;
+  box-shadow: 0 0px 20px rgba(0,0,0,0.2);
   display: flex
 `;
 
@@ -51,7 +56,7 @@ const ImageWrapper = styled.div`
   background-color: ${COLORS.WHITE};
   border-radius: 3px;
   align-self: center;
-  padding: 10px;
+  padding: 16px;
 `;
 
 // カスタムイメージ
@@ -67,9 +72,7 @@ const CustomImage = styled.div`
 `;
 
 const TableWrapper = styled.div`
-  width: 502px;
-  height: 220px;
-  background-color: ${COLORS.GAGE_GRAY};
+  background-color: ${COLORS.WHITE};
   border-radius: 3px;
   align-self: center;
 `;
@@ -97,8 +100,8 @@ const NameTd = styled(CustomTd)`
   font-family: YuGothic;
   font-style: normal;
   font-weight: bold;
-  font-size: 24px;
-  line-height: 30px;
+  font-size: 32px;
+  line-height: 40px;
   text-align: left;
   color: ${COLORS.BLACK};
 `;
@@ -113,6 +116,7 @@ const MetaTd = styled(CustomTd)`
 
 const ExpTd = styled(CustomTd)`
   text-align: left;
+  border: none;
 `;
 
 export const MyPages = () => {
@@ -178,37 +182,40 @@ export const MyPages = () => {
         />
       </FakeBlock>
       <MainWrapper>
-        <StatusWrapper>
-          <ImageWrapper>
-            <CustomImage />
-          </ImageWrapper>
-          <TableWrapper>
-            <CustomTable>
-              <tbody>
-                <tr>
-                  <NameTd colSpan={2}>{user.name}</NameTd> 
-                </tr>
-                <tr>
-                  <MetaTd>ランク</MetaTd> 
-                  <CustomTd>{user.rank}</CustomTd>
-                </tr>
-                <tr>
-                  <MetaTd>称号</MetaTd> 
-                  <CustomTd>{user.active_title}</CustomTd>
-                </tr>
-                <tr>
-                  <ExpTd colSpan={2}>
-                    <StatusExperienceBox 
-                      temporary_experience={user.temporary_experience}
-                      total_experience={user.total_experience}
-                      maximum_experience_per_rank={user.maximum_experience_per_rank}
-                    />
-                  </ExpTd>
-                </tr>
-              </tbody>
-            </CustomTable>
-          </TableWrapper>
-        </StatusWrapper>
+        <MainFirstWrapper>
+          <StatusWrapper>
+            <ImageWrapper>
+              <CustomImage />
+            </ImageWrapper>
+            <TableWrapper>
+              <CustomTable>
+                <tbody>
+                  <tr>
+                    <NameTd colSpan={2}>{user.name}</NameTd> 
+                  </tr>
+                  <tr>
+                    <MetaTd>ランク</MetaTd> 
+                    <CustomTd>{user.rank}</CustomTd>
+                  </tr>
+                  <tr>
+                    <MetaTd>称号</MetaTd> 
+                    <CustomTd>{user.active_title}</CustomTd>
+                  </tr>
+                  <tr>
+                    <ExpTd colSpan={2}>
+                      <StatusExperienceBox 
+                        temporary_experience={user.temporary_experience}
+                        total_experience={user.total_experience}
+                        maximum_experience_per_rank={user.maximum_experience_per_rank}
+                      />
+                    </ExpTd>
+                  </tr>
+                </tbody>
+              </CustomTable>
+            </TableWrapper>
+          </StatusWrapper>
+        </MainFirstWrapper>
+        アイウエオ
       </MainWrapper>
     </>
   );
