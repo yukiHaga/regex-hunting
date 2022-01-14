@@ -29,6 +29,11 @@ class Api::V1::OauthsController < ApplicationController
         user = create_from(provider)
         reset_session
         auto_login(user)
+        current_user.release_titles.build(
+          release_date: Date.today,
+          title_id: Title.find_by(name: current_user[:active_title])[:id]
+        )
+        current_user.save!
         render json: {
           session: true,
           user: {
