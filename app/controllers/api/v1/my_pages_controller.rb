@@ -1,6 +1,10 @@
 class Api::V1::MyPagesController < ApplicationController
   after_action :set_csrf_token_header, only: :index
 
+  # 実際にフロントに送られる問題数は14
+  # しかし、正答率を計算する際は全体の数に10を使う
+  Q_COUNT = 10
+
   def index
     # 今月のゲームクリアしたgame_managementsのレコードを難易度関係なしに全て取得
     # モデルに移す
@@ -28,19 +32,10 @@ class Api::V1::MyPagesController < ApplicationController
 
     game_managements_per_month.each do |game_management|
       incorrect = game_management.solved_questions.where(judgement: :incorrect).count
-      correct_percent = case incorrect
-                        when 0
+      correct_percent = if incorrect == 0
                           100
-                        when 1
-                          90
-                        when 2
-                          80
-                        when 3
-                          70
-                        when 4
-                          60
                         else
-                          0
+                          ((Q_COUNT - incorrect) / Q_COUNT) * 100
                         end
       play_date = game_management[:play_date]
       difficulty = game_management[:difficulty]
