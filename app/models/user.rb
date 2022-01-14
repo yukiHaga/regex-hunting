@@ -5,6 +5,7 @@ class User < ApplicationRecord
   has_many :authentications, dependent: :destroy
   has_many :game_managements, dependent: :destroy
   has_many :release_titles, dependent: :destroy
+  has_many :has_titles, through: :release_titles, source: :titles
   accepts_nested_attributes_for :authentications
 
   enum open_rank: { open: 0, close: 1 }
