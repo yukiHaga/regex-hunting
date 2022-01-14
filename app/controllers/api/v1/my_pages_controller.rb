@@ -70,21 +70,27 @@ class Api::V1::MyPagesController < ApplicationController
                                 )
 
     # 解放したタイトルデータ
+    # 解放していないタイトルのデータも入っている
+    # その場合はrelease_dateをnilとする
     # owned_titlesは配列
+    # current_user.release_title.pluck(:title_id)で、title_idを要素とする配列を取得
+    # include?はレシーバの配列が引数と等しい要素を持つ時に真を返す
+    # タイトルidがその配列に含まれている場合、relase_dateに値が入る
     # モデルに移す
-    release_titles = current_user.release_titles
-    owned_titles = release_titles.map do |release_title|
-                     {
-                       name: release_title.title[:name],
-                       release_date: release_title[:release_date]
-                     }
+    title_id_array = current_user.release_title.pluck(:title_id)
+    owned_titles = Title.all.map do |title|
+                     if(title_id_array.include?(title[:id]))
+                       {
+                         name: title,
+                         release_date: release_title[:release_date]
+                       }
+                     else
+                       {
+                         name: title,
+                         release_date: nil
+                       }
+                     end
                    end
-
-    # 解放していないタイトルデータ
-    # not_owned_titlesは配列
-    # モデルに移す
-    release_title_names = current_user.has_titles.pluck(:name)
-    not_owned_titles = Title.where.not(name: release_title_names)
 
     # レンダリング
     # ユーザー情報はcontextのstateに保管されているので、返す必要はない。
@@ -96,7 +102,6 @@ class Api::V1::MyPagesController < ApplicationController
       intermediate_correct_percents: intermediate_correct_percents,
       advanced_correct_percents: advanced_correct_percents,
       owned_titles: owned_titles,
-      not_owned_titles: not_owned_titles
     }, status: :ok
   end
 
