@@ -9,7 +9,7 @@ import CalendarHeatmap from 'react-calendar-heatmap';
 import 'react-calendar-heatmap/dist/styles.css';
 
 // Tooltip
-import Tooltip from '@mui/material/Tooltip';
+import ReactTooltip from 'react-tooltip';
 
 // DescriptionWrapper
 import { DescriptionWrapper } from '../../components/shared_style.js';
@@ -66,7 +66,15 @@ export const StudyHeatMap = () => {
             { date: '2022-01-30', count: 38 },
             { date: '2022-01-31', count: 1000 },
           ]}
+          tooltipDataAttrs={value => {
+            return {
+              'data-tip': `${value.date} has count: ${
+                value.count
+              }`,
+            };
+          }}
         />
+        <ReactTooltip />
       </InnerStudyHeatMapWrapper>
     </>
   );
