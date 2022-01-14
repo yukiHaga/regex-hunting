@@ -70,6 +70,7 @@ class Api::V1::MyPagesController < ApplicationController
                                 )
 
     # 解放したタイトルデータ
+    # owned_titlesは配列
     # モデルに移す
     release_titles = current_user.release_titles
     owned_titles = release_titles.map do |release_title|
@@ -80,13 +81,15 @@ class Api::V1::MyPagesController < ApplicationController
                    end
 
     # 解放していないタイトルデータ
+    # not_owned_titlesは配列
     # モデルに移す
     release_title_names = current_user.has_titles.pluck(:name)
     not_owned_titles = Title.where.not(name: release_title_names)
 
     # レンダリング
     # ユーザー情報はcontextのstateに保管されているので、返す必要はない。
-    # 以下に書いてあるcorrect_percentsは、1ヶ月間の正答率である。
+    # 以下に書いてあるcorrect_percentsは、
+    # 1ヶ月間の各日の最大正答率を要素とする配列である。
     render json: {
       game_frequencies_per_day: game_frequencies_per_day,
       elementary_correct_percents: elementary_correct_percents,
