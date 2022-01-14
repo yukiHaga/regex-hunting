@@ -68,8 +68,11 @@ export const StudyHeatMap = () => {
           ]}
           tooltipDataAttrs={value => {
             return {
-              'data-tip': `${value.date} has count: ${
-                value.count
+              'data-tip': `ゲームクリア回数: ${value.count}, ${
+                value.date ?
+                  value.date.replace(/-/g, '/')
+                :
+                  value.date
               }`,
             };
           }}
