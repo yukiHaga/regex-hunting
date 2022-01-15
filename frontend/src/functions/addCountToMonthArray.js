@@ -1,4 +1,5 @@
 // 今月のゲームクリア日にだけ、propsのcountを追加する関数
+// ヒートマップで使う
 export const addCountToMonthArray = (
   game_frequencies_per_day,
   month_obj
