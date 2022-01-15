@@ -89,6 +89,18 @@ export const StudyHeatMap = ({
     month_obj
   ])
 
+  // ヒートマップの色を返す関数
+  const getColorForHeatMap = (count) => {
+    switch (true){
+      case count >= 1 && count <= 4 :
+        return `color-scale-${count}`
+      case count > 4:
+        return `color-scale-4` 
+      default:
+        return 'color-empty'
+    }
+  };
+
   // startDateはその日を含まない
   // そのため、startDateには先月の月末を指定する
   return (
@@ -106,18 +118,13 @@ export const StudyHeatMap = ({
           gutterSize={1}
           horizontal={false}
           values={month_obj_array}
-          tooltipDataAttrs={(value) => {
+          tooltipDataAttrs={({count, date}) => {
             return {
-              'data-tip': `ゲームクリア回数: ${value.count}, ${
-                value.date.replace(/-/g, '/')}`
+              'data-tip': `ゲームクリア回数: ${count}, ${
+                date.replace(/-/g, '/')}`
             };
           }}
-          classForValue={(value) => {
-            if (!value.count) {
-              return 'color-empty';
-            }
-            return `color-scale-${value.count}`;
-          }}
+          classForValue={({count}) => getColorForHeatMap(count)}
         />
         <ReactTooltip />
       </InnerStudyHeatMapWrapper>
