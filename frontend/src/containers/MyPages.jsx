@@ -223,6 +223,8 @@ export const MyPages = () => {
   // navigation
   const navigate = useNavigate();
   
+  console.log(myPageState)
+
   return (
     <>
       <Header /> 
@@ -268,7 +270,9 @@ export const MyPages = () => {
             </TableWrapper>
           </StatusWrapper>
           <StudyHeatMapWrapper>
-            <StudyHeatMap />
+            <StudyHeatMap 
+              game_frequencies_per_day={myPageState.game_frequencies_per_day}
+            />
           </StudyHeatMapWrapper>
         </MainFirstWrapper>
       </MainWrapper>

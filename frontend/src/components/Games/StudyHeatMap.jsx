@@ -27,7 +27,9 @@ const StudyHeatMapSentenceWrapper = styled(DescriptionWrapper)`
   text-align: left;
 `;
 
-export const StudyHeatMap = () => {
+export const StudyHeatMap = ({
+  game_frequencies_per_day
+}) => {
 
   // 今日
   const today = new Date();
@@ -60,21 +62,22 @@ export const StudyHeatMap = () => {
           showOutOfRangeDays={false}
           gutterSize={1}
           horizontal={false}
-          values={[
-            { date: '2022-01-01', count: 33 },
-            { date: '2022-01-22', count: 122 },
-            { date: '2022-01-30', count: 38 },
-            { date: '2022-01-31', count: 1000 },
-          ]}
+          values={
+            Object.entries(game_frequencies_per_day).map(
+              ([date, count]) => ({date, count})
+            )
+          }
           tooltipDataAttrs={value => {
-            return {
-              'data-tip': `ゲームクリア回数: ${value.count}, ${
-                value.date ?
+            return value.date ?
+              {
+                'data-tip': `ゲームクリア回数: ${value.count}, ${
                   value.date.replace(/-/g, '/')
-                :
-                  value.date
-              }`,
-            };
+                }`
+              }
+            :
+              {
+                'data-tip': 'ゲームをプレイしていません。'
+              }  
           }}
         />
         <ReactTooltip />
