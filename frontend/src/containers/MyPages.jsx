@@ -191,25 +191,28 @@ export const MyPages = () => {
 
   // マイページの情報を取得するuseLayoutEffect
   // 初回マウント時とuserが変化したタイミングで実行される
+  // user存在時のみ発動するように、if文で制御した
   useLayoutEffect(() => {
-    getMyPageInfo(user).then((data) => {
-      setMyPageState((prev) => ({
-        ...prev,
-        game_frequencies_per_day: data.game_frequencies_per_day,
-        elementary_correct_percents: data.elementary_correct_percents,
-        intermediate_correct_percents: data.intermediate_correct_percents,
-        advanced_correct_percents: data.advanced_correct_percents,
-        owned_titles: data.owned_titles,
-      })); 
-    }).catch((e) => {
-      if(e.response.status === HTTP_STATUS_CODE.NOT_FOUND){
+    if(Object.keys(user).length){
+      getMyPageInfo(user).then((data) => {
         setMyPageState((prev) => ({
           ...prev,
+          game_frequencies_per_day: data.game_frequencies_per_day,
+          elementary_correct_percents: data.elementary_correct_percents,
+          intermediate_correct_percents: data.intermediate_correct_percents,
+          advanced_correct_percents: data.advanced_correct_percents,
+          owned_titles: data.owned_titles,
         })); 
-      } else {
-        throw e;
-      }
-    });
+      }).catch((e) => {
+        if(e.response.status === HTTP_STATUS_CODE.NOT_FOUND){
+          setMyPageState((prev) => ({
+            ...prev,
+          })); 
+        } else {
+          throw e;
+        }
+      });
+    }
   }, [
     user
   ]);
@@ -221,6 +224,7 @@ export const MyPages = () => {
   const navigate = useNavigate();
   
   console.log(myPageState);
+  console.log(user);
 
   return (
     <>
