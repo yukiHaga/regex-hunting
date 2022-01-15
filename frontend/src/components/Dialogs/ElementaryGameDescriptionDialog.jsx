@@ -107,6 +107,9 @@ const MonsterImageBoxWrapper = styled.div`
 `;
 
 const MonsterImageWrapper = styled.img`
+  width: 211px;
+  height: 205px;
+  object-fit: contain;
 `;
 
 const ButtonLineWrapper = styled.div`

@@ -104,7 +104,6 @@ const BattleBlockWrapper = styled.div`
 const MonsterBlockWrapper = styled.div`
   height: 370px;
   width: 900px;
-  margin-left: 43px;
   margin-top: 10px;
   display: flex;
   justify-content: space-evenly;
