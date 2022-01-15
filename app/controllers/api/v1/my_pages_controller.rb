@@ -37,6 +37,7 @@ class Api::V1::MyPagesController < ApplicationController
                         else
                           ((Q_COUNT - incorrect) / Q_COUNT) * 100
                         end
+      binding.pry
       play_date = game_management[:play_date]
       difficulty = game_management[:difficulty]
       case difficulty
