@@ -122,6 +122,9 @@ export const StudyHeatMap = ({
             };
           }}
           classForValue={({count}) => getColorForHeatMap(count)}
+          transformDayElement={(element, value, index) =>
+            React.cloneElement(element, { rx: 2, ry: 2 })
+          }
         />
         <ReactTooltip />
       </InnerStudyHeatMapWrapper>
