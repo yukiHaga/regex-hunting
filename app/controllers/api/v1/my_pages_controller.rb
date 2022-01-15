@@ -26,7 +26,7 @@ class Api::V1::MyPagesController < ApplicationController
     # デフォルトで初級, 中級, 上級の1ヶ月
     # temはtemporaryの略。長いから省略した
     # モデルに移す
-    temp_elementary_correct_percent = []
+    temp_elementary_correct_percents = []
     temp_intermediate_correct_percents = []
     temp_advanced_correct_percents = []
 
@@ -35,30 +35,29 @@ class Api::V1::MyPagesController < ApplicationController
       correct_percent = if incorrect == 0
                           100
                         else
-                          ((Q_COUNT - incorrect) / Q_COUNT) * 100
+                          (((Q_COUNT - incorrect.to_f) / Q_COUNT) * 100).to_i
                         end
-      binding.pry
       play_date = game_management[:play_date]
       difficulty = game_management[:difficulty]
       case difficulty
-        when '初級'
+        when 'elementary'
           temp_elementary_correct_percents << {
-                                               play_date: play_date,
-                                               difficulty: difficulty,
-                                               correct_percent: correct_percent
-                                             }
-        when '中級'
+                                                play_date: play_date,
+                                                difficulty: difficulty,
+                                                correct_percent: correct_percent
+                                              }
+        when 'intermediate'
           temp_intermediate_correct_percents << {
-                                                 play_date: play_date,
-                                                 difficulty: difficulty,
-                                                 correct_percent: correct_percent
-                                               }
-        when '上級'
+                                                  play_date: play_date,
+                                                  difficulty: difficulty,
+                                                  correct_percent: correct_percent
+                                                }
+        when 'advanced'
           temp_advanced_correct_percents << {
-                                             play_date: play_date,
-                                             difficulty: difficulty,
-                                             correct_percent: correct_percent
-                                           }
+                                              play_date: play_date,
+                                              difficulty: difficulty,
+                                              correct_percent: correct_percent
+                                            }
       end
     end
 
@@ -87,12 +86,15 @@ class Api::V1::MyPagesController < ApplicationController
     # include?はレシーバの配列が引数と等しい要素を持つ時に真を返す
     # タイトルidがその配列に含まれている場合、relase_dateに値が入る
     # モデルに移す
-    title_id_array = current_user.release_title.pluck(:title_id)
+    title_id_array = current_user.release_titles.pluck(:title_id)
     owned_titles = Title.all.map do |title|
                      if(title_id_array.include?(title[:id]))
+                       release_date_array = current_user.release_titles.
+                                              where(title_id: title[:id]).
+                                              pluck(:release_date)
                        {
                          name: title,
-                         release_date: release_title[:release_date]
+                         release_date: release_date_array[0]
                        }
                      else
                        {
@@ -117,7 +119,7 @@ class Api::V1::MyPagesController < ApplicationController
 
   private
 
-  def uniq_correct_percents_per_month(temp_correct_percents)
+  def uniq_correct_percents(temp_correct_percents)
     max_correct_percents = []
     temp_correct_percents.each do |temp_correct_percent_1|
       temp_storage = temp_correct_percent_1
