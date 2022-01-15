@@ -9,6 +9,7 @@ class Api::V1::UserSessionsController < ApplicationController
     render json: {
       session: true,
       user: {
+        id: user[:id],
         name: user[:name],
         rank: user[:rank],
         total_experience: user[:total_experience],
@@ -34,6 +35,7 @@ class Api::V1::UserSessionsController < ApplicationController
       render json: {
         session: true,
         user: {
+          id: current_user[:id],
           name: current_user[:name],
           rank: current_user[:rank],
           total_experience: current_user[:total_experience],

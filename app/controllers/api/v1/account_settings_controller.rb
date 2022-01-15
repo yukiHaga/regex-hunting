@@ -5,6 +5,7 @@ class Api::V1::AccountSettingsController < ApplicationController
     if current_user.update(user_params)
       render json: {
         user: {
+          id: user[:id],
           name: current_user[:name],
           rank: current_user[:rank],
           total_experience: current_user[:total_experience],

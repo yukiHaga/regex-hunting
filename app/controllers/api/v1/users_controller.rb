@@ -18,6 +18,7 @@ class Api::V1::UsersController < ApplicationController
       render json: {
         session: true,
         user: {
+          id: user[:id],
           name: user[:name],
           rank: user[:rank],
           total_experience: user[:total_experience],

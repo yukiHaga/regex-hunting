@@ -5,6 +5,7 @@ class Api::V1::TitleSettingsController < ApplicationController
     if current_user.update(active_title: params[:user][:select_title])
       render json: {
         user: {
+          id: current_user[:id],
           name: current_user[:name],
           rank: current_user[:rank],
           total_experience: current_user[:total_experience],
