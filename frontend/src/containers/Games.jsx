@@ -59,11 +59,11 @@ const MainContentWrapper = styled.div`
 
 // 背景画像
 const BackGroundImageCover = styled.img`
-  width: 1600px;
+  width: 1440px;
   height: 734px;
   position: absolute;
   top: 55px;
-  left: -50px;
+  left: 0px;
   z-index: -4;
 `;
 
