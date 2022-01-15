@@ -194,7 +194,6 @@ export const MyPages = () => {
   // user存在時のみ発動するように、if文で制御した
   useLayoutEffect(() => {
     if(Object.keys(user).length){
-      console.log(user);
       getMyPageInfo(user).then((data) => {
         setMyPageState((prev) => ({
           ...prev,
@@ -224,9 +223,6 @@ export const MyPages = () => {
   // navigation
   const navigate = useNavigate();
   
-  console.log(myPageState);
-  console.log(user);
-
   return (
     <>
       <Header /> 
