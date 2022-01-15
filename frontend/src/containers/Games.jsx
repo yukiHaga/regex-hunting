@@ -3,7 +3,8 @@ import { useParams, useLocation, useNavigate } from 'react-router-dom';
 import styled, { keyframes } from 'styled-components';
 
 // Image
-import BackGroundImage from '../images/background.png';
+import RealBackGroundImage from '../images/temporary_real_background_image.png';
+
 
 // Presentational Components
 import { Header } from '../components/Headers/Header.jsx';
@@ -58,11 +59,11 @@ const MainContentWrapper = styled.div`
 
 // 背景画像
 const BackGroundImageCover = styled.img`
-  width: 1790px;
+  width: 1600px;
   height: 734px;
   position: absolute;
   top: 55px;
-  left: -350px;
+  left: -50px;
   z-index: -4;
 `;
 
@@ -441,7 +442,7 @@ export const Games = () => {
       <Header />
       <FakeHeader />
       <MainContentWrapper>
-        <BackGroundImageCover src={BackGroundImage} />
+        <BackGroundImageCover src={RealBackGroundImage} />
         <MainGameContentWrapper
           question_judgement={gameState.question_judgement}
         >
