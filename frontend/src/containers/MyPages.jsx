@@ -8,6 +8,7 @@ import { FakeHeader } from '../components/Headers/FakeHeader.jsx';
 import { SessionFlashMessage } from '../components/FlashMessages/SessionFlashMessage.jsx';
 import { StatusExperienceBox } from '../components/Games/StatusExperienceBox.jsx';
 import { StudyHeatMap } from '../components/Games/StudyHeatMap.jsx';
+import { CorrectPercentGraph } from '../components/Games/CorrectPercentGraph.jsx';
 import { DescriptionWrapper } from '../components/shared_style.js';
  
 // Images
@@ -40,6 +41,12 @@ const MainWrapper = styled.div`
 
 // Mainのfirstラッパー
 const MainFirstWrapper = styled.div`
+  display: flex;
+  justify-content: space-around;
+`;
+
+// Mainのsecondラッパー
+const MainSecondWrapper = styled.div`
   display: flex;
   justify-content: space-around;
 `;
@@ -129,6 +136,10 @@ const ExpTd = styled(CustomTd)`
 const StudyHeatMapWrapper = styled.div`
   width: 400px;
   background-color: ${COLORS.SUB};
+`;
+
+const CorrectPercentGraphWrapper = styled.div`
+  background-color: ${COLORS.GRAY};
 `;
 
 export const MyPages = () => {
@@ -275,6 +286,11 @@ export const MyPages = () => {
             />
           </StudyHeatMapWrapper>
         </MainFirstWrapper>
+        <MainSecondWrapper>
+          <CorrectPercentGraphWrapper>
+            <CorrectPercentGraph />
+          </CorrectPercentGraphWrapper>
+        </MainSecondWrapper>
       </MainWrapper>
     </>
   );

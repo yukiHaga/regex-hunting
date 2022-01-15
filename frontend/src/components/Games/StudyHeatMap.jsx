@@ -1,9 +1,6 @@
 import React, { useMemo } from 'react';
 import styled from 'styled-components';
 
-// Colors
-import { COLORS } from '../../style_constants.js';
-
 // React Heat Map
 import CalendarHeatmap from 'react-calendar-heatmap';
 import 'react-calendar-heatmap/dist/styles.css';
