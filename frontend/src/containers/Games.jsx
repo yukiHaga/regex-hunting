@@ -245,7 +245,6 @@ export const Games = () => {
       })
     }
     if(!Object.keys(gameState.game_management).length){
-      console.log("Object.keysの中");
       getGameStart(difficulty).then((data) => {
         setGameState((prev) => ({
           ...prev,

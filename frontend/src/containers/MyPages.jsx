@@ -1,4 +1,4 @@
-import React, { Fragment, useContext, useLayoutEffect } from 'react';
+import React, { Fragment, useContext, useLayoutEffect, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 
@@ -18,6 +18,9 @@ import { UserContext } from "../context/UserProvider.js";
 
 // ログイン状態を確認するAPIコール関数
 import { checkLoginStatus } from '../apis/checkLoginStatus.js'; 
+
+// マイページの情報を取得するAPIコール関数
+import { getMyPageInfo } from '../apis/mypage.js'; 
 
 // HTTP_STATUS_CODE
 import { HTTP_STATUS_CODE } from '../constants';
@@ -142,6 +145,19 @@ export const MyPages = () => {
     requestUserActionTyps
   } = useContext(UserContext);
 
+  // myPageStateの最初の状態
+  const initialState = {
+    game_frequencies_per_day: [],
+    elementary_correct_percents: [],
+    intermediate_correct_percents: [],
+    advanced_correct_percents: [],
+    owned_titles: [],
+  };
+
+  // MyPageの状態を管理するstate
+  const [myPageState, setMyPageState] = useState(initialState);
+
+  // ブラウザをリロードしてもログイン状態を維持するためのuseEffect
   useLayoutEffect(() => {
     if(sessionState === false){
       checkLoginStatus().then((data) => {
@@ -173,11 +189,38 @@ export const MyPages = () => {
     requestUserActionTyps.REQUEST_FAILURE
   ]);
 
+  // マイページの情報を取得するuseLayoutEffect
+  // 初回マウント時とuserが変化したタイミングで実行される
+  useLayoutEffect(() => {
+    getMyPageInfo(user).then((data) => {
+      setMyPageState((prev) => ({
+        ...prev,
+        game_frequencies_per_day: data.game_frequencies_per_day,
+        elementary_correct_percents: data.elementary_correct_percents,
+        intermediate_correct_percents: data.intermediate_correct_percents,
+        advanced_correct_percents: data.advanced_correct_percents,
+        owned_titles: data.owned_titles,
+      })); 
+    }).catch((e) => {
+      if(e.response.status === HTTP_STATUS_CODE.NOT_FOUND){
+        setMyPageState((prev) => ({
+          ...prev,
+        })); 
+      } else {
+        throw e;
+      }
+    });
+  }, [
+    user
+  ]);
+
   // location
   const location = useLocation();
 
   // navigation
   const navigate = useNavigate();
+  
+  console.log(myPageState);
 
   return (
     <>
