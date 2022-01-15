@@ -115,10 +115,10 @@ export const StudyHeatMap = ({
           tooltipDataAttrs={({count, date}) => {
             return {
               'data-tip': `ゲームクリア回数: ${count}, ${
-                date.replace(/-/g, '/')}`
+                date?.replace(/-/g, '/')}`
             };
           }}
-          classForValue={({count}) => getColorForHeatMap(count)}
+          classForValue={(value) => getColorForHeatMap(value?.count)}
           transformDayElement={(element, value, index) =>
             React.cloneElement(element, { rx: 2, ry: 2 })
           }
