@@ -48,7 +48,7 @@ const MainFirstWrapper = styled.div`
 // Mainのsecondラッパー
 const MainSecondWrapper = styled.div`
   display: flex;
-  justify-content: center;
+  justify-content: start;
   margin-top: 40px;
 `;
 
@@ -141,6 +141,7 @@ const StudyHeatMapWrapper = styled.div`
 
 const CorrectPercentGraphWrapper = styled.div`
   background-color: ${COLORS.WHITE};
+  box-shadow: 0 0px 20px rgba(0,0,0,0.2);
 `;
 
 export const MyPages = () => {

@@ -33,7 +33,7 @@ ChartJS.register(
 );
 
 const InnerCorrectPercentGraphWrapper = styled.div`
-  width: 1000px;
+  width: 660px;
 `;
 
 /*
@@ -60,7 +60,8 @@ export const CorrectPercentGraph = () => {
         text: '初級編の正答率',
         font: {
           size: 24
-        }
+        },
+        color: COLORS.BLACK,
       }
     },
     scales: {
@@ -74,6 +75,9 @@ export const CorrectPercentGraph = () => {
           }
         }
       },
+    },
+    layout: {
+        padding: 10
     }
   };
 
@@ -116,7 +120,7 @@ export const CorrectPercentGraph = () => {
     datasets: [
       {
         label: '正答率',
-        data: [0, 0, 60, 70, 60, 90, 100],
+        data: [0, 0, 60, 70, 60, 90, 100, 100, 100],
         borderColor: COLORS.MAIN,
         backgroundColor: COLORS.MAIN,
         lineTension: 0,
@@ -124,12 +128,12 @@ export const CorrectPercentGraph = () => {
     ],
   };
 
+  // Lineはcanvas要素になる
+  // 1000px * 600pxである
   return (
     <>
       <InnerCorrectPercentGraphWrapper>
         <Line 
-          width={1000}
-          height={600}
           options={options} 
           data={data} 
         />
