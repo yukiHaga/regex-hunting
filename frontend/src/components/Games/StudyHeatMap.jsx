@@ -8,9 +8,6 @@ import { COLORS } from '../../style_constants.js';
 import CalendarHeatmap from 'react-calendar-heatmap';
 import 'react-calendar-heatmap/dist/styles.css';
 
-// ヒートマップの頻度のcss
-import './study_heat_map.css';
-
 // Tooltip
 import ReactTooltip from 'react-tooltip';
 
@@ -93,9 +90,9 @@ export const StudyHeatMap = ({
   const getColorForHeatMap = (count) => {
     switch (true){
       case count >= 1 && count <= 4 :
-        return `color-scale-${count}`
+        return `color-github-${count}`
       case count > 4:
-        return `color-scale-4` 
+        return 'color-github-4' 
       default:
         return 'color-empty'
     }
