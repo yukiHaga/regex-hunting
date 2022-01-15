@@ -33,7 +33,7 @@ ChartJS.register(
 );
 
 const InnerCorrectPercentGraphWrapper = styled.div`
-  width: 660px;
+  width: 1000px;
 `;
 
 /*
@@ -57,9 +57,24 @@ export const CorrectPercentGraph = () => {
       },
       title: {
         display: true,
-        text: '正答率',
-      },
+        text: '初級編の正答率',
+        font: {
+          size: 24
+        }
+      }
     },
+    scales: {
+      y: { 
+        min: 0,
+        max: 100,
+        ticks: {
+          // 目盛にドル記号を入れる
+          callback: function(value, index, values) {
+            return value + '%';
+          }
+        }
+      },
+    }
   };
 
   const labels = [
@@ -100,10 +115,10 @@ export const CorrectPercentGraph = () => {
     labels,
     datasets: [
       {
-        label: 'Dataset 2',
-        data: [10, 20, 30, 40, 50, 60, 70],
-        borderColor: 'rgb(53, 162, 235)',
-        backgroundColor: 'rgba(53, 162, 235, 0.5)',
+        label: '正答率',
+        data: [0, 0, 60, 70, 60, 90, 100],
+        borderColor: COLORS.MAIN,
+        backgroundColor: COLORS.MAIN,
         lineTension: 0,
       },
     ],
