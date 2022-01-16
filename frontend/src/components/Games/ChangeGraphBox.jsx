@@ -78,6 +78,8 @@ const ButtonWrapper = styled.div`
   }
 `;
 
+// 一回もゲームクリアをしていない場合、
+// fastest_timeは0でサーバー側から送られる
 export const ChangeGraphBox = ({
   game_frequencies_per_day,
   ele_fastest_time,
@@ -85,6 +87,8 @@ export const ChangeGraphBox = ({
   adv_fastest_time
 }) => {
 
+  //ele_fastest_timeが0の場合、
+  //format_ele_fastest_timeは00:00になる
   const format_ele_fastest_time = useMemo(() => getClearTime(
     0, 
     ele_fastest_time
@@ -124,7 +128,14 @@ export const ChangeGraphBox = ({
             </tr>
             <tr>
               <ItemTd>最速タイム</ItemTd>
-              <CustomTd>{format_ele_fastest_time}</CustomTd>
+              <CustomTd>
+                {
+                  format_ele_fastest_time !== "00:00" ? 
+                    format_ele_fastest_time
+                  :
+                    "なし"
+                }
+              </CustomTd>
             </tr>
           </CustomTable>
         </TableWrapper>
