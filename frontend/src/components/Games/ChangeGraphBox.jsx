@@ -75,7 +75,10 @@ const ButtonWrapper = styled.div`
 `;
 
 export const ChangeGraphBox = ({
-  game_frequencies_per_day
+  game_frequencies_per_day,
+  ele_fastest_time,
+  int_fastest_time,
+  adv_fastest_time
 }) => {
 
   return (
@@ -110,7 +113,7 @@ export const ChangeGraphBox = ({
             </tr>
             <tr>
               <ItemTd>最速タイム</ItemTd>
-              <CustomTd>01:00</CustomTd>
+              <CustomTd>{ele_fastest_time}</CustomTd>
             </tr>
           </CustomTable>
         </TableWrapper>

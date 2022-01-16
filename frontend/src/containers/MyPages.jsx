@@ -316,7 +316,12 @@ export const MyPages = () => {
             />
           </CorrectPercentGraphWrapper>
           <ChangeGraphBoxWrapper>
-            <ChangeGraphBox />
+            <ChangeGraphBox 
+              game_frequencies_per_day={myPageState.game_frequencies_per_day}
+              ele_fastest_time={myPageState.ele_fastest_time}
+              int_fastest_time={myPageState.int_fastest_time}
+              adv_fastest_time={myPageState.adv_fastest_time}
+            />
           </ChangeGraphBoxWrapper>
         </MainSecondWrapper>
         アイウエオ<br />柿くけこ
