@@ -154,6 +154,8 @@ export const GameClearDialog = ({
     game_end_time
   ]);
 
+  const share_clear_time = useMemo(() => clear_time.slice(3), [clear_time]);
+
   // このミリ秒はタイムに色をつけるために使う
   const milli_sec = game_end_time - game_start_time;
 
@@ -232,7 +234,7 @@ export const GameClearDialog = ({
               difficulty={difficulty}             
               game_result={game_result}
               rank_up={rank_up}
-              clear_time={clear_time}
+              clear_time={share_clear_time}
             />
             {
               has_user ?
