@@ -123,6 +123,9 @@ class Api::V1::MyPagesController < ApplicationController
       intermediate_correct_percents: intermediate_correct_percents,
       advanced_correct_percents: advanced_correct_percents,
       owned_titles: owned_titles,
+      ele_fastest_time: ele_fastest_time,
+      int_fastest_time: int_fastest_time,
+      adv_fastest_time: adv_fastest_time
     }, status: :ok
   end
 
