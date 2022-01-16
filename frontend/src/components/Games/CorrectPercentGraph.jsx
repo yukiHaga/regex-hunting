@@ -37,6 +37,8 @@ const InnerCorrectPercentGraphWrapper = styled.div`
   width: 700px;
 `;
 
+// 親コンポーネント(MyPages)のuseEffectが実行されるまで、
+// これらのcorrect_percentsは[]である。
 export const CorrectPercentGraph = ({
   elementary_correct_percents,
   intermediate_correct_percents,
@@ -45,7 +47,8 @@ export const CorrectPercentGraph = ({
 
   const initialState = {
     x_data: [],
-    y_data: []
+    y_data: [],
+    plot: false
   };
 
   const [dataState, setDataState] = useState(initialState);
@@ -74,22 +77,18 @@ export const CorrectPercentGraph = ({
     next_month_later_today
   ]);
 
+
+  // 初回にグラフを表示させるためのuseEffect
   // 今月のx座標(月日)とy座標(正答率)のオブジェクトを取得する
   // このオブジェクトのプロパティがx座標
   // このオブジェクトのキーがy座標
-  const month_obj = useMemo(() => makeCorrectPercentGraphData(
-    elementary_correct_percents,
-    this_month_first_day,
-    this_month_end_day
-  ), [
-    elementary_correct_percents,
-    this_month_first_day,
-    this_month_end_day
-  ]);
-
   useEffect(() => {
-    if(Object.values(month_obj).length) {
-      console.log("useEffectの中");
+    if(Object.keys(elementary_correct_percents).length && !dataState.plot) {
+      const month_obj = makeCorrectPercentGraphData(
+        elementary_correct_percents,
+        this_month_first_day,
+        this_month_end_day
+      ) 
       setDataState((prev) => ({
         ...prev,
         x_data: Object.keys(month_obj),
@@ -97,10 +96,11 @@ export const CorrectPercentGraph = ({
       }));
     }
   }, [
-    month_obj
+    dataState.plot,
+    elementary_correct_percents,
+    this_month_first_day,
+    this_month_end_day
   ])
-
-  console.log(dataState);
 
   // legendはグラフの判例の設定を行うオプション
   const options = {
