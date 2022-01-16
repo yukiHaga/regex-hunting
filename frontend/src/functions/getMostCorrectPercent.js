@@ -3,7 +3,8 @@
 // reduceの第２引数は、配列の2番目の要素(currentValue)
 // reduceに指定したcallbackの戻り値がpreviousValueになる
 // Math.maxは、与えた数の中で一番大きな数を返す。
-// 
+// 3項演算子はログインしているけど、ゲームクリアが一回もないユーザー
+// に対応した処理
 export const getMostCorrectPercent = (
   correct_percents
 ) => {
