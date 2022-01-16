@@ -39,27 +39,36 @@ class Api::V1::MyPagesController < ApplicationController
                         end
       play_date = game_management[:play_date]
       difficulty = game_management[:difficulty]
+      result_time = game_management[:result_time]
       case difficulty
         when 'elementary'
           temp_elementary_correct_percents << {
                                                 play_date: play_date,
                                                 difficulty: difficulty,
-                                                correct_percent: correct_percent
+                                                correct_percent: correct_percent,
+                                                result_time: result_time
                                               }
         when 'intermediate'
           temp_intermediate_correct_percents << {
                                                   play_date: play_date,
                                                   difficulty: difficulty,
-                                                  correct_percent: correct_percent
+                                                  correct_percent: correct_percent,
+                                                  result_time: result_time
                                                 }
         when 'advanced'
           temp_advanced_correct_percents << {
                                               play_date: play_date,
                                               difficulty: difficulty,
-                                              correct_percent: correct_percent
+                                              correct_percent: correct_percent,
+                                              result_time: result_time
                                             }
       end
     end
+
+    # 今月の難易度毎の最速タイムを導出する処理
+    ele_fastest_time = get_fastest_time(temp_elementary_correct_percents)
+    int_fastest_time = get_fastest_time(temp_intermediate_correct_percents)
+    adv_fastest_time = get_fastest_time(temp_advanced_correct_percents)
 
     # 各日付における初級の最大正答率を導く処理
     # 各日付毎の最大正答率を要素とした配列が、代入されている
@@ -132,5 +141,22 @@ class Api::V1::MyPagesController < ApplicationController
       max_correct_percents << temp_storage
     end
     return max_correct_percents.uniq
+  end
+
+  # fastest_timeが0じゃなく(初期状態ではない)、かつ、
+  # fastest_timeがh.result_timeより遅い時、
+  # fastest_timeがh.result_timeで更新される
+  # fastest_timeが0(初期状態)の場合、
+  # fastest_timeの0をh.result_timeで更新する
+  def get_fastest_time(temp_correct_percents)
+    fastest_time = 0
+    temp_correct_percents.each do |h|
+      if fastest_time != 0 && fastest_time > h[:result_time]
+        fastest_time = h[:result_time]
+      elsif fastest_time == 0
+        fastest_time = h[:result_time]
+      end
+    end
+    return fastest_time
   end
 end
