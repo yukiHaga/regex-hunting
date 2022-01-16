@@ -17,18 +17,16 @@ export const makeCorrectPercentGraphData = (
   }
 
   // 今月の全ての月日をキー, バリューがnullのオブジェクトを生成する処理
+  // キーがcorrect_percents_objに存在するなら、nullの代わりに
+  // correct_percents_objのバリューを代入する
   for(const day = first_day; day <= end_day; day.setDate(day.getDate() + 1)) {
     const formatDate = day.toISOString().slice(5, 10).replace('-', '/');
-    month_obj[formatDate] = null;
+    if(formatDate in correct_percents_obj) {
+      month_obj[formatDate] = correct_percents_obj[formatDate];
+    } else {
+      month_obj[formatDate] = null;
+    }
   }
 
-  // correct_percents_objの内容をmonth_objに反映させる処理
-  // keyはmm/dd
-  Object.keys(correct_percents_obj).forEach(key => {
-    if(key in month_obj) {
-       month_obj[key] = correct_percents_obj[key]; 
-    }
-  });
-  
   return month_obj;
 };
