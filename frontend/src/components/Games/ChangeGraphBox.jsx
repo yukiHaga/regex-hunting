@@ -17,6 +17,9 @@ import ArrowLeftIcon from '@mui/icons-material/ArrowLeft';
 // マイページで使う場合、第1引数は0を指定する
 import { getClearTime } from '../../functions/getClearTime.js';
 
+// 今月の最大の正答率を計算する関数
+import { getMostCorrectPercent } from '../../functions/getMostCorrectPercent.js';
+
 const InnerChangeGraphBoxWrapper = styled.div`
   width: 300px;
   margin: 0 auto;
@@ -102,8 +105,12 @@ export const ChangeGraphBox = ({
 
   // 最大正答率は1ヶ月間の最大正答率である
   // elementary_correct_percentsが空の配列の場合、
-  // 0%を返す
-  const most_ele_correct_percent = useMemo(() => ,[]);
+  // 0を返すように設定した
+  const most_ele_correct_percent = useMemo(() => getMostCorrectPercent(
+    elementary_correct_percents
+  ) ,[
+    elementary_correct_percents
+  ]);
   
   return (
     <>
@@ -134,8 +141,7 @@ export const ChangeGraphBox = ({
             <tr>
               <ItemTd>最大正答率</ItemTd>
               <CustomTd>
-                {
-                }
+                {`${most_ele_correct_percent}%`}
               </CustomTd>
             </tr>
             <tr>
