@@ -33,7 +33,7 @@ ChartJS.register(
 );
 
 const InnerCorrectPercentGraphWrapper = styled.div`
-  width: 660px;
+  width: 700px;
 `;
 
 /*
