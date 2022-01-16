@@ -20,6 +20,8 @@ import { getClearTime } from '../../functions/getClearTime.js';
 // 今月の最大の正答率を計算する関数
 import { getMostCorrectPercent } from '../../functions/getMostCorrectPercent.js';
 
+// 今月の平均正答率を計算する関数
+import { getAverageCorrectPercent } from '../../functions/getAverageCorrectPercent.js';
 const InnerChangeGraphBoxWrapper = styled.div`
   width: 300px;
   margin: 0 auto;
@@ -111,7 +113,16 @@ export const ChangeGraphBox = ({
   ) ,[
     elementary_correct_percents
   ]);
-  
+
+  // 今月の平均正答率を導出する処理
+  // elementary_correct_percentsが空の配列の場合、
+  // 0を返すように設定した
+  const average_ele_correct_percent = useMemo(() => getAverageCorrectPercent(
+    elementary_correct_percents
+  ) ,[
+    elementary_correct_percents
+  ]);
+
   return (
     <>
       <InnerChangeGraphBoxWrapper>
@@ -136,7 +147,7 @@ export const ChangeGraphBox = ({
           <CustomTable>
             <tr>
               <ItemTd>平均正答率</ItemTd>
-              <CustomTd>80%</CustomTd>
+              <CustomTd>{`${average_ele_correct_percent}%`}</CustomTd>
             </tr>
             <tr>
               <ItemTd>最大正答率</ItemTd>
