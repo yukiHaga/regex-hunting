@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react';
+import React, { useState, useMemo, useEffect } from 'react';
 import styled from 'styled-components';
 
 // react-chartjs-2 
@@ -18,6 +18,9 @@ import {
 
 // Colors
 import { COLORS } from '../../style_constants.js';
+
+// グラフのx座標とy座標を生成する関数 
+import { makeCorrectPercentGraphData } from '../../functions/makeCorrectPercentGraphData.js'
 
 // chsrt.jsのプラグインを事前に登録しておく
 ChartJS.register(
@@ -40,6 +43,13 @@ export const CorrectPercentGraph = ({
   advanced_correct_percents
 }) => {
 
+  const initialState = {
+    x_data: [],
+    y_data: []
+  };
+
+  const [dataState, setDataState] = useState(initialState);
+
   // 今日
   const today = useMemo(() => new Date(), []);
 
@@ -48,13 +58,6 @@ export const CorrectPercentGraph = ({
     today.setDate(1)
   ), [
     today
-  ]);
-
-  // 前月の月末
-  const prev_month_end_day = useMemo(() => new Date(
-    this_month_first_day.setDate(0)
-  ), [
-    this_month_first_day
   ]);
 
   // 来月の月初
@@ -70,6 +73,34 @@ export const CorrectPercentGraph = ({
   ), [
     next_month_later_today
   ]);
+
+  // 今月のx座標(月日)とy座標(正答率)のオブジェクトを取得する
+  // このオブジェクトのプロパティがx座標
+  // このオブジェクトのキーがy座標
+  const month_obj = useMemo(() => makeCorrectPercentGraphData(
+    elementary_correct_percents,
+    this_month_first_day,
+    this_month_end_day
+  ), [
+    elementary_correct_percents,
+    this_month_first_day,
+    this_month_end_day
+  ]);
+
+  useEffect(() => {
+    if(Object.values(month_obj).length) {
+      console.log("useEffectの中");
+      setDataState((prev) => ({
+        ...prev,
+        x_data: Object.keys(month_obj),
+        y_data: Object.values(month_obj)
+      }));
+    }
+  }, [
+    month_obj
+  ])
+
+  console.log(dataState);
 
   // legendはグラフの判例の設定を行うオプション
   const options = {
@@ -104,46 +135,14 @@ export const CorrectPercentGraph = ({
     }
   };
 
-  const labels = [
-    '1/1', 
-    '1/2',
-    '1/3',
-    '1/4',
-    '1/5',
-    '1/6',
-    '1/7',
-    '1/8',
-    '1/9',
-    '1/10',
-    '1/11',
-    '1/12',
-    '1/13',
-    '1/14',
-    '1/15',
-    '1/16',
-    '1/17',
-    '1/18',
-    '1/19',
-    '1/20',
-    '1/21',
-    '1/22',
-    '1/23',
-    '1/24',
-    '1/25',
-    '1/26',
-    '1/27',
-    '1/28',
-    '1/29',
-    '1/30',
-    '1/31',
-  ];
+  const labels = dataState["x_data"];
 
   const data = {
     labels,
     datasets: [
       {
         label: '正答率',
-        data: [null, null, 60, 0, 60, 90, 100, 100, 100, {x: '1/31', y: 70}],
+        data: dataState["y_data"],
         borderColor: COLORS.MAIN,
         backgroundColor: COLORS.MAIN,
         lineTension: 0,
