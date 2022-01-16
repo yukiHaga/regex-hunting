@@ -84,17 +84,26 @@ export const ChangeGraphBox = ({
   game_frequencies_per_day,
   ele_fastest_time,
   int_fastest_time,
-  adv_fastest_time
+  adv_fastest_time,
+  elementary_correct_percents,
+  intermediate_correct_percents,
+  advanced_correct_percents
 }) => {
 
-  //ele_fastest_timeが0の場合、
-  //format_ele_fastest_timeは00:00になる
+  // ele_fastest_timeが0の場合、
+  // format_ele_fastest_timeは00:00になる
+  // その場合は、なしをjsxで返す
   const format_ele_fastest_time = useMemo(() => getClearTime(
     0, 
     ele_fastest_time
   ).slice(3), [
     ele_fastest_time
   ]);
+
+  // 最大正答率は1ヶ月間の最大正答率である
+  // elementary_correct_percentsが空の配列の場合、
+  // 0%を返す
+  const most_ele_correct_percent = useMemo(() => ,[]);
   
   return (
     <>
@@ -124,7 +133,10 @@ export const ChangeGraphBox = ({
             </tr>
             <tr>
               <ItemTd>最大正答率</ItemTd>
-              <CustomTd>100%</CustomTd>
+              <CustomTd>
+                {
+                }
+              </CustomTd>
             </tr>
             <tr>
               <ItemTd>最速タイム</ItemTd>
