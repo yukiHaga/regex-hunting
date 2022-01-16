@@ -105,12 +105,12 @@ export const ChangeGraphBox = ({
               <CustomTd>80%</CustomTd>
             </tr>
             <tr>
-              <ItemTd>最速タイム</ItemTd>
-              <CustomTd>01:00</CustomTd>
-            </tr>
-            <tr>
               <ItemTd>最大正答率</ItemTd>
               <CustomTd>100%</CustomTd>
+            </tr>
+            <tr>
+              <ItemTd>最速タイム</ItemTd>
+              <CustomTd>01:00</CustomTd>
             </tr>
             <tr>
               <ItemTd>学習時間</ItemTd>
