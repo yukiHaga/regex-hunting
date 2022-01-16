@@ -85,6 +85,13 @@ export const ChangeGraphBox = ({
   adv_fastest_time
 }) => {
 
+  const format_ele_fastest_time = useMemo(() => getClearTime(
+    0, 
+    ele_fastest_time
+  ).slice(3), [
+    ele_fastest_time
+  ]);
+  
   return (
     <>
       <InnerChangeGraphBoxWrapper>
@@ -117,7 +124,7 @@ export const ChangeGraphBox = ({
             </tr>
             <tr>
               <ItemTd>最速タイム</ItemTd>
-              <CustomTd>{getClearTime(0, ele_fastest_time)}</CustomTd>
+              <CustomTd>{format_ele_fastest_time}</CustomTd>
             </tr>
           </CustomTable>
         </TableWrapper>
