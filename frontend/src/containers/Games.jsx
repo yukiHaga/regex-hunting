@@ -5,7 +5,6 @@ import styled, { keyframes } from 'styled-components';
 // Image
 import RealBackGroundImage from '../images/temporary_real_background_image.png';
 
-
 // Presentational Components
 import { Header } from '../components/Headers/Header.jsx';
 import { FakeHeader } from '../components/Headers/FakeHeader.jsx';

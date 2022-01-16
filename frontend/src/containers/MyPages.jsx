@@ -9,6 +9,7 @@ import { SessionFlashMessage } from '../components/FlashMessages/SessionFlashMes
 import { StatusExperienceBox } from '../components/Games/StatusExperienceBox.jsx';
 import { StudyHeatMap } from '../components/Games/StudyHeatMap.jsx';
 import { CorrectPercentGraph } from '../components/Games/CorrectPercentGraph.jsx';
+import { ChangeGraphBox } from '../components/Games/ChangeGraphBox.jsx';
 import { DescriptionWrapper } from '../components/shared_style.js';
  
 // Images
@@ -42,19 +43,19 @@ const MainWrapper = styled.div`
 // Mainのfirstラッパー
 const MainFirstWrapper = styled.div`
   display: flex;
-  justify-content: space-around;
+  justify-content: space-evenly;
 `;
 
 // Mainのsecondラッパー
 const MainSecondWrapper = styled.div`
   display: flex;
-  justify-content: start;
+  justify-content: space-evenly;
   margin-top: 40px;
 `;
 
 // ステータスのラッパー
 const StatusWrapper = styled.div`
-  width: 722px;
+  width: 700px;
   height: 260px;
   border-radius: 3px;
   background-color: ${COLORS.WHITE};
@@ -93,7 +94,7 @@ const TableWrapper = styled.div`
 `;
 
 const CustomTable = styled.table`
-  width: 450px;
+  width: 430px;
   border-collapse: collapse;
   color: ${COLORS.BLACK};
   background-color: ${COLORS.WHITE};
@@ -141,6 +142,13 @@ const StudyHeatMapWrapper = styled.div`
 
 const CorrectPercentGraphWrapper = styled.div`
   background-color: ${COLORS.WHITE};
+  box-shadow: 0 0px 20px rgba(0,0,0,0.2);
+`;
+
+const ChangeGraphBoxWrapper = styled.div`
+  width: 400px;
+  border-radius: 3px;
+  background-color: ${COLORS.OCHER};
   box-shadow: 0 0px 20px rgba(0,0,0,0.2);
 `;
 
@@ -302,6 +310,9 @@ export const MyPages = () => {
               }
             />
           </CorrectPercentGraphWrapper>
+          <ChangeGraphBoxWrapper>
+            <ChangeGraphBox />
+          </ChangeGraphBoxWrapper>
         </MainSecondWrapper>
       </MainWrapper>
     </>
