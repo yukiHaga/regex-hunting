@@ -13,6 +13,10 @@ import ArrowRightIcon from '@mui/icons-material/ArrowRight';
 // PrevButton
 import ArrowLeftIcon from '@mui/icons-material/ArrowLeft';
 
+// クリアタイムを取得する関数
+// マイページで使う場合、第1引数は0を指定する
+import { getClearTime } from '../../functions/getClearTime.js';
+
 const InnerChangeGraphBoxWrapper = styled.div`
   width: 300px;
   margin: 0 auto;
@@ -113,7 +117,7 @@ export const ChangeGraphBox = ({
             </tr>
             <tr>
               <ItemTd>最速タイム</ItemTd>
-              <CustomTd>{ele_fastest_time}</CustomTd>
+              <CustomTd>{getClearTime(0, ele_fastest_time)}</CustomTd>
             </tr>
           </CustomTable>
         </TableWrapper>

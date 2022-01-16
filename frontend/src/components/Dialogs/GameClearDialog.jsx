@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import styled from 'styled-components';
 
 // ダイアログ
@@ -30,6 +30,9 @@ import { getExperience } from '../../functions/getExperience.js';
 
 // モンスター名を取得する関数
 import { getMonsterName } from '../../functions/getMonsterName.js';
+
+// クリアタイムを取得する関数
+import { getClearTime } from '../../functions/getClearTime.js';
 
 const CustomDialogInnerWrapper = styled.div`
   padding-top: 10px;
@@ -143,24 +146,16 @@ export const GameClearDialog = ({
   rank_up
 }) => {
 
-  // このミリ秒はタイムに色をつけるために使う
-  const milli_sec = game_end_time - game_start_time;
-
-  // タイムを計算してhh:mm:ssのフォーマットで出力する関数
-  const getClearTime = (
+  const clear_time = useMemo(() => getClearTime(
     game_start_time, 
     game_end_time
-  ) => {
-    const milli_sec = game_end_time - game_start_time;
-    const sec = Math.floor(milli_sec/1000) % 60;
-    const min=Math.floor(milli_sec/1000/60) % 60;
-    const hours=Math.floor(milli_sec/1000/60/60)%24;
+  ), [
+    game_start_time,
+    game_end_time
+  ]);
 
-    const hh = ('0' + hours).slice(-2);
-    const mm = ('0' + min).slice(-2);
-    const ss = ('0' + sec).slice(-2);
-    return `${hh}:${mm}:${ss}`;
-  };
+  // このミリ秒はタイムに色をつけるために使う
+  const milli_sec = game_end_time - game_start_time;
 
   return(
     <Dialog
@@ -191,7 +186,7 @@ export const GameClearDialog = ({
                 <MetaTd>クリアタイム</MetaTd> 
                 <CustomTd>
                   <ColorTimeSpan milli_sec={milli_sec} >
-                    { getClearTime(game_start_time, game_end_time) }
+                    { clear_time }
                   </ColorTimeSpan>
                 </CustomTd>
               </tr>
@@ -237,7 +232,7 @@ export const GameClearDialog = ({
               difficulty={difficulty}             
               game_result={game_result}
               rank_up={rank_up}
-              clear_time={getClearTime(game_start_time, game_end_time)}
+              clear_time={clear_time}
             />
             {
               has_user ?
