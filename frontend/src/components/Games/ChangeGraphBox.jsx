@@ -112,10 +112,6 @@ export const ChangeGraphBox = ({
               <ItemTd>最速タイム</ItemTd>
               <CustomTd>01:00</CustomTd>
             </tr>
-            <tr>
-              <ItemTd>学習時間</ItemTd>
-              <CustomTd>1800分</CustomTd>
-            </tr>
           </CustomTable>
         </TableWrapper>
       </InnerChangeGraphBoxWrapper>
