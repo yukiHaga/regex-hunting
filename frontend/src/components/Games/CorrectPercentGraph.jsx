@@ -120,7 +120,7 @@ export const CorrectPercentGraph = () => {
     datasets: [
       {
         label: '正答率',
-        data: [0, 0, 60, 70, 60, 90, 100, 100, 100],
+        data: [null, null, 60, 0, 60, 90, 100, 100, 100, {x: '1/31', y: 70}],
         borderColor: COLORS.MAIN,
         backgroundColor: COLORS.MAIN,
         lineTension: 0,
