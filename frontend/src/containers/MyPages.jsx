@@ -88,8 +88,6 @@ const CustomImage = styled.div`
 `;
 
 const TableWrapper = styled.div`
-  background-color: ${COLORS.WHITE};
-  border-radius: 3px;
   align-self: center;
 `;
 
@@ -97,7 +95,6 @@ const CustomTable = styled.table`
   width: 430px;
   border-collapse: collapse;
   color: ${COLORS.BLACK};
-  background-color: ${COLORS.WHITE};
   font-family: YuGothic;
   font-weight: normal;
   font-size: 18px;
@@ -148,8 +145,10 @@ const CorrectPercentGraphWrapper = styled.div`
 const ChangeGraphBoxWrapper = styled.div`
   width: 400px;
   border-radius: 3px;
-  background-color: ${COLORS.OCHER};
+  background-color: ${COLORS.WHITE};
   box-shadow: 0 0px 20px rgba(0,0,0,0.2);
+  display: flex;
+  align-items: center;
 `;
 
 export const MyPages = () => {
@@ -314,6 +313,7 @@ export const MyPages = () => {
             <ChangeGraphBox />
           </ChangeGraphBoxWrapper>
         </MainSecondWrapper>
+        アイウエオ<br />柿くけこ
       </MainWrapper>
     </>
   );
