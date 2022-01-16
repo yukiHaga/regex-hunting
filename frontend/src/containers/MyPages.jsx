@@ -290,7 +290,17 @@ export const MyPages = () => {
         </MainFirstWrapper>
         <MainSecondWrapper>
           <CorrectPercentGraphWrapper>
-            <CorrectPercentGraph />
+            <CorrectPercentGraph 
+              elementary_correct_percents={
+                myPageState.elementary_correct_percents
+              }
+              intermediate_correct_percents={
+                myPageState.intermediate_correct_percents
+              }
+              advanced_correct_percents={
+                myPageState.advanced_correct_percents
+              }
+            />
           </CorrectPercentGraphWrapper>
         </MainSecondWrapper>
       </MainWrapper>

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import styled from 'styled-components';
 
 // react-chartjs-2 
@@ -19,8 +19,6 @@ import {
 // Colors
 import { COLORS } from '../../style_constants.js';
 
-import { DescriptionWrapper } from '../../components/shared_style.js';
-
 // chsrt.jsのプラグインを事前に登録しておく
 ChartJS.register(
   CategoryScale,
@@ -36,17 +34,42 @@ const InnerCorrectPercentGraphWrapper = styled.div`
   width: 700px;
 `;
 
-/*
-const CorrectPercentGraphSentenceWrapper = styled(DescriptionWrapper)`
-  font-weight: bold;
-  font-size: 24px;
-  line-height: 40px;
-  display: inline-block;
-  text-align: left;
-`;
-*/
+export const CorrectPercentGraph = ({
+  elementary_correct_percents,
+  intermediate_correct_percents,
+  advanced_correct_percents
+}) => {
 
-export const CorrectPercentGraph = () => {
+  // 今日
+  const today = useMemo(() => new Date(), []);
+
+  // 今月の月初
+  const this_month_first_day = useMemo(() => new Date(
+    today.setDate(1)
+  ), [
+    today
+  ]);
+
+  // 前月の月末
+  const prev_month_end_day = useMemo(() => new Date(
+    this_month_first_day.setDate(0)
+  ), [
+    this_month_first_day
+  ]);
+
+  // 来月の月初
+  const next_month_later_today = useMemo(() => new Date(
+    today.setMonth(today.getMonth() + 1)
+  ), [
+    today
+  ]);
+
+  // 今月の月末
+  const this_month_end_day = useMemo(() => new Date(
+    next_month_later_today.setDate(0)
+  ), [
+    next_month_later_today
+  ]);
 
   // legendはグラフの判例の設定を行うオプション
   const options = {
