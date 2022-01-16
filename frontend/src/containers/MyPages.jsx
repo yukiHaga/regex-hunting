@@ -172,6 +172,9 @@ export const MyPages = () => {
     intermediate_correct_percents: [],
     advanced_correct_percents: [],
     owned_titles: [],
+    ele_fastest_time: 0,
+    int_fastest_time: 0,
+    adv_fastest_time: 0
   };
 
   // MyPageの状態を管理するstate
@@ -222,6 +225,9 @@ export const MyPages = () => {
           intermediate_correct_percents: data.intermediate_correct_percents,
           advanced_correct_percents: data.advanced_correct_percents,
           owned_titles: data.owned_titles,
+          ele_fastest_time: data.ele_fastest_time,
+          int_fastest_time: data.int_fastest_time,
+          adv_fastest_time: data.adv_fastest_time
         })); 
       }).catch((e) => {
         if(e.response.status === HTTP_STATUS_CODE.NOT_FOUND){
