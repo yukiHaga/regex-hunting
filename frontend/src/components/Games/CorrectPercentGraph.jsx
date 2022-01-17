@@ -56,7 +56,6 @@ export const CorrectPercentGraph = memo(({
   useEffect(() => {
     if(Object.keys(elementary_graph_data).length) {
       const month_obj = elementary_graph_data; 
-      console.log(month_obj);
       setDataState((prev) => ({
         ...prev,
         x_data: Object.keys(month_obj),
