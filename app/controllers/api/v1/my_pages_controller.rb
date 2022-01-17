@@ -131,19 +131,23 @@ class Api::V1::MyPagesController < ApplicationController
 
   private
 
+  # 各日の最大の正答率を要素とした配列を返す
+  # 1日に100%が何個もあった場合、最初の100%が採用される
   def uniq_correct_percents(temp_correct_percents)
-    max_correct_percents = []
-    temp_correct_percents.each do |temp_correct_percent_1|
-      temp_storage = temp_correct_percent_1
-      temp_correct_percents.each do |temp_correct_percent_2|
-        if temp_storage[:play_date] == temp_correct_percent_2[:play_date]
-          temp_storage = temp_storage[:correct_percent] >= temp_correct_percent_2[:correct_percent] ?
-            temp_storage : temp_correct_percent_2
-        end
+    correct_percents_hash = {}
+    temp_correct_percents.each do |t_correct_percent|
+      play_date = t_correct_percent[:play_date].to_sym
+
+      if !correct_percents_hash.empty? && correct_percents_hash.keys.include?(play_date)
+        correct_percents_hash[play_date] = correct_percents_hash[play_date][:correct_percent] >= t_correct_percent[:correct_percent] ?
+                                             correct_percents_hash[play_date]
+                                           :
+                                             t_correct_percent
+      else
+        correct_percents_hash[play_date] = t_correct_percent
       end
-      max_correct_percents << temp_storage
     end
-    return max_correct_percents.uniq
+    return correct_percents_hash.values
   end
 
   # fastest_timeが0じゃなく(初期状態ではない)、かつ、
