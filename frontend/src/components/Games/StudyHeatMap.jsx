@@ -29,39 +29,14 @@ const StudyHeatMapSentenceWrapper = styled(DescriptionWrapper)`
 `;
 
 export const StudyHeatMap = memo(({
-  game_frequencies_per_day
+  game_frequencies_per_day,
+  today,
+  this_month_first_day,
+  prev_month_end_day,
+  next_month_later_today,
+  this_month_end_day
 }) => {
 
-  // 今日
-  const today = useMemo(() => new Date(), []);
-
-  // 今月の月初
-  const this_month_first_day = useMemo(() => new Date(
-    today.setDate(1)
-  ), [
-    today
-  ]);
-
-  // 前月の月末
-  const prev_month_end_day = useMemo(() => new Date(
-    this_month_first_day.setDate(0)
-  ), [
-    this_month_first_day
-  ]);
-
-  // 来月の月初
-  const next_month_later_today = useMemo(() => new Date(
-    today.setMonth(today.getMonth() + 1)
-  ), [
-    today
-  ]);
-
-  // 今月の月末
-  const this_month_end_day = useMemo(() => new Date(
-    next_month_later_today.setDate(0)
-  ), [
-    next_month_later_today
-  ]);
 
   // 今月の日付とカウントをプロパティに持つオブジェクトを生成
   // レンダリング毎に行われる不要な計算をスキップするためにuseMemoを使用

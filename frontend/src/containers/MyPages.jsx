@@ -228,6 +228,13 @@ export const MyPages = () => {
     today
   ]);
 
+  // 前月の月末
+  const prev_month_end_day = useMemo(() => new Date(
+    this_month_first_day.setDate(0)
+  ), [
+    this_month_first_day
+  ]);
+
   // 来月の月初
   const next_month_later_today = useMemo(() => new Date(
     today.setMonth(today.getMonth() + 1)
@@ -348,6 +355,11 @@ export const MyPages = () => {
           <StudyHeatMapWrapper>
             <StudyHeatMap 
               game_frequencies_per_day={myPageState.game_frequencies_per_day}
+              today={today}
+              this_month_first_day={this_month_first_day}
+              prev_month_end_day={prev_month_end_day}
+              next_month_later_today={next_month_later_today}
+              this_month_end_day={this_month_end_day}
             />
           </StudyHeatMapWrapper>
         </MainFirstWrapper>
