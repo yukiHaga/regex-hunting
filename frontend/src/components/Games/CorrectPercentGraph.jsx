@@ -1,4 +1,4 @@
-import React, { useState, useMemo, useEffect } from 'react';
+import React, { memo, useState, useMemo, useEffect } from 'react';
 import styled from 'styled-components';
 
 // react-chartjs-2 
@@ -41,7 +41,7 @@ const InnerCorrectPercentGraphWrapper = styled.div`
 
 // 親コンポーネント(MyPages)のuseEffectが実行されるまで、
 // これらのcorrect_percentsは[]である。
-export const CorrectPercentGraph = ({
+export const CorrectPercentGraph = memo(({
   elementary_correct_percents,
   intermediate_correct_percents,
   advanced_correct_percents
@@ -173,4 +173,4 @@ export const CorrectPercentGraph = ({
       </InnerCorrectPercentGraphWrapper>
     </>
   );
-};
+});
