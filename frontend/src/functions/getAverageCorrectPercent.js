@@ -12,7 +12,7 @@ export const getAverageCorrectPercent = (
   const average_correct_percent = !correct_percents.length ?
     0
   : 
-    Math.floor((correct_percents.map((obj) => {
+    Math.round((correct_percents.map((obj) => {
       return obj["correct_percent"];
     }).reduce((previousValue, currentValue) => {
       return previousValue + currentValue;
