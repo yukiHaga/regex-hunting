@@ -203,7 +203,8 @@ export const ChangeGraphBox = memo(({
   const handleElementary = () => {
     setMyPageState((prev) => ({
       ...prev,
-      real_graph_data: prev.elementary_graph_data 
+      real_graph_data: prev.elementary_graph_data, 
+      difficulty_title: "初級編"
     }));
     setStatusState((prev) => ({
       ...prev,
@@ -218,7 +219,8 @@ export const ChangeGraphBox = memo(({
   const handleIntermediate = () => {
     setMyPageState((prev) => ({
       ...prev,
-      real_graph_data: prev.intermediate_graph_data 
+      real_graph_data: prev.intermediate_graph_data, 
+      difficulty_title: "中級編"
     }));
     setStatusState((prev) => ({
       ...prev,
@@ -233,7 +235,8 @@ export const ChangeGraphBox = memo(({
   const handleAdvanced = () => {
     setMyPageState((prev) => ({
       ...prev,
-      real_graph_data: prev.advanced_graph_data 
+      real_graph_data: prev.advanced_graph_data, 
+      difficulty_title: "上級編"
     }));
     setStatusState((prev) => ({
       ...prev,

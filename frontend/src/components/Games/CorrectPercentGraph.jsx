@@ -40,6 +40,7 @@ const InnerCorrectPercentGraphWrapper = styled.div`
 // これらのcorrect_percentsは[]である。
 export const CorrectPercentGraph = memo(({
   real_graph_data,
+  difficulty_title
 }) => {
 
   const initialState = {
@@ -76,7 +77,7 @@ export const CorrectPercentGraph = memo(({
       },
       title: {
         display: true,
-        text: '初級編の正答率',
+        text: `${difficulty_title}の正答率`,
         font: {
           size: 24
         },

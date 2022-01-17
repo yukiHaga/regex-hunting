@@ -181,7 +181,8 @@ export const MyPages = () => {
     elementary_graph_data: {},
     intermediate_graph_data: {},
     advanced_graph_data: {},
-    real_graph_data: {}
+    real_graph_data: {},
+    difficulty_title: ""
   };
 
   // MyPageの状態を管理するstate
@@ -251,7 +252,8 @@ export const MyPages = () => {
           elementary_graph_data: elementary_graph_data,
           intermediate_graph_data: intermediate_graph_data,
           advanced_graph_data: advanced_graph_data,
-          real_graph_data: elementary_graph_data
+          real_graph_data: elementary_graph_data,
+          difficulty_title: "初級編"
         })); 
       }).catch((e) => {
         if(e.response.status === HTTP_STATUS_CODE.NOT_FOUND){
@@ -330,6 +332,9 @@ export const MyPages = () => {
             <CorrectPercentGraph 
               real_graph_data={
                 myPageState.real_graph_data
+              }
+              difficulty_title={
+                myPageState.difficulty_title
               }
             />
           </CorrectPercentGraphWrapper>
