@@ -125,6 +125,7 @@ export const CorrectPercentGraph = ({
         position: 'bottom',
         padding: {
           top: 10,
+          bottom: 2
         }
       }
     },
