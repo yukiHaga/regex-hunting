@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react';
+import React, { memo, useMemo } from 'react';
 import styled from 'styled-components';
 
 // React Heat Map
@@ -28,7 +28,7 @@ const StudyHeatMapSentenceWrapper = styled(DescriptionWrapper)`
   text-align: left;
 `;
 
-export const StudyHeatMap = ({
+export const StudyHeatMap = memo(({
   game_frequencies_per_day
 }) => {
 
@@ -127,4 +127,4 @@ export const StudyHeatMap = ({
       </InnerStudyHeatMapWrapper>
     </>
   );
-};
+});
