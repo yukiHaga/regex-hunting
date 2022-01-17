@@ -1,4 +1,4 @@
-import React, { useState, useMemo, useEffect } from 'react';
+import React, { memo, useState, useMemo, useEffect } from 'react';
 import styled from 'styled-components';
 
 // DescriptionWrapper
@@ -85,7 +85,7 @@ const ButtonWrapper = styled.div`
 
 // 一回もゲームクリアをしていない場合、
 // fastest_timeは0でサーバー側から送られる
-export const ChangeGraphBox = ({
+export const ChangeGraphBox = memo(({
   ele_fastest_time,
   int_fastest_time,
   adv_fastest_time,
@@ -315,4 +315,4 @@ export const ChangeGraphBox = ({
       </InnerChangeGraphBoxWrapper>
     </>
   );
-};
+});
