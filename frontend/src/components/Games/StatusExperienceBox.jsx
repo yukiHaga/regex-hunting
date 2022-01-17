@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 import styled from 'styled-components';
 
 // Colors
@@ -49,7 +49,7 @@ const InnerExperienceGageWrapper = styled.div`
   border: 1px solid rgba(0,0,0,.2);
 `;
 
-export const StatusExperienceBox = ({
+export const StatusExperienceBox = memo(({
   total_experience,
   maximum_experience_per_rank, 
   temporary_experience,
@@ -81,4 +81,4 @@ export const StatusExperienceBox = ({
       </ExperienceBoxWrapper>
     </>
   );
-};
+});
