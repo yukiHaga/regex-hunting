@@ -1,4 +1,4 @@
-import React, { Fragment, useContext, useLayoutEffect, useState, useMemo } from 'react';
+import React, { Fragment, useContext, useLayoutEffect, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 
@@ -218,42 +218,28 @@ export const MyPages = () => {
     requestUserActionTyps.REQUEST_FAILURE
   ]);
 
-  // 今日
-  const today = useMemo(() => new Date(), []);
-
-  // 今月の月初
-  const this_month_first_day = useMemo(() => new Date(
-    today.setDate(1)
-  ), [
-    today
-  ]);
-
-  // 前月の月末
-  const prev_month_end_day = useMemo(() => new Date(
-    this_month_first_day.setDate(0)
-  ), [
-    this_month_first_day
-  ]);
-
-  // 来月の月初
-  const next_month_later_today = useMemo(() => new Date(
-    today.setMonth(today.getMonth() + 1)
-  ), [
-    today
-  ]);
-
-  // 今月の月末
-  const this_month_end_day = useMemo(() => new Date(
-    next_month_later_today.setDate(0)
-  ), [
-    next_month_later_today
-  ]);
-
   // マイページの情報を取得するuseLayoutEffect
   // 初回マウント時とuserが変化したタイミングで実行される
   // user存在時のみ発動するように、if文で制御した
   useLayoutEffect(() => {
     if(Object.keys(user).length){
+      // 今月の月初
+      const this_month_first_day = new Date(
+        new Date(
+          new Date().getFullYear(), 
+          new Date().getMonth(), 
+          1
+        )
+      );
+
+      // 今月の月末
+      const this_month_end_day = new Date(
+        new Date(
+          new Date().getFullYear(), 
+          new Date().getMonth() + 1, 
+          0
+        )
+      );
       getMyPageInfo(user).then((data) => {
         const elementary_graph_data = makeCorrectPercentGraphData(
           data.elementary_correct_percents,
@@ -296,8 +282,6 @@ export const MyPages = () => {
     }
   }, [
     user,
-    this_month_first_day,
-    this_month_end_day
   ]);
 
   // location
@@ -355,11 +339,6 @@ export const MyPages = () => {
           <StudyHeatMapWrapper>
             <StudyHeatMap 
               game_frequencies_per_day={myPageState.game_frequencies_per_day}
-              today={today}
-              this_month_first_day={this_month_first_day}
-              prev_month_end_day={prev_month_end_day}
-              next_month_later_today={next_month_later_today}
-              this_month_end_day={this_month_end_day}
             />
           </StudyHeatMapWrapper>
         </MainFirstWrapper>

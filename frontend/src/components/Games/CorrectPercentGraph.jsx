@@ -54,7 +54,6 @@ export const CorrectPercentGraph = memo(({
   // このオブジェクトのプロパティがx座標
   // このオブジェクトのキーがy座標
   useEffect(() => {
-    console.log(elementary_graph_data)
     if(Object.keys(elementary_graph_data).length) {
       const month_obj = elementary_graph_data; 
       setDataState((prev) => ({

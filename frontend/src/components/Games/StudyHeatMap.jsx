@@ -30,13 +30,33 @@ const StudyHeatMapSentenceWrapper = styled(DescriptionWrapper)`
 
 export const StudyHeatMap = memo(({
   game_frequencies_per_day,
-  today,
-  this_month_first_day,
-  prev_month_end_day,
-  next_month_later_today,
-  this_month_end_day
 }) => {
 
+  // 今月の月初
+  const this_month_first_day = useMemo(() => new Date(
+    new Date(
+      new Date().getFullYear(), 
+      new Date().getMonth(), 
+      1
+    )
+  ), [
+  ]);
+
+  // 前月の月末
+  const prev_month_end_day = useMemo(() => new Date(
+    new Date().setDate(0), 
+  ), [
+  ]);
+
+  // 今月の月末
+  const this_month_end_day = useMemo(() => new Date(
+    new Date(
+      new Date().getFullYear(), 
+      new Date().getMonth() + 1, 
+      0
+    )
+  ), [
+  ]);
 
   // 今月の日付とカウントをプロパティに持つオブジェクトを生成
   // レンダリング毎に行われる不要な計算をスキップするためにuseMemoを使用
