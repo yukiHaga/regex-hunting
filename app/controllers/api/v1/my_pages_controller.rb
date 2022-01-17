@@ -76,7 +76,6 @@ class Api::V1::MyPagesController < ApplicationController
     elementary_correct_percents = uniq_correct_percents(
                                     temp_elementary_correct_percents
                                   )
-    binding.pry
 
     # 各日付における中級の最大正答率を導く処理
     intermediate_correct_percents = uniq_correct_percents(
