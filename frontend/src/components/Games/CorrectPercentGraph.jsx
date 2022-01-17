@@ -12,6 +12,7 @@ import {
   PointElement,
   LineElement,
   Title,
+  SubTitle,
   Tooltip,
   Legend,
 } from 'chart.js';
@@ -29,6 +30,7 @@ ChartJS.register(
   PointElement,
   LineElement,
   Title,
+  SubTitle,
   Tooltip,
   Legend
 );
@@ -116,6 +118,14 @@ export const CorrectPercentGraph = ({
           size: 24
         },
         color: COLORS.BLACK,
+      },
+      subtitle: {
+        display: true,
+        text: '(※) ゲームクリアしたデータに対して、正答率を算出しています。',
+        position: 'bottom',
+        padding: {
+          top: 10,
+        }
       }
     },
     scales: {
