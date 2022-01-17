@@ -1,4 +1,4 @@
-import React, { memo, useState, useMemo, useEffect } from 'react';
+import React, { memo, useState, useEffect } from 'react';
 import styled from 'styled-components';
 
 // react-chartjs-2 
@@ -20,9 +20,6 @@ import {
 // Colors
 import { COLORS } from '../../style_constants.js';
 
-// グラフのx座標とy座標を生成する関数 
-import { makeCorrectPercentGraphData } from '../../functions/makeCorrectPercentGraphData.js'
-
 // chsrt.jsのプラグインを事前に登録しておく
 ChartJS.register(
   CategoryScale,
@@ -42,55 +39,24 @@ const InnerCorrectPercentGraphWrapper = styled.div`
 // 親コンポーネント(MyPages)のuseEffectが実行されるまで、
 // これらのcorrect_percentsは[]である。
 export const CorrectPercentGraph = memo(({
-  elementary_correct_percents,
-  intermediate_correct_percents,
-  advanced_correct_percents
+  elementary_graph_data,
 }) => {
 
   const initialState = {
     x_data: [],
     y_data: [],
-    plot: false
   };
 
   const [dataState, setDataState] = useState(initialState);
-
-  // 今日
-  const today = useMemo(() => new Date(), []);
-
-  // 今月の月初
-  const this_month_first_day = useMemo(() => new Date(
-    today.setDate(1)
-  ), [
-    today
-  ]);
-
-  // 来月の月初
-  const next_month_later_today = useMemo(() => new Date(
-    today.setMonth(today.getMonth() + 1)
-  ), [
-    today
-  ]);
-
-  // 今月の月末
-  const this_month_end_day = useMemo(() => new Date(
-    next_month_later_today.setDate(0)
-  ), [
-    next_month_later_today
-  ]);
-
 
   // 初回にグラフを表示させるためのuseEffect
   // 今月のx座標(月日)とy座標(正答率)のオブジェクトを取得する
   // このオブジェクトのプロパティがx座標
   // このオブジェクトのキーがy座標
   useEffect(() => {
-    if(Object.keys(elementary_correct_percents).length && !dataState.plot) {
-      const month_obj = makeCorrectPercentGraphData(
-        elementary_correct_percents,
-        this_month_first_day,
-        this_month_end_day
-      ) 
+    if(Object.keys(elementary_graph_data).length) {
+      const month_obj = elementary_graph_data; 
+      console.log(month_obj);
       setDataState((prev) => ({
         ...prev,
         x_data: Object.keys(month_obj),
@@ -98,10 +64,7 @@ export const CorrectPercentGraph = memo(({
       }));
     }
   }, [
-    dataState.plot,
-    elementary_correct_percents,
-    this_month_first_day,
-    this_month_end_day
+    elementary_graph_data,
   ])
 
   // legendはグラフの判例の設定を行うオプション

@@ -1,4 +1,4 @@
-import React, { Fragment, useContext, useLayoutEffect, useState } from 'react';
+import React, { Fragment, useContext, useLayoutEffect, useState, useMemo } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 
@@ -29,6 +29,9 @@ import { HTTP_STATUS_CODE } from '../constants';
 
 // Colors
 import { COLORS } from '../style_constants.js';
+
+// グラフのx座標とy座標を生成する関数 
+import { makeCorrectPercentGraphData } from '../functions/makeCorrectPercentGraphData.js'
 
 const FakeBlock = styled.div`
   background-color: ${COLORS.SUB};
@@ -174,7 +177,10 @@ export const MyPages = () => {
     owned_titles: [],
     ele_fastest_time: 0,
     int_fastest_time: 0,
-    adv_fastest_time: 0
+    adv_fastest_time: 0,
+    elementary_graph_data: {},
+    intermediate_graph_data: {},
+    advanced_graph_data: {}
   };
 
   // MyPageの状態を管理するstate
@@ -212,12 +218,51 @@ export const MyPages = () => {
     requestUserActionTyps.REQUEST_FAILURE
   ]);
 
+  // 今日
+  const today = useMemo(() => new Date(), []);
+
+  // 今月の月初
+  const this_month_first_day = useMemo(() => new Date(
+    today.setDate(1)
+  ), [
+    today
+  ]);
+
+  // 来月の月初
+  const next_month_later_today = useMemo(() => new Date(
+    today.setMonth(today.getMonth() + 1)
+  ), [
+    today
+  ]);
+
+  // 今月の月末
+  const this_month_end_day = useMemo(() => new Date(
+    next_month_later_today.setDate(0)
+  ), [
+    next_month_later_today
+  ]);
+
   // マイページの情報を取得するuseLayoutEffect
   // 初回マウント時とuserが変化したタイミングで実行される
   // user存在時のみ発動するように、if文で制御した
   useLayoutEffect(() => {
     if(Object.keys(user).length){
       getMyPageInfo(user).then((data) => {
+        const elementary_graph_data = makeCorrectPercentGraphData(
+          data.elementary_correct_percents,
+          this_month_first_day,
+          this_month_end_day
+        );
+        const intermediate_graph_data = makeCorrectPercentGraphData(
+          data.intermediate_correct_percents,
+          this_month_first_day,
+          this_month_end_day
+        );
+        const advanced_graph_data = makeCorrectPercentGraphData(
+          data.advanced_correct_percents,
+          this_month_first_day,
+          this_month_end_day
+        )
         setMyPageState((prev) => ({
           ...prev,
           game_frequencies_per_day: data.game_frequencies_per_day,
@@ -227,7 +272,10 @@ export const MyPages = () => {
           owned_titles: data.owned_titles,
           ele_fastest_time: data.ele_fastest_time,
           int_fastest_time: data.int_fastest_time,
-          adv_fastest_time: data.adv_fastest_time
+          adv_fastest_time: data.adv_fastest_time,
+          elementary_graph_data: elementary_graph_data,
+          intermediate_graph_data: intermediate_graph_data,
+          advanced_graph_data: advanced_graph_data
         })); 
       }).catch((e) => {
         if(e.response.status === HTTP_STATUS_CODE.NOT_FOUND){
@@ -240,7 +288,9 @@ export const MyPages = () => {
       });
     }
   }, [
-    user
+    user,
+    this_month_first_day,
+    this_month_end_day
   ]);
 
   // location
@@ -304,14 +354,8 @@ export const MyPages = () => {
         <MainSecondWrapper>
           <CorrectPercentGraphWrapper>
             <CorrectPercentGraph 
-              elementary_correct_percents={
-                myPageState.elementary_correct_percents
-              }
-              intermediate_correct_percents={
-                myPageState.intermediate_correct_percents
-              }
-              advanced_correct_percents={
-                myPageState.advanced_correct_percents
+              elementary_graph_data={
+                myPageState.elementary_graph_data
               }
             />
           </CorrectPercentGraphWrapper>
