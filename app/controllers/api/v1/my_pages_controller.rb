@@ -76,6 +76,7 @@ class Api::V1::MyPagesController < ApplicationController
     elementary_correct_percents = uniq_correct_percents(
                                     temp_elementary_correct_percents
                                   )
+    binding.pry
 
     # 各日付における中級の最大正答率を導く処理
     intermediate_correct_percents = uniq_correct_percents(
@@ -133,10 +134,14 @@ class Api::V1::MyPagesController < ApplicationController
 
   # 各日の最大の正答率を要素とした配列を返す
   # 1日に100%が何個もあった場合、最初の100%が採用される
+  # temp_correct_percentsは配列
+  # temp_correct_percentsが空の配列の場合、
+  # 空のオブジェクトに対してvaluesメソッドを使うので、
+  # 空の配列が返される
   def uniq_correct_percents(temp_correct_percents)
     correct_percents_hash = {}
     temp_correct_percents.each do |t_correct_percent|
-      play_date = t_correct_percent[:play_date].to_sym
+      play_date = t_correct_percent[:play_date].to_s.to_sym
 
       if !correct_percents_hash.empty? && correct_percents_hash.keys.include?(play_date)
         correct_percents_hash[play_date] = correct_percents_hash[play_date][:correct_percent] >= t_correct_percent[:correct_percent] ?
