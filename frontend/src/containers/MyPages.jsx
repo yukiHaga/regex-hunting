@@ -180,7 +180,8 @@ export const MyPages = () => {
     adv_fastest_time: 0,
     elementary_graph_data: {},
     intermediate_graph_data: {},
-    advanced_graph_data: {}
+    advanced_graph_data: {},
+    real_graph_data: {}
   };
 
   // MyPageの状態を管理するstate
@@ -221,40 +222,21 @@ export const MyPages = () => {
   // マイページの情報を取得するuseLayoutEffect
   // 初回マウント時とuserが変化したタイミングで実行される
   // user存在時のみ発動するように、if文で制御した
+  // 内部で今月のグラフのデータも算出している
+  //
   useLayoutEffect(() => {
     if(Object.keys(user).length){
-      // 今月の月初
-      const this_month_first_day = new Date(
-        new Date(
-          new Date().getFullYear(), 
-          new Date().getMonth(), 
-          1
-        )
-      );
-
-      // 今月の月末
-      const this_month_end_day = new Date(
-        new Date(
-          new Date().getFullYear(), 
-          new Date().getMonth() + 1, 
-          0
-        )
-      );
       getMyPageInfo(user).then((data) => {
         const elementary_graph_data = makeCorrectPercentGraphData(
           data.elementary_correct_percents,
-          this_month_first_day,
-          this_month_end_day
         );
+
+        console.log(elementary_graph_data);
         const intermediate_graph_data = makeCorrectPercentGraphData(
           data.intermediate_correct_percents,
-          this_month_first_day,
-          this_month_end_day
         );
         const advanced_graph_data = makeCorrectPercentGraphData(
           data.advanced_correct_percents,
-          this_month_first_day,
-          this_month_end_day
         )
         setMyPageState((prev) => ({
           ...prev,
@@ -268,7 +250,8 @@ export const MyPages = () => {
           adv_fastest_time: data.adv_fastest_time,
           elementary_graph_data: elementary_graph_data,
           intermediate_graph_data: intermediate_graph_data,
-          advanced_graph_data: advanced_graph_data
+          advanced_graph_data: advanced_graph_data,
+          real_graph_data: elementary_graph_data
         })); 
       }).catch((e) => {
         if(e.response.status === HTTP_STATUS_CODE.NOT_FOUND){
@@ -345,8 +328,8 @@ export const MyPages = () => {
         <MainSecondWrapper>
           <CorrectPercentGraphWrapper>
             <CorrectPercentGraph 
-              elementary_graph_data={
-                myPageState.elementary_graph_data
+              real_graph_data={
+                myPageState.real_graph_data
               }
             />
           </CorrectPercentGraphWrapper>
@@ -364,6 +347,7 @@ export const MyPages = () => {
               advanced_correct_percents={
                 myPageState.advanced_correct_percents
               }
+              setMyPageState={setMyPageState}
             />
           </ChangeGraphBoxWrapper>
         </MainSecondWrapper>

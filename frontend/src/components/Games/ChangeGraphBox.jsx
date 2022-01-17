@@ -91,7 +91,8 @@ export const ChangeGraphBox = memo(({
   adv_fastest_time,
   elementary_correct_percents,
   intermediate_correct_percents,
-  advanced_correct_percents
+  advanced_correct_percents,
+  setMyPageState
 }) => {
 
   // 今月の初級編の最速クリアタイムを出力する処理
@@ -191,7 +192,7 @@ export const ChangeGraphBox = memo(({
       format_fastest_time: format_ele_fastest_time,
       most_correct_percent: most_ele_correct_percent,
       average_correct_percent: average_ele_correct_percent,
-    }))
+    }));
   },[
     format_ele_fastest_time,
     most_ele_correct_percent,
@@ -200,6 +201,10 @@ export const ChangeGraphBox = memo(({
 
   // 初級のデータを表示する関数
   const handleElementary = () => {
+    setMyPageState((prev) => ({
+      ...prev,
+      real_graph_data: prev.elementary_graph_data 
+    }));
     setStatusState((prev) => ({
       ...prev,
       difficulty_title: "初級編",
@@ -211,6 +216,10 @@ export const ChangeGraphBox = memo(({
 
   // 中級のデータを表示する関数
   const handleIntermediate = () => {
+    setMyPageState((prev) => ({
+      ...prev,
+      real_graph_data: prev.intermediate_graph_data 
+    }));
     setStatusState((prev) => ({
       ...prev,
       difficulty_title: "中級編",
@@ -222,6 +231,10 @@ export const ChangeGraphBox = memo(({
 
   // 上級のデータを表示する関数
   const handleAdvanced = () => {
+    setMyPageState((prev) => ({
+      ...prev,
+      real_graph_data: prev.advanced_graph_data 
+    }));
     setStatusState((prev) => ({
       ...prev,
       difficulty_title: "上級編",

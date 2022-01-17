@@ -39,7 +39,7 @@ const InnerCorrectPercentGraphWrapper = styled.div`
 // 親コンポーネント(MyPages)のuseEffectが実行されるまで、
 // これらのcorrect_percentsは[]である。
 export const CorrectPercentGraph = memo(({
-  elementary_graph_data,
+  real_graph_data,
 }) => {
 
   const initialState = {
@@ -53,9 +53,10 @@ export const CorrectPercentGraph = memo(({
   // 今月のx座標(月日)とy座標(正答率)のオブジェクトを取得する
   // このオブジェクトのプロパティがx座標
   // このオブジェクトのキーがy座標
+  // if文の条件を満たしていて、かつ、real_graph_dataが変化するたびに実行される
   useEffect(() => {
-    if(Object.keys(elementary_graph_data).length) {
-      const month_obj = elementary_graph_data; 
+    if(Object.keys(real_graph_data).length) {
+      const month_obj = real_graph_data; 
       setDataState((prev) => ({
         ...prev,
         x_data: Object.keys(month_obj),
@@ -63,7 +64,7 @@ export const CorrectPercentGraph = memo(({
       }));
     }
   }, [
-    elementary_graph_data,
+    real_graph_data
   ])
 
   // legendはグラフの判例の設定を行うオプション
