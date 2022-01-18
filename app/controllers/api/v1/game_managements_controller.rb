@@ -131,6 +131,7 @@ class Api::V1::GameManagementsController < ApplicationController
     # レンダリング
     render json: {
       send_game_data: true,
+      session: true,
       user: {
         rank: current_user ? current_user[:rank] : 1,
         total_experience: current_user ? current_user[:total_experience] : 0,
