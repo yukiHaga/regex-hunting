@@ -46,7 +46,7 @@ import { HTTP_STATUS_CODE } from '../constants';
 import { getMonsterName } from '../functions/getMonsterName.js';
 
 // ゲームクリア音
-import GameClearSound from '../sounds/game_clear_50.wav';
+import GameClearSound from '../sounds/game_clear_25.mp3';
 
 // ゲームオーバー音
 import GameOverSound from '../sounds/game_over.mp3';
@@ -401,6 +401,7 @@ export const Games = () => {
                   temporary_experience: data.user.temporary_experience,
                   active_title: data.user.active_title
                 },
+                play: { play: false }
               }
             });
           }

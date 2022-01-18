@@ -1,7 +1,7 @@
 import { REQUEST_STATE } from '../constants';
 
 // 戦闘bgm
-import BattleSound from '../sounds/battle_50.wav';
+import BattleSound from '../sounds/battle_25.mp3';
 
 // useReducerで使うinitialStateを定義
 export const initialState = {
