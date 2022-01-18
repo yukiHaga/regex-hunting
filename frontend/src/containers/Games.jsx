@@ -218,6 +218,8 @@ export const Games = () => {
   // ログインしていたらsessionStateはtrueなので、最初のif文は実行されない。
   // ログインしててリロードするとsessionStateはfalseなので、最初のif文が実行される。
   // サーバー側でcurrent_userが存在しない場合、sessionStateはfalseとなる
+  // 2個目のif文はログインの有無に関わらず必ず実行される
+  // ログインしていない場合は、user等は{}だが、playがtrueになる
   useLayoutEffect(() => {
     if(sessionState === false){
       checkLoginStatus().then((data) => {
@@ -323,12 +325,14 @@ export const Games = () => {
                                       true 
                                     : 
                                       false;
-      gameState.game_result === "progress" && 
-      !gameState.game_description_open &&
-      !gameState.click_meta_open ? 
-        battleAudioState.audio.play() 
-      : 
+      if(gameState.game_result === "progress" && !gameState.game_description_open && !gameState.click_meta_open) {
+        battleAudioState.audio.play();
+      } else if (gameState.game_result === "win" || gameState.game_result === "lose") {
         battleAudioState.audio.pause();
+        battleAudioState.audio.currentTime = 0;
+      } else {
+        battleAudioState.audio.pause();
+      }
     }
   }, [
     gameState.game_result,
