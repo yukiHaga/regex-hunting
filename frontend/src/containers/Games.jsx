@@ -46,13 +46,13 @@ import { HTTP_STATUS_CODE } from '../constants';
 import { getMonsterName } from '../functions/getMonsterName.js';
 
 // ゲームクリア音
-import GameClearSound from '../sounds/game_clear.wav';
+import GameClearSound from '../sounds/game_clear_50.wav';
 
 // ゲームオーバー音
 import GameOverSound from '../sounds/game_over.mp3';
 
 // 戦闘bgm
-import BattleSound from '../sounds/battle.wav';
+import BattleSound from '../sounds/battle_50.wav';
 
 // MainContentWrapperコンポーネント
 const MainContentWrapper = styled.div`
@@ -320,14 +320,18 @@ export const Games = () => {
                                       true 
                                     : 
                                       false;
-      gameState.game_result === "progress" ? 
+      gameState.game_result === "progress" && 
+      !gameState.game_description_open &&
+      !gameState.click_meta_open ? 
         gameState.battle_audio.play() 
       : 
         gameState.battle_audio.pause();
     }
   }, [
     gameState.game_result,
-    gameState.battle_audio
+    gameState.battle_audio,
+    gameState.game_description_open,
+    gameState.click_meta_open
   ])
 
   // ゲームクリア時の音
