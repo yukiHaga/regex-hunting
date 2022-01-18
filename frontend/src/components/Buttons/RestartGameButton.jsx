@@ -67,7 +67,6 @@ export const RestartGameButton = ({
         sample_answer: data.questions["0"].sample_answer,
         next_commentary: data.questions["0"].commentary,
         next_hint: data.questions["0"].hint,
-        game_result: data.game_management.game_result,
         game_start_time: performance.now(),
         has_user: sessionState ? 
           true

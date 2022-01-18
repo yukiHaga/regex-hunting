@@ -138,7 +138,8 @@ export const QuestionBlock = ({
           next_hint: prev.questions["1"].hint,
           key_available: true,
           first_appearance: false,
-          time_active: true
+          time_active: true,
+          game_result: "progress"
         }));
       }, 3000);
       return () => clearTimeout(timer);

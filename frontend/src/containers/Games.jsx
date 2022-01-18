@@ -51,6 +51,9 @@ import GameClearSound from '../sounds/game_clear.wav';
 // ゲームオーバー音
 import GameOverSound from '../sounds/game_over.mp3';
 
+// 戦闘bgm
+import BattleSound from '../sounds/battle.wav';
+
 // MainContentWrapperコンポーネント
 const MainContentWrapper = styled.div`
   padding-top: 36px;
@@ -203,7 +206,8 @@ export const Games = () => {
     rank_up: false,
     active_title: "見習いハンター",
     click_description_open: false,
-    click_meta_open: false
+    click_meta_open: false,
+    battle_audio: new Audio(BattleSound)
   }
 
   // ゲーム状態を管理するstate
@@ -257,7 +261,6 @@ export const Games = () => {
           sample_answer: data.questions["0"].sample_answer,
           next_hint: data.questions["0"].hint,
           next_commentary: data.questions["0"].commentary,
-          game_result: data.game_management.game_result,
           game_start_time: performance.now(),
           game_description_open: true,
           has_user: sessionState ? 
@@ -309,6 +312,23 @@ export const Games = () => {
     requestUserActionTyps.REQUEST_SUCCESS,
     requestUserActionTyps.REQUEST_FAILURE,
   ]);
+
+  // 戦闘中のbgm
+  useEffect(() => {
+    if(gameState.game_result !== "") {
+      gameState.battle_audio.loop = gameState.game_result === "progress" ? 
+                                      true 
+                                    : 
+                                      false;
+      gameState.game_result === "progress" ? 
+        gameState.battle_audio.play() 
+      : 
+        gameState.battle_audio.pause();
+    }
+  }, [
+    gameState.game_result,
+    gameState.battle_audio
+  ])
 
   // ゲームクリア時の音
   useEffect(() => {
