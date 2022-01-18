@@ -638,7 +638,6 @@ export const Games = () => {
             temporary_experience={gameState.temporary_experience}
             prev_temporary_experience={gameState.prev_temporary_experience}
             dialog_gage_up={gameState.dialog_gage_up}
-            sessionState={sessionState}
             game_result={gameState.game_result}
             rank_up={gameState.rank_up}
           />
