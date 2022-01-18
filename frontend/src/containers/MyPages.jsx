@@ -224,7 +224,6 @@ export const MyPages = () => {
   // 初回マウント時とuserが変化したタイミングで実行される
   // user存在時のみ発動するように、if文で制御した
   // 内部で今月のグラフのデータも算出している
-  //
   useLayoutEffect(() => {
     if(Object.keys(user).length){
       getMyPageInfo(user).then((data) => {

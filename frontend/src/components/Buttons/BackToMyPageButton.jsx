@@ -36,7 +36,7 @@ const BackToMyPageButtonTextWrapper = styled.div`
 export const BackToMyPageButton = () => {
   return (
     <>
-      <BackToMyPageButtonWrapper to={'/my-page'}>
+    <BackToMyPageButtonWrapper to={'/my-page'}>
         <BackToMyPageButtonTextWrapper>
           選択画面へ戻る
         </BackToMyPageButtonTextWrapper>
