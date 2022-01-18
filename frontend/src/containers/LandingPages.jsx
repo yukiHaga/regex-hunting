@@ -5,7 +5,7 @@ import styled from 'styled-components';
 // Image
 import MainTitleImage from '../images/main_title.png';
 import BackGroundImage from '../images/background.png';
-import MainMonsterImage from '../images/intermediate.png';
+import MainMonsterImage from '../images/advanced.png';
 import BattleSceneImage from '../images/battle_scene.png';
 import MyPageImage from '../images/my_page_image.png';
 import RaknkingImage from '../images/ranking_image.png';
@@ -83,8 +83,8 @@ const MainMonsterImageCover = styled.img`
   object-fit: contain;
   z-index: -3;
   position: absolute;
-  top: 55px;
-  left: 200px;
+  top: 25px;
+  left: 250px;
 `;
 
 // フラッシュメッセージでレイアウトが変化しないためのブロック要素

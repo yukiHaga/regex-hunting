@@ -3,7 +3,7 @@ import { useParams, useLocation, useNavigate } from 'react-router-dom';
 import styled, { keyframes } from 'styled-components';
 
 // Image
-import BackGroundImage from '../images/background.png';
+import RealBackGroundImage from '../images/temporary_real_background_image.png';
 
 // Presentational Components
 import { Header } from '../components/Headers/Header.jsx';
@@ -58,11 +58,11 @@ const MainContentWrapper = styled.div`
 
 // 背景画像
 const BackGroundImageCover = styled.img`
-  width: 1790px;
+  width: 1440px;
   height: 734px;
   position: absolute;
   top: 55px;
-  left: -350px;
+  left: 0px;
   z-index: -4;
 `;
 
@@ -90,7 +90,6 @@ const GameBlockWrapper = styled.div`
 
 // SlideWrapperコンポーネント
 const SlideWrapper = styled.div`
-  box-shadow: 0 0px 20px rgba(0,0,0,0.2);
 `;
 
 // BattleBlockWrapperコンポーネント
@@ -104,7 +103,6 @@ const BattleBlockWrapper = styled.div`
 const MonsterBlockWrapper = styled.div`
   height: 370px;
   width: 900px;
-  margin-left: 43px;
   margin-top: 10px;
   display: flex;
   justify-content: space-evenly;
@@ -124,7 +122,6 @@ const QuestionBlockWrapper = styled.div`
 const CodeBlockWrapper = styled.div`
   height: 53px;
   margin-top: 13px;
-  box-shadow: 0 0px 20px rgba(0,0,0,0.2);
 `;
 
 // GageBlockWrapperコンポーネント
@@ -220,6 +217,7 @@ export const Games = () => {
   // useEffectは実行されない                    
   // ログインしていたらsessionStateはtrueなので、最初のif文は実行されない。
   // ログインしててリロードするとsessionStateはfalseなので、最初のif文が実行される。
+  // サーバー側でcurrent_userが存在しない場合、sessionStateはfalseとなる
   useLayoutEffect(() => {
     if(sessionState === false){
       checkLoginStatus().then((data) => {
@@ -244,7 +242,6 @@ export const Games = () => {
       })
     }
     if(!Object.keys(gameState.game_management).length){
-      console.log("Object.keysの中");
       getGameStart(difficulty).then((data) => {
         setGameState((prev) => ({
           ...prev,
@@ -342,9 +339,10 @@ export const Games = () => {
   // そのため、絶対1回しか発動しない
   // result_timeの単位はミリ秒である。
   // ユーザーがログインしていなくても送る。
+  // ログインユーザーの場合、contextを更新する
+  // ログインユーザーしかsessionStateはtrueにならないので、そこを利用する
   useEffect(() => {
     if(!gameState.send_game_data && gameState.game_result === "win"){
-      console.log("ゲーム終了のif文の中");
       const timer = setTimeout(() => {
         postGameFinish({
           game_management: {
@@ -364,6 +362,21 @@ export const Games = () => {
             active_title: gameState.active_title
           }
         }).then((data) => {
+          if(sessionState) {
+            dispatch({
+              type: requestUserActionTyps.REQUEST_SUCCESS,
+              payload: {
+                session: data.session,
+                user: {
+                  rank: data.user.rank,
+                  total_experience: data.user.total_experience,
+                  maximum_experience_per_rank: data.user.maximum_experience_per_rank,
+                  temporary_experience: data.user.temporary_experience,
+                  active_title: data.user.active_title
+                },
+              }
+            });
+          }
           setGameState((prev) => ({
             ...prev,
             send_game_data: data.send_game_data,
@@ -432,6 +445,7 @@ export const Games = () => {
     sessionState,
     requestUserActionTyps.REQUEST_FAILURE, 
     requestUserActionTyps.REQUEST_SUCCESS,
+    dispatch
   ]);
 
   console.log(gameState);
@@ -441,7 +455,7 @@ export const Games = () => {
       <Header />
       <FakeHeader />
       <MainContentWrapper>
-        <BackGroundImageCover src={BackGroundImage} />
+        <BackGroundImageCover src={RealBackGroundImage} />
         <MainGameContentWrapper
           question_judgement={gameState.question_judgement}
         >

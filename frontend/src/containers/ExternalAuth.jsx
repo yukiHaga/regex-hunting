@@ -44,7 +44,12 @@ export const ExternalAuth = () => {
         state: { display: true, success: "アカウントが見つかりません。"}
       });
     }
-  }, [callBackState, code, provider, navigate]);
+  }, [
+    callBackState, 
+    code, 
+    provider, 
+    navigate
+  ]);
 
   return (
     <CustomDiv>

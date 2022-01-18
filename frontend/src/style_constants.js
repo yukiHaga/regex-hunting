@@ -21,7 +21,8 @@ export const COLORS = {
   WORD_BACK: '#BFE4FF',
   OVER_BLACK: '#444444',
   ANSWER_GRAY: '#E5E5E5',
-  EXPERIENCE: '#00a968'
+  EXPERIENCE: '#00a968',
+  LIGHT_GRAY: '#f6f6f6'
 }
 
 // フォントサイズを決める際に、適宜定義する。

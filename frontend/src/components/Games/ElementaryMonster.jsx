@@ -84,6 +84,7 @@ const HpGageWrapper = styled.div`
   animation-fill-mode: forwards;
   border: 1px solid #000;
   box-shadow: inset 1px 1px 3px 0 rgba(0, 0, 0, 0.8), 1px 1px 0 0 rgba(255, 255, 255, 0.12);
+  margin: 0 auto;
 `;
 
 const InnerHpGageWrapper = styled.div`

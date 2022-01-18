@@ -4,7 +4,7 @@ import styled from 'styled-components';
 // Colors
 import { COLORS } from '../../style_constants.js';
 
-import AdvancedMonsterImage from '../../images/intermediate.png'; 
+import AdvancedMonsterImage from '../../images/advanced.png'; 
 
 const AdvancedWrapper = styled.div`
 `;

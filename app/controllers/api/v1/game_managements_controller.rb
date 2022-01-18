@@ -70,7 +70,8 @@ class Api::V1::GameManagementsController < ApplicationController
 
     # ゲーム管理に関する処理
     # solved_questionsの2箇所は、GameManagementモデルに記述して一つにまとめる。
-    # GameManagementモデルのsoleved_questonsは、throughをつけなくて良い。中間テーブルだけにデータを直接入れる。
+    # GameManagementモデルのsoleved_questonsは、
+    # throughをつけなくて良い。中間テーブルだけにデータを直接入れる。
     game_management = current_user.game_managements.
                         create(
                           difficulty: params[:game_management][:difficulty],
@@ -130,6 +131,7 @@ class Api::V1::GameManagementsController < ApplicationController
     # レンダリング
     render json: {
       send_game_data: true,
+      session: true,
       user: {
         rank: current_user ? current_user[:rank] : 1,
         total_experience: current_user ? current_user[:total_experience] : 0,

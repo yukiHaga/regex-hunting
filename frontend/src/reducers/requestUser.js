@@ -24,7 +24,10 @@ export const requestUserReducer = (state, action) => {
         requestState: REQUEST_STATE.OK,
         sessionState: action.payload.session,
         userState: {
-          user: action.payload.user
+          user: {
+            ...state.userState.user,
+            ...action.payload.user
+          }
         },
       };
     case requestUserActionTyps.REQUEST_FAILURE:
