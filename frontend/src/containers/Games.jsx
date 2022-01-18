@@ -51,9 +51,6 @@ import GameClearSound from '../sounds/game_clear_50.wav';
 // ゲームオーバー音
 import GameOverSound from '../sounds/game_over.mp3';
 
-// 戦闘bgm
-import BattleSound from '../sounds/battle_50.wav';
-
 // MainContentWrapperコンポーネント
 const MainContentWrapper = styled.div`
   padding-top: 36px;
@@ -144,7 +141,7 @@ export const Games = () => {
 
   // useContext
   const {
-    requestUserState: { sessionState }, 
+    requestUserState: { sessionState, battleAudioState }, 
     dispatch, 
     requestUserActionTyps
   } = useContext(UserContext);
@@ -207,7 +204,6 @@ export const Games = () => {
     active_title: "見習いハンター",
     click_description_open: false,
     click_meta_open: false,
-    battle_audio: new Audio(BattleSound)
   }
 
   // ゲーム状態を管理するstate
@@ -246,6 +242,13 @@ export const Games = () => {
       })
     }
     if(!Object.keys(gameState.game_management).length){
+      dispatch({
+        type: requestUserActionTyps.REQUEST_SUCCESS,
+        payload: {
+          session: sessionState ? true : false,
+          play: { play: true }
+        }
+      });
       getGameStart(difficulty).then((data) => {
         setGameState((prev) => ({
           ...prev,
@@ -313,25 +316,25 @@ export const Games = () => {
     requestUserActionTyps.REQUEST_FAILURE,
   ]);
 
-  // 戦闘中のbgm
+  // 戦闘bgm
   useEffect(() => {
     if(gameState.game_result !== "") {
-      gameState.battle_audio.loop = gameState.game_result === "progress" ? 
+      battleAudioState.audio.loop = gameState.game_result === "progress" ? 
                                       true 
                                     : 
                                       false;
       gameState.game_result === "progress" && 
       !gameState.game_description_open &&
       !gameState.click_meta_open ? 
-        gameState.battle_audio.play() 
+        battleAudioState.audio.play() 
       : 
-        gameState.battle_audio.pause();
+        battleAudioState.audio.pause();
     }
   }, [
     gameState.game_result,
-    gameState.battle_audio,
     gameState.game_description_open,
-    gameState.click_meta_open
+    gameState.click_meta_open,
+    battleAudioState.audio
   ])
 
   // ゲームクリア時の音

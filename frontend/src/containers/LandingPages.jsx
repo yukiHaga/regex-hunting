@@ -1,4 +1,4 @@
-import React, { Fragment, useState, useLayoutEffect, useContext } from 'react';
+import React, { Fragment, useState, useEffect, useLayoutEffect, useContext } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 
@@ -166,7 +166,7 @@ export const LandingPages = () => {
 
   // useContext
   const {
-    requestUserState: { sessionState }, 
+    requestUserState: { sessionState, battleAudioState }, 
     dispatch, 
     requestUserActionTyps
   } = useContext(UserContext);
@@ -208,6 +208,18 @@ export const LandingPages = () => {
     requestUserActionTyps.REQUEST_SUCCESS,
     requestUserActionTyps.REQUEST_FAILURE
   ]);
+
+  // ゲーム中のユーザーがトップページに戻ったときに
+  // 音を消すuseEffect
+  useEffect(() => {
+    if(battleAudioState.play) {
+      battleAudioState.audio.pause();
+      battleAudioState.audio.currentTime = 0;
+    }
+  },[
+    battleAudioState.play,
+    battleAudioState.audio
+  ])
 
   return (
     <>
