@@ -217,6 +217,7 @@ export const Games = () => {
   // useEffectは実行されない                    
   // ログインしていたらsessionStateはtrueなので、最初のif文は実行されない。
   // ログインしててリロードするとsessionStateはfalseなので、最初のif文が実行される。
+  // サーバー側でcurrent_userが存在しない場合、sessionStateはfalseとなる
   useLayoutEffect(() => {
     if(sessionState === false){
       checkLoginStatus().then((data) => {
@@ -338,9 +339,10 @@ export const Games = () => {
   // そのため、絶対1回しか発動しない
   // result_timeの単位はミリ秒である。
   // ユーザーがログインしていなくても送る。
+  // ログインユーザーの場合、contextを更新する
+  // ログインユーザーしかsessionStateはtrueにならないので、そこを利用する
   useEffect(() => {
     if(!gameState.send_game_data && gameState.game_result === "win"){
-      console.log("ゲーム終了のif文の中");
       const timer = setTimeout(() => {
         postGameFinish({
           game_management: {
@@ -360,6 +362,21 @@ export const Games = () => {
             active_title: gameState.active_title
           }
         }).then((data) => {
+          if(sessionState) {
+            dispatch({
+              type: requestUserActionTyps.REQUEST_SUCCESS,
+              payload: {
+                session: data.session,
+                user: {
+                  rank: data.user.rank,
+                  total_experience: data.user.total_experience,
+                  maximum_experience_per_rank: data.user.maximum_experience_per_rank,
+                  temporary_experience: data.user.temporary_experience,
+                  active_title: data.user.active_title
+                },
+              }
+            });
+          }
           setGameState((prev) => ({
             ...prev,
             send_game_data: data.send_game_data,
@@ -428,6 +445,7 @@ export const Games = () => {
     sessionState,
     requestUserActionTyps.REQUEST_FAILURE, 
     requestUserActionTyps.REQUEST_SUCCESS,
+    dispatch
   ]);
 
   console.log(gameState);
