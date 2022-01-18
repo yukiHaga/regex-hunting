@@ -84,7 +84,7 @@ export const DialogExperienceBox = ({
           ...prev,
           temporary_experience: temporary_experience,
         }));
-      }, 2000);
+      }, 4900);
       return () => clearTimeout(timer);
     }
   },[
