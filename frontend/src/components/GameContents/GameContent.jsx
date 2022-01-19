@@ -8,13 +8,13 @@ import { COLORS } from '../../style_constants.js';
 
 const GameContentWrapper = styled.div`
   background-color: ${COLORS.WHITE};
-  width: 350px;
+  width: 330px;
   height: 386px;
 `;
 
 const GameContentTitleWrapper = styled.div`
   height: 36px;
-  width: 350px;
+  width: 330px;
   font-family: YuGothic;
   font-style: normal;
   font-weight: 500;
@@ -26,7 +26,7 @@ const GameContentTitleWrapper = styled.div`
 `;
 
 const GameContentDescriptionWrapper = styled.div`
-  width: 350px;
+  width: 330px;
   height: 350px;
   box-shadow: 0 0px 20px rgba(0,0,0,0.2);
 `;
@@ -34,7 +34,7 @@ const GameContentDescriptionWrapper = styled.div`
 // ブロック要素じゃないので、もしかしたら直列に並ばないかも
 // 使用するときに、propsのsrc属性を渡す。
 const GameContentImageWrapper = styled.img`
-  width: 350px;
+  width: 330px;
   height: 190px;
   box-sizing: border-box;
   border: 2px solid ${COLORS.BLACK};
@@ -43,13 +43,13 @@ const GameContentImageWrapper = styled.img`
 const GameContentMainWrapper = styled.div`
   margin: 0 auto;
   test-align: center;
-  width: 350px;
+  width: 330px;
   height: 350px;
   padding-top: 10px;
 `;
 
 const GameContentSentenceWrapper = styled.div`
-  width: 300px;
+  width: 290px;
   display: inline-block;
   text-align: left;
   font-family: YuGothic;

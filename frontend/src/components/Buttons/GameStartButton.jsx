@@ -17,7 +17,7 @@ const GameStartButtonWrapper = styled(BaseLink)`
 `;
 
 const GameStartButtonTextWrapper = styled.div`
-  width: 300px;
+  width: 290px;
   height: 40px;
   border-radius: 3px;
   color: white;
