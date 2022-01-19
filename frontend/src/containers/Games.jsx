@@ -46,10 +46,10 @@ import { HTTP_STATUS_CODE } from '../constants';
 import { getMonsterName } from '../functions/getMonsterName.js';
 
 // ゲームクリア音
-import GameClearSound from '../sounds/game_clear.mp3';
+import GameClearSound from '../sounds/game_clear_25.mp3';
 
 // ゲームオーバー音
-import GameOverSound from '../sounds/game_over.mp3';
+import GameOverSound from '../sounds/game_over_25.mp3';
 
 // MainContentWrapperコンポーネント
 const MainContentWrapper = styled.div`
@@ -141,7 +141,7 @@ export const Games = () => {
 
   // useContext
   const {
-    requestUserState: { sessionState }, 
+    requestUserState: { sessionState, battleAudioState }, 
     dispatch, 
     requestUserActionTyps
   } = useContext(UserContext);
@@ -168,7 +168,7 @@ export const Games = () => {
     monster_max_hp: 100,
     correct_questions: [],
     incorrect_questions: [],
-    sentence: `${getMonsterName(difficulty)}が現れた！`,
+    sentence: 'ロード中',
     next_sentence: "",
     sentence_num: 0,
     next_sentence_num: 0,
@@ -203,7 +203,7 @@ export const Games = () => {
     rank_up: false,
     active_title: "見習いハンター",
     click_description_open: false,
-    click_meta_open: false
+    click_meta_open: false,
   }
 
   // ゲーム状態を管理するstate
@@ -218,6 +218,8 @@ export const Games = () => {
   // ログインしていたらsessionStateはtrueなので、最初のif文は実行されない。
   // ログインしててリロードするとsessionStateはfalseなので、最初のif文が実行される。
   // サーバー側でcurrent_userが存在しない場合、sessionStateはfalseとなる
+  // 2個目のif文はログインの有無に関わらず必ず実行される
+  // ログインしていない場合は、user等は{}だが、playがtrueになる
   useLayoutEffect(() => {
     if(sessionState === false){
       checkLoginStatus().then((data) => {
@@ -242,9 +244,17 @@ export const Games = () => {
       })
     }
     if(!Object.keys(gameState.game_management).length){
+      dispatch({
+        type: requestUserActionTyps.REQUEST_SUCCESS,
+        payload: {
+          session: sessionState ? true : false,
+          play: { play: true }
+        }
+      });
       getGameStart(difficulty).then((data) => {
         setGameState((prev) => ({
           ...prev,
+          sentence: `${getMonsterName(difficulty)}が現れた！`,
           next_sentence: data.questions["0"].sentence,
           next_sentence_num: 1,
           next_target_sentence: data.questions["0"].target_sentence,
@@ -257,7 +267,6 @@ export const Games = () => {
           sample_answer: data.questions["0"].sample_answer,
           next_hint: data.questions["0"].hint,
           next_commentary: data.questions["0"].commentary,
-          game_result: data.game_management.game_result,
           game_start_time: performance.now(),
           game_description_open: true,
           has_user: sessionState ? 
@@ -309,6 +318,29 @@ export const Games = () => {
     requestUserActionTyps.REQUEST_SUCCESS,
     requestUserActionTyps.REQUEST_FAILURE,
   ]);
+
+  // 戦闘bgm
+  useEffect(() => {
+    if(gameState.game_result !== "") {
+      battleAudioState.audio.loop = gameState.game_result === "progress" ? 
+                                      true 
+                                    : 
+                                      false;
+      if(gameState.game_result === "progress" && !gameState.game_description_open && !gameState.click_meta_open) {
+        battleAudioState.audio.play();
+      } else if (gameState.game_result === "win" || gameState.game_result === "lose") {
+        battleAudioState.audio.pause();
+        battleAudioState.audio.currentTime = 0;
+      } else {
+        battleAudioState.audio.pause();
+      }
+    }
+  }, [
+    gameState.game_result,
+    gameState.game_description_open,
+    gameState.click_meta_open,
+    battleAudioState.audio
+  ])
 
   // ゲームクリア時の音
   useEffect(() => {
@@ -374,6 +406,7 @@ export const Games = () => {
                   temporary_experience: data.user.temporary_experience,
                   active_title: data.user.active_title
                 },
+                play: { play: false }
               }
             });
           }
@@ -425,7 +458,7 @@ export const Games = () => {
             throw e;
           }
         })
-        }, 4000);
+        }, 6900);
       return () => clearTimeout(timer);
     }
   }, [
@@ -606,7 +639,6 @@ export const Games = () => {
             temporary_experience={gameState.temporary_experience}
             prev_temporary_experience={gameState.prev_temporary_experience}
             dialog_gage_up={gameState.dialog_gage_up}
-            sessionState={sessionState}
             game_result={gameState.game_result}
             rank_up={gameState.rank_up}
           />

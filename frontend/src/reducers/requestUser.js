@@ -1,5 +1,8 @@
 import { REQUEST_STATE } from '../constants';
 
+// 戦闘bgm
+import BattleSound from '../sounds/battle_25.mp3';
+
 // useReducerで使うinitialStateを定義
 export const initialState = {
   requestState: REQUEST_STATE.INITIAL,
@@ -8,6 +11,10 @@ export const initialState = {
     user: {}
   },
   errors: {},
+  battleAudioState: {
+    audio: new Audio(BattleSound),
+    play: false
+  }
 };
 
 // useReducerで使うActonTypsを定義
@@ -29,6 +36,10 @@ export const requestUserReducer = (state, action) => {
             ...action.payload.user
           }
         },
+        battleAudioState: {
+          ...state.battleAudioState,
+          ...action.payload.play
+        }
       };
     case requestUserActionTyps.REQUEST_FAILURE:
       return {

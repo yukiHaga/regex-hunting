@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react'; 
+import React, { Fragment, useContext } from 'react'; 
 import styled from 'styled-components';
 
 // Colors
@@ -6,6 +6,9 @@ import { COLORS } from '../../style_constants.js';
 
 // HTTP_STATUS_CODE
 import { HTTP_STATUS_CODE } from '../../constants';
+
+// Contextオブジェクト
+import { UserContext } from "../../context/UserProvider.js";
 
 const RestartGameButtonWrapper = styled.div`
   margin-top: 30px;
@@ -42,8 +45,14 @@ export const RestartGameButton = ({
   setGameState,
   getGameStart,
   initialState,
-  sessionState
 }) => {
+
+  // useContext
+  const {
+    requestUserState: { sessionState }, 
+    dispatch, 
+    requestUserActionTyps
+  } = useContext(UserContext);
 
   // リスタートを制御する関数
   const handleRestart = (
@@ -52,6 +61,13 @@ export const RestartGameButton = ({
     getGameStart,
     initialState
   ) => {
+    dispatch({
+      type: requestUserActionTyps.REQUEST_SUCCESS,
+      payload: {
+        session: sessionState ? true : false,
+        play: { play: true }
+      }
+    });
     getGameStart(difficulty).then((data) => {
       setGameState({
         ...initialState,
@@ -67,7 +83,6 @@ export const RestartGameButton = ({
         sample_answer: data.questions["0"].sample_answer,
         next_commentary: data.questions["0"].commentary,
         next_hint: data.questions["0"].hint,
-        game_result: data.game_management.game_result,
         game_start_time: performance.now(),
         has_user: sessionState ? 
           true

@@ -17,7 +17,7 @@ import { BackToModalButton } from '../Buttons/BackToModalButton.jsx';
 import { ResultShareButton } from '../Buttons/ResultShareButton.jsx';
 
 // ランクアップ音
-import RankUpSound from '../../sounds/game_clear.mp3';
+import RankUpSound from '../../sounds/rank_up_25.mp3';
 
 const CustomDialogInnerWrapper = styled.div`
   padding-right: 10px;

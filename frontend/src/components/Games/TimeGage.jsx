@@ -5,7 +5,7 @@ import styled, { keyframes } from 'styled-components';
 import { COLORS } from '../../style_constants.js';
 
 // Sounds
-import TackleSound from '../../sounds/tackle.mp3';
+import TackleSound from '../../sounds/tackle_25.mp3';
 
 // calculateDamage 
 import { calculateDamage } from '../../functions/calculateDamage.js';

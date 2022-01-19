@@ -8,7 +8,7 @@ import { COLORS } from '../../style_constants.js';
 import { DescriptionWrapper } from '../shared_style.js';
 
 // Sounds
-import GageUpSounds from '../../sounds/gage_up.mp3';
+import GageUpSounds from '../../sounds/gage_up_25.mp3';
 
 const ExperienceBoxWrapper = styled.div`
 `;
@@ -84,7 +84,7 @@ export const DialogExperienceBox = ({
           ...prev,
           temporary_experience: temporary_experience,
         }));
-      }, 2000);
+      }, 4900);
       return () => clearTimeout(timer);
     }
   },[

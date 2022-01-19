@@ -141,7 +141,6 @@ export const GameClearDialog = ({
   temporary_experience,
   prev_temporary_experience,
   dialog_gage_up,
-  sessionState,
   game_result,
   rank_up
 }) => {
@@ -228,7 +227,6 @@ export const GameClearDialog = ({
               setGameState={setGameState}
               getGameStart={getGameStart}
               initialState={initialState}
-              sessionState={sessionState}
             />
             <ResultShareButton 
               difficulty={difficulty}             

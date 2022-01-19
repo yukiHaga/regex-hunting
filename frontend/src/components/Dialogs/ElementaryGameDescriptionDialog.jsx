@@ -100,6 +100,18 @@ const SentenceWrapper = styled.div`
   width: 900px;
 `;
 
+const WarningSentenceWrapper = styled.div`
+  font-family: YuGothic;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 18px;
+  display: inline-block;
+  text-align: center;
+  margin-top: 45px;
+  color: ${COLORS.RED};
+  width: 900px;
+`;
+
 const MonsterImageBoxWrapper = styled.div`
  text-align: right;
  width: 80%;
@@ -284,6 +296,9 @@ export const ElementaryGameDescriptionDialog = ({
                     <SentenceWrapper>
                       初級編では、重要なメタ文字を使った正規表現を学習していきます。時間内に正しい正規表現を入力すると、モンスターに攻撃できます。モンスターのHPを0にしたらゲームクリアです！
                     </SentenceWrapper>
+                    <WarningSentenceWrapper>
+                      ※ UX向上の為、音が鳴ります。音量が気になる方は下げて頂くよう宜しくお願い致します。
+                    </WarningSentenceWrapper>
                     <OuterButtonsWrapper>
                       <ButtonsWrapper>
                         {
