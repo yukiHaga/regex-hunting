@@ -157,7 +157,8 @@ export const MyPages = () => {
     intermediate_graph_data: {},
     advanced_graph_data: {},
     real_graph_data: {},
-    difficulty_title: ""
+    difficulty_title: "",
+    isOpenDialog: false
   };
 
   // MyPageの状態を管理するstate
@@ -336,6 +337,10 @@ export const MyPages = () => {
                 <TitleCard
                   name={obj.name}
                   release_date={obj.release_date}
+                  onClick={() => setMyPageState((prev) => ({
+                    ...prev,
+                    isOpenDialog: true,                   
+                  }))}
                 />
               ))
             }

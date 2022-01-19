@@ -19,6 +19,11 @@ const InnerTitleCardWrapper = styled.div`
   margin-left: 0;
   margin-right: 0;
   position: relative;
+  cursor: pointer;
+  :hover {
+    opacity: 0.8;
+  }
+  text-decoration: none;
 `;
 
 const MaskTitleCardWrapper = styled.div`
@@ -50,11 +55,14 @@ const TitleCardSentenceWrapper = styled(DescriptionWrapper)`
 
 export const TitleCard = memo(({
   name,
-  release_date
+  release_date,
+  onClick
 }) => {
   return (
     <>
-      <InnerTitleCardWrapper>
+      <InnerTitleCardWrapper 
+        onClick={onClick}
+      >
         {
           !release_date &&
             <>
