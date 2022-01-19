@@ -8,13 +8,13 @@ import { COLORS } from '../../style_constants.js';
 
 const GameContentWrapper = styled.div`
   background-color: ${COLORS.WHITE};
-  width: 350px;
+  width: 326px;
   height: 386px;
 `;
 
 const GameContentTitleWrapper = styled.div`
   height: 36px;
-  width: 350px;
+  width: 326px;
   font-family: YuGothic;
   font-style: normal;
   font-weight: 500;
@@ -26,7 +26,7 @@ const GameContentTitleWrapper = styled.div`
 `;
 
 const GameContentDescriptionWrapper = styled.div`
-  width: 350px;
+  width: 326px;
   height: 350px;
   box-shadow: 0 0px 20px rgba(0,0,0,0.2);
 `;
@@ -34,21 +34,22 @@ const GameContentDescriptionWrapper = styled.div`
 // ブロック要素じゃないので、もしかしたら直列に並ばないかも
 // 使用するときに、propsのsrc属性を渡す。
 const GameContentImageWrapper = styled.img`
-  width: 350px;
+  width: 326px;
   height: 190px;
   box-sizing: border-box;
   border: 2px solid ${COLORS.BLACK};
 `;
 
 const GameContentMainWrapper = styled.div`
+  margin: 0 auto;
   test-align: center;
-  width: 350px;
+  width: 326px;
   height: 350px;
   padding-top: 10px;
 `;
 
 const GameContentSentenceWrapper = styled.div`
-  width: 300px;
+  width: 290px;
   display: inline-block;
   text-align: left;
   font-family: YuGothic;
@@ -72,13 +73,13 @@ export const GameContent = ({difficulty, image}) => {
   const difficultySentence = (difficulty) => {
     let sentence;
     switch (difficulty){
-      case '初級':
+      case 'elementary':
         sentence = '基礎的なメタ文字をマスターして、スクータムの群れを倒そう！';
         break;
-      case '中級':
+      case 'intermediate':
         sentence = '文字列を表す正規表現をマスターして、カスアリウスの群れを倒そう！';
         break;
-      case '上級':
+      case 'advanced':
         sentence = 'パスワードの正規表現をマスターして、オルファ・ラパクスを倒そう！';
         break;
       default:
@@ -88,30 +89,20 @@ export const GameContent = ({difficulty, image}) => {
     return sentence;
   };
 
-  const conversionDifficulty = (difficulty) => {
-    let englishDifficulty;
-    switch (difficulty){
-      case '初級':
-        englishDifficulty = 'elementary';
-        break;
-      case '中級':
-        englishDifficulty = 'intermediate';
-        break;
-      case '上級':
-        englishDifficulty = 'advanced'
-        break;
-      default:
-        englishDifficulty = 'error'
-        break;
+  const difficultyTitle = (difficulty) => {
+    const difficulty_array = {
+      elementary: "初級編",
+      intermediate: "中級編",
+      advanced: "上級編"
     };
-    return englishDifficulty;
+    return difficulty_array[difficulty];
   };
 
   return (
     <>
       <GameContentWrapper>
         <GameContentTitleWrapper>
-          {`${difficulty}編`}
+          {difficultyTitle(difficulty)}
         </GameContentTitleWrapper>
         <GameContentDescriptionWrapper>
           <GameContentImageWrapper src={image} />
@@ -120,7 +111,7 @@ export const GameContent = ({difficulty, image}) => {
               {(difficultySentence(difficulty))}
             </GameContentSentenceWrapper>
             <GameContentStartWrapper>
-              <GameStartButton difficulty={(conversionDifficulty(difficulty))}/>
+              <GameStartButton difficulty={difficulty}/>
             </GameContentStartWrapper>
           </GameContentMainWrapper>
         </GameContentDescriptionWrapper>

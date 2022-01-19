@@ -275,12 +275,21 @@ export const LandingPages = () => {
       </FourthWrapper>
       <FifthWrapper id="gameContent">
         <GameStartDescriptionSentence>
-          3種類の難易度のゲームをクリアして、正規表現を極めよう！
+          3種類のクエストをクリアして、正規表現を極めよう！
         </GameStartDescriptionSentence>
         <GameContentsWrapper> 
-          <GameContent difficulty='初級' image={ElementaryGameContentImage} />
-          <GameContent difficulty='中級' image={IntermediateGameContentImage} />
-          <GameContent difficulty='上級' image={IntermediateGameContentImage} />
+          <GameContent 
+            difficulty='elementary' 
+            image={ElementaryGameContentImage} 
+          />
+          <GameContent 
+            difficulty='intermediate' 
+            image={IntermediateGameContentImage} 
+          />
+          <GameContent 
+            difficulty='advanced' 
+            image={IntermediateGameContentImage} 
+          />
         </GameContentsWrapper>
       </FifthWrapper>
       <Footer />
