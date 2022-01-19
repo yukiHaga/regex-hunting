@@ -178,7 +178,7 @@ export const LandingPages = () => {
   const navigate = useNavigate();
 
   // 初めてLPページに訪れた場合、ログインしていないので、
-  // 2回目のdispatchのdata.sessionはfalseとなる
+  // dispatchのdata.sessionはfalseとなる
   useLayoutEffect(() => {
     if(sessionState === false){
       checkLoginStatus().then((data) => {
