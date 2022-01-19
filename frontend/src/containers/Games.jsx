@@ -168,7 +168,7 @@ export const Games = () => {
     monster_max_hp: 100,
     correct_questions: [],
     incorrect_questions: [],
-    sentence: '',
+    sentence: 'ロード中',
     next_sentence: "",
     sentence_num: 0,
     next_sentence_num: 0,
