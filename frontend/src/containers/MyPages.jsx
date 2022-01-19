@@ -64,6 +64,12 @@ const SecondWrapper = styled.div`
   padding-top: 80px;
 `;
 
+// サードラッパー
+const ThirdWrapper = styled.div`
+  background-color: ${COLORS.SUB};
+  padding-top: 80px;
+`;
+
 const StudyHeatMapWrapper = styled.div`
   width: 400px;
   background-color: ${COLORS.SUB};
@@ -83,6 +89,16 @@ const ChangeGraphBoxWrapper = styled.div`
   align-items: center;
 `;
 
+// クエスト一覧というセンテンスのラッパー
+const QuestSentenceWrapper = styled(DescriptionWrapper)`
+  font-weight: bold;
+  font-size: 24px;
+  line-height: 40px;
+  display: inline-block;
+  text-align: left;
+  padding: 0 110px;
+`;
+
 // マイページのゲームコンテンツのラッパー
 const MyPageGameContentsWrapper = styled.div`
   padding-top: 20px;
@@ -91,8 +107,8 @@ const MyPageGameContentsWrapper = styled.div`
   justify-content: space-evenly;
 `;
 
-// クエスト一覧というセンテンスのラッパー
-const QuestSentenceWrapper = styled(DescriptionWrapper)`
+// 称号一覧というセンテンスのラッパー
+const TitleListSentenceWrapper = styled(DescriptionWrapper)`
   font-weight: bold;
   font-size: 24px;
   line-height: 40px;
@@ -298,6 +314,11 @@ export const MyPages = () => {
             />
           </MyPageGameContentsWrapper>
         </SecondWrapper>
+        <ThirdWrapper>
+          <TitleListSentenceWrapper>
+            称号一覧
+          </TitleListSentenceWrapper>
+        </ThirdWrapper>
       </MainWrapper>
     </>
   );
