@@ -19,8 +19,8 @@ const CustomDialogInnerWrapper = styled.div`
   padding-top: 10px;
   background-color: ${COLORS.SUB};
   text-align: center;
-  width: 550px;
-  height: 420px;
+  width: 450px;
+  height: 250px;
 `;
 
 const CustomDialogTitleWrapper = styled.div`
@@ -41,7 +41,13 @@ const CustomDialogContent = styled(DialogContent)`
 const CustomDialogContentSentence = styled(DescriptionWrapper)`
   display: inline-block;
   text-align: left;
-  font-size: 18px;
+  font-family: YuGothic;
+  font-style: normal;
+  font-size: 20px;
+`;
+
+const CustomDialogContentReleaseSentence = styled(CustomDialogContentSentence)`
+  color: ${COLORS.RED};
 `;
 
 // backボタンのラッパー 
@@ -49,7 +55,7 @@ const CustomDialogContentSentence = styled(DescriptionWrapper)`
 const BackToModalButtonWrapper = styled.div`
   position: fixed;
   background-color: ${COLORS.SUB};
-  width: 550px;
+  width: 450px;
   z-index: 2;
 `;
 
@@ -65,7 +71,8 @@ const ButtonsWrapper = styled.div`
 export const ReleaseConditionDialog = ({
   isOpen,
   onClose,
-  release_date
+  release_date,
+  release_condition
 }) => {
 
   return(
@@ -83,11 +90,17 @@ export const ReleaseConditionDialog = ({
         </CustomDialogTitleWrapper> 
         <CustomDialogContent>
           <CustomDialogContentSentence>
-            {release_date}
+            {release_condition}
           </CustomDialogContentSentence>
-          <ButtonsWrapper>
-          </ButtonsWrapper>
         </CustomDialogContent>
+        {
+          release_date && 
+            <CustomDialogContent>
+              <CustomDialogContentReleaseSentence>
+                {`${release_date.replace(/-/g, '/')}に解放`}
+              </CustomDialogContentReleaseSentence>
+            </CustomDialogContent>
+        }
       </CustomDialogInnerWrapper>
     </Dialog>
   );

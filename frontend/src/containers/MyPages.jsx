@@ -163,6 +163,7 @@ export const MyPages = () => {
     difficulty_title: "",
     isOpenDialog: false,
     release_date: "",
+    release_condition: ""
   };
 
   // MyPageの状態を管理するstate
@@ -210,8 +211,6 @@ export const MyPages = () => {
         const elementary_graph_data = makeCorrectPercentGraphData(
           data.elementary_correct_percents,
         );
-
-        console.log(elementary_graph_data);
         const intermediate_graph_data = makeCorrectPercentGraphData(
           data.intermediate_correct_percents,
         );
@@ -344,7 +343,8 @@ export const MyPages = () => {
                   onClick={() => setMyPageState((prev) => ({
                     ...prev,
                     isOpenDialog: true,   
-                    release_date: obj.release_date
+                    release_date: obj.release_date,
+                    release_condition: obj.release_condition
                   }))}
                 />
               ))
@@ -360,9 +360,11 @@ export const MyPages = () => {
             onClose={() => setMyPageState((prev) => ({
               ...prev,
               isOpenDialog: false,
-              release_date: ""
+              release_date: "",
+              release_condition: ""
             }))}
             release_date={myPageState.release_date}
+            release_condition={myPageState.release_condition}
           />
       }
     </>
