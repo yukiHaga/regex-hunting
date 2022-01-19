@@ -5,19 +5,21 @@ import styled from 'styled-components';
 import { DescriptionWrapper } from '../../components/shared_style.js';
 
 const InnerTitleCardWrapper = styled.div`
-  width: 40%;
+  width: 36%;
   height: 69px;
   border-radius: 3px;
-  background-color: #E4E826;
+  background-color: #d6e685;
+  margin: 20px;
+  margin-left: 0;
+  margin-right: 0;
 `;
 
 const TitleCardSentenceWrapper = styled(DescriptionWrapper)`
   font-style: normal;
   font-size: 24px;
-  line-height: 36px;
-  display: flex;
-  align-items: center;
+  height: 69px;
   text-align: center;
+  line-height: 69px;
 `;
 
 export const TitleCard = memo(({
@@ -25,6 +27,7 @@ export const TitleCard = memo(({
   release_date
 }) => {
 
+  console.log(name);
   return (
     <>
       <InnerTitleCardWrapper>

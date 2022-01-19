@@ -12,6 +12,7 @@ import { CorrectPercentGraph } from '../components/Games/CorrectPercentGraph.jsx
 import { ChangeGraphBox } from '../components/Games/ChangeGraphBox.jsx';
 import { DescriptionWrapper } from '../components/shared_style.js';
 import { GameContent } from '../components/GameContents/GameContent.jsx';
+import { TitleCard } from '../components/Games/TitleCard.jsx';
  
 // Images
 import ElementaryGameContentImage from '../images/elementary_game_content.png';
@@ -115,6 +116,15 @@ const TitleListSentenceWrapper = styled(DescriptionWrapper)`
   display: inline-block;
   text-align: left;
   padding: 0 110px;
+`;
+
+// 称号一覧のカードを包括しているラッパー
+const TitleListWrapper = styled.div`
+  padding-top: 5px;
+  text-align: center;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
 `;
 
 export const MyPages = () => {
@@ -318,6 +328,16 @@ export const MyPages = () => {
           <TitleListSentenceWrapper>
             称号一覧
           </TitleListSentenceWrapper>
+          <TitleListWrapper>
+            {
+              myPageState.owned_titles.map((obj) => (
+                <TitleCard
+                  name={obj.name}
+                  release_date={obj.release_date}
+                />
+              ))
+            }
+          </TitleListWrapper>
         </ThirdWrapper>
       </MainWrapper>
     </>
