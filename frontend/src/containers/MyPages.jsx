@@ -11,9 +11,12 @@ import { StudyHeatMap } from '../components/Games/StudyHeatMap.jsx';
 import { CorrectPercentGraph } from '../components/Games/CorrectPercentGraph.jsx';
 import { ChangeGraphBox } from '../components/Games/ChangeGraphBox.jsx';
 import { DescriptionWrapper } from '../components/shared_style.js';
+import { GameContent } from '../components/GameContents/GameContent.jsx';
  
 // Images
 import TemporaryUserImage from '../images/temporary_user_image.png';
+import ElementaryGameContentImage from '../images/elementary_game_content.png';
+import IntermediateGameContentImage from '../images/intermediate_game_content.png';
 
 // Contextオブジェクト
 import { UserContext } from "../context/UserProvider.js";
@@ -54,6 +57,12 @@ const MainSecondWrapper = styled.div`
   display: flex;
   justify-content: space-evenly;
   margin-top: 40px;
+`;
+
+// セカンドラッパー
+const SecondWrapper = styled.div`
+  background-color: ${COLORS.SUB};
+  padding-top: 80px;
 `;
 
 // ステータスのラッパー
@@ -152,6 +161,25 @@ const ChangeGraphBoxWrapper = styled.div`
   box-shadow: 0 0px 20px rgba(0,0,0,0.2);
   display: flex;
   align-items: center;
+`;
+
+// マイページのゲームコンテンツのラッパー
+const MyPageGameContentsWrapper = styled.div`
+  padding-top: 20px;
+  text-align: center;
+  display: flex;
+  justify-content: space-evenly;
+`;
+
+// クエスト一覧というセンテンスのラッパー
+const QuestSentenceWrapper = styled(DescriptionWrapper)`
+  font-weight: bold;
+  font-size: 24px;
+  line-height: 40px;
+  display: inline-block;
+  text-align: left;
+  width: 100%;
+  padding: 0 96px;
 `;
 
 export const MyPages = () => {
@@ -355,8 +383,26 @@ export const MyPages = () => {
             />
           </ChangeGraphBoxWrapper>
         </MainSecondWrapper>
-        アイウエオ<br />柿くけこ
       </MainWrapper>
+      <SecondWrapper>
+        <QuestSentenceWrapper>
+          クエスト一覧
+        </QuestSentenceWrapper>
+        <MyPageGameContentsWrapper> 
+          <GameContent 
+            difficulty='elementary' 
+            image={ElementaryGameContentImage} 
+          />
+          <GameContent 
+            difficulty='intermediate' 
+            image={IntermediateGameContentImage} 
+          />
+          <GameContent 
+            difficulty='advanced' 
+            image={IntermediateGameContentImage} 
+          />
+        </MyPageGameContentsWrapper>
+      </SecondWrapper>
     </>
   );
 };

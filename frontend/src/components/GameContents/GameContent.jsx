@@ -41,6 +41,7 @@ const GameContentImageWrapper = styled.img`
 `;
 
 const GameContentMainWrapper = styled.div`
+  margin: 0 auto;
   test-align: center;
   width: 350px;
   height: 350px;
