@@ -103,11 +103,13 @@ class Api::V1::MyPagesController < ApplicationController
                                               pluck(:release_date)
                        {
                          name: title[:name],
+                         release_condition: title[:release_condition],
                          release_date: release_date_array[0]
                        }
                      else
                        {
                          name: title[:name],
+                         release_condition: title[:release_condition],
                          release_date: nil
                        }
                      end
