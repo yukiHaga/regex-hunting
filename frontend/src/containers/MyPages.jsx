@@ -145,6 +145,8 @@ export const MyPages = () => {
   } = useContext(UserContext);
 
   // myPageStateの最初の状態
+  // isOpenDialog, title_name, release_dateは
+  // タイトルカードのモーダルで使う
   const initialState = {
     game_frequencies_per_day: [],
     elementary_correct_percents: [],
@@ -159,7 +161,8 @@ export const MyPages = () => {
     advanced_graph_data: {},
     real_graph_data: {},
     difficulty_title: "",
-    isOpenDialog: false
+    isOpenDialog: false,
+    release_date: "",
   };
 
   // MyPageの状態を管理するstate
@@ -340,7 +343,8 @@ export const MyPages = () => {
                   release_date={obj.release_date}
                   onClick={() => setMyPageState((prev) => ({
                     ...prev,
-                    isOpenDialog: true,                   
+                    isOpenDialog: true,   
+                    release_date: obj.release_date
                   }))}
                 />
               ))
@@ -352,11 +356,13 @@ export const MyPages = () => {
       {
         myPageState.isOpenDialog &&
           <ReleaseConditionDialog 
-             isOpen={myPageState.isOpenDialog}
-             onClose={() => setMyPageState((prev) => ({
-               ...prev,
-               isOpenDialog: false
-             }))}
+            isOpen={myPageState.isOpenDialog}
+            onClose={() => setMyPageState((prev) => ({
+              ...prev,
+              isOpenDialog: false,
+              release_date: ""
+            }))}
+            release_date={myPageState.release_date}
           />
       }
     </>
