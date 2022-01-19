@@ -168,7 +168,7 @@ export const Games = () => {
     monster_max_hp: 100,
     correct_questions: [],
     incorrect_questions: [],
-    sentence: `${getMonsterName(difficulty)}が現れた！`,
+    sentence: '',
     next_sentence: "",
     sentence_num: 0,
     next_sentence_num: 0,
@@ -254,6 +254,7 @@ export const Games = () => {
       getGameStart(difficulty).then((data) => {
         setGameState((prev) => ({
           ...prev,
+          sentence: `${getMonsterName(difficulty)}が現れた！`,
           next_sentence: data.questions["0"].sentence,
           next_sentence_num: 1,
           next_target_sentence: data.questions["0"].target_sentence,
