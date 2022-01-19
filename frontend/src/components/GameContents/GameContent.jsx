@@ -72,13 +72,13 @@ export const GameContent = ({difficulty, image}) => {
   const difficultySentence = (difficulty) => {
     let sentence;
     switch (difficulty){
-      case '初級':
+      case 'elementary':
         sentence = '基礎的なメタ文字をマスターして、スクータムの群れを倒そう！';
         break;
-      case '中級':
+      case 'intermediate':
         sentence = '文字列を表す正規表現をマスターして、カスアリウスの群れを倒そう！';
         break;
-      case '上級':
+      case 'advanced':
         sentence = 'パスワードの正規表現をマスターして、オルファ・ラパクスを倒そう！';
         break;
       default:
@@ -88,30 +88,20 @@ export const GameContent = ({difficulty, image}) => {
     return sentence;
   };
 
-  const conversionDifficulty = (difficulty) => {
-    let englishDifficulty;
-    switch (difficulty){
-      case '初級':
-        englishDifficulty = 'elementary';
-        break;
-      case '中級':
-        englishDifficulty = 'intermediate';
-        break;
-      case '上級':
-        englishDifficulty = 'advanced'
-        break;
-      default:
-        englishDifficulty = 'error'
-        break;
+  const difficultyTitle = (difficulty) => {
+    const difficulty_array = {
+      elementary: "初級編",
+      intermediate: "中級編",
+      advanced: "上級編"
     };
-    return englishDifficulty;
+    return difficulty_array[difficulty];
   };
 
   return (
     <>
       <GameContentWrapper>
         <GameContentTitleWrapper>
-          {`${difficulty}編`}
+          {difficultyTitle(difficulty)}
         </GameContentTitleWrapper>
         <GameContentDescriptionWrapper>
           <GameContentImageWrapper src={image} />
@@ -120,7 +110,7 @@ export const GameContent = ({difficulty, image}) => {
               {(difficultySentence(difficulty))}
             </GameContentSentenceWrapper>
             <GameContentStartWrapper>
-              <GameStartButton difficulty={(conversionDifficulty(difficulty))}/>
+              <GameStartButton difficulty={difficulty}/>
             </GameContentStartWrapper>
           </GameContentMainWrapper>
         </GameContentDescriptionWrapper>
