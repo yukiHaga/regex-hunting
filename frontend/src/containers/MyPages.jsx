@@ -98,7 +98,6 @@ const QuestSentenceWrapper = styled(DescriptionWrapper)`
   line-height: 40px;
   display: inline-block;
   text-align: left;
-  width: 100%;
   padding: 0 110px;
 `;
 
@@ -280,26 +279,26 @@ export const MyPages = () => {
             />
           </ChangeGraphBoxWrapper>
         </MainSecondWrapper>
+        <SecondWrapper>
+          <QuestSentenceWrapper>
+            クエスト一覧
+          </QuestSentenceWrapper>
+          <MyPageGameContentsWrapper> 
+            <GameContent 
+              difficulty='elementary' 
+              image={ElementaryGameContentImage} 
+            />
+            <GameContent 
+              difficulty='intermediate' 
+              image={IntermediateGameContentImage} 
+            />
+            <GameContent 
+              difficulty='advanced' 
+              image={IntermediateGameContentImage} 
+            />
+          </MyPageGameContentsWrapper>
+        </SecondWrapper>
       </MainWrapper>
-      <SecondWrapper>
-        <QuestSentenceWrapper>
-          クエスト一覧
-        </QuestSentenceWrapper>
-        <MyPageGameContentsWrapper> 
-          <GameContent 
-            difficulty='elementary' 
-            image={ElementaryGameContentImage} 
-          />
-          <GameContent 
-            difficulty='intermediate' 
-            image={IntermediateGameContentImage} 
-          />
-          <GameContent 
-            difficulty='advanced' 
-            image={IntermediateGameContentImage} 
-          />
-        </MyPageGameContentsWrapper>
-      </SecondWrapper>
     </>
   );
 };
