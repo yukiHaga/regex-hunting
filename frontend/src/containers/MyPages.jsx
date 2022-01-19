@@ -13,6 +13,7 @@ import { ChangeGraphBox } from '../components/Games/ChangeGraphBox.jsx';
 import { DescriptionWrapper } from '../components/shared_style.js';
 import { GameContent } from '../components/GameContents/GameContent.jsx';
 import { TitleCard } from '../components/Games/TitleCard.jsx';
+import { Footer } from '../components/Footers/Footer.jsx';
  
 // Images
 import ElementaryGameContentImage from '../images/elementary_game_content.png';
@@ -69,6 +70,7 @@ const SecondWrapper = styled.div`
 const ThirdWrapper = styled.div`
   background-color: ${COLORS.SUB};
   padding-top: 80px;
+  padding-bottom: 40px;
 `;
 
 const StudyHeatMapWrapper = styled.div`
@@ -340,6 +342,7 @@ export const MyPages = () => {
           </TitleListWrapper>
         </ThirdWrapper>
       </MainWrapper>
+      <Footer />
     </>
   );
 };
