@@ -49,7 +49,7 @@ import { getMonsterName } from '../functions/getMonsterName.js';
 import GameClearSound from '../sounds/game_clear_25.mp3';
 
 // ゲームオーバー音
-import GameOverSound from '../sounds/game_over.mp3';
+import GameOverSound from '../sounds/game_over_25.mp3';
 
 // MainContentWrapperコンポーネント
 const MainContentWrapper = styled.div`
