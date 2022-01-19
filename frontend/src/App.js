@@ -18,6 +18,7 @@ import { PrivacyPolicies } from './containers/PrivacyPolicies.jsx';
 import { PasswordResets } from './containers/PasswordResets.jsx';
 import { PasswordUpdates } from './containers/PasswordUpdates.jsx';
 import { ExternalAuth } from './containers/ExternalAuth.jsx';
+import ScrollToTop from './scroll/ScrollToTop.jsx';
 
 // Provider
 import { UserProvider } from "./context/UserProvider.js";
@@ -28,6 +29,7 @@ function App() {
     <React.StrictMode>
       <UserProvider>
         <Router>
+          <ScrollToTop />
           <Routes>
             {/* LPページ */}
             <Route 
