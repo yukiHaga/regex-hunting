@@ -14,6 +14,7 @@ import { DescriptionWrapper } from '../components/shared_style.js';
 import { GameContent } from '../components/GameContents/GameContent.jsx';
 import { TitleCard } from '../components/Games/TitleCard.jsx';
 import { Footer } from '../components/Footers/Footer.jsx';
+import { ReleaseConditionDialog } from '../components/Dialogs/ReleaseConditionDialog.jsx'
  
 // Images
 import ElementaryGameContentImage from '../images/elementary_game_content.png';
@@ -348,6 +349,16 @@ export const MyPages = () => {
         </ThirdWrapper>
       </MainWrapper>
       <Footer />
+      {
+        myPageState.isOpenDialog &&
+          <ReleaseConditionDialog 
+             isOpen={myPageState.isOpenDialog}
+             onClose={() => setMyPageState((prev) => ({
+               ...prev,
+               isOpenDialog: false
+             }))}
+          />
+      }
     </>
   );
 };
