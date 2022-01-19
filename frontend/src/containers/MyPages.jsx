@@ -179,7 +179,7 @@ const QuestSentenceWrapper = styled(DescriptionWrapper)`
   display: inline-block;
   text-align: left;
   width: 100%;
-  padding: 0 96px;
+  padding: 0 110px;
 `;
 
 export const MyPages = () => {
