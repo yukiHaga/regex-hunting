@@ -7,6 +7,8 @@ import MenuOutlinedIcon from '@mui/icons-material/MenuOutlined';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 
+import { BaseLink } from '../shared_style.js';
+
 // Colors
 import { COLORS } from '../../style_constants.js';
 
@@ -49,8 +51,21 @@ export const IconMenu = () => {
         open={Boolean(anchorEl)}
         onClose={handleClose}
       >
-        <MenuItem onClick={handleClose}>Profile</MenuItem>
-        <MenuItem onClick={handleClose}>My account</MenuItem>
+        <MenuItem 
+          component={BaseLink}
+          to="/my-page"
+          onClick={handleClose}
+        >
+          マイページ
+        </MenuItem>
+        <MenuItem 
+          component={BaseLink}
+          to="/account-settings"
+          onClick={handleClose}
+        >
+          アカウント設定
+        </MenuItem>
+        <MenuItem onClick={handleClose}>ログアウト</MenuItem>
       </Menu>
     </>
   );
