@@ -80,7 +80,8 @@ export const ReleaseConditionDialog = ({
   isOpen,
   onClose,
   release_date,
-  release_condition
+  release_condition,
+  setMyPageState
 }) => {
 
   return(
@@ -112,7 +113,9 @@ export const ReleaseConditionDialog = ({
                 </CustomDialogContentReleaseSentence>
               </CustomDialogContentReleaseSentenceWrapper>
               <ButtonsWrapper>
-                <TitleSettingButton />
+                <TitleSettingButton 
+                  setMyPageState={setMyPageState}
+                />
               </ButtonsWrapper>
             </>
         }
