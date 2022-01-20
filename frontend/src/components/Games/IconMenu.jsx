@@ -3,11 +3,14 @@ import styled from 'styled-components';
 
 // MUI
 import IconButton from '@mui/material/IconButton';
-import MenuOutlinedIcon from '@mui/icons-material/MenuOutlined';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
+import Avatar from '@mui/material/Avatar';
 
 import { BaseLink } from '../shared_style.js';
+
+// Images
+import TemporaryUserImage from '../../images/temporary_user_image.png';
 
 // Colors
 import { COLORS } from '../../style_constants.js';
@@ -36,7 +39,11 @@ export const IconMenu = ({
         onClick={handleMenu}
         color="inherit"
       >
-        <MenuOutlinedIcon />
+        <Avatar 
+          alt="user-icon" 
+          src={TemporaryUserImage} 
+          sx={{ width: 32, height: 32 }}
+        />
       </IconButton>
       <Menu
         id="menu-appbar"
