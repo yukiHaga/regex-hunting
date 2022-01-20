@@ -1,7 +1,20 @@
 import React, { Fragment, useEffect, useContext } from 'react';
+import styled from 'styled-components';
+
+// Presentational Components
+import { Header } from '../components/Headers/Header.jsx';
+import { FakeHeader } from '../components/Headers/FakeHeader.jsx';
 
 // Contextオブジェクト
 import { UserContext } from "../context/UserProvider.js";
+
+// Colors
+import { COLORS } from '../style_constants.js';
+
+const FakeBlock = styled.div`
+  background-color: ${COLORS.SUB};
+  height: 56px;
+`;
 
 export const Rankings = () => {
 
@@ -31,7 +44,9 @@ export const Rankings = () => {
 
   return (
     <>
-      ランキング一覧画面
+      <Header /> 
+      <FakeHeader />
+      <FakeBlock />
     </>
   );
 };
