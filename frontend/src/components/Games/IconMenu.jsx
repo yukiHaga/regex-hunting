@@ -1,46 +1,57 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 
+// MUI
+import IconButton from '@mui/material/IconButton';
 import MenuOutlinedIcon from '@mui/icons-material/MenuOutlined';
+import Menu from '@mui/material/Menu';
+import MenuItem from '@mui/material/MenuItem';
 
 // Colors
 import { COLORS } from '../../style_constants.js';
 
-const CustomDiv = styled.div`
-  position: relative;
-`
-const CustomUl = styled.ul`
-  position: absolute;
-  background-color: ${COLORS.WHITE};
-`;
-
 export const IconMenu = () => {
 
-  const [isOpen, setIsOpen] = useState(false)
-  const menuRef = useRef()
+  const [anchorEl, setAnchorEl] = useState(null);
 
-  useEffect(() => {
-    isOpen && menuRef.current.focus()
-  }, [isOpen])
+  const handleMenu = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
 
   return (
-    <>
-      <CustomDiv>
-        <div onClick={ () => setIsOpen(isOpen ? false : true) }>
-          <MenuOutlinedIcon />
-        </div>
-        {
-          isOpen &&
-          <CustomUl  
-            onBlur={() => setTimeout(() => setIsOpen(false), 100)} 
-            ref={menuRef}
-            tabIndex={1}
-          >
-            <li>menu1</li>
-            <li>menu2</li>
-          </CustomUl>
-        }
-      </CustomDiv>
-    </>
+    <div>
+      <IconButton
+        size="large"
+        aria-label="account of current user"
+        aria-controls="menu-appbar"
+        aria-haspopup="true"
+        onClick={handleMenu}
+        color="inherit"
+      >
+        <MenuOutlinedIcon />
+      </IconButton>
+      <Menu
+        id="menu-appbar"
+        anchorEl={anchorEl}
+        anchorOrigin={{
+          vertical: 'top',
+          horizontal: 'right',
+        }}
+        keepMounted
+        transformOrigin={{
+          vertical: 'top',
+          horizontal: 'right',
+        }}
+        open={Boolean(anchorEl)}
+        onClose={handleClose}
+      >
+        <MenuItem onClick={handleClose}>Profile</MenuItem>
+        <MenuItem onClick={handleClose}>My account</MenuItem>
+      </Menu>
+    </div>
   );
 };
