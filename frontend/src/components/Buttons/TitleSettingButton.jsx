@@ -9,6 +9,9 @@ import { UserContext } from "../../context/UserProvider.js";
 // Colors
 import { COLORS } from '../../style_constants.js';
 
+// HTTP_STATUS_CODE
+import { HTTP_STATUS_CODE } from '../../constants';
+
 // タイトルを設定した情報を取得するapiコール関数
 import { postTitleSetting } from '../../apis/titleSetting.js';
 
@@ -40,6 +43,7 @@ const TitleSettingButtonTextWrapper = styled.div`
 `;
 
 export const TitleSettingButton = ({
+  name,
   setMyPageState
 }) => {
 
@@ -55,7 +59,7 @@ export const TitleSettingButton = ({
   } = useContext(UserContext);
 
   const handleTitleSetting = () => {
-    postTitleSetting().then((data) => {
+    postTitleSetting(user, name).then((data) => {
       dispatch({
         type: requestUserActionTyps.REQUEST_SUCCESS,
         payload: {
@@ -78,6 +82,7 @@ export const TitleSettingButton = ({
     setMyPageState((prev) =>({
       ...prev,
       isOpenDialog: false,
+      name: "",
       release_date: "",
       release_condition: ""
     }));

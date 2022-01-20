@@ -79,6 +79,7 @@ const ButtonsWrapper = styled.div`
 export const ReleaseConditionDialog = ({
   isOpen,
   onClose,
+  name,
   release_date,
   release_condition,
   setMyPageState
@@ -114,6 +115,7 @@ export const ReleaseConditionDialog = ({
               </CustomDialogContentReleaseSentenceWrapper>
               <ButtonsWrapper>
                 <TitleSettingButton 
+                  name={name}
                   setMyPageState={setMyPageState}
                 />
               </ButtonsWrapper>

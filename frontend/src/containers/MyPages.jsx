@@ -366,6 +366,7 @@ export const MyPages = () => {
               release_date: "",
               release_condition: ""
             }))}
+            name={myPageState.name}
             release_date={myPageState.release_date}
             release_condition={myPageState.release_condition}
             setMyPageState={setMyPageState}
