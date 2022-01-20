@@ -1,6 +1,9 @@
 import React, { useContext } from 'react';
 import styled from 'styled-components';
 
+// アイコン付きメニュー
+import { IconMenu } from '../Games/IconMenu.jsx' 
+
 // Images
 import TitleImage from '../../images/title.png';
 
@@ -136,6 +139,9 @@ export const Header = ({onClickLink}) => {
               <>
                 <HeaderNavFakeLink onClick={handleLogout}>
                   ログアウト
+                </HeaderNavFakeLink>
+                <HeaderNavFakeLink>
+                  <IconMenu />
                 </HeaderNavFakeLink>
               </>
           }

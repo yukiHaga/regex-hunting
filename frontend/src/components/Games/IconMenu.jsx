@@ -6,6 +6,14 @@ import MenuOutlinedIcon from '@mui/icons-material/MenuOutlined';
 // Colors
 import { COLORS } from '../../style_constants.js';
 
+const CustomDiv = styled.div`
+  position: relative;
+`
+const CustomUl = styled.ul`
+  position: absolute;
+  background-color: ${COLORS.WHITE};
+`;
+
 export const IconMenu = () => {
 
   const [isOpen, setIsOpen] = useState(false)
@@ -17,22 +25,22 @@ export const IconMenu = () => {
 
   return (
     <>
-      <div>
-        <div onClick={ () => setIsOpen(isOpen ? false : true)} }>
+      <CustomDiv>
+        <div onClick={ () => setIsOpen(isOpen ? false : true) }>
           <MenuOutlinedIcon />
         </div>
         {
           isOpen &&
-          <ul  
+          <CustomUl  
             onBlur={() => setTimeout(() => setIsOpen(false), 100)} 
             ref={menuRef}
             tabIndex={1}
           >
-            <li><a href="/somewhere">menu1</a></li>
+            <li>menu1</li>
             <li>menu2</li>
-          </ul>
+          </CustomUl>
         }
-      </div>
+      </CustomDiv>
     </>
   );
 };
