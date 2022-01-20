@@ -102,12 +102,14 @@ class Api::V1::MyPagesController < ApplicationController
                                               where(title_id: title[:id]).
                                               pluck(:release_date)
                        {
-                         name: title,
+                         name: title[:name],
+                         release_condition: title[:release_condition],
                          release_date: release_date_array[0]
                        }
                      else
                        {
-                         name: title,
+                         name: title[:name],
+                         release_condition: title[:release_condition],
                          release_date: nil
                        }
                      end

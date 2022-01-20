@@ -297,7 +297,7 @@ export const ElementaryGameDescriptionDialog = ({
                       初級編では、重要なメタ文字を使った正規表現を学習していきます。時間内に正しい正規表現を入力すると、モンスターに攻撃できます。モンスターのHPを0にしたらゲームクリアです！
                     </SentenceWrapper>
                     <WarningSentenceWrapper>
-                      ※ UX向上の為、音が鳴ります。音量が気になる方は下げて頂くよう宜しくお願い致します。
+                      ※ UX向上の為、音が出ます。音量が気になる方は下げて頂くよう宜しくお願い致します。
                     </WarningSentenceWrapper>
                     <OuterButtonsWrapper>
                       <ButtonsWrapper>

@@ -6,15 +6,17 @@ import styled from 'styled-components';
 import { Header } from '../components/Headers/Header.jsx';
 import { FakeHeader } from '../components/Headers/FakeHeader.jsx';
 import { SessionFlashMessage } from '../components/FlashMessages/SessionFlashMessage.jsx';
-import { StatusExperienceBox } from '../components/Games/StatusExperienceBox.jsx';
+import { UserStatus } from '../components/Games/UserStatus.jsx';
 import { StudyHeatMap } from '../components/Games/StudyHeatMap.jsx';
 import { CorrectPercentGraph } from '../components/Games/CorrectPercentGraph.jsx';
 import { ChangeGraphBox } from '../components/Games/ChangeGraphBox.jsx';
 import { DescriptionWrapper } from '../components/shared_style.js';
 import { GameContent } from '../components/GameContents/GameContent.jsx';
+import { TitleCard } from '../components/Games/TitleCard.jsx';
+import { Footer } from '../components/Footers/Footer.jsx';
+import { ReleaseConditionDialog } from '../components/Dialogs/ReleaseConditionDialog.jsx'
  
 // Images
-import TemporaryUserImage from '../images/temporary_user_image.png';
 import ElementaryGameContentImage from '../images/elementary_game_content.png';
 import IntermediateGameContentImage from '../images/intermediate_game_content.png';
 
@@ -65,83 +67,11 @@ const SecondWrapper = styled.div`
   padding-top: 80px;
 `;
 
-// ステータスのラッパー
-const StatusWrapper = styled.div`
-  width: 700px;
-  height: 260px;
-  border-radius: 3px;
-  background-color: ${COLORS.WHITE};
-  box-shadow: 0 0px 20px rgba(0,0,0,0.2);
-  display: flex
-`;
-
-// イメージのラッパー
-const ImageWrapper = styled.div`
-  width: 220px;
-  height: 220px;
-  background-color: ${COLORS.WHITE};
-  border-radius: 3px;
-  align-self: center;
-  padding: 16px;
-`;
-
-// カスタムイメージ
-// imageタグだと縦横比を維持できない
-// background-imageだと縦横比を維持できる
-const CustomImage = styled.div`
-  background-image: url(${TemporaryUserImage});
-  width: 220px;
-  height: 220px;
-  border-radius: 50%;
-  background-size: cover;
-  background-position: center center;
-  border: 3px solid silver;
-  box-shadow: inset 1px 1px 3px 0 rgba(0, 0, 0, 0.8), 1px 1px 0 0 rgba(255, 255, 255, 0.12);
-`;
-
-const TableWrapper = styled.div`
-  align-self: center;
-`;
-
-const CustomTable = styled.table`
-  width: 430px;
-  border-collapse: collapse;
-  color: ${COLORS.BLACK};
-  font-family: YuGothic;
-  font-weight: normal;
-  font-size: 18px;
-  margin: 0 auto;
-  border: none;
-`;
-
-const CustomTd = styled.td`
-  padding: 10px 40px; 
-  border: none;
-  text-align: right;
-  border-bottom:solid 1px silver;
-`;
-
-const NameTd = styled(CustomTd)`
-  font-family: YuGothic;
-  font-style: normal;
-  font-weight: bold;
-  font-size: 32px;
-  line-height: 40px;
-  text-align: left;
-  color: ${COLORS.BLACK};
-`;
-
-const MetaTd = styled(CustomTd)`
-  padding: 10px 40px; 
-  border: none;
-  text-align: left;
-  border-bottom:solid 1px silver;
-  font-weight: bold;
-`;
-
-const ExpTd = styled(CustomTd)`
-  text-align: left;
-  border: none;
+// サードラッパー
+const ThirdWrapper = styled.div`
+  background-color: ${COLORS.SUB};
+  padding-top: 80px;
+  padding-bottom: 40px;
 `;
 
 const StudyHeatMapWrapper = styled.div`
@@ -163,6 +93,16 @@ const ChangeGraphBoxWrapper = styled.div`
   align-items: center;
 `;
 
+// クエスト一覧というセンテンスのラッパー
+const QuestSentenceWrapper = styled(DescriptionWrapper)`
+  font-weight: bold;
+  font-size: 24px;
+  line-height: 40px;
+  display: inline-block;
+  text-align: left;
+  padding: 0 110px;
+`;
+
 // マイページのゲームコンテンツのラッパー
 const MyPageGameContentsWrapper = styled.div`
   padding-top: 20px;
@@ -171,15 +111,23 @@ const MyPageGameContentsWrapper = styled.div`
   justify-content: space-evenly;
 `;
 
-// クエスト一覧というセンテンスのラッパー
-const QuestSentenceWrapper = styled(DescriptionWrapper)`
+// 称号一覧というセンテンスのラッパー
+const TitleListSentenceWrapper = styled(DescriptionWrapper)`
   font-weight: bold;
   font-size: 24px;
   line-height: 40px;
   display: inline-block;
   text-align: left;
-  width: 100%;
   padding: 0 110px;
+`;
+
+// 称号一覧のカードを包括しているラッパー
+const TitleListWrapper = styled.div`
+  padding-top: 5px;
+  text-align: center;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
 `;
 
 export const MyPages = () => {
@@ -197,6 +145,8 @@ export const MyPages = () => {
   } = useContext(UserContext);
 
   // myPageStateの最初の状態
+  // isOpenDialog, title_name, release_dateは
+  // タイトルカードのモーダルで使う
   const initialState = {
     game_frequencies_per_day: [],
     elementary_correct_percents: [],
@@ -210,7 +160,11 @@ export const MyPages = () => {
     intermediate_graph_data: {},
     advanced_graph_data: {},
     real_graph_data: {},
-    difficulty_title: ""
+    difficulty_title: "",
+    isOpenDialog: false,
+    name: "",
+    release_date: "",
+    release_condition: ""
   };
 
   // MyPageの状態を管理するstate
@@ -258,8 +212,6 @@ export const MyPages = () => {
         const elementary_graph_data = makeCorrectPercentGraphData(
           data.elementary_correct_percents,
         );
-
-        console.log(elementary_graph_data);
         const intermediate_graph_data = makeCorrectPercentGraphData(
           data.intermediate_correct_percents,
         );
@@ -317,37 +269,14 @@ export const MyPages = () => {
       </FakeBlock>
       <MainWrapper>
         <MainFirstWrapper>
-          <StatusWrapper>
-            <ImageWrapper>
-              <CustomImage />
-            </ImageWrapper>
-            <TableWrapper>
-              <CustomTable>
-                <tbody>
-                  <tr>
-                    <NameTd colSpan={2}>{user.name}</NameTd> 
-                  </tr>
-                  <tr>
-                    <MetaTd>ランク</MetaTd> 
-                    <CustomTd>{user.rank}</CustomTd>
-                  </tr>
-                  <tr>
-                    <MetaTd>称号</MetaTd> 
-                    <CustomTd>{user.active_title}</CustomTd>
-                  </tr>
-                  <tr>
-                    <ExpTd colSpan={2}>
-                      <StatusExperienceBox 
-                        temporary_experience={user.temporary_experience}
-                        total_experience={user.total_experience}
-                        maximum_experience_per_rank={user.maximum_experience_per_rank}
-                      />
-                    </ExpTd>
-                  </tr>
-                </tbody>
-              </CustomTable>
-            </TableWrapper>
-          </StatusWrapper>
+          <UserStatus
+            name={user.name}
+            rank={user.rank}
+            active_title={user.active_title}
+            temporary_experience={user.temporary_experience}
+            total_experience={user.total_experience}
+            maximum_experience_per_rank={user.maximum_experience_per_rank}
+          />
           <StudyHeatMapWrapper>
             <StudyHeatMap 
               game_frequencies_per_day={myPageState.game_frequencies_per_day}
@@ -383,26 +312,66 @@ export const MyPages = () => {
             />
           </ChangeGraphBoxWrapper>
         </MainSecondWrapper>
+        <SecondWrapper>
+          <QuestSentenceWrapper>
+            クエスト一覧
+          </QuestSentenceWrapper>
+          <MyPageGameContentsWrapper> 
+            <GameContent 
+              difficulty='elementary' 
+              image={ElementaryGameContentImage} 
+            />
+            <GameContent 
+              difficulty='intermediate' 
+              image={IntermediateGameContentImage} 
+            />
+            <GameContent 
+              difficulty='advanced' 
+              image={IntermediateGameContentImage} 
+            />
+          </MyPageGameContentsWrapper>
+        </SecondWrapper>
+        <ThirdWrapper>
+          <TitleListSentenceWrapper>
+            称号一覧
+          </TitleListSentenceWrapper>
+          <TitleListWrapper>
+            {
+              myPageState.owned_titles.map((obj) => (
+                <TitleCard
+                  name={obj.name}
+                  release_date={obj.release_date}
+                  onClick={() => setMyPageState((prev) => ({
+                    ...prev,
+                    isOpenDialog: true,   
+                    name: obj.name,
+                    release_date: obj.release_date,
+                    release_condition: obj.release_condition
+                  }))}
+                />
+              ))
+            }
+          </TitleListWrapper>
+        </ThirdWrapper>
       </MainWrapper>
-      <SecondWrapper>
-        <QuestSentenceWrapper>
-          クエスト一覧
-        </QuestSentenceWrapper>
-        <MyPageGameContentsWrapper> 
-          <GameContent 
-            difficulty='elementary' 
-            image={ElementaryGameContentImage} 
+      <Footer />
+      {
+        myPageState.isOpenDialog &&
+          <ReleaseConditionDialog 
+            isOpen={myPageState.isOpenDialog}
+            onClose={() => setMyPageState((prev) => ({
+              ...prev,
+              isOpenDialog: false,
+              name: "",
+              release_date: "",
+              release_condition: ""
+            }))}
+            name={myPageState.name}
+            release_date={myPageState.release_date}
+            release_condition={myPageState.release_condition}
+            setMyPageState={setMyPageState}
           />
-          <GameContent 
-            difficulty='intermediate' 
-            image={IntermediateGameContentImage} 
-          />
-          <GameContent 
-            difficulty='advanced' 
-            image={IntermediateGameContentImage} 
-          />
-        </MyPageGameContentsWrapper>
-      </SecondWrapper>
+      }
     </>
   );
 };
