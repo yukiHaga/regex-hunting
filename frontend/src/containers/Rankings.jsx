@@ -1,6 +1,9 @@
 import React, { Fragment, useEffect, useLayoutEffect, useContext } from 'react';
 import styled from 'styled-components';
 
+// MUI
+import Avatar from '@mui/material/Avatar';
+
 // Presentational Components
 import { Header } from '../components/Headers/Header.jsx';
 import { FakeHeader } from '../components/Headers/FakeHeader.jsx';
@@ -26,6 +29,8 @@ import { checkLoginStatus } from '../apis/checkLoginStatus.js';
 // HTTP_STATUS_CODE
 import { HTTP_STATUS_CODE } from '../constants';
 
+// Images
+import TemporaryUserImage from '../images/temporary_user_image.png';
 
 const FakeBlock = styled.div`
   background-color: ${COLORS.SUB};
@@ -66,6 +71,10 @@ const RankingWrapper = styled.div`
  margin-top: 20px;
 `;
 
+const CustomThead = styled.thead`
+  box-shadow: 0 1px 2px rgba(0,0,0,0.3);
+`;
+
 const CustomTable = styled.table`
   border-collapse: collapse;
   color: ${COLORS.BLACK};
@@ -81,58 +90,105 @@ const CustomTable = styled.table`
 `;
 
 const RankingTd = styled.td`
-  padding: 10px 30px; 
+  padding 10px 0;
   border: none;
   text-align: center;
   border-bottom:solid 1px silver;
-  width: 10%;
+  width: 5%;
   font-weight: bold;
 `;
 
 const TimeTd = styled.td`
-  padding: 10px 30px; 
-  border: none;
-  text-align: center;
-  border-bottom:solid 1px silver;
-  width: 30%;
-  font-weight: bold;
-`;
-
-const HunterTd = styled.td`
-  padding: 10px 30px; 
-  border: none;
-  text-align: left;
-  border-bottom:solid 1px silver;
-  width: 40%;
-  font-weight: bold;
-`;
-
-const RankingDataTd = styled.td`
-  padding: 10px 30px; 
+  padding: 10px 0; 
   border: none;
   text-align: center;
   border-bottom:solid 1px silver;
   width: 10%;
+  font-weight: bold;
+`;
+
+const HunterTd = styled.td`
+  padding: 10px 0; 
+  border: none;
+  text-align: center;
+  border-bottom:solid 1px silver;
+  width: 65%;
+  font-weight: bold;
+`;
+
+const RankingDataTd = styled.td`
+  padding: 10px 0; 
+  border: none;
+  text-align: center;
+  border-bottom:solid 1px silver;
+  width: 10%;
+  font-size: 20px;
 `;
 
 const TimeDataTd = styled.td`
-  padding: 10px 30px; 
+  padding: 10px 0; 
   border: none;
   text-align: center;
   border-bottom:solid 1px silver;
   width: 30%;
+  font-size: 20px;
 `;
 
 const HunterDataTd = styled.td`
-  padding: 10px 30px; 
+  padding: 10px 0; 
   border: none;
-  text-align: left;
+  text-align: center;
   border-bottom:solid 1px silver;
   width: 40%;
 `;
 
-const CustomThead = styled.thead`
-  box-shadow: 0 1px 2px rgba(0,0,0,0.3);
+// ステータスのラッパー
+const StatusWrapper = styled.div`
+  display: flex
+`;
+
+const AvatarWrapper = styled.div`
+  align-self: center;
+`;
+
+// ハンター項目内のテーブル
+const HunterTableWrapper = styled.div`
+  align-self: center;
+  margin: 0 auto;
+`;
+
+const HunterTable = styled.table`
+  width: 400px;
+  border-collapse: collapse;
+  color: ${COLORS.BLACK};
+  font-family: YuGothic;
+  font-weight: normal;
+  font-size: 18px;
+  margin: 0 auto;
+  border: none;
+`;
+
+const HunterTableTd = styled.td`
+  padding: 5px 30px; 
+  border: none;
+  text-align: right;
+  border-bottom:solid 1px silver;
+`;
+
+const HunterTableNameTd = styled(HunterTableTd)`
+  font-family: YuGothic;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 24px;
+  text-align: left;
+  color: ${COLORS.BLACK};
+`;
+
+const HunterTableMetaTd = styled(HunterTableTd)`
+  border: none;
+  text-align: left;
+  border-bottom:solid 1px silver;
+  font-weight: bold;
 `;
 
 export const Rankings = () => {
@@ -231,12 +287,86 @@ export const Rankings = () => {
               <tr>
                 <RankingDataTd>1</RankingDataTd>
                 <TimeDataTd>00:55</TimeDataTd>
-                <HunterDataTd></HunterDataTd>
+                <HunterDataTd>
+                  <StatusWrapper>
+                    <AvatarWrapper>
+                      <Avatar
+                        alt="Hunter"
+                        src={TemporaryUserImage}
+                        sx={{ width: 110, height: 110 }}
+                      />
+                    </AvatarWrapper>
+                    <HunterTableWrapper>
+                      <HunterTable>
+                        <tbody>
+                          <tr>
+                            <HunterTableNameTd colSpan={2}>
+                              Yuki
+                            </HunterTableNameTd>
+                          </tr>
+                          <tr>
+                            <HunterTableMetaTd>
+                              ランク
+                            </HunterTableMetaTd>
+                            <HunterTableTd>
+                              18
+                            </HunterTableTd>
+                          </tr>
+                          <tr>
+                            <HunterTableMetaTd>
+                              称号
+                            </HunterTableMetaTd>
+                            <HunterTableTd>
+                              語り継がれし英雄
+                            </HunterTableTd>
+                          </tr>
+                        </tbody>
+                      </HunterTable>
+                    </HunterTableWrapper>
+                  </StatusWrapper>
+                </HunterDataTd>
               </tr>
               <tr>
                 <RankingDataTd>2</RankingDataTd>
                 <TimeDataTd>01:00</TimeDataTd>
-                <HunterDataTd></HunterDataTd>
+                <HunterDataTd>
+                  <StatusWrapper>
+                    <AvatarWrapper>
+                      <Avatar
+                        alt="Hunter"
+                        src={TemporaryUserImage}
+                        sx={{ width: 110, height: 110 }}
+                      />
+                    </AvatarWrapper>
+                    <HunterTableWrapper>
+                      <HunterTable>
+                        <tbody>
+                          <tr>
+                            <HunterTableNameTd colSpan={2}>
+                              Yuki
+                            </HunterTableNameTd>
+                          </tr>
+                          <tr>
+                            <HunterTableMetaTd>
+                              ランク
+                            </HunterTableMetaTd>
+                            <HunterTableTd>
+                              12
+                            </HunterTableTd>
+                          </tr>
+                          <tr>
+                            <HunterTableMetaTd>
+                              称号
+                            </HunterTableMetaTd>
+                            <HunterTableTd>
+                              天才と呼ばれしハンター
+                            </HunterTableTd>
+                          </tr>
+                        </tbody>
+                      </HunterTable>
+                    </HunterTableWrapper>
+                  </StatusWrapper>
+                </HunterDataTd>
               </tr>
             </tbody>
           </CustomTable>
