@@ -13,6 +13,9 @@ import { DescriptionWrapper } from '../shared_style.js';
 // 戻るボタン
 import { BackToModalButton } from '../Buttons/BackToModalButton.jsx';
 
+// 称号を変更するボタン
+import { TitleSettingButton } from '../Buttons/TitleSettingButton.jsx';
+
 const CustomDialogInnerWrapper = styled.div`
   padding-right: 10px;
   padding-left: 10px;
@@ -20,7 +23,7 @@ const CustomDialogInnerWrapper = styled.div`
   background-color: ${COLORS.SUB};
   text-align: center;
   width: 450px;
-  height: 250px;
+  height: ${({release_date}) => release_date ? '350px' : '250px'};
 `;
 
 const CustomDialogTitleWrapper = styled.div`
@@ -46,6 +49,11 @@ const CustomDialogContentSentence = styled(DescriptionWrapper)`
   font-size: 20px;
 `;
 
+const CustomDialogContentReleaseSentenceWrapper = styled.div`
+  text-align: center;
+  padding-top: 30px;
+`;
+
 const CustomDialogContentReleaseSentence = styled(CustomDialogContentSentence)`
   color: ${COLORS.RED};
 `;
@@ -61,7 +69,7 @@ const BackToModalButtonWrapper = styled.div`
 
 const ButtonsWrapper = styled.div`
   display: flex;
-  justify-content: space-around;
+  justify-content: center;
 `;
 
 // gameStateのrank_upがtrueの時に開くモーダル
@@ -79,7 +87,9 @@ export const ReleaseConditionDialog = ({
     <Dialog
       open={isOpen}
     >
-      <CustomDialogInnerWrapper> 
+      <CustomDialogInnerWrapper 
+        release_date={release_date}
+      > 
         <BackToModalButtonWrapper>
           <BackToModalButton 
             onClick={onClose}
@@ -95,11 +105,16 @@ export const ReleaseConditionDialog = ({
         </CustomDialogContent>
         {
           release_date && 
-            <CustomDialogContent>
-              <CustomDialogContentReleaseSentence>
-                {`${release_date.replace(/-/g, '/')}に解放`}
-              </CustomDialogContentReleaseSentence>
-            </CustomDialogContent>
+            <>
+              <CustomDialogContentReleaseSentenceWrapper>
+                <CustomDialogContentReleaseSentence>
+                  {`${release_date.replace(/-/g, '/')}に解放`}
+                </CustomDialogContentReleaseSentence>
+              </CustomDialogContentReleaseSentenceWrapper>
+              <ButtonsWrapper>
+                <TitleSettingButton />
+              </ButtonsWrapper>
+            </>
         }
       </CustomDialogInnerWrapper>
     </Dialog>
