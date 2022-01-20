@@ -39,6 +39,29 @@ const HeaderWrapper = styled.div`
   border: 1px solid rgba(0,0,0,.2);
 `;
 
+// title
+const TitleWrapper = styled.div`
+  width: 245px;
+  height: 45px;
+  font-family: Raleway;
+  font-style: italic;
+  font-weight: bold;
+  font-size: 27px;
+  line-height: 45px;
+  color: ${COLORS.SUB};
+  -webkit-text-stroke: 5px #030002;
+  text-stroke: 5px #030002;
+  padding: 5px;
+  margin-left: 30px;
+  position: relative;
+`
+
+// fuchiue
+const Fuchiue = styled.span`
+  -webkit-text-stroke: 0;
+  position: absolute;
+`
+
 const HeaderTitleImage = styled.img`
   width: 245px;
   height: 42px;
@@ -121,7 +144,12 @@ export const Header = ({onClickLink}) => {
     <>
       <HeaderWrapper>
         <HeaderTitleLink to={`/`}>
-          <HeaderTitleImage src={TitleImage} alt="main logo" />  
+          <TitleWrapper>
+            <Fuchiue>
+              Regex Hunting
+            </Fuchiue>
+            Regex Hunting
+          </TitleWrapper>
         </HeaderTitleLink>
         <HeaderNav>
           <HeaderNavLink to={`/rankings`}>
