@@ -23,7 +23,7 @@ export const IconMenu = () => {
   };
 
   return (
-    <div>
+    <>
       <IconButton
         size="large"
         aria-label="account of current user"
@@ -52,6 +52,6 @@ export const IconMenu = () => {
         <MenuItem onClick={handleClose}>Profile</MenuItem>
         <MenuItem onClick={handleClose}>My account</MenuItem>
       </Menu>
-    </div>
+    </>
   );
 };
