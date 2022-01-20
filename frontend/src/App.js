@@ -57,7 +57,7 @@ function App() {
 
             {/* アカウント設定ページ */}
             <Route 
-              exact path="/users/:user_id/account-settings" 
+              exact path="/account-settings" 
               element={<AccountSettings />} 
             />
 
