@@ -135,8 +135,9 @@ class Api::V1::GameManagementsController < ApplicationController
     if(condition_hash.values.include?(current_user.rank))
       current_user.release_titles.build(
         release_date: Date.today,
-        title_id: Title.find_by(name: condition_hash.key(current_user.rank))
+        title_id: (Title.find_by(name: condition_hash.key(current_user.rank)))[:id]
       )
+      current_user[:active_title] = condition_hash.key(current_user.rank)
       current_user.save!
     end
 
