@@ -12,7 +12,9 @@ import { BaseLink } from '../shared_style.js';
 // Colors
 import { COLORS } from '../../style_constants.js';
 
-export const IconMenu = () => {
+export const IconMenu = ({
+  handleLogout
+}) => {
 
   const [anchorEl, setAnchorEl] = useState(null);
 
@@ -65,7 +67,7 @@ export const IconMenu = () => {
         >
           アカウント設定
         </MenuItem>
-        <MenuItem onClick={handleClose}>ログアウト</MenuItem>
+        <MenuItem onClick={handleLogout}>ログアウト</MenuItem>
       </Menu>
     </>
   );

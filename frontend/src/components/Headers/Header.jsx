@@ -137,11 +137,10 @@ export const Header = ({onClickLink}) => {
           { 
             sessionState && userState && 
               <>
-                <HeaderNavFakeLink onClick={handleLogout}>
-                  ログアウト
-                </HeaderNavFakeLink>
                 <HeaderNavFakeLink>
-                  <IconMenu />
+                  <IconMenu 
+                    handleLogout={handleLogout}
+                  />
                 </HeaderNavFakeLink>
               </>
           }
