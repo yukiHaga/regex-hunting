@@ -1,4 +1,4 @@
-import React, { Fragment, useContext, useLayoutEffect, useState } from 'react';
+import React, { Fragment, useContext, useEffect, useLayoutEffect, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 
@@ -138,7 +138,8 @@ export const MyPages = () => {
   const { 
     requestUserState: { 
       sessionState,
-      userState: { user }
+      userState: { user },
+      battleAudioState
     },
     dispatch, 
     requestUserActionTyps
@@ -247,6 +248,18 @@ export const MyPages = () => {
   }, [
     user,
   ]);
+
+  // ゲーム中のユーザーがトップページに戻ったときに
+  // 音を消すuseEffect
+  useEffect(() => {
+    if(battleAudioState.play) {
+      battleAudioState.audio.pause();
+      battleAudioState.audio.currentTime = 0;
+    }
+  },[
+    battleAudioState.play,
+    battleAudioState.audio
+  ])
 
   // location
   const location = useLocation();
