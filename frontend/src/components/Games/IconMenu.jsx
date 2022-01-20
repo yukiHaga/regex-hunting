@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import styled from 'styled-components';
 
 // MUI
 import IconButton from '@mui/material/IconButton';
@@ -11,9 +10,6 @@ import { BaseLink } from '../shared_style.js';
 
 // Images
 import TemporaryUserImage from '../../images/temporary_user_image.png';
-
-// Colors
-import { COLORS } from '../../style_constants.js';
 
 export const IconMenu = ({
   handleLogout

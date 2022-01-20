@@ -1,4 +1,4 @@
-import React, { Fragment, useEffect, useContext } from 'react';
+import React, { Fragment, useEffect, useLayoutEffect, useContext } from 'react';
 import styled from 'styled-components';
 
 // Presentational Components
@@ -19,6 +19,13 @@ import ArrowRightIcon from '@mui/icons-material/ArrowRight';
 
 // PrevButton
 import ArrowLeftIcon from '@mui/icons-material/ArrowLeft';
+
+// ログイン状態を確認するAPIコール関数
+import { checkLoginStatus } from '../apis/checkLoginStatus.js'; 
+
+// HTTP_STATUS_CODE
+import { HTTP_STATUS_CODE } from '../constants';
+
 
 const FakeBlock = styled.div`
   background-color: ${COLORS.SUB};
@@ -53,6 +60,84 @@ const ChangeGraphBoxSentenceWrapper = styled(DescriptionWrapper)`
   text-align: center;
 `;
 
+const RankingWrapper = styled.div`
+ width: 80%;
+ margin: 0 auto;
+ margin-top: 20px;
+`;
+
+const CustomTable = styled.table`
+  border-collapse: collapse;
+  color: ${COLORS.BLACK};
+  background-color: ${COLORS.WHITE};
+  font-family: YuGothic;
+  font-weight: normal;
+  font-size: 18px;
+  margin: 0 auto;
+  margin-top: 8px;
+  box-shadow: 0 0px 20px rgba(0,0,0,0.2);
+  width: 80%;
+  border: 1px solid rgba(0,0,0,.2);
+`;
+
+const RankingTd = styled.td`
+  padding: 10px 30px; 
+  border: none;
+  text-align: center;
+  border-bottom:solid 1px silver;
+  width: 10%;
+  font-weight: bold;
+`;
+
+const TimeTd = styled.td`
+  padding: 10px 30px; 
+  border: none;
+  text-align: center;
+  border-bottom:solid 1px silver;
+  width: 30%;
+  font-weight: bold;
+`;
+
+const HunterTd = styled.td`
+  padding: 10px 30px; 
+  border: none;
+  text-align: left;
+  border-bottom:solid 1px silver;
+  width: 40%;
+  font-weight: bold;
+`;
+
+const RankingDataTd = styled.td`
+  padding: 10px 30px; 
+  border: none;
+  text-align: center;
+  border-bottom:solid 1px silver;
+  width: 10%;
+`;
+
+const TimeDataTd = styled.td`
+  padding: 10px 30px; 
+  border: none;
+  text-align: center;
+  border-bottom:solid 1px silver;
+  width: 30%;
+`;
+
+const HunterDataTd = styled.td`
+  padding: 10px 30px; 
+  border: none;
+  text-align: left;
+  border-bottom:solid 1px silver;
+  width: 40%;
+`;
+
+const CustomThead = styled.thead`
+  background-image: -webkit-linear-gradient(rgba(255,255,255,.3) 0%,transparent 50%,transparent 50%,rgba(0,0,0,.1) 100%);
+  background-image:         linear-gradient(rgba(255,255,255,.3) 0%,transparent 50%,transparent 50%,rgba(0,0,0,.1) 100%);
+  box-shadow: 0 2px 2px 0 rgba(255,255,255,.1) inset,0 2px 10px 0 rgba(255,255,255,.2) inset,0 -2px 2px 0 rgba(0,0,0,.1) inset;
+  border: 1px solid rgba(0,0,0,.2);
+`;
+
 export const Rankings = () => {
 
   // useContext
@@ -66,6 +151,38 @@ export const Rankings = () => {
     dispatch, 
     requestUserActionTyps
   } = useContext(UserContext);
+
+  // ブラウザをリロードしてもログイン状態を維持するためのuseEffect
+  useLayoutEffect(() => {
+    if(sessionState === false){
+      checkLoginStatus().then((data) => {
+        dispatch({
+          type: requestUserActionTyps.REQUEST_SUCCESS,
+          payload: {
+            session: data.session,
+            user: data.user,
+          }
+        });
+      }).catch((e) => {
+        if(e.response.status === HTTP_STATUS_CODE.NOT_FOUND){
+          dispatch({
+            type: requestUserActionTyps.REQUEST_FAILURE,
+            payload: {
+              errors: e.response.data.errors
+            }
+          });
+        } else {
+          throw e;
+        }
+      })
+    }
+  }, [
+    dispatch, 
+    sessionState,
+    requestUserActionTyps.REQUEST, 
+    requestUserActionTyps.REQUEST_SUCCESS,
+    requestUserActionTyps.REQUEST_FAILURE
+  ]);
 
   // ゲーム中のユーザーがトップページに戻ったときに
   // 音を消すuseEffect
@@ -104,6 +221,29 @@ export const Rankings = () => {
             />
           </ButtonWrapper>
         </TitleLineWrapper>
+        <RankingWrapper>
+          <CustomTable>
+            <CustomThead>
+              <tr>
+                <RankingTd>順位</RankingTd>
+                <TimeTd>クリアタイム</TimeTd>
+                <HunterTd>ハンター</HunterTd>
+              </tr>
+            </CustomThead>
+            <tbody>
+              <tr>
+                <RankingDataTd>1</RankingDataTd>
+                <TimeDataTd>00:55</TimeDataTd>
+                <HunterDataTd></HunterDataTd>
+              </tr>
+              <tr>
+                <RankingDataTd>2</RankingDataTd>
+                <TimeDataTd>01:00</TimeDataTd>
+                <HunterDataTd></HunterDataTd>
+              </tr>
+            </tbody>
+          </CustomTable>
+        </RankingWrapper>
       </MainWrapper>
     </>
   );
