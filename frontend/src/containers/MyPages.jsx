@@ -162,6 +162,7 @@ export const MyPages = () => {
     real_graph_data: {},
     difficulty_title: "",
     isOpenDialog: false,
+    name: "",
     release_date: "",
     release_condition: ""
   };
@@ -343,6 +344,7 @@ export const MyPages = () => {
                   onClick={() => setMyPageState((prev) => ({
                     ...prev,
                     isOpenDialog: true,   
+                    name: obj.name,
                     release_date: obj.release_date,
                     release_condition: obj.release_condition
                   }))}
@@ -360,6 +362,7 @@ export const MyPages = () => {
             onClose={() => setMyPageState((prev) => ({
               ...prev,
               isOpenDialog: false,
+              name: "",
               release_date: "",
               release_condition: ""
             }))}
