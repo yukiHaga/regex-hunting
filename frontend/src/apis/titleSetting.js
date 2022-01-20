@@ -6,7 +6,7 @@ import { titleSettings } from '../urls/index';
 // API(Rails)と通信する際にデータにcookieを含めることができる
 export const postTitleSetting = async ({ id }, name) => {
   try {
-    const response = await axios.post(
+    const response = await axios.patch(
       titleSettings(id),
       { select_title: name },
       { withCredentials: true }
