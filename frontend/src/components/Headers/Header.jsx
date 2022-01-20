@@ -37,11 +37,11 @@ const HeaderWrapper = styled.div`
   background-image:         linear-gradient(rgba(255,255,255,.3) 0%,transparent 30%,transparent 30%,rgba(0,0,0,.1) 100%);
   box-shadow: 0 2px 2px 0 rgba(255,255,255,.1) inset,0 2px 10px 0 rgba(255,255,255,.2) inset,0 -2px 2px 0 rgba(0,0,0,.1) inset;
   border: 1px solid rgba(0,0,0,.2);
+  box-sizing: border-box;
 `;
 
 // title
 const TitleWrapper = styled.div`
-  width: 245px;
   height: 45px;
   font-family: Raleway;
   font-style: italic;
@@ -61,14 +61,6 @@ const Fuchiue = styled.span`
   -webkit-text-stroke: 0;
   position: absolute;
 `
-
-const HeaderTitleImage = styled.img`
-  width: 245px;
-  height: 42px;
-  padding: 5px;
-  margin-left: 10px;
-  object-fit: contain;
-`;
 
 const HeaderNav = styled.nav`
   margin-right: 40px;
