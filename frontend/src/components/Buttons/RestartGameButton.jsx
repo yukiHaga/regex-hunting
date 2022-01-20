@@ -10,6 +10,9 @@ import { HTTP_STATUS_CODE } from '../../constants';
 // Contextオブジェクト
 import { UserContext } from "../../context/UserProvider.js";
 
+// モンスター名を取得する関数
+import { getMonsterName } from '../../functions/getMonsterName.js';
+
 const RestartGameButtonWrapper = styled.div`
   margin-top: 30px;
   border-style: none;
@@ -71,6 +74,7 @@ export const RestartGameButton = ({
     getGameStart(difficulty).then((data) => {
       setGameState({
         ...initialState,
+        sentence: `${getMonsterName(difficulty)}が現れた！`,
         next_sentence: data.questions["0"].sentence,
         next_sentence_num: 1,
         next_target_sentence: data.questions["0"].target_sentence,
