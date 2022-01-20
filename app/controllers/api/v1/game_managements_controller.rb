@@ -118,32 +118,41 @@ class Api::V1::GameManagementsController < ApplicationController
     end
 
     # タイトルに関する処理
-    # release_titles <<は、Userモデルに記述する。
-    # Userモデルのrelease_titlesは、throughをつけなくて良い。中間テーブルだけにデータを直接入れる。
-=begin
-    if params[:release_title]
-      title = Title.find_by(name: params[:release_title][:name])
-      current_user.release_titles << title.release_titles.
-        build(release_date: params[:release_title][:release_date])
+    # ユーザーのランクが、condition_hashのバリューのランクを満たすなら、
+    # active_titleを更新する
+    condition_hash = {
+      一人前ハンター: 2,
+      先輩ハンター: 4,
+      玄人ハンター: 6,
+      熟練ハンター: 8,
+      いにしえのハンター: 10,
+      天才と呼ばれしハンター: 12,
+      伝説のハンター: 14,
+      無我の境地: 16,
+      語り継がれし英雄: 18
+    }
+
+    if(condition_hash.values.include?(current_user.rank))
+      current_user.release_titles.build(
+        release_date: Date.today,
+        title_id: Title.find_by(name: condition_hash.key(current_user.rank))
+      )
+      current_user.save!
     end
-=end
 
     # レンダリング
+    # ログインユーザーに返すjson
     render json: {
       send_game_data: true,
       session: true,
       user: {
-        rank: current_user ? current_user[:rank] : 1,
-        total_experience: current_user ? current_user[:total_experience] : 0,
-        maximum_experience_per_rank: current_user ?
-          current_user[:maximum_experience_per_rank] : 500,
-        temporary_experience: current_user ?
-          current_user[:temporary_experience] : 0,
-        prev_temporary_experience: current_user ?
-          current_user[:temporary_experience] : 0,
-        active_title: current_user ?
-          current_user[:active_title] : "見習いハンター",
-        rank_up: current_user && params[:current_user][:temporary_experience] >= params[:current_user][:maximum_experience_per_rank] ?
+        rank: current_user[:rank],
+        total_experience: current_user[:total_experience],
+        maximum_experience_per_rank: current_user[:maximum_experience_per_rank],
+        temporary_experience: current_user[:temporary_experience],
+        prev_temporary_experience: current_user[:temporary_experience],
+        active_title: current_user[:active_title],
+        rank_up: params[:current_user][:temporary_experience] >= params[:current_user][:maximum_experience_per_rank] ?
           true : false
       }
     }, status: :created
