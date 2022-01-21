@@ -9,8 +9,8 @@ import { COLORS } from '../../style_constants.js';
 const GameStartButtonWrapper = styled(BaseLink)`
   border-style: none;
   border-radius: 3px;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.3);
   transition: 0.3s;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.3);
   :hover {
     box-shadow: 0 0 2px rgba(0,0,0,0.2);
   }

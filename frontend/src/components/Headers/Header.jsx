@@ -4,9 +4,6 @@ import styled from 'styled-components';
 // アイコン付きメニュー
 import { IconMenu } from '../Games/IconMenu.jsx' 
 
-// Images
-import TitleImage from '../../images/title.png';
-
 // Colors
 import { COLORS } from '../../style_constants.js';
 
@@ -35,13 +32,27 @@ const HeaderWrapper = styled.div`
   z-index: 1;
 `;
 
-const HeaderTitleImage = styled.img`
-  width: 245px;
-  height: 42px;
+// title
+const TitleWrapper = styled.div`
+  height: 45px;
+  font-family: Raleway;
+  font-style: italic;
+  font-weight: bold;
+  font-size: 27px;
+  line-height: 45px;
+  color: ${COLORS.SUB};
+  -webkit-text-stroke: 5px #030002;
+  text-stroke: 5px #030002;
   padding: 5px;
-  margin-left: 10px;
-  object-fit: contain;
-`;
+  margin-left: 30px;
+  position: relative;
+`
+
+// fuchiue
+const Fuchiue = styled.span`
+  -webkit-text-stroke: 0;
+  position: absolute;
+`
 
 const HeaderNav = styled.nav`
   margin-right: 40px;
@@ -117,7 +128,12 @@ export const Header = ({onClickLink}) => {
     <>
       <HeaderWrapper>
         <HeaderTitleLink to={`/`}>
-          <HeaderTitleImage src={TitleImage} alt="main logo" />  
+          <TitleWrapper>
+            <Fuchiue>
+              Regex Hunting
+            </Fuchiue>
+            Regex Hunting
+          </TitleWrapper>
         </HeaderTitleLink>
         <HeaderNav>
           <HeaderNavLink to={`/rankings`}>
