@@ -4,9 +4,6 @@ import styled from 'styled-components';
 // アイコン付きメニュー
 import { IconMenu } from '../Games/IconMenu.jsx' 
 
-// Images
-import TitleImage from '../../images/title.png';
-
 // Colors
 import { COLORS } from '../../style_constants.js';
 
