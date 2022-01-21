@@ -8,9 +8,9 @@ class Api::V1::RankingsController < ApplicationController
     top_three_intermediate = get_top_three("intermediate")
     top_three_advanced = get_top_three("advanced")
     render json: {
-      top_three_elementary: @top_three_elementary,
-      top_three_intermediate: @top_three_intermediate,
-      top_three_advanced: @top_three_advanced
+      top_three_elementary: top_three_elementary,
+      top_three_intermediate: top_three_intermediate,
+      top_three_advanced: top_three_advanced
     }, status: :ok
   end
 
@@ -27,7 +27,11 @@ class Api::V1::RankingsController < ApplicationController
     top_three_array = three_game_managements.map do |obj|
                         {
                           game_management: obj,
-                          user: game_management.user
+                          user: game_management.user.select(
+                                                       name,
+                                                       rank,
+                                                       active_title,
+                                                     )
                         }
                       end
   end
