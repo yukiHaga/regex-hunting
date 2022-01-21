@@ -5,7 +5,7 @@ const FakeHeaderWrapper = styled.div`
   display: flex;
   justify-content: space-between;
   width: 100%;
-  height: 57px;
+  height: 55px;
 `;
 
 // LPページの場合、onClickLinkはモーダル管理のstateを更新する関数
