@@ -32,9 +32,6 @@ group :development, :test do
   gem 'sqlite3', '~> 1.4'
   # Call 'binding.pry' anywhere in the code to stop execution and get a debugger console
   gem 'pry-byebug'
-
-  # Use it to create data
-  gem 'faker'
 end
 
 group :development do
@@ -72,3 +69,6 @@ gem 'sorcery'
 
 # APIとクライアント側を一つのコマンドで動かす為に導入する。
 gem 'foreman'
+
+# Use it to create data
+gem 'faker'
