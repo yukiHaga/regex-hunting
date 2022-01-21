@@ -1,5 +1,4 @@
 class Api::V1::RankingsController < ApplicationController
-  before_action :set_each_difficulty_level_top_three, only: :index
   after_action :set_csrf_token_header, only: :index
 
   # 自分のランクを表示する部分は一旦保留。かなりムズイ
@@ -18,20 +17,25 @@ class Api::V1::RankingsController < ApplicationController
 
   # orderは、デフォルトで昇順である
   # そのため、最も早いゲームデータがレコードの一番上にくる
+  # to_aメソッドで、ActiveRecord_Relationクラスのオブジェクトを、
+  # Arrayクラスのオブジェクトに変換する
+  # 複数のゲームマネジメントに対して1人のユーザーが存在するので(N対1)
+  # eager_loadで左外部結合をした。
+  # おかげで、1回のクエリで上位3つの速さのゲームデータとユーザーを取得できた
   def get_top_three(difficulty)
     three_game_managements = GameManagement.where(
                                               difficulty: difficulty,
                                               game_result: :win
                                             ).order(:result_time).limit(3).
                                             eager_load(:user)
-    top_three_array = three_game_managements.map do |obj|
+    top_three_array = three_game_managements.to_a.map do |game_management|
                         {
-                          game_management: obj,
-                          user: game_management.user.select(
-                                                       name,
-                                                       rank,
-                                                       active_title,
-                                                     )
+                          game_management: game_management,
+                          user: {
+                            name: game_management.user[:name],
+                            rank: game_management.user[:rank],
+                            active_title: game_management.user[:active_title]
+                          }
                         }
                       end
   end

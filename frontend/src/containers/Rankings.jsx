@@ -27,6 +27,9 @@ import ArrowLeftIcon from '@mui/icons-material/ArrowLeft';
 // ログイン状態を確認するAPIコール関数
 import { checkLoginStatus } from '../apis/checkLoginStatus.js'; 
 
+// ランキングを取得するAPIコール関数
+import { getRanking } from '../apis/ranking.js'; 
+
 // HTTP_STATUS_CODE
 import { HTTP_STATUS_CODE } from '../constants';
 
@@ -250,6 +253,20 @@ export const Rankings = () => {
     requestUserActionTyps.REQUEST, 
     requestUserActionTyps.REQUEST_SUCCESS,
     requestUserActionTyps.REQUEST_FAILURE
+  ]);
+
+  // ランキングデータを取得するためのuseEffect
+  useEffect(() => {
+    getRanking().then((data) => {
+      console.log(data);
+    }).catch((e) => {
+      if(e.response.status === HTTP_STATUS_CODE.NOT_FOUND){
+        console.log(e.response.status);
+      } else {
+        throw e;
+      }
+    })
+  }, [
   ]);
 
   // ゲーム中のユーザーがトップページに戻ったときに
