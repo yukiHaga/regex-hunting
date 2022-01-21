@@ -1,4 +1,5 @@
 class Api::V1::RankingsController < ApplicationController
+  skip_before_action :require_login, only: :index
   after_action :set_csrf_token_header, only: :index
 
   # 自分のランクを表示する部分は一旦保留。かなりムズイ

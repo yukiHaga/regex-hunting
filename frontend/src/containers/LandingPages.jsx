@@ -263,8 +263,7 @@ export const LandingPages = () => {
       <ThirdWrapper>
         <ThirdMyPageImageCover src={MyPageImage} alt="my-page" />
         <GameDescriptionSentence>
-          アカウント作成すると、学習頻度や正答率の推移を<br/> 
-          確認できます。
+          アカウント作成すると、学習頻度や正答率の推移を<br />確認できます。
         </GameDescriptionSentence>
       </ThirdWrapper>
       <FourthWrapper>
