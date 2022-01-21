@@ -26,7 +26,7 @@ class Api::V1::RankingsController < ApplicationController
     three_game_managements = GameManagement.where(
                                               difficulty: difficulty,
                                               game_result: :win
-                                            ).order(:result_time).limit(3).
+                                            ).order(:result_time).limit(10).
                                             eager_load(:user)
     top_three_array = three_game_managements.to_a.map do |game_management|
                         {
