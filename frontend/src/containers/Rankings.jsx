@@ -1,4 +1,4 @@
-import React, { Fragment, useEffect, useLayoutEffect, useContext } from 'react';
+import React, { Fragment, useState, useEffect, useLayoutEffect, useContext } from 'react';
 import styled from 'styled-components';
 
 // MUI
@@ -29,6 +29,9 @@ import { checkLoginStatus } from '../apis/checkLoginStatus.js';
 
 // ランキングを取得するAPIコール関数
 import { getRanking } from '../apis/ranking.js'; 
+
+// クリアタイムを00:00:00のフォーマットで取得する関数
+import { getClearTime } from '../functions/getClearTime.js';
 
 // HTTP_STATUS_CODE
 import { HTTP_STATUS_CODE } from '../constants';
@@ -223,6 +226,15 @@ export const Rankings = () => {
     requestUserActionTyps
   } = useContext(UserContext);
 
+  const initialState = {
+    top_three_elementary: [],
+    top_three_intermediate: [],
+    top_three_advanced: []
+  };
+
+  // ランキングを制御するstate
+  const [rankingState, setRankingState] = useState(initialState);
+
   // ブラウザをリロードしてもログイン状態を維持するためのuseEffect
   useLayoutEffect(() => {
     if(sessionState === false){
@@ -256,12 +268,19 @@ export const Rankings = () => {
   ]);
 
   // ランキングデータを取得するためのuseEffect
-  useEffect(() => {
+  useLayoutEffect(() => {
     getRanking().then((data) => {
-      console.log(data);
+      setRankingState((prev) => ({
+        ...prev,
+        top_three_elementary: data.top_three_elementary,
+        top_three_intermediate: data.top_three_intermediate,
+        top_three_advanced: data.top_three_advanced
+      }));
     }).catch((e) => {
       if(e.response.status === HTTP_STATUS_CODE.NOT_FOUND){
-        console.log(e.response.status);
+        setRankingState((prev) => ({
+          ...prev,
+        }));
       } else {
         throw e;
       }
@@ -317,10 +336,17 @@ export const Rankings = () => {
             </CustomThead>
             <tbody>
               {
-                [1, 2, 3, 4, 5].map((value) => (
+                rankingState.top_three_elementary.map(({
+                  game_management, 
+                  user
+                }, index) => (
                   <tr>
-                    <RankingDataTd>{value}</RankingDataTd>
-                    <TimeDataTd>00:55</TimeDataTd>
+                    <RankingDataTd>{index + 1}</RankingDataTd>
+                    <TimeDataTd>
+                      {
+                        getClearTime(0, game_management.result_time).slice(3)
+                      }
+                    </TimeDataTd>
                     <HunterDataTd>
                       <StatusWrapper>
                         <AvatarWrapper>
@@ -335,7 +361,7 @@ export const Rankings = () => {
                             <tbody>
                               <tr>
                                 <HunterTableNameTd colSpan={2}>
-                                  Yuki
+                                  {user.name}
                                 </HunterTableNameTd>
                               </tr>
                               <tr>
@@ -343,7 +369,7 @@ export const Rankings = () => {
                                   ランク
                                 </HunterTableMetaTd>
                                 <HunterTableTd>
-                                  18
+                                  {user.rank}
                                 </HunterTableTd>
                               </tr>
                               <tr>
@@ -351,7 +377,7 @@ export const Rankings = () => {
                                   称号
                                 </HunterTableRankMetaTd>
                                 <HunterTableRankDataTd>
-                                  語り継がれし英雄
+                                  {user.active_title}
                                 </HunterTableRankDataTd>
                               </tr>
                             </tbody>
