@@ -1,21 +1,31 @@
-import React, { Fragment, useState, useEffect, useContext } from 'react';
+import React, { Fragment, useState, useEffect, useLayoutEffect, useContext } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 
 // Image
 import MainTitleImage from '../images/main_title.png';
 import BackGroundImage from '../images/background.png';
-import MainMonsterImage from '../images/intermediate.png';
+import MainMonsterImage from '../images/advanced.png';
+import BattleSceneImage from '../images/battle_scene.png';
+import MyPageImage from '../images/my_page_image.png';
+import RaknkingImage from '../images/ranking_image.png';
+import ElementaryGameContentImage from '../images/elementary_game_content.png';
+import IntermediateGameContentImage from '../images/intermediate_game_content.png';
 
 // Presentational Components
 import { Header } from '../components/Headers/Header.jsx';
 import { FakeHeader } from '../components/Headers/FakeHeader.jsx';
-import { SubTitle } from '../components/SubTitle.jsx';
+import { SubText } from '../components/SubText.jsx';
 import { StartButton } from '../components/Buttons/StartButton.jsx'
-import { Footer } from '../components/Footer.jsx';
+import { Footer } from '../components/Footers/Footer.jsx';
 import { LoginDialog } from '../components/Dialogs/LoginDialog.jsx';
 import { SignUpDialog } from '../components/Dialogs/SignUpDialog.jsx';
 import { SessionFlashMessage } from '../components/FlashMessages/SessionFlashMessage.jsx';
+import { GameDescriptionSentence } from '../components/Sentences/GameDescriptionSentence.jsx';
+import { RankingDescriptionSentence } from '../components/Sentences/RankingDescriptionSentence.jsx';
+import { GameStartDescriptionSentence } from '../components/Sentences/GameStartDescriptionSentence.jsx';
+import { GameContent } from '../components/GameContents/GameContent.jsx';
+import { BoundDescriptionSentence } from '../components/Sentences/BoundDescriptionSentence.jsx';
 
 // Contextオブジェクト
 import { UserContext } from "../context/UserProvider.js";
@@ -25,6 +35,12 @@ import { checkLoginStatus } from '../apis/checkLoginStatus.js';
 
 // HTTP_STATUS_CODE
 import { HTTP_STATUS_CODE } from '../constants';
+
+// Colors
+import { COLORS } from '../style_constants.js';
+
+// react-scroll
+import { Link as Scroll } from 'react-scroll';
 
 // メインのラッパー
 const MainWrapper = styled.div`
@@ -67,13 +83,74 @@ const MainMonsterImageCover = styled.img`
   object-fit: contain;
   z-index: -3;
   position: absolute;
-  top: 55px;
-  left: 200px;
+  top: 25px;
+  left: 250px;
 `;
 
 // フラッシュメッセージでレイアウトが変化しないためのブロック要素
 const FakeBlock = styled.div`
   height: 56px;
+`;
+
+// セカンドのラッパー
+const SecondWrapper = styled.div`
+  text-align: center;
+  background-color: ${COLORS.SUB};
+  padding-top: 80px;
+`;
+
+// 戦闘画像
+const SecondBattleSceneImageCover = styled.img`
+  width: 650px;
+  height: 400px;
+  object-fit: contain;
+  margin-top: 40px;
+  margin-bottom: 20px;
+`;
+
+// サードのラッパー
+const ThirdWrapper = styled.div`
+  text-align: center;
+  background-color: ${COLORS.SUB};
+  padding-top: 110px;
+`;
+
+// マイページ画像
+const ThirdMyPageImageCover = styled.img`
+  width: 650px;
+  height: 400px;
+  object-fit: contain;
+  margin-bottom: 20px;
+`;
+
+// フォースのラッパー
+const FourthWrapper = styled.div`
+  text-align: center;
+  background-color: ${COLORS.SUB};
+  padding-top: 110px;
+`;
+
+// ランキング画像
+const FourthRaknkingImageCover = styled.img`
+  width: 650px;
+  height: 400px;
+  object-fit: contain;
+  margin-top: 40px;
+`;
+
+// フィフスのラッパー
+const FifthWrapper = styled.div`
+  text-align: center;
+  background-color: ${COLORS.SUB};
+  padding-top: 140px;
+  padding-bottom: 150px;
+`;
+
+// ゲームコンテンツのラッパー
+const GameContentsWrapper = styled.div`
+  padding-top: 80px;
+  display: flex;
+  justify-content: space-evenly;
 `;
 
 export const LandingPages = () => { 
@@ -89,7 +166,7 @@ export const LandingPages = () => {
 
   // useContext
   const {
-    requestUserState: { sessionState }, 
+    requestUserState: { sessionState, battleAudioState }, 
     dispatch, 
     requestUserActionTyps
   } = useContext(UserContext);
@@ -101,10 +178,9 @@ export const LandingPages = () => {
   const navigate = useNavigate();
 
   // 初めてLPページに訪れた場合、ログインしていないので、
-  // 2回目のdispatchのdata.sessionはfalseとなる
-  useEffect(() => {
+  // dispatchのdata.sessionはfalseとなる
+  useLayoutEffect(() => {
     if(sessionState === false){
-      dispatch({ type: requestUserActionTyps.REQUEST });
       checkLoginStatus().then((data) => {
         dispatch({
           type: requestUserActionTyps.REQUEST_SUCCESS,
@@ -129,10 +205,21 @@ export const LandingPages = () => {
   }, [
     dispatch, 
     sessionState,
-    requestUserActionTyps.REQUEST, 
     requestUserActionTyps.REQUEST_SUCCESS,
     requestUserActionTyps.REQUEST_FAILURE
   ]);
+
+  // ゲーム中のユーザーがトップページに戻ったときに
+  // 音を消すuseEffect
+  useEffect(() => {
+    if(battleAudioState.play) {
+      battleAudioState.audio.pause();
+      battleAudioState.audio.currentTime = 0;
+    }
+  },[
+    battleAudioState.play,
+    battleAudioState.audio
+  ])
 
   return (
     <>
@@ -153,9 +240,57 @@ export const LandingPages = () => {
         <Filter />
         <MainMonsterImageCover src={MainMonsterImage} alt="main-monster" />
         <BackGroundImageCover src={BackGroundImage} alt="back-ground"/> 
-        <SubTitle />
-        <StartButton />
+        <SubText color={COLORS.SUB}>
+          正規表現を学ぶ狩りに出よう
+        </SubText>
+        <Scroll to="gameContent" smooth={true}>
+          <StartButton />
+        </Scroll>
+        <Scroll to="what'sRegex" smooth={true}>
+          <BoundDescriptionSentence />
+        </Scroll>
       </MainWrapper>
+      <SecondWrapper id="what'sRegex">
+        <SubText>
+          What's Regex Hunting ?
+        </SubText>
+        <SecondBattleSceneImageCover src={BattleSceneImage} alt="battle-scene"/>
+        <GameDescriptionSentence>
+          Regex Huntingは、凶悪なモンスターを倒しながら<br/>
+          正規表現が学べるゲーム型学習サービスです。
+        </GameDescriptionSentence>
+      </SecondWrapper>
+      <ThirdWrapper>
+        <ThirdMyPageImageCover src={MyPageImage} alt="my-page" />
+        <GameDescriptionSentence>
+          アカウント作成すると、学習頻度や正答率の推移を<br />確認できます。
+        </GameDescriptionSentence>
+      </ThirdWrapper>
+      <FourthWrapper>
+        <RankingDescriptionSentence>
+          全世界のハンターと競争して、最強の正規表現ハンターを目指そう！
+        </RankingDescriptionSentence>
+        <FourthRaknkingImageCover src={RaknkingImage} alt="ranking" />
+      </FourthWrapper>
+      <FifthWrapper id="gameContent">
+        <GameStartDescriptionSentence>
+          3種類のクエストをクリアして、正規表現を極めよう！
+        </GameStartDescriptionSentence>
+        <GameContentsWrapper> 
+          <GameContent 
+            difficulty='elementary' 
+            image={ElementaryGameContentImage} 
+          />
+          <GameContent 
+            difficulty='intermediate' 
+            image={IntermediateGameContentImage} 
+          />
+          <GameContent 
+            difficulty='advanced' 
+            image={IntermediateGameContentImage} 
+          />
+        </GameContentsWrapper>
+      </FifthWrapper>
       <Footer />
       {
         state.isOpenDialog && state.modalType === "login" &&

@@ -1,8 +1,8 @@
 import React, { useContext } from 'react';
 import styled from 'styled-components';
 
-// Images
-import TitleImage from '../../images/title.png';
+// アイコン付きメニュー
+import { IconMenu } from '../Games/IconMenu.jsx' 
 
 // Colors
 import { COLORS } from '../../style_constants.js';
@@ -27,17 +27,32 @@ const HeaderWrapper = styled.div`
   justify-content: space-between;
   background-color: ${COLORS.MAIN};
   width: 100%;
+  box-shadow: 0 3px 6px rgba(0,0,0,0.2);
   position: fixed;
   z-index: 1;
 `;
 
-const HeaderTitleImage = styled.img`
-  width: 245px;
-  height: 42px;
+// title
+const TitleWrapper = styled.div`
+  height: 45px;
+  font-family: Raleway;
+  font-style: italic;
+  font-weight: bold;
+  font-size: 27px;
+  line-height: 45px;
+  color: ${COLORS.SUB};
+  -webkit-text-stroke: 5px #030002;
+  text-stroke: 5px #030002;
   padding: 5px;
-  margin-left: 10px;
-  object-fit: contain;
-`;
+  margin-left: 30px;
+  position: relative;
+`
+
+// fuchiue
+const Fuchiue = styled.span`
+  -webkit-text-stroke: 0;
+  position: absolute;
+`
 
 const HeaderNav = styled.nav`
   margin-right: 40px;
@@ -85,7 +100,6 @@ export const Header = ({onClickLink}) => {
 
   // ログアウトを管理する関数
   const handleLogout = () => {
-    dispatch({ type: requestUserActionTyps.REQUEST });
     deleteUserSession().then((data) => {
       dispatch({
         type: requestUserActionTyps.REQUEST_SUCCESS,
@@ -110,19 +124,23 @@ export const Header = ({onClickLink}) => {
     });
   };
 
-
   return (
     <>
       <HeaderWrapper>
         <HeaderTitleLink to={`/`}>
-          <HeaderTitleImage src={TitleImage} alt="main logo" />  
+          <TitleWrapper>
+            <Fuchiue>
+              Regex Hunting
+            </Fuchiue>
+            Regex Hunting
+          </TitleWrapper>
         </HeaderTitleLink>
         <HeaderNav>
           <HeaderNavLink to={`/rankings`}>
             ランキング
           </HeaderNavLink>
           {
-            sessionState === false && 
+            sessionState === false && onClickLink && 
               <>
                 <HeaderNavFakeLink onClick={() => onClickLink("login")}>
                   ログイン
@@ -135,8 +153,10 @@ export const Header = ({onClickLink}) => {
           { 
             sessionState && userState && 
               <>
-                <HeaderNavFakeLink onClick={handleLogout}>
-                  ログアウト
+                <HeaderNavFakeLink>
+                  <IconMenu 
+                    handleLogout={handleLogout}
+                  />
                 </HeaderNavFakeLink>
               </>
           }

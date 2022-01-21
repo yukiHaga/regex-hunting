@@ -1,8 +1,4 @@
 Rails.application.routes.draw do
-  # React Routerを本番環境で動かす為に必要なルーティング
-  get '*path', to: "application#fallback_index_html", constraints: ->(request) do
-    !request.xhr? && request.format.html?
-  end
 
   namespace :api do
     namespace :v1 do
@@ -22,5 +18,11 @@ Rails.application.routes.draw do
       post "oauth/callback", to: "oauths#callback"
       resources :password_resets, only: %i[create edit update]
     end
+  end
+
+  # React Routerを本番環境で動かす為に必要なルーティング
+  # railsのルーティングについて書いている部分より下に追記する
+  get '*path', to: "application#fallback_index_html", constraints: ->(request) do
+    !request.xhr? && request.format.html?
   end
 end

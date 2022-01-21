@@ -97,9 +97,9 @@ export const LoginDialog = ({
     handleSubmit, 
     formState: { errors, isValid } 
   } = useForm({
-        mode: 'all',
-        shouldUnregister: false 
-      }); 
+    mode: 'all',
+    shouldUnregister: false 
+  }); 
 
 
   // Formの検証後に呼び出される関数
@@ -109,7 +109,6 @@ export const LoginDialog = ({
   // reducer側でちゃんとstateは更新されている。
   // しかし、この関数内でstateをコンソール出力できない。
   const onSubmit = ({EmailBox, PasswordBox}) => { 
-    dispatch({ type: requestUserActionTyps.REQUEST });
     postUserSession({
       user: {
         email: EmailBox,

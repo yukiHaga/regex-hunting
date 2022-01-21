@@ -22,9 +22,9 @@ ActiveRecord::Schema.define(version: 2021_12_16_054722) do
   end
 
   create_table "game_managements", force: :cascade do |t|
-    t.integer "difficulty_level", default: 0, null: false
+    t.integer "difficulty", default: 0, null: false
     t.integer "game_result", default: 0, null: false
-    t.time "result_time", default: "2000-01-01 00:00:00", null: false
+    t.float "result_time", default: 0.0, null: false
     t.date "play_date", null: false
     t.integer "user_id", null: false
     t.datetime "created_at", precision: 6, null: false
@@ -37,6 +37,7 @@ ActiveRecord::Schema.define(version: 2021_12_16_054722) do
     t.integer "max_hp", null: false
     t.integer "attack", null: false
     t.integer "defence", null: false
+    t.integer "difficulty", default: 0, null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
@@ -45,8 +46,9 @@ ActiveRecord::Schema.define(version: 2021_12_16_054722) do
     t.text "sentence", null: false
     t.string "target_sentence", null: false
     t.string "sample_answer", null: false
+    t.text "hint", null: false
     t.text "commentary", null: false
-    t.integer "difficulty_level", default: 0, null: false
+    t.integer "difficulty", default: 0, null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
@@ -73,6 +75,7 @@ ActiveRecord::Schema.define(version: 2021_12_16_054722) do
 
   create_table "titles", force: :cascade do |t|
     t.string "name", null: false
+    t.text "release_condition", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end

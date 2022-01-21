@@ -24,7 +24,6 @@ export const ExternalAuth = () => {
   // ExternalAuthコンポーネントの初回レンダリング時に、
   // ユーザーをログインさせるかのアクションへリクエストを出す
   useEffect(() => {
-    console.log("request関数の中");
     if (callBackState === 'xyz') {
       postExternalAuth({ 
         code, 
@@ -45,7 +44,12 @@ export const ExternalAuth = () => {
         state: { display: true, success: "アカウントが見つかりません。"}
       });
     }
-  }, [callBackState, code, provider, navigate]);
+  }, [
+    callBackState, 
+    code, 
+    provider, 
+    navigate
+  ]);
 
   return (
     <CustomDiv>

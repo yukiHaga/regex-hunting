@@ -18,6 +18,7 @@ import { PrivacyPolicies } from './containers/PrivacyPolicies.jsx';
 import { PasswordResets } from './containers/PasswordResets.jsx';
 import { PasswordUpdates } from './containers/PasswordUpdates.jsx';
 import { ExternalAuth } from './containers/ExternalAuth.jsx';
+import ScrollToTop from './scroll/ScrollToTop.jsx';
 
 // Provider
 import { UserProvider } from "./context/UserProvider.js";
@@ -28,6 +29,7 @@ function App() {
     <React.StrictMode>
       <UserProvider>
         <Router>
+          <ScrollToTop />
           <Routes>
             {/* LPページ */}
             <Route 
@@ -55,13 +57,13 @@ function App() {
 
             {/* アカウント設定ページ */}
             <Route 
-              exact path="/users/:user_id/account-settings" 
+              exact path="/account-settings" 
               element={<AccountSettings />} 
             />
 
             {/* ゲームページ */}
             <Route
-              exact path="/games/:difficulty_level/start"
+              exact path="/games/:difficulty/start"
               element={<Games />}
             />
 

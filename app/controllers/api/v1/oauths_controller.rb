@@ -14,6 +14,7 @@ class Api::V1::OauthsController < ApplicationController
       render json: {
         session: true,
         user: {
+          id: user[:id],
           name: user[:name],
           rank: user[:rank],
           total_experience: user[:total_experience],
@@ -29,9 +30,15 @@ class Api::V1::OauthsController < ApplicationController
         user = create_from(provider)
         reset_session
         auto_login(user)
+        current_user.release_titles.build(
+          release_date: Date.today,
+          title_id: Title.find_by(name: current_user[:active_title])[:id]
+        )
+        current_user.save!
         render json: {
           session: true,
           user: {
+            id: user[:id],
             name: user[:name],
             rank: user[:rank],
             total_experience: user[:total_experience],

@@ -1,5 +1,8 @@
 import { REQUEST_STATE } from '../constants';
 
+// 戦闘bgm
+import BattleSound from '../sounds/battle_25.mp3';
+
 // useReducerで使うinitialStateを定義
 export const initialState = {
   requestState: REQUEST_STATE.INITIAL,
@@ -7,34 +10,36 @@ export const initialState = {
   userState: {
     user: {}
   },
-  errors: {}
+  errors: {},
+  battleAudioState: {
+    audio: new Audio(BattleSound),
+    play: false
+  }
 };
 
 // useReducerで使うActonTypsを定義
-// REQUEST_STATEは、INITIAL, LOADING, OKの3つである
-// requestUserActionTypsがREQUESTなら、REQUEST_STATEはLOADING
-// requestUserActionTypsがREQUEST_SUCCESSなら、REQUEST_STATEはOK
 export const requestUserActionTyps = {
-  REQUEST: 'REQUEST',
   REQUEST_SUCCESS: 'REQUEST_SUCCESS',
   REQUEST_FAILURE: 'REQUEST_FAILURE'
 }
 
 export const requestUserReducer = (state, action) => {
   switch (action.type) {
-    case requestUserActionTyps.REQUEST:
-      return {
-        ...state,
-        requestState: REQUEST_STATE.LOADING,
-      };
     case requestUserActionTyps.REQUEST_SUCCESS:
       return {
         ...state,
         requestState: REQUEST_STATE.OK,
         sessionState: action.payload.session,
         userState: {
-          user: action.payload.user
+          user: {
+            ...state.userState.user,
+            ...action.payload.user
+          }
         },
+        battleAudioState: {
+          ...state.battleAudioState,
+          ...action.payload.play
+        }
       };
     case requestUserActionTyps.REQUEST_FAILURE:
       return {

@@ -19,13 +19,22 @@ module Api::ExceptionHandler
     }, status: :bad_request
   end
 
-  def render_404
-    render json: {
-      errors: {
-        title: 'Record Not Found',
-        detail: 'メールアドレスもしくはパスワードが不正です。'
-      }
-    }, status: :not_found
+  def render_404(e)
+    if e.message.slice(/Email has already been taken/) == "Email has already been taken"
+      render json: {
+        errors: {
+          title: 'Record Not Found',
+          detail: 'このメールアドレスは既に登録されています。'
+        }
+      }, status: :not_found
+    else
+      render json: {
+        errors: {
+          title: 'Record Not Found',
+          detail: 'メールアドレスもしくはパスワードが不正です。'
+        }
+      }, status: :not_found
+    end
   end
 
   def render_500

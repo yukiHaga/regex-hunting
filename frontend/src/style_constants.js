@@ -9,9 +9,20 @@ export const COLORS = {
   BLUE: '#0066B3',
   BROWN: '#8C705A',
   WHITE: '#ffffff',
-  BLACK: '#666666',
+  BLACK: '#333333',
   PINK: '#F7ADC3',
   LIGHT_BLUE: '#66BBFF',
+  GRAY: '#C4C4C4',
+  LIGHT_BLACK: '#666666',
+  OCHER: '#D3AA6B',
+  YELLOW: '#EBA12F',
+  GAGE_GRAY: '#BBB8AA',
+  WORD_BLUE: '#0066B3',
+  WORD_BACK: '#BFE4FF',
+  OVER_BLACK: '#444444',
+  ANSWER_GRAY: '#E5E5E5',
+  EXPERIENCE: '#00a968',
+  LIGHT_GRAY: '#f6f6f6'
 }
 
 // フォントサイズを決める際に、適宜定義する。
