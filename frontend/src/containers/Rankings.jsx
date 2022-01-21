@@ -191,6 +191,19 @@ const HunterTableMetaTd = styled(HunterTableTd)`
   font-weight: bold;
 `;
 
+const HunterTableRankMetaTd = styled.td`
+  padding: 5px 30px; 
+  border: none;
+  text-align: left;
+  font-weight: bold;
+`;
+
+const HunterTableRankDataTd = styled.td`
+  padding: 5px 30px; 
+  border: none;
+  text-align: right;
+`;
+
 export const Rankings = () => {
 
   // useContext
@@ -313,12 +326,12 @@ export const Rankings = () => {
                             </HunterTableTd>
                           </tr>
                           <tr>
-                            <HunterTableMetaTd>
+                            <HunterTableRankMetaTd>
                               称号
-                            </HunterTableMetaTd>
-                            <HunterTableTd>
+                            </HunterTableRankMetaTd>
+                            <HunterTableRankDataTd>
                               語り継がれし英雄
-                            </HunterTableTd>
+                            </HunterTableRankDataTd>
                           </tr>
                         </tbody>
                       </HunterTable>
@@ -355,12 +368,12 @@ export const Rankings = () => {
                             </HunterTableTd>
                           </tr>
                           <tr>
-                            <HunterTableMetaTd>
+                            <HunterTableRankMetaTd>
                               称号
-                            </HunterTableMetaTd>
-                            <HunterTableTd>
+                            </HunterTableRankMetaTd>
+                            <HunterTableRankDataTd>
                               天才と呼ばれしハンター
-                            </HunterTableTd>
+                            </HunterTableRankDataTd>
                           </tr>
                         </tbody>
                       </HunterTable>
