@@ -7,6 +7,7 @@ import Avatar from '@mui/material/Avatar';
 // Presentational Components
 import { Header } from '../components/Headers/Header.jsx';
 import { FakeHeader } from '../components/Headers/FakeHeader.jsx';
+import { Footer } from '../components/Footers/Footer.jsx';
 
 // Contextオブジェクト
 import { UserContext } from "../context/UserProvider.js";
@@ -40,6 +41,7 @@ const FakeBlock = styled.div`
 // メインのラッパー
 const MainWrapper = styled.div`
   background-color: ${COLORS.SUB};
+  padding-bottom: 56px;
 `;
 
 const TitleLineWrapper = styled.div`
@@ -297,94 +299,57 @@ export const Rankings = () => {
               </tr>
             </CustomThead>
             <tbody>
-              <tr>
-                <RankingDataTd>1</RankingDataTd>
-                <TimeDataTd>00:55</TimeDataTd>
-                <HunterDataTd>
-                  <StatusWrapper>
-                    <AvatarWrapper>
-                      <Avatar
-                        alt="Hunter"
-                        src={TemporaryUserImage}
-                        sx={{ width: 110, height: 110 }}
-                      />
-                    </AvatarWrapper>
-                    <HunterTableWrapper>
-                      <HunterTable>
-                        <tbody>
-                          <tr>
-                            <HunterTableNameTd colSpan={2}>
-                              Yuki
-                            </HunterTableNameTd>
-                          </tr>
-                          <tr>
-                            <HunterTableMetaTd>
-                              ランク
-                            </HunterTableMetaTd>
-                            <HunterTableTd>
-                              18
-                            </HunterTableTd>
-                          </tr>
-                          <tr>
-                            <HunterTableRankMetaTd>
-                              称号
-                            </HunterTableRankMetaTd>
-                            <HunterTableRankDataTd>
-                              語り継がれし英雄
-                            </HunterTableRankDataTd>
-                          </tr>
-                        </tbody>
-                      </HunterTable>
-                    </HunterTableWrapper>
-                  </StatusWrapper>
-                </HunterDataTd>
-              </tr>
-              <tr>
-                <RankingDataTd>2</RankingDataTd>
-                <TimeDataTd>01:00</TimeDataTd>
-                <HunterDataTd>
-                  <StatusWrapper>
-                    <AvatarWrapper>
-                      <Avatar
-                        alt="Hunter"
-                        src={TemporaryUserImage}
-                        sx={{ width: 110, height: 110 }}
-                      />
-                    </AvatarWrapper>
-                    <HunterTableWrapper>
-                      <HunterTable>
-                        <tbody>
-                          <tr>
-                            <HunterTableNameTd colSpan={2}>
-                              Yuki
-                            </HunterTableNameTd>
-                          </tr>
-                          <tr>
-                            <HunterTableMetaTd>
-                              ランク
-                            </HunterTableMetaTd>
-                            <HunterTableTd>
-                              12
-                            </HunterTableTd>
-                          </tr>
-                          <tr>
-                            <HunterTableRankMetaTd>
-                              称号
-                            </HunterTableRankMetaTd>
-                            <HunterTableRankDataTd>
-                              天才と呼ばれしハンター
-                            </HunterTableRankDataTd>
-                          </tr>
-                        </tbody>
-                      </HunterTable>
-                    </HunterTableWrapper>
-                  </StatusWrapper>
-                </HunterDataTd>
-              </tr>
+              {
+                [1, 2, 3, 4, 5].map((value) => (
+                  <tr>
+                    <RankingDataTd>{value}</RankingDataTd>
+                    <TimeDataTd>00:55</TimeDataTd>
+                    <HunterDataTd>
+                      <StatusWrapper>
+                        <AvatarWrapper>
+                          <Avatar
+                            alt="Hunter"
+                            src={TemporaryUserImage}
+                            sx={{ width: 110, height: 110 }}
+                          />
+                        </AvatarWrapper>
+                        <HunterTableWrapper>
+                          <HunterTable>
+                            <tbody>
+                              <tr>
+                                <HunterTableNameTd colSpan={2}>
+                                  Yuki
+                                </HunterTableNameTd>
+                              </tr>
+                              <tr>
+                                <HunterTableMetaTd>
+                                  ランク
+                                </HunterTableMetaTd>
+                                <HunterTableTd>
+                                  18
+                                </HunterTableTd>
+                              </tr>
+                              <tr>
+                                <HunterTableRankMetaTd>
+                                  称号
+                                </HunterTableRankMetaTd>
+                                <HunterTableRankDataTd>
+                                  語り継がれし英雄
+                                </HunterTableRankDataTd>
+                              </tr>
+                            </tbody>
+                          </HunterTable>
+                        </HunterTableWrapper>
+                      </StatusWrapper>
+                    </HunterDataTd>
+                  </tr>
+                ))
+              }
             </tbody>
           </CustomTable>
         </RankingWrapper>
       </MainWrapper>
+      <Footer />
     </>
   );
 };
