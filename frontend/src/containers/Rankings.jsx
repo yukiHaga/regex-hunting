@@ -212,6 +212,15 @@ const HunterTableRankDataTd = styled.td`
   text-align: right;
 `;
 
+const NotDescriptionWrapper = styled(DescriptionWrapper)`
+`;
+
+const NotRankingWrapper = styled(RankingWrapper)`
+ width: 100%;
+ height: 475px;
+ text-align: center;
+`;
+
 export const Rankings = () => {
 
   // useContext
@@ -229,7 +238,9 @@ export const Rankings = () => {
   const initialState = {
     top_three_elementary: [],
     top_three_intermediate: [],
-    top_three_advanced: []
+    top_three_advanced: [],
+    current_top_three_array: [],
+    difficulty_title: ""
   };
 
   // ランキングを制御するstate
@@ -274,7 +285,9 @@ export const Rankings = () => {
         ...prev,
         top_three_elementary: data.top_three_elementary,
         top_three_intermediate: data.top_three_intermediate,
-        top_three_advanced: data.top_three_advanced
+        top_three_advanced: data.top_three_advanced,
+        current_top_three_array: data.top_three_elementary,
+        difficulty_title: "初級編"
       }));
     }).catch((e) => {
       if(e.response.status === HTTP_STATUS_CODE.NOT_FOUND){
@@ -299,6 +312,65 @@ export const Rankings = () => {
     battleAudioState.play,
     battleAudioState.audio
   ])
+ 
+  // 初級のデータを表示する関数
+  const handleElementary = () => {
+    setRankingState((prev) => ({
+      ...prev,
+      current_top_three_array: prev.top_three_elementary,
+      difficulty_title: "初級編"
+    }));
+  };
+
+  // 中級のデータを表示する関数
+  const handleIntermediate = () => {
+    setRankingState((prev) => ({
+      ...prev,
+      current_top_three_array: prev.top_three_intermediate,
+      difficulty_title: "中級編"
+    }));
+  };
+
+  // 上級のデータを表示する関数
+  const handleAdvanced = () => {
+    setRankingState((prev) => ({
+      ...prev,
+      current_top_three_array: prev.top_three_advanced,
+      difficulty_title: "上級編"
+    }));
+  };
+
+  // 左矢印のリンクを制御する関数
+  // difficulty_titleは初め初級が入る
+  // そのため、defaultは上級の関数が実行される
+  const handleLeftArrow = (difficulty_title) => {
+    switch (difficulty_title){
+      case '中級編':
+        handleElementary();
+        break;
+      case '上級編':
+        handleIntermediate(); 
+        break;
+      default:
+        handleAdvanced();
+    }
+  };
+
+  // 右矢印のリンクを制御する関数
+  // difficulty_titleは初め初級が入る
+  // そのため、defaultは中級の関数が実行される
+  const handleRightArrow = (difficulty_title) => {
+    switch (difficulty_title){
+      case '中級編':
+        handleAdvanced();
+        break;
+      case '上級編':
+        handleElementary();
+        break;
+      default:
+        handleIntermediate(); 
+    }
+  };
 
   return (
     <>
@@ -312,85 +384,96 @@ export const Rankings = () => {
             <ArrowLeftIcon
               fontSize='inherit' 
               sx={{ color: `${COLORS.BLACK}` }}
+              onClick={() => handleLeftArrow(rankingState.difficulty_title)}
             />
           </ButtonWrapper>
           <ChangeGraphBoxSentenceWrapper>
-            初級編
+            {rankingState.difficulty_title}
           </ChangeGraphBoxSentenceWrapper>
           <ButtonWrapper
           >
             <ArrowRightIcon
               fontSize='inherit' 
               sx={{ color: `${COLORS.BLACK}` }}
+              onClick={() => handleRightArrow(rankingState.difficulty_title)}
             />
           </ButtonWrapper>
         </TitleLineWrapper>
-        <RankingWrapper>
-          <CustomTable>
-            <CustomThead>
-              <tr>
-                <RankingTd>順位</RankingTd>
-                <TimeTd>クリアタイム</TimeTd>
-                <HunterTd>ハンター</HunterTd>
-              </tr>
-            </CustomThead>
-            <tbody>
-              {
-                rankingState.top_three_elementary.map(({
-                  game_management, 
-                  user
-                }, index) => (
+        {
+          rankingState.current_top_three_array.length ?
+            <RankingWrapper>
+              <CustomTable>
+                <CustomThead>
                   <tr>
-                    <RankingDataTd>{index + 1}</RankingDataTd>
-                    <TimeDataTd>
-                      {
-                        getClearTime(0, game_management.result_time).slice(3)
-                      }
-                    </TimeDataTd>
-                    <HunterDataTd>
-                      <StatusWrapper>
-                        <AvatarWrapper>
-                          <Avatar
-                            alt="Hunter"
-                            src={TemporaryUserImage}
-                            sx={{ width: 110, height: 110 }}
-                          />
-                        </AvatarWrapper>
-                        <HunterTableWrapper>
-                          <HunterTable>
-                            <tbody>
-                              <tr>
-                                <HunterTableNameTd colSpan={2}>
-                                  {user.name}
-                                </HunterTableNameTd>
-                              </tr>
-                              <tr>
-                                <HunterTableMetaTd>
-                                  ランク
-                                </HunterTableMetaTd>
-                                <HunterTableTd>
-                                  {user.rank}
-                                </HunterTableTd>
-                              </tr>
-                              <tr>
-                                <HunterTableRankMetaTd>
-                                  称号
-                                </HunterTableRankMetaTd>
-                                <HunterTableRankDataTd>
-                                  {user.active_title}
-                                </HunterTableRankDataTd>
-                              </tr>
-                            </tbody>
-                          </HunterTable>
-                        </HunterTableWrapper>
-                      </StatusWrapper>
-                    </HunterDataTd>
+                    <RankingTd>順位</RankingTd>
+                    <TimeTd>クリアタイム</TimeTd>
+                    <HunterTd>ハンター</HunterTd>
                   </tr>
-                ))
-              }
-            </tbody>
-          </CustomTable>
-        </RankingWrapper>
+                </CustomThead>
+                <tbody>
+                  {
+                    rankingState.current_top_three_array.map(({
+                      game_management, 
+                      user
+                    }, index) => (
+                      <tr>
+                        <RankingDataTd>{index + 1}</RankingDataTd>
+                        <TimeDataTd>
+                          {
+                            getClearTime(0, game_management.result_time).slice(3)
+                          }
+                        </TimeDataTd>
+                        <HunterDataTd>
+                          <StatusWrapper>
+                            <AvatarWrapper>
+                              <Avatar
+                                alt="Hunter"
+                                src={TemporaryUserImage}
+                                sx={{ width: 110, height: 110 }}
+                              />
+                            </AvatarWrapper>
+                            <HunterTableWrapper>
+                              <HunterTable>
+                                <tbody>
+                                  <tr>
+                                    <HunterTableNameTd colSpan={2}>
+                                      {user.name}
+                                    </HunterTableNameTd>
+                                  </tr>
+                                  <tr>
+                                    <HunterTableMetaTd>
+                                      ランク
+                                    </HunterTableMetaTd>
+                                    <HunterTableTd>
+                                      {user.rank}
+                                    </HunterTableTd>
+                                  </tr>
+                                  <tr>
+                                    <HunterTableRankMetaTd>
+                                      称号
+                                    </HunterTableRankMetaTd>
+                                    <HunterTableRankDataTd>
+                                      {user.active_title}
+                                    </HunterTableRankDataTd>
+                                  </tr>
+                                </tbody>
+                              </HunterTable>
+                            </HunterTableWrapper>
+                          </StatusWrapper>
+                        </HunterDataTd>
+                      </tr>
+                    ))
+                  }
+                </tbody>
+              </CustomTable>
+            </RankingWrapper>
+          :
+            <NotRankingWrapper>
+              <NotDescriptionWrapper>
+                ランキングが存在しません
+              </NotDescriptionWrapper>
+            </NotRankingWrapper>
+        }
       </MainWrapper>
       <Footer />
     </>
