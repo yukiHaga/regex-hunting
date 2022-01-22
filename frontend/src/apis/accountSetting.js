@@ -5,10 +5,12 @@ import { accountSettings } from '../urls/index';
 // postの第3引数にwithCredentials: trueを指定することで、
 // API(Rails)と通信する際にデータにcookieを含めることができる
 export const patchAccountSetting = async ({ 
-  id, 
-  name, 
-  email, 
-  open_rank 
+  user: {
+    id, 
+    name, 
+    email, 
+    open_rank 
+  }
 }) => {
   try {
     const response = await axios.patch(
