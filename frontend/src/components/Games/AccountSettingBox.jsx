@@ -207,7 +207,7 @@ export const AccountSettingBox = ({
                       control={
                         <Checkbox 
                           {...field} 
-                          defaultChecked={user.open_rank === "open"} 
+                          defaultChecked={user.open_rank} 
                         />
                       }
                     />
