@@ -28,6 +28,7 @@ const FakeBlock = styled.div`
 // メインのラッパー
 const MainWrapper = styled.div`
   background-color: ${COLORS.SUB};
+  padding-bottom: 23px;
 `;
 
 export const AccountSettings = () => {

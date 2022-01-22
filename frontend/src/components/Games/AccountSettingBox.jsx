@@ -27,6 +27,7 @@ import { LoginButton } from '../Buttons/LoginButton.jsx'
 
 const AccountSettingBoxWrapper = styled.div`
   width: 50%;
+  height: 600px;
   background-color: ${COLORS.WHITE};
   margin: 0 auto;
 `;
@@ -34,10 +35,11 @@ const AccountSettingBoxWrapper = styled.div`
 const AccountSettingBoxImageWrapper = styled.div`
   display: flex;
   justify-content: center;
-  padding-top: 50px;
+  padding-top: 40px;
 `;
 
 const AccountSettingBoxFormWrapper = styled.div`
+  margin: 0 auto;
 `;
 
 const CustomFilledInput = styled(FilledInput)`
