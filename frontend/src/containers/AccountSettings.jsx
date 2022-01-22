@@ -36,6 +36,7 @@ export const AccountSettings = () => {
   // requestUserStateには、requestState, userState, errorsが格納されている
   // userStateにはsessionとuserが格納されている
   const { 
+    requestUserState,
     requestUserState: { 
       sessionState,
       userState: { user },
@@ -95,7 +96,9 @@ export const AccountSettings = () => {
       <FakeHeader />
       <FakeBlock />
       <MainWrapper>
-        <AccountSettingBox />
+        <AccountSettingBox 
+          requestUserState={requestUserState}
+        />
       </MainWrapper>
       <Footer />
     </>
