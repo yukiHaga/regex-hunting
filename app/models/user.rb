@@ -8,7 +8,6 @@ class User < ApplicationRecord
   has_many :has_titles, through: :release_titles, source: :title
   accepts_nested_attributes_for :authentications
 
-  enum open_rank: { open: 0, close: 1 }
   enum active_title: {
                        見習いハンター: 0,
                        一人前ハンター: 1,
@@ -29,4 +28,5 @@ class User < ApplicationRecord
   validates :password, length: { minimum: 8 }, if: -> { new_record? || changes[:crypted_password] }
   validates :password, confirmation: true, if: -> { new_record? || changes[:crypted_password] }
   validates :password_confirmation, presence: true, if: -> { new_record? || changes[:crypted_password] }
+  validates :open_rank, inclusion: [true, false]
 end
