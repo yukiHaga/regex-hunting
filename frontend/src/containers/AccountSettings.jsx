@@ -6,6 +6,7 @@ import { Header } from '../components/Headers/Header.jsx';
 import { FakeHeader } from '../components/Headers/FakeHeader.jsx';
 import { DescriptionWrapper } from '../components/shared_style.js';
 import { Footer } from '../components/Footers/Footer.jsx';
+import { AccountSettingBox } from '../components/Games/AccountSettingBox.jsx';
 
 // Contextオブジェクト
 import { UserContext } from "../context/UserProvider.js";
@@ -86,7 +87,7 @@ export const AccountSettings = () => {
   },[
     battleAudioState.play,
     battleAudioState.audio
-  ])
+  ]);
 
   return (
     <>
@@ -94,7 +95,7 @@ export const AccountSettings = () => {
       <FakeHeader />
       <FakeBlock />
       <MainWrapper>
-
+        <AccountSettingBox />
       </MainWrapper>
       <Footer />
     </>
