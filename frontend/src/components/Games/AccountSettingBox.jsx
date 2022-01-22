@@ -26,8 +26,8 @@ import { SubmitErrorSentence } from '../Sentences/SubmitErrorSentence.jsx';
 import { LoginButton } from '../Buttons/LoginButton.jsx'
 
 const AccountSettingBoxWrapper = styled.div`
-  width: 50%;
-  height: 600px;
+  width: 40%;
+  height: 580px;
   background-color: ${COLORS.WHITE};
   margin: 0 auto;
 `;
@@ -35,10 +35,12 @@ const AccountSettingBoxWrapper = styled.div`
 const AccountSettingBoxImageWrapper = styled.div`
   display: flex;
   justify-content: center;
-  padding-top: 40px;
+  padding-top: 30px;
+  padding-bottom: 30px;
 `;
 
 const AccountSettingBoxFormWrapper = styled.div`
+  width: 402px;
   margin: 0 auto;
 `;
 
@@ -54,6 +56,10 @@ const CustomFilledEmailInput = styled(FilledInput)`
   margin-bottom: ${({
     errors_email_box
   }) => typeof errors_email_box === 'undefined' && '16px' };
+`;
+
+const AccoutSettingButtonWrapper = styled.div`
+  margin-top: 22px;
 `;
 
 export const AccountSettingBox = ({
@@ -87,7 +93,7 @@ export const AccountSettingBox = ({
       required: "メールアドレスを入力してください。", 
       pattern: {
         value: /^[A-Za-z0-9]{1}[A-Za-z0-9_.-]*@{1}[A-Za-z0-9_.-]{1,}.[A-Za-z0-9]{1,}$/,
-        message: "英数字, @, ドメインが含まれるメールアドレスを入力してください。"
+        message: "英数字, @, ドメインを含めて入力してください。"
       }
     }
   };
@@ -132,8 +138,6 @@ export const AccountSettingBox = ({
     })
   */
 
-  console.log(typeof errors.EmailBox);
-
   return (
     <>
       <AccountSettingBoxWrapper>
@@ -141,7 +145,7 @@ export const AccountSettingBox = ({
           <Avatar
             alt="Hunter"
             src={TemporaryUserImage}
-            sx={{ width: 250, height: 250 }}
+            sx={{ width: 200, height: 200 }}
           />
         </AccountSettingBoxImageWrapper>
         <AccountSettingBoxFormWrapper>
@@ -188,9 +192,11 @@ export const AccountSettingBox = ({
             {errors.EmailBox && <InputErrorSentence>
                                   {errors.EmailBox.message}
                                 </InputErrorSentence>}
-            <LoginButton 
-              disabled={!isValid} 
-            />
+            <AccoutSettingButtonWrapper>
+              <LoginButton 
+                disabled={!isValid} 
+              />
+            </AccoutSettingButtonWrapper>
             {
               requestUserState.errors.title === 'Record Not Found' && 
                 <SubmitErrorSentence>
