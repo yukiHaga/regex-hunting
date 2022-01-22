@@ -177,7 +177,7 @@ export const AccountSettingBox = ({
             <Controller 
               name="EmailBox"
               control={control}
-              defaultValue=""
+              defaultValue={user.email}
               rules={registerOptions.email}
               render={({ field }) => (
                 <FormControl variant="filled">              

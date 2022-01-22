@@ -22,7 +22,10 @@ export const initialState = {
 };
 
 // useReducerで使うActonTypsを定義
+// dispatch実行時に指定する
+// それに沿って、リデューサ関数のcase文が振り分けられる
 export const requestUserActionTyps = {
+  REQUEST: 'REQUEST',
   REQUEST_SUCCESS: 'REQUEST_SUCCESS',
   REQUEST_FAILURE: 'REQUEST_FAILURE'
 }

@@ -53,6 +53,7 @@ export const AccountSettings = () => {
   } = useContext(UserContext);
 
   // ブラウザをリロードしてもログイン状態を維持するためのuseEffect
+  // requestUserActionTyps.REQUESTとかは、reducerのファイルで定義した定数
   useLayoutEffect(() => {
     if(sessionState === false){
       dispatch({ type: requestUserActionTyps.REQUEST });
@@ -97,6 +98,10 @@ export const AccountSettings = () => {
     battleAudioState.audio
   ]);
 
+
+  // マウント後、直ぐにuseEffectが実行されるので、
+  // マウント時には、フォームがマウントされるが、すぐにCircularが表示される。
+  // その後、フォームがまたマウントされる
   return (
     <>
       {
