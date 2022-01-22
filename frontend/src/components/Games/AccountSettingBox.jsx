@@ -3,6 +3,8 @@ import styled from 'styled-components';
 
 // MUI
 import Avatar from '@mui/material/Avatar';
+import FormControlLabel from '@mui/material/FormControlLabel';
+import Checkbox from '@mui/material/Checkbox';
 
 // Colors
 import { COLORS } from '../../style_constants.js';
@@ -59,11 +61,12 @@ const CustomFilledEmailInput = styled(FilledInput)`
 `;
 
 const AccoutSettingButtonWrapper = styled.div`
-  margin-top: 22px;
+  margin-top: 16px;
 `;
 
 export const AccountSettingBox = ({
-  requestUserState
+  requestUserState,
+  user
 }) => {
 
   // useForm
@@ -104,8 +107,8 @@ export const AccountSettingBox = ({
   // postUserSessionで取得したdataを実引数として、dispatchを実行
   // reducer側でちゃんとstateは更新されている。
   // しかし、この関数内でstateをコンソール出力できない。
-  const onSubmit = ({NameBox, EmailBox}) => { 
-    return console.log(EmailBox);
+  const onSubmit = ({NameBox, EmailBox, OpenRankBox}) => { 
+    return console.log(OpenRankBox);
   };
 
   /*
@@ -153,7 +156,7 @@ export const AccountSettingBox = ({
             <Controller 
               name="NameBox"
               control={control}
-              defaultValue=""
+              defaultValue={user.name}
               rules={registerOptions.name}
               render={({ field }) => (
                 <FormControl variant="filled">              
@@ -192,6 +195,24 @@ export const AccountSettingBox = ({
             {errors.EmailBox && <InputErrorSentence>
                                   {errors.EmailBox.message}
                                 </InputErrorSentence>}
+            <Controller 
+              name="OpenRankBox"
+              control={control}
+              defaultValue=""
+              render={({ field }) => (
+                    <FormControlLabel
+                      {...field}
+                      key={1}
+                      label='ランキングを公開する'
+                      control={
+                        <Checkbox 
+                          {...field} 
+                          defaultChecked={user.open_rank === "open"} 
+                        />
+                      }
+                    />
+              )}
+            />
             <AccoutSettingButtonWrapper>
               <LoginButton 
                 disabled={!isValid} 

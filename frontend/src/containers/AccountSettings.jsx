@@ -99,6 +99,7 @@ export const AccountSettings = () => {
       <MainWrapper>
         <AccountSettingBox 
           requestUserState={requestUserState}
+          user={user}
         />
       </MainWrapper>
       <Footer />
