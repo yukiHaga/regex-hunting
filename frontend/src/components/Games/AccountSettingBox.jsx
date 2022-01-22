@@ -1,5 +1,10 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import styled from 'styled-components';
+
+import { useNavigate } from 'react-router-dom';
+
+// Contextオブジェクト
+import { UserContext } from "../../context/UserProvider.js";
 
 // MUI
 import Avatar from '@mui/material/Avatar';
@@ -25,7 +30,13 @@ import { InputErrorSentence } from '../Sentences/InputErrorSentence.jsx';
 import { SubmitErrorSentence } from '../Sentences/SubmitErrorSentence.jsx';
 
 // Button
-import { LoginButton } from '../Buttons/LoginButton.jsx'
+import { LoginButton } from '../Buttons/LoginButton.jsx';
+
+// アカウント情報を更新して、更新した情報を取得する関数
+import { patchAccountSetting } from '../../apis/accountSetting.js';
+
+// HTTP_STATUS_CODE
+import { HTTP_STATUS_CODE } from '../../constants';
 
 const AccountSettingBoxWrapper = styled.div`
   width: 40%;
@@ -101,6 +112,17 @@ export const AccountSettingBox = ({
     }
   };
 
+  // navigation
+  const navigate = useNavigate();
+
+  // useContext
+  // requestUserStateには、requestState, userState, errorsが格納されている
+  // userStateにはsessionとuserが格納されている
+  const { 
+    dispatch, 
+    requestUserActionTyps
+  } = useContext(UserContext);
+
   // Formの検証後に呼び出される関数
   // dataにはフォームに入力したデータが入る
   // dataを実引数としてpostUserSeesionを呼び出した後、
@@ -108,14 +130,12 @@ export const AccountSettingBox = ({
   // reducer側でちゃんとstateは更新されている。
   // しかし、この関数内でstateをコンソール出力できない。
   const onSubmit = ({NameBox, EmailBox, OpenRankBox}) => { 
-    return console.log(OpenRankBox);
-  };
-
-  /*
-    postUserSession({
+    patchAccountSetting({
       user: {
+        id: user.id,
+        name: NameBox,
         email: EmailBox,
-        password: PasswordBox
+        open_rank: OpenRankBox
       }
     }).then((data) => {
       dispatch({
@@ -126,7 +146,7 @@ export const AccountSettingBox = ({
         }
       });
     }).then(() => 
-      navigate('/my-page?user=login', { state: { display: true, success: "ログインしました。"}})
+      navigate('/my-page?user=account_setting', { state: { display: true, success: "アカウントを更新しました。"}})
     ).catch((e) => {
       if(e.response.status === HTTP_STATUS_CODE.NOT_FOUND){
         dispatch({
@@ -139,7 +159,7 @@ export const AccountSettingBox = ({
         throw e;
       }
     })
-  */
+  };
 
   return (
     <>
