@@ -86,7 +86,7 @@ ActiveRecord::Schema.define(version: 2022_01_21_121554) do
     t.integer "total_experience", default: 0, null: false
     t.integer "maximum_experience_per_rank", default: 500, null: false
     t.integer "temporary_experience", default: 0, null: false
-    t.integer "open_rank", default: 0, null: false
+    t.boolean "open_rank", default: true, null: false
     t.integer "active_title", default: 0, null: false
     t.string "email", null: false
     t.string "crypted_password"
