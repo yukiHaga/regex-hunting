@@ -4,6 +4,10 @@ import { REQUEST_STATE } from '../constants';
 import BattleSound from '../sounds/battle_25.mp3';
 
 // useReducerで使うinitialStateを定義
+// REQUEST_STATE.INITIALはrequestStateの初期値である
+// REQUEST_STATE.INITISLはconstants.jsに定義されている
+// APIの取得状況に応じて、requestStateの値が変化する
+// リクエスト中ならLOADING, リクエスト完了ならOK
 export const initialState = {
   requestState: REQUEST_STATE.INITIAL,
   sessionState: false,
