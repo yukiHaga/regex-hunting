@@ -42,9 +42,18 @@ const AccountSettingBoxFormWrapper = styled.div`
   margin: 0 auto;
 `;
 
-const CustomFilledInput = styled(FilledInput)`
+const CustomFilledNameInput = styled(FilledInput)`
   width: 400px;
-  margin-bottom: 16px;
+  margin-bottom: ${({
+    errors_name_box
+  }) => typeof errors_name_box === 'undefined' && '16px' };
+`;
+
+const CustomFilledEmailInput = styled(FilledInput)`
+  width: 400px;
+  margin-bottom: ${({
+    errors_email_box
+  }) => typeof errors_email_box === 'undefined' && '16px' };
 `;
 
 export const AccountSettingBox = ({
@@ -123,6 +132,8 @@ export const AccountSettingBox = ({
     })
   */
 
+  console.log(typeof errors.EmailBox);
+
   return (
     <>
       <AccountSettingBoxWrapper>
@@ -143,11 +154,12 @@ export const AccountSettingBox = ({
               render={({ field }) => (
                 <FormControl variant="filled">              
                   <InputLabel htmlFor="name-component-filled">名前</InputLabel>
-                  <CustomFilledInput
+                  <CustomFilledNameInput
                     {...field}
                     type="text"
                     id="name-component-filled"
                     label="name"
+                    errors_name_box={errors.NameBox}
                   />
                 </FormControl>              
               )}
@@ -163,11 +175,12 @@ export const AccountSettingBox = ({
               render={({ field }) => (
                 <FormControl variant="filled">              
                   <InputLabel htmlFor="email-component-filled">メールアドレス</InputLabel>
-                  <CustomFilledInput
+                  <CustomFilledEmailInput
                     {...field}
                     type="email"
                     id="email-component-filled"
                     label="email"
+                    errors_email_box={errors.EmailBox}
                   />
                 </FormControl>              
               )}
