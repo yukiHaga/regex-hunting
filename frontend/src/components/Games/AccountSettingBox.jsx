@@ -30,7 +30,7 @@ import { InputErrorSentence } from '../Sentences/InputErrorSentence.jsx';
 import { SubmitErrorSentence } from '../Sentences/SubmitErrorSentence.jsx';
 
 // Button
-import { LoginButton } from '../Buttons/LoginButton.jsx';
+import { AccountSettingButton } from '../Buttons/AccountSettingButton.jsx';
 
 // アカウント情報を更新して、更新した情報を取得する関数
 import { patchAccountSetting } from '../../apis/accountSetting.js';
@@ -234,7 +234,7 @@ export const AccountSettingBox = ({
               )}
             />
             <AccoutSettingButtonWrapper>
-              <LoginButton 
+              <AccountSettingButton 
                 disabled={!isValid} 
               />
             </AccoutSettingButtonWrapper>
