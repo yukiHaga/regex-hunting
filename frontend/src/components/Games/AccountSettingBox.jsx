@@ -125,10 +125,6 @@ export const AccountSettingBox = ({
 
   // Formの検証後に呼び出される関数
   // dataにはフォームに入力したデータが入る
-  // dataを実引数としてpostUserSeesionを呼び出した後、
-  // postUserSessionで取得したdataを実引数として、dispatchを実行
-  // reducer側でちゃんとstateは更新されている。
-  // しかし、この関数内でstateをコンソール出力できない。
   const onSubmit = ({NameBox, EmailBox, OpenRankBox}) => { 
     patchAccountSetting({
       user: {
@@ -218,7 +214,7 @@ export const AccountSettingBox = ({
             <Controller 
               name="OpenRankBox"
               control={control}
-              defaultValue=""
+              defaultValue={user.open_rank}
               render={({ field }) => (
                     <FormControlLabel
                       {...field}
