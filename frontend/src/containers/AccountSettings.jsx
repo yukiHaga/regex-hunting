@@ -7,6 +7,7 @@ import { FakeHeader } from '../components/Headers/FakeHeader.jsx';
 import { DescriptionWrapper } from '../components/shared_style.js';
 import { Footer } from '../components/Footers/Footer.jsx';
 import { AccountSettingBox } from '../components/Games/AccountSettingBox.jsx';
+import CircularProgress from '@mui/material/CircularProgress';
 
 // Contextオブジェクト
 import { UserContext } from "../context/UserProvider.js";
