@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useState, useContext } from 'react';
 import styled from 'styled-components';
 
 import { useNavigate } from 'react-router-dom';
@@ -10,6 +10,8 @@ import { UserContext } from "../../context/UserProvider.js";
 import Avatar from '@mui/material/Avatar';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Checkbox from '@mui/material/Checkbox';
+import IconButton from '@mui/material/IconButton';
+import PhotoCamera from '@mui/icons-material/PhotoCamera';
 
 // Colors
 import { COLORS } from '../../style_constants.js';
@@ -50,6 +52,7 @@ const AccountSettingBoxImageWrapper = styled.div`
   justify-content: center;
   padding-top: 30px;
   padding-bottom: 30px;
+  position: relative;
 `;
 
 const AccountSettingBoxFormWrapper = styled.div`
@@ -75,10 +78,41 @@ const AccoutSettingButtonWrapper = styled.div`
   margin-top: 16px;
 `;
 
+// アイコンボタン用のコンポーネント
+const Input = styled.input`
+  display: none;
+`;
+
+const CustomLabel = styled.label`
+  position: absolute;
+  top: 181px;
+  right: 190px; 
+`;
+
 export const AccountSettingBox = ({
   requestUserState,
   user
 }) => {
+
+  const initialState = {
+    upload: false,
+    image_url: "",
+  }
+
+  // プレビュー機能を実装するためのstate
+  const [uploadState, setUploadState] = useState(initialState);
+
+  // ユーザーがアップロードした画像を取り扱う関数
+  // URL.createObjectURL()は、ファイルを参照するための一時的なURLを生成する
+  const handleUpload = ({
+    target: { files }
+  }) => {
+    setUploadState((prev) => ({
+      ...prev,
+      upload: true,
+      image_url: URL.createObjectURL(files[0])
+    }));
+  };
 
   // useForm
   const { 
@@ -163,9 +197,20 @@ export const AccountSettingBox = ({
         <AccountSettingBoxImageWrapper>
           <Avatar
             alt="Hunter"
-            src={TemporaryUserImage}
+            src={uploadState.upload ? uploadState.image_url : TemporaryUserImage}
             sx={{ width: 200, height: 200 }}
           />
+          <CustomLabel htmlFor="icon-button-file">
+            <Input 
+              accept="image/*" 
+              id="icon-button-file" 
+              type="file" 
+              onChange={(e) => handleUpload(e)}
+            />
+            <IconButton color="primary" aria-label="upload picture" component="span">
+              <PhotoCamera />
+            </IconButton>
+          </CustomLabel>
         </AccountSettingBoxImageWrapper>
         <AccountSettingBoxFormWrapper>
           <form onSubmit={handleSubmit(onSubmit)}>
