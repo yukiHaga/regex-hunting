@@ -13,7 +13,7 @@ import { COLORS } from '../../style_constants.js';
 import { HTTP_STATUS_CODE } from '../../constants';
 
 // タイトルを設定した情報を取得するapiコール関数
-import { postTitleSetting } from '../../apis/titleSetting.js';
+import { patchTitleSetting } from '../../apis/titleSetting.js';
 
 const TitleSettingButtonWrapper = styled(BaseLink)`
   margin-top: 30px;
@@ -59,7 +59,7 @@ export const TitleSettingButton = ({
   } = useContext(UserContext);
 
   const handleTitleSetting = () => {
-    postTitleSetting(user, name).then((data) => {
+    patchTitleSetting(user, name).then((data) => {
       dispatch({
         type: requestUserActionTyps.REQUEST_SUCCESS,
         payload: {
