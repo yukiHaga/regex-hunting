@@ -29,6 +29,11 @@ export const requestUserActionTyps = {
 
 export const requestUserReducer = (state, action) => {
   switch (action.type) {
+    case requestUserActionTyps.REQUEST:
+      return {
+        ...state,
+        requestState: REQUEST_STATE.LOADING,
+      };
     case requestUserActionTyps.REQUEST_SUCCESS:
       return {
         ...state,

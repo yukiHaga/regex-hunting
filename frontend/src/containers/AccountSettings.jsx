@@ -15,6 +15,9 @@ import { UserContext } from "../context/UserProvider.js";
 // ログイン状態を確認するAPIコール関数
 import { checkLoginStatus } from '../apis/checkLoginStatus.js'; 
 
+// REQUEST_STATE
+import { REQUEST_STATE } from '../constants';
+
 // HTTP_STATUS_CODE
 import { HTTP_STATUS_CODE } from '../constants';
 
@@ -40,6 +43,7 @@ export const AccountSettings = () => {
   const { 
     requestUserState,
     requestUserState: { 
+      requestState,
       sessionState,
       userState: { user },
       battleAudioState
@@ -51,6 +55,7 @@ export const AccountSettings = () => {
   // ブラウザをリロードしてもログイン状態を維持するためのuseEffect
   useLayoutEffect(() => {
     if(sessionState === false){
+      dispatch({ type: requestUserActionTyps.REQUEST });
       checkLoginStatus().then((data) => {
         dispatch({
           type: requestUserActionTyps.REQUEST_SUCCESS,
@@ -94,16 +99,23 @@ export const AccountSettings = () => {
 
   return (
     <>
-      <Header /> 
-      <FakeHeader />
-      <FakeBlock />
-      <MainWrapper>
-        <AccountSettingBox 
-          requestUserState={requestUserState}
-          user={user}
-        />
-      </MainWrapper>
-      <Footer />
+      {
+        requestState === REQUEST_STATE.LOADING ?
+          <CircularProgress />
+        :
+          <>
+            <Header /> 
+            <FakeHeader />
+            <FakeBlock />
+            <MainWrapper>
+              <AccountSettingBox 
+                requestUserState={requestUserState}
+                user={user}
+              />
+            </MainWrapper>
+            <Footer />
+          </>
+      }
     </>
   );
 };
