@@ -9,7 +9,8 @@ export const patchAccountSetting = async ({
     id, 
     name, 
     email, 
-    open_rank 
+    open_rank,
+    image
   }
 }) => {
   try {
@@ -19,7 +20,8 @@ export const patchAccountSetting = async ({
         user: {
           name: name,
           email: email,
-          open_rank: open_rank
+          open_rank: open_rank,
+          image: image
         }
       },
       { withCredentials: true }

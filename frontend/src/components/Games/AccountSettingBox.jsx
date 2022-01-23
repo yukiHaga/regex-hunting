@@ -105,7 +105,7 @@ export const AccountSettingBox = ({
   const initialState = {
     upload: false,
     image_url: "",
-    image_data: {}
+    image: {}
   }
 
   // プレビュー機能を実装するためのstate
@@ -142,7 +142,7 @@ export const AccountSettingBox = ({
           ...prev,
           upload: true,
           image_url: URL.createObjectURL(files[0]),
-          image_data: {
+          image: {
             name: files[0] ? files[0].name : 'unknown_file',
             data: reader.result
           }
@@ -195,7 +195,8 @@ export const AccountSettingBox = ({
         id: user.id,
         name: NameBox,
         email: EmailBox,
-        open_rank: OpenRankBox
+        open_rank: OpenRankBox,
+        image: uploadState.image
       }
     }).then((data) => {
       dispatch({
