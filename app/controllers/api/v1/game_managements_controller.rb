@@ -40,6 +40,8 @@ class Api::V1::GameManagementsController < ApplicationController
     monster = Monster.find_by(difficulty: params[:difficulty])
 
     # レンダリング
+    # このユーザーはゲームに使うユーザー
+    # contextのユーザーとは何も関係ない
     render json: {
       game_management: game_management,
       questions: questions.shuffle,
@@ -146,6 +148,7 @@ class Api::V1::GameManagementsController < ApplicationController
 
     # レンダリング
     # ログインユーザーに返すjson
+    # このuserのデータはcontextのユーザーに反映される
     render json: {
       send_game_data: true,
       session: true,
