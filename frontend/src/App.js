@@ -18,6 +18,7 @@ import { PrivacyPolicies } from './containers/PrivacyPolicies.jsx';
 import { PasswordResets } from './containers/PasswordResets.jsx';
 import { PasswordUpdates } from './containers/PasswordUpdates.jsx';
 import { ExternalAuth } from './containers/ExternalAuth.jsx';
+import { NotFoundPage } from './containers/NotFoundPage.jsx';
 import ScrollToTop from './scroll/ScrollToTop.jsx';
 
 // Provider
@@ -90,6 +91,11 @@ function App() {
             <Route 
               exact path="/users/password/edit" 
               element={<PasswordUpdates />} 
+            />
+            {/* どのページにも一致しなかったらこのページにアクセスされる*/}
+            <Route 
+              path="/*" 
+              element={<NotFoundPage />} 
             />
           </Routes>
         </Router>
