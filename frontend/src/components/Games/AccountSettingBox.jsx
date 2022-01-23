@@ -130,6 +130,8 @@ export const AccountSettingBox = ({
   // 使用されたメソッドによって異なります。
   // なので、画像ファイル(バイナリファイル)の場合、base64 Data URLが返ってくる
   // このプロパティは、読み込み操作が完了した後にのみ有効
+  // 文字列データしかやりとりできないので、音声データや画像データをbase64で
+  // 文字列にしているだけ
   const handleUpload = ({
     target: { files }
   }) => {
