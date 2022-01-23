@@ -10,8 +10,8 @@ export const patchAccountSetting = async ({
     name, 
     email, 
     open_rank,
-    image
-  }
+  },
+  image
 }) => {
   try {
     const response = await axios.patch(
@@ -21,8 +21,8 @@ export const patchAccountSetting = async ({
           name: name,
           email: email,
           open_rank: open_rank,
-          image: image
-        }
+        },
+        image: image
       },
       { withCredentials: true }
     );

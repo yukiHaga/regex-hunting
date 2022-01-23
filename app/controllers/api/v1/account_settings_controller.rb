@@ -12,15 +12,15 @@ class Api::V1::AccountSettingsController < ApplicationController
   # 元々設定している画像を消す
   def update
     if current_user.update(user_params)
-      if params[:user][:image]
+      if params[:image].has_key?(:data)
         current_user.avatar.purge
         blob = ActiveStorage::Blob.create_after_upload!(
-          io: StringIO.new(decode(params[:user][:image][:data]) + "\n"),
-          filename: params[:user][:image][:name]
+          io: StringIO.new(decode(params[:image][:data]) + "\n"),
+          filename: params[:image][:name]
         )
         current_user.avatar.attach(blob)
+        current_user.save!
       end
-      current_user.save!
       render json: {
         session: true,
         user: {

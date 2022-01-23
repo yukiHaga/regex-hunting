@@ -196,8 +196,8 @@ export const AccountSettingBox = ({
         name: NameBox,
         email: EmailBox,
         open_rank: OpenRankBox,
-        image: uploadState.image
-      }
+      },
+      image: uploadState.image
     }).then((data) => {
       dispatch({
         type: requestUserActionTyps.REQUEST_SUCCESS,
