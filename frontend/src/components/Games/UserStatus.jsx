@@ -110,7 +110,7 @@ export const UserStatus = memo(({
         <ImageWrapper>
           <Avatar
             alt="Hunter"
-            src={!image && DefaultAvatarImage}
+            src={image || DefaultAvatarImage}
             sx={{ width: 200, height: 200 }}
           />
         </ImageWrapper>

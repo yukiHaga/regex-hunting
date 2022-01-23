@@ -104,7 +104,7 @@ export const AccountSettingBox = ({
 
   const initialState = {
     upload: false,
-    image_url: !user.image && DefaultAvatarImage,
+    image_url: user.image || DefaultAvatarImage,
     image: {}
   }
 

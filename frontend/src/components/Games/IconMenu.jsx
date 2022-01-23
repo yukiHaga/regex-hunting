@@ -49,7 +49,7 @@ export const IconMenu = ({
       >
         <Avatar 
           alt="user-icon" 
-          src={!user.image && DefaultAvatarImage} 
+          src={user.image || DefaultAvatarImage} 
           sx={{ width: 32, height: 32 }}
         />
       </IconButton>
