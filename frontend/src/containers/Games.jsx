@@ -141,7 +141,10 @@ export const Games = () => {
 
   // useContext
   const {
-    requestUserState: { sessionState, battleAudioState }, 
+    requestUserState: { 
+      sessionState, 
+      battleAudioState 
+    }, 
     dispatch, 
     requestUserActionTyps
   } = useContext(UserContext);

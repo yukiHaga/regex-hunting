@@ -10,6 +10,9 @@ import { StatusExperienceBox } from '../Games/StatusExperienceBox.jsx';
 // Colors
 import { COLORS } from '../../style_constants.js';
 
+// デフォルトのアバター画像
+import DefaultAvatarImage from '../../images/default_avatar.png';
+
 // ステータスのラッパー
 const StatusWrapper = styled.div`
   width: 700px;
@@ -107,7 +110,7 @@ export const UserStatus = memo(({
         <ImageWrapper>
           <Avatar
             alt="Hunter"
-            src={image}
+            src={!image && DefaultAvatarImage}
             sx={{ width: 200, height: 200 }}
           />
         </ImageWrapper>

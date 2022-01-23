@@ -86,7 +86,10 @@ const HeaderNavFakeLink = styled(FakeLink)`
 
 // LPページの場合、onClickLinkはモーダル管理のstateを更新する関数
 // ログインしている場合、onClickLinkは何もない。
-export const Header = ({onClickLink}) => {
+export const Header = ({
+  onClickLink,
+  image
+}) => {
 
   // navigate
   let navigate = useNavigate();

@@ -16,8 +16,8 @@ import PhotoCamera from '@mui/icons-material/PhotoCamera';
 // Colors
 import { COLORS } from '../../style_constants.js';
 
-// Images
-import TemporaryUserImage from '../../images/temporary_user_image.png';
+// デフォルトのアバター画像
+import DefaultAvatarImage from '../../images/default_avatar.png';
 
 // React Hook Form
 import { useForm, Controller } from "react-hook-form";
@@ -104,7 +104,7 @@ export const AccountSettingBox = ({
 
   const initialState = {
     upload: false,
-    image_url: "",
+    image_url: !user.image && DefaultAvatarImage,
     image: {}
   }
 
@@ -230,12 +230,7 @@ export const AccountSettingBox = ({
         <AccountSettingBoxImageWrapper>
           <Avatar
             alt="Hunter"
-            src={
-              uploadState.upload ? 
-                uploadState.image_url 
-              : 
-                TemporaryUserImage
-            }
+            src={uploadState.image_url}
             sx={{ width: 200, height: 200 }}
           />
           <CustomLabel htmlFor="icon-button-file">

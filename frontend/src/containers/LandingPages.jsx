@@ -166,7 +166,10 @@ export const LandingPages = () => {
 
   // useContext
   const {
-    requestUserState: { sessionState, battleAudioState }, 
+    requestUserState: { 
+      sessionState, 
+      battleAudioState 
+    }, 
     dispatch, 
     requestUserActionTyps
   } = useContext(UserContext);
@@ -223,10 +226,12 @@ export const LandingPages = () => {
 
   return (
     <>
-      <Header onClickLink={(modalType) => setState({
-        isOpenDialog: true,
-        modalType: modalType
-      })}/>
+      <Header 
+        onClickLink={(modalType) => setState({
+          isOpenDialog: true,
+          modalType: modalType
+        })}
+      />
       <FakeHeader />
       <FakeBlock>
         <SessionFlashMessage
