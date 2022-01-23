@@ -94,9 +94,18 @@ export const AccountSettingBox = ({
   user
 }) => {
 
+  // useContext
+  // requestUserStateには、requestState, userState, errorsが格納されている
+  // userStateにはsessionとuserが格納されている
+  const { 
+    dispatch, 
+    requestUserActionTyps
+  } = useContext(UserContext);
+
   const initialState = {
     upload: false,
     image_url: "",
+    image_data: {}
   }
 
   // プレビュー機能を実装するためのstate
@@ -104,14 +113,41 @@ export const AccountSettingBox = ({
 
   // ユーザーがアップロードした画像を取り扱う関数
   // URL.createObjectURL()は、ファイルを参照するための一時的なURLを生成する
+  // filesプロパティの戻り値(if文の箇所に書いてあるfiles)はFileListオブジェクト
+  // FileListオブジェクトの中にファイル(Fileオブジェクト)が格納されている
+  // FileReaderオブジェクトを利用することで、取得したFileオブジェクトの内容を
+  // 読み込むことができる
+  // reader.onloadで、ファイルの読み込みが成功した後に、アロー関数が実行される
+  // onloadはイベントリスナーを定義しているだけで、まだ実行されたわけではない
+  // 実際に画像ファイル(バイナリファイル)を読み込むためには、
+  // readAsDataURLメソッドを使う
+  // readAsDataURLメソッドが実行完了後に、onload登録したイベントリスナーが実行される
+  // readAsDataURLメソッドは、バイナリファイルを
+  // base64 Data URLという形式にエンコードして取得できる
+  // Data URLとは、URLに直接、画像/音声等のデータを埋め込むための表現
+  // FileReader の result プロパティは、ファイルの内容を返す。
+  // データの形式は、読み取り操作を開始するために
+  // 使用されたメソッドによって異なります。
+  // なので、画像ファイル(バイナリファイル)の場合、base64 Data URLが返ってくる
+  // このプロパティは、読み込み操作が完了した後にのみ有効
   const handleUpload = ({
     target: { files }
   }) => {
-    setUploadState((prev) => ({
-      ...prev,
-      upload: true,
-      image_url: URL.createObjectURL(files[0])
-    }));
+    const reader = new FileReader();
+    if(files) {
+      reader.onload = () => {
+        setUploadState((prev) => ({
+          ...prev,
+          upload: true,
+          image_url: URL.createObjectURL(files[0]),
+          image_data: {
+            name: files[0] ? files[0].name : 'unknown_file',
+            data: reader.result
+          }
+        }))
+      }
+      reader.readAsDataURL(files[0])
+    }
   };
 
   // useForm
@@ -149,14 +185,6 @@ export const AccountSettingBox = ({
   // navigation
   const navigate = useNavigate();
 
-  // useContext
-  // requestUserStateには、requestState, userState, errorsが格納されている
-  // userStateにはsessionとuserが格納されている
-  const { 
-    dispatch, 
-    requestUserActionTyps
-  } = useContext(UserContext);
-
   // Formの検証後に呼び出される関数
   // dataにはフォームに入力したデータが入る
   const onSubmit = ({NameBox, EmailBox, OpenRankBox}) => { 
@@ -176,7 +204,9 @@ export const AccountSettingBox = ({
         }
       });
     }).then(() => 
-      navigate('/my-page?user=account_setting', { state: { display: true, success: "アカウントを更新しました。"}})
+      navigate('/my-page?user=account_setting', { 
+        state: { display: true, success: "アカウントを更新しました。"}
+      })
     ).catch((e) => {
       if(e.response.status === HTTP_STATUS_CODE.NOT_FOUND){
         dispatch({
@@ -197,7 +227,12 @@ export const AccountSettingBox = ({
         <AccountSettingBoxImageWrapper>
           <Avatar
             alt="Hunter"
-            src={uploadState.upload ? uploadState.image_url : TemporaryUserImage}
+            src={
+              uploadState.upload ? 
+                uploadState.image_url 
+              : 
+                TemporaryUserImage
+            }
             sx={{ width: 200, height: 200 }}
           />
           <CustomLabel htmlFor="icon-button-file">
@@ -207,7 +242,11 @@ export const AccountSettingBox = ({
               type="file" 
               onChange={(e) => handleUpload(e)}
             />
-            <IconButton color="primary" aria-label="upload picture" component="span">
+            <IconButton 
+              color="primary" 
+              aria-label="upload picture" 
+              component="span"
+            >
               <PhotoCamera />
             </IconButton>
           </CustomLabel>
