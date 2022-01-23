@@ -26,7 +26,8 @@ class Api::V1::UsersController < ApplicationController
           temporary_experience: user[:temporary_experience],
           open_rank: user[:open_rank],
           active_title: user[:active_title],
-          email: user[:email]
+          email: user[:email],
+          image: nil
         }
       }, status: :created
     else

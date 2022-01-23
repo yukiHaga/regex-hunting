@@ -53,5 +53,4 @@ class Api::V1::UserSessionsController < ApplicationController
       }, status: :ok
     end
   end
-
 end

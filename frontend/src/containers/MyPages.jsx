@@ -19,6 +19,7 @@ import { ReleaseConditionDialog } from '../components/Dialogs/ReleaseConditionDi
 // Images
 import ElementaryGameContentImage from '../images/elementary_game_content.png';
 import IntermediateGameContentImage from '../images/intermediate_game_content.png';
+import DefaultAvatarImage from '../images/default_avatar.png';
 
 // Contextオブジェクト
 import { UserContext } from "../context/UserProvider.js";
@@ -289,6 +290,7 @@ export const MyPages = () => {
             temporary_experience={user.temporary_experience}
             total_experience={user.total_experience}
             maximum_experience_per_rank={user.maximum_experience_per_rank}
+            image={DefaultAvatarImage}
           />
           <StudyHeatMapWrapper>
             <StudyHeatMap 
