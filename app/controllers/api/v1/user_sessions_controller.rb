@@ -45,7 +45,7 @@ class Api::V1::UserSessionsController < ApplicationController
           open_rank: current_user[:open_rank],
           active_title: current_user[:active_title],
           email: current_user[:email],
-          image: user.avatar.attached? ? url_for(user.avatar) : nil
+          image: current_user.avatar.attached? ? url_for(current_user.avatar) : nil
         },
       }, status: :ok
     else
