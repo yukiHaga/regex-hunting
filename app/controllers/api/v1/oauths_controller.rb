@@ -22,7 +22,8 @@ class Api::V1::OauthsController < ApplicationController
           temporary_experience: user[:temporary_experience],
           open_rank: user[:open_rank],
           active_title: user[:active_title],
-          email: user[:email]
+          email: user[:email],
+          image: nil
         },
       }, status: :ok
     else
@@ -46,7 +47,8 @@ class Api::V1::OauthsController < ApplicationController
             temporary_experience: user[:temporary_experience],
             open_rank: user[:open_rank],
             active_title: user[:active_title],
-            email: user[:email]
+            email: user[:email],
+            image: nil
           },
         }, status: :ok
       rescue

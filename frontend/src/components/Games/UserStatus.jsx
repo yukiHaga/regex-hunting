@@ -1,14 +1,17 @@
 import React, { memo } from 'react';
 import styled from 'styled-components';
 
+// MUI
+import Avatar from '@mui/material/Avatar';
+
 // Presentational Components
 import { StatusExperienceBox } from '../Games/StatusExperienceBox.jsx';
 
-// Images
-import TemporaryUserImage from '../../images/temporary_user_image.png';
-
 // Colors
 import { COLORS } from '../../style_constants.js';
+
+// デフォルトのアバター画像
+import DefaultAvatarImage from '../../images/default_avatar.png';
 
 // ステータスのラッパー
 const StatusWrapper = styled.div`
@@ -25,14 +28,15 @@ const ImageWrapper = styled.div`
   width: 220px;
   height: 220px;
   background-color: ${COLORS.WHITE};
-  border-radius: 3px;
-  align-self: center;
+  display: flex;
+  align-items: center;
   padding: 16px;
 `;
 
 // カスタムイメージ
 // imageタグだと縦横比を維持できない
 // background-imageだと縦横比を維持できる
+/*
 const CustomImage = styled.div`
   background-image: url(${TemporaryUserImage});
   width: 220px;
@@ -43,6 +47,7 @@ const CustomImage = styled.div`
   border: 3px solid silver;
   box-shadow: inset 1px 1px 3px 0 rgba(0, 0, 0, 0.8), 1px 1px 0 0 rgba(255, 255, 255, 0.12);
 `;
+*/
 
 const TableWrapper = styled.div`
   align-self: center;
@@ -95,14 +100,19 @@ export const UserStatus = memo(({
   active_title,
   temporary_experience,
   total_experience,
-  maximum_experience_per_rank
+  maximum_experience_per_rank,
+  image
 }) => {
 
   return (
     <>
       <StatusWrapper>
         <ImageWrapper>
-          <CustomImage />
+          <Avatar
+            alt="Hunter"
+            src={image || DefaultAvatarImage}
+            sx={{ width: 200, height: 200 }}
+          />
         </ImageWrapper>
         <TableWrapper>
           <CustomTable>

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 
 // MUI
 import IconButton from '@mui/material/IconButton';
@@ -8,12 +8,24 @@ import Avatar from '@mui/material/Avatar';
 
 import { BaseLink } from '../shared_style.js';
 
-// Images
-import TemporaryUserImage from '../../images/temporary_user_image.png';
+// Contextオブジェクト
+import { UserContext } from "../../context/UserProvider.js";
+
+// デフォルトのアバター画像
+import DefaultAvatarImage from '../../images/default_avatar.png';
 
 export const IconMenu = ({
   handleLogout
 }) => {
+
+  // useContext
+  // requestUserStateには、requestState, userState, errorsが格納されている
+  // userStateにはsessionとuserが格納されている
+  const { 
+    requestUserState: { 
+      userState: { user },
+    },
+  } = useContext(UserContext);
 
   const [anchorEl, setAnchorEl] = useState(null);
 
@@ -37,7 +49,7 @@ export const IconMenu = ({
       >
         <Avatar 
           alt="user-icon" 
-          src={TemporaryUserImage} 
+          src={user.image || DefaultAvatarImage} 
           sx={{ width: 32, height: 32 }}
         />
       </IconButton>

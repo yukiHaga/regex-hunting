@@ -1,14 +1,29 @@
 import axios from 'axios';
-import { titleSettings } from '../urls/index';
+import { accountSettings } from '../urls/index';
 
-// タイトルをセッティングした情報を取得するAPIコール関数
+// アカウントを更新した情報を取得するAPIコール関数
 // postの第3引数にwithCredentials: trueを指定することで、
 // API(Rails)と通信する際にデータにcookieを含めることができる
-export const patchTitleSetting = async ({ id }, name) => {
+export const patchAccountSetting = async ({ 
+  user: {
+    id, 
+    name, 
+    email, 
+    open_rank,
+  },
+  image
+}) => {
   try {
     const response = await axios.patch(
-      titleSettings(id),
-      { select_title: name },
+      accountSettings(id),
+      {
+        user: {
+          name: name,
+          email: email,
+          open_rank: open_rank,
+        },
+        image: image
+      },
       { withCredentials: true }
     );
     axios.defaults.headers.common['X-CSRF-Token'] = response.headers['x-csrf-token'];

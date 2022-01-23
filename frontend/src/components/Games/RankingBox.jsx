@@ -19,8 +19,8 @@ import { COLORS } from '../../style_constants.js';
 // DescriptionWrapper 
 import { DescriptionWrapper } from '../shared_style.js';
 
-// Images
-import TemporaryUserImage from '../../images/temporary_user_image.png';
+// デフォルトのアバター画像
+import DefaultAvatarImage from '../../images/default_avatar.png';
 
 const TitleLineWrapper = styled.div`
   display: flex;
@@ -301,7 +301,8 @@ export const RankingBox = memo(({
                     user: {
                       name,
                       rank,
-                      active_title
+                      active_title,
+                      image
                     }
                   }, index) => (
                     <tr>
@@ -316,7 +317,7 @@ export const RankingBox = memo(({
                           <AvatarWrapper>
                             <Avatar
                               alt="Hunter"
-                              src={TemporaryUserImage}
+                              src={image || DefaultAvatarImage}
                               sx={{ width: 110, height: 110 }}
                             />
                           </AvatarWrapper>

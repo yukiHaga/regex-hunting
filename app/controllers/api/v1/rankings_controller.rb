@@ -16,6 +16,9 @@ class Api::V1::RankingsController < ApplicationController
 
   private
 
+  # open_rankがtrueのユーザーidを全て取得する
+  # そのidを外部キーにもつゲームデータを取得する
+  # whereのハッシュのバリューに配列を指定すると、in句と同じ意味になる
   # orderは、デフォルトで昇順である
   # そのため、最も早いゲームデータがレコードの一番上にくる
   # to_aメソッドで、ActiveRecord_Relationクラスのオブジェクトを、
@@ -24,9 +27,11 @@ class Api::V1::RankingsController < ApplicationController
   # eager_loadで左外部結合をした。
   # おかげで、1回のクエリで上位3つの速さのゲームデータとユーザーを取得できた
   def get_top_three(difficulty)
+    user_id = User.where(open_rank: true).pluck(:id)
     three_game_managements = GameManagement.where(
                                               difficulty: difficulty,
-                                              game_result: :win
+                                              game_result: :win,
+                                              user_id: user_id
                                             ).order(:result_time).limit(10).
                                             eager_load(:user)
     top_three_array = three_game_managements.to_a.map do |game_management|
@@ -35,7 +40,8 @@ class Api::V1::RankingsController < ApplicationController
                           user: {
                             name: game_management.user[:name],
                             rank: game_management.user[:rank],
-                            active_title: game_management.user[:active_title]
+                            active_title: game_management.user[:active_title],
+                            image: game_management.user.avatar.attached? ? url_for(game_management.user.avatar) : nil
                           }
                         }
                       end

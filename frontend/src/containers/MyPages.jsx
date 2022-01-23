@@ -289,6 +289,7 @@ export const MyPages = () => {
             temporary_experience={user.temporary_experience}
             total_experience={user.total_experience}
             maximum_experience_per_rank={user.maximum_experience_per_rank}
+            image={user.image}
           />
           <StudyHeatMapWrapper>
             <StudyHeatMap 
