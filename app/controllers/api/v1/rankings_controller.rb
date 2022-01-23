@@ -40,7 +40,8 @@ class Api::V1::RankingsController < ApplicationController
                           user: {
                             name: game_management.user[:name],
                             rank: game_management.user[:rank],
-                            active_title: game_management.user[:active_title]
+                            active_title: game_management.user[:active_title],
+                            image: game_management.user.avatar.attached? ? url_for(game_management.user.avatar) : nil
                           }
                         }
                       end
