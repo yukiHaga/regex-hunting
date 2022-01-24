@@ -26,7 +26,7 @@ import { UserProvider } from "./context/UserProvider.js";
 
 // App Component
 function App() {
-
+   
   return (
     <React.StrictMode>
       <UserProvider>
@@ -48,9 +48,9 @@ function App() {
             {/* マイページ */}
             {/* ログインユーザー以外は見れないページ*/}
             <Route 
-              exact path="/my-page" 
-              element={<MyPages />} 
-            />
+              exact path="/my-page"
+              element={<MyPages />}
+            /> 
 
             {/* ランキングページ */}
             <Route 
