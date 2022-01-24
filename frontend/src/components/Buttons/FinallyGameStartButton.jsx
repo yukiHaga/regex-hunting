@@ -39,12 +39,14 @@ export const FinallyGameStartButton = ({
 }) => {
 
   // スタートを制御する関数
+  // このボタンを押したと同時にタイムを測る
   const handleFinallyStart = (
     setGameState
   ) => {
     setGameState((prev) => ({
       ...prev,
-      game_description_open: false
+      game_description_open: false,
+      game_start_time: performance.now(),
     })); 
   };
 
