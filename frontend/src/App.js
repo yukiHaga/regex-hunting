@@ -18,6 +18,7 @@ import { PrivacyPolicies } from './containers/PrivacyPolicies.jsx';
 import { PasswordResets } from './containers/PasswordResets.jsx';
 import { PasswordUpdates } from './containers/PasswordUpdates.jsx';
 import { ExternalAuth } from './containers/ExternalAuth.jsx';
+import { NotFoundPage } from './containers/NotFoundPage.jsx';
 import ScrollToTop from './scroll/ScrollToTop.jsx';
 
 // Provider
@@ -25,6 +26,7 @@ import { UserProvider } from "./context/UserProvider.js";
 
 // App Component
 function App() {
+   
   return (
     <React.StrictMode>
       <UserProvider>
@@ -44,10 +46,11 @@ function App() {
             />
 
             {/* マイページ */}
+            {/* ログインユーザー以外は見れないページ*/}
             <Route 
-              exact path="/my-page" 
-              element={<MyPages />} 
-            />
+              exact path="/my-page"
+              element={<MyPages />}
+            /> 
 
             {/* ランキングページ */}
             <Route 
@@ -56,6 +59,7 @@ function App() {
             />
 
             {/* アカウント設定ページ */}
+            {/* ログインユーザー以外は見れないページ*/}
             <Route 
               exact path="/account-settings" 
               element={<AccountSettings />} 
@@ -90,6 +94,12 @@ function App() {
             <Route 
               exact path="/users/password/edit" 
               element={<PasswordUpdates />} 
+            />
+
+            {/* どのページにも一致しなかったらこのページにアクセスされる*/}
+            <Route 
+              path="/*" 
+              element={<NotFoundPage />} 
             />
           </Routes>
         </Router>

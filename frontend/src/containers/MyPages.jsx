@@ -15,6 +15,7 @@ import { GameContent } from '../components/GameContents/GameContent.jsx';
 import { TitleCard } from '../components/Games/TitleCard.jsx';
 import { Footer } from '../components/Footers/Footer.jsx';
 import { ReleaseConditionDialog } from '../components/Dialogs/ReleaseConditionDialog.jsx'
+import { CircularMask } from '../components/loads/CircularMask.jsx';
  
 // Images
 import ElementaryGameContentImage from '../images/elementary_game_content.png';
@@ -31,6 +32,9 @@ import { getMyPageInfo } from '../apis/mypage.js';
 
 // HTTP_STATUS_CODE
 import { HTTP_STATUS_CODE } from '../constants';
+
+// REQUEST_STATE
+import { REQUEST_STATE } from '../constants';
 
 // Colors
 import { COLORS } from '../style_constants.js';
@@ -137,6 +141,7 @@ export const MyPages = () => {
   // userStateにはsessionとuserが格納されている
   const { 
     requestUserState: { 
+      requestState,
       sessionState,
       userState: { user },
       battleAudioState
@@ -171,9 +176,16 @@ export const MyPages = () => {
   // MyPageの状態を管理するstate
   const [myPageState, setMyPageState] = useState(initialState);
 
+  // location
+  const location = useLocation();
+
+  // navigation
+  const navigate = useNavigate();
+
   // ブラウザをリロードしてもログイン状態を維持するためのuseEffect
-  useLayoutEffect(() => {
+  useEffect(() => {
     if(sessionState === false){
+      dispatch({ type: requestUserActionTyps.REQUEST });
       checkLoginStatus().then((data) => {
         dispatch({
           type: requestUserActionTyps.REQUEST_SUCCESS,
@@ -182,6 +194,12 @@ export const MyPages = () => {
             user: data.user,
           }
         });
+        if(!data.session && location.key === 'default') {
+          navigate(
+            '/?user=not_authentications', 
+            { state: { display: true, success: "ログインしてください。"}}
+          )
+        }
       }).catch((e) => {
         if(e.response.status === HTTP_STATUS_CODE.NOT_FOUND){
           dispatch({
@@ -200,15 +218,18 @@ export const MyPages = () => {
     sessionState,
     requestUserActionTyps.REQUEST, 
     requestUserActionTyps.REQUEST_SUCCESS,
-    requestUserActionTyps.REQUEST_FAILURE
+    requestUserActionTyps.REQUEST_FAILURE,
+    navigate,
+    location.key
   ]);
 
   // マイページの情報を取得するuseLayoutEffect
   // 初回マウント時とuserが変化したタイミングで実行される
   // user存在時のみ発動するように、if文で制御した
   // 内部で今月のグラフのデータも算出している
+  // sessionStateがtrueの時かつ、userがサーバーから取得できたときに実行する
   useLayoutEffect(() => {
-    if(Object.keys(user).length){
+    if(sessionState && Object.keys(user).length){
       getMyPageInfo(user).then((data) => {
         const elementary_graph_data = makeCorrectPercentGraphData(
           data.elementary_correct_percents,
@@ -247,6 +268,7 @@ export const MyPages = () => {
     }
   }, [
     user,
+    sessionState
   ]);
 
   // ゲーム中のユーザーがトップページに戻ったときに
@@ -260,131 +282,132 @@ export const MyPages = () => {
     battleAudioState.play,
     battleAudioState.audio
   ])
-
-  // location
-  const location = useLocation();
-
-  // navigation
-  const navigate = useNavigate();
-  
+ 
   console.log(myPageState)
 
   return (
     <>
-      <Header /> 
-      <FakeHeader />
-      <FakeBlock>
-        <SessionFlashMessage
-          location={location}
-          navigate={navigate}
-          url='/my-page'
-        />
-      </FakeBlock>
-      <MainWrapper>
-        <MainFirstWrapper>
-          <UserStatus
-            name={user.name}
-            rank={user.rank}
-            active_title={user.active_title}
-            temporary_experience={user.temporary_experience}
-            total_experience={user.total_experience}
-            maximum_experience_per_rank={user.maximum_experience_per_rank}
-            image={user.image}
-          />
-          <StudyHeatMapWrapper>
-            <StudyHeatMap 
-              game_frequencies_per_day={myPageState.game_frequencies_per_day}
-            />
-          </StudyHeatMapWrapper>
-        </MainFirstWrapper>
-        <MainSecondWrapper>
-          <CorrectPercentGraphWrapper>
-            <CorrectPercentGraph 
-              real_graph_data={
-                myPageState.real_graph_data
-              }
-              difficulty_title={
-                myPageState.difficulty_title
-              }
-            />
-          </CorrectPercentGraphWrapper>
-          <ChangeGraphBoxWrapper>
-            <ChangeGraphBox 
-              ele_fastest_time={myPageState.ele_fastest_time}
-              int_fastest_time={myPageState.int_fastest_time}
-              adv_fastest_time={myPageState.adv_fastest_time}
-              elementary_correct_percents={
-                myPageState.elementary_correct_percents
-              }
-              intermediate_correct_percents={
-                myPageState.intermediate_correct_percents
-              }
-              advanced_correct_percents={
-                myPageState.advanced_correct_percents
-              }
-              setMyPageState={setMyPageState}
-            />
-          </ChangeGraphBoxWrapper>
-        </MainSecondWrapper>
-        <SecondWrapper>
-          <QuestSentenceWrapper>
-            クエスト一覧
-          </QuestSentenceWrapper>
-          <MyPageGameContentsWrapper> 
-            <GameContent 
-              difficulty='elementary' 
-              image={ElementaryGameContentImage} 
-            />
-            <GameContent 
-              difficulty='intermediate' 
-              image={IntermediateGameContentImage} 
-            />
-            <GameContent 
-              difficulty='advanced' 
-              image={IntermediateGameContentImage} 
-            />
-          </MyPageGameContentsWrapper>
-        </SecondWrapper>
-        <ThirdWrapper>
-          <TitleListSentenceWrapper>
-            称号一覧
-          </TitleListSentenceWrapper>
-          <TitleListWrapper>
-            {
-              myPageState.owned_titles.map((obj) => (
-                <TitleCard
-                  name={obj.name}
-                  release_date={obj.release_date}
-                  onClick={() => setMyPageState((prev) => ({
-                    ...prev,
-                    isOpenDialog: true,   
-                    name: obj.name,
-                    release_date: obj.release_date,
-                    release_condition: obj.release_condition
-                  }))}
-                />
-              ))
-            }
-          </TitleListWrapper>
-        </ThirdWrapper>
-      </MainWrapper>
-      <Footer />
       {
-        myPageState.isOpenDialog &&
-          <ReleaseConditionDialog 
-            isOpen={myPageState.isOpenDialog}
-            onClose={() => setMyPageState((prev) => ({
-              ...prev,
-              isOpenDialog: false,
-              name: "",
-              release_date: "",
-              release_condition: ""
-            }))}
-            name={myPageState.name}
-            release_date={myPageState.release_date}
-            release_condition={myPageState.release_condition}
-            setMyPageState={setMyPageState}
-          />
+        requestState === REQUEST_STATE.LOADING ?
+          <CircularMask /> 
+        :
+          <>
+            <Header /> 
+            <FakeHeader />
+            <FakeBlock>
+              <SessionFlashMessage
+                location={location}
+                navigate={navigate}
+                url='/my-page'
+              />
+            </FakeBlock>
+            <MainWrapper>
+              <MainFirstWrapper>
+                <UserStatus
+                  name={user.name}
+                  rank={user.rank}
+                  active_title={user.active_title}
+                  temporary_experience={user.temporary_experience}
+                  total_experience={user.total_experience}
+                  maximum_experience_per_rank={user.maximum_experience_per_rank}
+                  image={user.image}
+                />
+                <StudyHeatMapWrapper>
+                  <StudyHeatMap 
+                    game_frequencies_per_day={myPageState.game_frequencies_per_day}
+                  />
+                </StudyHeatMapWrapper>
+              </MainFirstWrapper>
+              <MainSecondWrapper>
+                <CorrectPercentGraphWrapper>
+                  <CorrectPercentGraph 
+                    real_graph_data={
+                      myPageState.real_graph_data
+                    }
+                    difficulty_title={
+                      myPageState.difficulty_title
+                    }
+                  />
+                </CorrectPercentGraphWrapper>
+                <ChangeGraphBoxWrapper>
+                  <ChangeGraphBox 
+                    ele_fastest_time={myPageState.ele_fastest_time}
+                    int_fastest_time={myPageState.int_fastest_time}
+                    adv_fastest_time={myPageState.adv_fastest_time}
+                    elementary_correct_percents={
+                      myPageState.elementary_correct_percents
+                    }
+                    intermediate_correct_percents={
+                      myPageState.intermediate_correct_percents
+                    }
+                    advanced_correct_percents={
+                      myPageState.advanced_correct_percents
+                    }
+                    setMyPageState={setMyPageState}
+                  />
+                </ChangeGraphBoxWrapper>
+              </MainSecondWrapper>
+              <SecondWrapper>
+                <QuestSentenceWrapper>
+                  クエスト一覧
+                </QuestSentenceWrapper>
+                <MyPageGameContentsWrapper> 
+                  <GameContent 
+                    difficulty='elementary' 
+                    image={ElementaryGameContentImage} 
+                  />
+                  <GameContent 
+                    difficulty='intermediate' 
+                    image={IntermediateGameContentImage} 
+                  />
+                  <GameContent 
+                    difficulty='advanced' 
+                    image={IntermediateGameContentImage} 
+                  />
+                </MyPageGameContentsWrapper>
+              </SecondWrapper>
+              <ThirdWrapper>
+                <TitleListSentenceWrapper>
+                  称号一覧
+                </TitleListSentenceWrapper>
+                <TitleListWrapper>
+                  {
+                    myPageState.owned_titles.map((obj) => (
+                      <TitleCard
+                        name={obj.name}
+                        release_date={obj.release_date}
+                        onClick={() => setMyPageState((prev) => ({
+                          ...prev,
+                          isOpenDialog: true,   
+                          name: obj.name,
+                          release_date: obj.release_date,
+                          release_condition: obj.release_condition
+                        }))}
+                      />
+                    ))
+                  }
+                </TitleListWrapper>
+              </ThirdWrapper>
+            </MainWrapper>
+            <Footer />
+            {
+              myPageState.isOpenDialog &&
+                <ReleaseConditionDialog 
+                  isOpen={myPageState.isOpenDialog}
+                  onClose={() => setMyPageState((prev) => ({
+                    ...prev,
+                    isOpenDialog: false,
+                    name: "",
+                    release_date: "",
+                    release_condition: ""
+                  }))}
+                  name={myPageState.name}
+                  release_date={myPageState.release_date}
+                  release_condition={myPageState.release_condition}
+                  setMyPageState={setMyPageState}
+                />
+            }
+          </>
       }
     </>
   );

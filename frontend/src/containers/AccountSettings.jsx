@@ -1,4 +1,5 @@
 import React, { Fragment, useEffect, useLayoutEffect, useContext } from 'react';
+import { useLocation, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 
 // Presentational Components
@@ -6,7 +7,7 @@ import { Header } from '../components/Headers/Header.jsx';
 import { FakeHeader } from '../components/Headers/FakeHeader.jsx';
 import { Footer } from '../components/Footers/Footer.jsx';
 import { AccountSettingBox } from '../components/Games/AccountSettingBox.jsx';
-import CircularProgress from '@mui/material/CircularProgress';
+import { CircularMask } from '../components/loads/CircularMask.jsx';
 
 // Contextオブジェクト
 import { UserContext } from "../context/UserProvider.js";
@@ -51,6 +52,12 @@ export const AccountSettings = () => {
     requestUserActionTyps
   } = useContext(UserContext);
 
+  // location
+  const location = useLocation();
+
+  // navigation
+  const navigate = useNavigate();
+
   // ブラウザをリロードしてもログイン状態を維持するためのuseEffect
   // requestUserActionTyps.REQUESTとかは、reducerのファイルで定義した定数
   useLayoutEffect(() => {
@@ -64,6 +71,12 @@ export const AccountSettings = () => {
             user: data.user,
           }
         });
+        if(!data.session && location.key === 'default') {
+          navigate(
+            '/?user=not_authentications', 
+            { state: { display: true, success: "ログインしてください。"}}
+          )
+        }
       }).catch((e) => {
         if(e.response.status === HTTP_STATUS_CODE.NOT_FOUND){
           dispatch({
@@ -82,7 +95,9 @@ export const AccountSettings = () => {
     sessionState,
     requestUserActionTyps.REQUEST, 
     requestUserActionTyps.REQUEST_SUCCESS,
-    requestUserActionTyps.REQUEST_FAILURE
+    requestUserActionTyps.REQUEST_FAILURE,
+    navigate,
+    location.key
   ]);
 
   // ゲーム中のユーザーがトップページに戻ったときに
@@ -104,7 +119,7 @@ export const AccountSettings = () => {
     <>
       {
         requestState === REQUEST_STATE.LOADING ?
-          <CircularProgress />
+          <CircularMask />
         :
           <>
             <Header /> 
