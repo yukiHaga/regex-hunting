@@ -1,4 +1,5 @@
 class Api::V1::PasswordResetsController < ApplicationController
+  skip_before_action :require_login, only: %i(create edit update)
   skip_before_action :verify_authenticity_token, only: :create
   after_action :set_csrf_token_header, only: %i(create edit update)
 
