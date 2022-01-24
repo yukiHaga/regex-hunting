@@ -8,6 +8,9 @@ class Api::V1::PasswordResetsController < ApplicationController
   # deliver_reset_password_instructions!は、
   # パスワードをリセットする方法（ランダムなトークンを含むURL）を記載したメールを
   # ユーザーに送信します
+  # おそらく、このメソッド実行の中で、有効期限付きのトークンを生成して、
+  # UserMailerのreset_password_emailが実行される
+  # そのため、メールが送られる
   def create
     @user = User.find_by(email: params[:email])
     @user&.deliver_reset_password_instructions!
