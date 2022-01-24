@@ -7,7 +7,7 @@ import { Header } from '../components/Headers/Header.jsx';
 import { FakeHeader } from '../components/Headers/FakeHeader.jsx';
 import { Footer } from '../components/Footers/Footer.jsx';
 import { AccountSettingBox } from '../components/Games/AccountSettingBox.jsx';
-import CircularProgress from '@mui/material/CircularProgress';
+import { CircularMask } from '../components/loads/CircularMask.jsx';
 
 // Contextオブジェクト
 import { UserContext } from "../context/UserProvider.js";
@@ -119,7 +119,7 @@ export const AccountSettings = () => {
     <>
       {
         requestState === REQUEST_STATE.LOADING ?
-          <CircularProgress />
+          <CircularMask />
         :
           <>
             <Header /> 
