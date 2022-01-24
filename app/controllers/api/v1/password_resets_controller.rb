@@ -1,14 +1,23 @@
 class Api::V1::PasswordResetsController < ApplicationController
-  skip_before_action :require_login, only: %i(create edit update)
+  skip_before_action :require_login
   skip_before_action :verify_authenticity_token, only: :create
   after_action :set_csrf_token_header, only: %i(create edit update)
 
+  # ユーザーがパスワードリセットフォームにemailを入力して、
+  # 送信を押すと、createアクションが実行される
+  # deliver_reset_password_instructions!は、
+  # パスワードをリセットする方法（ランダムなトークンを含むURL）を記載したメールを
+  # ユーザーに送信します
   def create
-    user = User.find_by(email: params[:email])
-    user&.deliver_reset_password_instructions!
+    @user = User.find_by(email: params[:email])
+    @user&.deliver_reset_password_instructions!
     render json: {}, status: :ok
   end
 
+  # リセットパスワードフォームを開くときに、editアクションが実行される
+  # load_from_reset_password_tokenは、トークンでユーザーを検索して、
+  # トークンの有効期限もチェックする
+  # トークンが見つかり、かつ有効であればユーザーを返す。
   def edit
     token = params[:id]
     user = User.load_from_reset_password_token(token)
@@ -16,6 +25,10 @@ class Api::V1::PasswordResetsController < ApplicationController
     render json: {}, status: :ok
   end
 
+  # editアクションの結果を反映したリセットパスワードフォームを送信したとき、
+  # updateアクションが実行される
+  # change_passwordでは、一時的なトークンをクリアして、パスワードの更新を行う
+  # このときに更新処理をするので、バリデーションが走る
   def update
     token = params[:id]
     user = User.load_from_reset_password_token(token)
