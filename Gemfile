@@ -53,6 +53,7 @@ group :development do
   gem 'bullet'
   # RailsAdmin is a Rails engine that provides an easy-to-use interface for managing your data
   # gem 'rails_admin', '~> 2.0.0'
+  gem 'letter_opener_web', '~> 1.0'
 end
 
 group :production do
