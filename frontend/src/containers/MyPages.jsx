@@ -2,9 +2,6 @@ import React, { Fragment, useContext, useEffect, useLayoutEffect, useState } fro
 import { useLocation, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 
-// MUI
-import CircularProgress from '@mui/material/CircularProgress';
-
 // Presentational Components
 import { Header } from '../components/Headers/Header.jsx';
 import { FakeHeader } from '../components/Headers/FakeHeader.jsx';
@@ -18,6 +15,7 @@ import { GameContent } from '../components/GameContents/GameContent.jsx';
 import { TitleCard } from '../components/Games/TitleCard.jsx';
 import { Footer } from '../components/Footers/Footer.jsx';
 import { ReleaseConditionDialog } from '../components/Dialogs/ReleaseConditionDialog.jsx'
+import { CircularMask } from '../components/loads/CircularMask.jsx';
  
 // Images
 import ElementaryGameContentImage from '../images/elementary_game_content.png';
@@ -291,7 +289,7 @@ export const MyPages = () => {
     <>
       {
         requestState === REQUEST_STATE.LOADING ?
-          <CircularProgress />
+          <CircularMask /> 
         :
           <>
             <Header /> 

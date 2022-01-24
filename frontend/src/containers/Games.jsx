@@ -2,9 +2,6 @@ import React, { useState, Fragment, useEffect, useLayoutEffect, useContext } fro
 import { useParams } from 'react-router-dom';
 import styled, { keyframes } from 'styled-components';
 
-// MUI
-import CircularProgress from '@mui/material/CircularProgress';
-
 // Image
 import RealBackGroundImage from '../images/temporary_real_background_image.png';
 
@@ -29,6 +26,7 @@ import { RankUpDialog } from '../components/Dialogs/RankUpDialog.jsx';
 import { CheckMetaDialog } from '../components/Dialogs/CheckMetaDialog.jsx';
 import { CutImage } from '../components/Games/CutImage.jsx';
 import { ClawImage } from '../components/Games/ClawImage.jsx';
+import { CircularMask } from '../components/loads/CircularMask.jsx';
 
 // Contextオブジェクト
 import { UserContext } from "../context/UserProvider.js";
@@ -492,7 +490,7 @@ export const Games = () => {
     <>
       {
         requestState === REQUEST_STATE.LOADING && gameState.game_description_open ?
-          <CircularProgress />
+          <CircularMask />
         :
           <>
             <Header />
