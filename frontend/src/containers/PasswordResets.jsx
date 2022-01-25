@@ -122,8 +122,8 @@ export const PasswordResets = () => {
     postPasswordResetRequest({
       email: EmailBox
     }).then(() => (
-      navigate('/?user=password_reset', { 
-        state: { display: true, success: "メールを送信しました。"}
+      navigate('/users/password/sent?user=sent', { 
+        state: { display: true, success: "パスワード再設定メールを送信しました。"}
       })
     )).catch((e) => {
       if(e.response.status === HTTP_STATUS_CODE.NOT_FOUND){
