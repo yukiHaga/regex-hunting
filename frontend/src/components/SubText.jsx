@@ -12,6 +12,7 @@ const SubTextWrapper = styled.div`
   line-height: 72px;
   color: ${(props) => props.color || COLORS.BLACK};
   margin: 0 auto;
+  margin-top: 15px;
 `;
 
 export const SubText = ({color, children}) => {

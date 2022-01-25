@@ -45,6 +45,7 @@ import { Link as Scroll } from 'react-scroll';
 // メインのラッパー
 const MainWrapper = styled.div`
   text-align: center;
+  position: relative;
 `;
 
 // メインタイトル画像
@@ -66,25 +67,29 @@ const BackGroundImageCover = styled.img`
 `;
 
 // フィルター
-const Filter = styled.span`
-  width: 1790px;
-  height: 750px;
+const Filter = styled.div`
   position: absolute;
-  top: 55px;
-  left: -350px;
+  top: 0px;
+  left: 0px;
+  width: 100%;
+  height: 100%;
   z-index: -2;
   background-color: rgba(102,102,102,0.5)
 `;
 
 // メインモンスター画像
 const MainMonsterImageCover = styled.img`
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  right: 0;
+  bottom: 30px;
+  z-index: -3;
+  margin: auto;
+  margin-top: 0px;
   width: 1000px;
   height: 700px;
   object-fit: contain;
-  z-index: -3;
-  position: absolute;
-  top: 25px;
-  left: 250px;
 `;
 
 // フラッシュメッセージでレイアウトが変化しないためのブロック要素
@@ -233,18 +238,17 @@ export const LandingPages = () => {
         })}
       />
       <FakeHeader />
-      <FakeBlock>
-        <SessionFlashMessage
-          location={location}
-          navigate={navigate}
-          url='/'
-        />
-      </FakeBlock>
       <MainWrapper>
+        <FakeBlock>
+          <SessionFlashMessage
+            location={location}
+            navigate={navigate}
+            url='/'
+          />
+        </FakeBlock>
         <MainTitleImageCover src={MainTitleImage} alt="main-title"/>
         <Filter />
         <MainMonsterImageCover src={MainMonsterImage} alt="main-monster" />
-        <BackGroundImageCover src={BackGroundImage} alt="back-ground"/> 
         <SubText color={COLORS.SUB}>
           正規表現を学ぶ狩りに出よう
         </SubText>
