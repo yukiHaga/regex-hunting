@@ -13,6 +13,6 @@ class UserMailer < ApplicationMailer
     @user = User.find(user.id)
     @url  = "http://localhost:3001/reset_password/edit?token=#{user&.reset_password_token}"
     mail(:to => user.email,
-         :subject => "Your password has been reset")
+         :subject => "パスワード再設定のお知らせ")
   end
 end

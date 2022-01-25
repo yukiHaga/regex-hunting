@@ -18,7 +18,7 @@ class Api::V1::PasswordResetsController < ApplicationController
     user = User.find_by(email: params[:email])
     user&.generate_reset_password_token!
     UserMailer.reset_password_email(user).deliver_now
-    render json: {}, status: :ok
+    head :ok
   end
 
   # リセットパスワードフォームを開くときに、editアクションが実行される
