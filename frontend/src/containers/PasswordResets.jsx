@@ -1,10 +1,7 @@
-import React, { Fragment, useContext } from 'react';
+import React, { Fragment } from 'react';
 import styled from 'styled-components';
 
 import { useNavigate } from 'react-router-dom';
-
-// Contextオブジェクト
-import { UserContext } from "../context/UserProvider.js";
 
 // Presentational Components
 import { Header } from '../components/Headers/Header.jsx';
@@ -94,13 +91,6 @@ const PasswordResetsButtonWrapper = styled.div`
 `;
 
 export const PasswordResets = () => {
-
-  // useContext
-  // requestUserStateには、requestState, userState, errorsが格納されている
-  // userStateにはsessionとuserが格納されている
-  const { 
-    requestUserActionTyps
-  } = useContext(UserContext);
 
   // navigation
   const navigate = useNavigate();
