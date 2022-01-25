@@ -71,7 +71,9 @@ const CustomDialogContent = styled(DialogContent)`
 
 const CustomFilledInput = styled(FilledInput)`
   width: 400px;
-  margin-bottom: 16px;
+  margin-bottom: ${({
+    errors_box
+  }) => typeof errors_box === 'undefined' && '16px' };
 `;
 
 export const SignUpDialog = ({
@@ -225,6 +227,7 @@ export const SignUpDialog = ({
                     type="text"
                     id="name-component-filled"
                     label="name"
+                    errors_box={errors.NameBox}
                   />
                 </FormControl>              
               )}
@@ -245,6 +248,7 @@ export const SignUpDialog = ({
                     type="email"
                     id="email-component-filled"
                     label="email"
+                    errors_box={errors.EmailBox}
                   />
                 </FormControl>              
               )}
@@ -265,6 +269,7 @@ export const SignUpDialog = ({
                     type="password"
                     id="password-component-filled"
                     label="password"
+                    errors_box={errors.PasswordBox}
                   />
                 </FormControl>              
               )}
@@ -287,6 +292,7 @@ export const SignUpDialog = ({
                     type="password"
                     id="password-confirmation-component-filled"
                     label="password-confirmation"
+                    errors_box={errors.PasswordConfirmationBox}
                   />
                 </FormControl>              
               )}
@@ -298,7 +304,9 @@ export const SignUpDialog = ({
 
             {
               requestUserState.errors.title === 'Record Not Found' && 
-                <SubmitErrorSentence>
+                <SubmitErrorSentence
+                  errors_title={requestUserState.errors.title}
+                >
                   {requestUserState.errors.detail}
                 </SubmitErrorSentence>
             }
