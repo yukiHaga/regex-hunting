@@ -1,7 +1,7 @@
 import React, { Fragment, useRef, useContext } from 'react';
 import styled from 'styled-components';
 
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 
 // Contextオブジェクト
 import { UserContext } from "../context/UserProvider.js";
@@ -27,6 +27,7 @@ import FilledInput from '@mui/material/FilledInput';
 import { InputErrorSentence } from '../components/Sentences/InputErrorSentence.jsx';
 
 // パスワードリセットを更新するapiコール関数
+import { patchPasswordResetsUpdate } from '../apis/passwordUpdates.js';
 
 // HTTP_STATUS_CODE
 import { HTTP_STATUS_CODE } from '../constants';
@@ -160,18 +161,21 @@ export const PasswordUpdates = () => {
       }  
     }
   };
+  
+  const search = useLocation().search;
+  const query2 = new URLSearchParams(search);
 
   // Formの検証後に呼び出される関数
-  // dataにはフォームに入力したデータが入る
   const onSubmit = ({ PasswordBox, PasswordConfirmationBox }) => { 
-    console.log(PasswordBox);
-    console.log(PasswordConfirmationBox);
-    /*
-    postPasswordResetRequest({
-      email: EmailBox
+    patchPasswordResetsUpdate({
+      user: {
+        password: PasswordBox,
+        password_confirmation: PasswordConfirmationBox
+      },
+      token: query2.get('token') 
     }).then(() => (
-      navigate('/?user=password_reset', { 
-        state: { display: true, success: "メールを送信しました。"}
+      navigate('/?user=password_update', { 
+        state: { display: true, success: "パスワードを更新しました。"}
       })
     )).catch((e) => {
       if(e.response.status === HTTP_STATUS_CODE.NOT_FOUND){
@@ -179,7 +183,6 @@ export const PasswordUpdates = () => {
         throw e;
       }
     })
-    */
   };
 
   return (

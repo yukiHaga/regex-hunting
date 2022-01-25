@@ -1,7 +1,7 @@
 class Api::V1::PasswordResetsController < ApplicationController
   skip_before_action :require_login
-  skip_before_action :verify_authenticity_token, only: :create
-  after_action :set_csrf_token_header, only: %i(create edit update)
+  skip_before_action :verify_authenticity_token
+  after_action :set_csrf_token_header
 
   # ユーザーがパスワードリセットフォームにemailを入力して、
   # 送信を押すと、createアクションが実行される
@@ -12,7 +12,7 @@ class Api::V1::PasswordResetsController < ApplicationController
   # UserMailerのreset_password_emailが実行される
   # そのため、メールが送られる
   # SPAだとdeliver_reset_password_instructions!でなぜかメールが送られなかったので、
-  # generate_reset_password_token!でトークンを作成して、直接メイラーのメソッドを呼び出す
+  # generate_reset_password_token!で期限付きトークンを作成して、直接メイラーのメソッドを呼び出す
   # generate_reset_password_token!でusersテーブルのreset_password_tokenにトークンが入る
   def create
     user = User.find_by(email: params[:email])
@@ -30,7 +30,6 @@ class Api::V1::PasswordResetsController < ApplicationController
   # このときに更新処理をするので、バリデーションが走る
   def update
     user = User.load_from_reset_password_token(params[:token])
-
     raise ActiveRecord::RecordNotFound unless user
     user.password_confirmation = params[:user][:password_confirmation]
     if user.change_password(params[:user][:password])
