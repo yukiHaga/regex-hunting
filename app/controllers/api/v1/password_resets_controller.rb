@@ -21,32 +21,28 @@ class Api::V1::PasswordResetsController < ApplicationController
     head :ok
   end
 
-  # リセットパスワードフォームを開くときに、editアクションが実行される
   # load_from_reset_password_tokenは、トークンでユーザーを検索して、
   # トークンの有効期限もチェックする
   # トークンが見つかり、かつ有効であればユーザーを返す。
-  def edit
-    token = params[:id]
-    user = User.load_from_reset_password_token(token)
-    not_authenticated if user.blank?
-    render json: {}, status: :ok
-  end
-
   # editアクションの結果を反映したリセットパスワードフォームを送信したとき、
   # updateアクションが実行される
   # change_passwordでは、一時的なトークンをクリアして、パスワードの更新を行う
   # このときに更新処理をするので、バリデーションが走る
   def update
-    token = params[:id]
-    user = User.load_from_reset_password_token(token)
+    user = User.load_from_reset_password_token(params[:token])
 
-    return not_authenticated if user.blank?
-
+    raise ActiveRecord::RecordNotFound unless user
     user.password_confirmation = params[:user][:password_confirmation]
     if user.change_password(params[:user][:password])
-      render json: {}, status: :ok
+      head :ok
     else
       render json: {errors: user.errors}, status: :bad_request
     end
+  end
+
+  private
+
+  def user_params
+    params.require(:user).permit(:password, :password_confirmation)
   end
 end
