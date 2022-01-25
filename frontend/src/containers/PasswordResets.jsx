@@ -129,7 +129,6 @@ export const PasswordResets = () => {
   // Formの検証後に呼び出される関数
   // dataにはフォームに入力したデータが入る
   const onSubmit = ({ EmailBox }) => { 
-    console.log(EmailBox);
     postPasswordResetRequest({
       email: EmailBox
     }).then(() => (
