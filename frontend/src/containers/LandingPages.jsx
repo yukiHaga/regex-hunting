@@ -49,14 +49,21 @@ const MainWrapper = styled.div`
 `;
 
 // メインタイトル画像
+// max-widthはこの要素の最大幅を表す
+// width1000pxより画面幅が小さい場合、画像が画面からはみ出てしまう(横スクロールしないといけない)。
+// そのため、max-width(最大幅)を指定しておくと、画面幅がwidthより小さい場合でも、
+// widthを自動的に画面幅に合わせてくれる
 const MainTitleImageCover = styled.img`
-  width: 1000px;
+  width: 70%;
   height: 180px;
   object-fit: contain;
   margin-top: 145px;
+  max-width: 100%;
+  height: auto;
 `;
 
 // 背景画像
+// こいつの設定は全部background-imageに持ってく
 const BackGroundImageCover = styled.img`
   width: 1790px;
   height: 750px;
@@ -80,16 +87,18 @@ const Filter = styled.div`
 // メインモンスター画像
 const MainMonsterImageCover = styled.img`
   position: absolute;
-  top: 0px;
-  left: 0px;
+  top: 0;
+  left: 0;
   right: 0;
   bottom: 30px;
   z-index: -3;
   margin: auto;
   margin-top: 0px;
-  width: 1000px;
-  height: 700px;
+  margin-bottom: 0px;
+  width: 70%;
+  height: 90%;
   object-fit: contain;
+  max-width: 100%
 `;
 
 // フラッシュメッセージでレイアウトが変化しないためのブロック要素
@@ -106,11 +115,12 @@ const SecondWrapper = styled.div`
 
 // 戦闘画像
 const SecondBattleSceneImageCover = styled.img`
-  width: 650px;
-  height: 400px;
+  width: 60%;
+  height: auto;
   object-fit: contain;
-  margin-top: 40px;
+  margin-top: 60px;
   margin-bottom: 20px;
+  max-width: 100%
 `;
 
 // サードのラッパー
@@ -122,10 +132,12 @@ const ThirdWrapper = styled.div`
 
 // マイページ画像
 const ThirdMyPageImageCover = styled.img`
-  width: 650px;
-  height: 400px;
+  width: 60%;
+  height: auto;
   object-fit: contain;
+  margin-top: 60px;
   margin-bottom: 20px;
+  max-width: 100%
 `;
 
 // フォースのラッパー
@@ -137,25 +149,28 @@ const FourthWrapper = styled.div`
 
 // ランキング画像
 const FourthRaknkingImageCover = styled.img`
-  width: 650px;
-  height: 400px;
+  width: 60%;
+  height: auto;
   object-fit: contain;
   margin-top: 40px;
+  max-width: 100%
 `;
 
 // フィフスのラッパー
 const FifthWrapper = styled.div`
   text-align: center;
   background-color: ${COLORS.SUB};
-  padding-top: 140px;
+  padding-top: 110px;
   padding-bottom: 100px;
 `;
 
 // ゲームコンテンツのラッパー
 const GameContentsWrapper = styled.div`
-  padding-top: 70px;
+  padding-top: 50px;
   display: flex;
   justify-content: space-evenly;
+  frex-direction: row;
+  flex-wrap: wrap;
 `;
 
 export const LandingPages = () => { 
@@ -263,21 +278,21 @@ export const LandingPages = () => {
         <SubText>
           What's Regex Hunting ?
         </SubText>
-        <SecondBattleSceneImageCover src={BattleSceneImage} alt="battle-scene"/>
         <GameDescriptionSentence>
           Regex Huntingは、凶悪なモンスターを倒しながら<br/>
           正規表現が学べるゲーム型学習サービスです。
         </GameDescriptionSentence>
+        <SecondBattleSceneImageCover src={BattleSceneImage} alt="battle-scene"/>
       </SecondWrapper>
       <ThirdWrapper>
-        <ThirdMyPageImageCover src={MyPageImage} alt="my-page" />
         <GameDescriptionSentence>
-          アカウント作成すると、学習頻度や正答率の推移を<br />確認できます。
+          アカウント作成すると、学習頻度や正答数の推移を<br />確認できます。
         </GameDescriptionSentence>
+        <ThirdMyPageImageCover src={MyPageImage} alt="my-page" />
       </ThirdWrapper>
       <FourthWrapper>
         <RankingDescriptionSentence>
-          全世界のハンターと競争して、最強の正規表現ハンターを目指そう！
+          全世界のハンターと競争して、<br />最強の正規表現ハンターを目指そう！
         </RankingDescriptionSentence>
         <FourthRaknkingImageCover src={RaknkingImage} alt="ranking" />
       </FourthWrapper>

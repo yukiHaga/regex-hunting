@@ -9,6 +9,7 @@ import { COLORS } from '../../style_constants.js';
 const GameContentWrapper = styled.div`
   background-color: ${COLORS.WHITE};
   width: 326px;
+  margin-top: 20px;
 `;
 
 const GameContentTitleWrapper = styled.div`
@@ -17,7 +18,7 @@ const GameContentTitleWrapper = styled.div`
   font-family: YuGothic;
   font-style: normal;
   font-weight: 500;
-  font-size: 24px;
+  font-size: 1.5em;
   line-height: 36px;
   color: ${COLORS.BLACK};
   text-align: center;
@@ -36,6 +37,7 @@ const GameContentImageWrapper = styled.img`
   height: 190px;
   box-sizing: border-box;
   border: 2px solid ${COLORS.BLACK};
+  max-width: 100%;
 `;
 
 const GameContentMainWrapper = styled.div`

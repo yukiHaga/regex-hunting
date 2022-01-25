@@ -11,11 +11,13 @@ const GameStartDescriptionWrapper = styled(DescriptionWrapper)`
 const GameStartDescriptionSentenceWrapper = styled(DescriptionWrapper)`
   display: inline-block;
   text-align: left;
-  font-size: 36px;
+  font-size: 2.3em;
   font-family: YuGothic;
   font-style: normal;
   font-weight: bold;
-  line-height: 36px;
+  @media (max-width: 390px) {
+    font-size: 0.9em;
+  }
 `;
 
 export const GameStartDescriptionSentence = ({children}) => {

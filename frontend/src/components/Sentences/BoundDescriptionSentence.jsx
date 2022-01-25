@@ -6,15 +6,17 @@ import { COLORS } from '../../style_constants';
 import { FakeLink } from '../shared_style.js';
 
 const BoundDescriptionSentenceWrapper = styled(FakeLink)`
-  width: 624px;
-  height: 72px;
+  width: 70%;
   font-family: YuGothic;
   font-style: normal;
   font-weight: bold;
-  font-size: 40px;
-  line-height: 72px;
+  font-size: 2.5em;
   color: ${COLORS.SUB};
+  @media (max-width: 390px) {
+    font-size: 1.1em;
+  }
   margin: 0 auto;
+  padding-bottom: 7px;
 `;
 
 const bounceAnimation = keyframes`${bounce}`;
