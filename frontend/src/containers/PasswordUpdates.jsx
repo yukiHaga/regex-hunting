@@ -71,14 +71,14 @@ const CustomParagraphWrapper = styled.p`
   color: ${COLORS.BLACK};
   width: 70%;
   margin: 0 auto;
-  margin-bottom: 30px;
+  margin-bottom: 10px;
   overflow-wrap: break-word;
 `;
 
 const PasswordUpdatesFormWrapper = styled.div`
   width: 70%;
   margin: 0 auto;
-  margin-top: 50px; 
+  margin-top: 40px; 
 `;
 
 const CustomFilledPasswordInput = styled(FilledInput)`
@@ -163,8 +163,9 @@ export const PasswordUpdates = () => {
 
   // Formの検証後に呼び出される関数
   // dataにはフォームに入力したデータが入る
-  const onSubmit = ({ EmailBox }) => { 
-    console.log(EmailBox);
+  const onSubmit = ({ PasswordBox, PasswordConfirmationBox }) => { 
+    console.log(PasswordBox);
+    console.log(PasswordConfirmationBox);
     /*
     postPasswordResetRequest({
       email: EmailBox
@@ -241,7 +242,7 @@ export const PasswordUpdates = () => {
                                                    {errors.PasswordConfirmationBox.message}
                                                  </InputErrorSentence>}
               <PasswordUpdatesButtonWrapper>
-                <PasswordResetRequestButton 
+                <PasswordUpdatesButton 
                   disabled={!isValid} 
                 />
               </PasswordUpdatesButtonWrapper>
