@@ -420,7 +420,7 @@ Rails.application.config.sorcery.configure do |config|
     # Reset password email method on your mailer class.
     # Default: `:reset_password_email`
     #
-    # user.reset_password_email_method_name =
+    # user.reset_password_email_method_name = :reset_password_email
 
     # When true, sorcery will not automatically
     # send the password reset details email, and allow you to

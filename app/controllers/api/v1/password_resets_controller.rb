@@ -11,9 +11,13 @@ class Api::V1::PasswordResetsController < ApplicationController
   # おそらく、このメソッド実行の中で、有効期限付きのトークンを生成して、
   # UserMailerのreset_password_emailが実行される
   # そのため、メールが送られる
+  # SPAだとdeliver_reset_password_instructions!でなぜかメールが送られなかったので、
+  # generate_reset_password_token!でトークンを作成して、直接メイラーのメソッドを呼び出す
+  # generate_reset_password_token!でusersテーブルのreset_password_tokenにトークンが入る
   def create
-    @user = User.find_by(email: params[:email])
-    @user&.deliver_reset_password_instructions!
+    user = User.find_by(email: params[:email])
+    user&.generate_reset_password_token!
+    UserMailer.reset_password_email(user).deliver_now
     render json: {}, status: :ok
   end
 

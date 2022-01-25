@@ -8,7 +8,7 @@ import { passwordResetsCreate } from '../urls/index';
 export const postPasswordResetRequest = async ({ email }) => {
   try {
     const response = await axios.post(
-      passwordResetsCreate
+      passwordResetsCreate,
       { email: email },
       { withCredentials: true }
     );

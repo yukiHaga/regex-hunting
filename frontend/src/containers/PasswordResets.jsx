@@ -27,6 +27,7 @@ import FilledInput from '@mui/material/FilledInput';
 import { InputErrorSentence } from '../components/Sentences/InputErrorSentence.jsx';
 
 // パスワードリセットコントローラへアクセスするapiコール関数
+import { postPasswordResetRequest } from '../apis/passwordResetRequest.js';
 
 // HTTP_STATUS_CODE
 import { HTTP_STATUS_CODE } from '../constants';
@@ -129,6 +130,18 @@ export const PasswordResets = () => {
   // dataにはフォームに入力したデータが入る
   const onSubmit = ({ EmailBox }) => { 
     console.log(EmailBox);
+    postPasswordResetRequest({
+      email: EmailBox
+    }).then(() => (
+      navigate('/?user=password_reset', { 
+        state: { display: true, success: "メールを送信しました。"}
+      })
+    )).catch((e) => {
+      if(e.response.status === HTTP_STATUS_CODE.NOT_FOUND){
+      } else {
+        throw e;
+      }
+    })
   };
 
   return (
