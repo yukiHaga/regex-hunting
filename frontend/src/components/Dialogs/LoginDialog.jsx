@@ -72,7 +72,9 @@ const CustomDialogContent = styled(DialogContent)`
 
 const CustomFilledInput = styled(FilledInput)`
   width: 400px;
-  margin-bottom: 16px;
+  margin-bottom: ${({
+    errors_box
+  }) => typeof errors_box === 'undefined' && '16px' };
 `;
 
 export const LoginDialog = ({
@@ -183,6 +185,7 @@ export const LoginDialog = ({
                     type="email"
                     id="email-component-filled"
                     label="email"
+                    errors_box={errors.EmailBox}
                   />
                 </FormControl>              
               )}
@@ -203,6 +206,7 @@ export const LoginDialog = ({
                     type="password"
                     id="password-component-filled"
                     label="password"
+                    errors_box={errors.PasswordBox}
                   />
                 </FormControl>              
               )}
@@ -215,7 +219,9 @@ export const LoginDialog = ({
             />
             {
               requestUserState.errors.title === 'Record Not Found' && 
-                <SubmitErrorSentence>
+                <SubmitErrorSentence
+                  errors_title={requestUserState.errors.title}
+                >
                   {requestUserState.errors.detail}
                 </SubmitErrorSentence>
             }
