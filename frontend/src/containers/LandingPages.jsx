@@ -143,12 +143,12 @@ const FifthWrapper = styled.div`
   text-align: center;
   background-color: ${COLORS.SUB};
   padding-top: 140px;
-  padding-bottom: 150px;
+  padding-bottom: 100px;
 `;
 
 // ゲームコンテンツのラッパー
 const GameContentsWrapper = styled.div`
-  padding-top: 80px;
+  padding-top: 70px;
   display: flex;
   justify-content: space-evenly;
 `;
