@@ -16,6 +16,7 @@ import { Games } from './containers/Games.jsx';
 import { UseTreaties } from './containers/UseTreaties.jsx';
 import { PrivacyPolicies } from './containers/PrivacyPolicies.jsx';
 import { PasswordResets } from './containers/PasswordResets.jsx';
+import { SendEmail } from './containers/SendEmail.jsx';
 import { PasswordUpdates } from './containers/PasswordUpdates.jsx';
 import { ExternalAuth } from './containers/ExternalAuth.jsx';
 import { NotFoundPage } from './containers/NotFoundPage.jsx';
@@ -87,6 +88,11 @@ function App() {
             <Route 
               exact path="/users/password/new" 
               element={<PasswordResets />} 
+            />
+            {/* パスワードリセット申請をした後に遷移するページ*/}
+            <Route
+              exact path="/users/password/sent"
+              element={<SendEmail />}
             />
 
             {/* パスワード更新ページ */}

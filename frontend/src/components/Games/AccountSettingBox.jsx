@@ -45,6 +45,7 @@ const AccountSettingBoxWrapper = styled.div`
   height: 580px;
   background-color: ${COLORS.WHITE};
   margin: 0 auto;
+  border-radius: 3px;
 `;
 
 const AccountSettingBoxImageWrapper = styled.div`

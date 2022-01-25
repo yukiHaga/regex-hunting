@@ -41,7 +41,5 @@ export const titleSettings = (user_id) =>
 
 // パスワードリセット関係
 export const passwordResetsCreate = `${DEFAULT_API_URL}/password_resets`;
-export const passwordResetsEdit = (id) => 
-  `${DEFAULT_API_URL}/password_resets/${id}/edit`;
 export const passwordResetsUpdate = (id) => 
   `${DEFAULT_API_URL}/password_resets/${id}`;

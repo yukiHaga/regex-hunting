@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  mount LetterOpenerWeb::Engine, at: "/letter_opener" if Rails.env.development?
 
   namespace :api do
     namespace :v1 do
@@ -16,7 +17,7 @@ Rails.application.routes.draw do
       delete 'logout', to: 'user_sessions#destroy'
       get 'current_user_logged_in', to: 'user_sessions#current_user_logged_in?'
       post "oauth/callback", to: "oauths#callback"
-      resources :password_resets, only: %i[create edit update]
+      resources :password_resets, only: %i[create update]
     end
   end
 
