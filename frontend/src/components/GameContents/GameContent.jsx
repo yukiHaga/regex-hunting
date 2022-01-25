@@ -9,7 +9,6 @@ import { COLORS } from '../../style_constants.js';
 const GameContentWrapper = styled.div`
   background-color: ${COLORS.WHITE};
   width: 326px;
-  height: 386px;
 `;
 
 const GameContentTitleWrapper = styled.div`
@@ -27,7 +26,6 @@ const GameContentTitleWrapper = styled.div`
 
 const GameContentDescriptionWrapper = styled.div`
   width: 326px;
-  height: 350px;
   box-shadow: 0 0px 20px rgba(0,0,0,0.2);
 `;
 
@@ -44,8 +42,8 @@ const GameContentMainWrapper = styled.div`
   margin: 0 auto;
   test-align: center;
   width: 326px;
-  height: 350px;
   padding-top: 10px;
+  padding-bottom: 20px;
 `;
 
 const GameContentSentenceWrapper = styled.div`
