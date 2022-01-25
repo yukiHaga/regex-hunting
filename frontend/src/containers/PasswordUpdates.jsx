@@ -193,7 +193,7 @@ export const PasswordUpdates = () => {
             パスワード再設定
           </TitleWrapper>
           <CustomParagraphWrapper>
-            新しいパスワードを入力してください
+            新しいパスワードを入力してください。
           </CustomParagraphWrapper>
           <PasswordUpdatesFormWrapper>
             <form onSubmit={handleSubmit(onSubmit)}>
