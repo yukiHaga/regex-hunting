@@ -11,10 +11,10 @@ const SubTextWrapper = styled.div`
   font-size: 2.5em;
   color: ${(props) => props.color || COLORS.BLACK};
   @media (max-width: 390px) {
-    font-size: 1.2em;
+    font-size: 1.1em;
   }
   margin: 0 auto;
-  margin-top: 30px;
+  margin-top: 1%;
 `;
 
 export const SubText = ({color, children}) => {

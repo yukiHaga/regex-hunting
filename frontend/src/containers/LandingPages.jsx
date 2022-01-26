@@ -46,6 +46,7 @@ import { Link as Scroll } from 'react-scroll';
 const MainWrapper = styled.div`
   text-align: center;
   position: relative;
+  padding-top: 3%;
 `;
 
 // メインタイトル画像
@@ -55,18 +56,22 @@ const MainWrapper = styled.div`
 // widthを自動的に画面幅に合わせてくれる
 const MainTitleImageCover = styled.img`
   width: 70%;
-  height: 180px;
+  height: auto;
   object-fit: contain;
-  margin-top: 145px;
+  margin-top: 10%;
   max-width: 100%;
   height: auto;
+  @media (max-width: 390px) {
+    font-size: 0.9em;
+    margin-top: 17%;
+  }
 `;
 
 // 背景画像
-// こいつの設定は全部background-imageに持ってく
 const BackGroundImageCover = styled.img`
   position: absolute;
   width: 100%;
+  height: 100%;
   top: 0;
   left: 0;
   right: 0;
@@ -95,7 +100,7 @@ const MainMonsterImageCover = styled.img`
   top: 0;
   left: 0;
   right: 0;
-  bottom: 30px;
+  bottom: 30%;
   z-index: -3;
   margin: auto;
   margin-top: 0px;

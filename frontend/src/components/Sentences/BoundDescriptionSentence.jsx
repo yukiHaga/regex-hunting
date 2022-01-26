@@ -16,7 +16,7 @@ const BoundDescriptionSentenceWrapper = styled(FakeLink)`
     font-size: 1.1em;
   }
   margin: 0 auto;
-  padding-bottom: 7px;
+  padding-bottom: 1%;
 `;
 
 const bounceAnimation = keyframes`${bounce}`;
