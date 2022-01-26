@@ -42,6 +42,8 @@ import { COLORS } from '../style_constants.js';
 // react-scroll
 import { Link as Scroll } from 'react-scroll';
 
+import Alert from '@mui/material/Alert';
+
 // メインのラッパー
 const MainWrapper = styled.div`
   text-align: center;
@@ -65,12 +67,17 @@ const MainTitleImageCover = styled.img`
 // 背景画像
 // こいつの設定は全部background-imageに持ってく
 const BackGroundImageCover = styled.img`
-  width: 1790px;
-  height: 750px;
   position: absolute;
-  top: 55px;
-  left: -350px;
+  width: 100%;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  margin: auto;
+  margin-top: 0px;
+  margin-bottom: 0px;
   z-index: -4;
+  max-width: 100%;
 `;
 
 // フィルター
@@ -173,6 +180,13 @@ const GameContentsWrapper = styled.div`
   flex-wrap: wrap;
 `;
 
+// フラッシュメッセージを浮かせる
+const CustomDiv = styled.div`
+  position: absolute;
+  z-index: 0;
+  right: 0;
+`;
+
 export const LandingPages = () => { 
 
   // モーダルに関するstateの初期値
@@ -254,13 +268,12 @@ export const LandingPages = () => {
       />
       <FakeHeader />
       <MainWrapper>
-        <FakeBlock>
-          <SessionFlashMessage
-            location={location}
-            navigate={navigate}
-            url='/'
-          />
-        </FakeBlock>
+        <BackGroundImageCover src={BackGroundImage} alt="main-image" />
+        <CustomDiv>
+        <Alert variant="filled" severity="success">
+          This is a success alert — check it out!
+        </Alert>
+        </CustomDiv>
         <MainTitleImageCover src={MainTitleImage} alt="main-title"/>
         <Filter />
         <MainMonsterImageCover src={MainMonsterImage} alt="main-monster" />
