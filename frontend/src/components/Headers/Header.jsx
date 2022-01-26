@@ -36,6 +36,9 @@ import MenuItem from '@mui/material/MenuItem';
 
 // デフォルトのアバター画像
 import DefaultAvatarImage from '../../images/default_avatar.png';
+import { ThemeProvider } from '@mui/material/styles';
+import theme from '../../theme/theme.js';
+import CssBaseline from '@mui/material/CssBaseline';
 
 const HeaderWrapper = styled.div`
   display: flex;
@@ -99,10 +102,6 @@ const HeaderNavFakeLink = styled(FakeLink)`
   }
 `;
 
-const ColorDiv = styled.div`
-  background-color: ${COLORS.MAIN};
-`;
-
 // LPページの場合、onClickLinkはモーダル管理のstateを更新する関数
 // ログインしている場合、onClickLinkは何もない。
 export const Header = ({
@@ -164,10 +163,12 @@ export const Header = ({
     setAnchorElUser(null);
   };
 
+  console.log(theme);
   return (
     <>
-      <ColorDiv>
-        <AppBar position="fixed" color='inherit'>
+      <ThemeProvider theme={theme}>
+        <CssBaseline />
+        <AppBar position="fixed" color="green">
           <Container maxWidth="xl">
             <Toolbar disableGutters>
               <Typography
@@ -259,7 +260,7 @@ export const Header = ({
             </Toolbar>
           </Container>
         </AppBar>
-      </ColorDiv>
+      </ThemeProvider>
     </>
   );
 };
