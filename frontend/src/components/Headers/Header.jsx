@@ -13,14 +13,6 @@ import { BaseLink, FakeLink } from '../shared_style.js';
 // Contextオブジェクト
 import { UserContext } from "../../context/UserProvider.js";
 
-// ログイン関係のAPIコール関数
-import { deleteUserSession } from '../../apis/login'; 
-
-// HTTP_STATUS_CODE
-import { HTTP_STATUS_CODE } from '../../constants';
-
-// useNavigate
-import { useNavigate } from "react-router-dom";
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
@@ -29,41 +21,29 @@ import Typography from '@mui/material/Typography';
 import Menu from '@mui/material/Menu';
 import MenuIcon from '@mui/icons-material/Menu';
 import Container from '@mui/material/Container';
-import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
-import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 
-// デフォルトのアバター画像
-import DefaultAvatarImage from '../../images/default_avatar.png';
 import { ThemeProvider } from '@mui/material/styles';
 import theme from '../../theme/theme.js';
 import CssBaseline from '@mui/material/CssBaseline';
 
-const HeaderWrapper = styled.div`
-  display: flex;
-  justify-content: space-between;
-  background-color: ${COLORS.MAIN};
-  width: 100%;
-  box-shadow: 0 3px 6px rgba(0,0,0,0.2);
-  position: fixed;
-  z-index: 1;
-`;
-
 // title
 const TitleWrapper = styled.div`
-  height: 45px;
   font-family: Raleway;
   font-style: italic;
   font-weight: bold;
-  font-size: 27px;
-  line-height: 45px;
+  font-size: 1.4em;
   color: ${COLORS.SUB};
   -webkit-text-stroke: 5px #030002;
   text-stroke: 5px #030002;
   padding: 5px;
-  margin-left: 30px;
   position: relative;
+  @media (max-width: 390px) {
+    font-size: 0.9em;
+    -webkit-text-stroke: 4px #030002;
+    text-stroke: 4px #030002;
+  }
 `
 
 // fuchiue
@@ -71,35 +51,14 @@ const Fuchiue = styled.span`
   -webkit-text-stroke: 0;
   position: absolute;
 `
-
-const HeaderNav = styled.nav`
-  margin-right: 40px;
-`;
-
 const HeaderTitleLink = styled(BaseLink)``;
 
 const HeaderNavLink = styled(BaseLink)`
-  height: 52px;
-  line-height: 52px;
-  display: inline-block;
   color: ${COLORS.SUB};
-  margin-left: 20px; 
-  :hover {
-    opacity: 0.7;
-    border-bottom: solid ${COLORS.SUB};
-  }
 `;
 
 const HeaderNavFakeLink = styled(FakeLink)`
-  height: 52px;
-  line-height: 52px;
-  display: inline-block;
   color: ${COLORS.SUB};
-  margin-left: 20px; 
-  :hover {
-    opacity: 0.7;
-    border-bottom: solid ${COLORS.SUB};
-  }
 `;
 
 // LPページの場合、onClickLinkはモーダル管理のstateを更新する関数
@@ -109,42 +68,11 @@ export const Header = ({
   image
 }) => {
 
-  // navigate
-  let navigate = useNavigate();
-
   // useContext
   const {
     requestUserState: { sessionState, userState }, 
-    dispatch, 
-    requestUserActionTyps
   } = useContext(UserContext);
 
-  // ログアウトを管理する関数
-  const handleLogout = () => {
-    deleteUserSession().then((data) => {
-      dispatch({
-        type: requestUserActionTyps.REQUEST_SUCCESS,
-        payload: {
-          session: data.session,
-          user: data.user,
-        }
-      });
-    }).then(() => {
-      navigate('/?user=logout', { state: { display: true, success: "ログアウトしました。"}})
-    } 
-    ).catch((e) => {
-      if(e.response.status === HTTP_STATUS_CODE.NOT_FOUND){
-        dispatch({
-          type: requestUserActionTyps.REQUEST_FAILURE,
-          payload: {
-            errors: e.response.data.errors
-          }
-        });
-      } else {
-        throw e;
-      }
-    });
-  };
   const [anchorElNav, setAnchorElNav] = useState(null);
   const [anchorElUser, setAnchorElUser] = useState(null);
 
@@ -163,7 +91,7 @@ export const Header = ({
     setAnchorElUser(null);
   };
 
-  console.log(theme);
+  // flexGrowは空いたスペースへの伸び率を表している
   return (
     <>
       <ThemeProvider theme={theme}>
@@ -171,15 +99,24 @@ export const Header = ({
         <AppBar position="fixed" color="green">
           <Container maxWidth="xl">
             <Toolbar disableGutters>
-              <Typography
-                variant="h6"
-                noWrap
-                component="div"
-                sx={{ mr: 2, display: { xs: 'none', md: 'flex' } }}
-              >
-                Regex Hunting
-              </Typography>
-              <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
+              <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'flex' } }}>
+                <Typography
+                  variant="h6"
+                  noWrap
+                  component="div"
+                  sx={{ mr: 2, display: { xs: 'flex', md: 'flex' } }}
+                >
+                  <HeaderTitleLink to={`/`}>
+                    <TitleWrapper>
+                      <Fuchiue>
+                        Regex Hunting
+                      </Fuchiue>
+                      Regex Hunting
+                    </TitleWrapper>
+                  </HeaderTitleLink>
+                </Typography>
+              </Box>
+              <Box sx={{ flexGrow: 0, display: { xs: 'flex', md: 'none' } }}>
                 <IconButton
                   size="large"
                   aria-label="account of current user"
@@ -208,55 +145,67 @@ export const Header = ({
                     display: { xs: 'block', md: 'none' },
                   }}
                 >
-                  <MenuItem key="1" onClick={handleCloseNavMenu}>
+                  <MenuItem 
+                    key="1" 
+                    component={BaseLink}
+                    to="/rankings" 
+                    onClick={handleCloseNavMenu}
+                  >
+                    <Typography textAlign="center">
+                      ランキング
+                    </Typography>
+                  </MenuItem>
+                  <MenuItem key="2" onClick={handleCloseNavMenu}>
                     <Typography textAlign="center">ログイン</Typography>
+                  </MenuItem>
+                  <MenuItem key="3" onClick={handleCloseNavMenu}>
+                    <Typography textAlign="center">新規会員登録</Typography>
                   </MenuItem>
                 </Menu>
               </Box>
-              <Typography
-                variant="h6"
-                noWrap
-                component="div"
-                sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}
-              >
-                Regex Hunting
-              </Typography>
-              <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
+              <Box sx={{ flexGrow: 0, display: { xs: 'none', md: 'flex' } }}>
                 <Button
                   key="1"
-                  onClick={handleCloseNavMenu}
                   sx={{ my: 2, color: 'white', display: 'block' }}
                 >
-                  ログイン
+                  <HeaderNavLink to={`/rankings`}>
+                    ランキング
+                  </HeaderNavLink>
                 </Button>
               </Box>
-              <Box sx={{ flexGrow: 0 }}>
-                <Tooltip title="Open settings">
-                  <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                    <Avatar alt="Remy Sharp" src={DefaultAvatarImage} />
-                  </IconButton>
-                </Tooltip>
-                <Menu
-                  sx={{ mt: '45px' }}
-                  id="menu-appbar"
-                  anchorEl={anchorElUser}
-                  anchorOrigin={{
-                    vertical: 'top',
-                    horizontal: 'right',
-                  }}
-                  keepMounted
-                  transformOrigin={{
-                    vertical: 'top',
-                    horizontal: 'right',
-                  }}
-                  open={Boolean(anchorElUser)}
-                  onClose={handleCloseUserMenu}
-                >
-                  <MenuItem key="ログイン" onClick={handleCloseUserMenu}>
-                    <Typography textAlign="center">ログイン</Typography>
-                  </MenuItem>
-                </Menu>
-              </Box>
+              {
+                sessionState === false && onClickLink && 
+                  <>
+                    <Box sx={{ flexGrow: 0, display: { xs: 'none', md: 'flex' } }}>
+                      <Button
+                        key="1"
+                        sx={{ my: 2, color: 'white', display: 'block' }}
+                      >
+                        <HeaderNavFakeLink onClick={() => onClickLink("login")}>
+                          ログイン
+                        </HeaderNavFakeLink>
+                      </Button>
+                    </Box>
+                    <Box sx={{ flexGrow: 0, display: { xs: 'none', md: 'flex' } }}>
+                      <Button
+                        key="1"
+                        sx={{ my: 2, color: 'white', display: 'block' }}
+                      >
+                        <HeaderNavFakeLink onClick={() => onClickLink("signUp")}>
+                          新規会員登録
+                        </HeaderNavFakeLink>
+                      </Button>
+                    </Box>
+                  </>
+              }
+              {
+                sessionState && userState && 
+                  <IconMenu 
+                    anchorElUser={anchorElUser}
+                    handleOpenUserMenu={handleOpenUserMenu}
+                    handleCloseUserMenu={handleCloseUserMenu}
+                  />
+              }
             </Toolbar>
           </Container>
         </AppBar>

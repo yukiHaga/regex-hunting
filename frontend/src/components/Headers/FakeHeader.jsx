@@ -1,11 +1,5 @@
 import React, { useState } from 'react';
-import styled from 'styled-components';
 
-// Colors
-import { COLORS } from '../../style_constants.js';
-
-// useNavigate
-import { useNavigate } from "react-router-dom";
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
@@ -49,6 +43,7 @@ export const FakeHeader = () => {
   return (
     <>
       <ThemeProvider theme={theme}>
+        <CssBaseline />
         <AppBar position="static" color="green">
           <Container maxWidth="xl">
             <Toolbar disableGutters>

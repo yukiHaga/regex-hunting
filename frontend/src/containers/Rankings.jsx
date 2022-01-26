@@ -6,6 +6,8 @@ import { Header } from '../components/Headers/Header.jsx';
 import { FakeHeader } from '../components/Headers/FakeHeader.jsx';
 import { Footer } from '../components/Footers/Footer.jsx';
 import { RankingBox } from '../components/Games/RankingBox';
+import { LoginDialog } from '../components/Dialogs/LoginDialog.jsx';
+import { SignUpDialog } from '../components/Dialogs/SignUpDialog.jsx';
 
 // Contextオブジェクト
 import { UserContext } from "../context/UserProvider.js";
@@ -22,15 +24,11 @@ import { getRanking } from '../apis/ranking.js';
 // HTTP_STATUS_CODE
 import { HTTP_STATUS_CODE } from '../constants';
 
-const FakeBlock = styled.div`
-  background-color: ${COLORS.SUB};
-  height: 56px;
-`;
-
 // メインのラッパー
 const MainWrapper = styled.div`
   background-color: ${COLORS.SUB};
-  padding-bottom: 56px;
+  padding-top: 44px;
+  padding-bottom: 36px;
 `;
 
 export const Rankings = () => {
@@ -57,6 +55,15 @@ export const Rankings = () => {
 
   // ランキングを制御するstate
   const [rankingState, setRankingState] = useState(initialState);
+
+  // モーダルに関するstateの初期値
+  const loginInitialState = {
+    isOpenDialog: false,
+    modalType: ""
+  }
+
+  // モーダルを管理するstate
+  const [state, setState] = useState(loginInitialState);
 
   // ブラウザをリロードしてもログイン状態を維持するためのuseEffect
   useLayoutEffect(() => {
@@ -127,9 +134,13 @@ export const Rankings = () => {
  
   return (
     <>
-      <Header /> 
+      <Header 
+        onClickLink={(modalType) => setState({
+          isOpenDialog: true,
+          modalType: modalType
+        })}
+      /> 
       <FakeHeader />
-      <FakeBlock />
       <MainWrapper>
         <RankingBox
           current_top_three_array={rankingState.current_top_three_array}
@@ -138,6 +149,34 @@ export const Rankings = () => {
         />
       </MainWrapper>
       <Footer />
+      {
+        state.isOpenDialog && state.modalType === "login" &&
+          <LoginDialog 
+            isOpen={state.isOpenDialog}
+            onClose={() => setState({
+              isOpenDialog: false,
+              modalType: ""
+            })}
+            onClick={() => setState({
+              isOpenDialog: true,
+              modalType: "signUp"
+            })}
+          />
+      }
+      {
+        state.isOpenDialog && state.modalType === "signUp" &&
+          <SignUpDialog 
+            isOpen={state.isOpenDialog}
+            onClose={() => setState({
+              isOpenDialog: false,
+              modalType: ""
+            })}
+            onClick={() => setState({
+              isOpenDialog: true,
+              modalType: "login"
+            })}
+          />
+      }
     </>
   );
 };

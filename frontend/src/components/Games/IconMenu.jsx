@@ -1,10 +1,14 @@
-import React, { useState, useContext } from 'react';
+import React, { useContext } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 // MUI
 import IconButton from '@mui/material/IconButton';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import Avatar from '@mui/material/Avatar';
+import Box from '@mui/material/Box';
+import Tooltip from '@mui/material/Tooltip';
+import Typography from '@mui/material/Typography';
 
 import { BaseLink } from '../shared_style.js';
 
@@ -14,76 +18,114 @@ import { UserContext } from "../../context/UserProvider.js";
 // デフォルトのアバター画像
 import DefaultAvatarImage from '../../images/default_avatar.png';
 
+// ログイン関係のAPIコール関数
+import { deleteUserSession } from '../../apis/login'; 
+
+// HTTP_STATUS_CODE
+import { HTTP_STATUS_CODE } from '../../constants';
+
 export const IconMenu = ({
-  handleLogout
+  anchorElUser,
+  handleOpenUserMenu,
+  handleCloseUserMenu,
 }) => {
 
   // useContext
-  // requestUserStateには、requestState, userState, errorsが格納されている
-  // userStateにはsessionとuserが格納されている
-  const { 
-    requestUserState: { 
-      userState: { user },
-    },
+  const {
+    requestUserState: { userState: { user } }, 
+    dispatch, 
+    requestUserActionTyps
   } = useContext(UserContext);
 
-  const [anchorEl, setAnchorEl] = useState(null);
+  // navigate
+  let navigate = useNavigate();
 
-  const handleMenu = (event) => {
-    setAnchorEl(event.currentTarget);
-  };
-
-  const handleClose = () => {
-    setAnchorEl(null);
+  // ログアウトを管理する関数
+  const handleLogout = () => {
+    deleteUserSession().then((data) => {
+      dispatch({
+        type: requestUserActionTyps.REQUEST_SUCCESS,
+        payload: {
+          session: data.session,
+          user: data.user,
+        }
+      });
+    }).then(() => {
+      navigate('/?user=logout', { state: { display: true, success: "ログアウトしました。"}})
+    } 
+    ).catch((e) => {
+      if(e.response.status === HTTP_STATUS_CODE.NOT_FOUND){
+        dispatch({
+          type: requestUserActionTyps.REQUEST_FAILURE,
+          payload: {
+            errors: e.response.data.errors
+          }
+        });
+      } else {
+        throw e;
+      }
+    });
   };
 
   return (
     <>
-      <IconButton
-        size="large"
-        aria-label="account of current user"
-        aria-controls="menu-appbar"
-        aria-haspopup="true"
-        onClick={handleMenu}
-        color="inherit"
-      >
-        <Avatar 
-          alt="user-icon" 
-          src={user.image || DefaultAvatarImage} 
-          sx={{ width: 32, height: 32 }}
-        />
-      </IconButton>
-      <Menu
-        id="menu-appbar"
-        anchorEl={anchorEl}
-        anchorOrigin={{
-          vertical: 'top',
-          horizontal: 'right',
-        }}
-        keepMounted
-        transformOrigin={{
-          vertical: 'top',
-          horizontal: 'right',
-        }}
-        open={Boolean(anchorEl)}
-        onClose={handleClose}
-      >
-        <MenuItem 
-          component={BaseLink}
-          to="/my-page"
-          onClick={handleClose}
+      <Box sx={{ flexGrow: 0 }}>
+        <Tooltip title="Open settings">
+          <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
+            <Avatar 
+              alt="user-icon" 
+              src={user.image || DefaultAvatarImage} 
+            />
+          </IconButton>
+        </Tooltip>
+        <Menu
+          sx={{ mt: '45px' }}
+          id="menu-appbar"
+          anchorEl={anchorElUser}
+          anchorOrigin={{
+            vertical: 'top',
+            horizontal: 'right',
+          }}
+          keepMounted
+          transformOrigin={{
+            vertical: 'top',
+            horizontal: 'right',
+          }}
+          open={Boolean(anchorElUser)}
+          onClose={handleCloseUserMenu}
         >
-          マイページ
-        </MenuItem>
-        <MenuItem 
-          component={BaseLink}
-          to="/account-settings"
-          onClick={handleClose}
-        >
-          アカウント設定
-        </MenuItem>
-        <MenuItem onClick={handleLogout}>ログアウト</MenuItem>
-      </Menu>
+          <MenuItem 
+            key="1"
+            component={BaseLink}
+            to="/my-page"
+            onClick={handleCloseUserMenu}
+          >
+            <Typography textAlign="center">
+              マイページ
+            </Typography>
+          </MenuItem>
+          <MenuItem 
+            key="2"
+            component={BaseLink}
+            to="/account-settings"
+            onClick={handleCloseUserMenu}
+          >
+            <Typography textAlign="center">
+              アカウント設定
+            </Typography>
+          </MenuItem>
+          <MenuItem 
+            key="3"
+            component={BaseLink}
+            onClick={handleLogout}
+          >
+            <Typography textAlign="center">
+              ログアウト
+            </Typography>
+          </MenuItem>
+        </Menu>
+      </Box>
     </>
   );
 };
+
