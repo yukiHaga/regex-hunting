@@ -45,6 +45,8 @@ import { makeCorrectPercentGraphData } from '../functions/makeCorrectPercentGrap
 // メインのラッパー
 const MainWrapper = styled.div`
   background-color: ${COLORS.SUB};
+  text-align: center;
+  position: relative;
 `;
 
 // Mainのfirstラッパー
@@ -289,10 +291,10 @@ export const MyPages = () => {
           <>
             <Header /> 
             <FakeHeader />
-            <SessionFlashMessage
-              location={location}
-            />
             <MainWrapper>
+              <SessionFlashMessage
+                location={location}
+              />
               <MainFirstWrapper>
                 <UserStatus
                   name={user.name}

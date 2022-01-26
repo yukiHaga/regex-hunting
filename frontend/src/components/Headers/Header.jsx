@@ -53,10 +53,6 @@ const Fuchiue = styled.span`
 `
 const HeaderTitleLink = styled(BaseLink)``;
 
-const HeaderNavLink = styled(BaseLink)`
-  color: ${COLORS.SUB};
-`;
-
 // LPページの場合、onClickLinkはモーダル管理のstateを更新する関数
 // ログインしている場合、onClickLinkは何もない。
 export const Header = ({
@@ -162,10 +158,9 @@ export const Header = ({
                 <Button
                   key="1"
                   sx={{ my: 2, color: 'white', display: 'block' }}
+                  href='/rankings'
                 >
-                  <HeaderNavLink to={`/rankings`}>
-                    ランキング
-                  </HeaderNavLink>
+                  ランキング
                 </Button>
               </Box>
               {
