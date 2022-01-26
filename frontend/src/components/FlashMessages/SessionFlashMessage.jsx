@@ -1,48 +1,41 @@
-import React, { Fragment } from 'react';
+import React, { Fragment, useState } from 'react';
 import styled from 'styled-components';
 
 // フラッシュメッセージ関係のコンポーネント;
 import Alert from '@material-ui/lab/Alert';
-import Slide from '@mui/material/Slide';
+import Snackbar from '@mui/material/Snackbar';
 
-const CustomSlide = styled(Slide)`
-`;
-
-const AlertWrapper = styled.div`
-  display: flex;
-  justify-content: end;
-`;
-
-const CustomAlert = styled(Alert)`
-  width: 220px;
-  margin-top: 8px;
-  margin-right: 16px;
-  pointerEvents: 'none';
+// フラッシュメッセージを浮かせる
+const CustomDiv = styled.div`
+  position: absolute;
+  z-index: 0;
+  right: 0;
+  padding: 20px;
 `;
 
 export const SessionFlashMessage = ({
   location,
-  navigate,
-  url
 }) => {
 
+  const [open, setOpen] = useState(Boolean(location?.state?.display));
+
+  const handleClose = () => {
+    setOpen(false);
+  };
 
   return (
     <>
-      <CustomSlide 
-        direction="left" 
-        in={Boolean(location?.state?.display)} 
-        timeout={{ enter: 1000, exit: 1000 }} 
-        mountOnEnter 
-        unmountOnExit
-        addEndListener={() => (setTimeout(() => (navigate(url)), 2500))}
-      >
-        <AlertWrapper>
-          <CustomAlert severity="success">
+      <CustomDiv>
+        <Snackbar 
+          open={open} 
+          autoHideDuration={4000} 
+          onClose={handleClose}
+        >
+          <Alert variant="filled" severity="success">
             {location?.state?.success}
-          </CustomAlert>
-        </AlertWrapper>
-      </CustomSlide>
+          </Alert>
+        </Snackbar>
+      </CustomDiv>
     </>
   );
 };

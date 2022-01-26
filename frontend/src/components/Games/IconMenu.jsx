@@ -51,7 +51,7 @@ export const IconMenu = ({
         }
       });
     }).then(() => {
-      navigate('/?user=logout', { state: { display: true, success: "ログアウトしました。"}})
+      navigate('/', { state: { display: true, success: "ログアウトしました。"}})
     } 
     ).catch((e) => {
       if(e.response.status === HTTP_STATUS_CODE.NOT_FOUND){
@@ -115,8 +115,6 @@ export const IconMenu = ({
             </Typography>
           </MenuItem>
           <MenuItem 
-            key="3"
-            component={BaseLink}
             onClick={handleLogout}
           >
             <Typography textAlign="center">

@@ -42,11 +42,6 @@ import { COLORS } from '../style_constants.js';
 // グラフのx座標とy座標を生成する関数 
 import { makeCorrectPercentGraphData } from '../functions/makeCorrectPercentGraphData.js'
 
-const FakeBlock = styled.div`
-  background-color: ${COLORS.SUB};
-  height: 56px;
-`;
-
 // メインのラッパー
 const MainWrapper = styled.div`
   background-color: ${COLORS.SUB};
@@ -294,13 +289,9 @@ export const MyPages = () => {
           <>
             <Header /> 
             <FakeHeader />
-            <FakeBlock>
-              <SessionFlashMessage
-                location={location}
-                navigate={navigate}
-                url='/my-page'
-              />
-            </FakeBlock>
+            <SessionFlashMessage
+              location={location}
+            />
             <MainWrapper>
               <MainFirstWrapper>
                 <UserStatus

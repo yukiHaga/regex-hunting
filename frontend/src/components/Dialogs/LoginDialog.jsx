@@ -124,8 +124,9 @@ export const LoginDialog = ({
           user: data.user,
         }
       });
-    }).then(() => 
-      navigate('/my-page?user=login', { state: { display: true, success: "ログインしました。"}})
+    }).then(() => {
+      return navigate('/my-page', { state: { display: true, success: "ログインしました。"}})
+    } 
     ).catch((e) => {
       if(e.response.status === HTTP_STATUS_CODE.NOT_FOUND){
         dispatch({

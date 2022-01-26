@@ -1,5 +1,5 @@
 import React, { Fragment, useState, useEffect, useLayoutEffect, useContext } from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 import styled from 'styled-components';
 
 // Image
@@ -41,8 +41,6 @@ import { COLORS } from '../style_constants.js';
 
 // react-scroll
 import { Link as Scroll } from 'react-scroll';
-
-import Alert from '@mui/material/Alert';
 
 // メインのラッパー
 const MainWrapper = styled.div`
@@ -106,11 +104,6 @@ const MainMonsterImageCover = styled.img`
   height: 90%;
   object-fit: contain;
   max-width: 100%
-`;
-
-// フラッシュメッセージでレイアウトが変化しないためのブロック要素
-const FakeBlock = styled.div`
-  height: 56px;
 `;
 
 // セカンドのラッパー
@@ -180,13 +173,6 @@ const GameContentsWrapper = styled.div`
   flex-wrap: wrap;
 `;
 
-// フラッシュメッセージを浮かせる
-const CustomDiv = styled.div`
-  position: absolute;
-  z-index: 0;
-  right: 0;
-`;
-
 export const LandingPages = () => { 
 
   // モーダルに関するstateの初期値
@@ -210,9 +196,6 @@ export const LandingPages = () => {
 
   // location
   const location = useLocation();
-
-  // navigation
-  const navigate = useNavigate();
 
   // 初めてLPページに訪れた場合、ログインしていないので、
   // dispatchのdata.sessionはfalseとなる
@@ -268,12 +251,10 @@ export const LandingPages = () => {
       />
       <FakeHeader />
       <MainWrapper>
+        <SessionFlashMessage
+          location={location}
+        />
         <BackGroundImageCover src={BackGroundImage} alt="main-image" />
-        <CustomDiv>
-        <Alert variant="filled" severity="success">
-          This is a success alert — check it out!
-        </Alert>
-        </CustomDiv>
         <MainTitleImageCover src={MainTitleImage} alt="main-title"/>
         <Filter />
         <MainMonsterImageCover src={MainMonsterImage} alt="main-monster" />

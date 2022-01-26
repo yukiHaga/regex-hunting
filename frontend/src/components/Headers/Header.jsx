@@ -65,7 +65,6 @@ const HeaderNavFakeLink = styled(FakeLink)`
 // ログインしている場合、onClickLinkは何もない。
 export const Header = ({
   onClickLink,
-  image
 }) => {
 
   // useContext
