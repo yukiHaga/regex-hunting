@@ -193,7 +193,7 @@ export const MyPages = () => {
         });
         if(!data.session && location.key === 'default') {
           navigate(
-            '/?user=not_authentications', 
+            '/', 
             { state: { display: true, success: "ログインしてください。"}}
           )
         }

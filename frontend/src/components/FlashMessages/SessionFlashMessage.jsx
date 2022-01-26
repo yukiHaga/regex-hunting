@@ -27,6 +27,7 @@ export const SessionFlashMessage = ({
           position: 'absolute',
           zIndex: 1099,
         }}
+        onClose={handleClose}
       >
         <Alert variant="filled" severity="success">
           {location?.state?.success}

@@ -23,17 +23,17 @@ export const ExternalAuth = () => {
         provider 
       }).then((isSuccess) => {
         if (isSuccess) {
-          navigate('/my-page?user=oauth-login', { 
+          navigate('/my-page', { 
             state: { display: true, success: "ログインしました。"}
           });
         } else {
-          navigate('/my-page?user=oauth-login-faliure', { 
+          navigate('/?user=oauth-login-faliure', { 
             state: { display: true, success: "アカウントが見つかりません。"}
           });
         }
       });
     } else {
-      navigate('/my-page?user=oauth-login-faliure', { 
+      navigate('/?user=oauth-login-faliure', { 
         state: { display: true, success: "アカウントが見つかりません。"}
       });
     }
