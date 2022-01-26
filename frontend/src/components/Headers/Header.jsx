@@ -57,10 +57,6 @@ const HeaderNavLink = styled(BaseLink)`
   color: ${COLORS.SUB};
 `;
 
-const HeaderNavFakeLink = styled(FakeLink)`
-  color: ${COLORS.SUB};
-`;
-
 // LPページの場合、onClickLinkはモーダル管理のstateを更新する関数
 // ログインしている場合、onClickLinkは何もない。
 export const Header = ({
@@ -179,20 +175,18 @@ export const Header = ({
                       <Button
                         key="1"
                         sx={{ my: 2, color: 'white', display: 'block' }}
+                        onClick={() => onClickLink("login")}
                       >
-                        <HeaderNavFakeLink onClick={() => onClickLink("login")}>
-                          ログイン
-                        </HeaderNavFakeLink>
+                        ログイン
                       </Button>
                     </Box>
                     <Box sx={{ flexGrow: 0, display: { xs: 'none', md: 'flex' } }}>
                       <Button
                         key="1"
                         sx={{ my: 2, color: 'white', display: 'block' }}
+                        onClick={() => onClickLink("signUp")}
                       >
-                        <HeaderNavFakeLink onClick={() => onClickLink("signUp")}>
-                          新規会員登録
-                        </HeaderNavFakeLink>
+                        新規会員登録
                       </Button>
                     </Box>
                   </>
