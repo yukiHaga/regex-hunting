@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 import styled from 'styled-components';
 import { COLORS } from '../style_constants';
 
@@ -18,7 +18,7 @@ const SubTextWrapper = styled.div`
   }
 `;
 
-export const SubText = ({color, children}) => {
+export const SubText = memo(({color, children}) => {
   return (
     <>
       <SubTextWrapper color={color}>
@@ -26,4 +26,4 @@ export const SubText = ({color, children}) => {
       </SubTextWrapper>
     </>
   );
-};
+});

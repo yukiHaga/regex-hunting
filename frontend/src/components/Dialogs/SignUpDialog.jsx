@@ -50,30 +50,25 @@ import { UserContext } from "../../context/UserProvider.js";
 import { gitHubOAuth, googleOAuth } from '../../urls/index'; 
 
 const CustomDialogInnerWrapper = styled.div`
-  padding-top: 10px;
-  padding-right: 10px;
-  padding-left: 10px;
+  padding-top: 3%;
+  padding-right: 3%;
+  padding-left: 3%;
   background-color: ${COLORS.WHITE};
   text-align: center;
 `;
 
 const CustomDialogTitleImage = styled.img`
-  height: 50px;
-  width: 80px
+  width: 40%;
   object-fit: contain;
-  padding: 8px 23px;
+  padding: 2% 8%;
 `;
 
-const CustomDialogContent = styled(DialogContent)`
-  height: 500px;
-  width: 400px;
-`;
-
+// ここのwidthはpx指定しないとレイアウトが崩れるので、pxにした
 const CustomFilledInput = styled(FilledInput)`
   width: 400px;
   margin-bottom: ${({
     errors_box
-  }) => typeof errors_box === 'undefined' && '16px' };
+  }) => typeof errors_box === 'undefined' && '4%' };
 `;
 
 export const SignUpDialog = ({
@@ -173,7 +168,7 @@ export const SignUpDialog = ({
       required: "メールアドレスを入力してください。", 
       pattern: {
         value: /^[A-Za-z0-9]{1}[A-Za-z0-9_.-]*@{1}[A-Za-z0-9_.-]{1,}.[A-Za-z0-9]{1,}$/,
-        message: "英数字, @, ドメインが含まれるメールアドレスを入力してください。"
+        message: "英数字, @, ドメインを含めて入力してください。"
       }
     },
     password: {
@@ -184,7 +179,7 @@ export const SignUpDialog = ({
       },
       pattern: {
         value: /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?\d)[!-~]+$/,
-        message: "大文字, 小文字, 数字が含まれるパスワードを入力してください。"
+        message: "大文字, 小文字, 数字を含めて入力してください。"
       }
     },
     passwordConfirmation: {
@@ -195,7 +190,7 @@ export const SignUpDialog = ({
       },
       pattern: {
         value: /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?\d)[!-~]+$/,
-        message: "大文字, 小文字, 数字が含まれるパスワードを入力してください。"
+        message: "大文字, 小文字, 数字を含めて入力してください。"
       },
       validate: {
         confirmPassword: (value) => value === password.current || "パスワードが一致しません。" 
@@ -207,11 +202,12 @@ export const SignUpDialog = ({
     <Dialog
       open={isOpen}
       onClose={onClose}
+      maxWidth='sm'
     >
       <CustomDialogInnerWrapper> 
         <CloseButton onClose={onClose} fontSize="small" /> 
         <CustomDialogTitleImage src={SignUpImage} alt="SignUp" />
-        <CustomDialogContent>
+        <DialogContent>
           <CreateAccountSentence />
           <form onSubmit={handleSubmit(onSubmit)}>
             <Controller 
@@ -229,12 +225,14 @@ export const SignUpDialog = ({
                     label="name"
                     errors_box={errors.NameBox}
                   />
+                  {
+                    errors.NameBox && <InputErrorSentence>
+                                        {errors.NameBox.message}
+                                      </InputErrorSentence>
+                  }
                 </FormControl>              
               )}
             />
-            {errors.NameBox && <InputErrorSentence>
-                                  {errors.NameBox.message}
-                                </InputErrorSentence>}
             <Controller 
               name="EmailBox"
               control={control}
@@ -250,12 +248,14 @@ export const SignUpDialog = ({
                     label="email"
                     errors_box={errors.EmailBox}
                   />
+                  {
+                    errors.EmailBox && <InputErrorSentence>
+                                         {errors.EmailBox.message}
+                                       </InputErrorSentence>
+                  }
                 </FormControl>              
               )}
             />
-            {errors.EmailBox && <InputErrorSentence>
-                                  {errors.EmailBox.message}
-                                </InputErrorSentence>}
             <Controller 
               name="PasswordBox"
               control={control}
@@ -271,12 +271,14 @@ export const SignUpDialog = ({
                     label="password"
                     errors_box={errors.PasswordBox}
                   />
+                  {
+                    errors.PasswordBox && <InputErrorSentence>
+                                            {errors.PasswordBox.message}
+                                          </InputErrorSentence>
+                  }
                 </FormControl>              
               )}
             />
-            {errors.PasswordBox && <InputErrorSentence>
-                                     {errors.PasswordBox.message}
-                                   </InputErrorSentence>}
             <Controller 
               name="PasswordConfirmationBox"
               control={control}
@@ -294,14 +296,15 @@ export const SignUpDialog = ({
                     label="password-confirmation"
                     errors_box={errors.PasswordConfirmationBox}
                   />
+                  {
+                    errors.PasswordConfirmationBox && <InputErrorSentence>
+                                                        {errors.PasswordConfirmationBox.message}
+                                                      </InputErrorSentence>
+                  }
                 </FormControl>              
               )}
             />
-            {errors.PasswordConfirmationBox && <InputErrorSentence>
-                                                 {errors.PasswordConfirmationBox.message}
-                                               </InputErrorSentence>}
             <SignUpButton disabled={!isValid} />
-
             {
               requestUserState.errors.title === 'Record Not Found' && 
                 <SubmitErrorSentence
@@ -325,7 +328,7 @@ export const SignUpDialog = ({
             type="GitHub"
           />
           <HaveAccountSentence onClick={onClick} />
-        </CustomDialogContent>
+        </DialogContent>
       </CustomDialogInnerWrapper>
     </Dialog>
   );

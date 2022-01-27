@@ -51,30 +51,25 @@ import { UserContext } from "../../context/UserProvider.js";
 import { gitHubOAuth, googleOAuth } from '../../urls/index'; 
 
 const CustomDialogInnerWrapper = styled.div`
-  padding-top: 10px;
-  padding-right: 10px;
-  padding-left: 10px;
+  padding-top: 3%;
+  padding-right: 3%;
+  padding-left: 3%;
   background-color: ${COLORS.WHITE};
   text-align: center;
 `;
 
 const CustomDialogTitleImage = styled.img`
-  height: 50px;
-  width: 80px
+  width: 38%;
   object-fit: contain;
-  padding: 8px 23px;
+  padding: 2% 8%;
 `;
 
-const CustomDialogContent = styled(DialogContent)`
-  height: 440px;
-  width: 400px;
-`;
-
+// ここのwidthはpx指定しないとレイアウトが崩れるので、pxにした
 const CustomFilledInput = styled(FilledInput)`
   width: 400px;
   margin-bottom: ${({
     errors_box
-  }) => typeof errors_box === 'undefined' && '16px' };
+  }) => typeof errors_box === 'undefined' && '4%' };
 `;
 
 export const LoginDialog = ({
@@ -147,7 +142,7 @@ export const LoginDialog = ({
       required: "メールアドレスを入力してください。", 
       pattern: {
         value: /^[A-Za-z0-9]{1}[A-Za-z0-9_.-]*@{1}[A-Za-z0-9_.-]{1,}.[A-Za-z0-9]{1,}$/,
-        message: "英数字, @, ドメインが含まれるメールアドレスを入力してください。"
+        message: "英数字, @, ドメインを含めて入力してください。"
       }
     },
     password: {
@@ -158,7 +153,7 @@ export const LoginDialog = ({
       },
       pattern: {
         value: /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?\d)[!-~]+$/,
-        message: "大文字, 小文字, 数字が含まれるパスワードを入力してください。"
+        message: "大文字, 小文字, 数字を含めて入力してください。"
       }
     }
   };
@@ -167,11 +162,12 @@ export const LoginDialog = ({
     <Dialog
       open={isOpen}
       onClose={onClose}
+      maxWidth='sm'
     >
       <CustomDialogInnerWrapper> 
         <CloseButton onClose={onClose} fontSize="small" /> 
         <CustomDialogTitleImage src={LoginImage} alt="Login" />
-        <CustomDialogContent>
+        <DialogContent>
           <form onSubmit={handleSubmit(onSubmit)}>
             <Controller 
               name="EmailBox"
@@ -188,12 +184,14 @@ export const LoginDialog = ({
                     label="email"
                     errors_box={errors.EmailBox}
                   />
+                  {
+                    errors.EmailBox && <InputErrorSentence>
+                                         {errors.EmailBox.message}
+                                       </InputErrorSentence>
+                  }
                 </FormControl>              
               )}
             />
-            {errors.EmailBox && <InputErrorSentence>
-                                  {errors.EmailBox.message}
-                                </InputErrorSentence>}
             <Controller 
               name="PasswordBox"
               control={control}
@@ -209,12 +207,14 @@ export const LoginDialog = ({
                     label="password"
                     errors_box={errors.PasswordBox}
                   />
+                  {
+                    errors.PasswordBox && <InputErrorSentence>
+                                            {errors.PasswordBox.message}
+                                          </InputErrorSentence>
+                  }
                 </FormControl>              
               )}
             />
-            {errors.PasswordBox && <InputErrorSentence>
-                                     {errors.PasswordBox.message}
-                                   </InputErrorSentence>}
             <LoginButton 
               disabled={!isValid} 
             />
@@ -242,7 +242,7 @@ export const LoginDialog = ({
             type="GitHub"
           />
           <SignUpSentence onClick={onClick} />
-        </CustomDialogContent>
+        </DialogContent>
       </CustomDialogInnerWrapper>
     </Dialog>
   );

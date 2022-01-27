@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, memo } from 'react';
 import styled from 'styled-components';
 
 // アイコン付きメニュー
@@ -56,8 +56,9 @@ const HeaderTitleLink = styled(BaseLink)``;
 
 // LPページの場合、onClickLinkはモーダル管理のstateを更新する関数
 // ログインしている場合、onClickLinkは何もない。
-export const Header = ({
+export const Header = memo(({
   onClickLink,
+  onClickMobile
 }) => {
 
   // useContext
@@ -147,11 +148,25 @@ export const Header = ({
                       ランキング
                     </Typography>
                   </MenuItem>
-                  <MenuItem key="2" onClick={handleCloseNavMenu}>
-                    <Typography textAlign="center">ログイン</Typography>
+                  <MenuItem 
+                    key="2" 
+                    component={BaseLink}
+                    to="/?user=mobile"
+                    onClick={handleCloseNavMenu}
+                  >
+                    <Typography textAlign="center">
+                      ログイン
+                    </Typography>
                   </MenuItem>
-                  <MenuItem key="3" onClick={handleCloseNavMenu}>
-                    <Typography textAlign="center">新規会員登録</Typography>
+                  <MenuItem 
+                    key="3" 
+                    component={BaseLink}
+                    to="/?user=mobile"
+                    onClick={handleCloseNavMenu}
+                  >
+                    <Typography textAlign="center">
+                      新規会員登録
+                    </Typography>
                   </MenuItem>
                 </Menu>
               </Box>
@@ -201,4 +216,4 @@ export const Header = ({
       </ThemeProvider>
     </>
   );
-};
+});
