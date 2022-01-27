@@ -58,6 +58,7 @@ const HeaderTitleLink = styled(BaseLink)``;
 // ログインしている場合、onClickLinkは何もない。
 export const Header = ({
   onClickLink,
+  onClickMobile
 }) => {
 
   // useContext
@@ -147,11 +148,25 @@ export const Header = ({
                       ランキング
                     </Typography>
                   </MenuItem>
-                  <MenuItem key="2" onClick={handleCloseNavMenu}>
-                    <Typography textAlign="center">ログイン</Typography>
+                  <MenuItem 
+                    key="2" 
+                    component={BaseLink}
+                    to="/?user=mobile"
+                    onClick={handleCloseNavMenu}
+                  >
+                    <Typography textAlign="center">
+                      ログイン
+                    </Typography>
                   </MenuItem>
-                  <MenuItem key="3" onClick={handleCloseNavMenu}>
-                    <Typography textAlign="center">新規会員登録</Typography>
+                  <MenuItem 
+                    key="3" 
+                    component={BaseLink}
+                    to="/?user=mobile"
+                    onClick={handleCloseNavMenu}
+                  >
+                    <Typography textAlign="center">
+                      新規会員登録
+                    </Typography>
                   </MenuItem>
                 </Menu>
               </Box>
