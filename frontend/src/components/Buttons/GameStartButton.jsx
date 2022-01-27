@@ -34,6 +34,7 @@ const GameStartButtonTextWrapper = styled.div`
 `;
 
 export const GameStartButton = ({difficulty}) => {
+
   return (
     <>
       <GameStartButtonWrapper to={`/games/${difficulty}/start`}>
