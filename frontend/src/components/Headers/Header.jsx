@@ -28,6 +28,9 @@ import { ThemeProvider } from '@mui/material/styles';
 import theme from '../../theme/theme.js';
 import CssBaseline from '@mui/material/CssBaseline';
 
+// Responsive
+import { WIDTH } from '../../style_constants.js';
+
 // title
 const TitleWrapper = styled.div`
   font-family: Raleway;
@@ -39,7 +42,7 @@ const TitleWrapper = styled.div`
   text-stroke: 5px #030002;
   padding: 5px;
   position: relative;
-  @media (max-width: 414px) {
+  @media (max-width: ${WIDTH.MOBILE}) {
     font-size: 0.9em;
     -webkit-text-stroke: 4px #030002;
     text-stroke: 4px #030002;
@@ -89,7 +92,7 @@ export const Header = memo(({
     <>
       <ThemeProvider theme={theme}>
         <CssBaseline />
-        <AppBar position="fixed" color="green">
+        <AppBar position="fixed" color="green" sx={{zIndex: '1101'}}>
           <Container maxWidth="xl">
             <Toolbar disableGutters>
               <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'flex' } }}>

@@ -6,6 +6,8 @@ import { BaseLink } from '../shared_style';
 // Colors
 import { COLORS } from '../../style_constants.js';
 
+// Responsive
+import { WIDTH } from '../../style_constants.js';
 
 const GameStartButtonWrapper = styled(BaseLink)`
   border-style: none;
@@ -28,7 +30,7 @@ const GameStartButtonTextWrapper = styled.div`
   font-style: normal;
   font-weight: 500;
   padding: 3%;
-  @media (max-width: 414px) {
+  @media (max-width: ${WIDTH.MOBILE}) {
     font-size: 0.9em;
   }
 `;

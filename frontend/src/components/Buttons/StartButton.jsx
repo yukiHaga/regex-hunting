@@ -7,6 +7,9 @@ import { COLORS } from '../../style_constants.js';
 // Button
 import { RedRoundButton } from '../shared_style';
 
+// Responsive
+import { WIDTH } from '../../style_constants.js';
+
 const StartButtonWrapper = styled(RedRoundButton)`
   border-style: none;
   margin-top: 4%;
@@ -17,7 +20,7 @@ const StartButtonWrapper = styled(RedRoundButton)`
     box-shadow: 0 0 2px rgba(0,0,0,0.2);
   }
   width: 17%;
-  @media (max-width: 414px) {
+  @media (max-width: ${WIDTH.MOBILE}) {
     width: 50%;
     margin-top: 10%;
     margin-bottom: 20%;
@@ -29,7 +32,7 @@ const StartButtonTextWrapper = styled.div`
   font-family: YuGothic;
   font-style: normal;
   font-size: 2.7em;
-  @media (max-width: 414px) {
+  @media (max-width: ${WIDTH.MOBILE}) {
     font-size: 2.0em;
   }
   font-weight: 500;

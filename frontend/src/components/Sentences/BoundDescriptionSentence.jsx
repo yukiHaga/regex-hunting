@@ -2,8 +2,13 @@ import React from 'react';
 import styled, { keyframes } from 'styled-components';
 import { bounce } from 'react-animations';
 import { COLORS } from '../../style_constants';
+
 // FakeLink
 import { FakeLink } from '../shared_style.js';
+
+// Responsive
+import { WIDTH } from '../../style_constants.js';
+
 
 const BoundDescriptionSentenceWrapper = styled(FakeLink)`
   width: 70%;
@@ -14,7 +19,7 @@ const BoundDescriptionSentenceWrapper = styled(FakeLink)`
   color: ${COLORS.SUB};
   margin: 0 auto;
   padding-bottom: 1%;
-  @media (max-width: 414px) {
+  @media (max-width: ${WIDTH.MOBILE}) {
     font-size: 1.1em;
     padding-top: 36%;
   }
