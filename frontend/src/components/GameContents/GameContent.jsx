@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 import styled from 'styled-components';
 
 import { GameStartButton } from '../Buttons/GameStartButton.jsx';
@@ -84,7 +84,7 @@ const GameContentStartWrapper = styled.div`
 
 // LPページの場合、onClickLinkはモーダル管理のstateを更新する関数
 // ログインしている場合、onClickLinkは何もない。
-export const GameContent = ({difficulty, image}) => {
+export const GameContent = memo(({difficulty, image}) => {
 
   const difficultySentence = (difficulty) => {
     let sentence;
@@ -134,4 +134,4 @@ export const GameContent = ({difficulty, image}) => {
       </GameContentWrapper>
     </>
   );
-};
+});
