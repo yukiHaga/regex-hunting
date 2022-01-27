@@ -43,8 +43,9 @@ export const SessionFlashMessage = ({
           horizontal: 'right' 
         }}
         sx={{
-          position: 'absolute',
-          zIndex: 1099,
+          position: 'fixed',
+          zIndex: 1100,
+          top: { sm: '10%', md: '10%' }
         }}
         onClose={
           new URLSearchParams(location?.search)?.get('user') === 'mobile' ?
