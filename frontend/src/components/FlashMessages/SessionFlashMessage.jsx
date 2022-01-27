@@ -45,7 +45,7 @@ export const SessionFlashMessage = ({
         sx={{
           position: 'fixed',
           zIndex: 1100,
-          top: { sm: '10%', md: '10%' }
+          top: { xs: '10%', md: '10%' }
         }}
         onClose={
           new URLSearchParams(location?.search)?.get('user') === 'mobile' ?
@@ -55,7 +55,7 @@ export const SessionFlashMessage = ({
         }
       >
         <Alert variant="filled" severity="success">
-          {location?.state?.success || 'PCからご利用ください'}
+          {location?.state?.success || 'PCからご利用ください。'}
         </Alert>
       </Snackbar>
     </>
