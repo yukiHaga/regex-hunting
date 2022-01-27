@@ -5,7 +5,6 @@ import styled from 'styled-components';
 // Image
 import MainTitleImage from '../images/main_title.png';
 import GroupBackGroundImage from '../images/group_background.png';
-import MainMonsterImage from '../images/advanced.png';
 import BattleSceneImage from '../images/battle_scene.png';
 import MyPageImage from '../images/my_page_image.png';
 import RaknkingImage from '../images/ranking_image.png';
@@ -100,33 +99,11 @@ const Filter = styled.div`
   background-color: rgba(102,102,102,0.5)
 `;
 
-// メインモンスター画像
-const MainMonsterImageCover = styled.img`
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 30%;
-  z-index: -3;
-  margin: auto;
-  margin-top: 0px;
-  margin-bottom: 0px;
-  width: 70%;
-  height: 90%;
-  object-fit: contain;
-  max-width: 100%
-  @media (max-width: 390px) {
-    width: 100%;
-    height: 100%;
-    object-fit: none;
-  }
-`;
-
 // セカンドのラッパー
 const SecondWrapper = styled.div`
   text-align: center;
   background-color: ${COLORS.SUB};
-  padding-top: 80px;
+  padding-top: 6%;
 `;
 
 // 戦闘画像
@@ -134,8 +111,8 @@ const SecondBattleSceneImageCover = styled.img`
   width: 60%;
   height: auto;
   object-fit: contain;
-  margin-top: 60px;
-  margin-bottom: 20px;
+  margin-top: 4%;
+  margin-bottom: 2%;
   max-width: 100%
 `;
 
@@ -143,7 +120,7 @@ const SecondBattleSceneImageCover = styled.img`
 const ThirdWrapper = styled.div`
   text-align: center;
   background-color: ${COLORS.SUB};
-  padding-top: 110px;
+  padding-top: 6%;
 `;
 
 // マイページ画像
@@ -151,8 +128,8 @@ const ThirdMyPageImageCover = styled.img`
   width: 60%;
   height: auto;
   object-fit: contain;
-  margin-top: 60px;
-  margin-bottom: 20px;
+  margin-top: 4%;
+  margin-bottom: 4%;
   max-width: 100%
 `;
 
@@ -160,7 +137,7 @@ const ThirdMyPageImageCover = styled.img`
 const FourthWrapper = styled.div`
   text-align: center;
   background-color: ${COLORS.SUB};
-  padding-top: 110px;
+  padding-top: 6%;
 `;
 
 // ランキング画像
@@ -168,7 +145,8 @@ const FourthRaknkingImageCover = styled.img`
   width: 60%;
   height: auto;
   object-fit: contain;
-  margin-top: 40px;
+  margin-top: 4%;
+  margin-bottom: 4%;
   max-width: 100%
 `;
 
@@ -176,13 +154,13 @@ const FourthRaknkingImageCover = styled.img`
 const FifthWrapper = styled.div`
   text-align: center;
   background-color: ${COLORS.SUB};
-  padding-top: 110px;
-  padding-bottom: 100px;
+  padding-top: 4%;
+  padding-bottom: 6%;
 `;
 
 // ゲームコンテンツのラッパー
 const GameContentsWrapper = styled.div`
-  padding-top: 50px;
+  padding-top: 4%;
   display: flex;
   justify-content: space-evenly;
   frex-direction: row;

@@ -8,7 +8,7 @@ import { IconMenu } from '../Games/IconMenu.jsx'
 import { COLORS } from '../../style_constants.js';
 
 // BaseLink
-import { BaseLink, FakeLink } from '../shared_style.js';
+import { BaseLink } from '../shared_style.js';
  
 // Contextオブジェクト
 import { UserContext } from "../../context/UserProvider.js";
@@ -44,13 +44,14 @@ const TitleWrapper = styled.div`
     -webkit-text-stroke: 4px #030002;
     text-stroke: 4px #030002;
   }
-`
+`;
 
 // fuchiue
 const Fuchiue = styled.span`
   -webkit-text-stroke: 0;
   position: absolute;
-`
+`;
+
 const HeaderTitleLink = styled(BaseLink)``;
 
 // LPページの場合、onClickLinkはモーダル管理のstateを更新する関数

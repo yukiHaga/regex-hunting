@@ -16,7 +16,7 @@ const RankingDescriptionSentenceWrapper = styled(DescriptionWrapper)`
   font-style: normal;
   font-weight: bold;
   @media (max-width: 390px) {
-    font-size: 1.2em;
+    font-size: 1.1em;
   }
 `;
 

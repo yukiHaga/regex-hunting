@@ -8,7 +8,6 @@ import { COLORS } from '../../style_constants.js';
 import { FakeLink } from '../shared_style.js';
 
 const FooterWrapper = styled.div`
-  height: 55px;
   display: flex;
   justify-content: start;
   background-color: ${COLORS.BROWN};
