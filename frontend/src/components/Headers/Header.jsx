@@ -39,7 +39,7 @@ const TitleWrapper = styled.div`
   text-stroke: 5px #030002;
   padding: 5px;
   position: relative;
-  @media (max-width: 390px) {
+  @media (max-width: 414px) {
     font-size: 0.9em;
     -webkit-text-stroke: 4px #030002;
     text-stroke: 4px #030002;

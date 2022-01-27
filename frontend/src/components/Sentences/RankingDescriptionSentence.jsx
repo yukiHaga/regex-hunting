@@ -15,7 +15,7 @@ const RankingDescriptionSentenceWrapper = styled(DescriptionWrapper)`
   font-family: YuGothic;
   font-style: normal;
   font-weight: bold;
-  @media (max-width: 390px) {
+  @media (max-width: 414px) {
     font-size: 1.1em;
   }
 `;

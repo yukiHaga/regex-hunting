@@ -20,7 +20,7 @@ const GameContentTitleWrapper = styled.div`
   color: ${COLORS.BLACK};
   text-align: center;
   background-color: ${COLORS.SUB};
-  @media (max-width: 390px) {
+  @media (max-width: 414px) {
     font-size: 1.1em;
     width: 90%;
     margin: 0 auto;
@@ -33,7 +33,7 @@ const GameContentDescriptionWrapper = styled.div`
   width: 100%;
   box-shadow: 0 0px 20px rgba(0,0,0,0.2);
   background-color: ${COLORS.WHITE};
-  @media (max-width: 390px) {
+  @media (max-width: 414px) {
     width: 90%;
     margin: 0 auto;
   }

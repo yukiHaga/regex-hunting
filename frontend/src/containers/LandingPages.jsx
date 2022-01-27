@@ -46,7 +46,7 @@ const MainWrapper = styled.div`
   text-align: center;
   position: relative;
   padding-top: 3%;
-  @media (max-width: 390px) {
+  @media (max-width: 414px) {
     padding-top: 20%;
   }
 `;
@@ -63,7 +63,7 @@ const MainTitleImageCover = styled.img`
   margin-top: 10%;
   max-width: 100%;
   height: auto;
-  @media (max-width: 390px) {
+  @media (max-width: 414px) {
     margin-top: 30%;
     width: 90%;
   }
@@ -83,7 +83,7 @@ const BackGroundImageCover = styled.img`
   margin-bottom: 0px;
   z-index: -4;
   max-width: 100%;
-  @media (max-width: 390px) {
+  @media (max-width: 414px) {
     object-fit: cover;
   }
 `;

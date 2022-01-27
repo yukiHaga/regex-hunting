@@ -28,7 +28,7 @@ const GameStartButtonTextWrapper = styled.div`
   font-style: normal;
   font-weight: 500;
   padding: 3%;
-  @media (max-width: 390px) {
+  @media (max-width: 414px) {
     font-size: 0.9em;
   }
 `;
@@ -36,9 +36,10 @@ const GameStartButtonTextWrapper = styled.div`
 export const GameStartButton = ({difficulty}) => {
 
   // デバイス幅が640px以下の場合にスマホと判定するようにしている
+  // タブレットでもゲームして欲しくないので、1000pxにした
   // デバイス幅が640px以下なら、window.matchMedia('(max-device-width: 640px)').matchesがtrueになる
   const url = useMemo(() => {
-    if (window.matchMedia('(max-device-width: 640px)').matches) {
+    if (window.matchMedia('(max-device-width: 1000px)').matches) {
       return '/?user=mobile'; 
     } else {
       return `/games/${difficulty}/start`; 

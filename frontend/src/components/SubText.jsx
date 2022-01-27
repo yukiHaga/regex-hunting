@@ -12,7 +12,7 @@ const SubTextWrapper = styled.div`
   color: ${(props) => props.color || COLORS.BLACK};
   margin: 0 auto;
   margin-top: 1%;
-  @media (max-width: 390px) {
+  @media (max-width: 414px) {
     font-size: 1.1em;
     margin-top: 3%;  
   }

@@ -17,7 +17,7 @@ const StartButtonWrapper = styled(RedRoundButton)`
     box-shadow: 0 0 2px rgba(0,0,0,0.2);
   }
   width: 17%;
-  @media (max-width: 390px) {
+  @media (max-width: 414px) {
     width: 50%;
     margin-top: 10%;
     margin-bottom: 20%;
@@ -29,7 +29,7 @@ const StartButtonTextWrapper = styled.div`
   font-family: YuGothic;
   font-style: normal;
   font-size: 2.7em;
-  @media (max-width: 390px) {
+  @media (max-width: 414px) {
     font-size: 2.0em;
   }
   font-weight: 500;
