@@ -7,45 +7,61 @@ import { GameStartButton } from '../Buttons/GameStartButton.jsx';
 import { COLORS } from '../../style_constants.js';
 
 const GameContentWrapper = styled.div`
-  background-color: ${COLORS.WHITE};
-  width: 326px;
+  padding-top: 2%;
 `;
 
 const GameContentTitleWrapper = styled.div`
-  height: 36px;
-  width: 326px;
+  height: 9%;
+  width: 100%;
   font-family: YuGothic;
   font-style: normal;
   font-weight: 500;
-  font-size: 24px;
-  line-height: 36px;
+  font-size: 1.5em;
   color: ${COLORS.BLACK};
   text-align: center;
   background-color: ${COLORS.SUB};
+  @media (max-width: 390px) {
+    font-size: 1.1em;
+    width: 90%;
+    margin: 0 auto;
+    padding-top: 2%;
+    padding-bottom: 2%
+  }
 `;
 
 const GameContentDescriptionWrapper = styled.div`
-  width: 326px;
+  width: 100%;
   box-shadow: 0 0px 20px rgba(0,0,0,0.2);
+  background-color: ${COLORS.WHITE};
+  @media (max-width: 390px) {
+    width: 90%;
+    margin: 0 auto;
+  }
 `;
 
 // ブロック要素じゃないので、もしかしたら直列に並ばないかも
 // 使用するときに、propsのsrc属性を渡す。
 const GameContentImageWrapper = styled.img`
-  width: 326px;
-  height: 190px;
   box-sizing: border-box;
   border: 2px solid ${COLORS.BLACK};
+  max-width: 100%;
+  border-radius: 3px;
 `;
 
 const GameContentMainWrapper = styled.div`
   margin: 0 auto;
   test-align: center;
-  width: 326px;
-  padding-top: 10px;
-  padding-bottom: 20px;
+  width: 100%;
+  padding-top: 4%;
+  padding-bottom: 6%;
+  background-color: ${COLORS.WHITE};
+  @media (max-width: 390px) {
+    width: 90%;
+  }
+  border-radius: 3px;
 `;
 
+// ここのwidthはpx指定しないとレイアウトが崩れる
 const GameContentSentenceWrapper = styled.div`
   width: 290px;
   display: inline-block;
@@ -53,15 +69,17 @@ const GameContentSentenceWrapper = styled.div`
   font-family: YuGothic;
   font-style: normal;
   font-weight: 500;
-  font-size: 18px;
-  line-height: 27px;
+  font-size: 1.1em;
   color: ${COLORS.BLACK};
+  @media (max-width: 390px) {
+    font-size: 0.9em;
+  }
 `;
 
 const GameContentStartWrapper = styled.div`
   display: flex;
   justify-content: center;
-  padding-top: 30px;
+  padding-top: 6%;
 `;
 
 // LPページの場合、onClickLinkはモーダル管理のstateを更新する関数

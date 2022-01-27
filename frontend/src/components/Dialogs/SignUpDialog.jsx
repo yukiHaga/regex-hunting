@@ -141,7 +141,7 @@ export const SignUpDialog = ({
         }
       });
     }).then(() => 
-      navigate('/my-page?user=login', { state: { display: true, success: "アカウントを登録しました。"}})
+      navigate('/my-page', { state: { display: true, success: "アカウントを登録しました。"}})
     ).catch((e) => {
       if(e.response.status === HTTP_STATUS_CODE.NOT_FOUND){
         dispatch({

@@ -11,11 +11,13 @@ const RankingDescriptionWrapper = styled(DescriptionWrapper)`
 const RankingDescriptionSentenceWrapper = styled(DescriptionWrapper)`
   display: inline-block;
   text-align: left;
-  font-size: 36px;
+  font-size: 2.3em;
   font-family: YuGothic;
   font-style: normal;
   font-weight: bold;
-  line-height: 36px;
+  @media (max-width: 390px) {
+    font-size: 1.1em;
+  }
 `;
 
 export const RankingDescriptionSentence = ({children}) => {
