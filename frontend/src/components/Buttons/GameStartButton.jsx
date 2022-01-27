@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react'; 
+import React, { Fragment, useMemo } from 'react'; 
 import styled from 'styled-components';
 
 import { BaseLink } from '../shared_style';
@@ -35,9 +35,21 @@ const GameStartButtonTextWrapper = styled.div`
 
 export const GameStartButton = ({difficulty}) => {
 
+  // デバイス幅が640px以下の場合にスマホと判定するようにしている
+  // デバイス幅が640px以下なら、window.matchMedia('(max-device-width: 640px)').matchesがtrueになる
+  const url = useMemo(() => {
+    if (window.matchMedia('(max-device-width: 640px)').matches) {
+      return '/?user=mobile'; 
+    } else {
+      return `/games/${difficulty}/start`; 
+    }
+  }, [
+    difficulty
+  ]);
+
   return (
     <>
-      <GameStartButtonWrapper to={`/games/${difficulty}/start`}>
+      <GameStartButtonWrapper to={url}>
         <GameStartButtonTextWrapper>
           スタート
         </GameStartButtonTextWrapper>
