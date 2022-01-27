@@ -109,7 +109,7 @@ export const Header = memo(({
                   </HeaderTitleLink>
                 </Typography>
               </Box>
-              <Box sx={{ flexGrow: 0, display: { xs: 'flex', md: 'none' } }}>
+              <Box sx={{ flexGrow: 0, display: { xs: 'flex', md: 'flex', lg: 'none' } }}>
                 <IconButton
                   size="large"
                   aria-label="account of current user"
@@ -135,7 +135,7 @@ export const Header = memo(({
                   open={Boolean(anchorElNav)}
                   onClose={handleCloseNavMenu}
                   sx={{
-                    display: { xs: 'block', md: 'none' },
+                    display: { xs: 'block', md: 'block', lg: 'none' },
                   }}
                 >
                   <MenuItem 
@@ -170,7 +170,7 @@ export const Header = memo(({
                   </MenuItem>
                 </Menu>
               </Box>
-              <Box sx={{ flexGrow: 0, display: { xs: 'none', md: 'flex' } }}>
+              <Box sx={{ flexGrow: 0, display: { xs: 'none', md: 'none', lg: 'flex' } }}>
                 <Button
                   key="1"
                   sx={{ my: 2, color: 'white', display: 'block' }}
@@ -182,7 +182,7 @@ export const Header = memo(({
               {
                 sessionState === false && onClickLink && 
                   <>
-                    <Box sx={{ flexGrow: 0, display: { xs: 'none', md: 'flex' } }}>
+                    <Box sx={{ flexGrow: 0, display: { xs: 'none', md: 'none', lg: 'flex' } }}>
                       <Button
                         key="1"
                         sx={{ my: 2, color: 'white', display: 'block' }}
@@ -191,7 +191,7 @@ export const Header = memo(({
                         ログイン
                       </Button>
                     </Box>
-                    <Box sx={{ flexGrow: 0, display: { xs: 'none', md: 'flex' } }}>
+                    <Box sx={{ flexGrow: 0, display: { xs: 'none', md: 'none', lg: 'flex' } }}>
                       <Button
                         key="1"
                         sx={{ my: 2, color: 'white', display: 'block' }}
