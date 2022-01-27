@@ -9,7 +9,7 @@ import { BlueBaseLink } from '../shared_style.js';
 
 // SignUpSentenceWrapepr
 const SignUpSentenceWrapper = styled(DescriptionWrapper)`
-  margin-top: 15px;
+  margin-top: 3%;
 `;
 
 export const SignUpSentence = ({onClick}) => {
