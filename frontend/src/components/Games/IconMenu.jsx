@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { memo, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 // MUI
@@ -24,7 +24,7 @@ import { deleteUserSession } from '../../apis/login';
 // HTTP_STATUS_CODE
 import { HTTP_STATUS_CODE } from '../../constants';
 
-export const IconMenu = ({
+export const IconMenu = memo(({
   anchorElUser,
   handleOpenUserMenu,
   handleCloseUserMenu,
@@ -125,5 +125,4 @@ export const IconMenu = ({
       </Box>
     </>
   );
-};
-
+});

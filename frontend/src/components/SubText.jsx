@@ -2,6 +2,9 @@ import React, { memo } from 'react';
 import styled from 'styled-components';
 import { COLORS } from '../style_constants';
 
+// Responsive
+import { WIDTH } from '../style_constants.js';
+
 // 390pxはiphone12
 const SubTextWrapper = styled.div`
   width: 70%;
@@ -12,7 +15,7 @@ const SubTextWrapper = styled.div`
   color: ${(props) => props.color || COLORS.BLACK};
   margin: 0 auto;
   margin-top: 1%;
-  @media (max-width: 390px) {
+  @media (max-width: ${WIDTH.MOBILE}) {
     font-size: 1.1em;
     margin-top: 3%;  
   }

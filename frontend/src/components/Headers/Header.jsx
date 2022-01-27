@@ -28,6 +28,9 @@ import { ThemeProvider } from '@mui/material/styles';
 import theme from '../../theme/theme.js';
 import CssBaseline from '@mui/material/CssBaseline';
 
+// Responsive
+import { WIDTH } from '../../style_constants.js';
+
 // title
 const TitleWrapper = styled.div`
   font-family: Raleway;
@@ -39,7 +42,7 @@ const TitleWrapper = styled.div`
   text-stroke: 5px #030002;
   padding: 5px;
   position: relative;
-  @media (max-width: 390px) {
+  @media (max-width: ${WIDTH.MOBILE}) {
     font-size: 0.9em;
     -webkit-text-stroke: 4px #030002;
     text-stroke: 4px #030002;
@@ -89,7 +92,7 @@ export const Header = memo(({
     <>
       <ThemeProvider theme={theme}>
         <CssBaseline />
-        <AppBar position="fixed" color="green">
+        <AppBar position="fixed" color="green" sx={{zIndex: '1101'}}>
           <Container maxWidth="xl">
             <Toolbar disableGutters>
               <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'flex' } }}>
@@ -109,7 +112,7 @@ export const Header = memo(({
                   </HeaderTitleLink>
                 </Typography>
               </Box>
-              <Box sx={{ flexGrow: 0, display: { xs: 'flex', md: 'none' } }}>
+              <Box sx={{ flexGrow: 0, display: { xs: 'flex', md: 'flex', lg: 'none' } }}>
                 <IconButton
                   size="large"
                   aria-label="account of current user"
@@ -135,7 +138,7 @@ export const Header = memo(({
                   open={Boolean(anchorElNav)}
                   onClose={handleCloseNavMenu}
                   sx={{
-                    display: { xs: 'block', md: 'none' },
+                    display: { xs: 'block', md: 'block', lg: 'none' },
                   }}
                 >
                   <MenuItem 
@@ -170,7 +173,7 @@ export const Header = memo(({
                   </MenuItem>
                 </Menu>
               </Box>
-              <Box sx={{ flexGrow: 0, display: { xs: 'none', md: 'flex' } }}>
+              <Box sx={{ flexGrow: 0, display: { xs: 'none', md: 'none', lg: 'flex' } }}>
                 <Button
                   key="1"
                   sx={{ my: 2, color: 'white', display: 'block' }}
@@ -182,7 +185,7 @@ export const Header = memo(({
               {
                 sessionState === false && onClickLink && 
                   <>
-                    <Box sx={{ flexGrow: 0, display: { xs: 'none', md: 'flex' } }}>
+                    <Box sx={{ flexGrow: 0, display: { xs: 'none', md: 'none', lg: 'flex' } }}>
                       <Button
                         key="1"
                         sx={{ my: 2, color: 'white', display: 'block' }}
@@ -191,7 +194,7 @@ export const Header = memo(({
                         ログイン
                       </Button>
                     </Box>
-                    <Box sx={{ flexGrow: 0, display: { xs: 'none', md: 'flex' } }}>
+                    <Box sx={{ flexGrow: 0, display: { xs: 'none', md: 'none', lg: 'flex' } }}>
                       <Button
                         key="1"
                         sx={{ my: 2, color: 'white', display: 'block' }}
