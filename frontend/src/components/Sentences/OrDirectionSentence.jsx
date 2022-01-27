@@ -21,7 +21,7 @@ const OrDirectionSentenceWrapper = styled.div`
     width: 110px;
     margin-left: 25px;
   }
-  margin-bottom: 15px;
+  margin-bottom: 3%;
 `;
 
 export const OrDirectionSentence = () => {

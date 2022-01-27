@@ -50,30 +50,25 @@ import { UserContext } from "../../context/UserProvider.js";
 import { gitHubOAuth, googleOAuth } from '../../urls/index'; 
 
 const CustomDialogInnerWrapper = styled.div`
-  padding-top: 10px;
-  padding-right: 10px;
-  padding-left: 10px;
+  padding-top: 3%;
+  padding-right: 3%;
+  padding-left: 3%;
   background-color: ${COLORS.WHITE};
   text-align: center;
 `;
 
 const CustomDialogTitleImage = styled.img`
-  height: 50px;
-  width: 80px
+  width: 40%;
   object-fit: contain;
-  padding: 8px 23px;
+  padding: 2% 8%;
 `;
 
-const CustomDialogContent = styled(DialogContent)`
-  height: 500px;
-  width: 400px;
-`;
-
+// ここのwidthはpx指定しないとレイアウトが崩れるので、pxにした
 const CustomFilledInput = styled(FilledInput)`
   width: 400px;
   margin-bottom: ${({
     errors_box
-  }) => typeof errors_box === 'undefined' && '16px' };
+  }) => typeof errors_box === 'undefined' && '4%' };
 `;
 
 export const SignUpDialog = ({
@@ -207,11 +202,12 @@ export const SignUpDialog = ({
     <Dialog
       open={isOpen}
       onClose={onClose}
+      maxWidth='sm'
     >
       <CustomDialogInnerWrapper> 
         <CloseButton onClose={onClose} fontSize="small" /> 
         <CustomDialogTitleImage src={SignUpImage} alt="SignUp" />
-        <CustomDialogContent>
+        <DialogContent>
           <CreateAccountSentence />
           <form onSubmit={handleSubmit(onSubmit)}>
             <Controller 
@@ -325,7 +321,7 @@ export const SignUpDialog = ({
             type="GitHub"
           />
           <HaveAccountSentence onClick={onClick} />
-        </CustomDialogContent>
+        </DialogContent>
       </CustomDialogInnerWrapper>
     </Dialog>
   );

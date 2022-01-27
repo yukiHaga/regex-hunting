@@ -9,7 +9,9 @@ import { BlueBaseLink } from '../shared_style.js';
 
 const CreateAccountSentenceWrapper = styled(DescriptionWrapper)`
   text-align: center;
-  margin-bottom: 16px;
+  width: 80%;
+  margin 0 auto;
+  margin-bottom: 5%;
 `;
 
 const CreateAccountAgreeSentenceWrapper = styled(DescriptionWrapper)`
