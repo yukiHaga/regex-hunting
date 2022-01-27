@@ -4,7 +4,7 @@ import styled from 'styled-components';
 
 // Image
 import MainTitleImage from '../images/main_title.png';
-import BackGroundImage from '../images/background.png';
+import GroupBackGroundImage from '../images/group_background.png';
 import MainMonsterImage from '../images/advanced.png';
 import BattleSceneImage from '../images/battle_scene.png';
 import MyPageImage from '../images/my_page_image.png';
@@ -47,6 +47,9 @@ const MainWrapper = styled.div`
   text-align: center;
   position: relative;
   padding-top: 3%;
+  @media (max-width: 390px) {
+    padding-top: 20%;
+  }
 `;
 
 // メインタイトル画像
@@ -62,8 +65,8 @@ const MainTitleImageCover = styled.img`
   max-width: 100%;
   height: auto;
   @media (max-width: 390px) {
-    font-size: 0.9em;
-    margin-top: 17%;
+    margin-top: 30%;
+    width: 90%;
   }
 `;
 
@@ -81,6 +84,9 @@ const BackGroundImageCover = styled.img`
   margin-bottom: 0px;
   z-index: -4;
   max-width: 100%;
+  @media (max-width: 390px) {
+    object-fit: cover;
+  }
 `;
 
 // フィルター
@@ -109,6 +115,11 @@ const MainMonsterImageCover = styled.img`
   height: 90%;
   object-fit: contain;
   max-width: 100%
+  @media (max-width: 390px) {
+    width: 100%;
+    height: 100%;
+    object-fit: none;
+  }
 `;
 
 // セカンドのラッパー
@@ -259,10 +270,9 @@ export const LandingPages = () => {
         <SessionFlashMessage
           location={location}
         />
-        <BackGroundImageCover src={BackGroundImage} alt="main-image" />
+        <BackGroundImageCover src={GroupBackGroundImage} alt="main-image" />
         <MainTitleImageCover src={MainTitleImage} alt="main-title"/>
         <Filter />
-        <MainMonsterImageCover src={MainMonsterImage} alt="main-monster" />
         <SubText color={COLORS.SUB}>
           正規表現を学ぶ狩りに出よう
         </SubText>

@@ -12,11 +12,12 @@ const BoundDescriptionSentenceWrapper = styled(FakeLink)`
   font-weight: bold;
   font-size: 2.5em;
   color: ${COLORS.SUB};
-  @media (max-width: 390px) {
-    font-size: 1.1em;
-  }
   margin: 0 auto;
   padding-bottom: 1%;
+  @media (max-width: 390px) {
+    font-size: 1.1em;
+    padding-top: 36%;
+  }
 `;
 
 const bounceAnimation = keyframes`${bounce}`;
