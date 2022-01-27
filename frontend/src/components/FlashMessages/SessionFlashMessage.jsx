@@ -10,6 +10,7 @@ export const SessionFlashMessage = ({
 }) => {
 
   // displayが存在するか、user=moblieが存在するときにtrueになる
+  // use=mobileからtrueにさせるのは、useEffect実行時である
   const [open, setOpen] = useState(Boolean(location?.state?.display));
 
   const handleClose = () => {
