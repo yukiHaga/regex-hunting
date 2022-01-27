@@ -168,7 +168,7 @@ export const SignUpDialog = ({
       required: "メールアドレスを入力してください。", 
       pattern: {
         value: /^[A-Za-z0-9]{1}[A-Za-z0-9_.-]*@{1}[A-Za-z0-9_.-]{1,}.[A-Za-z0-9]{1,}$/,
-        message: "英数字, @, ドメインが含まれるメールアドレスを入力してください。"
+        message: "英数字, @, ドメインを含めて入力してください。"
       }
     },
     password: {
@@ -179,7 +179,7 @@ export const SignUpDialog = ({
       },
       pattern: {
         value: /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?\d)[!-~]+$/,
-        message: "大文字, 小文字, 数字が含まれるパスワードを入力してください。"
+        message: "大文字, 小文字, 数字を含めて入力してください。"
       }
     },
     passwordConfirmation: {
@@ -190,7 +190,7 @@ export const SignUpDialog = ({
       },
       pattern: {
         value: /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?\d)[!-~]+$/,
-        message: "大文字, 小文字, 数字が含まれるパスワードを入力してください。"
+        message: "大文字, 小文字, 数字を含めて入力してください。"
       },
       validate: {
         confirmPassword: (value) => value === password.current || "パスワードが一致しません。" 
@@ -225,12 +225,14 @@ export const SignUpDialog = ({
                     label="name"
                     errors_box={errors.NameBox}
                   />
+                  {
+                    errors.NameBox && <InputErrorSentence>
+                                        {errors.NameBox.message}
+                                      </InputErrorSentence>
+                  }
                 </FormControl>              
               )}
             />
-            {errors.NameBox && <InputErrorSentence>
-                                  {errors.NameBox.message}
-                                </InputErrorSentence>}
             <Controller 
               name="EmailBox"
               control={control}
@@ -246,12 +248,14 @@ export const SignUpDialog = ({
                     label="email"
                     errors_box={errors.EmailBox}
                   />
+                  {
+                    errors.EmailBox && <InputErrorSentence>
+                                         {errors.EmailBox.message}
+                                       </InputErrorSentence>
+                  }
                 </FormControl>              
               )}
             />
-            {errors.EmailBox && <InputErrorSentence>
-                                  {errors.EmailBox.message}
-                                </InputErrorSentence>}
             <Controller 
               name="PasswordBox"
               control={control}
@@ -267,12 +271,14 @@ export const SignUpDialog = ({
                     label="password"
                     errors_box={errors.PasswordBox}
                   />
+                  {
+                    errors.PasswordBox && <InputErrorSentence>
+                                            {errors.PasswordBox.message}
+                                          </InputErrorSentence>
+                  }
                 </FormControl>              
               )}
             />
-            {errors.PasswordBox && <InputErrorSentence>
-                                     {errors.PasswordBox.message}
-                                   </InputErrorSentence>}
             <Controller 
               name="PasswordConfirmationBox"
               control={control}
@@ -290,14 +296,15 @@ export const SignUpDialog = ({
                     label="password-confirmation"
                     errors_box={errors.PasswordConfirmationBox}
                   />
+                  {
+                    errors.PasswordConfirmationBox && <InputErrorSentence>
+                                                        {errors.PasswordConfirmationBox.message}
+                                                      </InputErrorSentence>
+                  }
                 </FormControl>              
               )}
             />
-            {errors.PasswordConfirmationBox && <InputErrorSentence>
-                                                 {errors.PasswordConfirmationBox.message}
-                                               </InputErrorSentence>}
             <SignUpButton disabled={!isValid} />
-
             {
               requestUserState.errors.title === 'Record Not Found' && 
                 <SubmitErrorSentence

@@ -4,9 +4,12 @@ import styled from 'styled-components';
 // Colors
 import { COLORS } from '../../style_constants.js';
 
-const DangerText = styled.p`
-  width: 100%;
+const DangerTextWrapper = styled.div`
   margin: 0 auto;
+`;
+
+const DangerText = styled.p`  
+  display: inline-block;
   text-align: left;
   margin-top: ${({
     errors_title
@@ -21,11 +24,13 @@ export const SubmitErrorSentence = ({
 }) => {
   return (
     <>
-      <DangerText
-        errors_title={errors_title}
-      >
-        {children}
-      </DangerText>
+      <DangerTextWrapper>
+        <DangerText
+          errors_title={errors_title}
+        >
+          {children}
+        </DangerText>
+      </DangerTextWrapper>
     </>
   );
 };
