@@ -2,7 +2,7 @@ import React, { Fragment, useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 // フラッシュメッセージ関係のコンポーネント;
-import Alert from '@material-ui/lab/Alert';
+import Alert from '@mui/material/Alert';
 import Snackbar from '@mui/material/Snackbar';
 
 export const SessionFlashMessage = ({
