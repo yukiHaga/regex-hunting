@@ -9,6 +9,18 @@ const theme = createTheme({
       main: COLORS.MAIN,
     },
   },
+  components: {
+    // Name of the component
+    MuiPaper: {
+      styleOverrides: {
+        // Name of the slot
+        root: {
+          // Some CSS
+          bgcolor: COLORS.MAIN
+        },
+      },
+    },
+  },
 });
 
 export default theme;

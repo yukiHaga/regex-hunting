@@ -92,7 +92,10 @@ export const Header = memo(({
     <>
       <ThemeProvider theme={theme}>
         <CssBaseline />
-        <AppBar position="fixed" color="green" sx={{zIndex: '1101'}}>
+        <AppBar 
+          position="fixed" 
+          color="green" 
+        >
           <Container maxWidth="xl">
             <Toolbar disableGutters>
               <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'flex' } }}>
