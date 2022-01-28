@@ -9,7 +9,8 @@ import { BaseLink } from '../shared_style.js';
 // Contextオブジェクト
 import { UserContext } from "../../context/UserProvider.js";
 
-import { ThemeProvider, styled } from '@mui/material/styles';
+import { ThemeProvider } from '@mui/material/styles';
+import { styled } from '@mui/styles';
 import CssBaseline from '@mui/material/CssBaseline';
 import theme from '../../theme/theme.js';
 
