@@ -1,17 +1,23 @@
 import React, { useState, useContext, memo } from 'react';
-import styled from 'styled-components';
 
 // アイコン付きメニュー
 import { IconMenu } from '../Games/IconMenu.jsx' 
-
-// Colors
-import { COLORS } from '../../style_constants.js';
 
 // BaseLink
 import { BaseLink } from '../shared_style.js';
  
 // Contextオブジェクト
 import { UserContext } from "../../context/UserProvider.js";
+
+import { ThemeProvider, styled } from '@mui/material/styles';
+import CssBaseline from '@mui/material/CssBaseline';
+import theme from '../../theme/theme.js';
+
+// Colors
+import { COLORS } from '../../style_constants.js';
+
+// ヘッダーをインポート
+import { HeaderTitle } from '../Sentences/HeaderTitle.jsx';
 
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
@@ -24,38 +30,12 @@ import Container from '@mui/material/Container';
 import Button from '@mui/material/Button';
 import MenuItem from '@mui/material/MenuItem';
 
-import { ThemeProvider } from '@mui/material/styles';
-import CssBaseline from '@mui/material/CssBaseline';
-import theme from '../../theme/theme.js';
-
-// Responsive
-import { WIDTH } from '../../style_constants.js';
-
-// title
-const TitleWrapper = styled.div`
-  font-family: Raleway;
-  font-style: italic;
-  font-weight: bold;
-  font-size: 1.4em;
-  color: ${COLORS.SUB};
-  -webkit-text-stroke: 5px #030002;
-  text-stroke: 5px #030002;
-  padding: 5px;
-  position: relative;
-  @media (max-width: ${WIDTH.MOBILE}) {
-    font-size: 0.9em;
-    -webkit-text-stroke: 4px #030002;
-    text-stroke: 4px #030002;
+// MuiPaper-rootの白を緑にするためにAppBarをカスタマイズする
+const CustomAppBar = styled(AppBar)({
+  '& .MuiPaper-root': {
+    backgroundColor: COLORS.MAIN
   }
-`;
-
-// fuchiue
-const Fuchiue = styled.span`
-  -webkit-text-stroke: 0;
-  position: absolute;
-`;
-
-const HeaderTitleLink = styled(BaseLink)``;
+});
 
 // LPページの場合、onClickLinkはモーダル管理のstateを更新する関数
 // ログインしている場合、onClickLinkは何もない。
@@ -92,7 +72,7 @@ export const Header = memo(({
     <>
       <ThemeProvider theme={theme}>
         <CssBaseline />
-        <AppBar 
+        <CustomAppBar 
           position="fixed" 
           color="green" 
         >
@@ -105,14 +85,7 @@ export const Header = memo(({
                   component="div"
                   sx={{ mr: 2, display: { xs: 'flex', md: 'flex' } }}
                 >
-                  <HeaderTitleLink to={`/`}>
-                    <TitleWrapper>
-                      <Fuchiue>
-                        Regex Hunting
-                      </Fuchiue>
-                      Regex Hunting
-                    </TitleWrapper>
-                  </HeaderTitleLink>
+                  <HeaderTitle />
                 </Typography>
               </Box>
               <Box sx={{ flexGrow: 0, display: { xs: 'flex', md: 'flex', lg: 'none' } }}>
@@ -218,7 +191,7 @@ export const Header = memo(({
               }
             </Toolbar>
           </Container>
-        </AppBar>
+        </CustomAppBar>
         <Toolbar />
       </ThemeProvider>
     </>
