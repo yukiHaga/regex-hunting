@@ -4,17 +4,11 @@ import { useLocation, useNavigate } from 'react-router-dom';
 
 // Presentational Components
 import { Header } from '../components/Headers/Header.jsx';
-import { FakeHeader } from '../components/Headers/FakeHeader.jsx';
 import { Footer } from '../components/Footers/Footer.jsx';
 import { SendEmailFlashMessage } from '../components/FlashMessages/SendEmailFlashMessage.jsx'; 
 
 // Colors
 import { COLORS } from '../style_constants.js';
-
-const FakeBlock = styled.div`
-  background-color: ${COLORS.SUB};
-  height: 56px;
-`;
 
 // メインのラッパー
 const MainWrapper = styled.div`
@@ -75,14 +69,6 @@ export const SendEmail = () => {
   return (
     <>
       <Header /> 
-      <FakeHeader />
-      <FakeBlock>
-        <SendEmailFlashMessage
-          location={location}
-          navigate={navigate}
-          url='/users/password/sent'
-        />
-      </FakeBlock>
       <MainWrapper>
         <SendEmailBoxWrapper>
           <TitleWrapper>

@@ -4,7 +4,6 @@ import styled from 'styled-components';
 
 // Presentational Components
 import { Header } from '../components/Headers/Header.jsx';
-import { FakeHeader } from '../components/Headers/FakeHeader.jsx';
 import { SessionFlashMessage } from '../components/FlashMessages/SessionFlashMessage.jsx';
 import { UserStatus } from '../components/Games/UserStatus.jsx';
 import { StudyHeatMap } from '../components/Games/StudyHeatMap.jsx';
@@ -290,7 +289,6 @@ export const MyPages = () => {
         :
           <>
             <Header /> 
-            <FakeHeader />
             <MainWrapper>
               <SessionFlashMessage
                 location={location}

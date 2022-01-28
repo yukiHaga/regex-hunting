@@ -7,7 +7,6 @@ import RealBackGroundImage from '../images/temporary_real_background_image.png';
 
 // Presentational Components
 import { Header } from '../components/Headers/Header.jsx';
-import { FakeHeader } from '../components/Headers/FakeHeader.jsx';
 import { HintBar } from '../components/Games/HintBar.jsx';
 import { ElementaryMonster } from '../components/Games/ElementaryMonster.jsx';
 import { IntermediateMonster } from '../components/Games/IntermediateMonster.jsx';
@@ -494,7 +493,6 @@ export const Games = () => {
         :
           <>
             <Header />
-            <FakeHeader />
             <MainContentWrapper>
               <BackGroundImageCover src={RealBackGroundImage} />
               <MainGameContentWrapper

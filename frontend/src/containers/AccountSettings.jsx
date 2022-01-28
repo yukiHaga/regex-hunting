@@ -4,7 +4,6 @@ import styled from 'styled-components';
 
 // Presentational Components
 import { Header } from '../components/Headers/Header.jsx';
-import { FakeHeader } from '../components/Headers/FakeHeader.jsx';
 import { Footer } from '../components/Footers/Footer.jsx';
 import { AccountSettingBox } from '../components/Games/AccountSettingBox.jsx';
 import { CircularMask } from '../components/loads/CircularMask.jsx';
@@ -23,11 +22,6 @@ import { HTTP_STATUS_CODE } from '../constants';
 
 // Colors
 import { COLORS } from '../style_constants.js';
-
-const FakeBlock = styled.div`
-  background-color: ${COLORS.SUB};
-  height: 56px;
-`;
 
 // メインのラッパー
 const MainWrapper = styled.div`
@@ -123,8 +117,6 @@ export const AccountSettings = () => {
         :
           <>
             <Header /> 
-            <FakeHeader />
-            <FakeBlock />
             <MainWrapper>
               <AccountSettingBox 
                 requestUserState={requestUserState}

@@ -5,7 +5,6 @@ import { useNavigate } from 'react-router-dom';
 
 // Presentational Components
 import { Header } from '../components/Headers/Header.jsx';
-import { FakeHeader } from '../components/Headers/FakeHeader.jsx';
 import { Footer } from '../components/Footers/Footer.jsx';
 import { PasswordResetRequestButton } from '../components/Buttons/PasswordResetRequestButton.jsx';
 
@@ -28,11 +27,6 @@ import { postPasswordResetRequest } from '../apis/passwordResetRequest.js';
 
 // HTTP_STATUS_CODE
 import { HTTP_STATUS_CODE } from '../constants';
-
-const FakeBlock = styled.div`
-  background-color: ${COLORS.SUB};
-  height: 56px;
-`;
 
 // メインのラッパー
 const MainWrapper = styled.div`
@@ -136,8 +130,6 @@ export const PasswordResets = () => {
   return (
     <>
       <Header /> 
-      <FakeHeader />
-      <FakeBlock />
       <MainWrapper>
         <PasswordResetsBoxWrapper>
           <TitleWrapper>

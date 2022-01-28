@@ -13,7 +13,6 @@ import IntermediateGameContentImage from '../images/intermediate_game_content.pn
 
 // Presentational Components
 import { Header } from '../components/Headers/Header.jsx';
-import { FakeHeader } from '../components/Headers/FakeHeader.jsx';
 import { SubText } from '../components/SubText.jsx';
 import { StartButton } from '../components/Buttons/StartButton.jsx'
 import { Footer } from '../components/Footers/Footer.jsx';
@@ -246,7 +245,6 @@ export const LandingPages = () => {
           modalType: modalType
         })}
       />
-      <FakeHeader />
       <MainWrapper>
         <SessionFlashMessage
           location={location}

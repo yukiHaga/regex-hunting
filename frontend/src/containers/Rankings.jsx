@@ -3,7 +3,6 @@ import styled from 'styled-components';
 
 // Presentational Components
 import { Header } from '../components/Headers/Header.jsx';
-import { FakeHeader } from '../components/Headers/FakeHeader.jsx';
 import { Footer } from '../components/Footers/Footer.jsx';
 import { RankingBox } from '../components/Games/RankingBox';
 import { LoginDialog } from '../components/Dialogs/LoginDialog.jsx';
@@ -140,7 +139,6 @@ export const Rankings = () => {
           modalType: modalType
         })}
       /> 
-      <FakeHeader />
       <MainWrapper>
         <RankingBox
           current_top_three_array={rankingState.current_top_three_array}

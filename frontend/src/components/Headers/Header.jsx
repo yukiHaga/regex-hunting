@@ -64,6 +64,7 @@ export const Header = memo(({
   onClickMobile
 }) => {
 
+  console.log(theme.mixins.toolbar);
   // useContext
   const {
     requestUserState: { sessionState, userState }, 
@@ -216,6 +217,7 @@ export const Header = memo(({
             </Toolbar>
           </Container>
         </AppBar>
+        <Toolbar />
       </ThemeProvider>
     </>
   );

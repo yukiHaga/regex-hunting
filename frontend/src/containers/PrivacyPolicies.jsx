@@ -3,16 +3,10 @@ import styled from 'styled-components';
 
 // Presentational Components
 import { Header } from '../components/Headers/Header.jsx';
-import { FakeHeader } from '../components/Headers/FakeHeader.jsx';
 import { Footer } from '../components/Footers/Footer.jsx';
 
 // Colors
 import { COLORS } from '../style_constants.js';
-
-const FakeBlock = styled.div`
-  background-color: ${COLORS.SUB};
-  height: 56px;
-`;
 
 // メインのラッパー
 const MainWrapper = styled.div`
@@ -101,8 +95,6 @@ export const PrivacyPolicies = () => {
   return (
     <>
       <Header /> 
-      <FakeHeader />
-      <FakeBlock />
       <MainWrapper>
         <TitleWrapper>
           プライバシーポリシー
