@@ -34,7 +34,8 @@ import MenuItem from '@mui/material/MenuItem';
 const CustomAppBar = styled(AppBar)({
   '& .MuiPaper-root': {
     backgroundColor: COLORS.MAIN
-  }
+  },
+  bacgroundColor: COLORS.MAIN
 });
 
 // LPページの場合、onClickLinkはモーダル管理のstateを更新する関数
