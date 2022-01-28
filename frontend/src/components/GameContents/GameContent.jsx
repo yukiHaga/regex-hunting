@@ -16,7 +16,6 @@ const GameContentWrapper = styled.div`
 const GameContentTitleWrapper = styled.div`
   height: 9%;
   width: 100%;
-  font-family: YuGothic;
   font-style: normal;
   font-weight: 500;
   font-size: 1.5em;
@@ -69,7 +68,6 @@ const GameContentSentenceWrapper = styled.div`
   width: 290px;
   display: inline-block;
   text-align: left;
-  font-family: YuGothic;
   font-style: normal;
   font-weight: 500;
   font-size: 1.1em;

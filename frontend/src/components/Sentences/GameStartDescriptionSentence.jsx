@@ -15,7 +15,6 @@ const GameStartDescriptionSentenceWrapper = styled(DescriptionWrapper)`
   display: inline-block;
   text-align: left;
   font-size: 2.3em;
-  font-family: YuGothic;
   font-style: normal;
   font-weight: bold;
   @media (max-width: ${WIDTH.MOBILE}) {

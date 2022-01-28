@@ -264,7 +264,7 @@ export const LandingPages = () => {
       </MainWrapper>
       <SecondWrapper id="what'sRegex">
         <SubText>
-          What's Regex Hunting ?
+          What's Regex Hunting？
         </SubText>
         <GameDescriptionSentence>
           Regex Huntingは、凶悪なモンスターを倒しながら<br/>

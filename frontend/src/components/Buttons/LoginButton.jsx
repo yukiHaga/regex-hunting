@@ -14,7 +14,6 @@ const LoginButtonWrapper = styled(BlueRoundButton)`
 
 const LoginButtonTextWrapper = styled.div`
   color: white;
-  font-family: YuGothic;
   font-style: normal;
   font-size: 1.5em;
   font-weight: 500;

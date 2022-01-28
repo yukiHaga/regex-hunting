@@ -15,7 +15,6 @@ const SignUpButtonWrapper = styled(BlueRoundButton)`
 // ここのwidthをpxから変えるとレイアウトが崩れるので、pxにした
 const SignUpButtonTextWrapper = styled.div`
   color: white;
-  font-family: YuGothic;
   font-style: normal;
   font-size: 1.5em;
   font-weight: 500;

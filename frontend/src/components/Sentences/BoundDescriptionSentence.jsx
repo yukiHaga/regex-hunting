@@ -12,7 +12,6 @@ import { WIDTH } from '../../style_constants.js';
 
 const BoundDescriptionSentenceWrapper = styled(FakeLink)`
   width: 70%;
-  font-family: YuGothic;
   font-style: normal;
   font-weight: bold;
   font-size: 2.5em;

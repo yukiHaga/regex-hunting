@@ -26,7 +26,6 @@ const GameStartButtonTextWrapper = styled.div`
   background-color: ${COLORS.BLUE};
   text-align: center;
   font-size: 1.0em;
-  font-family: YuGothic;
   font-style: normal;
   font-weight: 500;
   padding: 3%;
