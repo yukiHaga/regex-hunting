@@ -45,6 +45,7 @@ import { makeCorrectPercentGraphData } from '../functions/makeCorrectPercentGrap
 const MainWrapper = styled.div`
   background-color: ${COLORS.SUB};
   text-align: center;
+  padding-top: 4.5%;
   position: relative;
 `;
 
@@ -58,24 +59,24 @@ const MainFirstWrapper = styled.div`
 const MainSecondWrapper = styled.div`
   display: flex;
   justify-content: space-evenly;
-  margin-top: 40px;
+  padding-top: 3%;
 `;
 
 // セカンドラッパー
 const SecondWrapper = styled.div`
   background-color: ${COLORS.SUB};
-  padding-top: 80px;
+  padding-top: 6%;
 `;
 
 // サードラッパー
 const ThirdWrapper = styled.div`
   background-color: ${COLORS.SUB};
-  padding-top: 80px;
-  padding-bottom: 40px;
+  padding-top: 4%;
+  padding-bottom: 2%;
 `;
 
 const StudyHeatMapWrapper = styled.div`
-  width: 400px;
+  width: 28%;
   background-color: ${COLORS.SUB};
 `;
 
@@ -85,7 +86,7 @@ const CorrectPercentGraphWrapper = styled.div`
 `;
 
 const ChangeGraphBoxWrapper = styled.div`
-  width: 400px;
+  width: 28%;
   border-radius: 3px;
   background-color: ${COLORS.WHITE};
   box-shadow: 0 0px 20px rgba(0,0,0,0.2);
@@ -96,34 +97,33 @@ const ChangeGraphBoxWrapper = styled.div`
 // クエスト一覧というセンテンスのラッパー
 const QuestSentenceWrapper = styled(DescriptionWrapper)`
   font-weight: bold;
-  font-size: 24px;
-  line-height: 40px;
+  font-size: 1.5em;
   display: inline-block;
   text-align: left;
-  padding: 0 110px;
 `;
 
 // マイページのゲームコンテンツのラッパー
 const MyPageGameContentsWrapper = styled.div`
-  padding-top: 20px;
+  padding-top: 1%;
   text-align: center;
   display: flex;
   justify-content: space-evenly;
+  frex-direction: row;
+  flex-wrap: wrap;
 `;
 
 // 称号一覧というセンテンスのラッパー
 const TitleListSentenceWrapper = styled(DescriptionWrapper)`
+  padding-top: 1%;
   font-weight: bold;
-  font-size: 24px;
-  line-height: 40px;
+  font-size: 1.5em;
   display: inline-block;
   text-align: left;
-  padding: 0 110px;
 `;
 
 // 称号一覧のカードを包括しているラッパー
 const TitleListWrapper = styled.div`
-  padding-top: 5px;
+  padding-top: 2%;
   text-align: center;
   display: flex;
   flex-wrap: wrap;
