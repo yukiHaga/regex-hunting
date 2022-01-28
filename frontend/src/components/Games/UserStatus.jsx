@@ -16,6 +16,9 @@ import DefaultAvatarImage from '../../images/default_avatar.png';
 // ステータスのラッパー
 const StatusWrapper = styled.div`
   width: 49%;
+  height: 70%;
+  padding-top: 2%;
+  padding-bottom: 2%;
   border-radius: 3px;
   background-color: ${COLORS.WHITE};
   box-shadow: 0 0px 20px rgba(0,0,0,0.2);
