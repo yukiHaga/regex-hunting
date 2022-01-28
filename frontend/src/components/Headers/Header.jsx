@@ -25,8 +25,8 @@ import Button from '@mui/material/Button';
 import MenuItem from '@mui/material/MenuItem';
 
 import { ThemeProvider } from '@mui/material/styles';
-import theme from '../../theme/theme.js';
 import CssBaseline from '@mui/material/CssBaseline';
+import theme from '../../theme/theme.js';
 
 // Responsive
 import { WIDTH } from '../../style_constants.js';
@@ -216,6 +216,7 @@ export const Header = memo(({
             </Toolbar>
           </Container>
         </AppBar>
+        <Toolbar />
       </ThemeProvider>
     </>
   );
