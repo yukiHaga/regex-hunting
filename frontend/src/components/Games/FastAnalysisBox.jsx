@@ -1,4 +1,4 @@
-import React, { memo } from 'react';
+import React, { memo, useMemo } from 'react';
 import styled from 'styled-components';
 
 import { 
@@ -11,10 +11,11 @@ import 'react-circular-progressbar/dist/styles.css';
 // Colors
 import { COLORS } from '../../style_constants.js';
 
-// デフォルトのアバター画像
-import DefaultAvatarImage from '../../images/default_avatar.png';
+// クリアタイムを取得する関数
+// マイページで使う場合、第1引数は0を指定する
+import { getClearTime } from '../../functions/getClearTime.js';
 
-const TimeAnalysisBoxWrapper = styled.div`
+const FastAnalysisBoxWrapper = styled.div`
   width: 20%;
   height: 30%;
   border-radius: 3px;
@@ -22,14 +23,10 @@ const TimeAnalysisBoxWrapper = styled.div`
   padding-bottom: 0%;
 `;
 
-const ContentBackGroundWrapper = styled.div`
-  background-image: url(${DefaultAvatarImage});
-`;
-
 const ContentTitleWrapper = styled.div`
- font-size: 1.5em;
- color: ${COLORS.BLACK};
- letter-spacing: 0.04em;
+  font-size: 1.5em;
+  color: ${COLORS.BLACK};
+  letter-spacing: 0.04em;
 `;
 
 const ContentPercentWrapper = styled.div`
@@ -38,13 +35,16 @@ const ContentPercentWrapper = styled.div`
 `;
 
 export const FastAnalysisBox = memo(({
-  content_title,
   minutes
 }) => {
 
+  // 今月の最速タイムを出力する処理 
+  // minutesに任意の難易度の最速タイムが入っている
+  const format_fastest_time =  useMemo(() => getClearTime(0, minutes).slice(3), [minutes]);
+
   return (
     <>
-      <TimeAnalysisBoxWrapper>
+      <FastAnalysisBoxWrapper>
         <CircularProgressbarWithChildren 
           value={60} 
           strokeWidth={2}
@@ -69,16 +69,14 @@ export const FastAnalysisBox = memo(({
           })}
           maxValue={60}
         >
-          <ContentBackGroundWrapper>
-            <ContentTitleWrapper>
-              {content_title}
-            </ContentTitleWrapper>
-            <ContentPercentWrapper>
-              {minutes}
-            </ContentPercentWrapper>
-          </ContentBackGroundWrapper>
+          <ContentTitleWrapper>
+            最速タイム
+          </ContentTitleWrapper>
+          <ContentPercentWrapper>
+            {minutes ? format_fastest_time : "なし"}
+          </ContentPercentWrapper>
         </CircularProgressbarWithChildren>
-      </TimeAnalysisBoxWrapper>
+      </FastAnalysisBoxWrapper>
     </>
   );
 });

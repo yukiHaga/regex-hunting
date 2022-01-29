@@ -35,7 +35,6 @@ const CustomSpan = styled.span`
 `;
 
 export const LearningAnalysisBox = memo(({
-  content_title,
   percentage
 }) => {
 
@@ -78,7 +77,7 @@ export const LearningAnalysisBox = memo(({
           maxValue={10}
         >
           <ContentTitleWrapper>
-            {content_title}
+            正解数
           </ContentTitleWrapper>
           <ContentPercentWrapper>
             {percentage}

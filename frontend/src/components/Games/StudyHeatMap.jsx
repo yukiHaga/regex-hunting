@@ -12,9 +12,6 @@ import ReactTooltip from 'react-tooltip';
 import { makeThisMonthObj } from '../../functions/makeThisMonthObj.js';
 import { addCountToMonthArray } from '../../functions/addCountToMonthArray.js';
 
-// DescriptionWrapper
-import { DescriptionWrapper } from '../../components/shared_style.js';
-
 const InnerStudyHeatMapWrapper = styled.div`
   width: 300px;
   margin: 0 auto;

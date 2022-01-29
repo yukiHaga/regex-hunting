@@ -35,7 +35,6 @@ const CustomSpan = styled.span`
 `;
 
 export const TimeAnalysisBox = memo(({
-  content_title,
   minutes
 }) => {
 
@@ -78,7 +77,7 @@ export const TimeAnalysisBox = memo(({
           maxValue={60}
         >
           <ContentTitleWrapper>
-            {content_title}
+            プレイ時間
           </ContentTitleWrapper>
           <ContentPercentWrapper>
             {minutes}

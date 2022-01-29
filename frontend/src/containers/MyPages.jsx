@@ -7,8 +7,6 @@ import { Header } from '../components/Headers/Header.jsx';
 import { SessionFlashMessage } from '../components/FlashMessages/SessionFlashMessage.jsx';
 import { UserStatus } from '../components/Games/UserStatus.jsx';
 import { StudyHeatMap } from '../components/Games/StudyHeatMap.jsx';
-import { CorrectPercentGraph } from '../components/Games/CorrectPercentGraph.jsx';
-import { ChangeGraphBox } from '../components/Games/ChangeGraphBox.jsx';
 import { DescriptionWrapper } from '../components/shared_style.js';
 import { GameContent } from '../components/GameContents/GameContent.jsx';
 import { TitleCard } from '../components/Games/TitleCard.jsx';
@@ -182,6 +180,7 @@ export const MyPages = () => {
     intermediate_graph_data: {},
     advanced_graph_data: {},
     real_graph_data: {},
+    real_fastest_time: 0,
     difficulty_title: "",
     isOpenDialog: false,
     name: "",
@@ -270,6 +269,7 @@ export const MyPages = () => {
           intermediate_graph_data: intermediate_graph_data,
           advanced_graph_data: advanced_graph_data,
           real_graph_data: elementary_graph_data,
+          real_fastest_time: data.ele_fastest_time,
           difficulty_title: "初級編"
         })); 
       }).catch((e) => {
@@ -338,16 +338,13 @@ export const MyPages = () => {
                 </PlaySentenceWrapper>
                 <MainSecondGraphWrapper>
                   <TimeAnalysisBox
-                    content_title="プレイ時間"
                     minutes={30} 
                   />
                   <LearningAnalysisBox 
-                    content_title="正解数"
                     percentage={10} 
                   />
                   <FastAnalysisBox
-                    content_title="最速タイム"
-                    minutes={30} 
+                    minutes={myPageState.real_fastest_time} 
                   />
                 </MainSecondGraphWrapper>
                 <QuestSentenceWrapper>
