@@ -24,6 +24,7 @@ import { RankingDescriptionSentence } from '../components/Sentences/RankingDescr
 import { GameStartDescriptionSentence } from '../components/Sentences/GameStartDescriptionSentence.jsx';
 import { GameContent } from '../components/GameContents/GameContent.jsx';
 import { BoundDescriptionSentence } from '../components/Sentences/BoundDescriptionSentence.jsx';
+import { SubTitleSentence } from '../components/Sentences/SubTitleSentence.jsx';
 
 // Contextオブジェクト
 import { UserContext } from "../context/UserProvider.js";
@@ -262,9 +263,9 @@ export const LandingPages = () => {
         <BackGroundImageCover src={GroupBackGroundImage} alt="main-image" />
         <MainTitleImageCover src={MainTitleImage} alt="main-title"/>
         <Filter />
-        <SubText color={COLORS.SUB}>
+        <SubTitleSentence color={COLORS.SUB}>
           正規表現を学ぶ狩りに出よう
-        </SubText>
+        </SubTitleSentence>
         <Scroll to="gameContent" smooth={true}>
           <StartButton />
         </Scroll>
