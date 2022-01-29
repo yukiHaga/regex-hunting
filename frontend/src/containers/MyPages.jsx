@@ -58,16 +58,32 @@ const MainFirstWrapper = styled.div`
   justify-content: space-evenly;
 `;
 
+// 今月のプレイ状況というセンテンスのラッパー
+const PlaySentenceWrapper = styled(DescriptionWrapper)`
+  padding-top: 3%;
+  font-weight: bold;
+  font-size: 1.5em;
+  text-align: left;
+`;
+
 // Mainのsecondラッパー
 const MainSecondWrapper = styled.div`
-  display: flex;
-  justify-content: space-evenly;
-  padding-top: 3%;
-  padding-bottom: 2%;
-  background-color: ${COLORS.WHITE};
+  padding-bottom: 0.5%;
+  margin-top: 1.5%;
+  margin-bottom: 1%;
   width: 85%;
   margin: 0 auto;
-  margin-top: 3.5%;
+`;
+
+// Mainのsecondのグラフラッパー
+const MainSecondGraphWrapper = styled.div`
+  display: flex;
+  justify-content: space-evenly;
+  padding-bottom: 1%;
+  background-color: ${COLORS.WHITE};
+  width: 100%;
+  margin: 0 auto;
+  margin-top: 1.5%;
   box-shadow: 0 0px 20px rgba(0,0,0,0.2);
   margin-bottom: 2%;
   border-radius: 3px;
@@ -76,13 +92,13 @@ const MainSecondWrapper = styled.div`
 // セカンドラッパー
 const SecondWrapper = styled.div`
   background-color: ${COLORS.SUB};
-  padding-top: 4%;
+  width: 94%;
+  margin: 0 auto;
 `;
 
 // サードラッパー
 const ThirdWrapper = styled.div`
   background-color: ${COLORS.SUB};
-  padding-top: 4%;
   padding-bottom: 2%;
 `;
 
@@ -91,31 +107,24 @@ const StudyHeatMapWrapper = styled.div`
   background-color: ${COLORS.SUB};
 `;
 
-const CorrectPercentGraphWrapper = styled.div`
-  background-color: ${COLORS.WHITE};
-  box-shadow: 0 0px 20px rgba(0,0,0,0.2);
-`;
-
-const ChangeGraphBoxWrapper = styled.div`
-  width: 28%;
-  border-radius: 3px;
-  background-color: ${COLORS.WHITE};
-  box-shadow: 0 0px 20px rgba(0,0,0,0.2);
-  display: flex;
-  align-items: center;
+// 学習カレンダーというセンテンスのラッパー
+const StudyHeatMapSentenceWrapper = styled(DescriptionWrapper)`
+  font-weight: bold;
+  font-size: 1.5em;
+  text-align: left;
+  padding-left: 13%;
 `;
 
 // クエスト一覧というセンテンスのラッパー
 const QuestSentenceWrapper = styled(DescriptionWrapper)`
+  padding-top: 4%;
   font-weight: bold;
   font-size: 1.5em;
-  display: inline-block;
   text-align: left;
 `;
 
 // マイページのゲームコンテンツのラッパー
 const MyPageGameContentsWrapper = styled.div`
-  padding-top: 1%;
   text-align: center;
   display: flex;
   justify-content: space-evenly;
@@ -315,29 +324,37 @@ export const MyPages = () => {
                   image={user.image}
                 />
                 <StudyHeatMapWrapper>
+                  <StudyHeatMapSentenceWrapper>
+                    学習カレンダー
+                  </StudyHeatMapSentenceWrapper>
                   <StudyHeatMap 
                     game_frequencies_per_day={myPageState.game_frequencies_per_day}
                   />
                 </StudyHeatMapWrapper>
               </MainFirstWrapper>
               <MainSecondWrapper>
-                <TimeAnalysisBox
-                  content_title="学習時間"
-                  minutes={30} 
-                />
-                <LearningAnalysisBox 
-                  content_title="正答率"
-                  percentage={66} 
-                />
-                <FastAnalysisBox
-                  content_title="最速タイム"
-                  minutes={30} 
-                />
-              </MainSecondWrapper>
-              <SecondWrapper>
+                <PlaySentenceWrapper>
+                  今月のプレイ状況
+                </PlaySentenceWrapper>
+                <MainSecondGraphWrapper>
+                  <TimeAnalysisBox
+                    content_title="プレイ時間"
+                    minutes={30} 
+                  />
+                  <LearningAnalysisBox 
+                    content_title="正解数"
+                    percentage={10} 
+                  />
+                  <FastAnalysisBox
+                    content_title="最速タイム"
+                    minutes={30} 
+                  />
+                </MainSecondGraphWrapper>
                 <QuestSentenceWrapper>
                   クエスト一覧
                 </QuestSentenceWrapper>
+              </MainSecondWrapper>
+              <SecondWrapper>
                 <MyPageGameContentsWrapper> 
                   <GameContent 
                     difficulty='elementary' 

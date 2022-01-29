@@ -15,7 +15,7 @@ import { COLORS } from '../../style_constants.js';
 import DefaultAvatarImage from '../../images/default_avatar.png';
 
 const TimeAnalysisBoxWrapper = styled.div`
-  width: 22%;
+  width: 20%;
   height: 30%;
   border-radius: 3px;
   padding: 2%;

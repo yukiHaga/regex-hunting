@@ -12,7 +12,7 @@ import 'react-circular-progressbar/dist/styles.css';
 import { COLORS } from '../../style_constants.js';
 
 const TimeAnalysisBoxWrapper = styled.div`
-  width: 22%;
+  width: 20%;
   height: 30%;
   border-radius: 3px;
   padding: 2%;

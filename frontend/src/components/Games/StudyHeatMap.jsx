@@ -20,14 +20,6 @@ const InnerStudyHeatMapWrapper = styled.div`
   margin: 0 auto;
 `;
 
-const StudyHeatMapSentenceWrapper = styled(DescriptionWrapper)`
-  font-weight: bold;
-  font-size: 24px;
-  line-height: 40px;
-  display: inline-block;
-  text-align: left;
-`;
-
 export const StudyHeatMap = memo(({
   game_frequencies_per_day,
 }) => {
@@ -95,9 +87,6 @@ export const StudyHeatMap = memo(({
   return (
     <>
       <InnerStudyHeatMapWrapper>
-        <StudyHeatMapSentenceWrapper>
-          学習カレンダー
-        </StudyHeatMapSentenceWrapper>
         <CalendarHeatmap
           startDate={prev_month_end_day}
           endDate={this_month_end_day}

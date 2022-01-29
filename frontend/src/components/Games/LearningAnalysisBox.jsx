@@ -12,7 +12,7 @@ import 'react-circular-progressbar/dist/styles.css';
 import { COLORS } from '../../style_constants.js';
 
 const LearningAnalysisBoxWrapper = styled.div`
-  width: 22%;
+  width: 20%;
   height: 30%;
   border-radius: 3px;
   padding: 2%;
@@ -75,6 +75,7 @@ export const LearningAnalysisBox = memo(({
             trailColor: '#d6d6d6',
             backgroundColor: '#3e98c7',
           })}
+          maxValue={10}
         >
           <ContentTitleWrapper>
             {content_title}
@@ -82,7 +83,7 @@ export const LearningAnalysisBox = memo(({
           <ContentPercentWrapper>
             {percentage}
             <CustomSpan>
-              %
+              問
             </CustomSpan>
           </ContentPercentWrapper>
         </CircularProgressbarWithChildren>
