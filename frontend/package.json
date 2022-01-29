@@ -18,6 +18,7 @@
     "react-animations": "^1.0.0",
     "react-calendar-heatmap": "^1.8.1",
     "react-chartjs-2": "^4.0.0",
+    "react-circular-progressbar": "^2.0.4",
     "react-dom": "^17.0.2",
     "react-hook-form": "^7.21.0",
     "react-id-swiper": "^4.0.0",
