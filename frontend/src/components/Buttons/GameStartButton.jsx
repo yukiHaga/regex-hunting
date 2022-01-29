@@ -9,6 +9,7 @@ import { COLORS } from '../../style_constants.js';
 // Responsive
 import { WIDTH } from '../../style_constants.js';
 
+// ここのwidthはpx指定しないとレスポンシブ時にレイアウトが崩れる
 const GameStartButtonWrapper = styled(BaseLink)`
   border-style: none;
   border-radius: 3px;
