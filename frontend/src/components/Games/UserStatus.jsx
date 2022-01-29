@@ -30,7 +30,6 @@ const CustomTable = styled.table`
   width: 60%;
   border-collapse: collapse;
   color: ${COLORS.BLACK};
-  font-family: YuGothic;
   font-weight: normal;
   font-size: 1.1em;
   border: none;
@@ -45,12 +44,15 @@ const CustomTd = styled.td`
 `;
 
 const NameTd = styled(CustomTd)`
-  font-family: YuGothic;
   font-style: normal;
   font-weight: bold;
   font-size: 2.0em;
   text-align: left;
   color: ${COLORS.BLACK};
+  width: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 `;
 
 const MetaTd = styled(CustomTd)`
