@@ -117,7 +117,7 @@ const SecondBattleSceneImageCover = styled.img`
   margin-top: 4%;
   margin-bottom: 2%;
   max-width: 100%;
-  @media (min-width: 1000px) {
+  @media (min-width: ${WIDTH.PC}) {
     width: 50%;
     margin-bottom: 0%;
   }
@@ -138,7 +138,7 @@ const ThirdMyPageImageCover = styled.img`
   margin-top: 4%;
   margin-bottom: 4%;
   max-width: 100%;
-  @media (min-width: 1000px) {
+  @media (min-width: ${WIDTH.PC}) {
     width: 50%;
   }
 `;
@@ -158,7 +158,7 @@ const FourthRaknkingImageCover = styled.img`
   margin-top: 4%;
   margin-bottom: 4%;
   max-width: 100%;
-  @media (min-width: 1000px) {
+  @media (min-width: ${WIDTH.PC}) {
     width: 50%;
   }
 `;

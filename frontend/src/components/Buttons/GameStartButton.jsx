@@ -40,7 +40,7 @@ export const GameStartButton = ({difficulty}) => {
   // タブレットでもゲームして欲しくないので、1000pxにした
   // デバイス幅が640px以下なら、window.matchMedia('(max-device-width: 640px)').matchesがtrueになる
   const url = useMemo(() => {
-    if (window.matchMedia('(max-device-width: 1000px)').matches) {
+    if (window.matchMedia(`(max-device-width: ${WIDTH.PC})`).matches) {
       return '/?user=mobile'; 
     } else {
       return `/games/${difficulty}/start`; 
