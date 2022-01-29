@@ -77,7 +77,7 @@ const MainSecondWrapper = styled.div`
 const MainSecondGraphWrapper = styled.div`
   display: flex;
   justify-content: space-evenly;
-  padding-bottom: 1%;
+  padding-bottom: 1.8%;
   background-color: ${COLORS.WHITE};
   width: 100%;
   margin: 0 auto;
