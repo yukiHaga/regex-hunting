@@ -17,6 +17,7 @@ import { ReleaseConditionDialog } from '../components/Dialogs/ReleaseConditionDi
 import { CircularMask } from '../components/loads/CircularMask.jsx';
 import { LearningAnalysisBox } from '../components/Games/LearningAnalysisBox.jsx';
 import { TimeAnalysisBox } from '../components/Games/TimeAnalysisBox.jsx';
+import { FastAnalysisBox } from '../components/Games/FastAnalysisBox.jsx';
  
 // Images
 import ElementaryGameContentImage from '../images/elementary_game_content.png';
@@ -62,12 +63,20 @@ const MainSecondWrapper = styled.div`
   display: flex;
   justify-content: space-evenly;
   padding-top: 3%;
+  padding-bottom: 2%;
+  background-color: ${COLORS.WHITE};
+  width: 85%;
+  margin: 0 auto;
+  margin-top: 3.5%;
+  box-shadow: 0 0px 20px rgba(0,0,0,0.2);
+  margin-bottom: 2%;
+  border-radius: 3px;
 `;
 
 // セカンドラッパー
 const SecondWrapper = styled.div`
   background-color: ${COLORS.SUB};
-  padding-top: 6%;
+  padding-top: 4%;
 `;
 
 // サードラッパー
@@ -319,6 +328,10 @@ export const MyPages = () => {
                 <LearningAnalysisBox 
                   content_title="正答率"
                   percentage={66} 
+                />
+                <FastAnalysisBox
+                  content_title="最速タイム"
+                  minutes={30} 
                 />
               </MainSecondWrapper>
               <SecondWrapper>

@@ -1,4 +1,4 @@
-import React, { useState, useEffect, memo } from 'react';
+import React, { memo } from 'react';
 import styled from 'styled-components';
 
 import { 
@@ -11,12 +11,19 @@ import 'react-circular-progressbar/dist/styles.css';
 // Colors
 import { COLORS } from '../../style_constants.js';
 
-const LearningAnalysisBoxWrapper = styled.div`
+// デフォルトのアバター画像
+import DefaultAvatarImage from '../../images/default_avatar.png';
+
+const TimeAnalysisBoxWrapper = styled.div`
   width: 22%;
   height: 30%;
   border-radius: 3px;
   padding: 2%;
   padding-bottom: 0%;
+`;
+
+const ContentBackGroundWrapper = styled.div`
+  background-image: url(${DefaultAvatarImage});
 `;
 
 const ContentTitleWrapper = styled.div`
@@ -30,32 +37,17 @@ const ContentPercentWrapper = styled.div`
   color: ${COLORS.MAIN};
 `;
 
-const CustomSpan = styled.span`
- font-size: 0.6em;
-`;
-
-export const LearningAnalysisBox = memo(({
+export const FastAnalysisBox = memo(({
   content_title,
-  percentage
+  minutes
 }) => {
-
-  const [percentState, setPercentState] = useState(0);
-
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      setPercentState(percentage);
-    }, 400);
-    return () => clearTimeout(timer);
-  }, [
-    percentage
-  ])
 
   return (
     <>
-      <LearningAnalysisBoxWrapper>
+      <TimeAnalysisBoxWrapper>
         <CircularProgressbarWithChildren 
-          value={percentState} 
-          strokeWidth={4}
+          value={60} 
+          strokeWidth={2}
           styles={buildStyles({
             // Rotation of path and trail, in number of turns (0-1)
             rotation: 0,
@@ -70,23 +62,23 @@ export const LearningAnalysisBox = memo(({
             // pathTransition: 'none',
 
             // Colors
-            pathColor: `${COLORS.MAIN}`,
+            pathColor: `${COLORS.LIGHT_BLACK}`,
             textColor: `${COLORS.MAIN}`,
             trailColor: '#d6d6d6',
             backgroundColor: '#3e98c7',
           })}
+          maxValue={60}
         >
-          <ContentTitleWrapper>
-            {content_title}
-          </ContentTitleWrapper>
-          <ContentPercentWrapper>
-            {percentage}
-            <CustomSpan>
-              %
-            </CustomSpan>
-          </ContentPercentWrapper>
+          <ContentBackGroundWrapper>
+            <ContentTitleWrapper>
+              {content_title}
+            </ContentTitleWrapper>
+            <ContentPercentWrapper>
+              {minutes}
+            </ContentPercentWrapper>
+          </ContentBackGroundWrapper>
         </CircularProgressbarWithChildren>
-      </LearningAnalysisBoxWrapper>
+      </TimeAnalysisBoxWrapper>
     </>
   );
 });

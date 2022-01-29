@@ -14,7 +14,6 @@ import { COLORS } from '../../style_constants.js';
 const TimeAnalysisBoxWrapper = styled.div`
   width: 22%;
   height: 30%;
-  background-color: ${COLORS.WHITE};
   border-radius: 3px;
   padding: 2%;
   padding-bottom: 0%;
@@ -56,6 +55,7 @@ export const TimeAnalysisBox = memo(({
       <TimeAnalysisBoxWrapper>
         <CircularProgressbarWithChildren 
           value={minutesState} 
+          strokeWidth={4}
           styles={buildStyles({
             // Rotation of path and trail, in number of turns (0-1)
             rotation: 0,
