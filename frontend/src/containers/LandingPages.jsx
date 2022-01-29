@@ -115,7 +115,11 @@ const SecondBattleSceneImageCover = styled.img`
   object-fit: contain;
   margin-top: 4%;
   margin-bottom: 2%;
-  max-width: 100%
+  max-width: 100%;
+  @media (min-width: 1000px) {
+    width: 50%;
+    margin-bottom: 0%;
+  }
 `;
 
 // サードのラッパー
@@ -132,7 +136,10 @@ const ThirdMyPageImageCover = styled.img`
   object-fit: contain;
   margin-top: 4%;
   margin-bottom: 4%;
-  max-width: 100%
+  max-width: 100%;
+  @media (min-width: 1000px) {
+    width: 50%;
+  }
 `;
 
 // フォースのラッパー
@@ -149,7 +156,10 @@ const FourthRaknkingImageCover = styled.img`
   object-fit: contain;
   margin-top: 4%;
   margin-bottom: 4%;
-  max-width: 100%
+  max-width: 100%;
+  @media (min-width: 1000px) {
+    width: 50%;
+  }
 `;
 
 // フィフスのラッパー
