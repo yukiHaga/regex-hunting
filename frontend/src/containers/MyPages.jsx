@@ -310,33 +310,6 @@ export const MyPages = () => {
                 </StudyHeatMapWrapper>
               </MainFirstWrapper>
               <MainSecondWrapper>
-                <CorrectPercentGraphWrapper>
-                  <CorrectPercentGraph 
-                    real_graph_data={
-                      myPageState.real_graph_data
-                    }
-                    difficulty_title={
-                      myPageState.difficulty_title
-                    }
-                  />
-                </CorrectPercentGraphWrapper>
-                <ChangeGraphBoxWrapper>
-                  <ChangeGraphBox 
-                    ele_fastest_time={myPageState.ele_fastest_time}
-                    int_fastest_time={myPageState.int_fastest_time}
-                    adv_fastest_time={myPageState.adv_fastest_time}
-                    elementary_correct_percents={
-                      myPageState.elementary_correct_percents
-                    }
-                    intermediate_correct_percents={
-                      myPageState.intermediate_correct_percents
-                    }
-                    advanced_correct_percents={
-                      myPageState.advanced_correct_percents
-                    }
-                    setMyPageState={setMyPageState}
-                  />
-                </ChangeGraphBoxWrapper>
               </MainSecondWrapper>
               <SecondWrapper>
                 <QuestSentenceWrapper>
