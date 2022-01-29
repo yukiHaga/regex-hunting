@@ -63,6 +63,7 @@ class Api::V1::GameManagementsController < ApplicationController
 
   # finishに送る際に作成されたデータを使ってゲーム結果画面を作るので、
   # finishでゲーム関連のデータを返す必要は特にない
+  # ゲームに勝つか負けると、finishアクションが実行される
   def finish
     # 早期リターン
     # ログインユーザーが存在しないなら、ゲームデータをDBに保存しない
