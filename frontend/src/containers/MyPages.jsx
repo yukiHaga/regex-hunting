@@ -16,6 +16,7 @@ import { Footer } from '../components/Footers/Footer.jsx';
 import { ReleaseConditionDialog } from '../components/Dialogs/ReleaseConditionDialog.jsx'
 import { CircularMask } from '../components/loads/CircularMask.jsx';
 import { LearningAnalysisBox } from '../components/Games/LearningAnalysisBox.jsx';
+import { TimeAnalysisBox } from '../components/Games/TimeAnalysisBox.jsx';
  
 // Images
 import ElementaryGameContentImage from '../images/elementary_game_content.png';
@@ -311,6 +312,10 @@ export const MyPages = () => {
                 </StudyHeatMapWrapper>
               </MainFirstWrapper>
               <MainSecondWrapper>
+                <TimeAnalysisBox
+                  content_title="学習時間"
+                  minutes={30} 
+                />
                 <LearningAnalysisBox 
                   content_title="正答率"
                   percentage={66} 
