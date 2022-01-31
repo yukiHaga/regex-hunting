@@ -78,13 +78,14 @@ export const UserStatus = memo(({
   image
 }) => {
 
+  // sxを%指定すると、円から楕円形になってしまったのでやめた
   return (
     <>
       <StatusWrapper>
         <Avatar
           alt="Hunter"
           src={image || DefaultAvatarImage}
-          sx={{ width: 200, height: 200, ml: '2%', mr: '3%'}}
+          sx={{ width: 200, height: 200, ml: '1.5%', mr: '3%'}}
         />
         <CustomTable>
           <tbody>
