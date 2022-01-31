@@ -22,20 +22,11 @@ import { DescriptionWrapper } from '../shared_style.js';
 // デフォルトのアバター画像
 import DefaultAvatarImage from '../../images/default_avatar.png';
 
+import IconButton from '@mui/material/IconButton';
+
 const TitleLineWrapper = styled.div`
   display: flex;
   justify-content: space-evenly;
-`;
-
-const ButtonWrapper = styled.div`
-  font-size: 60px;
-  cursor: pointer;
-  :hover {
-    opacity: 0.7;
-  }
-  :focus {
-    outline: 0;
-  }
 `;
 
 const ChangeGraphBoxSentenceWrapper = styled(DescriptionWrapper)`
@@ -43,6 +34,7 @@ const ChangeGraphBoxSentenceWrapper = styled(DescriptionWrapper)`
   font-size: 36px;
   line-height: 54px;
   text-align: center;
+  padding-top: 1.1%;
 `;
 
 const RankingWrapper = styled.div`
@@ -261,25 +253,31 @@ export const RankingBox = memo(({
   return (
     <>
       <TitleLineWrapper>
-        <ButtonWrapper 
+        <IconButton
+          sx={{
+            fontSize: '4.0em'
+          }}
         >
           <ArrowLeftIcon
             fontSize='inherit' 
             sx={{ color: `${COLORS.BLACK}` }}
             onClick={() => handleLeftArrow(difficulty_title)}
           />
-        </ButtonWrapper>
+        </IconButton>
         <ChangeGraphBoxSentenceWrapper>
           {difficulty_title}
         </ChangeGraphBoxSentenceWrapper>
-        <ButtonWrapper
+        <IconButton
+          sx={{
+            fontSize: '4.0em'
+          }}
         >
           <ArrowRightIcon
             fontSize='inherit' 
             sx={{ color: `${COLORS.BLACK}` }}
             onClick={() => handleRightArrow(difficulty_title)}
           />
-        </ButtonWrapper>
+        </IconButton>
       </TitleLineWrapper>
       {
         current_top_three_array.length ?

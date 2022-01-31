@@ -102,7 +102,7 @@ export const SecondSelectBox = ({
     <TitleLineWrapper>
       <IconButton
         sx={{
-          fontSize: '3.0em'
+          fontSize: '2.5em'
         }}
       >
         <ArrowLeftIcon
@@ -116,7 +116,7 @@ export const SecondSelectBox = ({
       </SecondSelectBoxSentenceWrapper>
       <IconButton
         sx={{
-          fontSize: '3.0em'
+          fontSize: '2.5em'
         }}
       >
         <ArrowRightIcon
