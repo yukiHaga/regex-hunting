@@ -39,9 +39,6 @@ import { REQUEST_STATE } from '../constants';
 // Colors
 import { COLORS } from '../style_constants.js';
 
-// グラフのx座標とy座標を生成する関数 
-import { makeCorrectPercentGraphData } from '../functions/makeCorrectPercentGraphData.js'
-
 // メインのラッパー
 const MainWrapper = styled.div`
   background-color: ${COLORS.SUB};
@@ -165,21 +162,14 @@ export const MyPages = () => {
   } = useContext(UserContext);
 
   // myPageStateの最初の状態
-  // isOpenDialog, title_name, release_dateは
+  // isOpenDialog, name, release_date, release_conditionは
   // タイトルカードのモーダルで使う
   const initialState = {
     game_frequencies_per_day: [],
-    elementary_correct_percents: [],
-    intermediate_correct_percents: [],
-    advanced_correct_percents: [],
+    total_time_per_difficulty: [],
+    correct_avg_per_difficulty: [],
+    fast_time_per_difficulty: [],
     owned_titles: [],
-    ele_fastest_time: 0,
-    int_fastest_time: 0,
-    adv_fastest_time: 0,
-    elementary_graph_data: {},
-    intermediate_graph_data: {},
-    advanced_graph_data: {},
-    real_graph_data: {},
     real_fastest_time: 0,
     difficulty_title: "",
     isOpenDialog: false,
@@ -246,30 +236,14 @@ export const MyPages = () => {
   useLayoutEffect(() => {
     if(sessionState && Object.keys(user).length){
       getMyPageInfo(user).then((data) => {
-        const elementary_graph_data = makeCorrectPercentGraphData(
-          data.elementary_correct_percents,
-        );
-        const intermediate_graph_data = makeCorrectPercentGraphData(
-          data.intermediate_correct_percents,
-        );
-        const advanced_graph_data = makeCorrectPercentGraphData(
-          data.advanced_correct_percents,
-        )
         setMyPageState((prev) => ({
           ...prev,
           game_frequencies_per_day: data.game_frequencies_per_day,
-          elementary_correct_percents: data.elementary_correct_percents,
-          intermediate_correct_percents: data.intermediate_correct_percents,
-          advanced_correct_percents: data.advanced_correct_percents,
+          total_time_per_difficulty: data.total_time_per_difficulty,
+          correct_avg_per_difficulty: data.correct_avg_per_difficulty,
+          fast_time_per_difficulty: data.fast_time_per_difficulty,
           owned_titles: data.owned_titles,
-          ele_fastest_time: data.ele_fastest_time,
-          int_fastest_time: data.int_fastest_time,
-          adv_fastest_time: data.adv_fastest_time,
-          elementary_graph_data: elementary_graph_data,
-          intermediate_graph_data: intermediate_graph_data,
-          advanced_graph_data: advanced_graph_data,
-          real_graph_data: elementary_graph_data,
-          real_fastest_time: data.ele_fastest_time,
+          real_fastest_time: 0,
           difficulty_title: "初級編"
         })); 
       }).catch((e) => {
@@ -344,7 +318,7 @@ export const MyPages = () => {
                     percentage={10} 
                   />
                   <FastAnalysisBox
-                    minutes={myPageState.real_fastest_time} 
+                    minutes={30} 
                   />
                 </MainSecondGraphWrapper>
                 <QuestSentenceWrapper>
