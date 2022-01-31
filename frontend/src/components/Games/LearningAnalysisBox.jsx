@@ -25,7 +25,7 @@ const ContentTitleWrapper = styled.div`
  letter-spacing: 0.04em;
 `;
 
-const ContentPercentWrapper = styled.div`
+const ContentNumWrapper = styled.div`
   font-size: 3.0em;
   color: ${COLORS.MAIN};
 `;
@@ -35,25 +35,25 @@ const CustomSpan = styled.span`
 `;
 
 export const LearningAnalysisBox = memo(({
-  percentage
+  num
 }) => {
 
-  const [percentState, setPercentState] = useState(0);
+  const [numState, setNumState] = useState(0);
 
   useEffect(() => {
     const timer = setTimeout(() => {
-      setPercentState(percentage);
+      setNumState(num);
     }, 400);
     return () => clearTimeout(timer);
   }, [
-    percentage
+    num
   ])
 
   return (
     <>
       <LearningAnalysisBoxWrapper>
         <CircularProgressbarWithChildren 
-          value={percentState} 
+          value={numState} 
           strokeWidth={4}
           styles={buildStyles({
             // Rotation of path and trail, in number of turns (0-1)
@@ -79,12 +79,12 @@ export const LearningAnalysisBox = memo(({
           <ContentTitleWrapper>
             平均正解数
           </ContentTitleWrapper>
-          <ContentPercentWrapper>
-            {percentage}
+          <ContentNumWrapper>
+            {num ? num : "0"}
             <CustomSpan>
               問
             </CustomSpan>
-          </ContentPercentWrapper>
+          </ContentNumWrapper>
         </CircularProgressbarWithChildren>
       </LearningAnalysisBoxWrapper>
     </>

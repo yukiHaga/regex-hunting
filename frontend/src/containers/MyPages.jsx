@@ -170,6 +170,7 @@ export const MyPages = () => {
     correct_avg_per_difficulty: {},
     fast_time_per_difficulty: {},
     owned_titles: [],
+    selected_total_time: 0,
     selected_correct_avg: 0,
     selected_fast_time: 0,
     difficulty_title: "",
@@ -244,6 +245,7 @@ export const MyPages = () => {
           correct_avg_per_difficulty: data.correct_avg_per_difficulty,
           fast_time_per_difficulty: data.fast_time_per_difficulty,
           owned_titles: data.owned_titles,
+          selected_total_time: data.total_time_per_difficulty.elementary,
           selected_correct_avg: data.correct_avg_per_difficulty.elementary,
           selected_fast_time: data.fast_time_per_difficulty.elementary,
           difficulty_title: "初級編"
@@ -314,10 +316,10 @@ export const MyPages = () => {
                 </PlaySentenceWrapper>
                 <MainSecondGraphWrapper>
                   <TimeAnalysisBox
-                    minutes={30} 
+                    time={myPageState.selected_total_time} 
                   />
                   <LearningAnalysisBox 
-                    percentage={myPageState.selected_correct_avg} 
+                    num={myPageState.selected_correct_avg} 
                   />
                   <FastAnalysisBox
                     minutes={myPageState.selected_fast_time} 

@@ -1,4 +1,4 @@
-import React, { useState, useEffect, memo } from 'react';
+import React, { useState, useEffect, memo, useMemo } from 'react';
 import styled from 'styled-components';
 
 import { 
@@ -10,6 +10,9 @@ import 'react-circular-progressbar/dist/styles.css';
 
 // Colors
 import { COLORS } from '../../style_constants.js';
+
+// ミリ秒を分に変換する関数
+import { getMinute } from '../../functions/getMinute.js';
 
 const TimeAnalysisBoxWrapper = styled.div`
   width: 20%;
@@ -25,7 +28,7 @@ const ContentTitleWrapper = styled.div`
  letter-spacing: 0.04em;
 `;
 
-const ContentPercentWrapper = styled.div`
+const ContentTimeWrapper = styled.div`
   font-size: 3.0em;
   color: ${COLORS.MAIN};
 `;
@@ -34,26 +37,30 @@ const CustomSpan = styled.span`
  font-size: 0.6em;
 `;
 
+// 単位は分で固定する
 export const TimeAnalysisBox = memo(({
-  minutes
+  time
 }) => {
 
-  const [minutesState, setMinutesState] = useState(0);
+  // ゲージと分の関数
+  const format_min = useMemo(() => getMinute(time), [time]);
+
+  const [timeState, setTimeState] = useState(0);
 
   useEffect(() => {
     const timer = setTimeout(() => {
-      setMinutesState(minutes);
+      setTimeState(format_min);
     }, 400);
     return () => clearTimeout(timer);
   }, [
-    minutes
+    format_min
   ])
 
   return (
     <>
       <TimeAnalysisBoxWrapper>
         <CircularProgressbarWithChildren 
-          value={minutesState} 
+          value={timeState} 
           strokeWidth={4}
           styles={buildStyles({
             // Rotation of path and trail, in number of turns (0-1)
@@ -79,12 +86,12 @@ export const TimeAnalysisBox = memo(({
           <ContentTitleWrapper>
             プレイ時間
           </ContentTitleWrapper>
-          <ContentPercentWrapper>
-            {minutes}
+          <ContentTimeWrapper>
+            {timeState}
             <CustomSpan>
               分
             </CustomSpan>
-          </ContentPercentWrapper>
+          </ContentTimeWrapper>
         </CircularProgressbarWithChildren>
       </TimeAnalysisBoxWrapper>
     </>
