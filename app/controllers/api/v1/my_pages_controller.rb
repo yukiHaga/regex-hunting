@@ -26,7 +26,7 @@ class Api::V1::MyPagesController < ApplicationController
     # selectメソッド内に集約関数を入れた場合、.total_timeでその値を呼び出すことができる
     # selectメソッドの集約関数の結果は、ARオブジェクトにフィールドとして反映されないので、
     # 自分でオブジェクトを作る
-    total_time_per_difficulty = curernt_user.game_managements.
+    total_time_per_difficulty = current_user.game_managements.
                                   where(play_date: this_month).
                                   group(:difficulty).
                                   select("difficulty, SUM(result_time) AS total_time").
