@@ -1,4 +1,4 @@
-import React, { Fragment, useContext, useEffect, useLayoutEffect, useState } from 'react';
+import React, { Fragment, useContext, useEffect, useLayoutEffect, useState, useMemo } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 
@@ -40,6 +40,9 @@ import { REQUEST_STATE } from '../constants';
 // Colors
 import { COLORS } from '../style_constants.js';
 
+// 今月の月を取得する関数
+import { getMonthOfTheMonth } from '../functions/getMonthOfTheMonth.js';
+
 // メインのラッパー
 const MainWrapper = styled.div`
   background-color: ${COLORS.SUB};
@@ -52,6 +55,8 @@ const MainWrapper = styled.div`
 const MainFirstWrapper = styled.div`
   display: flex;
   justify-content: space-evenly;
+  width: 92%;
+  margin: 0 auto;
 `;
 
 // Mainのsecondラッパー
@@ -74,7 +79,7 @@ const MainSecondSelectWrapper = styled.div`
 // Mainのsecondのグラフラッパー
 const MainSecondGraphWrapper = styled.div`
   display: flex;
-  justify-content: space-evenly;
+  justify-content: space-around;
   padding-bottom: 1.8%;
   width: 100%;
   margin: 0 auto;
@@ -86,7 +91,7 @@ const MainSecondGraphWrapper = styled.div`
 // セカンドラッパー
 const SecondWrapper = styled.div`
   background-color: ${COLORS.SUB};
-  width: 94%;
+  width: 88%;
   margin: 0 auto;
 `;
 
@@ -111,10 +116,10 @@ const StudyHeatMapSentenceWrapper = styled(DescriptionWrapper)`
 
 // クエスト一覧というセンテンスのラッパー
 const QuestSentenceWrapper = styled(DescriptionWrapper)`
-  padding-top: 4%;
+  padding-top: 2%;
   font-weight: bold;
   font-size: 1.5em;
-  text-align: left;
+  text-align: center;
 `;
 
 // マイページのゲームコンテンツのラッパー
@@ -160,6 +165,9 @@ export const MyPages = () => {
     requestUserActionTyps
   } = useContext(UserContext);
 
+  // 今月の月を計算する関数
+  const this_month = useMemo(() => getMonthOfTheMonth(), []);
+
   // myPageStateの最初の状態
   // isOpenDialog, name, release_date, release_conditionは
   // タイトルカードのモーダルで使う
@@ -172,7 +180,7 @@ export const MyPages = () => {
     selected_total_time: 0,
     selected_correct_avg: 0,
     selected_fast_time: 0,
-    difficulty_title: "",
+    difficulty_month_title: "",
     isOpenDialog: false,
     name: "",
     release_date: "",
@@ -247,7 +255,7 @@ export const MyPages = () => {
           selected_total_time: data.total_time_per_difficulty.elementary,
           selected_correct_avg: data.correct_avg_per_difficulty.elementary,
           selected_fast_time: data.fast_time_per_difficulty.elementary,
-          difficulty_title: "初級編(1月)"
+          difficulty_month_title: `初級編(${this_month}月)`
         })); 
       }).catch((e) => {
         if(e.response.status === HTTP_STATUS_CODE.NOT_FOUND){
@@ -261,7 +269,8 @@ export const MyPages = () => {
     }
   }, [
     user,
-    sessionState
+    sessionState,
+    this_month
   ]);
 
   // ゲーム中のユーザーがトップページに戻ったときに
@@ -312,8 +321,9 @@ export const MyPages = () => {
               <MainSecondWrapper>
                 <MainSecondSelectWrapper>
                   <SecondSelectBox 
-                    difficulty_title={myPageState.difficulty_title}
+                    difficulty_month_title={myPageState.difficulty_month_title}
                     setMyPageState={setMyPageState}
+                    this_month={this_month}
                   />
                 </MainSecondSelectWrapper>
                 <MainSecondGraphWrapper>
@@ -327,11 +337,11 @@ export const MyPages = () => {
                     minutes={myPageState.selected_fast_time} 
                   />
                 </MainSecondGraphWrapper>
+              </MainSecondWrapper>
+              <SecondWrapper>
                 <QuestSentenceWrapper>
                   クエスト一覧
                 </QuestSentenceWrapper>
-              </MainSecondWrapper>
-              <SecondWrapper>
                 <MyPageGameContentsWrapper> 
                   <GameContent 
                     difficulty='elementary' 

@@ -15,7 +15,7 @@ const GameContentWrapper = styled.div`
 
 const GameContentTitleWrapper = styled.div`
   height: 9%;
-  width: 100%;
+  width: 90%;
   font-style: normal;
   font-weight: 500;
   font-size: 1.5em;
@@ -29,10 +29,12 @@ const GameContentTitleWrapper = styled.div`
     padding-top: 2%;
     padding-bottom: 2%
   }
+  margin: 0 auto;
 `;
 
 const GameContentDescriptionWrapper = styled.div`
-  width: 100%;
+  width: 90%;
+  margin: 0 auto;
   box-shadow: 0 0px 20px rgba(0,0,0,0.2);
   background-color: ${COLORS.WHITE};
   @media (max-width: ${WIDTH.MOBILE}) {
