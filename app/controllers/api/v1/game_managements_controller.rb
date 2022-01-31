@@ -128,14 +128,12 @@ class Api::V1::GameManagementsController < ApplicationController
     # 変更される
     condition_hash = {
       一人前ハンター: 2,
-      先輩ハンター: 4,
-      玄人ハンター: 6,
-      熟練ハンター: 8,
-      いにしえのハンター: 10,
-      天才と呼ばれしハンター: 12,
-      伝説のハンター: 14,
-      無我の境地: 16,
-      語り継がれし英雄: 18
+      玄人ハンター: 4,
+      いにしえのハンター: 6,
+      天才と呼ばれしハンター: 8,
+      伝説のハンター: 10,
+      無我の境地: 12,
+      語り継がれし英雄: 14
     }
 
     if params[:current_user][:temporary_experience] >= params[:current_user][:maximum_experience_per_rank] && condition_hash.values.include?(current_user.rank)

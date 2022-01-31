@@ -40,12 +40,10 @@ release_condition = [
   "ランクが10に到達",
   "ランクが12に到達",
   "ランクが14に到達",
-  "ランクが16に到達",
-  "ランクが18に到達"
 ]
 
 # タイトル
-10.times do |s|
+8.times do |s|
   Title.create!(
     name: User.active_titles.keys[s],
     release_condition: release_condition[s]
@@ -54,7 +52,7 @@ end
 
 # 1問目
 Question.create!(
-  sentence: "1, 5, 9の全てにマッチする正規表現を入力せよ。",
+  sentence: "1, 5, 9にマッチする正規表現を入力せよ。",
   target_sentence: "1, 5, 9",
   sample_answer: "\\d",
   hint: "1桁の数字を表すメタ文字を使って、正規表現を作ってみましょう。",
@@ -64,7 +62,7 @@ Question.create!(
 
 # 2問目
 Question.create!(
-  sentence: "10, 20, 30の全てにマッチする正規表現を入力せよ。",
+  sentence: "10, 20, 30にマッチする正規表現を入力せよ。",
   target_sentence: "10, 20, 30",
   sample_answer: "\\d{2}",
   hint: "\\d{n}は、n桁の数字を表すメタ文字です。\\d{n}を使って、正規表現を作ってみましょう。",
@@ -74,7 +72,7 @@ Question.create!(
 
 # 3問目
 Question.create!(
-  sentence: "100, 1000, 10000の全てにマッチする正規表現を入力せよ。",
+  sentence: "100, 1000, 10000にマッチする正規表現を入力せよ。",
   target_sentence: "100, 1000, 10000",
   sample_answer: "\\d{3,5}",
   hint: "\\d{n,m}は、n桁~m桁の数字を表すメタ文字です。\\d{n,m}を使って、正規表現を作ってみましょう。",
@@ -94,7 +92,7 @@ Question.create!(
 
 # 5問目
 Question.create!(
-  sentence: "A, B, Zの全てにマッチする正規表現を入力せよ。",
+  sentence: "A, B, Zにマッチする正規表現を入力せよ。",
   target_sentence: "A, B, Z",
   sample_answer: "[ABZ]",
   hint: "[ABC]は、A, B, Cのどれか1文字を表すメタ文字です。[ABC]を使って、正規表現を作ってみましょう。",
@@ -104,7 +102,7 @@ Question.create!(
 
 # 6問目
 Question.create!(
-  sentence: "A, 9, Zの全てにマッチする正規表現を入力せよ。",
+  sentence: "A, 9, Zにマッチする正規表現を入力せよ。",
   target_sentence: "A, 9, Z",
   sample_answer: "[A9Z]",
   hint: "[ABC]は、A, B, Cのどれか1文字を表すメタ文字です。[ABC]を使って、正規表現を作
@@ -115,7 +113,7 @@ Question.create!(
 
 # 7問目
 Question.create!(
-  sentence: "A, a, 9の全てにマッチする正規表現を入力せよ。",
+  sentence: "A, a, 9にマッチする正規表現を入力せよ。",
   target_sentence: "A, a, 9",
   sample_answer: "\\w",
   hint: "大文字アルファベット1文字, 小文字アルファベット1文字, 数字1文字を表すメタ文字を使って、正規表現を作ってみましょう。 ",
@@ -135,7 +133,7 @@ Question.create!(
 
 # 9問目
 Question.create!(
-  sentence: "X, y, Zの全てにマッチする正規表現を入力せよ。",
+  sentence: "X, y, Zにマッチする正規表現を入力せよ。",
   target_sentence: "X, y, Z",
   sample_answer: "[XyZ]",
   hint: "[ABC]は、A, B, Cのどれか1文字を表すメタ文字です。[ABC]を使って、正規表現を作ってみましょう。",
@@ -145,7 +143,7 @@ Question.create!(
 
 # 10問目
 Question.create!(
-  sentence: "xxx, yyy, zzzの全てにマッチする正規表現を入力せよ。",
+  sentence: "xxx, yyy, zzzにマッチする正規表現を入力せよ。",
   target_sentence: "xxx, yyy, zzz",
   sample_answer: "xxx|yyy|zzz",
   hint: "aaa|bbb|cccは、aaa, bbb, cccを表すメタ文字です。aaa|bbb|cccを使って、正規表現を作ってみましょう。",
@@ -155,7 +153,7 @@ Question.create!(
 
 # 11問目
 Question.create!(
-  sentence: "aaa, baaa, caの全てにマッチする正規表現を入力せよ。",
+  sentence: "aaa, baaa, caにマッチする正規表現を入力せよ。",
   target_sentence: "aaa, baaa, ca",
   sample_answer: "aaa|baaa|ca",
   hint: "aaa|bbb|cccは、aaa, bbb, cccを表すメタ文字です。aaa|bbb|cccを使って、正規表現を作ってみましょう。",
@@ -165,7 +163,7 @@ Question.create!(
 
 # 12問目
 Question.create!(
-  sentence: "aaa, 999, cccの全てにマッチする正規表現を入力せよ。",
+  sentence: "aaa, 999, cccにマッチする正規表現を入力せよ。",
   target_sentence: "aaa, 999, ccc, zzz",
   sample_answer: "aaa|999|ccc",
   hint: "aaa|bbb|cccは、aaa, bbb, cccを表すメタ文字です。aaa|bbb|cccを使って、正規表現を作ってみましょう。",
@@ -175,7 +173,7 @@ Question.create!(
 
 # 13問目
 Question.create!(
-  sentence: "#, %, @の全てにマッチする正規表現を入力せよ。",
+  sentence: "#, %, @にマッチする正規表現を入力せよ。",
   target_sentence: "#, %, @",
   sample_answer: "[#%@]",
   hint: "[ABC]は、A, B, Cのどれか1文字を表すメタ文字です。[ABC]を使って、正規表現を作ってみましょう。",
