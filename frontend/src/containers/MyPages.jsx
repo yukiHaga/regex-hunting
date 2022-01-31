@@ -75,11 +75,9 @@ const MainSecondGraphWrapper = styled.div`
   display: flex;
   justify-content: space-evenly;
   padding-bottom: 1.8%;
-  background-color: ${COLORS.WHITE};
   width: 100%;
   margin: 0 auto;
   margin-top: 1.5%;
-  box-shadow: 0 0px 20px rgba(0,0,0,0.2);
   margin-bottom: 2%;
   border-radius: 3px;
 `;

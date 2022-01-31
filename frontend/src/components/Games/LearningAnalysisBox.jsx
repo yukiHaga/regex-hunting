@@ -12,11 +12,11 @@ import 'react-circular-progressbar/dist/styles.css';
 import { COLORS } from '../../style_constants.js';
 
 const LearningAnalysisBoxWrapper = styled.div`
-  width: 20%;
+  width: 18%;
   height: 30%;
-  border-radius: 3px;
-  padding: 2%;
-  padding-bottom: 0%;
+  background-color: ${COLORS.WHITE};
+  border-radius: 50%;
+  box-shadow: 0 0px 4px rgba(0,0,0,0.2);
 `;
 
 const ContentTitleWrapper = styled.div`
