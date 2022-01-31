@@ -16,6 +16,7 @@ import { CircularMask } from '../components/loads/CircularMask.jsx';
 import { LearningAnalysisBox } from '../components/Games/LearningAnalysisBox.jsx';
 import { TimeAnalysisBox } from '../components/Games/TimeAnalysisBox.jsx';
 import { FastAnalysisBox } from '../components/Games/FastAnalysisBox.jsx';
+import { SecondSelectBox } from '../components/Games/SecondSelectBox.jsx';
  
 // Images
 import ElementaryGameContentImage from '../images/elementary_game_content.png';
@@ -53,20 +54,20 @@ const MainFirstWrapper = styled.div`
   justify-content: space-evenly;
 `;
 
-// 今月のプレイ状況というセンテンスのラッパー
-const PlaySentenceWrapper = styled(DescriptionWrapper)`
-  padding-top: 3%;
-  font-weight: bold;
-  font-size: 1.5em;
-  text-align: left;
-`;
-
 // Mainのsecondラッパー
 const MainSecondWrapper = styled.div`
   padding-bottom: 0.5%;
   margin-top: 1.5%;
   margin-bottom: 1%;
   width: 85%;
+  margin: 0 auto;
+`;
+
+// 難易度を変化させるラッパー
+const MainSecondSelectWrapper = styled.div`
+  width: 100%;
+  padding-top: 3%;
+  font-weight: bold;
   margin: 0 auto;
 `;
 
@@ -246,7 +247,7 @@ export const MyPages = () => {
           selected_total_time: data.total_time_per_difficulty.elementary,
           selected_correct_avg: data.correct_avg_per_difficulty.elementary,
           selected_fast_time: data.fast_time_per_difficulty.elementary,
-          difficulty_title: "初級編"
+          difficulty_title: "初級編(1月)"
         })); 
       }).catch((e) => {
         if(e.response.status === HTTP_STATUS_CODE.NOT_FOUND){
@@ -309,9 +310,12 @@ export const MyPages = () => {
                 </StudyHeatMapWrapper>
               </MainFirstWrapper>
               <MainSecondWrapper>
-                <PlaySentenceWrapper>
-                  今月のプレイ状況
-                </PlaySentenceWrapper>
+                <MainSecondSelectWrapper>
+                  <SecondSelectBox 
+                    difficulty_title={myPageState.difficulty_title}
+                    setMyPageState={setMyPageState}
+                  />
+                </MainSecondSelectWrapper>
                 <MainSecondGraphWrapper>
                   <TimeAnalysisBox
                     time={myPageState.selected_total_time} 
