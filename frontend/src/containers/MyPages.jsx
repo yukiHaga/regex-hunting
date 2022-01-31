@@ -71,7 +71,7 @@ const MainSecondWrapper = styled.div`
 // 難易度を変化させるラッパー
 const MainSecondSelectWrapper = styled.div`
   width: 100%;
-  padding-top: 3%;
+  padding-top: 3.5%;
   font-weight: bold;
   margin: 0 auto;
 `;
@@ -83,7 +83,7 @@ const MainSecondGraphWrapper = styled.div`
   padding-bottom: 1.8%;
   width: 100%;
   margin: 0 auto;
-  margin-top: 1.5%;
+  margin-top: 2.0%;
   margin-bottom: 2%;
   border-radius: 3px;
 `;
@@ -98,6 +98,7 @@ const SecondWrapper = styled.div`
 // サードラッパー
 const ThirdWrapper = styled.div`
   background-color: ${COLORS.SUB};
+  padding-top: 3.5%;
   padding-bottom: 2%;
 `;
 
