@@ -60,7 +60,7 @@ export const TimeAnalysisBox = memo(({
     <>
       <TimeAnalysisBoxWrapper>
         <CircularProgressbarWithChildren 
-          value={timeState} 
+          value={timeState ? timeState : 0} 
           strokeWidth={4}
           styles={buildStyles({
             // Rotation of path and trail, in number of turns (0-1)
@@ -87,7 +87,7 @@ export const TimeAnalysisBox = memo(({
             プレイ時間
           </ContentTitleWrapper>
           <ContentTimeWrapper>
-            {timeState}
+            {timeState ? timeState : 0}
             <CustomSpan>
               分
             </CustomSpan>

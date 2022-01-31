@@ -20,18 +20,6 @@ const TitleLineWrapper = styled.div`
   justify-content: space-evenly;
 `;
 
-const ButtonWrapper = styled.div`
-  font-size: 3.0em;
-  height: 1%;
-  cursor: pointer;
-  :hover {
-    opacity: 0.7;
-  }
-  :focus {
-    outline: 0;
-  }
-`;
-
 const SecondSelectBoxSentenceWrapper = styled(DescriptionWrapper)`
   font-weight: bold;
   font-size: 1.6em;
@@ -49,6 +37,9 @@ export const SecondSelectBox = ({
   const handleElementary = () => {
     setMyPageState((prev) => ({
       ...prev,
+      selected_total_time: prev.total_time_per_difficulty.elementary,
+      selected_correct_avg: prev.correct_avg_per_difficulty.elementary,
+      selected_fast_time: prev.fast_time_per_difficulty.elementary,
       difficulty_month_title: `初級編(${this_month}月)`
     }));
   };
@@ -57,6 +48,9 @@ export const SecondSelectBox = ({
   const handleIntermediate = () => {
     setMyPageState((prev) => ({
       ...prev,
+      selected_total_time: prev.total_time_per_difficulty.intermediate,
+      selected_correct_avg: prev.correct_avg_per_difficulty.intermediate,
+      selected_fast_time: prev.fast_time_per_difficulty.intermediate,
       difficulty_month_title: `中級編(${this_month}月)`
     }));
   };
@@ -65,6 +59,9 @@ export const SecondSelectBox = ({
   const handleAdvanced = () => {
     setMyPageState((prev) => ({
       ...prev,
+      selected_total_time: prev.total_time_per_difficulty.advanced,
+      selected_correct_avg: prev.correct_avg_per_difficulty.advanced,
+      selected_fast_time: prev.fast_time_per_difficulty.advanced,
       difficulty_month_title: `上級編(${this_month}月)`
     }));
   };

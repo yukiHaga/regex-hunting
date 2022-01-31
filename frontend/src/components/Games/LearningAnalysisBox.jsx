@@ -53,7 +53,7 @@ export const LearningAnalysisBox = memo(({
     <>
       <LearningAnalysisBoxWrapper>
         <CircularProgressbarWithChildren 
-          value={numState} 
+          value={numState ? numState : 0} 
           strokeWidth={4}
           styles={buildStyles({
             // Rotation of path and trail, in number of turns (0-1)
