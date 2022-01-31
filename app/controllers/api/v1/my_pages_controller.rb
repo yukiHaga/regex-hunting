@@ -13,7 +13,7 @@ class Api::V1::MyPagesController < ApplicationController
 
     # 今月の各日におけるゲーム回数
     # win, lose関係なしに取得する
-    # play_dateをキー、頻度をバリューに持つARオブジェクトが生成される
+    # play_dateをキー、頻度をバリューに持つハッシュが生成される
     game_frequencies_per_day =  current_user.game_managements.
                                   where(play_date: this_month).
                                   group(:play_date).
@@ -22,7 +22,6 @@ class Api::V1::MyPagesController < ApplicationController
     # 今月の各難易度のプレイ時間
     # win, lose関係なしに取得する
     # SUM(result_time)は、difficultyのグループ毎に実施される
-    # difficultyとtotal_timeをキーに持つARオブジェクトが生成される
     # selectメソッド内に集約関数を入れた場合、.total_timeでその値を呼び出すことができる
     # selectメソッドの集約関数の結果は、ARオブジェクトにフィールドとして反映されないので、
     # 自分でオブジェクトを作る
@@ -30,11 +29,8 @@ class Api::V1::MyPagesController < ApplicationController
                                   where(play_date: this_month).
                                   group(:difficulty).
                                   select("difficulty, SUM(result_time) AS total_time").
-                                  map do |data|
-                                    {
-                                      difficulty: data[:difficulty],
-                                      total_time: data.total_time
-                                    }
+                                  to_h do |data|
+                                    [data.difficulty, data.total_time]
                                   end
 
     # fromメソッドで使うサブクエリ
@@ -60,11 +56,8 @@ class Api::V1::MyPagesController < ApplicationController
     correct_avg_per_difficulty = GameManagement.from("(#{subquery.to_sql}) AS results").
                                    group(:difficulty).
                                    select("difficulty, ROUND(AVG(correct)) AS correct_avg").
-                                   map do |data|
-                                     {
-                                       difficulty: data[:difficulty],
-                                       correct_avg: data.correct_avg
-                                     }
+                                   to_h do |data|
+                                     [data.difficulty, data.correct_avg]
                                    end
 
     # 今月かつwinかつ各難易度の最速タイム
@@ -74,11 +67,8 @@ class Api::V1::MyPagesController < ApplicationController
                                    game_result: "win").
                                  group(:difficulty).
                                  select("difficulty, MIN(result_time) AS fast_time").
-                                 map do |data|
-                                   {
-                                     difficulty: data[:difficulty],
-                                     fast_time: data.fast_time
-                                   }
+                                 to_h do |data|
+                                   [data.difficulty, data.fast_time]
                                  end
 
     # ユーザーのrelease_titlesのtitle_idとrelease_dateを取得する

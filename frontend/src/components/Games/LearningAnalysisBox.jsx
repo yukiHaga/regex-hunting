@@ -77,7 +77,7 @@ export const LearningAnalysisBox = memo(({
           maxValue={10}
         >
           <ContentTitleWrapper>
-            正解数
+            平均正解数
           </ContentTitleWrapper>
           <ContentPercentWrapper>
             {percentage}

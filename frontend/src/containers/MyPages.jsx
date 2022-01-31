@@ -165,12 +165,13 @@ export const MyPages = () => {
   // isOpenDialog, name, release_date, release_conditionは
   // タイトルカードのモーダルで使う
   const initialState = {
-    game_frequencies_per_day: [],
-    total_time_per_difficulty: [],
-    correct_avg_per_difficulty: [],
-    fast_time_per_difficulty: [],
+    game_frequencies_per_day: {},
+    total_time_per_difficulty: {},
+    correct_avg_per_difficulty: {},
+    fast_time_per_difficulty: {},
     owned_titles: [],
-    real_fastest_time: 0,
+    selected_correct_avg: 0,
+    selected_fast_time: 0,
     difficulty_title: "",
     isOpenDialog: false,
     name: "",
@@ -243,7 +244,8 @@ export const MyPages = () => {
           correct_avg_per_difficulty: data.correct_avg_per_difficulty,
           fast_time_per_difficulty: data.fast_time_per_difficulty,
           owned_titles: data.owned_titles,
-          real_fastest_time: 0,
+          selected_correct_avg: data.correct_avg_per_difficulty.elementary,
+          selected_fast_time: data.fast_time_per_difficulty.elementary,
           difficulty_title: "初級編"
         })); 
       }).catch((e) => {
@@ -315,10 +317,10 @@ export const MyPages = () => {
                     minutes={30} 
                   />
                   <LearningAnalysisBox 
-                    percentage={10} 
+                    percentage={myPageState.selected_correct_avg} 
                   />
                   <FastAnalysisBox
-                    minutes={30} 
+                    minutes={myPageState.selected_fast_time} 
                   />
                 </MainSecondGraphWrapper>
                 <QuestSentenceWrapper>

@@ -95,7 +95,7 @@ export const StudyHeatMap = memo(({
           values={month_obj_array}
           tooltipDataAttrs={({count, date}) => {
             return {
-              'data-tip': `ゲームクリア回数: ${count}, ${
+              'data-tip': `ゲーム回数: ${count}, ${
                 date?.replace(/-/g, '/')}`
             };
           }}
