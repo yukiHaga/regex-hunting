@@ -32,8 +32,6 @@ export const rankings = `${DEFAULT_API_URL}/ranking`;
 // ユーザー関係
 export const myPages = (user_id) => 
   `${DEFAULT_API_URL}/users/${user_id}/my-page`;
-export const percents = (user_id) => 
-  `${DEFAULT_API_URL}/users/${user_id}/percent`;
 export const accountSettings = (user_id) => 
   `${DEFAULT_API_URL}/users/${user_id}/account-settings`;
 export const titleSettings = (user_id) => 
