@@ -4,6 +4,22 @@ class Api::V1::GameManagementsController < ApplicationController
   skip_before_action :verify_authenticity_token, only: :start
   after_action :set_csrf_token_header, only: %i(start finish)
 
+  # タイトルに関する処理
+  # ランクアップしているかつ、
+  # ユーザーのランクが、CONDITION_HASHのバリューのランクを満たすなら、
+  # active_titleを更新する
+  # active_titleに代入しているので、ランクが上がるごとに、マイページで設定したタイトルが
+  # 変更される
+  CONDITION_HASH = {
+    一人前ハンター: 2,
+    玄人ハンター: 4,
+    いにしえのハンター: 6,
+    天才と呼ばれしハンター: 8,
+    伝説のハンター: 10,
+    無我の境地: 12,
+    語り継がれし英雄: 14
+  }
+
   def start
     # ゲームに関する処理
     game_management = current_user ?
@@ -120,28 +136,12 @@ class Api::V1::GameManagementsController < ApplicationController
       )
     end
 
-    # タイトルに関する処理
-    # ランクアップしているかつ、
-    # ユーザーのランクが、condition_hashのバリューのランクを満たすなら、
-    # active_titleを更新する
-    # active_titleに代入しているので、ランクが上がるごとに、マイページで設定したタイトルが
-    # 変更される
-    condition_hash = {
-      一人前ハンター: 2,
-      玄人ハンター: 4,
-      いにしえのハンター: 6,
-      天才と呼ばれしハンター: 8,
-      伝説のハンター: 10,
-      無我の境地: 12,
-      語り継がれし英雄: 14
-    }
-
-    if params[:current_user][:temporary_experience] >= params[:current_user][:maximum_experience_per_rank] && condition_hash.values.include?(current_user.rank)
+    if params[:current_user][:temporary_experience] >= params[:current_user][:maximum_experience_per_rank] && CONDITION_HASH.values.include?(current_user.rank)
       current_user.release_titles.build(
         release_date: Date.today,
-        title_id: (Title.find_by(name: condition_hash.key(current_user.rank)))[:id]
+        title_id: (Title.find_by(name: CONDITION_HASH.key(current_user.rank)))[:id]
       )
-      current_user[:active_title] = condition_hash.key(current_user.rank)
+      current_user[:active_title] = CONDITION_HASH.key(current_user.rank)
       current_user.save!
     end
 
