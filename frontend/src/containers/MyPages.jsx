@@ -47,7 +47,7 @@ import { getMonthOfTheMonth } from '../functions/getMonthOfTheMonth.js';
 const MainWrapper = styled.div`
   background-color: ${COLORS.SUB};
   text-align: center;
-  padding-top: 4.5%;
+  padding-top: 4.3%;
   position: relative;
 `;
 
@@ -71,7 +71,7 @@ const MainSecondWrapper = styled.div`
 // 難易度を変化させるラッパー
 const MainSecondSelectWrapper = styled.div`
   width: 100%;
-  padding-top: 3.5%;
+  padding-top: 3.3%;
   font-weight: bold;
   margin: 0 auto;
 `;
@@ -83,7 +83,7 @@ const MainSecondGraphWrapper = styled.div`
   padding-bottom: 1.8%;
   width: 100%;
   margin: 0 auto;
-  margin-top: 2.0%;
+  margin-top: 2%;
   margin-bottom: 2%;
   border-radius: 3px;
 `;
