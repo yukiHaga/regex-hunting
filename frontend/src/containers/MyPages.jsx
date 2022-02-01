@@ -54,8 +54,8 @@ const MainWrapper = styled.div`
 // Mainのfirstラッパー
 const MainFirstWrapper = styled.div`
   display: flex;
-  justify-content: space-evenly;
-  width: 92%;
+  justify-content: space-around;
+  width: 85%;
   margin: 0 auto;
 `;
 
@@ -91,7 +91,7 @@ const MainSecondGraphWrapper = styled.div`
 // セカンドラッパー
 const SecondWrapper = styled.div`
   background-color: ${COLORS.SUB};
-  width: 88%;
+  width: 86%;
   margin: 0 auto;
 `;
 
@@ -100,6 +100,8 @@ const ThirdWrapper = styled.div`
   background-color: ${COLORS.SUB};
   padding-top: 3.5%;
   padding-bottom: 2%;
+  width: 98%;
+  margin: 0 auto;
 `;
 
 const StudyHeatMapWrapper = styled.div`
@@ -112,7 +114,7 @@ const StudyHeatMapSentenceWrapper = styled(DescriptionWrapper)`
   font-weight: bold;
   font-size: 1.5em;
   text-align: left;
-  padding-left: 13%;
+  padding-left: 12.5%;
 `;
 
 // クエスト一覧というセンテンスのラッパー

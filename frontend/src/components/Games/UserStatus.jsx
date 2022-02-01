@@ -15,16 +15,16 @@ import DefaultAvatarImage from '../../images/default_avatar.png';
 
 // ステータスのラッパー
 const StatusWrapper = styled.div`
-  width: 50%;
-  height: 70%;
-  padding-top: 3.0%;
-  padding-bottom: 3.0%;
+  width: 55%;
+  padding-top: 2.9%;
+  padding-bottom: 2.9%;
   border-radius: 3px;
   background-color: ${COLORS.WHITE};
   box-shadow: 0 0px 20px rgba(0,0,0,0.2);
   display: flex;
   align-items: center;
   justify-content: center;
+  padding-right: 1%;
 `;
 
 const CustomTable = styled.table`
@@ -85,7 +85,7 @@ export const UserStatus = memo(({
         <Avatar
           alt="Hunter"
           src={image || DefaultAvatarImage}
-          sx={{ width: 200, height: 200, ml: '1.5%', mr: '3%'}}
+          sx={{ width: 213, height: 213, ml: '0.4%', mr: '3.6%'}}
         />
         <CustomTable>
           <tbody>

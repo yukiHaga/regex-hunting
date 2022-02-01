@@ -13,8 +13,9 @@ import { makeThisMonthObj } from '../../functions/makeThisMonthObj.js';
 import { addCountToMonthArray } from '../../functions/addCountToMonthArray.js';
 
 const InnerStudyHeatMapWrapper = styled.div`
-  width: 300px;
+  width: 100%;
   margin: 0 auto;
+  margin-left: 13%;
 `;
 
 export const StudyHeatMap = memo(({
