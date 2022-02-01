@@ -74,13 +74,16 @@ export const TitleSettingButton = ({
         message: "称号を変更しました。"
       }));
     }).catch((e) => {
-      if(e.response.status === HTTP_STATUS_CODE.NOT_FOUND){
-        dispatch({
-          type: requestUserActionTyps.REQUEST_FAILURE,
-          payload: {
-            errors: e.response.data.errors
-          }
-        });
+      if(e.response.status === HTTP_STATUS_CODE.BAD_REQUEST){
+        setMyPageState((prev) =>({
+          ...prev,
+          isOpenDialog: false,
+          name: "",
+          release_date: "",
+          release_condition: "",
+          display: e.response.data.errors.display,
+          message: e.response.data.errors.message
+        }));
       } else {
         throw e;
       }

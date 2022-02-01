@@ -45,7 +45,9 @@ export const TitleFlashMessage = ({
         }}
         onClose={handleClose}
       >
-        <Alert variant="filled" severity="success">
+        <Alert 
+          variant="filled" 
+          severity={ message === "称号の変更に失敗しました。" ? "error" : "success" }>
           {message}
         </Alert>
       </Snackbar>

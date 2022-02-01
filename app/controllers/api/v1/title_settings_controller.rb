@@ -21,7 +21,12 @@ class Api::V1::TitleSettingsController < ApplicationController
         }
       }, status: :ok
     else
-      render json: {errors: current_user.errors}, status: :bad_request
+      render json: {
+        errors: {
+          display: true,
+          message: "称号の変更に失敗しました。"
+        }
+      }, status: :bad_request
     end
   end
 end
