@@ -143,11 +143,13 @@ const TitleListSentenceWrapper = styled(DescriptionWrapper)`
 
 // 称号一覧のカードを包括しているラッパー
 const TitleListWrapper = styled.div`
-  padding-top: 2%;
   text-align: center;
   display: flex;
   flex-wrap: wrap;
   justify-content: space-evenly;
+  padding-bottom: 3%;
+  width: 88%;
+  margin: 0 auto;
 `;
 
 export const MyPages = () => {

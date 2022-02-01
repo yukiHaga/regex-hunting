@@ -35,6 +35,7 @@ const GameContentTitleWrapper = styled.div`
 const GameContentDescriptionWrapper = styled.div`
   width: 90%;
   margin: 0 auto;
+  border-radius: 3px;
   box-shadow: 0 0px 20px rgba(0,0,0,0.2);
   background-color: ${COLORS.WHITE};
   @media (max-width: ${WIDTH.MOBILE}) {
@@ -49,7 +50,7 @@ const GameContentImageWrapper = styled.img`
   box-sizing: border-box;
   border: 2px solid ${COLORS.BLACK};
   max-width: 100%;
-  border-radius: 3px;
+  border-radius: 3px 3px 0px 0px;
 `;
 
 const GameContentMainWrapper = styled.div`
@@ -72,7 +73,7 @@ const GameContentSentenceWrapper = styled.div`
   text-align: left;
   font-style: normal;
   font-weight: 500;
-  font-size: 1.1em;
+  font-size: 1.0em;
   color: ${COLORS.BLACK};
   @media (max-width: ${WIDTH.MOBILE}) {
     font-size: 0.9em;
