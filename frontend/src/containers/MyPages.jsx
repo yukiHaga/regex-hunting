@@ -17,6 +17,7 @@ import { LearningAnalysisBox } from '../components/Games/LearningAnalysisBox.jsx
 import { TimeAnalysisBox } from '../components/Games/TimeAnalysisBox.jsx';
 import { FastAnalysisBox } from '../components/Games/FastAnalysisBox.jsx';
 import { SecondSelectBox } from '../components/Games/SecondSelectBox.jsx';
+import { TitleFlashMessage } from '../components/FlashMessages/TitleFlashMessage.jsx';
  
 // Images
 import ElementaryGameContentImage from '../images/elementary_game_content.png';
@@ -189,7 +190,10 @@ export const MyPages = () => {
     isOpenDialog: false,
     name: "",
     release_date: "",
-    release_condition: ""
+    release_condition: "",
+    display: false,
+    message: "",
+    get_page_info: false
   };
 
   // MyPageの状態を管理するstate
@@ -247,8 +251,10 @@ export const MyPages = () => {
   // user存在時のみ発動するように、if文で制御した
   // 内部で今月のグラフのデータも算出している
   // sessionStateがtrueの時かつ、userがサーバーから取得できたときに実行する
+  // get_page_infoのおかげで、マイページのデータを取得したら、
+  // このuseLayoutEffectは機能しないように設定されている
   useLayoutEffect(() => {
-    if(sessionState && Object.keys(user).length){
+    if(!myPageState.get_page_info && sessionState && Object.keys(user).length){
       getMyPageInfo(user).then((data) => {
         setMyPageState((prev) => ({
           ...prev,
@@ -260,7 +266,8 @@ export const MyPages = () => {
           selected_total_time: data.total_time_per_difficulty.elementary,
           selected_correct_avg: data.correct_avg_per_difficulty.elementary,
           selected_fast_time: data.fast_time_per_difficulty.elementary,
-          difficulty_month_title: `初級編(${this_month}月)`
+          difficulty_month_title: `初級編(${this_month}月)`,
+          get_page_info: true
         })); 
       }).catch((e) => {
         if(e.response.status === HTTP_STATUS_CODE.NOT_FOUND){
@@ -275,7 +282,8 @@ export const MyPages = () => {
   }, [
     user,
     sessionState,
-    this_month
+    this_month,
+    myPageState.get_page_info
   ]);
 
   // ゲーム中のユーザーがトップページに戻ったときに
@@ -289,8 +297,6 @@ export const MyPages = () => {
     battleAudioState.play,
     battleAudioState.audio
   ])
- 
-  console.log(myPageState)
 
   return (
     <>
@@ -303,6 +309,11 @@ export const MyPages = () => {
             <MainWrapper>
               <SessionFlashMessage
                 location={location}
+              />
+              <TitleFlashMessage
+                display={myPageState.display}
+                message={myPageState.message}
+                setMyPageState={setMyPageState}
               />
               <MainFirstWrapper>
                 <UserStatus

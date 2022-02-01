@@ -98,7 +98,6 @@ export const LoginDialog = ({
     shouldUnregister: false 
   }); 
 
-
   // Formの検証後に呼び出される関数
   // dataにはフォームに入力したデータが入る
   // dataを実引数としてpostUserSeesionを呼び出した後、

@@ -54,6 +54,7 @@ export const TitleSettingButton = ({
     requestUserActionTyps
   } = useContext(UserContext);
 
+  // my-pageじゃなくて、/にすると、フラッシュメッセージが表示された
   const handleTitleSetting = () => {
     patchTitleSetting(user, name).then((data) => {
       dispatch({
@@ -63,6 +64,15 @@ export const TitleSettingButton = ({
           user: data.user,
         }
       });
+      setMyPageState((prev) =>({
+        ...prev,
+        isOpenDialog: false,
+        name: "",
+        release_date: "",
+        release_condition: "",
+        display: true,
+        message: "称号を変更しました。"
+      }));
     }).catch((e) => {
       if(e.response.status === HTTP_STATUS_CODE.NOT_FOUND){
         dispatch({
@@ -75,13 +85,6 @@ export const TitleSettingButton = ({
         throw e;
       }
     });
-    setMyPageState((prev) =>({
-      ...prev,
-      isOpenDialog: false,
-      name: "",
-      release_date: "",
-      release_condition: ""
-    }));
   };
 
   return (
