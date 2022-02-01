@@ -17,9 +17,6 @@ import ManhoodBackground from '../../images/manhood_background.png';
 import SelfEffacementBackground from '../../images/self_effacement_background.png';
 import HeroBackground from '../../images/hero_background.png';
 
-// Responsive
-import { WIDTH } from '../../style_constants.js';
-
 // heigthはpx指定しないとダメ
 const InnerTitleCardWrapper = styled.div`
   width: 17%;

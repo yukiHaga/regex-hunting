@@ -6,8 +6,8 @@ import { BlueRoundButton } from '../shared_style';
 const SignUpButtonWrapper = styled(BlueRoundButton)`
   border-style: none;
   margin-bottom: 3%;
-  opacity: ${(props) => props.disabled ? 0.3 : 1};
-  pointer-events: ${(props) => props.disabled ? 'none' : 'auto'};
+  opacity: ${({disabled}) => disabled ? 0.3 : 1};
+  pointer-events: ${({disabled}) => disabled ? 'none' : 'auto'};
   width: 77%;
   padding: 2.4%;
 `;

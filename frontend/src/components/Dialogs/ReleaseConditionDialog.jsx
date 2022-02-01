@@ -16,25 +16,32 @@ import { BackToModalButton } from '../Buttons/BackToModalButton.jsx';
 // 称号を変更するボタン
 import { TitleSettingButton } from '../Buttons/TitleSettingButton.jsx';
 
+// 背景画像
+import DarkProfessionalBackGround from '../../images/dark_professional_background.png';
+import DarkAntiquityBackGround from '../../images/dark_antiquity_background.png';
+import DarkLegendBackground from '../../images/dark_legend_background.png';
+import DarkGeniusBackground from '../../images/dark_genius_background.png';
+import DarkApprenticeBackground from '../../images/dark_apprentice_background.png';
+import DarkManhoodBackground from '../../images/dark_manhood_background.png';
+import DarkSelfEffacementBackground from '../../images/dark_self_effacement_background.png';
+import DarkHeroBackground from '../../images/dark_hero_background.png';
+
 const CustomDialogInnerWrapper = styled.div`
-  padding-right: 10px;
-  padding-left: 10px;
-  padding-top: 10px;
-  background-color: ${COLORS.SUB};
+  border-radius: 3px;
   text-align: center;
-  width: 450px;
-  height: ${({release_date}) => release_date ? '350px' : '250px'};
+  background-image: url(${({name}) => getImage(name)});
+  background-size: cover;
+  background-color: ${COLORS.BLACK};
+  position: relative;
 `;
 
 const CustomDialogTitleWrapper = styled.div`
-  height: 74px;
   font-family: Helvetica;
   font-style: normal;
   font-weight: bold;
-  font-size: 40px;
-  line-height: 74px;
-  color: ${COLORS.MAIN};
-  padding-top: 30px;
+  font-size: 2.0em;
+  color: ${COLORS.WHITE};
+  padding-top: 10%;
 `;
 
 const CustomDialogContent = styled(DialogContent)`
@@ -42,35 +49,59 @@ const CustomDialogContent = styled(DialogContent)`
 `;
 
 const CustomDialogContentSentence = styled(DescriptionWrapper)`
-  display: inline-block;
-  text-align: left;
-  font-family: YuGothic;
   font-style: normal;
-  font-size: 20px;
+  font-size: 1.1em;
+  color: ${COLORS.WHITE}
 `;
 
 const CustomDialogContentReleaseSentenceWrapper = styled.div`
   text-align: center;
-  padding-top: 30px;
+  padding-top: 5%;
 `;
 
 const CustomDialogContentReleaseSentence = styled(CustomDialogContentSentence)`
-  color: ${COLORS.RED};
+  font-size: 1.1em;
+  padding-bottom: 8%;
 `;
 
 // backボタンのラッパー 
 // backボタンを固定してる
 const BackToModalButtonWrapper = styled.div`
   position: fixed;
-  background-color: ${COLORS.SUB};
-  width: 450px;
-  z-index: 2;
+  z-index: 1;
+  border-radius: 3px;
+  color: ${COLORS.WHITE}
 `;
 
 const ButtonsWrapper = styled.div`
   display: flex;
   justify-content: center;
+  padding-top: 8%;
+  padding-bottom: 7%;
 `;
+
+const getImage = (name) => {
+  switch (name) {
+    case '見習いハンター':
+      return DarkApprenticeBackground;
+    case '一人前ハンター':
+      return DarkManhoodBackground;
+    case '玄人ハンター':
+      return DarkProfessionalBackGround;
+    case 'いにしえのハンター':
+      return DarkAntiquityBackGround;
+    case '天才と呼ばれしハンター':
+      return DarkGeniusBackground;
+    case '伝説のハンター':
+      return DarkLegendBackground;
+    case '無我の境地':
+      return DarkSelfEffacementBackground;
+    case '語り継がれし英雄':
+      return DarkHeroBackground;
+    default:
+      return null;
+  }
+};
 
 // gameStateのrank_upがtrueの時に開くモーダル
 // サーバーに送ったゲームデータの戻り値のrank_upがtrueの場合、開く
@@ -88,9 +119,12 @@ export const ReleaseConditionDialog = ({
   return(
     <Dialog
       open={isOpen}
+      fullWidth="true"
+      maxWidth="xs"
     >
       <CustomDialogInnerWrapper 
         release_date={release_date}
+        name={name}
       > 
         <BackToModalButtonWrapper>
           <BackToModalButton 
@@ -105,22 +139,23 @@ export const ReleaseConditionDialog = ({
             {release_condition}
           </CustomDialogContentSentence>
         </CustomDialogContent>
-        {
-          release_date && 
-            <>
-              <CustomDialogContentReleaseSentenceWrapper>
-                <CustomDialogContentReleaseSentence>
-                  {`${release_date.replace(/-/g, '/')}に解放`}
-                </CustomDialogContentReleaseSentence>
-              </CustomDialogContentReleaseSentenceWrapper>
-              <ButtonsWrapper>
-                <TitleSettingButton 
-                  name={name}
-                  setMyPageState={setMyPageState}
-                />
-              </ButtonsWrapper>
-            </>
-        }
+        <CustomDialogContentReleaseSentenceWrapper>
+          <CustomDialogContentReleaseSentence>
+            {
+              release_date ?
+                `解放日: ${release_date.replace(/-/g, '/')}`
+              :
+                '未解放'
+            }
+          </CustomDialogContentReleaseSentence>
+        </CustomDialogContentReleaseSentenceWrapper>
+        <ButtonsWrapper>
+          <TitleSettingButton 
+            name={name}
+            setMyPageState={setMyPageState}
+            disabled={!release_date}
+          />
+        </ButtonsWrapper>
       </CustomDialogInnerWrapper>
     </Dialog>
   );

@@ -16,7 +16,6 @@ import { HTTP_STATUS_CODE } from '../../constants';
 import { patchTitleSetting } from '../../apis/titleSetting.js';
 
 const TitleSettingButtonWrapper = styled(BaseLink)`
-  margin-top: 30px;
   border-style: none;
   border-radius: 3px;
   box-shadow: 0 2px 4px rgba(0,0,0,0.3);
@@ -24,27 +23,24 @@ const TitleSettingButtonWrapper = styled(BaseLink)`
   :hover {
     box-shadow: 0 0 2px rgba(0,0,0,0.2);
   }
+  padding: 2.8%;
+  background-color: ${COLORS.MAIN};
+  opacity: ${({disabled}) => disabled ? 0.7 : 1};
+  pointer-events: ${({disabled}) => disabled ? 'none' : 'auto'};
 `;
 
 const TitleSettingButtonTextWrapper = styled.div`
-  width: 150px;
-  height: 40px;
-  border-radius: 3px;
-  font-family: YuGothic;
   font-style: normal;
   font-weight: 500;
-  font-size: 18px;
-  line-height: 40px;
+  font-size: 1.1em;
   color: ${COLORS.WHITE};
   text-align: center;
-  background-color: ${COLORS.MAIN};
-  padding-top: 5px;
-  padding-bottom: 5px;
 `;
 
 export const TitleSettingButton = ({
   name,
-  setMyPageState
+  setMyPageState,
+  disabled
 }) => {
 
   // useContext
@@ -90,7 +86,11 @@ export const TitleSettingButton = ({
 
   return (
     <>
-      <TitleSettingButtonWrapper to={'/my-page'} onClick={handleTitleSetting}>
+      <TitleSettingButtonWrapper 
+        to={'/my-page'} 
+        onClick={handleTitleSetting}
+        disabled={disabled}
+      >
         <TitleSettingButtonTextWrapper>
           称号を変更する
         </TitleSettingButtonTextWrapper>
