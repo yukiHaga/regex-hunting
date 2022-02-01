@@ -25,6 +25,7 @@ import { GameStartDescriptionSentence } from '../components/Sentences/GameStartD
 import { GameContent } from '../components/GameContents/GameContent.jsx';
 import { BoundDescriptionSentence } from '../components/Sentences/BoundDescriptionSentence.jsx';
 import { SubTitleSentence } from '../components/Sentences/SubTitleSentence.jsx';
+import { MobileFlashMessage } from '../components/FlashMessages/MobileFlashMessage.jsx';
 
 // Contextオブジェクト
 import { UserContext } from "../context/UserProvider.js";
@@ -191,6 +192,15 @@ export const LandingPages = () => {
   // モーダルを管理するstate
   const [state, setState] = useState(loginInitialState);
 
+  // モバイルに関するstateの初期値
+  const mobileInitialState = {
+    display: false,
+    message: ""
+  }
+
+  // モバイルを管理するstate
+  const [mobileState, setMobileState] = useState(mobileInitialState);
+
   // useContext
   const {
     requestUserState: { 
@@ -255,10 +265,16 @@ export const LandingPages = () => {
           isOpenDialog: true,
           modalType: modalType
         })}
+        setMobileState={setMobileState}
       />
       <MainWrapper>
         <SessionFlashMessage
           location={location}
+        />
+        <MobileFlashMessage
+          display={mobileState.display}
+          message={mobileState.message}
+          setMobileState={setMobileState}
         />
         <BackGroundImageCover src={GroupBackGroundImage} alt="main-image" />
         <MainTitleImageCover src={MainTitleImage} alt="main-title"/>
@@ -303,14 +319,17 @@ export const LandingPages = () => {
           <GameContent 
             difficulty='elementary' 
             image={ElementaryGameContentImage} 
+            setMobileState={setMobileState}
           />
           <GameContent 
             difficulty='intermediate' 
             image={IntermediateGameContentImage} 
+            setMobileState={setMobileState}
           />
           <GameContent 
             difficulty='advanced' 
             image={IntermediateGameContentImage} 
+            setMobileState={setMobileState}
           />
         </GameContentsWrapper>
       </FifthWrapper>

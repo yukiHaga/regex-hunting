@@ -88,7 +88,11 @@ const GameContentStartWrapper = styled.div`
 
 // LPページの場合、onClickLinkはモーダル管理のstateを更新する関数
 // ログインしている場合、onClickLinkは何もない。
-export const GameContent = memo(({difficulty, image}) => {
+export const GameContent = memo(({
+  difficulty, 
+  image,
+  setMobileState
+}) => {
 
   const difficultySentence = (difficulty) => {
     let sentence;
@@ -131,7 +135,10 @@ export const GameContent = memo(({difficulty, image}) => {
               {(difficultySentence(difficulty))}
             </GameContentSentenceWrapper>
             <GameContentStartWrapper>
-              <GameStartButton difficulty={difficulty}/>
+              <GameStartButton 
+                difficulty={difficulty}
+                setMobileState={setMobileState}
+              />
             </GameContentStartWrapper>
           </GameContentMainWrapper>
         </GameContentDescriptionWrapper>

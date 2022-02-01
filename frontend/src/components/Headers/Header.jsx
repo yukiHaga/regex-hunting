@@ -27,7 +27,7 @@ import MenuItem from '@mui/material/MenuItem';
 // ログインしている場合、onClickLinkは何もない。
 export const Header = memo(({
   onClickLink,
-  onClickMobile
+  setMobileState
 }) => {
 
   // useContext
@@ -51,6 +51,15 @@ export const Header = memo(({
 
   const handleCloseUserMenu = () => {
     setAnchorElUser(null);
+  };
+
+  const handleMobileState = () => {
+    handleCloseNavMenu();
+    setMobileState((prev)=>({
+      ...prev,
+      display: true,
+      message: "PCからご利用ください",
+    }));
   };
 
   // flexGrowは空いたスペースへの伸び率を表している
@@ -114,8 +123,8 @@ export const Header = memo(({
                 <MenuItem 
                   key="2" 
                   component={BaseLink}
-                  to="/?user=mobile"
-                  onClick={handleCloseNavMenu}
+                  to="/"
+                  onClick={handleMobileState}
                 >
                   <Typography textAlign="center">
                     ログイン
@@ -124,8 +133,8 @@ export const Header = memo(({
                 <MenuItem 
                   key="3" 
                   component={BaseLink}
-                  to="/?user=mobile"
-                  onClick={handleCloseNavMenu}
+                  to="/"
+                  onClick={handleMobileState}
                 >
                   <Typography textAlign="center">
                     新規会員登録

@@ -1,20 +1,33 @@
-import React, { Fragment, useState } from 'react';
+import React, { Fragment, useState, useEffect } from 'react';
 
 // フラッシュメッセージ関係のコンポーネント;
 import Alert from '@mui/material/Alert';
 import Snackbar from '@mui/material/Snackbar';
 
-export const SessionFlashMessage = ({
-  location,
+export const MobileFlashMessage = ({
+  display,
+  message,
+  setMobileState
 }) => {
 
-  // displayが存在するか、user=moblieが存在するときにtrueになる
-  // use=mobileからtrueにさせるのは、useEffect実行時である
-  const [open, setOpen] = useState(Boolean(location?.state?.display));
+  const [open, setOpen] = useState(null);
 
   const handleClose = () => {
     setOpen(false);
+    setMobileState((prev) => ({
+      ...prev,
+      display: false,
+      message: ""
+    }))
   };
+
+  useEffect(() => {
+    if(display) {
+      setOpen(display);
+    }
+  },[
+    display
+  ])
 
   return (
     <>
@@ -30,12 +43,10 @@ export const SessionFlashMessage = ({
           zIndex: 1100,
           top: { xs: '10%', md: '10%' }
         }}
-        onClose={
-          handleClose
-        }
+        onClose={handleClose}
       >
         <Alert variant="filled" severity="success">
-          {location?.state?.success}
+          {message}
         </Alert>
       </Snackbar>
     </>

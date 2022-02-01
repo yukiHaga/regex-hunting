@@ -35,14 +35,17 @@ const GameStartButtonTextWrapper = styled.div`
   }
 `;
 
-export const GameStartButton = ({difficulty}) => {
+export const GameStartButton = ({
+  difficulty,
+  setMobileState
+}) => {
 
   // デバイス幅が640px以下の場合にスマホと判定するようにしている
   // タブレットでもゲームして欲しくないので、1000pxにした
   // デバイス幅が640px以下なら、window.matchMedia('(max-device-width: 640px)').matchesがtrueになる
   const url = useMemo(() => {
     if (window.matchMedia(`(max-device-width: ${WIDTH.PC})`).matches) {
-      return '/?user=mobile'; 
+      return '/'; 
     } else {
       return `/games/${difficulty}/start`; 
     }
@@ -50,9 +53,17 @@ export const GameStartButton = ({difficulty}) => {
     difficulty
   ]);
 
+  const handleMobileState = () => {
+    setMobileState((prev)=>({
+      ...prev,
+      display: true,
+      message: "PCからご利用ください",
+    }));
+  };
+
   return (
     <>
-      <GameStartButtonWrapper to={url}>
+      <GameStartButtonWrapper to={url} onClick={handleMobileState}>
         <GameStartButtonTextWrapper>
           スタート
         </GameStartButtonTextWrapper>

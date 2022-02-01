@@ -1,9 +1,6 @@
 import React, { Fragment } from 'react'; 
 import styled from 'styled-components';
 
-// Colors
-import { COLORS } from '../../style_constants.js';
-
 // 戻るアイコン
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 
