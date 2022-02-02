@@ -14,8 +14,8 @@ const HpGageWrapper = styled.div`
   background-color: ${COLORS.GAGE_GRAY};
   border-radius: 0 0 3px 3px;
   width: 100%;
-  height: 31px;
   display: flex;
+  height: 3.9vh;
   box-sizing: border-box;
   border-left: 5px solid;
   border-right: 5px solid;
@@ -24,13 +24,10 @@ const HpGageWrapper = styled.div`
 `;
 
 const TypeWrapper = styled.div`
-  height: 26px;
-  width: 120px;
-  font-size: 18px;
-  line-height: 26px;
+  width: 8.5%;
+  font-size: 1.2em;
   background-color: ${COLORS.GAGE_GRAY};
   color: ${COLORS.BROWN};
-  font-family: YuGothic;
   font-weight: bold;
   text-align: center;
 `;
