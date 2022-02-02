@@ -10,7 +10,7 @@ const OAuthLoginButtonWrapper = styled(AnchorRoundButton)`
   margin: 0 auto;
   margin-bottom: 2%;
   background-color: ${(props) => props.backgroundcolor || COLORS.BLUE};
-  width: 77%;
+  width: 100%;
   border-style: none;
   display: flex;
   align-items: center;
@@ -20,7 +20,7 @@ const OAuthLoginButtonWrapper = styled(AnchorRoundButton)`
   font-size: 1.2em;
   font-weight: 500;
   text-decoration: none;
-  padding: 1%;
+  padding: 1.5%;
 `;
 
 const OAuthLoginButtonIconWrapper = styled.div`

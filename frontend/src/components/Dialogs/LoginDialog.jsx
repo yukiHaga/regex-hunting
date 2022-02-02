@@ -64,9 +64,16 @@ const CustomDialogTitleImage = styled.img`
   padding: 2% 8%;
 `;
 
+const CustomForm = styled.form`
+  width: 100%;
+`;
+
+const CustomFormControl = styled(FormControl)`
+  width: 100%;
+`;
+
 // ここのwidthはpx指定しないとレイアウトが崩れるので、pxにした
 const CustomFilledInput = styled(FilledInput)`
-  width: 400px;
   margin-bottom: ${({
     errors_box
   }) => typeof errors_box === 'undefined' && '4%' };
@@ -161,20 +168,20 @@ export const LoginDialog = ({
     <Dialog
       open={isOpen}
       onClose={onClose}
-      maxWidth='sm'
+      maxWidth='xs'
     >
       <CustomDialogInnerWrapper> 
         <CloseButton onClose={onClose} fontSize="small" /> 
         <CustomDialogTitleImage src={LoginImage} alt="Login" />
         <DialogContent>
-          <form onSubmit={handleSubmit(onSubmit)}>
+          <CustomForm onSubmit={handleSubmit(onSubmit)}>
             <Controller 
               name="EmailBox"
               control={control}
               defaultValue=""
               rules={registerOptions.email}
               render={({ field }) => (
-                <FormControl variant="filled">              
+                <CustomFormControl variant="filled">              
                   <InputLabel htmlFor="email-component-filled">メールアドレス</InputLabel>
                   <CustomFilledInput
                     {...field}
@@ -188,7 +195,7 @@ export const LoginDialog = ({
                                          {errors.EmailBox.message}
                                        </InputErrorSentence>
                   }
-                </FormControl>              
+                </CustomFormControl>              
               )}
             />
             <Controller 
@@ -197,7 +204,7 @@ export const LoginDialog = ({
               defaultValue=""
               rules={registerOptions.password}
               render={({ field }) => (
-                <FormControl variant="filled">              
+                <CustomFormControl variant="filled">              
                   <InputLabel htmlFor="password-component-filled">パスワード</InputLabel>
                   <CustomFilledInput
                     {...field}
@@ -211,7 +218,7 @@ export const LoginDialog = ({
                                             {errors.PasswordBox.message}
                                           </InputErrorSentence>
                   }
-                </FormControl>              
+                </CustomFormControl>              
               )}
             />
             <LoginButton 
@@ -225,7 +232,7 @@ export const LoginDialog = ({
                   {requestUserState.errors.detail}
                 </SubmitErrorSentence>
             }
-          </form>
+          </CustomForm>
           <PasswordResetSentence />
           <OrDirectionSentence />
           <OAuthLoginButton 
