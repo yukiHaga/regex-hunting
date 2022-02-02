@@ -14,21 +14,18 @@ const TimeGageWrapper = styled.div`
   background-color: ${COLORS.GAGE_GRAY};
   border-radius: 10px 10px 0 0;
   width: 100%;
-  height: 36px;
   display: flex;
+  height: 4.6vh;
   box-sizing: border-box;
   border: 5px solid;
   border-color: ${COLORS.GAGE_GRAY};
 `;
 
 const TypeWrapper = styled.div`
-  height: 26px;
-  width: 120px;
-  font-size: 18px;
-  line-height: 26px;
+  width: 8.5%;
+  font-size: 1.2em;
   background-color: ${COLORS.GAGE_GRAY};
   color: ${COLORS.BROWN};
-  font-family: YuGothic;
   font-weight: bold;
   text-align: center;
 `;
