@@ -128,8 +128,6 @@ const MonsterBlockWrapper = styled.div`
 const QuestionBlockWrapper = styled.div`
   width: 100%;
   box-shadow: 0 0px 20px rgba(0,0,0,0.2);
-  display: flex;
-  justify-content: center;
   padding-top: 1%;
 `;
 
