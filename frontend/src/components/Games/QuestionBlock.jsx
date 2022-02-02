@@ -43,14 +43,14 @@ const DifficultyWrapper = styled.div`
   background-color: ${COLORS.MAIN};
   border-radius: 3px 3px 3px 0;
   width: 5%;
-  font-size: 1.1em;
+  font-size: 1em;
   color: ${COLORS.SUB};
   text-align: center;
   font-style: normal;
   position: absolute;
   z-index: 0;
-  padding-top: 0.63%;
-  padding-bottom: 0.63%;
+  padding-top: 0.73%;
+  padding-bottom: 0.73%;
 `;
 
 // ターゲットセンテンス
