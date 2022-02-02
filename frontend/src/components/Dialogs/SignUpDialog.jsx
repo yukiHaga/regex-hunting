@@ -63,9 +63,16 @@ const CustomDialogTitleImage = styled.img`
   padding: 2% 8%;
 `;
 
+const CustomForm = styled.form`
+  width: 100%;
+`;
+
+const CustomFormControl = styled(FormControl)`
+  width: 100%;
+`;
+
 // ここのwidthはpx指定しないとレイアウトが崩れるので、pxにした
 const CustomFilledInput = styled(FilledInput)`
-  width: 400px;
   margin-bottom: ${({
     errors_box
   }) => typeof errors_box === 'undefined' && '4%' };
@@ -202,21 +209,21 @@ export const SignUpDialog = ({
     <Dialog
       open={isOpen}
       onClose={onClose}
-      maxWidth='sm'
+      maxWidth='xs'
     >
       <CustomDialogInnerWrapper> 
         <CloseButton onClose={onClose} fontSize="small" /> 
         <CustomDialogTitleImage src={SignUpImage} alt="SignUp" />
         <DialogContent>
           <CreateAccountSentence />
-          <form onSubmit={handleSubmit(onSubmit)}>
+          <CustomForm onSubmit={handleSubmit(onSubmit)}>
             <Controller 
               name="NameBox"
               control={control}
               defaultValue=""
               rules={registerOptions.name}
               render={({ field }) => (
-                <FormControl variant="filled">              
+                <CustomFormControl variant="filled">              
                   <InputLabel htmlFor="name-component-filled">名前</InputLabel>
                   <CustomFilledInput
                     {...field}
@@ -230,7 +237,7 @@ export const SignUpDialog = ({
                                         {errors.NameBox.message}
                                       </InputErrorSentence>
                   }
-                </FormControl>              
+                </CustomFormControl>              
               )}
             />
             <Controller 
@@ -239,7 +246,7 @@ export const SignUpDialog = ({
               defaultValue=""
               rules={registerOptions.email}
               render={({ field }) => (
-                <FormControl variant="filled">              
+                <CustomFormControl variant="filled">              
                   <InputLabel htmlFor="email-component-filled">メールアドレス</InputLabel>
                   <CustomFilledInput
                     {...field}
@@ -253,7 +260,7 @@ export const SignUpDialog = ({
                                          {errors.EmailBox.message}
                                        </InputErrorSentence>
                   }
-                </FormControl>              
+                </CustomFormControl>              
               )}
             />
             <Controller 
@@ -262,7 +269,7 @@ export const SignUpDialog = ({
               defaultValue=""
               rules={registerOptions.password}
               render={({ field }) => (
-                <FormControl variant="filled">              
+                <CustomFormControl variant="filled">              
                   <InputLabel htmlFor="password-component-filled">パスワード</InputLabel>
                   <CustomFilledInput
                     {...field}
@@ -276,7 +283,7 @@ export const SignUpDialog = ({
                                             {errors.PasswordBox.message}
                                           </InputErrorSentence>
                   }
-                </FormControl>              
+                </CustomFormControl>              
               )}
             />
             <Controller 
@@ -285,7 +292,7 @@ export const SignUpDialog = ({
               defaultValue=""
               rules={registerOptions.passwordConfirmation}
               render={({ field }) => (
-                <FormControl variant="filled">              
+                <CustomFormControl variant="filled">              
                   <InputLabel htmlFor="password-confirmation-component-filled">
                     パスワード(確認用)
                   </InputLabel>
@@ -301,7 +308,7 @@ export const SignUpDialog = ({
                                                         {errors.PasswordConfirmationBox.message}
                                                       </InputErrorSentence>
                   }
-                </FormControl>              
+                </CustomFormControl>              
               )}
             />
             <SignUpButton disabled={!isValid} />
@@ -313,7 +320,7 @@ export const SignUpDialog = ({
                   {requestUserState.errors.detail}
                 </SubmitErrorSentence>
             }
-          </form>
+          </CustomForm>
           <OrDirectionSentence />
           <OAuthLoginButton 
             url={googleOAuth}
