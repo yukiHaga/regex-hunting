@@ -7,8 +7,8 @@ import { COLORS } from '../../style_constants.js';
 const HintBarWrapper = styled.div`
   background-color: ${COLORS.GRAY};
   border-radius: 10px;
-  height: 370px;
-  width: 236px;
+  height: 44vh;
+  width: 16.5vw;
   display: inline-block;
   position: relative;
   background-image: -webkit-radial-gradient(transparent 0%,rgba(255,255,255,.3) 50%,transparent 50%,rgba(0,0,0,.1) 100%);
@@ -18,8 +18,8 @@ const HintBarWrapper = styled.div`
 `;
 
 const InnerHintBarWrapper = styled.div`
-  height: 355px;
-  width: 221px;
+  height: 96%;
+  width: 94%;
   border-radius: 10px;
   position: absolute;
   top: 50%;
@@ -30,38 +30,36 @@ const InnerHintBarWrapper = styled.div`
 `;
 
 const TitleWrapper = styled.div`
-  height: 60px;
-  line-height: 60px;
   color: ${COLORS.MAIN};
   text-align: left;
-  padding-left: 20px;
-  padding-right: 20px;
+  padding-top: 5%;
+  padding-bottom: 3%;
+  padding-left: 9%;
+  padding-right: 9%;
   font-family: Raleway;
   font-style: italic;
   font-weight: bold;
-  font-size: 32px;
-  padding-top: 5px;
-  padding-bottom: 5px;
+  font-size: 2em;
 `;
 
 const OuterMessageWrapper = styled.div`
-  padding-left: 20px;
-  padding-right: 20px;
-  padding-bottom: 5px;
+  padding-left: 9%;
+  padding-right: 9%;
   background-color: ${COLORS.SUB};
   text-align: center;
   margin: 0 auto;
 `;
 
+// text-align: justifyは、テキストの改行位置が
+// ボックスの両端ぴったりに揃うようにしてくれる
+// text-justifyは、text-justify: inter-ideographのIE用
 const MessageWrapper = styled.div`
   display: inline-block;
   text-align: justify;
   text-justify: inter-ideograph;
   color: ${COLORS.BLACK};
-  font-family: YuGothic;
   font-style: normal;
-  font-size: 16px;
-  font-weight: 500;
+  font-size: 1em;
 `;
 
 // ヒントを動的に出力するバー
