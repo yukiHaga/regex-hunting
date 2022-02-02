@@ -52,12 +52,13 @@ const ElementaryWrapper = styled.div`
   animation-name: ${(props) => props.game_result === "win" && FadeOutAnime};
   animation-duration: 3s;
   animation-fill-mode: forwards;
+  text-align: center;
 `;
 
 // 初登場時のモンスター
 const FirstElementaryMonsterWrapper = styled.img`
-  width: 211px;
-  height: 205px;
+  width: 50%;
+  height: 50%;
   object-fit: contain;
   animation-name: ${FadeInAnime};
   animation-duration: 3s;
@@ -65,8 +66,8 @@ const FirstElementaryMonsterWrapper = styled.img`
 `;
 
 const ElementaryMonsterWrapper = styled.img`
-  width: 211px;
-  height: 205px;
+  width: 50%;
+  height: 50%
   object-fit: contain;
   animation-name: ${(props) => props.question_judgement === "correct" && ElementaryMonsterFlash};
   animation-duration: 1s;
@@ -75,8 +76,8 @@ const ElementaryMonsterWrapper = styled.img`
 `;
 
 const HpGageWrapper = styled.div`
-  width: 160px;
-  height: 15px;
+  width: 50%;
+  height: 10%;
   border-radius: 3px;
   background-color: ${COLORS.LIGHT_BLACK};
   animation-name: ${(props) => props.first_appearance && FadeInAnime};
@@ -88,9 +89,9 @@ const HpGageWrapper = styled.div`
 `;
 
 const InnerHpGageWrapper = styled.div`
-  width: ${(props) => `${160 * (props.monster_hp / props.monster_max_hp)}px`};
+  width: ${(props) => `${100 * (props.monster_hp / props.monster_max_hp)}%`};
   transition: 0.5s;
-  height: 15px;
+  height: 2vh;
   border-radius: 3px;
   background-color: ${(props) => handleColorType(props.monster_hp)};
   background-image: -webkit-linear-gradient(transparent 0%,rgba(255,255,255,.3) 50%,transparent 50%,rgba(0,0,0,.1) 100%);

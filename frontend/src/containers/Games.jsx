@@ -116,7 +116,7 @@ const BattleBlockWrapper = styled.div`
 // ここに高さを設定しておかないと、モンスターがいない時に
 // 高さが0になってレイアウトが一気に崩れる
 const MonsterBlockWrapper = styled.div`
-  width: 70%;
+  width: 67%;
   margin: 0 auto;
   display: flex;
   justify-content: space-evenly;
