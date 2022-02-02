@@ -3,10 +3,18 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import { StyledEngineProvider, ThemeProvider } from '@mui/material/styles';
+import CssBaseline from '@mui/material/CssBaseline';
+import theme from './theme/theme.js';
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <ThemeProvider theme={theme}>
+      <CssBaseline />
+      <StyledEngineProvider injectFirst>
+        <App />
+      </StyledEngineProvider>
+    </ThemeProvider>
   </React.StrictMode>,
   document.getElementById('root')
 );

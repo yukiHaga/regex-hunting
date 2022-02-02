@@ -9,6 +9,7 @@ import { COLORS } from '../../style_constants.js';
 // Responsive
 import { WIDTH } from '../../style_constants.js';
 
+// ここのwidthはpx指定しないとレスポンシブ時にレイアウトが崩れる
 const GameStartButtonWrapper = styled(BaseLink)`
   border-style: none;
   border-radius: 3px;
@@ -26,23 +27,28 @@ const GameStartButtonTextWrapper = styled.div`
   background-color: ${COLORS.BLUE};
   text-align: center;
   font-size: 1.0em;
-  font-family: YuGothic;
   font-style: normal;
   font-weight: 500;
   padding: 3%;
+  @media (max-width: ${WIDTH.DEV_TOOL}) {
+    font-size: 0.9em;
+  }
   @media (max-width: ${WIDTH.MOBILE}) {
     font-size: 0.9em;
   }
 `;
 
-export const GameStartButton = ({difficulty}) => {
+export const GameStartButton = ({
+  difficulty,
+  setMobileState
+}) => {
 
   // デバイス幅が640px以下の場合にスマホと判定するようにしている
   // タブレットでもゲームして欲しくないので、1000pxにした
   // デバイス幅が640px以下なら、window.matchMedia('(max-device-width: 640px)').matchesがtrueになる
   const url = useMemo(() => {
-    if (window.matchMedia('(max-device-width: 1000px)').matches) {
-      return '/?user=mobile'; 
+    if (window.matchMedia(`(max-device-width: ${WIDTH.PC})`).matches) {
+      return '/'; 
     } else {
       return `/games/${difficulty}/start`; 
     }
@@ -50,9 +56,17 @@ export const GameStartButton = ({difficulty}) => {
     difficulty
   ]);
 
+  const handleMobileState = () => {
+    setMobileState((prev)=>({
+      ...prev,
+      display: true,
+      message: "PCからご利用ください",
+    }));
+  };
+
   return (
     <>
-      <GameStartButtonWrapper to={url}>
+      <GameStartButtonWrapper to={url} onClick={handleMobileState}>
         <GameStartButtonTextWrapper>
           スタート
         </GameStartButtonTextWrapper>

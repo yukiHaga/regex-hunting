@@ -9,16 +9,14 @@ import { FakeLink } from '../shared_style.js';
 // Responsive
 import { WIDTH } from '../../style_constants.js';
 
-
 const BoundDescriptionSentenceWrapper = styled(FakeLink)`
   width: 70%;
-  font-family: YuGothic;
   font-style: normal;
   font-weight: bold;
-  font-size: 2.5em;
+  font-size: 2.0em;
   color: ${COLORS.SUB};
   margin: 0 auto;
-  padding-bottom: 1%;
+  padding-top: 1.5%;
   @media (max-width: ${WIDTH.MOBILE}) {
     font-size: 1.1em;
     padding-top: 36%;

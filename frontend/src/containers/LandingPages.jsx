@@ -24,6 +24,8 @@ import { RankingDescriptionSentence } from '../components/Sentences/RankingDescr
 import { GameStartDescriptionSentence } from '../components/Sentences/GameStartDescriptionSentence.jsx';
 import { GameContent } from '../components/GameContents/GameContent.jsx';
 import { BoundDescriptionSentence } from '../components/Sentences/BoundDescriptionSentence.jsx';
+import { SubTitleSentence } from '../components/Sentences/SubTitleSentence.jsx';
+import { MobileFlashMessage } from '../components/FlashMessages/MobileFlashMessage.jsx';
 
 // Contextオブジェクト
 import { UserContext } from "../context/UserProvider.js";
@@ -115,7 +117,11 @@ const SecondBattleSceneImageCover = styled.img`
   object-fit: contain;
   margin-top: 4%;
   margin-bottom: 2%;
-  max-width: 100%
+  max-width: 100%;
+  @media (min-width: ${WIDTH.PC}) {
+    width: 50%;
+    margin-bottom: 0%;
+  }
 `;
 
 // サードのラッパー
@@ -132,7 +138,10 @@ const ThirdMyPageImageCover = styled.img`
   object-fit: contain;
   margin-top: 4%;
   margin-bottom: 4%;
-  max-width: 100%
+  max-width: 100%;
+  @media (min-width: ${WIDTH.PC}) {
+    width: 50%;
+  }
 `;
 
 // フォースのラッパー
@@ -149,7 +158,10 @@ const FourthRaknkingImageCover = styled.img`
   object-fit: contain;
   margin-top: 4%;
   margin-bottom: 4%;
-  max-width: 100%
+  max-width: 100%;
+  @media (min-width: ${WIDTH.PC}) {
+    width: 50%;
+  }
 `;
 
 // フィフスのラッパー
@@ -179,6 +191,15 @@ export const LandingPages = () => {
 
   // モーダルを管理するstate
   const [state, setState] = useState(loginInitialState);
+
+  // モバイルに関するstateの初期値
+  const mobileInitialState = {
+    display: false,
+    message: ""
+  }
+
+  // モバイルを管理するstate
+  const [mobileState, setMobileState] = useState(mobileInitialState);
 
   // useContext
   const {
@@ -244,17 +265,23 @@ export const LandingPages = () => {
           isOpenDialog: true,
           modalType: modalType
         })}
+        setMobileState={setMobileState}
       />
       <MainWrapper>
         <SessionFlashMessage
           location={location}
         />
+        <MobileFlashMessage
+          display={mobileState.display}
+          message={mobileState.message}
+          setMobileState={setMobileState}
+        />
         <BackGroundImageCover src={GroupBackGroundImage} alt="main-image" />
         <MainTitleImageCover src={MainTitleImage} alt="main-title"/>
         <Filter />
-        <SubText color={COLORS.SUB}>
+        <SubTitleSentence color={COLORS.SUB}>
           正規表現を学ぶ狩りに出よう
-        </SubText>
+        </SubTitleSentence>
         <Scroll to="gameContent" smooth={true}>
           <StartButton />
         </Scroll>
@@ -264,7 +291,7 @@ export const LandingPages = () => {
       </MainWrapper>
       <SecondWrapper id="what'sRegex">
         <SubText>
-          What's Regex Hunting ?
+          What's Regex Hunting？
         </SubText>
         <GameDescriptionSentence>
           Regex Huntingは、凶悪なモンスターを倒しながら<br/>
@@ -292,14 +319,17 @@ export const LandingPages = () => {
           <GameContent 
             difficulty='elementary' 
             image={ElementaryGameContentImage} 
+            setMobileState={setMobileState}
           />
           <GameContent 
             difficulty='intermediate' 
             image={IntermediateGameContentImage} 
+            setMobileState={setMobileState}
           />
           <GameContent 
             difficulty='advanced' 
             image={IntermediateGameContentImage} 
+            setMobileState={setMobileState}
           />
         </GameContentsWrapper>
       </FifthWrapper>

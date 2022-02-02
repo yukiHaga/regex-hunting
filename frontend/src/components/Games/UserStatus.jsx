@@ -13,76 +13,58 @@ import { COLORS } from '../../style_constants.js';
 // デフォルトのアバター画像
 import DefaultAvatarImage from '../../images/default_avatar.png';
 
+import { WIDTH } from '../../style_constants.js';
+
 // ステータスのラッパー
 const StatusWrapper = styled.div`
-  width: 700px;
-  height: 260px;
+  width: 55%;
+  padding-top: 2.9%;
+  padding-bottom: 2.9%;
   border-radius: 3px;
   background-color: ${COLORS.WHITE};
   box-shadow: 0 0px 20px rgba(0,0,0,0.2);
-  display: flex
-`;
-
-// イメージのラッパー
-const ImageWrapper = styled.div`
-  width: 220px;
-  height: 220px;
-  background-color: ${COLORS.WHITE};
   display: flex;
   align-items: center;
-  padding: 16px;
-`;
-
-// カスタムイメージ
-// imageタグだと縦横比を維持できない
-// background-imageだと縦横比を維持できる
-/*
-const CustomImage = styled.div`
-  background-image: url(${TemporaryUserImage});
-  width: 220px;
-  height: 220px;
-  border-radius: 50%;
-  background-size: cover;
-  background-position: center center;
-  border: 3px solid silver;
-  box-shadow: inset 1px 1px 3px 0 rgba(0, 0, 0, 0.8), 1px 1px 0 0 rgba(255, 255, 255, 0.12);
-`;
-*/
-
-const TableWrapper = styled.div`
-  align-self: center;
+  justify-content: center;
+  padding-right: 1%;
 `;
 
 const CustomTable = styled.table`
-  width: 430px;
+  width: 50%;
   border-collapse: collapse;
   color: ${COLORS.BLACK};
-  font-family: YuGothic;
   font-weight: normal;
-  font-size: 18px;
-  margin: 0 auto;
+  font-size: 1.1em;
   border: none;
+  margin-left: 2%;
+  @media (max-width: ${WIDTH.DEV_TOOL}) {
+    font-size: 0.9em;
+  }
 `;
 
 const CustomTd = styled.td`
-  padding: 10px 40px; 
+  padding: 2% 3%; 
   border: none;
   text-align: right;
   border-bottom:solid 1px silver;
 `;
 
 const NameTd = styled(CustomTd)`
-  font-family: YuGothic;
   font-style: normal;
   font-weight: bold;
-  font-size: 32px;
-  line-height: 40px;
+  font-size: 2.0em;
   text-align: left;
   color: ${COLORS.BLACK};
+  width: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  @media (max-width: ${WIDTH.DEV_TOOL}) {
+    font-size: 1.5em;
+  }
 `;
 
 const MetaTd = styled(CustomTd)`
-  padding: 10px 40px; 
   border: none;
   text-align: left;
   border-bottom:solid 1px silver;
@@ -104,42 +86,44 @@ export const UserStatus = memo(({
   image
 }) => {
 
+  // sxを%指定すると、円から楕円形になってしまったのでやめた
   return (
     <>
       <StatusWrapper>
-        <ImageWrapper>
-          <Avatar
-            alt="Hunter"
-            src={image || DefaultAvatarImage}
-            sx={{ width: 200, height: 200 }}
-          />
-        </ImageWrapper>
-        <TableWrapper>
-          <CustomTable>
-            <tbody>
-              <tr>
-                <NameTd colSpan={2}>{name}</NameTd> 
-              </tr>
-              <tr>
-                <MetaTd>ランク</MetaTd> 
-                <CustomTd>{rank}</CustomTd>
-              </tr>
-              <tr>
-                <MetaTd>称号</MetaTd> 
-                <CustomTd>{active_title}</CustomTd>
-              </tr>
-              <tr>
-                <ExpTd colSpan={2}>
-                  <StatusExperienceBox 
-                    temporary_experience={temporary_experience}
-                    total_experience={total_experience}
-                    maximum_experience_per_rank={maximum_experience_per_rank}
-                  />
-                </ExpTd>
-              </tr>
-            </tbody>
-          </CustomTable>
-        </TableWrapper>
+        <Avatar
+          alt="Hunter"
+          src={image || DefaultAvatarImage}
+          sx={{ 
+            width: {xs: 140, sm: 160, md: 180, lg: 213}, 
+            height: {xs: 140, sm: 160, md: 180, lg: 213}, 
+            ml: '0.4%', 
+            mr: '3.6%'
+          }}
+        />
+        <CustomTable>
+          <tbody>
+            <tr>
+              <NameTd colSpan={2}>{name}</NameTd> 
+            </tr>
+            <tr>
+              <MetaTd>ランク</MetaTd> 
+              <CustomTd>{rank}</CustomTd>
+            </tr>
+            <tr>
+              <MetaTd>称号</MetaTd> 
+              <CustomTd>{active_title}</CustomTd>
+            </tr>
+            <tr>
+              <ExpTd colSpan={2}>
+                <StatusExperienceBox 
+                  temporary_experience={temporary_experience}
+                  total_experience={total_experience}
+                  maximum_experience_per_rank={maximum_experience_per_rank}
+                />
+              </ExpTd>
+            </tr>
+          </tbody>
+        </CustomTable>
       </StatusWrapper>
     </>
   );

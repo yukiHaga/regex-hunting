@@ -1,18 +1,13 @@
 import React, { Fragment } from 'react'; 
 import styled from 'styled-components';
 
-// Colors
-import { COLORS } from '../../style_constants.js';
-
 // 戻るアイコン
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 
 const BackToModalButtonWrapper = styled.div`
   display: flex;
   align-items: center;
-`;
-
-const BackToModalButtonIconWrapper = styled.div`
+  border-radius: 3px;
   border-style: none;
   transition: 0.3s;
   :hover {
@@ -23,13 +18,9 @@ const BackToModalButtonIconWrapper = styled.div`
 `;
 
 const BackToModalButtonTextWrapper = styled.div`
-  border-radius: 3px;
-  font-family: YuGothic;
   font-style: normal;
   font-weight: 500;
-  font-size: 18px;
-  line-height: 40px;
-  color: ${COLORS.BLACK};
+  font-size: 1.2em;
   text-align: center;
   border-style: none;
   transition: 0.3s;
@@ -38,6 +29,8 @@ const BackToModalButtonTextWrapper = styled.div`
   }
   cursor: pointer;
   text-decoration: none;
+  display: inline-block;
+  padding-top: 2%;
 `;
 
 export const BackToModalButton = ({
@@ -46,11 +39,11 @@ export const BackToModalButton = ({
 
   return (
     <>
-      <BackToModalButtonWrapper> 
-        <BackToModalButtonIconWrapper onClick={onClick}>
-          <ArrowBackIcon />
-        </BackToModalButtonIconWrapper>
-        <BackToModalButtonTextWrapper onClick={onClick}>
+      <BackToModalButtonWrapper onClick={onClick}>
+        <ArrowBackIcon 
+          fontSize='medium'
+        />
+        <BackToModalButtonTextWrapper>
           Back
         </BackToModalButtonTextWrapper>
       </BackToModalButtonWrapper>

@@ -35,5 +35,7 @@ export const FONT_SIZE = {
 // とりあえずスマホだけ定義した
 // 414pxはiphoneXRの幅。これが一番でかい
 export const WIDTH = {
-  MOBILE: '414px'
+  MOBILE: '414px',
+  PC: '1000px',
+  DEV_TOOL: '1189px'
 };

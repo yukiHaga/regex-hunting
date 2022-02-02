@@ -8,7 +8,6 @@ import { WIDTH } from '../style_constants.js';
 // 390pxはiphone12
 const SubTextWrapper = styled.div`
   width: 70%;
-  font-family: YuGothic;
   font-style: normal;
   font-weight: bold;
   font-size: 2.5em;

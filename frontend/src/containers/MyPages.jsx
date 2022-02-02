@@ -1,4 +1,4 @@
-import React, { Fragment, useContext, useEffect, useLayoutEffect, useState } from 'react';
+import React, { Fragment, useContext, useEffect, useLayoutEffect, useState, useMemo } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 
@@ -7,14 +7,17 @@ import { Header } from '../components/Headers/Header.jsx';
 import { SessionFlashMessage } from '../components/FlashMessages/SessionFlashMessage.jsx';
 import { UserStatus } from '../components/Games/UserStatus.jsx';
 import { StudyHeatMap } from '../components/Games/StudyHeatMap.jsx';
-import { CorrectPercentGraph } from '../components/Games/CorrectPercentGraph.jsx';
-import { ChangeGraphBox } from '../components/Games/ChangeGraphBox.jsx';
 import { DescriptionWrapper } from '../components/shared_style.js';
 import { GameContent } from '../components/GameContents/GameContent.jsx';
 import { TitleCard } from '../components/Games/TitleCard.jsx';
 import { Footer } from '../components/Footers/Footer.jsx';
 import { ReleaseConditionDialog } from '../components/Dialogs/ReleaseConditionDialog.jsx'
 import { CircularMask } from '../components/loads/CircularMask.jsx';
+import { LearningAnalysisBox } from '../components/Games/LearningAnalysisBox.jsx';
+import { TimeAnalysisBox } from '../components/Games/TimeAnalysisBox.jsx';
+import { FastAnalysisBox } from '../components/Games/FastAnalysisBox.jsx';
+import { SecondSelectBox } from '../components/Games/SecondSelectBox.jsx';
+import { TitleFlashMessage } from '../components/FlashMessages/TitleFlashMessage.jsx';
  
 // Images
 import ElementaryGameContentImage from '../images/elementary_game_content.png';
@@ -38,96 +41,132 @@ import { REQUEST_STATE } from '../constants';
 // Colors
 import { COLORS } from '../style_constants.js';
 
-// グラフのx座標とy座標を生成する関数 
-import { makeCorrectPercentGraphData } from '../functions/makeCorrectPercentGraphData.js'
+// 今月の月を取得する関数
+import { getMonthOfTheMonth } from '../functions/getMonthOfTheMonth.js';
+
+import { WIDTH } from '../style_constants.js';
 
 // メインのラッパー
 const MainWrapper = styled.div`
   background-color: ${COLORS.SUB};
   text-align: center;
+  padding-top: 4.3%;
   position: relative;
 `;
 
 // Mainのfirstラッパー
 const MainFirstWrapper = styled.div`
   display: flex;
-  justify-content: space-evenly;
+  justify-content: space-around;
+  width: 85%;
+  margin: 0 auto;
 `;
 
 // Mainのsecondラッパー
 const MainSecondWrapper = styled.div`
+  padding-bottom: 0.5%;
+  margin-top: 1.5%;
+  margin-bottom: 1%;
+  width: 85%;
+  margin: 0 auto;
+`;
+
+// 難易度を変化させるラッパー
+const MainSecondSelectWrapper = styled.div`
+  width: 100%;
+  padding-top: 3.3%;
+  font-weight: bold;
+  margin: 0 auto;
+`;
+
+// Mainのsecondのグラフラッパー
+const MainSecondGraphWrapper = styled.div`
   display: flex;
-  justify-content: space-evenly;
-  margin-top: 40px;
+  justify-content: space-around;
+  padding-bottom: 1.8%;
+  width: 100%;
+  margin: 0 auto;
+  margin-top: 2%;
+  margin-bottom: 2%;
+  border-radius: 3px;
 `;
 
 // セカンドラッパー
 const SecondWrapper = styled.div`
   background-color: ${COLORS.SUB};
-  padding-top: 80px;
+  width: 86%;
+  margin: 0 auto;
+  @media (max-width: ${WIDTH.DEV_TOOL}) {
+    width: 92%;
+  };
 `;
 
 // サードラッパー
 const ThirdWrapper = styled.div`
   background-color: ${COLORS.SUB};
-  padding-top: 80px;
-  padding-bottom: 40px;
+  padding-top: 3.5%;
+  padding-bottom: 2%;
+  width: 98%;
+  margin: 0 auto;
 `;
 
 const StudyHeatMapWrapper = styled.div`
-  width: 400px;
+  width: 28%;
   background-color: ${COLORS.SUB};
 `;
 
-const CorrectPercentGraphWrapper = styled.div`
-  background-color: ${COLORS.WHITE};
-  box-shadow: 0 0px 20px rgba(0,0,0,0.2);
-`;
-
-const ChangeGraphBoxWrapper = styled.div`
-  width: 400px;
-  border-radius: 3px;
-  background-color: ${COLORS.WHITE};
-  box-shadow: 0 0px 20px rgba(0,0,0,0.2);
-  display: flex;
-  align-items: center;
+// 学習カレンダーというセンテンスのラッパー
+const StudyHeatMapSentenceWrapper = styled(DescriptionWrapper)`
+  font-weight: bold;
+  font-size: 1.5em;
+  text-align: left;
+  padding-left: 12.5%;
+  @media (max-width: ${WIDTH.DEV_TOOL}) {
+    font-size: 1.3em;
+  };
 `;
 
 // クエスト一覧というセンテンスのラッパー
 const QuestSentenceWrapper = styled(DescriptionWrapper)`
+  padding-top: 2%;
   font-weight: bold;
-  font-size: 24px;
-  line-height: 40px;
-  display: inline-block;
-  text-align: left;
-  padding: 0 110px;
+  font-size: 1.5em;
+  text-align: center;
+  @media (max-width: ${WIDTH.DEV_TOOL}) {
+    font-size: 1.35em;
+  };
 `;
 
 // マイページのゲームコンテンツのラッパー
 const MyPageGameContentsWrapper = styled.div`
-  padding-top: 20px;
   text-align: center;
   display: flex;
   justify-content: space-evenly;
+  frex-direction: row;
+  flex-wrap: wrap;
+  @media (max-width: ${WIDTH.DEV_TOOL}) {
+    justify-content: center;
+  };
 `;
 
 // 称号一覧というセンテンスのラッパー
 const TitleListSentenceWrapper = styled(DescriptionWrapper)`
+  padding-top: 1%;
   font-weight: bold;
-  font-size: 24px;
-  line-height: 40px;
+  font-size: 1.5em;
   display: inline-block;
   text-align: left;
-  padding: 0 110px;
 `;
 
 // 称号一覧のカードを包括しているラッパー
 const TitleListWrapper = styled.div`
-  padding-top: 5px;
   text-align: center;
   display: flex;
   flex-wrap: wrap;
   justify-content: space-evenly;
+  padding-bottom: 3%;
+  width: 88%;
+  margin: 0 auto;
 `;
 
 export const MyPages = () => {
@@ -146,27 +185,29 @@ export const MyPages = () => {
     requestUserActionTyps
   } = useContext(UserContext);
 
+  // 今月の月を計算する関数
+  const this_month = useMemo(() => getMonthOfTheMonth(), []);
+
   // myPageStateの最初の状態
-  // isOpenDialog, title_name, release_dateは
+  // isOpenDialog, name, release_date, release_conditionは
   // タイトルカードのモーダルで使う
   const initialState = {
-    game_frequencies_per_day: [],
-    elementary_correct_percents: [],
-    intermediate_correct_percents: [],
-    advanced_correct_percents: [],
+    game_frequencies_per_day: {},
+    total_time_per_difficulty: {},
+    correct_avg_per_difficulty: {},
+    fast_time_per_difficulty: {},
     owned_titles: [],
-    ele_fastest_time: 0,
-    int_fastest_time: 0,
-    adv_fastest_time: 0,
-    elementary_graph_data: {},
-    intermediate_graph_data: {},
-    advanced_graph_data: {},
-    real_graph_data: {},
-    difficulty_title: "",
+    selected_total_time: 0,
+    selected_correct_avg: 0,
+    selected_fast_time: 0,
+    difficulty_month_title: "",
     isOpenDialog: false,
     name: "",
     release_date: "",
-    release_condition: ""
+    release_condition: "",
+    display: false,
+    message: "",
+    get_page_info: false
   };
 
   // MyPageの状態を管理するstate
@@ -224,33 +265,23 @@ export const MyPages = () => {
   // user存在時のみ発動するように、if文で制御した
   // 内部で今月のグラフのデータも算出している
   // sessionStateがtrueの時かつ、userがサーバーから取得できたときに実行する
+  // get_page_infoのおかげで、マイページのデータを取得したら、
+  // このuseLayoutEffectは機能しないように設定されている
   useLayoutEffect(() => {
-    if(sessionState && Object.keys(user).length){
+    if(!myPageState.get_page_info && sessionState && Object.keys(user).length){
       getMyPageInfo(user).then((data) => {
-        const elementary_graph_data = makeCorrectPercentGraphData(
-          data.elementary_correct_percents,
-        );
-        const intermediate_graph_data = makeCorrectPercentGraphData(
-          data.intermediate_correct_percents,
-        );
-        const advanced_graph_data = makeCorrectPercentGraphData(
-          data.advanced_correct_percents,
-        )
         setMyPageState((prev) => ({
           ...prev,
           game_frequencies_per_day: data.game_frequencies_per_day,
-          elementary_correct_percents: data.elementary_correct_percents,
-          intermediate_correct_percents: data.intermediate_correct_percents,
-          advanced_correct_percents: data.advanced_correct_percents,
+          total_time_per_difficulty: data.total_time_per_difficulty,
+          correct_avg_per_difficulty: data.correct_avg_per_difficulty,
+          fast_time_per_difficulty: data.fast_time_per_difficulty,
           owned_titles: data.owned_titles,
-          ele_fastest_time: data.ele_fastest_time,
-          int_fastest_time: data.int_fastest_time,
-          adv_fastest_time: data.adv_fastest_time,
-          elementary_graph_data: elementary_graph_data,
-          intermediate_graph_data: intermediate_graph_data,
-          advanced_graph_data: advanced_graph_data,
-          real_graph_data: elementary_graph_data,
-          difficulty_title: "初級編"
+          selected_total_time: data.total_time_per_difficulty.elementary,
+          selected_correct_avg: data.correct_avg_per_difficulty.elementary,
+          selected_fast_time: data.fast_time_per_difficulty.elementary,
+          difficulty_month_title: `初級編(${this_month}月)`,
+          get_page_info: true
         })); 
       }).catch((e) => {
         if(e.response.status === HTTP_STATUS_CODE.NOT_FOUND){
@@ -264,7 +295,9 @@ export const MyPages = () => {
     }
   }, [
     user,
-    sessionState
+    sessionState,
+    this_month,
+    myPageState.get_page_info
   ]);
 
   // ゲーム中のユーザーがトップページに戻ったときに
@@ -278,8 +311,6 @@ export const MyPages = () => {
     battleAudioState.play,
     battleAudioState.audio
   ])
- 
-  console.log(myPageState)
 
   return (
     <>
@@ -293,6 +324,11 @@ export const MyPages = () => {
               <SessionFlashMessage
                 location={location}
               />
+              <TitleFlashMessage
+                display={myPageState.display}
+                message={myPageState.message}
+                setMyPageState={setMyPageState}
+              />
               <MainFirstWrapper>
                 <UserStatus
                   name={user.name}
@@ -304,39 +340,33 @@ export const MyPages = () => {
                   image={user.image}
                 />
                 <StudyHeatMapWrapper>
+                  <StudyHeatMapSentenceWrapper>
+                    学習カレンダー
+                  </StudyHeatMapSentenceWrapper>
                   <StudyHeatMap 
                     game_frequencies_per_day={myPageState.game_frequencies_per_day}
                   />
                 </StudyHeatMapWrapper>
               </MainFirstWrapper>
               <MainSecondWrapper>
-                <CorrectPercentGraphWrapper>
-                  <CorrectPercentGraph 
-                    real_graph_data={
-                      myPageState.real_graph_data
-                    }
-                    difficulty_title={
-                      myPageState.difficulty_title
-                    }
-                  />
-                </CorrectPercentGraphWrapper>
-                <ChangeGraphBoxWrapper>
-                  <ChangeGraphBox 
-                    ele_fastest_time={myPageState.ele_fastest_time}
-                    int_fastest_time={myPageState.int_fastest_time}
-                    adv_fastest_time={myPageState.adv_fastest_time}
-                    elementary_correct_percents={
-                      myPageState.elementary_correct_percents
-                    }
-                    intermediate_correct_percents={
-                      myPageState.intermediate_correct_percents
-                    }
-                    advanced_correct_percents={
-                      myPageState.advanced_correct_percents
-                    }
+                <MainSecondSelectWrapper>
+                  <SecondSelectBox 
+                    difficulty_month_title={myPageState.difficulty_month_title}
                     setMyPageState={setMyPageState}
+                    this_month={this_month}
                   />
-                </ChangeGraphBoxWrapper>
+                </MainSecondSelectWrapper>
+                <MainSecondGraphWrapper>
+                  <TimeAnalysisBox
+                    time={myPageState.selected_total_time} 
+                  />
+                  <LearningAnalysisBox 
+                    num={myPageState.selected_correct_avg} 
+                  />
+                  <FastAnalysisBox
+                    minutes={myPageState.selected_fast_time} 
+                  />
+                </MainSecondGraphWrapper>
               </MainSecondWrapper>
               <SecondWrapper>
                 <QuestSentenceWrapper>

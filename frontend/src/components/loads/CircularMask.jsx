@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import CircularProgress from '@material-ui/core/CircularProgress';
+import CircularProgress from '@mui/material/CircularProgress';
 
 const CustomDiv = styled.div`
   display: flex;

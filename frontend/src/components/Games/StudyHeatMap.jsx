@@ -12,20 +12,10 @@ import ReactTooltip from 'react-tooltip';
 import { makeThisMonthObj } from '../../functions/makeThisMonthObj.js';
 import { addCountToMonthArray } from '../../functions/addCountToMonthArray.js';
 
-// DescriptionWrapper
-import { DescriptionWrapper } from '../../components/shared_style.js';
-
 const InnerStudyHeatMapWrapper = styled.div`
-  width: 300px;
+  width: 100%;
   margin: 0 auto;
-`;
-
-const StudyHeatMapSentenceWrapper = styled(DescriptionWrapper)`
-  font-weight: bold;
-  font-size: 24px;
-  line-height: 40px;
-  display: inline-block;
-  text-align: left;
+  margin-left: 13%;
 `;
 
 export const StudyHeatMap = memo(({
@@ -95,9 +85,6 @@ export const StudyHeatMap = memo(({
   return (
     <>
       <InnerStudyHeatMapWrapper>
-        <StudyHeatMapSentenceWrapper>
-          学習カレンダー
-        </StudyHeatMapSentenceWrapper>
         <CalendarHeatmap
           startDate={prev_month_end_day}
           endDate={this_month_end_day}
@@ -109,7 +96,7 @@ export const StudyHeatMap = memo(({
           values={month_obj_array}
           tooltipDataAttrs={({count, date}) => {
             return {
-              'data-tip': `ゲームクリア回数: ${count}, ${
+              'data-tip': `ゲーム回数: ${count}, ${
                 date?.replace(/-/g, '/')}`
             };
           }}

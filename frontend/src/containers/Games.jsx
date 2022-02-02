@@ -365,18 +365,15 @@ export const Games = () => {
   ]);
 
   // ゲーム終了時のロジック
-  // 10問クリアした時だけ、ゲームのデータをサーバー側へ送る
-  // ゲーム失敗した時のデータも送ってしまうと、10問ちゃんとクリアしていない
-  // レコードが存在してしまう。
-  // 10問クリア。間違いなしの場合、14問クリアしたことにする。
-  // gameState.send_game_dataがfalse。gameState.game_resultがwinの時だけ発動
+  // ログインの有無に関わらず、勝つか負けるとゲームのデータをサーバー側へ送る
+  // gameState.send_game_dataがfalse。gameState.game_resultがwinまたはlose時だけ発動
   // そのため、絶対1回しか発動しない
   // result_timeの単位はミリ秒である。
   // ユーザーがログインしていなくても送る。
   // ログインユーザーの場合、contextを更新する
   // ログインユーザーしかsessionStateはtrueにならないので、そこを利用する
   useEffect(() => {
-    if(!gameState.send_game_data && gameState.game_result === "win"){
+    if(!gameState.send_game_data && (gameState.game_result === "win" || gameState.game_result === "lose")){
       const timer = setTimeout(() => {
         postGameFinish({
           game_management: {

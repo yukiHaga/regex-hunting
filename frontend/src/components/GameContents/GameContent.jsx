@@ -15,8 +15,7 @@ const GameContentWrapper = styled.div`
 
 const GameContentTitleWrapper = styled.div`
   height: 9%;
-  width: 100%;
-  font-family: YuGothic;
+  width: 90%;
   font-style: normal;
   font-weight: 500;
   font-size: 1.5em;
@@ -28,16 +27,28 @@ const GameContentTitleWrapper = styled.div`
     width: 90%;
     margin: 0 auto;
     padding-top: 2%;
-    padding-bottom: 2%
+    padding-bottom: 7%
   }
+  @media (max-width: ${WIDTH.DEV_TOOL}) {
+    width: 70%;
+    margin: 0 auto;
+    font-size: 1.2em;
+  }
+  margin: 0 auto;
 `;
 
 const GameContentDescriptionWrapper = styled.div`
-  width: 100%;
+  width: 90%;
+  margin: 0 auto;
+  border-radius: 3px;
   box-shadow: 0 0px 20px rgba(0,0,0,0.2);
   background-color: ${COLORS.WHITE};
   @media (max-width: ${WIDTH.MOBILE}) {
     width: 90%;
+    margin: 0 auto;
+  }
+  @media (max-width: ${WIDTH.DEV_TOOL}) {
+    width: 70%;
     margin: 0 auto;
   }
 `;
@@ -48,7 +59,7 @@ const GameContentImageWrapper = styled.img`
   box-sizing: border-box;
   border: 2px solid ${COLORS.BLACK};
   max-width: 100%;
-  border-radius: 3px;
+  border-radius: 3px 3px 0px 0px;
 `;
 
 const GameContentMainWrapper = styled.div`
@@ -62,6 +73,9 @@ const GameContentMainWrapper = styled.div`
     width: 90%;
   }
   border-radius: 3px;
+  @media (max-width: ${WIDTH.DEV_TOOL}) {
+    width: 90%;
+  }
 `;
 
 // ここのwidthはpx指定しないとレイアウトが崩れる
@@ -69,13 +83,16 @@ const GameContentSentenceWrapper = styled.div`
   width: 290px;
   display: inline-block;
   text-align: left;
-  font-family: YuGothic;
   font-style: normal;
   font-weight: 500;
-  font-size: 1.1em;
+  font-size: 1.0em;
   color: ${COLORS.BLACK};
   @media (max-width: ${WIDTH.MOBILE}) {
     font-size: 0.9em;
+  }
+  @media (max-width: ${WIDTH.DEV_TOOL}) {
+    font-size: 0.8em;
+    width: 220px;
   }
 `;
 
@@ -87,7 +104,11 @@ const GameContentStartWrapper = styled.div`
 
 // LPページの場合、onClickLinkはモーダル管理のstateを更新する関数
 // ログインしている場合、onClickLinkは何もない。
-export const GameContent = memo(({difficulty, image}) => {
+export const GameContent = memo(({
+  difficulty, 
+  image,
+  setMobileState
+}) => {
 
   const difficultySentence = (difficulty) => {
     let sentence;
@@ -130,7 +151,10 @@ export const GameContent = memo(({difficulty, image}) => {
               {(difficultySentence(difficulty))}
             </GameContentSentenceWrapper>
             <GameContentStartWrapper>
-              <GameStartButton difficulty={difficulty}/>
+              <GameStartButton 
+                difficulty={difficulty}
+                setMobileState={setMobileState}
+              />
             </GameContentStartWrapper>
           </GameContentMainWrapper>
         </GameContentDescriptionWrapper>

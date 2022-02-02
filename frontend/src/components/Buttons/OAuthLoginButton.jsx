@@ -16,7 +16,6 @@ const OAuthLoginButtonWrapper = styled(AnchorRoundButton)`
   align-items: center;
   justify-content: center;
   color: white;
-  font-family: YuGothic;
   font-style: normal;
   font-size: 1.2em;
   font-weight: 500;

@@ -2,7 +2,8 @@ import React, { Fragment } from 'react';
 import styled from 'styled-components';
 
 // フラッシュメッセージ関係のコンポーネント;
-import Alert from '@material-ui/lab/Alert';
+import Alert from '@mui/material/Alert';
+// import Snackbar from '@mui/material/Snackbar';
 import Slide from '@mui/material/Slide';
 
 const CustomSlide = styled(Slide)`

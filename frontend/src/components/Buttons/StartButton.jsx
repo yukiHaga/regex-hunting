@@ -25,19 +25,24 @@ const StartButtonWrapper = styled(RedRoundButton)`
     margin-top: 10%;
     margin-bottom: 20%;
   }
+  padding-bottom: 0.1%;
 `;
 
 const StartButtonTextWrapper = styled.div`
   color: ${COLORS.SUB};
-  font-family: YuGothic;
+  font-family: 'Avenir';
   font-style: normal;
-  font-size: 2.7em;
+  font-size: 2.9em;
   @media (max-width: ${WIDTH.MOBILE}) {
     font-size: 2.0em;
   }
   font-weight: 500;
   text-align: center;
-  padding-bottom: 1%;
+  padding: 2%;
+  vertical-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `;
 
 export const StartButton = () => {

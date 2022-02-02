@@ -1,8 +1,7 @@
-import React, { Fragment, useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import React, { Fragment, useState } from 'react';
 
 // フラッシュメッセージ関係のコンポーネント;
-import Alert from '@material-ui/lab/Alert';
+import Alert from '@mui/material/Alert';
 import Snackbar from '@mui/material/Snackbar';
 
 export const SessionFlashMessage = ({
@@ -15,23 +14,6 @@ export const SessionFlashMessage = ({
 
   const handleClose = () => {
     setOpen(false);
-  };
-
-  // mobileから何か操作されたら、このuseEffectが実行される
-  useEffect(() => {
-    if(new URLSearchParams(location?.search)?.get('user') === 'mobile') {
-      setOpen(true);
-    } 
-  }, [
-    location?.search
-  ])
-
-  const navigate = useNavigate();
-
-  // フラッシュメッセージが出現後、クエリストリングを削除する関数
-  const handleNavigateClose = () => {
-    handleClose();
-    navigate('/');
   };
 
   return (
@@ -49,14 +31,11 @@ export const SessionFlashMessage = ({
           top: { xs: '10%', md: '10%' }
         }}
         onClose={
-          new URLSearchParams(location?.search)?.get('user') === 'mobile' ?
-            handleNavigateClose
-          :
-            handleClose
+          handleClose
         }
       >
         <Alert variant="filled" severity="success">
-          {location?.state?.success || 'PCからご利用ください。'}
+          {location?.state?.success}
         </Alert>
       </Snackbar>
     </>

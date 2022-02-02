@@ -208,7 +208,7 @@ export const AccountSettingBox = ({
         }
       });
     }).then(() => 
-      navigate('/my-page?user=account_setting', { 
+      navigate('/my-page', { 
         state: { display: true, success: "アカウントを更新しました。"}
       })
     ).catch((e) => {
