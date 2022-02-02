@@ -8,8 +8,8 @@ const LoginButtonWrapper = styled(BlueRoundButton)`
   margin-bottom: 3%;
   opacity: ${(props) => props.disabled ? 0.3 : 1};
   pointer-events: ${(props) => props.disabled ? 'none' : 'auto'};
-  width: 77%;
-  padding: 2.4%;
+  width: 100%;
+  padding: 3.3%;
 `;
 
 const LoginButtonTextWrapper = styled.div`

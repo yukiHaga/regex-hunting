@@ -10,6 +10,7 @@ import { BlueBaseLink } from '../shared_style.js';
 // LoginDescriptionWrapepr
 const PasswordResetSentenceWrapper = styled(DescriptionWrapper)`
   margin-bottom: 3%;
+  font-size: 0.9em;
 `;
 
 export const PasswordResetSentence = () => {

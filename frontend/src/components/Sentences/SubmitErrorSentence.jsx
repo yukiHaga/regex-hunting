@@ -16,6 +16,7 @@ const DangerText = styled.p`
   }) => errors_title === 'Record Not Found' ? '0px' : '2%' };
   margin-bottom: 4%;
   color: ${COLORS.RED};
+  font-size: 0.9em;
 `;
 
 export const SubmitErrorSentence = ({

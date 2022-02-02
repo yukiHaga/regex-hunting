@@ -8,8 +8,8 @@ const SignUpButtonWrapper = styled(BlueRoundButton)`
   margin-bottom: 3%;
   opacity: ${({disabled}) => disabled ? 0.3 : 1};
   pointer-events: ${({disabled}) => disabled ? 'none' : 'auto'};
-  width: 77%;
-  padding: 2.4%;
+  width: 100%;
+  padding: 3.3%;
 `;
 
 // ここのwidthをpxから変えるとレイアウトが崩れるので、pxにした
