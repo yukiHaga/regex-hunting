@@ -44,6 +44,8 @@ import { COLORS } from '../style_constants.js';
 // 今月の月を取得する関数
 import { getMonthOfTheMonth } from '../functions/getMonthOfTheMonth.js';
 
+import { WIDTH } from '../style_constants.js';
+
 // メインのラッパー
 const MainWrapper = styled.div`
   background-color: ${COLORS.SUB};
@@ -94,6 +96,9 @@ const SecondWrapper = styled.div`
   background-color: ${COLORS.SUB};
   width: 86%;
   margin: 0 auto;
+  @media (max-width: ${WIDTH.DEV_TOOL}) {
+    width: 92%;
+  };
 `;
 
 // サードラッパー
@@ -116,6 +121,9 @@ const StudyHeatMapSentenceWrapper = styled(DescriptionWrapper)`
   font-size: 1.5em;
   text-align: left;
   padding-left: 12.5%;
+  @media (max-width: ${WIDTH.DEV_TOOL}) {
+    font-size: 1.3em;
+  };
 `;
 
 // クエスト一覧というセンテンスのラッパー
@@ -124,6 +132,9 @@ const QuestSentenceWrapper = styled(DescriptionWrapper)`
   font-weight: bold;
   font-size: 1.5em;
   text-align: center;
+  @media (max-width: ${WIDTH.DEV_TOOL}) {
+    font-size: 1.35em;
+  };
 `;
 
 // マイページのゲームコンテンツのラッパー
@@ -133,6 +144,9 @@ const MyPageGameContentsWrapper = styled.div`
   justify-content: space-evenly;
   frex-direction: row;
   flex-wrap: wrap;
+  @media (max-width: ${WIDTH.DEV_TOOL}) {
+    justify-content: center;
+  };
 `;
 
 // 称号一覧というセンテンスのラッパー

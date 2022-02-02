@@ -13,6 +13,8 @@ import { COLORS } from '../../style_constants.js';
 // デフォルトのアバター画像
 import DefaultAvatarImage from '../../images/default_avatar.png';
 
+import { WIDTH } from '../../style_constants.js';
+
 // ステータスのラッパー
 const StatusWrapper = styled.div`
   width: 55%;
@@ -35,6 +37,9 @@ const CustomTable = styled.table`
   font-size: 1.1em;
   border: none;
   margin-left: 2%;
+  @media (max-width: ${WIDTH.DEV_TOOL}) {
+    font-size: 0.9em;
+  }
 `;
 
 const CustomTd = styled.td`
@@ -54,6 +59,9 @@ const NameTd = styled(CustomTd)`
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+  @media (max-width: ${WIDTH.DEV_TOOL}) {
+    font-size: 1.5em;
+  }
 `;
 
 const MetaTd = styled(CustomTd)`
@@ -85,7 +93,12 @@ export const UserStatus = memo(({
         <Avatar
           alt="Hunter"
           src={image || DefaultAvatarImage}
-          sx={{ width: 213, height: 213, ml: '0.4%', mr: '3.6%'}}
+          sx={{ 
+            width: {xs: 140, sm: 160, md: 180, lg: 213}, 
+            height: {xs: 140, sm: 160, md: 180, lg: 213}, 
+            ml: '0.4%', 
+            mr: '3.6%'
+          }}
         />
         <CustomTable>
           <tbody>

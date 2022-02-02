@@ -14,6 +14,8 @@ import { COLORS } from '../../style_constants.js';
 // ミリ秒を分に変換する関数
 import { getMinute } from '../../functions/getMinute.js';
 
+import { WIDTH } from '../../style_constants.js';
+
 const TimeAnalysisBoxWrapper = styled.div`
   width: 18%;
   height: 30%;
@@ -26,15 +28,24 @@ const ContentTitleWrapper = styled.div`
  font-size: 1.5em;
  color: ${COLORS.BLACK};
  letter-spacing: 0.04em;
+ @media (max-width: ${WIDTH.DEV_TOOL}) {
+   font-size: 1.3em;
+ }
 `;
 
 const ContentTimeWrapper = styled.div`
   font-size: 3.0em;
   color: ${COLORS.MAIN};
+  @media (max-width: ${WIDTH.DEV_TOOL}) {
+    font-size: 2.5em;
+  }
 `;
 
 const CustomSpan = styled.span`
  font-size: 0.6em;
+ @media (max-width: ${WIDTH.DEV_TOOL}) {
+   font-size: 0.5em;
+ }
 `;
 
 // 単位は分で固定する

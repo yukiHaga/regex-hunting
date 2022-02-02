@@ -30,6 +30,9 @@ const GameStartButtonTextWrapper = styled.div`
   font-style: normal;
   font-weight: 500;
   padding: 3%;
+  @media (max-width: ${WIDTH.DEV_TOOL}) {
+    font-size: 0.9em;
+  }
   @media (max-width: ${WIDTH.MOBILE}) {
     font-size: 0.9em;
   }

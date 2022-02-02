@@ -15,6 +15,8 @@ import IconButton from '@mui/material/IconButton';
 // DescriptionWrapper 
 import { DescriptionWrapper } from '../shared_style.js';
 
+import { WIDTH } from '../../style_constants.js';
+
 const TitleLineWrapper = styled.div`
   display: flex;
   justify-content: space-evenly;
@@ -25,6 +27,10 @@ const SecondSelectBoxSentenceWrapper = styled(DescriptionWrapper)`
   font-size: 1.6em;
   text-align: center;
   padding-top: 1%;
+  @media (max-width: ${WIDTH.DEV_TOOL}) {
+    font-size: 1.4em;
+    padding-top: 1.5%;
+  }
 `;
 
 export const SecondSelectBox = ({

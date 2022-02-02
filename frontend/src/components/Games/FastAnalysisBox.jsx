@@ -15,6 +15,8 @@ import { COLORS } from '../../style_constants.js';
 // マイページで使う場合、第1引数は0を指定する
 import { getClearTime } from '../../functions/getClearTime.js';
 
+import { WIDTH } from '../../style_constants.js';
+
 const FastAnalysisBoxWrapper = styled.div`
   width: 18%;
   height: 30%;
@@ -27,11 +29,17 @@ const ContentTitleWrapper = styled.div`
   font-size: 1.5em;
   color: ${COLORS.BLACK};
   letter-spacing: 0.04em;
+  @media (max-width: ${WIDTH.DEV_TOOL}) {
+    font-size: 1.3em;
+  }
 `;
 
 const ContentPercentWrapper = styled.div`
   font-size: 3.0em;
   color: ${COLORS.MAIN};
+  @media (max-width: ${WIDTH.DEV_TOOL}) {
+    font-size: 2.5em;
+  }
 `;
 
 export const FastAnalysisBox = memo(({

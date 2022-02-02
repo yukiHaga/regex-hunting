@@ -29,6 +29,11 @@ const GameContentTitleWrapper = styled.div`
     padding-top: 2%;
     padding-bottom: 2%
   }
+  @media (max-width: ${WIDTH.DEV_TOOL}) {
+    width: 70%;
+    margin: 0 auto;
+    font-size: 1.2em;
+  }
   margin: 0 auto;
 `;
 
@@ -40,6 +45,10 @@ const GameContentDescriptionWrapper = styled.div`
   background-color: ${COLORS.WHITE};
   @media (max-width: ${WIDTH.MOBILE}) {
     width: 90%;
+    margin: 0 auto;
+  }
+  @media (max-width: ${WIDTH.DEV_TOOL}) {
+    width: 70%;
     margin: 0 auto;
   }
 `;
@@ -64,6 +73,9 @@ const GameContentMainWrapper = styled.div`
     width: 90%;
   }
   border-radius: 3px;
+  @media (max-width: ${WIDTH.DEV_TOOL}) {
+    width: 70%;
+  }
 `;
 
 // ここのwidthはpx指定しないとレイアウトが崩れる
@@ -77,6 +89,10 @@ const GameContentSentenceWrapper = styled.div`
   color: ${COLORS.BLACK};
   @media (max-width: ${WIDTH.MOBILE}) {
     font-size: 0.9em;
+  }
+  @media (max-width: ${WIDTH.DEV_TOOL}) {
+    font-size: 0.75em;
+    width: 200px;
   }
 `;
 

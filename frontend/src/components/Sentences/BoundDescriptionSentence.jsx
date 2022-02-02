@@ -9,7 +9,6 @@ import { FakeLink } from '../shared_style.js';
 // Responsive
 import { WIDTH } from '../../style_constants.js';
 
-
 const BoundDescriptionSentenceWrapper = styled(FakeLink)`
   width: 70%;
   font-style: normal;
