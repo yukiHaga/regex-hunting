@@ -27,7 +27,7 @@ const GameContentTitleWrapper = styled.div`
     width: 90%;
     margin: 0 auto;
     padding-top: 2%;
-    padding-bottom: 2%
+    padding-bottom: 7%
   }
   @media (max-width: ${WIDTH.DEV_TOOL}) {
     width: 70%;
@@ -74,7 +74,7 @@ const GameContentMainWrapper = styled.div`
   }
   border-radius: 3px;
   @media (max-width: ${WIDTH.DEV_TOOL}) {
-    width: 70%;
+    width: 90%;
   }
 `;
 
@@ -91,8 +91,8 @@ const GameContentSentenceWrapper = styled.div`
     font-size: 0.9em;
   }
   @media (max-width: ${WIDTH.DEV_TOOL}) {
-    font-size: 0.75em;
-    width: 200px;
+    font-size: 0.8em;
+    width: 220px;
   }
 `;
 
