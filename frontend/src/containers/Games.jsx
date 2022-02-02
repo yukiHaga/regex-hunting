@@ -61,6 +61,8 @@ const MainContentWrapper = styled.div`
 `;
 
 // 背景画像
+// absoluteで親要素を基準にするためには
+// 親要素にrelativeを書く
 const BackGroundImageCover = styled.img`
   position: absolute;
   width: 100%;
@@ -92,9 +94,8 @@ const MainGameContentWrapper = styled.div`
 `;
 
 // GameBlockWrapperコンポーネント
+// position: relativeを書くことによって、
 const GameBlockWrapper = styled.div`
-  display: flex;
-  justify-content: center;
   width: 100%;
 `;
 
@@ -111,28 +112,34 @@ const BattleBlockWrapper = styled.div`
 `;
 
 // MonsterBlockWrapperコンポーネント
+// vhはブラウザの画面高を元に決まる数値
+// ここに高さを設定しておかないと、モンスターがいない時に
+// 高さが0になってレイアウトが一気に崩れる
 const MonsterBlockWrapper = styled.div`
-  height: 90%;
-  width: 100%;
-  margin-top: 1%;
+  width: 70%;
+  margin: 0 auto;
   display: flex;
   justify-content: space-evenly;
+  height: 42.7vh;
   align-items: end;
 `;
 
 // QuestionBlockWrapperコンポーネント
 const QuestionBlockWrapper = styled.div`
   width: 100%;
-  height: 20%;
-  margin: 0 auto;
   box-shadow: 0 0px 20px rgba(0,0,0,0.2);
+  display: flex;
+  justify-content: center;
+  padding-top: 1%;
 `;
 
 // CodeBlockWrapperコンポーネント
 const CodeBlockWrapper = styled.div`
-  height: 20%;
+  padding-top: 1%;
+  padding-bottom: 1.5%;
   width: 100%;
-  margin-top: 0%;
+  display: flex;
+  justify-content: center;
 `;
 
 // GageBlockWrapperコンポーネント
