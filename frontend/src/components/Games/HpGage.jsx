@@ -7,9 +7,6 @@ import { COLORS } from '../../style_constants.js';
 // handleColorType 
 import { handleColorType } from '../../functions/handleColorType.js';
 
-/*
-  background-color: ${COLORS.LIGHT_BLACK};
-  */
 const HpGageWrapper = styled.div`
   background-color: ${COLORS.GAGE_GRAY};
   border-radius: 0 0 3px 3px;
