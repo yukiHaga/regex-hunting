@@ -489,6 +489,15 @@ export const Games = () => {
           <CircularMask />
         :
           <>
+            {
+              gameState.game_description_open &&
+                <ElementaryGameDescriptionDialog
+                  isOpen={gameState.game_description_open}
+                  setGameState={setGameState}
+                  game_description_open={gameState.game_description_open}
+                  click_description_open={gameState.click_description_open}
+                />
+            }
             <Header />
             <MainContentWrapper>
               <BackGroundImageCover src={RealBackGroundImage} />
@@ -623,15 +632,6 @@ export const Games = () => {
             <GameFooter 
               setGameState={setGameState}
             />
-            {
-              gameState.game_description_open &&
-                <ElementaryGameDescriptionDialog
-                  isOpen={gameState.game_description_open}
-                  setGameState={setGameState}
-                  game_description_open={gameState.game_description_open}
-                  click_description_open={gameState.click_description_open}
-                />
-            }
             {
               gameState.game_result === "win" && !gameState.rank_up && !gameState.check_answer &&
                 <GameClearDialog

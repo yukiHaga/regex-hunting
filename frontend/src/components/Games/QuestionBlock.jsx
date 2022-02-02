@@ -52,7 +52,7 @@ const DifficultyWrapper = styled.div`
   font-style: normal;
   font-weight: 500;
   position: absolute;
-  z-index: 1;
+  z-index: 0;
 `;
 
 const TargetSentenceWrapper = styled.div`
