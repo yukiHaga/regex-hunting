@@ -63,26 +63,26 @@ class Api::V1::GameManagementsController < ApplicationController
       send_game_data: true
     }, status: :ok unless current_user
 
-    game_management.add_correct_questions(@correct_questions)
-    game_management.add_incorrect_questions(@incorrect_questions)
-    game_management.save!
+    @game_management.add_correct_questions(@correct_questions)
+    @game_management.add_incorrect_questions(@incorrect_questions)
+    @game_management.save!
 
     # ログインユーザーのステータスを更新する処理
     # ランクアップしている場合、temporary_experienceが0になる
+    # さらに、あるランクに到達すると称号を解放する
     # current_userにsaltやcrypted_passwordなどのカラムを含めてjsonを送ってはダメ
-    if rank_up? && CONDITION_HASH.values.include?(current_user.rank)
+    if rank_up? && CONDITION_HASH.values.include?(params[:current_user][:rank] + 1)
+      current_user.release_titles.build(
+        release_date: Date.today,
+        title_id: (Title.find_by(name: CONDITION_HASH.key(params[:current_user][:rank] + 1)))[:id]
+      )
       current_user.update(
         rank: params[:current_user][:rank] + 1,
         total_experience: params[:current_user][:total_experience],
         maximum_experience_per_rank: params[:current_user][:maximum_experience_per_rank] + 100,
-        temporary_experience: 0
+        temporary_experience: 0,
+        active_title: CONDITION_HASH.key(params[:current_user][:rank] + 1)
       )
-      current_user.release_titles.build(
-        release_date: Date.today,
-        title_id: (Title.find_by(name: CONDITION_HASH.key(current_user.rank)))[:id]
-      )
-      current_user[:active_title] = CONDITION_HASH.key(current_user.rank)
-      current_user.save!
     elsif rank_up?
       current_user.update(
         rank: params[:current_user][:rank] + 1,

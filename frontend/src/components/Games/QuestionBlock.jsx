@@ -16,6 +16,7 @@ const QuestionBlockWrapper = styled.div`
   height: 13.4vh;
   margin: 0 auto;
   width: 60%;
+  box-shadow: 0 0px 20px rgba(0,0,0,0.2);
 `;
 
 const QuestionWrapper = styled.div`

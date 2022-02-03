@@ -127,7 +127,6 @@ const MonsterBlockWrapper = styled.div`
 // QuestionBlockWrapperコンポーネント
 const QuestionBlockWrapper = styled.div`
   width: 100%;
-  box-shadow: 0 0px 20px rgba(0,0,0,0.2);
   padding-top: 1%;
 `;
 
