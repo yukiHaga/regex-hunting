@@ -24,9 +24,18 @@ const TypeWrapper = styled.div`
   width: 8.5%;
   font-size: 1.2em;
   background-color: ${COLORS.GAGE_GRAY};
-  color: ${COLORS.BROWN};
+  color: ${({ user_hp }) => handleColorType(user_hp)};
   font-weight: bold;
   text-align: center;
+  -webkit-text-stroke: 2px #030002;
+  text-stroke: 2px #030002;
+  position: relative;
+`;
+
+// fuchiue
+const Fuchiue = styled.span`
+  -webkit-text-stroke: 0;
+  position: absolute;
 `;
 
 const GageOuterWrapper = styled.div`
@@ -44,7 +53,7 @@ const GageWrapper = styled.div`
     user_hp,
     user_max_hp
   }) => `${100 * (user_hp / user_max_hp)}%`};
-  background-color: ${(props) => handleColorType(props.user_hp)};
+  background-color: ${({ user_hp }) => handleColorType(user_hp)};
   box-sizing: border-box;
   border: none;
   outline: none;
@@ -63,7 +72,12 @@ export const HpGage = ({
   return (
     <>
       <HpGageWrapper>
-        <TypeWrapper>
+        <TypeWrapper
+          user_hp={user_hp}
+        >
+          <Fuchiue>
+            HP 
+          </Fuchiue>
           HP
         </TypeWrapper>
         <GageOuterWrapper>

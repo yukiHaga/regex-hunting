@@ -25,9 +25,18 @@ const TypeWrapper = styled.div`
   width: 8.5%;
   font-size: 1.2em;
   background-color: ${COLORS.GAGE_GRAY};
-  color: ${COLORS.BROWN};
+  color: ${COLORS.YELLOW};
   font-weight: bold;
   text-align: center;
+  -webkit-text-stroke: 2px #030002;
+  text-stroke: 2px #030002;
+  position: relative;
+`;
+
+// fuchiue
+const Fuchiue = styled.span`
+  -webkit-text-stroke: 0;
+  position: absolute;
 `;
 
 // ゲージ減少のアニメーション
@@ -114,6 +123,9 @@ export const TimeGage = ({
     <>
       <TimeGageWrapper>
         <TypeWrapper>
+          <Fuchiue>
+            TIME 
+          </Fuchiue>
           TIME
         </TypeWrapper>
         <GageOuterWrapper>
