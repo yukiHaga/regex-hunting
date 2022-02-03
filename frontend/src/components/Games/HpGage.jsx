@@ -24,12 +24,9 @@ const TypeWrapper = styled.div`
   width: 8.5%;
   font-size: 1.2em;
   background-color: ${COLORS.GAGE_GRAY};
-  color: ${({ user_hp }) => handleColorType(user_hp)};
+  color: ${COLORS.LIGHT_BLACK};
   font-weight: bold;
   text-align: center;
-  -webkit-text-stroke: 2px #030002;
-  text-stroke: 2px #030002;
-  position: relative;
 `;
 
 // fuchiue
