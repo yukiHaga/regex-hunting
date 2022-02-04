@@ -25,17 +25,6 @@ import Tooltip from '@mui/material/Tooltip';
 import IconButton from '@mui/material/IconButton';
 
 /*
-const WarningSentenceWrapper = styled.div`
-  font-style: normal;
-  font-weight: normal;
-  font-size: 18px;
-  display: inline-block;
-  text-align: center;
-  margin-top: 45px;
-  color: ${COLORS.RED};
-  width: 900px;
-`;
-
 const MonsterImageBoxWrapper = styled.div`
  text-align: right;
  width: 80%;
@@ -46,16 +35,6 @@ const MonsterImageWrapper = styled.img`
   width: 211px;
   height: 205px;
   object-fit: contain;
-`;
-
-const OuterButtonsWrapper = styled.div`
-  width: 80%;
-  margin: 0 auto;
-`;
-
-const ButtonsWrapper = styled.div`
-  display: flex;
-  justify-content: space-evenly;
 `;
 */
 
@@ -181,6 +160,21 @@ const ButtonWrapper = styled.div`
     outline: 0;
   }
   display: inline-block;
+`;
+
+const WarningSentenceWrapper = styled.div`
+  font-style: normal;
+  font-weight: normal;
+  font-size: 1.1em;
+  text-align: center;
+  margin-top: 5%;
+  color: ${COLORS.RED};
+`;
+
+const OuterButtonsWrapper = styled.div`
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;
 `;
 
 // isOpenはgameState.game_description_open
@@ -338,13 +332,28 @@ export const ElementaryGameDescriptionDialog = ({
                 slide_out={slideState.slide_out}
                 direction={slideState.direction}
               >
-
                 <TitleWrapper>
                   {slideState.title}
                 </TitleWrapper>
                 <SentenceWrapper>
                   {slideState.sentence}
                 </SentenceWrapper>
+                {
+                  slideState.slide_num === 3 &&
+                    <>
+                      <WarningSentenceWrapper>
+                        ※ UX向上の為、音が出ます。音量が気になる方は下げて頂くようお願いします。
+                      </WarningSentenceWrapper>
+                      <OuterButtonsWrapper>
+                        {
+                          click_description_open ?
+                            <FinallyGameRestartButton setGameState={setGameState} />
+                          :
+                            <FinallyGameStartButton setGameState={setGameState} />
+                        }
+                      </OuterButtonsWrapper>
+                    </>
+                }
               </SlideContentWrapper>
             </DynamicSlideContentWrapper>
             <ButtonLineWrapper>
