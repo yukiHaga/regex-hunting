@@ -211,7 +211,7 @@ export const CodeBlock = ({
                 flash_title: "Good",
                 commentary: prev.next_commentary,
                 next_commentary: prev?.questions["0"]?.commentary || "no_next_commentary",
-                key_available: false
+                key_available: false,
               }));
               audio.play();
               setCodeState("");

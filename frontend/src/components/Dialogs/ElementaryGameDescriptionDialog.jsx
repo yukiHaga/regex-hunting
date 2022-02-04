@@ -24,20 +24,6 @@ import { FinallyGameRestartButton } from '../Buttons/FinallyGameRestartButton.js
 import Tooltip from '@mui/material/Tooltip';
 import IconButton from '@mui/material/IconButton';
 
-/*
-const MonsterImageBoxWrapper = styled.div`
- text-align: right;
- width: 80%;
- margin-top: 80px;
-`;
-
-const MonsterImageWrapper = styled.img`
-  width: 211px;
-  height: 205px;
-  object-fit: contain;
-`;
-*/
-
 const CustomDialogInnerWrapper = styled.div`
   background-color: ${COLORS.SUB};
   text-align: center;
@@ -58,6 +44,18 @@ const TitleWrapper = styled.div`
   color: ${COLORS.BLACK};
   width: 80%;
   margin: 0 auto;
+`;
+
+const MonsterImageBoxWrapper = styled.div`
+ text-align: right;
+ width: 86%;
+ margin-top: 7%;
+`;
+
+const MonsterImageWrapper = styled.img`
+  width: 25%;
+  height: 25%;
+  object-fit: contain;
 `;
 
 // フェードアウトのアニメーション
@@ -284,13 +282,13 @@ export const ElementaryGameDescriptionDialog = ({
   useEffect(() => {
     if(game_description_open) {
       const handleRightkeyPress = (e) => {
-        if(e.key !== 'Enter' && e.key === 'ArrowRight' && slideState.slide_num < 3) {
+        if(e.key !== 'Enter' && e.key === 'ArrowRight') {
           changeSlideToRight();
         }
       };
 
       const handleLeftkeyPress = (e) => {
-        if(e.key !== 'Enter' && e.key === 'ArrowLeft' && slideState.slide_num > 0) {
+        if(e.key !== 'Enter' && e.key === 'ArrowLeft') {
           changeSlideToLeft();
         }
       };
@@ -310,7 +308,7 @@ export const ElementaryGameDescriptionDialog = ({
   }, [
     game_description_open,
     changeSlideToRight,
-    changeSlideToLeft
+    changeSlideToLeft,
   ]);
 
   return(
@@ -338,6 +336,12 @@ export const ElementaryGameDescriptionDialog = ({
                 <SentenceWrapper>
                   {slideState.sentence}
                 </SentenceWrapper>
+                {
+                  slideState.slide_num === 0 &&
+                    <MonsterImageBoxWrapper>
+                      <MonsterImageWrapper src={ElementaryMonsterImage} />
+                    </MonsterImageBoxWrapper>
+                }
                 {
                   slideState.slide_num === 3 &&
                     <>
