@@ -77,7 +77,6 @@ const ElementaryMonsterWrapper = styled.img`
 
 const HpGageWrapper = styled.div`
   width: 50%;
-  height: 10%;
   border-radius: 3px;
   background-color: ${COLORS.LIGHT_BLACK};
   animation-name: ${(props) => props.first_appearance && FadeInAnime};
@@ -91,7 +90,7 @@ const HpGageWrapper = styled.div`
 const InnerHpGageWrapper = styled.div`
   width: ${(props) => `${100 * (props.monster_hp / props.monster_max_hp)}%`};
   transition: 0.5s;
-  height: 2vh;
+  height: 1.8vh;
   border-radius: 3px;
   background-color: ${(props) => handleColorType(props.monster_hp)};
   background-image: -webkit-linear-gradient(transparent 0%,rgba(255,255,255,.3) 50%,transparent 50%,rgba(0,0,0,.1) 100%);

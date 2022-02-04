@@ -35,8 +35,15 @@ const Fuchiue = styled.span`
   position: absolute;
 `;
 
-const GageOuterWrapper = styled.div`
+const FixWrapper = styled.div`
   height: 100%;
+  width: 100%;
+  display: flex;
+  align-items: center;
+`;
+
+const GageOuterWrapper = styled.div`
+  height: 80%;
   width: 100%;
   background-color: ${COLORS.LIGHT_BLACK};
   border-radius: 10px;
@@ -77,15 +84,17 @@ export const HpGage = ({
           </Fuchiue>
           HP
         </TypeWrapper>
-        <GageOuterWrapper>
-          {
-            (user_hp / user_max_hp) !== 0 &&
-              <GageWrapper 
-                user_hp={user_hp}
-                user_max_hp={user_max_hp}
-              />
-          }
-        </GageOuterWrapper>
+        <FixWrapper>
+          <GageOuterWrapper>
+            {
+              (user_hp / user_max_hp) !== 0 &&
+                <GageWrapper 
+                  user_hp={user_hp}
+                  user_max_hp={user_max_hp}
+                />
+            }
+          </GageOuterWrapper>
+        </FixWrapper>
       </HpGageWrapper>
     </>
   );

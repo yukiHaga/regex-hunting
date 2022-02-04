@@ -47,8 +47,15 @@ const TimeGageAnime = keyframes`
   }
 `;
 
-const GageOuterWrapper = styled.div`
+const FixWrapper = styled.div`
   height: 100%;
+  width: 100%;
+  display: flex;
+  align-items: center;
+`;
+
+const GageOuterWrapper = styled.div`
+  height: 80%;
   width: 100%;
   background-color: ${COLORS.LIGHT_BLACK};
   border-radius: 10px;
@@ -125,14 +132,16 @@ export const TimeGage = ({
           </Fuchiue>
           TIME
         </TypeWrapper>
-        <GageOuterWrapper>
-          <GageWrapper 
-            onAnimationEnd={timeOut} 
-            time_active={time_active}
-            click_description_open={click_description_open}
-            click_meta_open={click_meta_open}
-          />
-        </GageOuterWrapper>
+        <FixWrapper>
+          <GageOuterWrapper>
+            <GageWrapper 
+              onAnimationEnd={timeOut} 
+              time_active={time_active}
+              click_description_open={click_description_open}
+              click_meta_open={click_meta_open}
+            />
+          </GageOuterWrapper>
+        </FixWrapper>
       </TimeGageWrapper>
     </>
   );
