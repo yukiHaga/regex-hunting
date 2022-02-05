@@ -51,7 +51,7 @@ const MainWrapper = styled.div`
   position: relative;
   padding-top: 1.5%;
   @media (max-width: ${WIDTH.MOBILE}) {
-    padding-top: 20%;
+    padding-top: 10%;
   }
 `;
 
