@@ -10,7 +10,7 @@ import { ColoredTwitterIcon } from '../Icons/CustomIcon.js';
 import { getMonsterName } from '../../functions/getMonsterName.js';
 
 const ResultShareButtonWrapper = styled.a`
-  margin-top: 30px;
+  width: 90%;
   border-style: none;
   border-radius: 3px;
   box-shadow: 0 2px 4px rgba(0,0,0,0.3);
@@ -21,26 +21,22 @@ const ResultShareButtonWrapper = styled.a`
   }
   cursor: pointer;
   text-decoration: none;
+  margin: 2%;
 `;
 
 const ResultShareButtonTextWrapper = styled.div`
-  width: 150px;
-  height: 36px;
   border-radius: 3px;
-  font-family: YuGothic;
   font-style: normal;
-  font-weight: 500;
-  font-size: 18px;
-  line-height: 36px;
+  font-size: 1em;
   color: ${COLORS.LIGHT_BLUE};
   text-align: center;
   background-color: ${COLORS.WHITE};
-  padding-top: 5px;
-  padding-bottom: 5px;
   border: 2px solid ${COLORS.LIGHT_BLUE};
   display: flex;
   align-items: center;
   justify-content: center;
+  padding-top: 6.9%;
+  padding-bottom: 6.9%;
 `;
 
 export const ResultShareButton = ({

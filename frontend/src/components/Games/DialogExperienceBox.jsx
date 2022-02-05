@@ -14,11 +14,12 @@ const ExperienceBoxWrapper = styled.div`
 `;
 
 const ExperienceTextWrapper = styled(DescriptionWrapper)`
- font-size: 16px;
+ font-size: 0.9em;
 `;
 
+// ここのheightのpx指定を崩すとレイアウトが崩れたので、やめた
 const ExperienceGageWrapper = styled.div`
-  width: 253px;
+  width: 100%;
   height: 12px;
   background-color: ${COLORS.LIGHT_BLACK};
   border-radius: 10px;
