@@ -42,41 +42,47 @@ import { HTTP_STATUS_CODE } from '../../constants';
 
 const AccountSettingBoxWrapper = styled.div`
   width: 40%;
-  height: 580px;
   background-color: ${COLORS.WHITE};
   margin: 0 auto;
   border-radius: 3px;
+  padding-top: 3%;
+  padding-bottom: 3%;
 `;
 
 const AccountSettingBoxImageWrapper = styled.div`
   display: flex;
   justify-content: center;
-  padding-top: 30px;
-  padding-bottom: 30px;
+  padding-bottom: 6%;
   position: relative;
 `;
 
 const AccountSettingBoxFormWrapper = styled.div`
-  width: 402px;
+  width: 70%;
   margin: 0 auto;
 `;
 
+const CustomForm = styled.form`
+  width: 100%;
+`;
+
+const CustomFormControl = styled(FormControl)`
+  width: 100%;
+`;
+
 const CustomFilledNameInput = styled(FilledInput)`
-  width: 400px;
   margin-bottom: ${({
     errors_name_box
-  }) => typeof errors_name_box === 'undefined' && '16px' };
+  }) => typeof errors_name_box === 'undefined' && '4%' };
 `;
 
 const CustomFilledEmailInput = styled(FilledInput)`
-  width: 400px;
   margin-bottom: ${({
     errors_email_box
-  }) => typeof errors_email_box === 'undefined' && '16px' };
+  }) => typeof errors_email_box === 'undefined' && '4%' };
 `;
 
 const AccoutSettingButtonWrapper = styled.div`
-  margin-top: 16px;
+  margin-top: 3%;
 `;
 
 // アイコンボタン用のコンポーネント
@@ -86,8 +92,8 @@ const Input = styled.input`
 
 const CustomLabel = styled.label`
   position: absolute;
-  top: 181px;
-  right: 190px; 
+  top: 67%;
+  right: 33%; 
 `;
 
 export const AccountSettingBox = ({
@@ -251,14 +257,14 @@ export const AccountSettingBox = ({
           </CustomLabel>
         </AccountSettingBoxImageWrapper>
         <AccountSettingBoxFormWrapper>
-          <form onSubmit={handleSubmit(onSubmit)}>
+          <CustomForm onSubmit={handleSubmit(onSubmit)}>
             <Controller 
               name="NameBox"
               control={control}
               defaultValue={user.name}
               rules={registerOptions.name}
               render={({ field }) => (
-                <FormControl variant="filled">              
+                <CustomFormControl variant="filled">              
                   <InputLabel htmlFor="name-component-filled">名前</InputLabel>
                   <CustomFilledNameInput
                     {...field}
@@ -267,7 +273,7 @@ export const AccountSettingBox = ({
                     label="name"
                     errors_name_box={errors.NameBox}
                   />
-                </FormControl>              
+                </CustomFormControl>              
               )}
             />
             {errors.NameBox && <InputErrorSentence>
@@ -279,7 +285,7 @@ export const AccountSettingBox = ({
               defaultValue={user.email}
               rules={registerOptions.email}
               render={({ field }) => (
-                <FormControl variant="filled">              
+                <CustomFormControl variant="filled">              
                   <InputLabel htmlFor="email-component-filled">メールアドレス</InputLabel>
                   <CustomFilledEmailInput
                     {...field}
@@ -288,7 +294,7 @@ export const AccountSettingBox = ({
                     label="email"
                     errors_email_box={errors.EmailBox}
                   />
-                </FormControl>              
+                </CustomFormControl>              
               )}
             />
             {errors.EmailBox && <InputErrorSentence>
@@ -323,7 +329,7 @@ export const AccountSettingBox = ({
                   {requestUserState.errors.detail}
                 </SubmitErrorSentence>
             }
-          </form>
+          </CustomForm>
         </AccountSettingBoxFormWrapper>
       </AccountSettingBoxWrapper>
     </>

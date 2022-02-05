@@ -1,6 +1,9 @@
 import React from 'react';
 import styled from 'styled-components';
 
+// Image
+import MainTitleImage from '../../images/main_title.svg';
+
 // Colors
 import { COLORS } from '../../style_constants.js';
 
@@ -34,18 +37,24 @@ const Fuchiue = styled.span`
   position: absolute;
 `;
 
-const HeaderTitleLink = styled(BaseLink)``;
+const MainTitleImageCover = styled.img`
+  width: 18%;
+  height: auto;
+  object-fit: contain;
+  max-width: 100%;
+  height: auto;
+  @media (max-width: ${WIDTH.MOBILE}) {
+  };
+`;
+
+const HeaderTitleLink = styled(BaseLink)`
+`;
 
 export const HeaderTitle = () => {
   return (
     <>
       <HeaderTitleLink to={`/`}>
-        <TitleWrapper>
-          <Fuchiue>
-            Regex Hunting
-          </Fuchiue>
-          Regex Hunting
-        </TitleWrapper>
+        <MainTitleImageCover src={MainTitleImage} alt="main-title" />
       </HeaderTitleLink>
     </>
   );
