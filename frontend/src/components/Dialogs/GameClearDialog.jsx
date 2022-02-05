@@ -41,7 +41,7 @@ const CustomDialogInnerWrapper = styled.div`
   padding-bottom: 0;
   background-color: ${COLORS.SUB};
   text-align: center;
-  height: ${({has_user}) => has_user ? '572px' : '450px' };
+  height: 100%;
 `;
 
 const CustomDialogTitleWrapper = styled.div`
@@ -84,17 +84,22 @@ const CustomTd = styled.td`
   border: none;
   text-align: right;
   border-bottom:solid 1px silver;
+  padding-right: 4%;
 `;
 
 const MetaTd = styled(CustomTd)`
   border: none;
   text-align: left;
   border-bottom:solid 1px silver;
+  padding-right: 3%;
+  padding-left: 4%;
 `;
 
 const ExperienceMetaTd = styled(CustomTd)`
   border: none;
   text-align: left;
+  padding-right: 3%;
+  padding-left: 4%;
 `;
 
 const ExperienceTd = styled(CustomTd)`
@@ -106,6 +111,7 @@ const ExperienceGageTd = styled(CustomTd)`
   border: none;
   text-align: left;
   border-bottom:solid 1px silver;
+  padding-left: 4%;
 `;
 
 const ButtonsWrapper = styled.div`  
