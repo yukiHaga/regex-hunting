@@ -7,7 +7,6 @@ import { BaseLink } from '../shared_style';
 import { COLORS } from '../../style_constants.js';
 
 const BackToTopButtonWrapper = styled(BaseLink)`
-  margin-top: 30px;
   border-style: none;
   border-radius: 3px;
   box-shadow: 0 2px 4px rgba(0,0,0,0.3);
@@ -15,22 +14,19 @@ const BackToTopButtonWrapper = styled(BaseLink)`
   :hover {
     box-shadow: 0 0 2px rgba(0,0,0,0.2);
   }
+  width: 90%;
+  margin: 2%;
 `;
 
 const BackToTopButtonTextWrapper = styled.div`
-  width: 150px;
-  height: 40px;
   border-radius: 3px;
-  font-family: YuGothic;
   font-style: normal;
-  font-weight: 500;
-  font-size: 18px;
-  line-height: 40px;
+  font-size: 1em;
   color: ${COLORS.WHITE};
   text-align: center;
   background-color: ${COLORS.MAIN};
-  padding-top: 5px;
-  padding-bottom: 5px;
+  padding-top: 8%;
+  padding-bottom: 8%;
 `;
 
 export const BackToTopButton = () => {

@@ -76,7 +76,7 @@ const CustomTable = styled.table`
   margin: 0 auto;
   margin-top: 1%;
   border: none;
-  width: 70%;
+  width: 68%;
 `;
 
 const CustomTd = styled.td`
@@ -84,7 +84,7 @@ const CustomTd = styled.td`
   border: none;
   text-align: right;
   border-bottom:solid 1px silver;
-  padding-right: 4%;
+  padding-right: 5%;
 `;
 
 const MetaTd = styled(CustomTd)`
@@ -92,14 +92,14 @@ const MetaTd = styled(CustomTd)`
   text-align: left;
   border-bottom:solid 1px silver;
   padding-right: 3%;
-  padding-left: 4%;
+  padding-left: 5%;
 `;
 
 const ExperienceMetaTd = styled(CustomTd)`
   border: none;
   text-align: left;
   padding-right: 3%;
-  padding-left: 4%;
+  padding-left: 5%;
 `;
 
 const ExperienceTd = styled(CustomTd)`
@@ -111,7 +111,7 @@ const ExperienceGageTd = styled(CustomTd)`
   border: none;
   text-align: left;
   border-bottom:solid 1px silver;
-  padding-left: 4%;
+  padding-left: 5%;
 `;
 
 const ButtonsWrapper = styled.div`  
