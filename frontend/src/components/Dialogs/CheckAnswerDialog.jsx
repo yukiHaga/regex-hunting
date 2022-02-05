@@ -31,11 +31,11 @@ const CustomDialogInnerWrapper = styled.div`
 
 const CustomDialogTitleWrapper = styled.div`
   font-size: 2em;
-  padding-top: 13%;
+  padding-top: ${({ title }) => title === "Bad" && "10%"};
   font-family: Raleway;
   font-style: italic;
   font-weight: bold;
-  color: ${(props) => handleTitleColorType(props.title)};
+  color: ${({ title }) => handleTitleColorType(title)};
   text-align: left;
   width: 85%;
   margin: 0 auto;
@@ -49,8 +49,7 @@ const CustomDialogContent = styled(DialogContent)`
 // backボタンを固定してる
 const BackToModalButtonWrapper = styled.div`
   position: fixed;
-  background-color: ${COLORS.SUB};
-  z-index: 2;
+  z-index: 3;
 `;
 
 // background-color: ${COLORS.OCHER};

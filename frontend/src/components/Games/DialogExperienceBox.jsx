@@ -15,6 +15,8 @@ const ExperienceBoxWrapper = styled.div`
 
 const ExperienceTextWrapper = styled(DescriptionWrapper)`
  font-size: 0.9em;
+ padding-top: 1%;
+ padding-bottom: 1%;
 `;
 
 // ここのheightのpx指定を崩すとレイアウトが崩れたので、やめた
