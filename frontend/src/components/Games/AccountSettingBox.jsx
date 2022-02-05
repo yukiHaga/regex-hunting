@@ -46,7 +46,7 @@ const AccountSettingBoxWrapper = styled.div`
   margin: 0 auto;
   border-radius: 3px;
   padding-top: 3%;
-  padding-bottom: 3%;
+  padding-bottom: 3.12%;
 `;
 
 const AccountSettingBoxImageWrapper = styled.div`
