@@ -3,7 +3,7 @@ import { useLocation } from 'react-router-dom';
 import styled from 'styled-components';
 
 // Image
-import MainTitleImage from '../images/main_title.png';
+import MainTitleImage from '../images/main_title.svg';
 import GroupBackGroundImage from '../images/group_background.png';
 import BattleSceneImage from '../images/battle_scene.png';
 import MyPageImage from '../images/my_page_image.png';
@@ -49,9 +49,9 @@ import { Link as Scroll } from 'react-scroll';
 const MainWrapper = styled.div`
   text-align: center;
   position: relative;
-  padding-top: 3%;
+  padding-top: 1.5%;
   @media (max-width: ${WIDTH.MOBILE}) {
-    padding-top: 20%;
+    padding-top: 10%;
   }
 `;
 
@@ -61,10 +61,11 @@ const MainWrapper = styled.div`
 // そのため、max-width(最大幅)を指定しておくと、画面幅がwidthより小さい場合でも、
 // widthを自動的に画面幅に合わせてくれる
 const MainTitleImageCover = styled.img`
-  width: 70%;
+  margin: 0 auto;
+  width: 75%;
   height: auto;
   object-fit: contain;
-  margin-top: 10%;
+  margin-top: 3.5%;
   max-width: 100%;
   height: auto;
   @media (max-width: ${WIDTH.MOBILE}) {

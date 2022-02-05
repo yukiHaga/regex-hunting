@@ -7,18 +7,18 @@ const AccountSettingButtonWrapper = styled(BlueRoundButton)`
   border-style: none;
   opacity: ${(props) => props.disabled ? 0.3 : 1};
   pointer-events: ${(props) => props.disabled ? 'none' : 'auto'};
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-top: 3%;
+  padding-bottom: 3%;
 `;
 
 const AccountSettingButtonTextWrapper = styled.div`
-  width: 390px;
-  height: 50px;
   color: white;
-  font-family: YuGothic;
   font-style: normal;
-  font-size: 20px;
-  font-weight: 500;
-  text-align: center;
-  line-height: 50px;
+  font-size: 1.3em;
 `;
 
 export const AccountSettingButton = ({disabled}) => {

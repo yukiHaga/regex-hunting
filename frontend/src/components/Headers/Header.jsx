@@ -72,14 +72,7 @@ export const Header = memo(({
         <Container maxWidth="xl">
           <Toolbar disableGutters>
             <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'flex' } }}>
-              <Typography
-                variant="h6"
-                noWrap
-                component="div"
-                sx={{ mr: 2, display: { xs: 'flex', md: 'flex' } }}
-              >
-                <HeaderTitle />
-              </Typography>
+              <HeaderTitle />
             </Box>
             <Box sx={{ flexGrow: 0, display: { xs: 'flex', md: 'flex', lg: 'none' } }}>
               <IconButton
@@ -145,7 +138,7 @@ export const Header = memo(({
             <Box sx={{ flexGrow: 0, display: { xs: 'none', md: 'none', lg: 'flex' } }}>
               <Button
                 key="1"
-                sx={{ my: 2, color: 'white', display: 'block' }}
+                sx={{ my: 2, color: 'white', display: 'block', width: '6vw' }}
                 href='/rankings'
               >
                 ランキング
@@ -157,7 +150,7 @@ export const Header = memo(({
                   <Box sx={{ flexGrow: 0, display: { xs: 'none', md: 'none', lg: 'flex' } }}>
                     <Button
                       key="1"
-                      sx={{ my: 2, color: 'white', display: 'block' }}
+                      sx={{ my: 2, color: 'white', display: 'block', width: '6vw' }}
                       onClick={() => onClickLink("login")}
                     >
                       ログイン
@@ -166,7 +159,7 @@ export const Header = memo(({
                   <Box sx={{ flexGrow: 0, display: { xs: 'none', md: 'none', lg: 'flex' } }}>
                     <Button
                       key="1"
-                      sx={{ my: 2, color: 'white', display: 'block' }}
+                      sx={{ my: 2, color: 'white', display: 'block', width: '7vw' }}
                       onClick={() => onClickLink("signUp")}
                     >
                       新規会員登録

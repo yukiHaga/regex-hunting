@@ -10,14 +10,14 @@ const SubTitleSentenceWrapper = styled.div`
   width: 70%;
   font-style: normal;
   font-weight: bold;
-  font-size: 2.0em;
+  font-size: 1.9em;
   color: ${(props) => props.color || COLORS.BLACK};
   margin: 0 auto;
-  margin-top: 1%;
   @media (max-width: ${WIDTH.MOBILE}) {
     font-size: 1.1em;
     margin-top: 3%;  
   }
+  letter-spacing: 0.04em;
 `;
 
 export const SubTitleSentence = memo(({color, children}) => {

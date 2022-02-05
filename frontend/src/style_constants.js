@@ -23,7 +23,7 @@ export const COLORS = {
   ANSWER_GRAY: '#E5E5E5',
   EXPERIENCE: '#00a968',
   LIGHT_GRAY: '#f6f6f6',
-  HP_BLUE: '#3399ff'
+  HP_BLUE: '#3399ff',
 };
 
 // フォントサイズを決める際に、適宜定義する。

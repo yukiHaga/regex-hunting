@@ -26,7 +26,8 @@ import { COLORS } from '../style_constants.js';
 // メインのラッパー
 const MainWrapper = styled.div`
   background-color: ${COLORS.SUB};
-  padding-bottom: 43px;
+  padding-bottom: 2.95%;
+  padding-top: 2.95%;
 `;
 
 export const AccountSettings = () => {
