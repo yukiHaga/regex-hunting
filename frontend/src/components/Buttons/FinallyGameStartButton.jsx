@@ -5,7 +5,7 @@ import styled from 'styled-components';
 import { COLORS } from '../../style_constants.js';
 
 const FinallyGameStartButtonWrapper = styled.div`
-  margin-top: 30px;
+  margin-top: 2%;
   border-style: none;
   border-radius: 3px;
   transition: 0.3s;
@@ -16,22 +16,17 @@ const FinallyGameStartButtonWrapper = styled.div`
   }
   cursor: pointer;
   text-decoration: none;
+  width: 25%;
 `;
 
 const FinallyGameStartButtonTextWrapper = styled.div`
-  width: 240px;
-  height: 40px;
   border-radius: 3px;
-  font-family: YuGothic;
   font-style: normal;
-  font-weight: 500;
-  font-size: 18px;
-  line-height: 40px;
+  font-size: 1.1em;
   color: ${COLORS.WHITE};
   text-align: center;
   background-color: ${COLORS.BLUE};
-  padding-top: 5px;
-  padding-bottom: 5px;
+  padding: 5%;
 `;
 
 export const FinallyGameStartButton = ({ 

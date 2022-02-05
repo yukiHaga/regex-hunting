@@ -56,17 +56,26 @@ import { REQUEST_STATE } from '../constants';
 
 // MainContentWrapperコンポーネント
 const MainContentWrapper = styled.div`
-  padding-top: 36px;
+  position: relative;
+  padding-top: 3%;
 `;
 
 // 背景画像
+// absoluteで親要素を基準にするためには
+// 親要素にrelativeを書く
 const BackGroundImageCover = styled.img`
-  width: 1440px;
-  height: 734px;
   position: absolute;
-  top: 55px;
-  left: 0px;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  margin: auto;
+  margin-top: 0px;
+  margin-bottom: 0px;
   z-index: -4;
+  max-width: 100%;
 `;
 
 // 画面を揺らすアニメーション
@@ -85,59 +94,54 @@ const MainGameContentWrapper = styled.div`
 `;
 
 // GameBlockWrapperコンポーネント
+// position: relativeを書くことによって、
 const GameBlockWrapper = styled.div`
-  display: flex;
-  justify-content: start;
-  padding-left: 24px;
+  width: 100%;
 `;
 
-// SlideWrapperコンポーネント
-const SlideWrapper = styled.div`
+// HintBarWrapperコンポーネント
+const HintBarWrapper = styled.div`
+  position: fixed;
+  z-index: 0;
+  left: 1.5%;
 `;
 
 // BattleBlockWrapperコンポーネント
 // background-color: #F6F6DC;  
 const BattleBlockWrapper = styled.div`
-  height: 498px;
-  width: 920px;
 `;
 
 // MonsterBlockWrapperコンポーネント
+// vhはブラウザの画面高を元に決まる数値
+// ここに高さを設定しておかないと、モンスターがいない時に
+// 高さが0になってレイアウトが一気に崩れる
 const MonsterBlockWrapper = styled.div`
-  height: 370px;
-  width: 900px;
-  margin-top: 10px;
+  width: 67%;
+  margin: 0 auto;
   display: flex;
   justify-content: space-evenly;
+  height: 42.7vh;
   align-items: end;
 `;
 
 // QuestionBlockWrapperコンポーネント
 const QuestionBlockWrapper = styled.div`
-  height: 104px;
-  width: 860px;
-  margin: 0 auto;
-  margin-top: 13px;
-  box-shadow: 0 0px 20px rgba(0,0,0,0.2);
+  width: 100%;
+  padding-top: 1%;
 `;
 
 // CodeBlockWrapperコンポーネント
 const CodeBlockWrapper = styled.div`
-  height: 53px;
-  margin-top: 13px;
+  padding-top: 1%;
+  padding-bottom: 1.5%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
 `;
 
 // GageBlockWrapperコンポーネント
 const GageBlockWrapper = styled.div`
-  height: 66px;
   width: 100%;
-  margin-top: 13px;
-`;
-
-// Judgementメッセージを出すためのコンポーネント
-const CustomJudgementFlashMessage = styled(JudgementFlashMessage)`
-  position: relative;
-  z-index: 1;
 `;
 
 export const Games = () => {
@@ -489,18 +493,34 @@ export const Games = () => {
           <CircularMask />
         :
           <>
+            {
+              gameState.game_description_open &&
+                <ElementaryGameDescriptionDialog
+                  isOpen={gameState.game_description_open}
+                  setGameState={setGameState}
+                  game_description_open={gameState.game_description_open}
+                  click_description_open={gameState.click_description_open}
+                />
+            }
             <Header />
             <MainContentWrapper>
+              {  
+                gameState.flash_display && 
+                  <JudgementFlashMessage 
+                    flash_display={gameState.flash_display}
+                    flash_title={gameState.flash_title}
+                  />
+              }
               <BackGroundImageCover src={RealBackGroundImage} />
               <MainGameContentWrapper
                 question_judgement={gameState.question_judgement}
               >
                 <GameBlockWrapper>
-                  <SlideWrapper>
+                  <HintBarWrapper>
                     <HintBar 
                       hint={gameState.hint}
                     />
-                  </SlideWrapper>
+                  </HintBarWrapper>
                   <BattleBlockWrapper>
                     <MonsterBlockWrapper>
                       {
@@ -574,13 +594,6 @@ export const Games = () => {
                       />
                     </QuestionBlockWrapper>
                   </BattleBlockWrapper>
-                  {  
-                    gameState.flash_display && 
-                      <CustomJudgementFlashMessage 
-                        flash_display={gameState.flash_display}
-                        flash_title={gameState.flash_title}
-                      />
-                  }
                 </GameBlockWrapper>
                 <CodeBlockWrapper>
                   <CodeBlock 
@@ -623,15 +636,6 @@ export const Games = () => {
             <GameFooter 
               setGameState={setGameState}
             />
-            {
-              gameState.game_description_open &&
-                <ElementaryGameDescriptionDialog
-                  isOpen={gameState.game_description_open}
-                  setGameState={setGameState}
-                  game_description_open={gameState.game_description_open}
-                  click_description_open={gameState.click_description_open}
-                />
-            }
             {
               gameState.game_result === "win" && !gameState.rank_up && !gameState.check_answer &&
                 <GameClearDialog

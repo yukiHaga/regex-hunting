@@ -35,24 +35,21 @@ import { getMonsterName } from '../../functions/getMonsterName.js';
 import { getClearTime } from '../../functions/getClearTime.js';
 
 const CustomDialogInnerWrapper = styled.div`
-  padding-top: 10px;
-  padding-right: 10px;
-  padding-left: 10px;
+  width: 40vw;
+  padding: 3%;
+  padding-top: 7%;
+  padding-bottom: 0;
   background-color: ${COLORS.SUB};
   text-align: center;
-  height: ${({has_user}) => has_user ? '572px' : '450px' };
-  width: 550px;
+  height: 100%;
 `;
 
 const CustomDialogTitleWrapper = styled.div`
-  height: 74px;
   font-family: Helvetica;
   font-style: normal;
   font-weight: bold;
-  font-size: 50px;
-  line-height: 74px;
+  font-size: 3em;
   color: ${COLORS.WHITE};
-  padding-top: 30px;
   -webkit-text-stroke: 6px ${COLORS.MAIN};
   position: relative;
 `;
@@ -67,57 +64,62 @@ const CustomDialogContent = styled(DialogContent)`
 `;
 
 const CustomDialogContentSentence = styled(DescriptionWrapper)`
-  margin-bottom: 10px;
+  margin-bottom: 2.5%;
 `;
 
 const CustomTable = styled.table`
   border-collapse: collapse;
   color: ${COLORS.BLACK};
   background-color: ${COLORS.SUB};
-  font-family: YuGothic;
   font-weight: normal;
-  font-size: 18px;
+  font-size: 1.1em;
   margin: 0 auto;
-  margin-top: 8px;
+  margin-top: 1%;
   border: none;
+  width: 68%;
 `;
 
 const CustomTd = styled.td`
-  padding: 10px 40px; 
+  padding: 3%;
   border: none;
   text-align: right;
   border-bottom:solid 1px silver;
+  padding-right: 5%;
 `;
 
 const MetaTd = styled(CustomTd)`
-  padding: 10px 40px; 
   border: none;
   text-align: left;
   border-bottom:solid 1px silver;
+  padding-right: 3%;
+  padding-left: 5%;
 `;
 
 const ExperienceMetaTd = styled(CustomTd)`
-  padding: 10px 40px; 
   border: none;
   text-align: left;
+  padding-right: 3%;
+  padding-left: 5%;
 `;
 
 const ExperienceTd = styled(CustomTd)`
-  padding: 10px 40px; 
   border: none;
   text-align: right;
 `;
 
 const ExperienceGageTd = styled(CustomTd)`
-  padding: 10px 40px; 
   border: none;
   text-align: left;
   border-bottom:solid 1px silver;
+  padding-left: 5%;
 `;
 
-const ButtonsWrapper = styled.div`
+const ButtonsWrapper = styled.div`  
+  width: 100%;
   display: flex;
   justify-content: space-around;
+  align-items: end;
+  margin-top: 2%;
 `;
 
 const ColorTimeSpan = styled.span`
@@ -161,6 +163,7 @@ export const GameClearDialog = ({
   return(
     <Dialog
       open={isOpen}
+      maxWidth='lg'        
     >
       <CustomDialogInnerWrapper
         has_user={has_user}

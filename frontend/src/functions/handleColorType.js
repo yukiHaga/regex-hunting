@@ -5,7 +5,7 @@ import { COLORS } from '../style_constants.js';
 export const handleColorType = (hp) => {
   switch (true) {
     case hp > 50:
-      return COLORS.LIGHT_BLUE;
+      return COLORS.HP_BLUE;
     case hp <= 50 && hp > 20:
       return COLORS.YELLOW;
     case hp <= 20:

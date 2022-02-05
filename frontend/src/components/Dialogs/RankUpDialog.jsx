@@ -20,24 +20,21 @@ import { ResultShareButton } from '../Buttons/ResultShareButton.jsx';
 import RankUpSound from '../../sounds/rank_up_25.mp3';
 
 const CustomDialogInnerWrapper = styled.div`
-  padding-right: 10px;
-  padding-left: 10px;
-  padding-top: 10px;
+  padding: 3%;
+  padding-top: 1%;
+  padding-bottom: 1%;
   background-color: ${COLORS.SUB};
   text-align: center;
-  width: 550px;
-  height: 420px;
+  width: 40vw;
 `;
 
 const CustomDialogTitleWrapper = styled.div`
-  height: 74px;
   font-family: Helvetica;
   font-style: normal;
   font-weight: bold;
-  font-size: 50px;
-  line-height: 74px;
+  font-size: 3em;
   color: ${COLORS.WHITE};
-  padding-top: 30px;
+  padding-top: 7%;
   -webkit-text-stroke: 6px ${COLORS.MAIN};
   position: relative;
 `;
@@ -54,7 +51,6 @@ const CustomDialogContent = styled(DialogContent)`
 const CustomDialogContentSentence = styled(DescriptionWrapper)`
   display: inline-block;
   text-align: left;
-  font-size: 18px;
 `;
 
 // backボタンのラッパー 
@@ -62,7 +58,6 @@ const CustomDialogContentSentence = styled(DescriptionWrapper)`
 const BackToModalButtonWrapper = styled.div`
   position: fixed;
   background-color: ${COLORS.SUB};
-  width: 550px;
   z-index: 2;
 `;
 
@@ -70,36 +65,39 @@ const CustomTable = styled.table`
   border-collapse: collapse;
   color: ${COLORS.BLACK};
   background-color: ${COLORS.SUB};
-  font-family: YuGothic;
   font-weight: normal;
-  font-size: 18px;
+  font-size: 1.1em;
   margin: 0 auto;
-  margin-top: 25px;
+  margin-top: 4%;
+  margin-bottom: 4%;
   border: none;
-  width: 70%;
+  width: 60%;
 `;
 
-const CustomTd = styled.td`
-  padding: 10px 40px; 
-  text-align: center;
-  border: solid 1px silver;
-  font-size: 21px;
-  background-color: ${COLORS.OCHER};
-`;
-
-const MetaTd = styled.td`
-  padding: 10px 40px; 
-  text-align: center;
-  border: solid 1px silver;
-  font-weight: bold;
-  font-size: 21px;
-  color: ${COLORS.SUB};
-  background-color: ${COLORS.MAIN};
-`;
 
 const ButtonsWrapper = styled.div`
   display: flex;
   justify-content: space-around;
+  width: 30%;
+  align-items: end;
+  margin 0 auto;
+`;
+
+const CustomTd = styled.td`
+  padding: 3%;
+  border: none;
+  text-align: right;
+  border-bottom:solid 1px silver;
+  padding-right: 4%;
+`;
+
+const MetaTd = styled(CustomTd)`
+  border: none;
+  text-align: left;
+  font-weight: bold;
+  border-bottom:solid 1px silver;
+  padding-right: 0;
+  padding-left: 4%;
 `;
 
 // gameStateのrank_upがtrueの時に開くモーダル
@@ -129,6 +127,7 @@ export const RankUpDialog = ({
   return(
     <Dialog
       open={isOpen}
+      maxWidth='lg'        
     >
       <CustomDialogInnerWrapper> 
         <BackToModalButtonWrapper>
@@ -156,9 +155,11 @@ export const RankUpDialog = ({
           <CustomTable>
             <tbody>
               <tr>
-                <MetaTd colSpan={2}>現在の称号</MetaTd> 
+                <MetaTd>ランク</MetaTd> 
+                <CustomTd>2</CustomTd>
               </tr>
               <tr>
+                <MetaTd>称号</MetaTd> 
                 <CustomTd>{active_title}</CustomTd>
               </tr>
             </tbody>

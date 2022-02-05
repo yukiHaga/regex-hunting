@@ -7,15 +7,12 @@ import { COLORS } from '../../style_constants.js';
 // handleColorType 
 import { handleColorType } from '../../functions/handleColorType.js';
 
-/*
-  background-color: ${COLORS.LIGHT_BLACK};
-  */
 const HpGageWrapper = styled.div`
   background-color: ${COLORS.GAGE_GRAY};
   border-radius: 0 0 3px 3px;
   width: 100%;
-  height: 31px;
   display: flex;
+  height: 3.9vh;
   box-sizing: border-box;
   border-left: 5px solid;
   border-right: 5px solid;
@@ -24,19 +21,29 @@ const HpGageWrapper = styled.div`
 `;
 
 const TypeWrapper = styled.div`
-  height: 26px;
-  width: 120px;
-  font-size: 18px;
-  line-height: 26px;
+  width: 8.5%;
+  font-size: 1.2em;
   background-color: ${COLORS.GAGE_GRAY};
-  color: ${COLORS.BROWN};
-  font-family: YuGothic;
+  color: ${COLORS.LIGHT_BLACK};
   font-weight: bold;
   text-align: center;
 `;
 
-const GageOuterWrapper = styled.div`
+// fuchiue
+const Fuchiue = styled.span`
+  -webkit-text-stroke: 0;
+  position: absolute;
+`;
+
+const FixWrapper = styled.div`
   height: 100%;
+  width: 100%;
+  display: flex;
+  align-items: center;
+`;
+
+const GageOuterWrapper = styled.div`
+  height: 80%;
   width: 100%;
   background-color: ${COLORS.LIGHT_BLACK};
   border-radius: 10px;
@@ -50,7 +57,7 @@ const GageWrapper = styled.div`
     user_hp,
     user_max_hp
   }) => `${100 * (user_hp / user_max_hp)}%`};
-  background-color: ${(props) => handleColorType(props.user_hp)};
+  background-color: ${({ user_hp }) => handleColorType(user_hp)};
   box-sizing: border-box;
   border: none;
   outline: none;
@@ -69,18 +76,25 @@ export const HpGage = ({
   return (
     <>
       <HpGageWrapper>
-        <TypeWrapper>
+        <TypeWrapper
+          user_hp={user_hp}
+        >
+          <Fuchiue>
+            HP 
+          </Fuchiue>
           HP
         </TypeWrapper>
-        <GageOuterWrapper>
-          {
-            (user_hp / user_max_hp) !== 0 &&
-              <GageWrapper 
-                user_hp={user_hp}
-                user_max_hp={user_max_hp}
-              />
-          }
-        </GageOuterWrapper>
+        <FixWrapper>
+          <GageOuterWrapper>
+            {
+              (user_hp / user_max_hp) !== 0 &&
+                <GageWrapper 
+                  user_hp={user_hp}
+                  user_max_hp={user_max_hp}
+                />
+            }
+          </GageOuterWrapper>
+        </FixWrapper>
       </HpGageWrapper>
     </>
   );
