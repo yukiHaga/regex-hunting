@@ -21,26 +21,24 @@ import { handleTitleColorType } from '../../functions/handleTitleColorType.js'
 import { BackToModalButton } from '../Buttons/BackToModalButton.jsx';
 
 const CustomDialogInnerWrapper = styled.div`
-  padding-right: 10px;
-  padding-left: 10px;
+  padding-right: 3%;
+  padding-left: 3%;
+  padding-top: 2%;
   background-color: ${COLORS.SUB};
   text-align: center;
-  width: 550px;
+  width: 40vw;
 `;
 
 const CustomDialogTitleWrapper = styled.div`
-  height: 50px;
-  font-size: 30px;
-  line-height: 50px;
-  padding-top: 50px;
+  font-size: 2em;
+  padding-top: 13%;
   font-family: Raleway;
   font-style: italic;
   font-weight: bold;
-  font-size: 32px;
   color: ${(props) => handleTitleColorType(props.title)};
   text-align: left;
-  padding-left: 40px;
-  padding-right: 40px;
+  width: 85%;
+  margin: 0 auto;
 `;
 
 const CustomDialogContent = styled(DialogContent)`
@@ -52,64 +50,59 @@ const CustomDialogContent = styled(DialogContent)`
 const BackToModalButtonWrapper = styled.div`
   position: fixed;
   background-color: ${COLORS.SUB};
-  width: 550px;
   z-index: 2;
 `;
 
 // background-color: ${COLORS.OCHER};
 const QuestionBlockWrapper = styled.div`
-  width: 470px;
-  height: ${({ good_or_bad }) => good_or_bad === "good" ? '270px' : '180px' };
+  width: 100%;
   border-radius: 3px;
   background-color: ${COLORS.ANSWER_GRAY};
   margin: 0 auto;
-  padding-top: 10px;
-  margin-bottom: 20px;
+  padding-top: 4%;
+  padding-bottom: 4%;
+  margin-bottom: 4%;
 `;
 
 const QuestionWrapper = styled.div`
-  height: 80px;
-  width: 450px;
+  width: 90%;
   border-radius: 3px;
   background-color: ${COLORS.OCHER};
-  font-size: 16px;
-  line-height: 40px;
+  font-size: 1em;
   color: ${COLORS.BLACK};
-  font-family: YuGothic;
   font-style: normal;
-  font-weight: 500;
   text-align: center;
   margin: 0 auto;
 `;
 
 const QuestionUpperWrapper = styled.div`
- display: flex;
+  display: flex;
 `;
 
 const QuestionNumFakeWrapper = styled.div`
-  height: 40px;
-  width: 45px;
+  height: 5.5%;
+  width: 10%;
 `;
 const QuestionNumWrapper = styled.div`
   background-color: ${COLORS.MAIN};
-  height: 40px;
-  width: 45px;
-  border-radius: 3px;
-  font-size: 16px;
-  line-height: 40px;
+  width: 8%;
+  border-radius: 3px 3px 0 0;
+  font-size: 1em;
   color: ${COLORS.SUB};
   text-align: center;
-  font-family: YuGothic;
   font-style: normal;
   font-weight: 500;
   position: absolute;
   z-index: 1;
+  padding-top: 1.4%;
+  padding-bottom: 1.4%;
 `;
 
 const QuestionSentenceWrapper = styled.div`
+  padding-top: 1.8%;
+  padding-bottom: 1.8%;
+  padding-left: 2%;
   text-align: left;
-  height: 40px;
-  padding-left: 10px;
   overflow-x: scroll;
 `;
 
@@ -123,56 +116,47 @@ const CustomSentence = styled.div`
 
 const TargetSentenceWrapper = styled.div`
   background-color: ${COLORS.SUB};
-  border-radius: 3px;
-  width: 450px;
-  height: 40px;
-  font-size: 16px;
-  line-height: 40px;
+  border-radius: 0 0 3px 3px;
+  width: 100%;
+  font-size: 1em;
   color: ${COLORS.BLACK};
   text-align: center;
-  font-family: YuGothic;
   font-style: normal;
-  font-weight: 500;
+  padding-top: 1.8%;
+  padding-bottom: 1.8%;
 `;
 
 const OuterCodeBlockWrapper = styled.div`
   margin: 0 auto;
-  width: 450px;
-  margin-top: 10px;
+  width: 100%;
+  margin-top: 3%; 
 `;
 
 const CodeBlockWrapper = styled.div`
   background-color: ${COLORS.LIGHT_BLACK};
   border-radius: 3px;
-  width: 450px;
-  height: 40px;
+  width: 90%;
   margin: 0 auto;
   display: flex;
   justify-content: space-between;
 `;
 
 const AnchorWrapper = styled.div`
-  height: 40px;
-  font-size: 16px;
-  line-height: 40px;
+  font-size: 1em;
   color: ${COLORS.WHITE};
-  font-family: YuGothic;
   font-style: normal;
-  font-weight: 500;
-  margin-left: 15px;
-  margin-right: 15px;
+  margin-left: 3%;
+  margin-right: 3%;
+  padding-top: 2%;
+  padding-bottom: 2%;
 `;
 
 const CodeBlockDiv = styled.div`
-  height: 40px;
-  width: 450px;
-  font-size: 16px;
-  line-height: 40px;
+  width: 100%;
+  font-size: 1em;
   background-color: ${COLORS.LIGHT_BLACK};
   color: ${COLORS.WHITE};
-  font-family: YuGothic;
   font-style: normal;
-  font-weight: 500;
   outline: none;
   border: none;
   text-align: center;
@@ -188,37 +172,37 @@ const CodeBlockDiv = styled.div`
     color: #eeeeee;
     opacity: 0.5;
   };
+  padding-top: 2%;
+  padding-bottom: 2%;
 `;
 
 const CodeBlockTitleWrapper = styled.div`
-  font-size: 19px;
+  font-size: 1.2em;
   color: ${COLORS.BLACK};
   text-align: left;
-  font-family: YuGothic;
-  font-weight: 500;
+  width: 90%;
+  margin: 0 auto;
 `;
 
 const CommentaryBlockWrapper = styled.div`
   margin: 0 auto;
-  width: 450px;
-  margin-top: 10px;
-  margin-bottom: 10px;
+  width: 90%;
+  margin-top: 2%;
+  padding-top: 0.5%;
 `;
 
 const CommentaryTitleWrapper = styled.div`
-  font-size: 19px;
+  font-size: 1.2em;
   color: ${COLORS.BLACK};
   text-align: left;
-  font-family: YuGothic;
-  font-weight: 500;
+  width: 100%;
+  margin: 0 auto;
 `;
 
 const CommentaryWrapper = styled.div`
-  font-size: 16px;
+  font-size: 1em;
   color: ${COLORS.BLACK};
   text-align: left;
-  font-family: YuGothic;
-  font-weight: 500;
 `;
 
 export const CheckAnswerDialog = ({
@@ -232,6 +216,7 @@ export const CheckAnswerDialog = ({
   return(
     <Dialog
       open={isOpen}
+      maxWidth='lg'        
     >
       <CustomDialogInnerWrapper> 
         <BackToModalButtonWrapper>
@@ -285,7 +270,7 @@ export const CheckAnswerDialog = ({
             ))
             :
               <DescriptionWrapper>
-                不正解の問題はありませんでした。
+                なし
               </DescriptionWrapper>
           }
         </CustomDialogContent>
@@ -346,7 +331,7 @@ export const CheckAnswerDialog = ({
             ))
             :
               <DescriptionWrapper>
-                正解の問題はありませんでした。
+                なし
               </DescriptionWrapper>
           }
         </CustomDialogContent>
