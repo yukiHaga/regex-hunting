@@ -13,44 +13,39 @@ import { COLORS } from '../style_constants.js';
 // メインのラッパー
 const MainWrapper = styled.div`
   background-color: ${COLORS.SUB};
-  padding-top: 45px;
-  padding-bottom: 98px;
+  padding-top: 7.62%;
+  padding-bottom: 7.62%;
 `;
 
 const SendEmailBoxWrapper = styled.div`
   width: 40%;
-  height: 480px;
   background-color: ${COLORS.WHITE};
   margin: 0 auto;
   border-radius: 3px;
+  padding-bottom: 5%;
 `;
 
 const TitleWrapper = styled.h2`
-  margin-bottom: 30px;
-  font-family: YuGothic;
   font-style: normal;
   color: ${COLORS.BLACK};
-  margin-top: 0px;
-  margin-bottom: 0px;
-  padding: 40px;
-  padding-top: 65px;
   width: 70%;
   margin: 0 auto;
+  padding-top: 9%;
+  padding-bottom: 3%;
 `;
 
 const CustomParagraphWrapper = styled.p`
-  font-family: YuGothic;
   font-style: normal;
   font-size: 1.1em;
   color: ${COLORS.BLACK};
   width: 70%;
   margin: 0 auto;
-  margin-bottom: 30px;
   overflow-wrap: break-word;
+  margin-top: 3%;
+  margin-bottom: 5%;
 `;
 
 const CustomUl = styled.ul`
-  font-family: YuGothic;
   font-style: normal;
   font-size: 1.1em;
   color: ${COLORS.BLACK};
@@ -78,12 +73,12 @@ export const SendEmail = () => {
             パスワード再設定用のURLをご入力のメールアドレスに送信しました。記載された内容に従って、パスワードの再設定を行なってください。
           </CustomParagraphWrapper>
           <CustomParagraphWrapper>
-            メールが届かない場合は以下の場合が考えられます
+            メールが届かない場合、以下が考えられます
           </CustomParagraphWrapper>
           <CustomUl>
-            <li>迷惑メールフォルダに入ってしまっている場合</li>
-            <li>メールアドレスが間違っている場合</li>
-            <li>メールアドレスが登録されていない場合</li>
+            <li>迷惑メールフォルダに入っている</li>
+            <li>メールアドレスが間違っている</li>
+            <li>メールアドレスが登録されていない</li>
           </CustomUl>
         </SendEmailBoxWrapper>
       </MainWrapper>
