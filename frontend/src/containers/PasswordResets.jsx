@@ -31,57 +31,61 @@ import { HTTP_STATUS_CODE } from '../constants';
 // メインのラッパー
 const MainWrapper = styled.div`
   background-color: ${COLORS.SUB};
-  padding-top: 45px;
-  padding-bottom: 98px;
+  padding-bottom: 8.33%;
+  padding-top: 8.33%;
 `;
 
 const PasswordResetsBoxWrapper = styled.div`
   width: 40%;
-  height: 480px;
   background-color: ${COLORS.WHITE};
   margin: 0 auto;
   border-radius: 3px;
+  padding-top: 4%;
+  padding-bottom: 4%;
 `;
 
 const TitleWrapper = styled.h2`
-  margin-bottom: 30px;
-  font-family: YuGothic;
   font-style: normal;
   color: ${COLORS.BLACK};
   margin-top: 0px;
   margin-bottom: 0px;
-  padding: 40px;
-  padding-top: 65px;
   width: 70%;
   margin: 0 auto;
 `;
 
 const CustomParagraphWrapper = styled.p`
-  font-family: YuGothic;
   font-style: normal;
   font-size: 1.1em;
   color: ${COLORS.BLACK};
   width: 70%;
   margin: 0 auto;
-  margin-bottom: 30px;
   overflow-wrap: break-word;
+  margin-top: 3%;
+  margin-bottom: 5%;
 `;
 
 const PasswordResetsFormWrapper = styled.div`
   width: 70%;
   margin: 0 auto;
-  margin-top: 50px; 
+  margin-top: 3%;
+`;
+
+const CustomForm = styled.form`
+  width: 100%;
+`;
+
+const CustomFormControl = styled(FormControl)`
+  width: 100%;
 `;
 
 const CustomFilledEmailInput = styled(FilledInput)`
-  width: 400px;
   margin-bottom: ${({
     errors_email_box
-  }) => typeof errors_email_box === 'undefined' && '16px' };
+  }) => typeof errors_email_box === 'undefined' && '5%' };
 `;
 
 const PasswordResetsButtonWrapper = styled.div`
-  margin-top: 16px;
+  margin-top: 3%;
 `;
 
 export const PasswordResets = () => {
@@ -139,14 +143,14 @@ export const PasswordResets = () => {
             ご登録いただいたメールアドレスを入力してください。メールアドレス宛に、パスワード変更ページのURLが記載されたメールを送信します。
           </CustomParagraphWrapper>
           <PasswordResetsFormWrapper>
-            <form onSubmit={handleSubmit(onSubmit)}>
+            <CustomForm onSubmit={handleSubmit(onSubmit)}>
               <Controller 
                 name="EmailBox"
                 control={control}
                 defaultValue=""
                 rules={registerOptions.email}
                 render={({ field }) => (
-                  <FormControl variant="filled">              
+                  <CustomFormControl variant="filled">              
                     <InputLabel htmlFor="email-component-filled">メールアドレス</InputLabel>
                     <CustomFilledEmailInput
                       {...field}
@@ -155,7 +159,7 @@ export const PasswordResets = () => {
                       label="email"
                       errors_email_box={errors.EmailBox}
                     />
-                  </FormControl>              
+                  </CustomFormControl>              
                 )}
               />
               {errors.EmailBox && <InputErrorSentence>
@@ -166,7 +170,7 @@ export const PasswordResets = () => {
                   disabled={!isValid} 
                 />
               </PasswordResetsButtonWrapper>
-            </form>
+            </CustomForm>
           </PasswordResetsFormWrapper>
         </PasswordResetsBoxWrapper>
       </MainWrapper>
