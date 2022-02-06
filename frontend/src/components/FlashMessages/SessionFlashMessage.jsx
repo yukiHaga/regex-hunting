@@ -28,7 +28,7 @@ export const SessionFlashMessage = ({
         sx={{
           position: 'fixed',
           zIndex: 1100,
-          top: { xs: '10%', md: '10%' }
+          top: { xs: '10%', md: '11%' }
         }}
         onClose={
           handleClose

@@ -120,7 +120,7 @@ export const PasswordResets = () => {
     postPasswordResetRequest({
       email: EmailBox
     }).then(() => (
-      navigate('/users/password/sent?user=sent', { 
+      navigate('/users/password/sent', { 
         state: { display: true, success: "パスワード再設定メールを送信しました。"}
       })
     )).catch((e) => {

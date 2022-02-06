@@ -1,11 +1,11 @@
 import React, { Fragment } from 'react';
 import styled from 'styled-components';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 
 // Presentational Components
 import { Header } from '../components/Headers/Header.jsx';
 import { Footer } from '../components/Footers/Footer.jsx';
-import { SendEmailFlashMessage } from '../components/FlashMessages/SendEmailFlashMessage.jsx'; 
+import { SessionFlashMessage } from '../components/FlashMessages/SessionFlashMessage.jsx';
 
 // Colors
 import { COLORS } from '../style_constants.js';
@@ -55,9 +55,6 @@ const CustomUl = styled.ul`
 
 export const SendEmail = () => {
 
-  // navigation
-  const navigate = useNavigate();
-
   // location
   const location = useLocation();
 
@@ -65,6 +62,9 @@ export const SendEmail = () => {
     <>
       <Header /> 
       <MainWrapper>
+        <SessionFlashMessage
+          location={location}
+        />
         <SendEmailBoxWrapper>
           <TitleWrapper>
             メール送信完了
