@@ -10,17 +10,20 @@ class Api::V1::AccountSettingsController < ApplicationController
   # StringIOは文字列をファイルのように扱うことができます
   # ユーザーは一つの画像しか持てないので、画像を更新するときはpurgeで
   # 元々設定している画像を消す
+  # current_user.save!時に、独自バリデーションを画像ファイルに走らせる
+  # 画像を何も設定してないで、更新ボタンを押すと、params[:image].has_key?(:data)がfalseになる
+  # 元々画像を設定していて、画像設定ボタンを押さないで更新ボタンを押すと、
+  # params[:image].has_key?(:data)がfalseになる
   def update
+    if params[:image].has_key?(:data)
+      current_user.avatar.purge
+      blob = ActiveStorage::Blob.create_after_upload!(
+        io: StringIO.new(decode(params[:image][:data]) + "\n"),
+        filename: params[:image][:name]
+      )
+      current_user.avatar.attach(blob)
+    end
     if current_user.update(user_params)
-      if params[:image].has_key?(:data)
-        current_user.avatar.purge
-        blob = ActiveStorage::Blob.create_after_upload!(
-          io: StringIO.new(decode(params[:image][:data]) + "\n"),
-          filename: params[:image][:name]
-        )
-        current_user.avatar.attach(blob)
-        current_user.save!
-      end
       render json: {
         session: true,
         user: {
@@ -37,7 +40,12 @@ class Api::V1::AccountSettingsController < ApplicationController
         }
       }, status: :ok
     else
-      render json: {errors: current_user.errors}, status: :bad_request
+      render json: {
+        errors: {
+          title: 'Bad Request',
+          detail: current_user.errors.full_messages[0].split(' ').last
+        }
+      }, status: :bad_request
     end
   end
 

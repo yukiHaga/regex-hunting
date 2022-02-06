@@ -33,4 +33,22 @@ class User < ApplicationRecord
   # nilの時はバリデーションをスキップする
   validates :reset_password_token, uniqueness: true, allow_nil: true
   validates :open_rank, inclusion: [true, false]
+  validate :avatar_type, :avatar_size
+
+  private
+
+  # in?に含まれていればtrueになる。含まれているのが正常
+  def avatar_type
+    if !avatar.blob.content_type.in?(%('image/jpg image/jpeg image/png'))
+      avatar.purge
+      errors.add(:avatar, 'jpegまたはpng形式でアップロードしてください')
+    end
+  end
+
+  def avatar_size
+    if avatar.blob.byte_size > 1.megabytes
+      avatar.purge
+      errors.add(:avatar, "1MB以内のファイルを選択してください")
+    end
+  end
 end
