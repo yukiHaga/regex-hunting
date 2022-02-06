@@ -59,7 +59,7 @@ const CustomDialogInnerWrapper = styled.div`
 `;
 
 const CustomDialogTitleImage = styled.img`
-  width: 40%;
+  width: 41%;
   object-fit: contain;
   padding: 2% 8%;
 `;
