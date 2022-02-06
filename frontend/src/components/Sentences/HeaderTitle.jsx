@@ -4,9 +4,6 @@ import styled from 'styled-components';
 // Image
 import MainTitleImage from '../../images/main_title.svg';
 
-// Colors
-import { COLORS } from '../../style_constants.js';
-
 // Responsive
 import { WIDTH } from '../../style_constants.js';
 

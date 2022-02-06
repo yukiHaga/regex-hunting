@@ -31,64 +31,67 @@ import { HTTP_STATUS_CODE } from '../constants';
 // メインのラッパー
 const MainWrapper = styled.div`
   background-color: ${COLORS.SUB};
-  padding-top: 45px;
-  padding-bottom: 98px;
+  padding-bottom: 7.52%;
+  padding-top: 7.52%;
 `;
 
 const PasswordUpdatesBoxWrapper = styled.div`
   width: 40%;
-  height: 480px;
   background-color: ${COLORS.WHITE};
   margin: 0 auto;
   border-radius: 3px;
+  padding-top: 4%;
+  padding-bottom: 4%;
 `;
 
 const TitleWrapper = styled.h2`
-  margin-bottom: 30px;
-  font-family: YuGothic;
   font-style: normal;
   color: ${COLORS.BLACK};
   margin-top: 0px;
   margin-bottom: 0px;
-  padding: 40px;
-  padding-top: 65px;
   width: 70%;
   margin: 0 auto;
 `;
 
 const CustomParagraphWrapper = styled.p`
-  font-family: YuGothic;
   font-style: normal;
   font-size: 1.1em;
   color: ${COLORS.BLACK};
   width: 70%;
   margin: 0 auto;
-  margin-bottom: 10px;
   overflow-wrap: break-word;
+  margin-top: 3%;
+  margin-bottom: 5%;
 `;
 
 const PasswordUpdatesFormWrapper = styled.div`
   width: 70%;
   margin: 0 auto;
-  margin-top: 40px; 
+  margin-top: 3%; 
+`;
+
+const CustomForm = styled.form`
+  width: 100%;
+`;
+
+const CustomFormControl = styled(FormControl)`
+  width: 100%;
 `;
 
 const CustomFilledPasswordInput = styled(FilledInput)`
-  width: 400px;
   margin-bottom: ${({
     errors_password_box
-  }) => typeof errors_password_box === 'undefined' && '16px' };
+  }) => typeof errors_password_box === 'undefined' && '5%' };
 `;
 
 const CustomFilledPasswordConfirmationInput = styled(FilledInput)`
-  width: 400px;
   margin-bottom: ${({
     errors_password_confirmation_box
-  }) => typeof errors_password_confirmation_box === 'undefined' && '16px' };
+  }) => typeof errors_password_confirmation_box === 'undefined' && '5%' };
 `;
 
 const PasswordUpdatesButtonWrapper = styled.div`
-  margin-top: 16px;
+  margin-top: 3%;
 `;
 
 export const PasswordUpdates = () => {
@@ -181,14 +184,14 @@ export const PasswordUpdates = () => {
             新しいパスワードを入力してください。
           </CustomParagraphWrapper>
           <PasswordUpdatesFormWrapper>
-            <form onSubmit={handleSubmit(onSubmit)}>
+            <CustomForm onSubmit={handleSubmit(onSubmit)}>
               <Controller 
                 name="PasswordBox"
                 control={control}
                 defaultValue=""
                 rules={registerOptions.password}
                 render={({ field }) => (
-                  <FormControl variant="filled">              
+                  <CustomFormControl variant="filled">              
                     <InputLabel htmlFor="password-component-filled">パスワード</InputLabel>
                     <CustomFilledPasswordInput
                       {...field}
@@ -197,7 +200,7 @@ export const PasswordUpdates = () => {
                       label="password"
                       errors_password_box={errors.PasswordBox}
                     />
-                  </FormControl>              
+                  </CustomFormControl>              
                 )}
               />
               {errors.PasswordBox && <InputErrorSentence>
@@ -209,7 +212,7 @@ export const PasswordUpdates = () => {
                 defaultValue=""
                 rules={registerOptions.passwordConfirmation}
                 render={({ field }) => (
-                  <FormControl variant="filled">              
+                  <CustomFormControl variant="filled">              
                     <InputLabel htmlFor="password-confirmation-component-filled">
                       パスワード(確認用)
                     </InputLabel>
@@ -220,7 +223,7 @@ export const PasswordUpdates = () => {
                       label="password-confirmation"
                       errors_password_confirmation_box={errors.PasswordConfirmationBox}
                     />
-                  </FormControl>              
+                  </CustomFormControl>              
                 )}
               />
               {errors.PasswordConfirmationBox && <InputErrorSentence>
@@ -231,7 +234,7 @@ export const PasswordUpdates = () => {
                   disabled={!isValid} 
                 />
               </PasswordUpdatesButtonWrapper>
-            </form>
+            </CustomForm>
           </PasswordUpdatesFormWrapper>
         </PasswordUpdatesBoxWrapper>
       </MainWrapper>
