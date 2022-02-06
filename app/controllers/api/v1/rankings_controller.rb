@@ -29,11 +29,8 @@ class Api::V1::RankingsController < ApplicationController
   # そのプロフィール画像もeager_loadで取得する
   # おかげで、1回のクエリで上位3つの速さのゲームデータ, ユーザー, 画像を取得できる
   def get_top_ten(difficulty)
-    user_id = User.where(open_rank: true).pluck(:id)
-    top_ten_array = GameManagement.where(
-                                     difficulty: difficulty,
-                                     game_result: :win,
-                                     user_id: user_id
+    top_ten_array = GameManagement.where(difficulty: difficulty, game_result: :win,
+                                     user_id: User.where(open_rank: true).pluck(:id)
                                    ).order(:result_time).limit(10).
                                    eager_load(user: { avatar_attachment: :blob }).to_a.
                                    map do |game_management|

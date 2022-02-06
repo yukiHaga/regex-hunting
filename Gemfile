@@ -41,6 +41,7 @@ group :development do
   gem 'spring-watcher-listen', '~> 2.0.0'
   # Ruby code style checking and code formatting tool
   gem 'rubocop'
+  gem 'rubocop-rails'
   # A code metric tool for rails codes
   gem 'rails_best_practices'
   # Provides a better error page
