@@ -26,8 +26,8 @@ import { HTTP_STATUS_CODE } from '../constants';
 // メインのラッパー
 const MainWrapper = styled.div`
   background-color: ${COLORS.SUB};
-  padding-top: 44px;
-  padding-bottom: 36px;
+  padding-top: 3%;
+  padding-bottom: 2.65%;
 `;
 
 export const Rankings = () => {
@@ -45,10 +45,10 @@ export const Rankings = () => {
   } = useContext(UserContext);
 
   const initialState = {
-    top_three_elementary: [],
-    top_three_intermediate: [],
-    top_three_advanced: [],
-    current_top_three_array: [],
+    top_ten_elementary: [],
+    top_ten_intermediate: [],
+    top_ten_advanced: [],
+    current_top_ten_array: [],
     difficulty_title: ""
   };
 
@@ -101,10 +101,10 @@ export const Rankings = () => {
     getRanking().then((data) => {
       setRankingState((prev) => ({
         ...prev,
-        top_three_elementary: data.top_three_elementary,
-        top_three_intermediate: data.top_three_intermediate,
-        top_three_advanced: data.top_three_advanced,
-        current_top_three_array: data.top_three_elementary,
+        top_ten_elementary: data.top_ten_elementary,
+        top_ten_intermediate: data.top_ten_intermediate,
+        top_ten_advanced: data.top_ten_advanced,
+        current_top_ten_array: data.top_ten_elementary,
         difficulty_title: "初級編"
       }));
     }).catch((e) => {
@@ -141,7 +141,7 @@ export const Rankings = () => {
       /> 
       <MainWrapper>
         <RankingBox
-          current_top_three_array={rankingState.current_top_three_array}
+          current_top_ten_array={rankingState.current_top_ten_array}
           difficulty_title={rankingState.difficulty_title}
           setRankingState={setRankingState}
         />

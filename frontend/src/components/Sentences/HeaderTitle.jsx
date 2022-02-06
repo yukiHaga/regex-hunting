@@ -20,7 +20,7 @@ const MainTitleImageCover = styled.img`
   max-width: 100%;
   height: auto;
   @media (max-width: ${WIDTH.MOBILE}) {
-    width: 30%
+    width: 40%;
   };
 `;
 
