@@ -18,7 +18,7 @@ import { useForm, Controller } from "react-hook-form";
 import { COLORS } from '../../style_constants.js';
 
 // Images
-import LoginImage from '../../images/login.png';
+import LoginImage from '../../images/login.svg';
 
 // Button
 import { LoginButton } from '../Buttons/LoginButton.jsx'
@@ -59,7 +59,7 @@ const CustomDialogInnerWrapper = styled.div`
 `;
 
 const CustomDialogTitleImage = styled.img`
-  width: 38%;
+  width: 40%;
   object-fit: contain;
   padding: 2% 8%;
 `;
