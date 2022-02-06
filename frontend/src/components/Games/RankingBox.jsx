@@ -31,8 +31,7 @@ const TitleLineWrapper = styled.div`
 
 const ChangeGraphBoxSentenceWrapper = styled(DescriptionWrapper)`
   font-weight: bold;
-  font-size: 36px;
-  line-height: 54px;
+  font-size: 2.3em;
   text-align: center;
   padding-top: 1.1%;
 `;
@@ -40,7 +39,7 @@ const ChangeGraphBoxSentenceWrapper = styled(DescriptionWrapper)`
 const RankingWrapper = styled.div`
  width: 80%;
  margin: 0 auto;
- margin-top: 20px;
+ margin-top: 2%;
 `;
 
 const CustomThead = styled.thead`
@@ -51,18 +50,17 @@ const CustomTable = styled.table`
   border-collapse: collapse;
   color: ${COLORS.BLACK};
   background-color: ${COLORS.WHITE};
-  font-family: YuGothic;
   font-weight: normal;
-  font-size: 18px;
+  font-size: 1.1em;
   margin: 0 auto;
-  margin-top: 8px;
   box-shadow: 0 0px 20px rgba(0,0,0,0.2);
   width: 80%;
   border: 1px solid rgba(0,0,0,.2);
+  margin-bottom: 2%;
 `;
 
 const RankingTd = styled.td`
-  padding 10px 0;
+  padding: 1.3% 0; 
   border: none;
   text-align: center;
   border-bottom:solid 1px silver;
@@ -71,7 +69,7 @@ const RankingTd = styled.td`
 `;
 
 const TimeTd = styled.td`
-  padding: 10px 0; 
+  padding: 1.3% 0; 
   border: none;
   text-align: center;
   border-bottom:solid 1px silver;
@@ -80,7 +78,7 @@ const TimeTd = styled.td`
 `;
 
 const HunterTd = styled.td`
-  padding: 10px 0; 
+  padding: 1.3% 0; 
   border: none;
   text-align: center;
   border-bottom:solid 1px silver;
@@ -89,25 +87,25 @@ const HunterTd = styled.td`
 `;
 
 const RankingDataTd = styled.td`
-  padding: 10px 0; 
+  padding: 1.5% 0; 
   border: none;
   text-align: center;
   border-bottom:solid 1px silver;
   width: 10%;
-  font-size: 20px;
+  font-size: 1.5em;
 `;
 
 const TimeDataTd = styled.td`
-  padding: 10px 0; 
+  padding: 1.5% 0; 
   border: none;
   text-align: center;
   border-bottom:solid 1px silver;
   width: 30%;
-  font-size: 20px;
+  font-size: 1.4em;
 `;
 
 const HunterDataTd = styled.td`
-  padding: 10px 0; 
+  padding: 1.5% 0; 
   border: none;
   text-align: center;
   border-bottom:solid 1px silver;
@@ -130,48 +128,47 @@ const HunterTableWrapper = styled.div`
 `;
 
 const HunterTable = styled.table`
-  width: 400px;
+  width: 22vw;
   border-collapse: collapse;
   color: ${COLORS.BLACK};
-  font-family: YuGothic;
   font-weight: normal;
-  font-size: 18px;
+  font-size: 1.1em;
   margin: 0 auto;
   border: none;
 `;
 
 const HunterTableTd = styled.td`
-  padding: 5px 30px; 
+  padding: 2% 4%; 
   border: none;
   text-align: right;
   border-bottom:solid 1px silver;
 `;
 
 const HunterTableNameTd = styled(HunterTableTd)`
-  font-family: YuGothic;
   font-style: normal;
   font-weight: bold;
-  font-size: 24px;
+  font-size: 1.3em;
   text-align: left;
   color: ${COLORS.BLACK};
 `;
 
-const HunterTableMetaTd = styled(HunterTableTd)`
+const HunterTableRankMetaTd = styled(HunterTableTd)`
   border: none;
   text-align: left;
   border-bottom:solid 1px silver;
   font-weight: bold;
+  width: 35%;
 `;
 
-const HunterTableRankMetaTd = styled.td`
-  padding: 5px 30px; 
+const HunterTableTitleMetaTd = styled.td`
+  padding: 2% 4%; 
   border: none;
   text-align: left;
   font-weight: bold;
 `;
 
-const HunterTableRankDataTd = styled.td`
-  padding: 5px 30px; 
+const HunterTableTitleDataTd = styled.td`
+  padding: 2% 4%; 
   border: none;
   text-align: right;
 `;
@@ -181,7 +178,7 @@ const NotDescriptionWrapper = styled(DescriptionWrapper)`
 
 const NotRankingWrapper = styled(RankingWrapper)`
  width: 100%;
- height: 475px;
+ height: 59.1vh;
  text-align: center;
 `;
 
@@ -328,20 +325,20 @@ export const RankingBox = memo(({
                                   </HunterTableNameTd>
                                 </tr>
                                 <tr>
-                                  <HunterTableMetaTd>
+                                  <HunterTableRankMetaTd>
                                     ランク
-                                  </HunterTableMetaTd>
+                                  </HunterTableRankMetaTd>
                                   <HunterTableTd>
                                     {rank}
                                   </HunterTableTd>
                                 </tr>
                                 <tr>
-                                  <HunterTableRankMetaTd>
+                                  <HunterTableTitleMetaTd>
                                     称号
-                                  </HunterTableRankMetaTd>
-                                  <HunterTableRankDataTd>
+                                  </HunterTableTitleMetaTd>
+                                  <HunterTableTitleDataTd>
                                     {active_title}
-                                  </HunterTableRankDataTd>
+                                  </HunterTableTitleDataTd>
                                 </tr>
                               </tbody>
                             </HunterTable>

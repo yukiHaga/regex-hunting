@@ -26,8 +26,8 @@ import { HTTP_STATUS_CODE } from '../constants';
 // メインのラッパー
 const MainWrapper = styled.div`
   background-color: ${COLORS.SUB};
-  padding-top: 44px;
-  padding-bottom: 36px;
+  padding-top: 3%;
+  padding-bottom: 2.65%;
 `;
 
 export const Rankings = () => {
