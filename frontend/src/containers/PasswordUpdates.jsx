@@ -161,7 +161,7 @@ export const PasswordUpdates = () => {
       },
       token: query2.get('token') 
     }).then(() => (
-      navigate('/?user=password_update', { 
+      navigate('/', { 
         state: { display: true, success: "パスワードを更新しました。"}
       })
     )).catch((e) => {
