@@ -245,6 +245,7 @@ export const AccountSettingBox = ({
               accept="image/*" 
               id="icon-button-file" 
               type="file" 
+              accept=".png, .jpg, .jpeg"
               onChange={(e) => handleUpload(e)}
             />
             <IconButton 
