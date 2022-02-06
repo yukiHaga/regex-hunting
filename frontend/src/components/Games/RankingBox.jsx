@@ -183,7 +183,7 @@ const NotRankingWrapper = styled(RankingWrapper)`
 `;
 
 export const RankingBox = memo(({
-  current_top_three_array,
+  current_top_ten_array,
   difficulty_title,
   setRankingState
 }) => {
@@ -192,7 +192,7 @@ export const RankingBox = memo(({
   const handleElementary = () => {
     setRankingState((prev) => ({
       ...prev,
-      current_top_three_array: prev.top_three_elementary,
+      current_top_ten_array: prev.top_ten_elementary,
       difficulty_title: "初級編"
     }));
   };
@@ -201,7 +201,7 @@ export const RankingBox = memo(({
   const handleIntermediate = () => {
     setRankingState((prev) => ({
       ...prev,
-      current_top_three_array: prev.top_three_intermediate,
+      current_top_ten_array: prev.top_ten_intermediate,
       difficulty_title: "中級編"
     }));
   };
@@ -210,7 +210,7 @@ export const RankingBox = memo(({
   const handleAdvanced = () => {
     setRankingState((prev) => ({
       ...prev,
-      current_top_three_array: prev.top_three_advanced,
+      current_top_ten_array: prev.top_ten_advanced,
       difficulty_title: "上級編"
     }));
   };
@@ -277,7 +277,7 @@ export const RankingBox = memo(({
         </IconButton>
       </TitleLineWrapper>
       {
-        current_top_three_array.length ?
+        current_top_ten_array.length ?
           <RankingWrapper>
             <CustomTable>
               <CustomThead>
@@ -289,7 +289,7 @@ export const RankingBox = memo(({
               </CustomThead>
               <tbody>
                 {
-                  current_top_three_array.map(({
+                  current_top_ten_array.map(({
                     game_management: { 
                       result_time 
                     }, 
