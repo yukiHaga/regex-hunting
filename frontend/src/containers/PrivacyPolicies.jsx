@@ -11,7 +11,7 @@ import { COLORS } from '../style_constants.js';
 // メインのラッパー
 const MainWrapper = styled.div`
   background-color: ${COLORS.SUB};
-  padding-top: 5%;
+  padding-top: 4%;
   padding-bottom: 4%;
 `;
 
