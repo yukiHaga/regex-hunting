@@ -218,7 +218,7 @@ export const AccountSettingBox = ({
         state: { display: true, success: "アカウントを更新しました。"}
       })
     ).catch((e) => {
-      if(e.response.status === HTTP_STATUS_CODE.NOT_FOUND){
+      if(e.response.status === HTTP_STATUS_CODE.BAD_REQUEST){
         dispatch({
           type: requestUserActionTyps.REQUEST_FAILURE,
           payload: {
@@ -325,7 +325,7 @@ export const AccountSettingBox = ({
               />
             </AccoutSettingButtonWrapper>
             {
-              requestUserState.errors.title === 'Record Not Found' && 
+              requestUserState.errors.title === 'Bad Request' && 
                 <SubmitErrorSentence>
                   {requestUserState.errors.detail}
                 </SubmitErrorSentence>
