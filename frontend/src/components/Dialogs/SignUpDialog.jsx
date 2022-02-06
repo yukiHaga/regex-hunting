@@ -17,7 +17,7 @@ import { useNavigate } from "react-router-dom";
 import { COLORS } from '../../style_constants.js';
 
 // Images
-import SignUpImage from '../../images/sign_up.png';
+import SignUpImage from '../../images/sign_up.svg';
 
 // Button
 import { SignUpButton } from '../Buttons/SignUpButton.jsx'
@@ -58,7 +58,7 @@ const CustomDialogInnerWrapper = styled.div`
 `;
 
 const CustomDialogTitleImage = styled.img`
-  width: 40%;
+  width: 45%;
   object-fit: contain;
   padding: 2% 8%;
 `;

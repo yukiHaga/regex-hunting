@@ -7,18 +7,16 @@ const PasswordUpdatesButtonWrapper = styled(BlueRoundButton)`
   border-style: none;
   opacity: ${(props) => props.disabled ? 0.3 : 1};
   pointer-events: ${(props) => props.disabled ? 'none' : 'auto'};
+  width: 100%;
+  padding-top: 3.2%;
+  padding-bottom: 3.2%;
 `;
 
 const PasswordUpdatesButtonTextWrapper = styled.div`
-  width: 390px;
-  height: 50px;
   color: white;
-  font-family: YuGothic;
   font-style: normal;
-  font-size: 20px;
-  font-weight: 500;
+  font-size: 1.3em;
   text-align: center;
-  line-height: 50px;
 `;
 
 export const PasswordUpdatesButton = ({disabled}) => {
