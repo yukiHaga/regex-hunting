@@ -11,64 +11,59 @@ import { COLORS } from '../style_constants.js';
 // メインのラッパー
 const MainWrapper = styled.div`
   background-color: ${COLORS.SUB};
-  padding-bottom: 56px;
+  padding-top: 4%;
+  padding-bottom: 4%;
 `;
 
 const TitleWrapper = styled.h1`
-  margin-bottom: 30px;
+  margin-bottom: 2%;
   font-size: 2em;
   text-align: center;
-  font-family: YuGothic;
   font-style: normal;
   color: ${COLORS.BLACK};
   margin-top: 0px;
 `;
 
 const CustomParagraphWrapper = styled.p`
-  font-family: YuGothic;
   font-style: normal;
   font-size: 1.1em;
   color: ${COLORS.BLACK};
   width: 60%;
   margin: 0 auto;
-  margin-bottom: 30px;
+  margin-bottom: 3%;
 `;
 
 const SemiTitleWrapper = styled.h3`
-  font-family: YuGothic;
   font-style: normal;
   color: ${COLORS.BLACK};
   width: 60%;
   margin: 0 auto;
-  margin-bottom: 5px;
+  margin-bottom: 0.5%;
 `;
 
 const CustomSecondParagraphWrapper = styled.p`
-  font-family: YuGothic;
   font-style: normal;
   font-size: 1.1em;
   color: ${COLORS.BLACK};
   width: 60%;
   margin: 0 auto;
-  margin-bottom: 10px;
+  margin-bottom: 1%;
 `;
 
 const CustomUlWrapper = styled.ul`
-  font-family: YuGothic;
   font-style: normal;
   color: ${COLORS.BLACK};
   width: 60%;
   margin: 0 auto;
-  margin-bottom: 30px;
+  margin-bottom: 3%;
 `;
 
 const CustomURLWrapper = styled.div`
-  font-family: YuGothic;
   font-style: normal;
   color: ${COLORS.BLACK};
   width: 60%;
   margin: 0 auto;
-  margin-bottom: 30px;
+  margin-bottom: 3%;
   text-decoration: none;
 `;
 
@@ -78,17 +73,16 @@ const CustomAnchor = styled.a`
 `;
 
 const CustomBottomParagraphWrapper = styled(CustomSecondParagraphWrapper)`
-  margin-bottom: 30px;
+  margin-bottom: 3%;
 `;
 
 const CustomEmailWrapper = styled.div`
-  font-family: YuGothic;
   font-style: normal;
   color: ${COLORS.BLACK};
   width: 60%;
   margin: 0 auto;
   text-decoration: none;
-  margin-bottom: 10px;
+  margin-bottom: 1%;
 `;
 
 export const PrivacyPolicies = () => {
