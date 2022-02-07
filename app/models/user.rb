@@ -33,7 +33,22 @@ class User < ApplicationRecord
   # nilの時はバリデーションをスキップする
   validates :reset_password_token, uniqueness: true, allow_nil: true
   validates :open_rank, inclusion: [true, false]
-  validate :avatar_type, :avatar_size
+
+  # avatarが存在するときだけこのバリデーションが走る
+  # avatar画像に問題がないかチェックしている
+  validate :avatar_type, :avatar_size, if: :avatar_attached?
+
+  # ユーザーをシリアライズするクラスメソッド
+  # シリアライズ（serialize）とは、プログラミングでオプジェクト化されたデータを、
+  # ファイルやストレージに保存したり、ネットワークで送受信したりできるような形に変換することである。
+  # シリアライズ後のデータは、JSON形式になって、ネットワークを使って送受信できるようになる。
+  # コントローラで使うので、privateメソッドにしない
+  # userデータをJSONに変換後、image: nilをマージしている
+  def self.handle_user_serializer(user)
+    options = { serializer: UserSerializer }
+    ActiveModelSerializers::SerializableResource.new(user, options).
+                                                 as_json.merge({ image: nil })
+  end
 
   private
 
@@ -50,5 +65,11 @@ class User < ApplicationRecord
         avatar.purge
         errors.add(:avatar, '1MB以内のファイルを選択してください')
       end
+    end
+
+    # avatar画像が存在するかを返すメソッド
+    # attached?でアバターが存在するかを判定できる
+    def avatar_attached?
+      avatar.attached?
     end
 end
