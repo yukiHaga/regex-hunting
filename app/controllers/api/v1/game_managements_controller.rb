@@ -74,10 +74,7 @@ class Api::V1::GameManagementsController < ApplicationController
     # さらに、あるランクに到達すると称号を解放する
     # current_userにsaltやcrypted_passwordなどのカラムを含めてjsonを送ってはダメ
     if rank_up? && CONDITION_HASH.values.include?(params[:current_user][:rank] + 1)
-      current_user.release_titles.build(
-        release_date: Time.zone.today,
-        title_id: (Title.find_by(name: CONDITION_HASH.key(params[:current_user][:rank] + 1)))[:id]
-      )
+      current_user.release_new_title((Title.find_by(name: CONDITION_HASH.key(params[:current_user][:rank] + 1)))[:id])
       current_user.update(
         rank: params[:current_user][:rank] + 1,
         total_experience: params[:current_user][:total_experience],
@@ -145,11 +142,11 @@ class Api::V1::GameManagementsController < ApplicationController
     # ゲストユーザーがゲームをプレイする場合、ゲストユーザー用のデータを@userに代入する
     # User.handle_game_user_serializer(nil)で例外が発生する
     def set_user
-      @user =  if current_user
-                 User.handle_game_user_serializer(current_user)
-               else
-                 GUEST_USER
-               end
+      @user = if current_user
+                User.handle_game_user_serializer(current_user)
+              else
+                GUEST_USER
+              end
     end
 
     # ゲーム終了時のgame_management

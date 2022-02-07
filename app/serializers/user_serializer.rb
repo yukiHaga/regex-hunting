@@ -1,5 +1,4 @@
 class UserSerializer < ActiveModel::Serializer
-
   # ゲームの時はこの情報が返される
   attributes :rank,
              :total_experience,
@@ -11,5 +10,4 @@ class UserSerializer < ActiveModel::Serializer
   attribute :name, if: -> { instance_options[:type] == :profile }
   attribute :open_rank, if: -> { instance_options[:type] == :profile }
   attribute :email, if: -> { instance_options[:type] == :profile }
-
 end

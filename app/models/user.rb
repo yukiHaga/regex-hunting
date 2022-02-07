@@ -58,7 +58,16 @@ class User < ApplicationRecord
     options = { serializer: UserSerializer }
     ActiveModelSerializers::SerializableResource.new(user, options)
                                                 .as_json
-                                                .merge({ prev_temporary_experience: user[:temporary_experience]})
+                                                .merge({ prev_temporary_experience: user[:temporary_experience] })
+  end
+
+  # ログインユーザーの新しいrelease_titleを作成する処理
+  # ログインユーザー作成時とタイトル解放時に、この関数を実行する
+  def release_new_title(title_id)
+    release_titles.build(
+      release_date: Time.zone.today,
+      title_id: title_id
+    )
   end
 
   private
