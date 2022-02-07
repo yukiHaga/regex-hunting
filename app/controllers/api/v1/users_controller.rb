@@ -18,7 +18,7 @@ class Api::V1::UsersController < ApplicationController
       current_user.save!
       render json: {
         session: true,
-        user: User.handle_user_serializer(current_user)
+        user: User.handle_user_serializer(current_user, current_user.avatar.attached? ? url_for(current_user.avatar) : nil)
       }, status: :created
     else
       render json: { errors: user.errors }, status: :bad_request

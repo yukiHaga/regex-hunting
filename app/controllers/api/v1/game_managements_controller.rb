@@ -30,6 +30,16 @@ class Api::V1::GameManagementsController < ApplicationController
     語り継がれし英雄: 14
   }
 
+  # ゲストユーザーのゲーム中のステータス
+  GUEST_USER = {
+    rank: 1,
+    total_experience: 0,
+    maximum_experience_per_rank: 500,
+    temporary_experience: 0,
+    prev_temporary_experience: 0,
+    active_title: '見習いハンター'
+  }
+
   def start
     # レンダリング
     # このユーザーはゲームに使うユーザー

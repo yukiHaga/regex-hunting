@@ -19,7 +19,7 @@ class Api::V1::AccountSettingsController < ApplicationController
     if current_user.update(user_params)
       render json: {
         session: true,
-        user: User.handle_user_serializer(current_user)
+        user: User.handle_user_serializer(current_user, current_user.avatar.attached? ? url_for(current_user.avatar) : nil)
       }, status: :ok
     else
       render json: {
@@ -34,15 +34,16 @@ class Api::V1::AccountSettingsController < ApplicationController
   # privateの下のメソッドにわざわざインデントを加えなくてもいい
   # しかし、rubocopで引っかかるので、インデント入れた
   private
+
     def set_blob(image, user)
-      if image.has_key?(:data)
-        user.avatar.purge
-        blob = ActiveStorage::Blob.create_after_upload!(
-          io: StringIO.new(decode(image[:data]) + "\n"),
-          filename: image[:name]
-        )
-        user.avatar.attach(blob)
-      end
+      return unless image.has_key?(:data)
+
+      user.avatar.purge
+      blob = ActiveStorage::Blob.create_after_upload!(
+        io: StringIO.new(decode(image[:data]) + "\n"),
+        filename: image[:name]
+      )
+      user.avatar.attach(blob)
     end
 
     def user_params

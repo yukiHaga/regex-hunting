@@ -9,7 +9,7 @@ class Api::V1::UserSessionsController < ApplicationController
 
     render json: {
       session: true,
-      user: User.handle_user_serializer(user)
+      user: User.handle_user_serializer(user, user.avatar.attached? ? url_for(user.avatar) : nil)
     }, status: :ok
   end
 
@@ -25,7 +25,7 @@ class Api::V1::UserSessionsController < ApplicationController
     if current_user
       render json: {
         session: true,
-        user: User.handle_user_serializer(current_user)
+        user: User.handle_user_serializer(current_user, current_user.avatar.attached? ? url_for(current_user.avatar) : nil)
       }, status: :ok
     else
       render json: {
