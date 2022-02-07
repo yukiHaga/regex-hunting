@@ -77,3 +77,6 @@ gem 'faker'
 
 # 環境ごとに分けて定数を使うためのgem
 gem 'config'
+
+# シリアライザー
+gem 'active_model_serializers'
