@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  mount LetterOpenerWeb::Engine, at: "/letter_opener" if Rails.env.development?
+  mount LetterOpenerWeb::Engine, at: '/letter_opener' if Rails.env.development?
 
   namespace :api do
     namespace :v1 do
@@ -15,14 +15,14 @@ Rails.application.routes.draw do
       post 'login', to: 'user_sessions#create'
       delete 'logout', to: 'user_sessions#destroy'
       get 'current_user_logged_in', to: 'user_sessions#current_user_logged_in?'
-      post "oauth/callback", to: "oauths#callback"
+      post 'oauth/callback', to: 'oauths#callback'
       resources :password_resets, only: %i[create update]
     end
   end
 
   # React Routerを本番環境で動かす為に必要なルーティング
   # railsのルーティングについて書いている部分より下に追記する
-  get '*path', to: "application#fallback_index_html", constraints: ->(request) do
+  get '*path', to: 'application#fallback_index_html', constraints: ->(request) {
     !request.xhr? && request.format.html?
-  end
+  }
 end

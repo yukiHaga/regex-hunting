@@ -15,29 +15,11 @@ class Api::V1::AccountSettingsController < ApplicationController
   # 元々画像を設定していて、画像設定ボタンを押さないで更新ボタンを押すと、
   # params[:image].has_key?(:data)がfalseになる
   def update
-    if params[:image].has_key?(:data)
-      current_user.avatar.purge
-      blob = ActiveStorage::Blob.create_after_upload!(
-        io: StringIO.new(decode(params[:image][:data]) + "\n"),
-        filename: params[:image][:name]
-      )
-      current_user.avatar.attach(blob)
-    end
+    set_blob(params[:image], current_user)
     if current_user.update(user_params)
       render json: {
         session: true,
-        user: {
-          id: current_user[:id],
-          name: current_user[:name],
-          rank: current_user[:rank],
-          total_experience: current_user[:total_experience],
-          maximum_experience_per_rank: current_user[:maximum_experience_per_rank],
-          temporary_experience: current_user[:temporary_experience],
-          open_rank: current_user[:open_rank],
-          active_title: current_user[:active_title],
-          email: current_user[:email],
-          image: current_user.avatar.attached? ? url_for(current_user.avatar) : nil
-        }
+        user: User.handle_profile_user_serializer(current_user, current_user.avatar.attached? ? url_for(current_user.avatar) : nil)
       }, status: :ok
     else
       render json: {
@@ -49,17 +31,30 @@ class Api::V1::AccountSettingsController < ApplicationController
     end
   end
 
+  # privateの下のメソッドにわざわざインデントを加えなくてもいい
+  # しかし、rubocopで引っかかるので、インデント入れた
   private
 
-  def user_params
-    params.require(:user).permit(:name, :email, :open_rank)
-  end
+    def set_blob(image, user)
+      return unless image.has_key?(:data)
 
-  # フロント送られるData urlには、
-  # 先頭にファイル属性などの文字列が付いているので、
-  # カンマでスプリットしてデータ部分のみを取り出す
-  # そして、エンコードされたデータをデコードする
-  def decode(str)
-    Base64.decode64(str.split(',').last)
-  end
+      user.avatar.purge
+      blob = ActiveStorage::Blob.create_after_upload!(
+        io: StringIO.new(decode(image[:data]) + "\n"),
+        filename: image[:name]
+      )
+      user.avatar.attach(blob)
+    end
+
+    def user_params
+      params.require(:user).permit(:name, :email, :open_rank)
+    end
+
+    # フロント送られるData urlには、
+    # 先頭にファイル属性などの文字列が付いているので、
+    # カンマでスプリットしてデータ部分のみを取り出す
+    # そして、エンコードされたデータをデコードする
+    def decode(str)
+      Base64.decode64(str.split(',').last)
+    end
 end

@@ -13,48 +13,23 @@ class Api::V1::OauthsController < ApplicationController
     if user = login_from(provider)
       render json: {
         session: true,
-        user: {
-          id: user[:id],
-          name: user[:name],
-          rank: user[:rank],
-          total_experience: user[:total_experience],
-          maximum_experience_per_rank: user[:maximum_experience_per_rank],
-          temporary_experience: user[:temporary_experience],
-          open_rank: user[:open_rank],
-          active_title: user[:active_title],
-          email: user[:email],
-          image: nil
-        },
+        user: User.handle_profile_user_serializer(user, user.avatar.attached? ? url_for(user.avatar) : nil)
       }, status: :ok
     else
       begin
         user = create_from(provider)
         reset_session
         auto_login(user)
-        current_user.release_titles.build(
-          release_date: Date.today,
-          title_id: Title.find_by(name: current_user[:active_title])[:id]
-        )
+        current_user.release_new_title(Title.find_by(name: current_user[:active_title])[:id])
         current_user.save!
         render json: {
           session: true,
-          user: {
-            id: user[:id],
-            name: user[:name],
-            rank: user[:rank],
-            total_experience: user[:total_experience],
-            maximum_experience_per_rank: user[:maximum_experience_per_rank],
-            temporary_experience: user[:temporary_experience],
-            open_rank: user[:open_rank],
-            active_title: user[:active_title],
-            email: user[:email],
-            image: nil
-          },
+          user: User.handle_profile_user_serializer(current_user, current_user.avatar.attached? ? url_for(current_user.avatar) : nil)
         }, status: :ok
-      rescue
+      rescue StandardError
         render json: {
           session: false,
-          user: {},
+          user: {}
         }, status: :bad_request
       end
     end
