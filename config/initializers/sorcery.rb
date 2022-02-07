@@ -4,7 +4,7 @@
 # Available submodules are: :user_activation, :http_basic_auth, :remember_me,
 # :reset_password, :session_timeout, :brute_force_protection, :activity_logging,
 # :magic_login, :external
-Rails.application.config.sorcery.submodules = [:external, :reset_password]
+Rails.application.config.sorcery.submodules = %i[external reset_password]
 
 # Here you can configure each submodule's features.
 Rails.application.config.sorcery.configure do |config|
@@ -79,19 +79,19 @@ Rails.application.config.sorcery.configure do |config|
   # What providers are supported by this app
   # i.e. [:twitter, :facebook, :github, :linkedin, :xing, :google, :liveid, :salesforce, :slack, :line].
   # Default: `[]`
-  config.external_providers = [:github, :google]
+  config.external_providers = %i[github google]
 
   config.github.key = Rails.application.credentials.dig(:github, :key)
   config.github.secret = Rails.application.credentials.dig(:github, :secret)
   config.github.callback_url = Rails.application.credentials.dig(:github, :callback_url)
-  config.github.user_info_mapping = {email: "email", name: "name"}
-  config.github.scope = "user:email"
+  config.github.user_info_mapping = { email: 'email', name: 'name' }
+  config.github.scope = 'user:email'
 
   config.google.key = Rails.application.credentials.dig(:google, :key)
   config.google.secret = Rails.application.credentials.dig(:google, :secret)
   config.google.callback_url = Rails.application.credentials.dig(:google, :callback_url)
-  config.google.user_info_mapping = {email: "email", name: "given_name"}
-  config.google.scope = "https://www.googleapis.com/auth/userinfo.email https://www.googleapis.com/auth/userinfo.profile"
+  config.google.user_info_mapping = { email: 'email', name: 'given_name' }
+  config.google.scope = 'https://www.googleapis.com/auth/userinfo.email https://www.googleapis.com/auth/userinfo.profile'
 
   # You can change it by your local ca_file. i.e. '/etc/pki/tls/certs/ca-bundle.crt'
   # Path to ca_file. By default use a internal ca-bundle.crt.
@@ -236,7 +236,6 @@ Rails.application.config.sorcery.configure do |config|
   # config.line.scope = "profile"
   # config.line.bot_prompt = "normal"
   # config.line.user_info_mapping = {name: 'displayName'}
-
 
   # For information about Discord API
   # https://discordapp.com/developers/docs/topics/oauth2
@@ -576,5 +575,5 @@ Rails.application.config.sorcery.configure do |config|
 
   # This line must come after the 'user config' block.
   # Define which model authenticates with sorcery.
-  config.user_class = "User"
+  config.user_class = 'User'
 end

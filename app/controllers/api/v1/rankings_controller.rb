@@ -4,9 +4,9 @@ class Api::V1::RankingsController < ApplicationController
 
   # 自分のランクを表示する部分は一旦保留。かなりムズイ
   def index
-    top_ten_elementary = get_top_ten("elementary")
-    top_ten_intermediate = get_top_ten("intermediate")
-    top_ten_advanced = get_top_ten("advanced")
+    top_ten_elementary = get_top_ten('elementary')
+    top_ten_intermediate = get_top_ten('intermediate')
+    top_ten_advanced = get_top_ten('advanced')
     render json: {
       top_ten_elementary: top_ten_elementary,
       top_ten_intermediate: top_ten_intermediate,
@@ -30,19 +30,18 @@ class Api::V1::RankingsController < ApplicationController
   # おかげで、1回のクエリで上位3つの速さのゲームデータ, ユーザー, 画像を取得できる
   def get_top_ten(difficulty)
     top_ten_array = GameManagement.where(difficulty: difficulty, game_result: :win,
-                                     user_id: User.where(open_rank: true).pluck(:id)
-                                   ).order(:result_time).limit(10).
-                                   eager_load(user: { avatar_attachment: :blob }).to_a.
-                                   map do |game_management|
-                                     {
-                                       game_management: game_management,
-                                       user: {
-                                         name: game_management.user[:name],
-                                         rank: game_management.user[:rank],
-                                         active_title: game_management.user[:active_title],
-                                         image: game_management.user.avatar.attached? ? url_for(game_management.user.avatar) : nil
-                                       }
-                                     }
-                                   end
+                                         user_id: User.where(open_rank: true).pluck(:id)).order(:result_time).limit(10)
+                                  .eager_load(user: { avatar_attachment: :blob }).to_a
+                                  .map do |game_management|
+      {
+        game_management: game_management,
+        user: {
+          name: game_management.user[:name],
+          rank: game_management.user[:rank],
+          active_title: game_management.user[:active_title],
+          image: game_management.user.avatar.attached? ? url_for(game_management.user.avatar) : nil
+        }
+      }
+    end
   end
 end

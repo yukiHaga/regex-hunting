@@ -7,4 +7,3 @@ if Rails.env == 'production'
 else
   Rails.application.config.session_store :cookie_store, key: '_regex_hunting_session'
 end
-

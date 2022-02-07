@@ -24,7 +24,7 @@ class Api::V1::OauthsController < ApplicationController
           active_title: user[:active_title],
           email: user[:email],
           image: nil
-        },
+        }
       }, status: :ok
     else
       begin
@@ -49,12 +49,12 @@ class Api::V1::OauthsController < ApplicationController
             active_title: user[:active_title],
             email: user[:email],
             image: nil
-          },
+          }
         }, status: :ok
-      rescue
+      rescue StandardError
         render json: {
           session: false,
-          user: {},
+          user: {}
         }, status: :bad_request
       end
     end

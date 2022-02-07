@@ -2,7 +2,7 @@ class Api::V1::GameManagementsController < ApplicationController
   MIN_TIMES = 14
   skip_before_action :require_login
   skip_before_action :verify_authenticity_token, only: :start
-  after_action :set_csrf_token_header, only: %i(start finish)
+  after_action :set_csrf_token_header, only: %i[start finish]
 
   # startに関するbefore_action
   before_action :set_start_game_management, only: :start
@@ -41,14 +41,26 @@ class Api::V1::GameManagementsController < ApplicationController
       user: {
         rank: current_user ? current_user[:rank] : 1,
         total_experience: current_user ? current_user[:total_experience] : 0,
-        maximum_experience_per_rank: current_user ?
-          current_user[:maximum_experience_per_rank] : 500,
-        temporary_experience: current_user ?
-          current_user[:temporary_experience] : 0,
-        prev_temporary_experience: current_user ?
-          current_user[:temporary_experience] : 0,
-        active_title: current_user ?
-          current_user[:active_title] : "見習いハンター"
+        maximum_experience_per_rank: if current_user
+                                       current_user[:maximum_experience_per_rank]
+                                     else
+                                       500
+                                     end,
+        temporary_experience: if current_user
+                                current_user[:temporary_experience]
+                              else
+                                0
+                              end,
+        prev_temporary_experience: if current_user
+                                     current_user[:temporary_experience]
+                                   else
+                                     0
+                                   end,
+        active_title: if current_user
+                        current_user[:active_title]
+                      else
+                        '見習いハンター'
+                      end
       }
     }, status: :created
   end
@@ -59,9 +71,11 @@ class Api::V1::GameManagementsController < ApplicationController
   def finish
     # 早期リターン
     # ログインユーザーが存在しないなら、ゲームデータをDBに保存しない
-    return render json: {
-      send_game_data: true
-    }, status: :ok unless current_user
+    unless current_user
+      return render json: {
+        send_game_data: true
+      }, status: :ok
+    end
 
     @game_management.add_correct_questions(@correct_questions)
     @game_management.add_incorrect_questions(@incorrect_questions)
@@ -95,7 +109,7 @@ class Api::V1::GameManagementsController < ApplicationController
         rank: params[:current_user][:rank],
         total_experience: params[:current_user][:total_experience],
         maximum_experience_per_rank: params[:current_user][:maximum_experience_per_rank],
-        temporary_experience: params[:current_user][:temporary_experience],
+        temporary_experience: params[:current_user][:temporary_experience]
       )
     end
 
@@ -123,11 +137,11 @@ class Api::V1::GameManagementsController < ApplicationController
   # current_userが存在しないなら、user_idのバリューがnilになる
   def set_start_game_management
     @game_management = GameManagement.new(
-                         difficulty: params[:difficulty],
-                         game_result: "progress",
-                         play_date: Date.today,
-                         user_id: current_user ? current_user.id : nil
-                       )
+      difficulty: params[:difficulty],
+      game_result: 'progress',
+      play_date: Date.today,
+      user_id: current_user ? current_user.id : nil
+    )
   end
 
   # start時にモンスターを取得する関数
@@ -143,18 +157,18 @@ class Api::V1::GameManagementsController < ApplicationController
   # shuffleで配列の要素をランダムにシャッフルして、その結果を配列として返す
   def set_questions
     indices = Question.where(difficulty: params[:difficulty]).pluck(:id).sample(14)
-    @questions = Question.where(id: indices, difficulty: params[:difficulty]).shuffle;
+    @questions = Question.where(id: indices, difficulty: params[:difficulty]).shuffle
   end
 
   # ゲーム終了時のgame_management
   def set_finish_game_management
-    @game_management = current_user.game_managements.
-                        create(
-                          difficulty: params[:game_management][:difficulty],
-                          game_result: params[:game_management][:game_result],
-                          result_time: params[:game_management][:result_time],
-                          play_date: Date.today
-                        )
+    @game_management = current_user.game_managements
+                                   .create(
+                                     difficulty: params[:game_management][:difficulty],
+                                     game_result: params[:game_management][:game_result],
+                                     result_time: params[:game_management][:result_time],
+                                     play_date: Date.today
+                                   )
   end
 
   # ゲーム終了時のcorrect_questions
@@ -170,10 +184,6 @@ class Api::V1::GameManagementsController < ApplicationController
   # current_userのtemporary_experienceがmaximum_experience_per_rank以上になると、
   # trueになる関数
   def rank_up?
-    if params[:current_user][:temporary_experience] >= params[:current_user][:maximum_experience_per_rank]
-      true
-    else
-      false
-    end
+    params[:current_user][:temporary_experience] >= params[:current_user][:maximum_experience_per_rank]
   end
 end

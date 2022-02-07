@@ -20,7 +20,7 @@ module Api::ExceptionHandler
   end
 
   def render_404(e)
-    if e.message.slice(/Email has already been taken/) == "Email has already been taken"
+    if e.message.slice(/Email has already been taken/) == 'Email has already been taken'
       render json: {
         errors: {
           title: 'Record Not Found',

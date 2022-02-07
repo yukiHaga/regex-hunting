@@ -10,11 +10,11 @@ class SorceryCore < ActiveRecord::Migration[6.0]
       t.integer :active_title, null: false, default: 0
 
       # sorcery
-      t.string :email,            null: false, index: { unique: true }
+      t.string :email, null: false, index: { unique: true }
       t.string :crypted_password
       t.string :salt
 
-      t.timestamps                null: false
+      t.timestamps null: false
     end
   end
 end

@@ -10,15 +10,15 @@ class User < ApplicationRecord
   has_one_attached :avatar
 
   enum active_title: {
-                       見習いハンター: 0,
-                       一人前ハンター: 1,
-                       玄人ハンター: 2,
-                       いにしえのハンター: 3,
-                       天才と呼ばれしハンター: 4,
-                       伝説のハンター: 5,
-                       無我の境地: 6,
-                       語り継がれし英雄: 7,
-                     }
+    見習いハンター: 0,
+    一人前ハンター: 1,
+    玄人ハンター: 2,
+    いにしえのハンター: 3,
+    天才と呼ばれしハンター: 4,
+    伝説のハンター: 5,
+    無我の境地: 6,
+    語り継がれし英雄: 7
+  }
 
   validates :name, presence: true, length: { maximum: 10 }
 
@@ -39,7 +39,7 @@ class User < ApplicationRecord
 
   # in?に含まれていればtrueになる。含まれているのが正常
   def avatar_type
-    if !avatar.blob.content_type.in?(%('image/jpg image/jpeg image/png'))
+    unless avatar.blob.content_type.in?(%('image/jpg image/jpeg image/png'))
       avatar.purge
       errors.add(:avatar, 'jpegまたはpng形式でアップロードしてください')
     end
@@ -48,7 +48,7 @@ class User < ApplicationRecord
   def avatar_size
     if avatar.blob.byte_size > 1.megabytes
       avatar.purge
-      errors.add(:avatar, "1MB以内のファイルを選択してください")
+      errors.add(:avatar, '1MB以内のファイルを選択してください')
     end
   end
 end

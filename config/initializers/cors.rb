@@ -11,9 +11,9 @@ Rails.application.config.middleware.insert_before 0, Rack::Cors do
     origins 'http://localhost:3001', 'https://regex-hunting.herokuapp.com/'
 
     resource '*',
-      headers: :any,
-      expose: ['X-CSRF-Token'],
-      methods: [:get, :post, :put, :patch, :delete, :options, :head],
-      credentials: true
+             headers: :any,
+             expose: ['X-CSRF-Token'],
+             methods: %i[get post put patch delete options head],
+             credentials: true
   end
 end

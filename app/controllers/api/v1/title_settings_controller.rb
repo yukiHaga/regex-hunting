@@ -17,14 +17,14 @@ class Api::V1::TitleSettingsController < ApplicationController
       render json: {
         session: true,
         user: {
-          active_title: current_user[:active_title],
+          active_title: current_user[:active_title]
         }
       }, status: :ok
     else
       render json: {
         errors: {
           display: true,
-          message: "称号の変更に失敗しました。"
+          message: '称号の変更に失敗しました。'
         }
       }, status: :bad_request
     end

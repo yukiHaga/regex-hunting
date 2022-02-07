@@ -10,7 +10,7 @@ class ApplicationController < ActionController::API
 
   def not_authenticated
     render json: {
-      alert: "Please login first"
+      alert: 'Please login first'
     }, status: :forbidden
   end
 

@@ -1,11 +1,12 @@
 class Api::V1::UserSessionsController < ApplicationController
-  skip_before_action :require_login, only: %i(create current_user_logged_in? destroy)
-  skip_before_action :verify_authenticity_token, only: %i(create current_user_logged_in?)
-  after_action :set_csrf_token_header, only: %i(create current_user_logged_in?)
+  skip_before_action :require_login, only: %i[create current_user_logged_in? destroy]
+  skip_before_action :verify_authenticity_token, only: %i[create current_user_logged_in?]
+  after_action :set_csrf_token_header, only: %i[create current_user_logged_in?]
 
   def create
     user = login(params[:email], params[:password])
     raise ActiveRecord::RecordNotFound unless user
+
     render json: {
       session: true,
       user: {
@@ -19,7 +20,7 @@ class Api::V1::UserSessionsController < ApplicationController
         active_title: user[:active_title],
         email: user[:email],
         image: user.avatar.attached? ? url_for(user.avatar) : nil
-      },
+      }
     }, status: :ok
   end
 
@@ -27,7 +28,7 @@ class Api::V1::UserSessionsController < ApplicationController
     logout
     render json: {
       session: false,
-      user: {},
+      user: {}
     }, status: :ok
   end
 
@@ -46,12 +47,12 @@ class Api::V1::UserSessionsController < ApplicationController
           active_title: current_user[:active_title],
           email: current_user[:email],
           image: current_user.avatar.attached? ? url_for(current_user.avatar) : nil
-        },
+        }
       }, status: :ok
     else
       render json: {
         session: false,
-        user: {},
+        user: {}
       }, status: :ok
     end
   end

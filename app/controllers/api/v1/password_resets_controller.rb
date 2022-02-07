@@ -31,11 +31,12 @@ class Api::V1::PasswordResetsController < ApplicationController
   def update
     user = User.load_from_reset_password_token(params[:token])
     raise ActiveRecord::RecordNotFound unless user
+
     user.password_confirmation = params[:user][:password_confirmation]
     if user.change_password(params[:user][:password])
       head :ok
     else
-      render json: {errors: user.errors}, status: :bad_request
+      render json: { errors: user.errors }, status: :bad_request
     end
   end
 

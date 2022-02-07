@@ -7,6 +7,7 @@ class Api::V1::UsersController < ApplicationController
   def create
     user = User.new(user_params)
     raise ActiveRecord::RecordNotFound, user.errors.full_messages unless user.valid?
+
     if user.save
       reset_session
       auto_login(user)
@@ -31,7 +32,7 @@ class Api::V1::UsersController < ApplicationController
         }
       }, status: :created
     else
-      render json: {errors: user.errors}, status: :bad_request
+      render json: { errors: user.errors }, status: :bad_request
     end
   end
 

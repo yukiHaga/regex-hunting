@@ -1,5 +1,4 @@
 class UserMailer < ApplicationMailer
-
   # Subject can be set in your I18n file at config/locales/en.yml
   # with the following lookup:
   #
@@ -12,7 +11,7 @@ class UserMailer < ApplicationMailer
   def reset_password_email(user)
     @user = User.find(user.id)
     @url  = "http://localhost:3001/users/password/edit?token=#{user&.reset_password_token}"
-    mail(:to => user.email,
-         :subject => "パスワード再設定のお知らせ")
+    mail(to: user.email,
+         subject: 'パスワード再設定のお知らせ')
   end
 end
