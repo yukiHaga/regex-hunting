@@ -5,17 +5,19 @@ class Api::V1::GameManagementsController < ApplicationController
   after_action :set_csrf_token_header, only: %i[start finish]
 
   # startに関するbefore_action
+  # set_userをfinishで実行すると、ステータスが更新されたデータをフロントに送ることができないので、
+  # finishでset_userを使うことはやめた
   before_action :set_start_game_management, only: :start
   before_action :set_monster, only: :start
   before_action :set_questions, only: :start
-
-  # startとfinishに関するbefore_action
-  before_action :set_user
+  before_action :set_user, only: :start
 
   # finishに関するbefore_action
-  before_action :set_finish_game_management, only: :finish
-  before_action :set_correct_questions, only: :finish
-  before_action :set_incorrect_questions, only: :finish
+  # current_userが存在するときだけ、実行させる
+  # logged_in?は現在ログイン中かどうか、true or falseで返す。
+  before_action :set_finish_game_management, only: :finish, if: :logged_in?
+  before_action :set_correct_questions, only: :finish, if: :logged_in?
+  before_action :set_incorrect_questions, only: :finish, if: :logged_in?
 
   # タイトルに関する処理
   # ランクアップしているかつ、
@@ -105,7 +107,7 @@ class Api::V1::GameManagementsController < ApplicationController
     render json: {
       send_game_data: true,
       session: true,
-      user: @user.merge({ rank_up: rank_up? ? true : false })
+      user: User.handle_game_user_serializer(current_user).merge({ rank_up: rank_up? ? true : false })
     }, status: :created
   end
 
@@ -141,6 +143,7 @@ class Api::V1::GameManagementsController < ApplicationController
     # start時にユーザーを取得する関数
     # ログインユーザーがゲームをプレイする場合、ログインユーザーのデータをJSON形式でシリアライズする
     # ゲストユーザーがゲームをプレイする場合、ゲストユーザー用のデータを@userに代入する
+    # User.handle_game_user_serializer(nil)で例外が発生する
     def set_user
       @user =  if current_user
                  User.handle_game_user_serializer(current_user)
