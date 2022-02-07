@@ -32,7 +32,7 @@ class Api::V1::OauthsController < ApplicationController
         reset_session
         auto_login(user)
         current_user.release_titles.build(
-          release_date: Date.today,
+          release_date: Time.zone.today,
           title_id: Title.find_by(name: current_user[:active_title])[:id]
         )
         current_user.save!

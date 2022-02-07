@@ -23,6 +23,7 @@ module RegexHunting
   class Application < Rails::Application
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 6.0
+    config.time_zone = 'Asia/Tokyo'
 
     # Disable cross-origin validation.
     config.action_controller.forgery_protection_origin_check = false

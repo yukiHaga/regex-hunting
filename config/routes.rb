@@ -22,7 +22,7 @@ Rails.application.routes.draw do
 
   # React Routerを本番環境で動かす為に必要なルーティング
   # railsのルーティングについて書いている部分より下に追記する
-  get '*path', to: 'application#fallback_index_html', constraints: lambda { |request|
+  get '*path', to: 'application#fallback_index_html', constraints: ->(request) {
     !request.xhr? && request.format.html?
   }
 end

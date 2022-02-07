@@ -94,30 +94,30 @@ Naming/FileName:
 Naming/MethodParameterName:
   AllowedNames: [e]
 
-RSpec/ContextWording:
-  Enabled: false
+# RSpec/ContextWording:
+#   Enabled: false
 
-RSpec/DescribedClass:
-  Enabled: false
+# RSpec/DescribedClass:
+#   Enabled: false
 
-RSpec/ExampleLength:
-  Enabled: false
+# RSpec/ExampleLength:
+#   Enabled: false
 
-RSpec/ExpectInHook:
-  Enabled: false
+# RSpec/ExpectInHook:
+#   Enabled: false
 
 # An instance variable can be used when needed, but use let when possible.
-RSpec/InstanceVariable:
-  Enabled: false
+# RSpec/InstanceVariable:
+#   Enabled: false
 
-RSpec/MessageSpies:
-  Enabled: false
+# RSpec/MessageSpies:
+#   Enabled: false
 
-RSpec/MultipleExpectations:
-  Enabled: false
+# RSpec/MultipleExpectations:
+#   Enabled: false
 
-RSpec/NestedGroups:
-  Max: 5
+# RSpec/NestedGroups:
+#   Max: 5
 
 # https://rubocop.readthedocs.io/en/stable/cops_style/#stylehashtransformvalues
 Style/HashTransformValues:

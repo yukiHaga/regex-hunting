@@ -49,17 +49,19 @@ class Api::V1::AccountSettingsController < ApplicationController
     end
   end
 
+  # privateの下のメソッドにわざわざインデントを加えなくてもいい
+  # しかし、rubocopで引っかかるので、インデント入れた
   private
 
-  def user_params
-    params.require(:user).permit(:name, :email, :open_rank)
-  end
+    def user_params
+      params.require(:user).permit(:name, :email, :open_rank)
+    end
 
-  # フロント送られるData urlには、
-  # 先頭にファイル属性などの文字列が付いているので、
-  # カンマでスプリットしてデータ部分のみを取り出す
-  # そして、エンコードされたデータをデコードする
-  def decode(str)
-    Base64.decode64(str.split(',').last)
-  end
+    # フロント送られるData urlには、
+    # 先頭にファイル属性などの文字列が付いているので、
+    # カンマでスプリットしてデータ部分のみを取り出す
+    # そして、エンコードされたデータをデコードする
+    def decode(str)
+      Base64.decode64(str.split(',').last)
+    end
 end

@@ -5,7 +5,7 @@ class Api::V1::MyPagesController < ApplicationController
 
   def index
     # 今月のRangeオブジェクトを生成する
-    today = Date.today
+    today = Time.zone.today
     beginning_day = today.beginning_of_month
     last_day = today.end_of_month
     this_month = beginning_day..last_day

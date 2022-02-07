@@ -71,11 +71,7 @@ class Api::V1::GameManagementsController < ApplicationController
   def finish
     # 早期リターン
     # ログインユーザーが存在しないなら、ゲームデータをDBに保存しない
-    unless current_user
-      return render json: {
-        send_game_data: true
-      }, status: :ok
-    end
+    return render json: { send_game_data: true }, status: :ok unless current_user
 
     @game_management.add_correct_questions(@correct_questions)
     @game_management.add_incorrect_questions(@incorrect_questions)
@@ -87,7 +83,7 @@ class Api::V1::GameManagementsController < ApplicationController
     # current_userにsaltやcrypted_passwordなどのカラムを含めてjsonを送ってはダメ
     if rank_up? && CONDITION_HASH.values.include?(params[:current_user][:rank] + 1)
       current_user.release_titles.build(
-        release_date: Date.today,
+        release_date: Time.zone.today,
         title_id: (Title.find_by(name: CONDITION_HASH.key(params[:current_user][:rank] + 1)))[:id]
       )
       current_user.update(
@@ -133,57 +129,57 @@ class Api::V1::GameManagementsController < ApplicationController
 
   private
 
-  # start時にgame_managementを生成する関数
-  # current_userが存在しないなら、user_idのバリューがnilになる
-  def set_start_game_management
-    @game_management = GameManagement.new(
-      difficulty: params[:difficulty],
-      game_result: 'progress',
-      play_date: Date.today,
-      user_id: current_user ? current_user.id : nil
-    )
-  end
+    # start時にgame_managementを生成する関数
+    # current_userが存在しないなら、user_idのバリューがnilになる
+    def set_start_game_management
+      @game_management = GameManagement.new(
+        difficulty: params[:difficulty],
+        game_result: 'progress',
+        play_date: Time.zone.today,
+        user_id: current_user ? current_user.id : nil
+      )
+    end
 
-  # start時にモンスターを取得する関数
-  def set_monster
-    @monster = Monster.find_by(difficulty: params[:difficulty])
-  end
+    # start時にモンスターを取得する関数
+    def set_monster
+      @monster = Monster.find_by(difficulty: params[:difficulty])
+    end
 
-  # 問題に関する処理
-  # RAND()を使うと、本番のDBによっては使えなかったりするので、
-  # sampleを使う。
-  # sample(14)でpluck(:id)の配列の中で、要素をランダムに14個、1つの配列として返す
-  # ただ、DBから取得しても、結局小さい順になるので、shuffleメソッドを使う
-  # shuffleで配列の要素をランダムにシャッフルして、その結果を配列として返す
-  def set_questions
-    indices = Question.where(difficulty: params[:difficulty]).pluck(:id).sample(14)
-    @questions = Question.where(id: indices, difficulty: params[:difficulty]).shuffle
-  end
+    # 問題に関する処理
+    # RAND()を使うと、本番のDBによっては使えなかったりするので、
+    # sampleを使う。
+    # sample(14)でpluck(:id)の配列の中で、要素をランダムに14個、1つの配列として返す
+    # ただ、DBから取得しても、結局小さい順になるので、shuffleメソッドを使う
+    # shuffleで配列の要素をランダムにシャッフルして、その結果を配列として返す
+    def set_questions
+      indices = Question.where(difficulty: params[:difficulty]).pluck(:id).sample(14)
+      @questions = Question.where(id: indices, difficulty: params[:difficulty]).shuffle
+    end
 
-  # ゲーム終了時のgame_management
-  def set_finish_game_management
-    @game_management = current_user.game_managements
-                                   .create(
-                                     difficulty: params[:game_management][:difficulty],
-                                     game_result: params[:game_management][:game_result],
-                                     result_time: params[:game_management][:result_time],
-                                     play_date: Date.today
-                                   )
-  end
+    # ゲーム終了時のgame_management
+    def set_finish_game_management
+      @game_management = current_user.game_managements
+                                     .create(
+                                       difficulty: params[:game_management][:difficulty],
+                                       game_result: params[:game_management][:game_result],
+                                       result_time: params[:game_management][:result_time],
+                                       play_date: Time.zone.today
+                                     )
+    end
 
-  # ゲーム終了時のcorrect_questions
-  def set_correct_questions
-    @correct_questions = params[:judgement][:correct]
-  end
+    # ゲーム終了時のcorrect_questions
+    def set_correct_questions
+      @correct_questions = params[:judgement][:correct]
+    end
 
-  # ゲーム終了時のincorrect_questions
-  def set_incorrect_questions
-    @incorrect_questions = params[:judgement][:incorrect]
-  end
+    # ゲーム終了時のincorrect_questions
+    def set_incorrect_questions
+      @incorrect_questions = params[:judgement][:incorrect]
+    end
 
-  # current_userのtemporary_experienceがmaximum_experience_per_rank以上になると、
-  # trueになる関数
-  def rank_up?
-    params[:current_user][:temporary_experience] >= params[:current_user][:maximum_experience_per_rank]
-  end
+    # current_userのtemporary_experienceがmaximum_experience_per_rank以上になると、
+    # trueになる関数
+    def rank_up?
+      params[:current_user][:temporary_experience] >= params[:current_user][:maximum_experience_per_rank]
+    end
 end
