@@ -38,14 +38,14 @@ class User < ApplicationRecord
   # avatar画像に問題がないかチェックしている
   validate :avatar_type, :avatar_size, if: :avatar_attached?
 
-  # ユーザーをシリアライズするクラスメソッド
+  # プロフィールユーザー(プロフィールで使うユーザー)をシリアライズするクラスメソッド
   # シリアライズ（serialize）とは、プログラミングでオプジェクト化されたデータを、
   # ファイルやストレージに保存したり、ネットワークで送受信したりできるような形に変換することである。
   # シリアライズ後のデータは、JSON形式になって、ネットワークを使って送受信できるようになる。
   # コントローラで使うので、privateメソッドにしない
   # userデータをJSONに変換後、image: nilをマージしている
-  def self.handle_user_serializer(user, image)
-    options = { serializer: UserSerializer }
+  def self.handle_profile_user_serializer(user, image)
+    options = { serializer: UserSerializer, type: :profile }
     ActiveModelSerializers::SerializableResource.new(user, options)
                                                 .as_json
                                                 .merge({ image: image })

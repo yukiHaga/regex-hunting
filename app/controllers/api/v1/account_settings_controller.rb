@@ -19,7 +19,7 @@ class Api::V1::AccountSettingsController < ApplicationController
     if current_user.update(user_params)
       render json: {
         session: true,
-        user: User.handle_user_serializer(current_user, current_user.avatar.attached? ? url_for(current_user.avatar) : nil)
+        user: User.handle_profile_user_serializer(current_user, current_user.avatar.attached? ? url_for(current_user.avatar) : nil)
       }, status: :ok
     else
       render json: {

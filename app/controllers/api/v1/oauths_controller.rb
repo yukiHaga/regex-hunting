@@ -13,7 +13,7 @@ class Api::V1::OauthsController < ApplicationController
     if user = login_from(provider)
       render json: {
         session: true,
-        user: User.handle_user_serializer(user, user.avatar.attached? ? url_for(user.avatar) : nil)
+        user: User.handle_profile_user_serializer(user, user.avatar.attached? ? url_for(user.avatar) : nil)
       }, status: :ok
     else
       begin
@@ -27,7 +27,7 @@ class Api::V1::OauthsController < ApplicationController
         current_user.save!
         render json: {
           session: true,
-          user: User.handle_user_serializer(current_user, current_user.avatar.attached? ? url_for(current_user.avatar) : nil)
+          user: User.handle_profile_user_serializer(current_user, current_user.avatar.attached? ? url_for(current_user.avatar) : nil)
         }, status: :ok
       rescue StandardError
         render json: {
