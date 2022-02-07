@@ -9,6 +9,9 @@ class Api::V1::GameManagementsController < ApplicationController
   before_action :set_monster, only: :start
   before_action :set_questions, only: :start
 
+  # startとfinishに関するbefore_action
+  before_action :set_user
+
   # finishに関するbefore_action
   before_action :set_finish_game_management, only: :finish
   before_action :set_correct_questions, only: :finish
@@ -48,30 +51,7 @@ class Api::V1::GameManagementsController < ApplicationController
       game_management: @game_management,
       questions: @questions,
       monster: @monster,
-      user: {
-        rank: current_user ? current_user[:rank] : 1,
-        total_experience: current_user ? current_user[:total_experience] : 0,
-        maximum_experience_per_rank: if current_user
-                                       current_user[:maximum_experience_per_rank]
-                                     else
-                                       500
-                                     end,
-        temporary_experience: if current_user
-                                current_user[:temporary_experience]
-                              else
-                                0
-                              end,
-        prev_temporary_experience: if current_user
-                                     current_user[:temporary_experience]
-                                   else
-                                     0
-                                   end,
-        active_title: if current_user
-                        current_user[:active_title]
-                      else
-                        '見習いハンター'
-                      end
-      }
+      user: @user
     }, status: :created
   end
 
@@ -125,15 +105,7 @@ class Api::V1::GameManagementsController < ApplicationController
     render json: {
       send_game_data: true,
       session: true,
-      user: {
-        rank: current_user[:rank],
-        total_experience: current_user[:total_experience],
-        maximum_experience_per_rank: current_user[:maximum_experience_per_rank],
-        temporary_experience: current_user[:temporary_experience],
-        prev_temporary_experience: current_user[:temporary_experience],
-        active_title: current_user[:active_title],
-        rank_up: rank_up? ? true : false
-      }
+      user: @user.merge({ rank_up: rank_up? ? true : false })
     }, status: :created
   end
 
@@ -164,6 +136,17 @@ class Api::V1::GameManagementsController < ApplicationController
     def set_questions
       indices = Question.where(difficulty: params[:difficulty]).pluck(:id).sample(14)
       @questions = Question.where(id: indices, difficulty: params[:difficulty]).shuffle
+    end
+
+    # start時にユーザーを取得する関数
+    # ログインユーザーがゲームをプレイする場合、ログインユーザーのデータをJSON形式でシリアライズする
+    # ゲストユーザーがゲームをプレイする場合、ゲストユーザー用のデータを@userに代入する
+    def set_user
+      @user =  if current_user
+                 User.handle_game_user_serializer(current_user)
+               else
+                 GUEST_USER
+               end
     end
 
     # ゲーム終了時のgame_management

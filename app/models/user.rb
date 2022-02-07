@@ -51,6 +51,16 @@ class User < ApplicationRecord
                                                 .merge({ image: image })
   end
 
+  # ゲームユーザー(ゲーム中で使うユーザー)をシリアライズするクラスメソッド
+  # オプションのtypeを指定しないで呼び出すだけだと、rank, total, maxi, tempo, active_title
+  # しかないので、mergeでprev_tempoを追加しとく
+  def self.handle_game_user_serializer(user)
+    options = { serializer: UserSerializer }
+    ActiveModelSerializers::SerializableResource.new(user, options)
+                                                .as_json
+                                                .merge({ prev_temporary_experience: user[:temporary_experience]})
+  end
+
   private
 
     # in?に含まれていればtrueになる。含まれているのが正常
