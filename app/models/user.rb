@@ -44,10 +44,16 @@ class User < ApplicationRecord
   # シリアライズ後のデータは、JSON形式になって、ネットワークを使って送受信できるようになる。
   # コントローラで使うので、privateメソッドにしない
   # userデータをJSONに変換後、image: nilをマージしている
+  # if文は、どの条件にも一致しない場合はnilを返す
   def self.handle_user_serializer(user)
     options = { serializer: UserSerializer }
-    ActiveModelSerializers::SerializableResource.new(user, options).
-                                                 as_json.merge({ image: nil })
+    ActiveModelSerializers::SerializableResource.new(user, options)
+                                                .as_json
+                                                .merge({
+                                                         image: if user.avatar.attached?
+                                                                  url_for(user.avatar)
+                                                                end
+                                                       })
   end
 
   private
