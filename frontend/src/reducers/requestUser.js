@@ -4,6 +4,10 @@ import { REQUEST_STATE } from '../constants';
 import BattleSound from '../sounds/battle_25.mp3';
 
 // useReducerで使うinitialStateを定義
+// REQUEST_STATE.INITIALはrequestStateの初期値である
+// REQUEST_STATE.INITISLはconstants.jsに定義されている
+// APIの取得状況に応じて、requestStateの値が変化する
+// リクエスト中ならLOADING, リクエスト完了ならOK
 export const initialState = {
   requestState: REQUEST_STATE.INITIAL,
   sessionState: false,
@@ -18,13 +22,21 @@ export const initialState = {
 };
 
 // useReducerで使うActonTypsを定義
+// dispatch実行時に指定する
+// それに沿って、リデューサ関数のcase文が振り分けられる
 export const requestUserActionTyps = {
+  REQUEST: 'REQUEST',
   REQUEST_SUCCESS: 'REQUEST_SUCCESS',
   REQUEST_FAILURE: 'REQUEST_FAILURE'
 }
 
 export const requestUserReducer = (state, action) => {
   switch (action.type) {
+    case requestUserActionTyps.REQUEST:
+      return {
+        ...state,
+        requestState: REQUEST_STATE.LOADING,
+      };
     case requestUserActionTyps.REQUEST_SUCCESS:
       return {
         ...state,

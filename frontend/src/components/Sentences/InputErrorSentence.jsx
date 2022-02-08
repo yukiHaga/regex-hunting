@@ -7,8 +7,8 @@ import { COLORS } from '../../style_constants.js';
 const DangerText = styled.p`
   text-align: left;
   margin-top: 0px;
-  margin-bottom: 32px;
   color: ${COLORS.RED};
+  font-size: 0.9em;
 `;
 
 export const InputErrorSentence = ({children}) => {

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 import styled from 'styled-components';
 
 import { GameStartButton } from '../Buttons/GameStartButton.jsx';
@@ -6,69 +6,109 @@ import { GameStartButton } from '../Buttons/GameStartButton.jsx';
 // Colors
 import { COLORS } from '../../style_constants.js';
 
+// Responsive
+import { WIDTH } from '../../style_constants.js';
+
 const GameContentWrapper = styled.div`
-  background-color: ${COLORS.WHITE};
-  width: 326px;
-  height: 386px;
+  padding-top: 2%;
 `;
 
 const GameContentTitleWrapper = styled.div`
-  height: 36px;
-  width: 326px;
-  font-family: YuGothic;
+  height: 9%;
+  width: 90%;
   font-style: normal;
   font-weight: 500;
-  font-size: 24px;
-  line-height: 36px;
+  font-size: 1.5em;
   color: ${COLORS.BLACK};
   text-align: center;
   background-color: ${COLORS.SUB};
+  @media (max-width: ${WIDTH.MOBILE}) {
+    font-size: 1.1em;
+    width: 90%;
+    margin: 0 auto;
+    padding-top: 2%;
+    padding-bottom: 7%
+  }
+  @media (max-width: ${WIDTH.DEV_TOOL}) {
+    width: 70%;
+    margin: 0 auto;
+    font-size: 1.2em;
+  }
+  margin: 0 auto;
 `;
 
 const GameContentDescriptionWrapper = styled.div`
-  width: 326px;
-  height: 350px;
+  width: 90%;
+  margin: 0 auto;
+  border-radius: 3px;
   box-shadow: 0 0px 20px rgba(0,0,0,0.2);
+  background-color: ${COLORS.WHITE};
+  @media (max-width: ${WIDTH.MOBILE}) {
+    width: 90%;
+    margin: 0 auto;
+  }
+  @media (max-width: ${WIDTH.DEV_TOOL}) {
+    width: 70%;
+    margin: 0 auto;
+  }
 `;
 
 // ブロック要素じゃないので、もしかしたら直列に並ばないかも
 // 使用するときに、propsのsrc属性を渡す。
 const GameContentImageWrapper = styled.img`
-  width: 326px;
-  height: 190px;
   box-sizing: border-box;
   border: 2px solid ${COLORS.BLACK};
+  max-width: 100%;
+  border-radius: 3px 3px 0px 0px;
 `;
 
 const GameContentMainWrapper = styled.div`
   margin: 0 auto;
   test-align: center;
-  width: 326px;
-  height: 350px;
-  padding-top: 10px;
+  width: 100%;
+  padding-top: 4%;
+  padding-bottom: 6%;
+  background-color: ${COLORS.WHITE};
+  @media (max-width: ${WIDTH.MOBILE}) {
+    width: 90%;
+  }
+  border-radius: 3px;
+  @media (max-width: ${WIDTH.DEV_TOOL}) {
+    width: 90%;
+  }
 `;
 
+// ここのwidthはpx指定しないとレイアウトが崩れる
 const GameContentSentenceWrapper = styled.div`
   width: 290px;
   display: inline-block;
   text-align: left;
-  font-family: YuGothic;
   font-style: normal;
   font-weight: 500;
-  font-size: 18px;
-  line-height: 27px;
+  font-size: 1.0em;
   color: ${COLORS.BLACK};
+  @media (max-width: ${WIDTH.MOBILE}) {
+    font-size: 0.9em;
+  }
+  @media (max-width: ${WIDTH.DEV_TOOL}) {
+    font-size: 0.8em;
+    width: 220px;
+  }
 `;
 
 const GameContentStartWrapper = styled.div`
   display: flex;
   justify-content: center;
-  padding-top: 30px;
+  padding-top: 6%;
 `;
 
 // LPページの場合、onClickLinkはモーダル管理のstateを更新する関数
 // ログインしている場合、onClickLinkは何もない。
-export const GameContent = ({difficulty, image}) => {
+export const GameContent = memo(({
+  difficulty, 
+  image,
+  setMobileState
+}) => {
 
   const difficultySentence = (difficulty) => {
     let sentence;
@@ -111,11 +151,14 @@ export const GameContent = ({difficulty, image}) => {
               {(difficultySentence(difficulty))}
             </GameContentSentenceWrapper>
             <GameContentStartWrapper>
-              <GameStartButton difficulty={difficulty}/>
+              <GameStartButton 
+                difficulty={difficulty}
+                setMobileState={setMobileState}
+              />
             </GameContentStartWrapper>
           </GameContentMainWrapper>
         </GameContentDescriptionWrapper>
       </GameContentWrapper>
     </>
   );
-};
+});

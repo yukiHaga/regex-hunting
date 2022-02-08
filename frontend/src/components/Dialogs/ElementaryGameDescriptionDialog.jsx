@@ -1,5 +1,8 @@
-import React, { useState, useEffect } from 'react';
-import styled from 'styled-components';
+import React, { useState, useEffect, useCallback, useMemo } from 'react';
+import styled, { keyframes } from 'styled-components';
+
+// ダイアログ
+import { DialogContent, Dialog } from '@mui/material';
 
 // Colors
 import { COLORS } from '../../style_constants.js';
@@ -17,140 +20,165 @@ import ArrowLeftIcon from '@mui/icons-material/ArrowLeft';
 import { FinallyGameStartButton } from '../Buttons/FinallyGameStartButton.jsx';
 import { FinallyGameRestartButton } from '../Buttons/FinallyGameRestartButton.jsx';
 
-// MUIのツールチップコンポーネントを使う
-// チラツキがあるからやっぱりやめた
-// import Tooltip from '@mui/material/Tooltip';
+// ツールチップ
+import Tooltip from '@mui/material/Tooltip';
+import IconButton from '@mui/material/IconButton';
 
-// 画面全体にマスクを設置する設定
-// 画面の中央に要素を表示させる設定
-const MaskWrapper = styled.div`
-  position:fixed;
-  top:0;
-  left:0;
-  width:100%;
-  height:100%;
-  z-index: 1;
-  background-color:rgba(0,0,0,0.3);
-`;
-
-// PCの画面全体を表している
-const Carousel = styled.div`
-  z-index: 2;
-  width: 100%;
-  height: 100%;
-  text-align: center;
-  margin: 0 auto;
-  position: relative;
-  transition: right 0.5s ease;
-  right: ${({ widthState: { width } }) => `${width}px`};
-`;
-
-// 全てのスライドを包み込むラッパー
-// position: absoluteで全てのスライドを包み込むラッパーを、親要素を元にして固定しておく
-// 高さはpcの画面全体である
-const CarouselArea = styled.ul`
-  width: 4400px;
-  display: flex;
-  height: 100%;
-  align-items: center;
-  padding-left: 185px;
-  padding-right: 140px;
-  position: absolute;
-  margin-top: 0px;
-  margin-bottom: 0px;
-`;
-
-// 一枚あたりのスライドのラッパー
-// ここに移動ボタンが属している。
-const CarouselList = styled.li`
-  margin-right: 40px;
-  list-style: none;
+const CustomDialogInnerWrapper = styled.div`
   background-color: ${COLORS.SUB};
-  width: 1000px;
-  height: 550px;
-  padding-top: 30px;
-  padding-left: 30px;
-  padding-right: 30px;
-  border-radius: 4px
+  text-align: center;
+  padding: 3%;
+  padding-bottom: 0;
 `;
 
-// 一枚あたりのスライド(ボタンは除く)
-// CarsolListの高さが550pxなので、ButtonLineWrapperの高さは自動的に150pxとなる
-const ModalWrapper = styled.div`
-  height: 450px;
+const DynamicSlideContentWrapper = styled.div`
+  width: 80%;
+  height: 78%;
+  margin: 0 auto;
 `;
 
 const TitleWrapper = styled.div`
-  font-family: YuGothic;
   font-style: normal;
   font-weight: bold;
-  font-size: 32px;
+  font-size: 2em;
   color: ${COLORS.BLACK};
-`;
-
-const SentenceWrapper = styled.div`
-  font-family: YuGothic;
-  font-style: normal;
-  font-weight: normal;
-  font-size: 20px;
-  display: inline-block;
-  text-align: left;
-  margin-top: 45px;
-  color: ${COLORS.BLACK};
-  width: 900px;
-`;
-
-const WarningSentenceWrapper = styled.div`
-  font-family: YuGothic;
-  font-style: normal;
-  font-weight: normal;
-  font-size: 18px;
-  display: inline-block;
-  text-align: center;
-  margin-top: 45px;
-  color: ${COLORS.RED};
-  width: 900px;
+  width: 80%;
+  margin: 0 auto;
 `;
 
 const MonsterImageBoxWrapper = styled.div`
  text-align: right;
- width: 80%;
- margin-top: 80px;
+ width: 86%;
+ margin-top: 7%;
 `;
 
 const MonsterImageWrapper = styled.img`
-  width: 211px;
-  height: 205px;
+  width: 25%;
+  height: 25%;
   object-fit: contain;
 `;
 
-const ButtonLineWrapper = styled.div`
+// フェードアウトのアニメーション
+// transform: translateXは、x方向に動かすって意味
+// x方向の位置をどんどん原点に近づけることで、右から左に動いているように見える
+const LeftSlideOutAnime = keyframes`
+  0% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+  100% {
+    opacity: 0;
+    transform: translateX(-50%);
+  }
+`;
+
+const LeftSlideInAnime = keyframes`
+  0% {
+    opacity: 0;
+    transform: translateX(50%);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+`;
+
+const RightSlideOutAnime = keyframes`
+  0% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+  100% {
+    opacity: 0;
+    transform: translateX(50%);
+  }
+`;
+
+const RightSlideInAnime = keyframes`
+  0% {
+    opacity: 0;
+    transform: translateX(-50%);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+`;
+
+const slideFunction = (
+  slide_in,
+  slide_out,
+  direction
+) => {
+  switch (true){
+    case slide_out && !slide_in && direction === "left":
+      return LeftSlideOutAnime;
+    case !slide_out && slide_in && direction === "left":
+      return LeftSlideInAnime;
+    case slide_out && !slide_in && direction === "right":
+      return RightSlideOutAnime;
+    case !slide_out && slide_in && direction === "right":
+      return RightSlideInAnime;
+    default:
+      return false;
+  }
+};
+
+// animationプロパティは1つしか存在できない
+// 2個存在する場合、2個目で1個目が上書きされる
+const SlideContentWrapper = styled.div`
   width: 100%;
+  height: 100%;
+  margin: 0 auto;
+  transform: translateX(0);
+  animation: ${({ 
+    slide_in, 
+    slide_out,
+    direction
+  }) => slideFunction(slide_in, slide_out, direction)} 0.7s ease forwards;
+`;
+
+const SentenceWrapper = styled.div`
+  font-style: normal;
+  font-weight: normal;
+  font-size: 1.1em;
+  text-align: left;
+  margin-top: 5%;
+  color: ${COLORS.BLACK};
+`;
+
+const ButtonLineWrapper = styled.div`
+  width: 80%;
   text-align: right;
+  margin: 0 auto;
 `;
 
 const ButtonWrapper = styled.div`
-  font-size: 80px;
-  cursor: pointer;
-  :hover {
-    opacity: 0.7;
-  }
   :focus {
     outline: 0;
   }
   display: inline-block;
 `;
 
+const WarningSentenceWrapper = styled.div`
+  font-style: normal;
+  font-weight: normal;
+  font-size: 1.1em;
+  text-align: center;
+  margin-top: 5%;
+  color: ${COLORS.RED};
+`;
+
 const OuterButtonsWrapper = styled.div`
-  width: 80%;
   margin: 0 auto;
-`;
-
-const ButtonsWrapper = styled.div`
   display: flex;
-  justify-content: space-evenly;
+  justify-content: center;
 `;
 
+// isOpenはgameState.game_description_open
+// game_description_openは、game_description_open
+// click_description_openは、ゲーム開始後にスライドを見るをクリックしたかを表すprops
+// ゲーム開始後にスライドを見るをクリックしたなら、trueになる
 export const ElementaryGameDescriptionDialog = ({
   isOpen,
   setGameState,
@@ -158,29 +186,98 @@ export const ElementaryGameDescriptionDialog = ({
   click_description_open
 }) => {
 
+  // 第2引数に空の依存配列を渡した場合、初回の1回のみ実行され、
+  // 2度目以降のレンダリング時にはキャッシュから値を取得する
+  // 最初のslide_numを0とした
+  const slideContent = useMemo(() => [
+    {
+      title: "初級編",
+      sentence: "初級編を始める前に、正規表現とは何か?、どんなことができるのか？を学習しましょう。そして、初級編のゲームを通して、正規表現を作る際に使う基礎的なメタ文字をマスターしましょう！",
+      slide_num: 0
+    },
+    {
+      title: "What’s 正規表現？",
+      sentence: "正規表現とは、複数の文字列からルールを見つけ出し、そのルールをパターンで表現したものです。正規表現を用いることで、文字列中に特定の文字が含まれているか判定できます。そして、含んでいる場合、どの位置にあるかを知ることができます。",
+      slide_num: 1
+    },
+    {
+      title: "正規表現を作る上で重要なメタ文字",
+      sentence: "正規表現は、「文字列」と「メタ文字」で構成されています。そのため、メタ文字を知らないと正規表現を作ることができません。メタ文字とは、特殊な働きをする文字列です。メタ文字の例として、「[a-z]」というメタ文字は「a~zの中の一文字」を表します。また、「\\d」というメタ文字は0~9までの1つの数字を表します。",
+      slide_num: 2
+    },
+    {
+      title: "ルール説明",
+      sentence: "初級編では、重要なメタ文字を使った正規表現を学習していきます。時間内に正しい正規表現を入力すると、モンスターに攻撃できます。モンスターのHPを0にしたらゲームクリアです！",
+      slide_num: 3
+    }
+  ], []);
+
   const initialState = {
-    width: 0,
-    count: 0
+    title: slideContent[0]["title"],
+    sentence: slideContent[0]["sentence"],
+    slide_num: slideContent[0]["slide_num"],
+    slide_in: false,
+    slide_out: false,
+    direction: "",
   };
 
+  const [slideState, setSlideState] = useState(initialState);
 
-  const [widthState, setWidthState] = useState(initialState);
+  // 右カーソルをクリックで左へずらす
+  // スライドが右のスライドになる
+  // slideState.slide_numが3より小さい場合、右カーソルが機能する
+  const changeSlideToRight = useCallback(() => {
+    if(slideState.slide_num < 3) {
+      setSlideState((prev) => ({
+        ...prev,
+        slide_in: false,
+        slide_out: true,
+        direction: "left"
+      }));
+      setTimeout(() => {
+        setSlideState((prev) => ({
+          ...prev,
+          title: slideContent[prev.slide_num + 1]["title"],
+          sentence: slideContent[prev.slide_num + 1]["sentence"],
+          slide_num: slideContent[prev.slide_num + 1]["slide_num"],
+          slide_in: true,
+          slide_out: false,
+          direction: "left",
+        }));
+      }, 350);
+    }
+  }, [
+    slideContent,
+    slideState.slide_num
+  ]);
 
-  // 右へ1095pxずらす
-  const changeSlideToRight = () => {
-    setWidthState((prev) => ({
-      width: prev.count === 3 ? prev.width : prev.width + 1095,
-      count: prev.count === 3 ? prev.count : prev.count + 1
-    }));
-  };
-
-  // 左へ1095pxずらす
-  const changeSlideToLeft = () => {
-    setWidthState((prev) => ({
-      width: prev.count === 0 ? prev.width : prev.width - 1095,
-      count: prev.count === 0 ? prev.count : prev.count - 1
-    }));
-  };
+  // 左カーソルをクリックで右へずらす
+  // スライドが左のスライドになる
+  // slideState.slide_numが1より大きくないと、左カーソルが機能しないようにした
+  const changeSlideToLeft = useCallback(() => {
+    if(slideState.slide_num > 0) {
+      setSlideState((prev) => ({
+        ...prev,
+        slide_in: false,
+        slide_out: true,
+        direction: "right"
+      }));
+      setTimeout(() => {
+        setSlideState((prev) => ({
+          ...prev,
+          title: slideContent[prev.slide_num - 1]["title"],
+          sentence: slideContent[prev.slide_num - 1]["sentence"],
+          slide_num: slideContent[prev.slide_num - 1]["slide_num"],
+          slide_in: true,
+          slide_out: false,
+          direction: "right",
+        }));
+      }, 350);
+    }
+  }, [
+    slideContent,
+    slideState.slide_num
+  ]);
 
   useEffect(() => {
     if(game_description_open) {
@@ -209,120 +306,113 @@ export const ElementaryGameDescriptionDialog = ({
       }
     }
   }, [
-    game_description_open
+    game_description_open,
+    changeSlideToRight,
+    changeSlideToLeft,
   ]);
 
   return(
     <>
-      {
-        isOpen && 
-          <MaskWrapper>
-            <Carousel widthState={widthState}>
-              <CarouselArea>
-                <CarouselList>
-                  <ModalWrapper>
-                    <TitleWrapper>
-                      初級編
-                    </TitleWrapper>
-                    <SentenceWrapper>
-                      初級編を始める前に、正規表現とは何か?、どんなことができるのか？を学習しましょう。そして、初級編のゲームを通して、正規表現を作る際に使う基礎的なメタ文字をマスターしましょう！
-                    </SentenceWrapper>
+      <Dialog
+        open={isOpen}
+        maxWidth='lg'        
+      >
+        <CustomDialogInnerWrapper> 
+          <DialogContent
+            sx={{
+              height: "75vh",
+              pb: "0"
+            }}
+          >
+            <DynamicSlideContentWrapper>
+              <SlideContentWrapper
+                slide_in={slideState.slide_in}
+                slide_out={slideState.slide_out}
+                direction={slideState.direction}
+              >
+                <TitleWrapper>
+                  {slideState.title}
+                </TitleWrapper>
+                <SentenceWrapper>
+                  {slideState.sentence}
+                </SentenceWrapper>
+                {
+                  slideState.slide_num === 0 &&
                     <MonsterImageBoxWrapper>
                       <MonsterImageWrapper src={ElementaryMonsterImage} />
                     </MonsterImageBoxWrapper>
-                  </ModalWrapper>
-                  <ButtonLineWrapper>
-                    <ButtonWrapper onClick={changeSlideToRight}>
-                      <ArrowRightIcon 
-                        fontSize='inherit' 
-                        sx={{ color: `${COLORS.BLACK}` }}
-                      />
-                    </ButtonWrapper>
-                  </ButtonLineWrapper>
-                </CarouselList>
-                <CarouselList>
-                  <ModalWrapper>
-                    <TitleWrapper>
-                      What’s 正規表現？
-                    </TitleWrapper>
-                    <SentenceWrapper>
-                      正規表現とは、複数の文字列からルールを見つけ出し、そのルールをパターンで表現したものです。正規表現を用いることで、文字列中に特定の文字が含まれているか判定できます。そして、含んでいる場合、どの位置にあるかを知ることができます。
-                    </SentenceWrapper>
-                  </ModalWrapper>
-                  <ButtonLineWrapper>
-                    <ButtonWrapper onClick={changeSlideToLeft}>
-                      <ArrowLeftIcon
-                        fontSize='inherit' 
-                        sx={{ color: `${COLORS.BLACK}` }}
-                      />
-                    </ButtonWrapper>
-                    <ButtonWrapper onClick={changeSlideToRight}>
-                      <ArrowRightIcon 
-                        fontSize='inherit' 
-                        sx={{ color: `${COLORS.BLACK}` }}
-                      />
-                    </ButtonWrapper>
-                  </ButtonLineWrapper>
-                </CarouselList>
-                <CarouselList>
-                  <ModalWrapper>
-                    <TitleWrapper>
-                      正規表現を作る上で重要なメタ文字
-                    </TitleWrapper>
-                    <SentenceWrapper>
-                      正規表現は、「文字列」と「メタ文字」で構成されています。そのため、メタ文字を知らなければ正規表現を作ることができません。メタ文字とは、特殊な働きをする文字列です。メタ文字の例として、「[a-z]」というメタ文字は「a~zの中の一文字」を表します。また、「\d」というメタ文字は0~9までの1つの数字を表します。
-                    </SentenceWrapper>
-                  </ModalWrapper>
-                  <ButtonLineWrapper>
-                    <ButtonWrapper onClick={changeSlideToLeft}>
-                      <ArrowLeftIcon
-                        fontSize='inherit' 
-                        sx={{ color: `${COLORS.BLACK}` }}
-                      />
-                    </ButtonWrapper>
-                    <ButtonWrapper onClick={changeSlideToRight}>
-                      <ArrowRightIcon 
-                        fontSize='inherit' 
-                        sx={{ color: `${COLORS.BLACK}` }}
-                      />
-                    </ButtonWrapper>
-                  </ButtonLineWrapper>
-                </CarouselList>
-                <CarouselList>
-                  <ModalWrapper>
-                    <TitleWrapper>
-                      ルール説明
-                    </TitleWrapper>
-                    <SentenceWrapper>
-                      初級編では、重要なメタ文字を使った正規表現を学習していきます。時間内に正しい正規表現を入力すると、モンスターに攻撃できます。モンスターのHPを0にしたらゲームクリアです！
-                    </SentenceWrapper>
-                    <WarningSentenceWrapper>
-                      ※ UX向上の為、音が出ます。音量が気になる方は下げて頂くよう宜しくお願い致します。
-                    </WarningSentenceWrapper>
-                    <OuterButtonsWrapper>
-                      <ButtonsWrapper>
+                }
+                {
+                  slideState.slide_num === 3 &&
+                    <>
+                      <WarningSentenceWrapper>
+                        ※ UX向上の為、音が出ます。音量が気になる方は下げて頂くようお願いします。
+                      </WarningSentenceWrapper>
+                      <OuterButtonsWrapper>
                         {
                           click_description_open ?
                             <FinallyGameRestartButton setGameState={setGameState} />
                           :
                             <FinallyGameStartButton setGameState={setGameState} />
                         }
-                      </ButtonsWrapper>
-                    </OuterButtonsWrapper>
-                  </ModalWrapper>
-                  <ButtonLineWrapper>
-                    <ButtonWrapper onClick={changeSlideToLeft}>
-                      <ArrowLeftIcon
-                        fontSize='inherit' 
-                        sx={{ color: `${COLORS.BLACK}` }}
-                      />
-                    </ButtonWrapper>
-                  </ButtonLineWrapper>
-                </CarouselList>
-              </CarouselArea>
-            </Carousel>
-          </MaskWrapper>
-      }
+                      </OuterButtonsWrapper>
+                    </>
+                }
+              </SlideContentWrapper>
+            </DynamicSlideContentWrapper>
+            <ButtonLineWrapper>
+              {
+                slideState.slide_num !== 0 &&
+                  <ButtonWrapper 
+                    onClick={changeSlideToLeft}
+                  >
+                    <Tooltip 
+                      title={<div>戻る<br />( 左矢印キー ← )</div>}
+                      placement="top"
+                    >
+                      <IconButton
+                        sx={{
+                          fontSize: '4.0em'
+                        }}
+                      >
+                        <ArrowLeftIcon
+                          fontSize='inherit' 
+                          sx={{ color: `${COLORS.BLACK}` }}
+                        />
+                      </IconButton>
+                    </Tooltip>
+                  </ButtonWrapper>
+              }
+              <ButtonWrapper 
+                onClick={changeSlideToRight}
+              >
+                <Tooltip 
+                  title={<div>進む<br />( 右矢印キー → )</div>}
+                  placement="top"
+                  disableHoverListener={slideState.slide_num === 3}
+                  sx={{
+                    opacity: slideState.slide_num === 3 ? 0 : 1,
+                  }}
+                >
+                  <IconButton
+                    sx={{
+                      fontSize: '4.0em',
+                      opacity: slideState.slide_num === 3 ? 0.1 : 1,
+                      cursor: slideState.slide_num === 3 && "default"
+                    }}
+                    disableRipple={slideState.slide_num === 3}
+                  >
+                    <ArrowRightIcon 
+                      fontSize='inherit' 
+                      sx={{ color: `${COLORS.BLACK}` }}
+                    />
+                  </IconButton>
+                </Tooltip>
+              </ButtonWrapper>
+            </ButtonLineWrapper>
+          </DialogContent>
+        </CustomDialogInnerWrapper>
+      </Dialog>
     </>
   );
 };

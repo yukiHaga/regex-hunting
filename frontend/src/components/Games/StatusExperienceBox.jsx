@@ -7,11 +7,16 @@ import { COLORS } from '../../style_constants.js';
 // DescriptionWrapper 
 import { DescriptionWrapper } from '../shared_style.js';
 
+import { WIDTH } from '../../style_constants.js';
+
 const ExperienceBoxWrapper = styled.div`
 `;
 
 const ExperienceTextWrapper = styled(DescriptionWrapper)`
- font-size: 16px;
+  font-size: 0.9em;
+  @media (max-width: ${WIDTH.DEV_TOOL}) {
+    font-size: 0.85em;
+  }
 `;
 
 const ExperienceGageWrapper = styled.div`

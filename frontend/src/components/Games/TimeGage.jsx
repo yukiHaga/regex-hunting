@@ -14,23 +14,26 @@ const TimeGageWrapper = styled.div`
   background-color: ${COLORS.GAGE_GRAY};
   border-radius: 10px 10px 0 0;
   width: 100%;
-  height: 36px;
   display: flex;
+  height: 4.6vh;
   box-sizing: border-box;
   border: 5px solid;
   border-color: ${COLORS.GAGE_GRAY};
 `;
 
 const TypeWrapper = styled.div`
-  height: 26px;
-  width: 120px;
-  font-size: 18px;
-  line-height: 26px;
+  width: 8.5%;
+  font-size: 1.2em;
   background-color: ${COLORS.GAGE_GRAY};
-  color: ${COLORS.BROWN};
-  font-family: YuGothic;
+  color: ${COLORS.LIGHT_BLACK};
   font-weight: bold;
   text-align: center;
+`;
+
+// fuchiue
+const Fuchiue = styled.span`
+  -webkit-text-stroke: 0;
+  position: absolute;
 `;
 
 // ゲージ減少のアニメーション
@@ -44,8 +47,15 @@ const TimeGageAnime = keyframes`
   }
 `;
 
-const GageOuterWrapper = styled.div`
+const FixWrapper = styled.div`
   height: 100%;
+  width: 100%;
+  display: flex;
+  align-items: center;
+`;
+
+const GageOuterWrapper = styled.div`
+  height: 80%;
   width: 100%;
   background-color: ${COLORS.LIGHT_BLACK};
   border-radius: 10px;
@@ -117,16 +127,21 @@ export const TimeGage = ({
     <>
       <TimeGageWrapper>
         <TypeWrapper>
+          <Fuchiue>
+            TIME 
+          </Fuchiue>
           TIME
         </TypeWrapper>
-        <GageOuterWrapper>
-          <GageWrapper 
-            onAnimationEnd={timeOut} 
-            time_active={time_active}
-            click_description_open={click_description_open}
-            click_meta_open={click_meta_open}
-          />
-        </GageOuterWrapper>
+        <FixWrapper>
+          <GageOuterWrapper>
+            <GageWrapper 
+              onAnimationEnd={timeOut} 
+              time_active={time_active}
+              click_description_open={click_description_open}
+              click_meta_open={click_meta_open}
+            />
+          </GageOuterWrapper>
+        </FixWrapper>
       </TimeGageWrapper>
     </>
   );

@@ -4,33 +4,14 @@ import styled from 'styled-components';
 // Colors
 import { COLORS } from '../../style_constants.js';
 
-// BaseLink
-import { FakeLink } from '../shared_style.js';
+import Container from '@mui/material/Container';
+import Box from '@mui/material/Box';
+import Toolbar from '@mui/material/Toolbar';
+import Button from '@mui/material/Button';
 
 const FooterWrapper = styled.div`
-  height: 55px;
-  display: flex;
-  justify-content: start;
   background-color: ${COLORS.BROWN};
-  width: 100%;
 `;
-
-const FooterNav = styled.nav`
-  margin-left: 20px;
-`;
-
-const FooterNavFakeLink = styled(FakeLink)`
-  height: 52px;
-  line-height: 52px;
-  display: inline-block;
-  color: ${COLORS.SUB};
-  margin-left: 20px; 
-  :hover {
-    opacity: 0.7;
-    border-bottom: solid ${COLORS.SUB};
-  }
-`;
-
 
 export const GameFooter = ({
   setGameState
@@ -58,18 +39,30 @@ export const GameFooter = ({
   return (
     <>
       <FooterWrapper>
-        <FooterNav>
-          <FooterNavFakeLink
-            onClick={handleGameDescriptionDialog}
-          >
-            スライドを見る
-          </FooterNavFakeLink>
-          <FooterNavFakeLink 
-            onClick={handleMetaDialog}
-          >
-            メタ文字一覧
-          </FooterNavFakeLink>
-        </FooterNav>
+        <Container maxWidth="xl">
+          <Toolbar disableGutters>
+            <Box sx={{ flexDirection: { xs: 'column', md: 'row' }, display: 'flex' }}>
+              <Box sx={{ flexGrow: 0, display: { xs: 'flex', md: 'flex' } }}>
+                <Button
+                  key="1"
+                  sx={{ my: 2, color: 'white', display: 'block' }}
+                  onClick={handleGameDescriptionDialog}
+                >
+                  スライドを見る
+                </Button>
+              </Box>
+              <Box sx={{ flexGrow: 0, display: { xs: 'flex', md: 'flex' } }}>
+                <Button
+                  key="1"
+                  sx={{ my: 2, color: 'white', display: 'block' }}
+                  onClick={handleMetaDialog}
+                >
+                  メタ文字一覧 
+                </Button>
+              </Box>
+            </Box>
+          </Toolbar>
+        </Container>
       </FooterWrapper>
     </>
   );

@@ -13,10 +13,9 @@ import { COLORS } from '../../style_constants.js';
 import { HTTP_STATUS_CODE } from '../../constants';
 
 // タイトルを設定した情報を取得するapiコール関数
-import { postTitleSetting } from '../../apis/titleSetting.js';
+import { patchTitleSetting } from '../../apis/titleSetting.js';
 
 const TitleSettingButtonWrapper = styled(BaseLink)`
-  margin-top: 30px;
   border-style: none;
   border-radius: 3px;
   box-shadow: 0 2px 4px rgba(0,0,0,0.3);
@@ -24,27 +23,24 @@ const TitleSettingButtonWrapper = styled(BaseLink)`
   :hover {
     box-shadow: 0 0 2px rgba(0,0,0,0.2);
   }
+  padding: 2.8%;
+  background-color: ${COLORS.MAIN};
+  opacity: ${({disabled}) => disabled ? 0.7 : 1};
+  pointer-events: ${({disabled}) => disabled ? 'none' : 'auto'};
 `;
 
 const TitleSettingButtonTextWrapper = styled.div`
-  width: 150px;
-  height: 40px;
-  border-radius: 3px;
-  font-family: YuGothic;
   font-style: normal;
   font-weight: 500;
-  font-size: 18px;
-  line-height: 40px;
+  font-size: 1.1em;
   color: ${COLORS.WHITE};
   text-align: center;
-  background-color: ${COLORS.MAIN};
-  padding-top: 5px;
-  padding-bottom: 5px;
 `;
 
 export const TitleSettingButton = ({
   name,
-  setMyPageState
+  setMyPageState,
+  disabled
 }) => {
 
   // useContext
@@ -58,8 +54,9 @@ export const TitleSettingButton = ({
     requestUserActionTyps
   } = useContext(UserContext);
 
+  // my-pageじゃなくて、/にすると、フラッシュメッセージが表示された
   const handleTitleSetting = () => {
-    postTitleSetting(user, name).then((data) => {
+    patchTitleSetting(user, name).then((data) => {
       dispatch({
         type: requestUserActionTyps.REQUEST_SUCCESS,
         payload: {
@@ -67,30 +64,39 @@ export const TitleSettingButton = ({
           user: data.user,
         }
       });
+      setMyPageState((prev) =>({
+        ...prev,
+        isOpenDialog: false,
+        name: "",
+        release_date: "",
+        release_condition: "",
+        display: true,
+        message: "称号を変更しました。"
+      }));
     }).catch((e) => {
-      if(e.response.status === HTTP_STATUS_CODE.NOT_FOUND){
-        dispatch({
-          type: requestUserActionTyps.REQUEST_FAILURE,
-          payload: {
-            errors: e.response.data.errors
-          }
-        });
+      if(e.response.status === HTTP_STATUS_CODE.BAD_REQUEST){
+        setMyPageState((prev) =>({
+          ...prev,
+          isOpenDialog: false,
+          name: "",
+          release_date: "",
+          release_condition: "",
+          display: e.response.data.errors.display,
+          message: e.response.data.errors.message
+        }));
       } else {
         throw e;
       }
     });
-    setMyPageState((prev) =>({
-      ...prev,
-      isOpenDialog: false,
-      name: "",
-      release_date: "",
-      release_condition: ""
-    }));
   };
 
   return (
     <>
-      <TitleSettingButtonWrapper to={'/my-page'} onClick={handleTitleSetting}>
+      <TitleSettingButtonWrapper 
+        to={'/my-page'} 
+        onClick={handleTitleSetting}
+        disabled={disabled}
+      >
         <TitleSettingButtonTextWrapper>
           称号を変更する
         </TitleSettingButtonTextWrapper>

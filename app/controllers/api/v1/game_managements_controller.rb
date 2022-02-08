@@ -2,105 +2,87 @@ class Api::V1::GameManagementsController < ApplicationController
   MIN_TIMES = 14
   skip_before_action :require_login
   skip_before_action :verify_authenticity_token, only: :start
-  after_action :set_csrf_token_header, only: %i(start finish)
+  after_action :set_csrf_token_header, only: %i[start finish]
+
+  # startに関するbefore_action
+  # set_userをfinishで実行すると、ステータスが更新されたデータをフロントに送ることができないので、
+  # finishでset_userを使うことはやめた
+  before_action :set_start_game_management, only: :start
+  before_action :set_monster, only: :start
+  before_action :set_questions, only: :start
+  before_action :set_user, only: :start
+
+  # finishに関するbefore_action
+  # current_userが存在するときだけ、実行させる
+  # logged_in?は現在ログイン中かどうか、true or falseで返す。
+  before_action :set_finish_game_management, only: :finish, if: :logged_in?
+  before_action :set_correct_questions, only: :finish, if: :logged_in?
+  before_action :set_incorrect_questions, only: :finish, if: :logged_in?
+
+  # タイトルに関する処理
+  # ランクアップしているかつ、
+  # ユーザーのランクが、CONDITION_HASHのバリューのランクを満たすなら、
+  # active_titleを更新する
+  # active_titleに代入しているので、ランクが上がるごとに、マイページで設定したタイトルが
+  # 変更される
+  CONDITION_HASH = {
+    一人前ハンター: 2,
+    玄人ハンター: 4,
+    いにしえのハンター: 6,
+    天才と呼ばれしハンター: 8,
+    伝説のハンター: 10,
+    無我の境地: 12,
+    語り継がれし英雄: 14
+  }
+
+  # ゲストユーザーのゲーム中のステータス
+  GUEST_USER = {
+    rank: 1,
+    total_experience: 0,
+    maximum_experience_per_rank: 500,
+    temporary_experience: 0,
+    prev_temporary_experience: 0,
+    active_title: '見習いハンター'
+  }
 
   def start
-    # ゲームに関する処理
-    game_management = current_user ?
-                        current_user.game_managements.
-                          build(
-                            difficulty: params[:difficulty],
-                            game_result: "progress",
-                            result_time: Time.zone.now,
-                            play_date: Date.today
-                          )
-                      :
-                        GameManagement.new(
-                          difficulty: params[:difficulty],
-                          game_result: "progress",
-                          result_time: Time.zone.now,
-                          play_date: Date.today
-                        )
-
-    # 問題に関する処理
-    # indicesは、全てのQuestionのidが格納された変数
-    # sampleメソッドは、配列の要素を1個ランダムに返す
-    # search_indicesという配列に取得したidを格納する
-    # Array#deleteで、indicesからsearch_indexの値を削除する
-    indices = Question.where(difficulty: params[:difficulty]).pluck(:id)
-    search_indices = []
-    MIN_TIMES.times do
-      search_index = indices.sample
-      search_indices << search_index
-      indices.delete(search_index)
-    end
-    questions = Question.where(id: search_indices, difficulty: params[:difficulty]);
-
-    # モンスターに関する処理
-    monster = Monster.find_by(difficulty: params[:difficulty])
-
     # レンダリング
+    # このユーザーはゲームに使うユーザー
+    # contextのユーザーとは何も関係ない
     render json: {
-      game_management: game_management,
-      questions: questions.shuffle,
-      monster: monster,
-      user: {
-        rank: current_user ? current_user[:rank] : 1,
-        total_experience: current_user ? current_user[:total_experience] : 0,
-        maximum_experience_per_rank: current_user ?
-          current_user[:maximum_experience_per_rank] : 500,
-        temporary_experience: current_user ?
-          current_user[:temporary_experience] : 0,
-        prev_temporary_experience: current_user ?
-          current_user[:temporary_experience] : 0,
-        active_title: current_user ?
-          current_user[:active_title] : "見習いハンター"
-      }
+      game_management: @game_management,
+      questions: @questions,
+      monster: @monster,
+      user: @user
     }, status: :created
   end
 
   # finishに送る際に作成されたデータを使ってゲーム結果画面を作るので、
   # finishでゲーム関連のデータを返す必要は特にない
+  # ゲームに勝つか負けると、finishアクションが実行される
   def finish
     # 早期リターン
     # ログインユーザーが存在しないなら、ゲームデータをDBに保存しない
-    return render json: {
-      send_game_data: true
-    }, status: :ok unless current_user
+    return render json: { send_game_data: true }, status: :ok unless current_user
 
-    # ゲーム管理に関する処理
-    # solved_questionsの2箇所は、GameManagementモデルに記述して一つにまとめる。
-    # GameManagementモデルのsoleved_questonsは、
-    # throughをつけなくて良い。中間テーブルだけにデータを直接入れる。
-    game_management = current_user.game_managements.
-                        create(
-                          difficulty: params[:game_management][:difficulty],
-                          game_result: params[:game_management][:game_result],
-                          result_time: params[:game_management][:result_time],
-                          play_date: Date.today
-                        )
-
-    correct_questions = params[:judgement][:correct]
-    incorrect_questions = params[:judgement][:incorrect]
-    game_management.solved_questions << Array.new(correct_questions.length) do |i|
-      SolvedQuestion.new(
-        judgement: :correct,
-        question_id: correct_questions[i][:question][:id]
-      )
-    end
-    game_management.solved_questions << Array.new(incorrect_questions.length) do |i|
-      SolvedQuestion.new(
-        judgement: :incorrect,
-        question_id: incorrect_questions[i][:question][:id]
-      )
-    end
-
-    game_management.save!
+    @game_management.add_correct_questions(@correct_questions)
+    @game_management.add_incorrect_questions(@incorrect_questions)
+    @game_management.save!
 
     # ログインユーザーのステータスを更新する処理
     # ランクアップしている場合、temporary_experienceが0になる
+    # さらに、あるランクに到達すると称号を解放する
     # current_userにsaltやcrypted_passwordなどのカラムを含めてjsonを送ってはダメ
-    if params[:current_user][:temporary_experience] >= params[:current_user][:maximum_experience_per_rank]
+    if rank_up? && CONDITION_HASH.values.include?(params[:current_user][:rank] + 1)
+      current_user.release_new_title((Title.find_by(name: CONDITION_HASH.key(params[:current_user][:rank] + 1)))[:id])
+      current_user.update(
+        rank: params[:current_user][:rank] + 1,
+        total_experience: params[:current_user][:total_experience],
+        maximum_experience_per_rank: params[:current_user][:maximum_experience_per_rank] + 100,
+        temporary_experience: 0,
+        active_title: CONDITION_HASH.key(params[:current_user][:rank] + 1)
+      )
+    elsif rank_up?
       current_user.update(
         rank: params[:current_user][:rank] + 1,
         total_experience: params[:current_user][:total_experience],
@@ -112,53 +94,85 @@ class Api::V1::GameManagementsController < ApplicationController
         rank: params[:current_user][:rank],
         total_experience: params[:current_user][:total_experience],
         maximum_experience_per_rank: params[:current_user][:maximum_experience_per_rank],
-        temporary_experience: params[:current_user][:temporary_experience],
-        active_title: params[:current_user][:active_title]
+        temporary_experience: params[:current_user][:temporary_experience]
       )
-    end
-
-    # タイトルに関する処理
-    # ランクアップしているかつ、
-    # ユーザーのランクが、condition_hashのバリューのランクを満たすなら、
-    # active_titleを更新する
-    # active_titleに代入しているので、ランクが上がるごとに、マイページで設定したタイトルが
-    # 変更される
-    condition_hash = {
-      一人前ハンター: 2,
-      先輩ハンター: 4,
-      玄人ハンター: 6,
-      熟練ハンター: 8,
-      いにしえのハンター: 10,
-      天才と呼ばれしハンター: 12,
-      伝説のハンター: 14,
-      無我の境地: 16,
-      語り継がれし英雄: 18
-    }
-
-    if params[:current_user][:temporary_experience] >= params[:current_user][:maximum_experience_per_rank] && condition_hash.values.include?(current_user.rank)
-      current_user.release_titles.build(
-        release_date: Date.today,
-        title_id: (Title.find_by(name: condition_hash.key(current_user.rank)))[:id]
-      )
-      current_user[:active_title] = condition_hash.key(current_user.rank)
-      current_user.save!
     end
 
     # レンダリング
     # ログインユーザーに返すjson
+    # このuserのデータはcontextのユーザーに反映される
     render json: {
       send_game_data: true,
       session: true,
-      user: {
-        rank: current_user[:rank],
-        total_experience: current_user[:total_experience],
-        maximum_experience_per_rank: current_user[:maximum_experience_per_rank],
-        temporary_experience: current_user[:temporary_experience],
-        prev_temporary_experience: current_user[:temporary_experience],
-        active_title: current_user[:active_title],
-        rank_up: params[:current_user][:temporary_experience] >= params[:current_user][:maximum_experience_per_rank] ?
-          true : false
-      }
+      user: User.handle_game_user_serializer(current_user).merge({ rank_up: rank_up? ? true : false })
     }, status: :created
   end
+
+  private
+
+    # start時にgame_managementを生成する関数
+    # current_userが存在しないなら、user_idのバリューがnilになる
+    def set_start_game_management
+      @game_management = GameManagement.new(
+        difficulty: params[:difficulty],
+        game_result: 'progress',
+        play_date: Time.zone.today,
+        user_id: current_user ? current_user.id : nil
+      )
+    end
+
+    # start時にモンスターを取得する関数
+    def set_monster
+      @monster = Monster.find_by(difficulty: params[:difficulty])
+    end
+
+    # 問題に関する処理
+    # RAND()を使うと、本番のDBによっては使えなかったりするので、
+    # sampleを使う。
+    # sample(14)でpluck(:id)の配列の中で、要素をランダムに14個、1つの配列として返す
+    # ただ、DBから取得しても、結局小さい順になるので、shuffleメソッドを使う
+    # shuffleで配列の要素をランダムにシャッフルして、その結果を配列として返す
+    def set_questions
+      indices = Question.where(difficulty: params[:difficulty]).pluck(:id).sample(14)
+      @questions = Question.where(id: indices, difficulty: params[:difficulty]).shuffle
+    end
+
+    # start時にユーザーを取得する関数
+    # ログインユーザーがゲームをプレイする場合、ログインユーザーのデータをJSON形式でシリアライズする
+    # ゲストユーザーがゲームをプレイする場合、ゲストユーザー用のデータを@userに代入する
+    # User.handle_game_user_serializer(nil)で例外が発生する
+    def set_user
+      @user = if current_user
+                User.handle_game_user_serializer(current_user)
+              else
+                GUEST_USER
+              end
+    end
+
+    # ゲーム終了時のgame_management
+    def set_finish_game_management
+      @game_management = current_user.game_managements
+                                     .create(
+                                       difficulty: params[:game_management][:difficulty],
+                                       game_result: params[:game_management][:game_result],
+                                       result_time: params[:game_management][:result_time],
+                                       play_date: Time.zone.today
+                                     )
+    end
+
+    # ゲーム終了時のcorrect_questions
+    def set_correct_questions
+      @correct_questions = params[:judgement][:correct]
+    end
+
+    # ゲーム終了時のincorrect_questions
+    def set_incorrect_questions
+      @incorrect_questions = params[:judgement][:incorrect]
+    end
+
+    # current_userのtemporary_experienceがmaximum_experience_per_rank以上になると、
+    # trueになる関数
+    def rank_up?
+      params[:current_user][:temporary_experience] >= params[:current_user][:maximum_experience_per_rank]
+    end
 end

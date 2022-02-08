@@ -14,7 +14,6 @@ import { UserContext } from "../../context/UserProvider.js";
 import { getMonsterName } from '../../functions/getMonsterName.js';
 
 const RestartGameButtonWrapper = styled.div`
-  margin-top: 30px;
   border-style: none;
   border-radius: 3px;
   transition: 0.3s;
@@ -25,22 +24,19 @@ const RestartGameButtonWrapper = styled.div`
   }
   cursor: pointer;
   text-decoration: none;
+  width: 90%;
+  margin: 2%;
 `;
 
 const RestartGameButtonTextWrapper = styled.div`
-  width: 150px;
-  height: 40px;
   border-radius: 3px;
-  font-family: YuGothic;
   font-style: normal;
-  font-weight: 500;
-  font-size: 18px;
-  line-height: 40px;
+  font-size: 1em;
   color: ${COLORS.WHITE};
   text-align: center;
   background-color: ${COLORS.BLUE};
-  padding-top: 5px;
-  padding-bottom: 5px;
+  padding-top: 8%;
+  padding-bottom: 8%;
 `;
 
 export const RestartGameButton = ({ 

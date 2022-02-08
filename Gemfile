@@ -27,7 +27,7 @@ gem 'rack-cors'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
-  gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
+  gem 'byebug', platforms: %i[mri mingw x64_mingw]
   # Set up for development and test environments
   gem 'sqlite3', '~> 1.4'
   # Call 'binding.pry' anywhere in the code to stop execution and get a debugger console
@@ -41,6 +41,7 @@ group :development do
   gem 'spring-watcher-listen', '~> 2.0.0'
   # Ruby code style checking and code formatting tool
   gem 'rubocop'
+  gem 'rubocop-rails'
   # A code metric tool for rails codes
   gem 'rails_best_practices'
   # Provides a better error page
@@ -53,6 +54,7 @@ group :development do
   gem 'bullet'
   # RailsAdmin is a Rails engine that provides an easy-to-use interface for managing your data
   # gem 'rails_admin', '~> 2.0.0'
+  gem 'letter_opener_web', '~> 1.0'
 end
 
 group :production do
@@ -60,7 +62,7 @@ group :production do
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
-gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
+gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]
 
 gem 'sprockets', '~> 3.7.2'
 
@@ -72,3 +74,9 @@ gem 'foreman'
 
 # Use it to create data
 gem 'faker'
+
+# 環境ごとに分けて定数を使うためのgem
+gem 'config'
+
+# シリアライザー
+gem 'active_model_serializers'

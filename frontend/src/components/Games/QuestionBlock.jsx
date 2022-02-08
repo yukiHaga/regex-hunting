@@ -13,60 +13,57 @@ import { getExperience } from '../../functions/getExperience.js';
 const QuestionBlockWrapper = styled.div`
   background-color: ${COLORS.SUB};
   border-radius: 3px;
-  width: 860px;
-  height: 106px;
+  height: 13.4vh;
+  margin: 0 auto;
+  width: 60%;
+  box-shadow: 0 0px 20px rgba(0,0,0,0.2);
 `;
 
 const QuestionWrapper = styled.div`
   background-color: ${COLORS.OCHER};
   border-radius: 3px;
-  width: 860px;
-  height: 53px;
-  font-size: 23px;
-  line-height: 53px;
+  font-size: 1.3em;
   color: ${COLORS.BLACK};
-  font-family: YuGothic;
   font-style: normal;
   font-weight: 500;
   text-align: center;
 `;
 
+// 問題文
 const SentenceWrapper = styled.div`
-  font-size: 23px;
+  font-size: 1em;
   color: ${COLORS.BLACK};
-  font-family: YuGothic;
   font-style: normal;
-  font-weight: 500;
+  padding-top: 1.25%;
+  padding-bottom: 1.25%;
+  border-radius: 3px;
 `;
 
+// 問題文の左隣にある問題カウンター
 const DifficultyWrapper = styled.div`
   background-color: ${COLORS.MAIN};
-  border-radius: 3px;
-  width: 75px;
-  height: 53px;
-  font-size: 23px;
-  line-height: 53px;
+  border-radius: 3px 3px 3px 0;
+  width: 5%;
+  font-size: 1em;
   color: ${COLORS.SUB};
   text-align: center;
-  font-family: YuGothic;
   font-style: normal;
-  font-weight: 500;
   position: absolute;
-  z-index: 1;
+  z-index: 0;
+  padding-top: 0.73%;
+  padding-bottom: 0.73%;
 `;
 
+// ターゲットセンテンス
 const TargetSentenceWrapper = styled.div`
   background-color: ${COLORS.SUB};
-  border-radius: 3px;
-  width: 860px;
-  height: 53px;
-  font-size: 23px;
-  line-height: 53px;
+  border-radius: 0, 0, 3px 3px;
+  font-size: 1.1em;
   color: ${COLORS.BLACK};
   text-align: center;
-  font-family: YuGothic;
   font-style: normal;
-  font-weight: 500;
+  vertical-align: center;
+  padding-top: 1%;
 `;
 
 const CustomSpan = styled.span`

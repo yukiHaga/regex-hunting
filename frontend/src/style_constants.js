@@ -22,10 +22,21 @@ export const COLORS = {
   OVER_BLACK: '#444444',
   ANSWER_GRAY: '#E5E5E5',
   EXPERIENCE: '#00a968',
-  LIGHT_GRAY: '#f6f6f6'
-}
+  LIGHT_GRAY: '#f6f6f6',
+  HP_BLUE: '#3399ff',
+};
 
 // フォントサイズを決める際に、適宜定義する。
 export const FONT_SIZE = {
   HEADER_TITLE: '36px'
-}
+};
+
+// レスポンシブデザインの定数
+// スマホ、タブレット、PC、で定義しておく
+// とりあえずスマホだけ定義した
+// 414pxはiphoneXRの幅。これが一番でかい
+export const WIDTH = {
+  MOBILE: '414px',
+  PC: '1000px',
+  DEV_TOOL: '1189px'
+};

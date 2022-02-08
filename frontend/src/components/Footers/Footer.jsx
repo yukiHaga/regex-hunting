@@ -4,45 +4,46 @@ import styled from 'styled-components';
 // Colors
 import { COLORS } from '../../style_constants.js';
 
-// BaseLink
-import { BaseLink } from '../shared_style.js';
+import Container from '@mui/material/Container';
+import Box from '@mui/material/Box';
+import Toolbar from '@mui/material/Toolbar';
+import Button from '@mui/material/Button';
 
 const FooterWrapper = styled.div`
-  height: 55px;
-  display: flex;
-  justify-content: start;
   background-color: ${COLORS.BROWN};
-  width: 100%;
 `;
 
-const FooterNav = styled.nav`
-  margin-left: 20px;
-`;
-
-const FooterNavLink = styled(BaseLink)`
-  height: 52px;
-  line-height: 52px;
-  display: inline-block;
-  color: ${COLORS.SUB};
-  margin-left: 20px; 
-  :hover {
-    opacity: 0.7;
-    border-bottom: solid ${COLORS.SUB};
-  }
-`;
-
+// 遷移するスピードが早すぎるから、リップルエフェクトが最後の四角の状態になるまで表示されない
+// 四角の状態になる前にページが遷移する
+// hrefを/#にして検証済
 export const Footer = () => {
   return (
     <>
       <FooterWrapper>
-        <FooterNav>
-          <FooterNavLink to={`/policy`}>
-            利用規約
-          </FooterNavLink>
-          <FooterNavLink to={`/privacy-policy`}>
-            プライバシーポリシー
-          </FooterNavLink>
-        </FooterNav>
+        <Container maxWidth="xl">
+          <Toolbar disableGutters>
+            <Box sx={{ flexDirection: { xs: 'column', md: 'row' }, display: 'flex' }}>
+              <Box sx={{ flexGrow: 0, display: { xs: 'flex', md: 'flex' } }}>
+                <Button
+                  key="1"
+                  sx={{ my: 2, color: 'white', display: 'block' }}
+                  href='/policy'
+                >
+                  利用規約
+                </Button>
+              </Box>
+              <Box sx={{ flexGrow: 0, display: { xs: 'flex', md: 'flex' } }}>
+                <Button
+                  key="1"
+                  sx={{ my: 2, color: 'white', display: 'block' }}
+                  href='/privacy-policy'
+                >
+                  プライバシーポリシー
+                </Button>
+              </Box>
+            </Box>
+          </Toolbar>
+        </Container>
       </FooterWrapper>
     </>
   );

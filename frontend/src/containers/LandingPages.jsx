@@ -1,11 +1,10 @@
 import React, { Fragment, useState, useEffect, useLayoutEffect, useContext } from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 import styled from 'styled-components';
 
 // Image
-import MainTitleImage from '../images/main_title.png';
-import BackGroundImage from '../images/background.png';
-import MainMonsterImage from '../images/advanced.png';
+import MainTitleImage from '../images/main_title.svg';
+import GroupBackGroundImage from '../images/group_background.png';
 import BattleSceneImage from '../images/battle_scene.png';
 import MyPageImage from '../images/my_page_image.png';
 import RaknkingImage from '../images/ranking_image.png';
@@ -14,7 +13,6 @@ import IntermediateGameContentImage from '../images/intermediate_game_content.pn
 
 // Presentational Components
 import { Header } from '../components/Headers/Header.jsx';
-import { FakeHeader } from '../components/Headers/FakeHeader.jsx';
 import { SubText } from '../components/SubText.jsx';
 import { StartButton } from '../components/Buttons/StartButton.jsx'
 import { Footer } from '../components/Footers/Footer.jsx';
@@ -26,6 +24,8 @@ import { RankingDescriptionSentence } from '../components/Sentences/RankingDescr
 import { GameStartDescriptionSentence } from '../components/Sentences/GameStartDescriptionSentence.jsx';
 import { GameContent } from '../components/GameContents/GameContent.jsx';
 import { BoundDescriptionSentence } from '../components/Sentences/BoundDescriptionSentence.jsx';
+import { SubTitleSentence } from '../components/Sentences/SubTitleSentence.jsx';
+import { MobileFlashMessage } from '../components/FlashMessages/MobileFlashMessage.jsx';
 
 // Contextオブジェクト
 import { UserContext } from "../context/UserProvider.js";
@@ -39,118 +39,147 @@ import { HTTP_STATUS_CODE } from '../constants';
 // Colors
 import { COLORS } from '../style_constants.js';
 
+// Responsive
+import { WIDTH } from '../style_constants.js';
+
 // react-scroll
 import { Link as Scroll } from 'react-scroll';
 
 // メインのラッパー
 const MainWrapper = styled.div`
   text-align: center;
+  position: relative;
+  padding-top: 1.5%;
+  @media (max-width: ${WIDTH.MOBILE}) {
+    padding-top: 10%;
+  }
 `;
 
 // メインタイトル画像
+// max-widthはこの要素の最大幅を表す
+// width1000pxより画面幅が小さい場合、画像が画面からはみ出てしまう(横スクロールしないといけない)。
+// そのため、max-width(最大幅)を指定しておくと、画面幅がwidthより小さい場合でも、
+// widthを自動的に画面幅に合わせてくれる
 const MainTitleImageCover = styled.img`
-  width: 1000px;
-  height: 180px;
+  margin: 0 auto;
+  width: 75%;
+  height: auto;
   object-fit: contain;
-  margin-top: 145px;
+  margin-top: 3.5%;
+  max-width: 100%;
+  height: auto;
+  @media (max-width: ${WIDTH.MOBILE}) {
+    margin-top: 30%;
+    width: 90%;
+  }
 `;
 
 // 背景画像
 const BackGroundImageCover = styled.img`
-  width: 1790px;
-  height: 750px;
   position: absolute;
-  top: 55px;
-  left: -350px;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  margin: auto;
+  margin-top: 0px;
+  margin-bottom: 0px;
   z-index: -4;
+  max-width: 100%;
+  @media (max-width: ${WIDTH.MOBILE}) {
+    object-fit: cover;
+  }
 `;
 
 // フィルター
-const Filter = styled.span`
-  width: 1790px;
-  height: 750px;
+const Filter = styled.div`
   position: absolute;
-  top: 55px;
-  left: -350px;
+  top: 0px;
+  left: 0px;
+  width: 100%;
+  height: 100%;
   z-index: -2;
   background-color: rgba(102,102,102,0.5)
-`;
-
-// メインモンスター画像
-const MainMonsterImageCover = styled.img`
-  width: 1000px;
-  height: 700px;
-  object-fit: contain;
-  z-index: -3;
-  position: absolute;
-  top: 25px;
-  left: 250px;
-`;
-
-// フラッシュメッセージでレイアウトが変化しないためのブロック要素
-const FakeBlock = styled.div`
-  height: 56px;
 `;
 
 // セカンドのラッパー
 const SecondWrapper = styled.div`
   text-align: center;
   background-color: ${COLORS.SUB};
-  padding-top: 80px;
+  padding-top: 6%;
 `;
 
 // 戦闘画像
 const SecondBattleSceneImageCover = styled.img`
-  width: 650px;
-  height: 400px;
+  width: 60%;
+  height: auto;
   object-fit: contain;
-  margin-top: 40px;
-  margin-bottom: 20px;
+  margin-top: 4%;
+  margin-bottom: 2%;
+  max-width: 100%;
+  @media (min-width: ${WIDTH.PC}) {
+    width: 50%;
+    margin-bottom: 0%;
+  }
 `;
 
 // サードのラッパー
 const ThirdWrapper = styled.div`
   text-align: center;
   background-color: ${COLORS.SUB};
-  padding-top: 110px;
+  padding-top: 6%;
 `;
 
 // マイページ画像
 const ThirdMyPageImageCover = styled.img`
-  width: 650px;
-  height: 400px;
+  width: 60%;
+  height: auto;
   object-fit: contain;
-  margin-bottom: 20px;
+  margin-top: 4%;
+  margin-bottom: 4%;
+  max-width: 100%;
+  @media (min-width: ${WIDTH.PC}) {
+    width: 50%;
+  }
 `;
 
 // フォースのラッパー
 const FourthWrapper = styled.div`
   text-align: center;
   background-color: ${COLORS.SUB};
-  padding-top: 110px;
+  padding-top: 6%;
 `;
 
 // ランキング画像
 const FourthRaknkingImageCover = styled.img`
-  width: 650px;
-  height: 400px;
+  width: 60%;
+  height: auto;
   object-fit: contain;
-  margin-top: 40px;
+  margin-top: 4%;
+  margin-bottom: 4%;
+  max-width: 100%;
+  @media (min-width: ${WIDTH.PC}) {
+    width: 50%;
+  }
 `;
 
 // フィフスのラッパー
 const FifthWrapper = styled.div`
   text-align: center;
   background-color: ${COLORS.SUB};
-  padding-top: 140px;
-  padding-bottom: 150px;
+  padding-top: 4%;
+  padding-bottom: 6%;
 `;
 
 // ゲームコンテンツのラッパー
 const GameContentsWrapper = styled.div`
-  padding-top: 80px;
+  padding-top: 4%;
   display: flex;
   justify-content: space-evenly;
+  frex-direction: row;
+  flex-wrap: wrap;
 `;
 
 export const LandingPages = () => { 
@@ -164,18 +193,27 @@ export const LandingPages = () => {
   // モーダルを管理するstate
   const [state, setState] = useState(loginInitialState);
 
+  // モバイルに関するstateの初期値
+  const mobileInitialState = {
+    display: false,
+    message: ""
+  }
+
+  // モバイルを管理するstate
+  const [mobileState, setMobileState] = useState(mobileInitialState);
+
   // useContext
   const {
-    requestUserState: { sessionState, battleAudioState }, 
+    requestUserState: { 
+      sessionState, 
+      battleAudioState 
+    }, 
     dispatch, 
     requestUserActionTyps
   } = useContext(UserContext);
 
   // location
   const location = useLocation();
-
-  // navigation
-  const navigate = useNavigate();
 
   // 初めてLPページに訪れた場合、ログインしていないので、
   // dispatchのdata.sessionはfalseとなる
@@ -223,26 +261,28 @@ export const LandingPages = () => {
 
   return (
     <>
-      <Header onClickLink={(modalType) => setState({
-        isOpenDialog: true,
-        modalType: modalType
-      })}/>
-      <FakeHeader />
-      <FakeBlock>
+      <Header 
+        onClickLink={(modalType) => setState({
+          isOpenDialog: true,
+          modalType: modalType
+        })}
+        setMobileState={setMobileState}
+      />
+      <MainWrapper>
         <SessionFlashMessage
           location={location}
-          navigate={navigate}
-          url='/'
         />
-      </FakeBlock>
-      <MainWrapper>
+        <MobileFlashMessage
+          display={mobileState.display}
+          message={mobileState.message}
+          setMobileState={setMobileState}
+        />
+        <BackGroundImageCover src={GroupBackGroundImage} alt="main-image" />
         <MainTitleImageCover src={MainTitleImage} alt="main-title"/>
         <Filter />
-        <MainMonsterImageCover src={MainMonsterImage} alt="main-monster" />
-        <BackGroundImageCover src={BackGroundImage} alt="back-ground"/> 
-        <SubText color={COLORS.SUB}>
+        <SubTitleSentence color={COLORS.SUB}>
           正規表現を学ぶ狩りに出よう
-        </SubText>
+        </SubTitleSentence>
         <Scroll to="gameContent" smooth={true}>
           <StartButton />
         </Scroll>
@@ -252,23 +292,23 @@ export const LandingPages = () => {
       </MainWrapper>
       <SecondWrapper id="what'sRegex">
         <SubText>
-          What's Regex Hunting ?
+          What's Regex Hunting？
         </SubText>
-        <SecondBattleSceneImageCover src={BattleSceneImage} alt="battle-scene"/>
         <GameDescriptionSentence>
           Regex Huntingは、凶悪なモンスターを倒しながら<br/>
           正規表現が学べるゲーム型学習サービスです。
         </GameDescriptionSentence>
+        <SecondBattleSceneImageCover src={BattleSceneImage} alt="battle-scene"/>
       </SecondWrapper>
       <ThirdWrapper>
-        <ThirdMyPageImageCover src={MyPageImage} alt="my-page" />
         <GameDescriptionSentence>
-          アカウント作成すると、学習頻度や正答率の推移を<br />確認できます。
+          アカウント作成すると、学習頻度や正答数の推移を<br />確認できます。
         </GameDescriptionSentence>
+        <ThirdMyPageImageCover src={MyPageImage} alt="my-page" />
       </ThirdWrapper>
       <FourthWrapper>
         <RankingDescriptionSentence>
-          全世界のハンターと競争して、最強の正規表現ハンターを目指そう！
+          全世界のハンターと競争して、<br />最強の正規表現ハンターを目指そう！
         </RankingDescriptionSentence>
         <FourthRaknkingImageCover src={RaknkingImage} alt="ranking" />
       </FourthWrapper>
@@ -280,14 +320,17 @@ export const LandingPages = () => {
           <GameContent 
             difficulty='elementary' 
             image={ElementaryGameContentImage} 
+            setMobileState={setMobileState}
           />
           <GameContent 
             difficulty='intermediate' 
             image={IntermediateGameContentImage} 
+            setMobileState={setMobileState}
           />
           <GameContent 
             difficulty='advanced' 
             image={IntermediateGameContentImage} 
+            setMobileState={setMobileState}
           />
         </GameContentsWrapper>
       </FifthWrapper>

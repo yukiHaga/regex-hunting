@@ -19,36 +19,37 @@ import { COLORS } from '../../style_constants.js';
 // DescriptionWrapper 
 import { DescriptionWrapper } from '../shared_style.js';
 
-// Images
-import TemporaryUserImage from '../../images/temporary_user_image.png';
+// デフォルトのアバター画像
+import DefaultAvatarImage from '../../images/default_avatar.png';
+
+import IconButton from '@mui/material/IconButton';
+
+// Responsive
+import { WIDTH } from '../../style_constants.js';
 
 const TitleLineWrapper = styled.div`
   display: flex;
   justify-content: space-evenly;
 `;
 
-const ButtonWrapper = styled.div`
-  font-size: 60px;
-  cursor: pointer;
-  :hover {
-    opacity: 0.7;
-  }
-  :focus {
-    outline: 0;
-  }
-`;
-
 const ChangeGraphBoxSentenceWrapper = styled(DescriptionWrapper)`
   font-weight: bold;
-  font-size: 36px;
-  line-height: 54px;
+  font-size: 2.3em;
   text-align: center;
+  padding-top: 1.1%;
+  @media (max-width: ${WIDTH.MOBILE}) {
+    font-size: 2.0em;
+    padding-top: 4.5%;
+  }
 `;
 
 const RankingWrapper = styled.div`
  width: 80%;
  margin: 0 auto;
- margin-top: 20px;
+ margin-top: 2%;
+ @media (max-width: ${WIDTH.MOBILE}) {
+   width: 100%;
+ }
 `;
 
 const CustomThead = styled.thead`
@@ -59,63 +60,77 @@ const CustomTable = styled.table`
   border-collapse: collapse;
   color: ${COLORS.BLACK};
   background-color: ${COLORS.WHITE};
-  font-family: YuGothic;
   font-weight: normal;
-  font-size: 18px;
+  font-size: 1.1em;
   margin: 0 auto;
-  margin-top: 8px;
   box-shadow: 0 0px 20px rgba(0,0,0,0.2);
-  width: 80%;
+  width: 75%;
   border: 1px solid rgba(0,0,0,.2);
+  margin-bottom: 2%;
+  @media (max-width: ${WIDTH.MOBILE}) {
+    width: 90%;
+  }
 `;
 
 const RankingTd = styled.td`
-  padding 10px 0;
+  padding: 1.3% 0; 
   border: none;
   text-align: center;
   border-bottom:solid 1px silver;
   width: 5%;
   font-weight: bold;
+  @media (max-width: ${WIDTH.MOBILE}) {
+    width: 20%;
+    font-size: 0.9em;
+  }
 `;
 
 const TimeTd = styled.td`
-  padding: 10px 0; 
+  padding: 1.3% 0; 
   border: none;
   text-align: center;
   border-bottom:solid 1px silver;
   width: 10%;
   font-weight: bold;
+  @media (max-width: ${WIDTH.MOBILE}) {
+    width: 40%;
+    font-size: 0.9em;
+  }
 `;
 
 const HunterTd = styled.td`
-  padding: 10px 0; 
+  padding: 1.3% 0; 
   border: none;
   text-align: center;
   border-bottom:solid 1px silver;
   width: 65%;
   font-weight: bold;
+  @media (max-width: ${WIDTH.MOBILE}) {
+    width: 40%;
+    font-size: 0.9em;
+  }
 `;
 
 const RankingDataTd = styled.td`
-  padding: 10px 0; 
+  padding: 1.5% 0; 
   border: none;
   text-align: center;
   border-bottom:solid 1px silver;
   width: 10%;
-  font-size: 20px;
+  font-size: 1.5em;
 `;
 
 const TimeDataTd = styled.td`
-  padding: 10px 0; 
+  padding: 1.5% 0; 
   border: none;
   text-align: center;
   border-bottom:solid 1px silver;
   width: 30%;
-  font-size: 20px;
+  font-size: 1.4em;
 `;
 
 const HunterDataTd = styled.td`
-  padding: 10px 0; 
+  padding: 1.5% 0; 
   border: none;
   text-align: center;
   border-bottom:solid 1px silver;
@@ -124,11 +139,21 @@ const HunterDataTd = styled.td`
 
 // ステータスのラッパー
 const StatusWrapper = styled.div`
-  display: flex
+  display: flex;
+  @media (max-width: ${WIDTH.MOBILE}) {
+    display: block;
+    padding-top: 8%;
+    padding-bottom: 8%;
+  }
 `;
 
 const AvatarWrapper = styled.div`
   align-self: center;
+  @media (max-width: ${WIDTH.MOBILE}) {
+    padding-bottom: 2%;
+    display: flex;
+    justify-content: center;
+  }
 `;
 
 // ハンター項目内のテーブル
@@ -138,63 +163,85 @@ const HunterTableWrapper = styled.div`
 `;
 
 const HunterTable = styled.table`
-  width: 400px;
+  width: 22vw;
   border-collapse: collapse;
   color: ${COLORS.BLACK};
-  font-family: YuGothic;
   font-weight: normal;
-  font-size: 18px;
+  font-size: 1.1em;
   margin: 0 auto;
   border: none;
 `;
 
 const HunterTableTd = styled.td`
-  padding: 5px 30px; 
+  padding: 2% 4%; 
   border: none;
   text-align: right;
   border-bottom:solid 1px silver;
 `;
 
 const HunterTableNameTd = styled(HunterTableTd)`
-  font-family: YuGothic;
   font-style: normal;
   font-weight: bold;
-  font-size: 24px;
+  font-size: 1.3em;
   text-align: left;
   color: ${COLORS.BLACK};
+  @media (max-width: ${WIDTH.MOBILE}) {
+    font-size: 0.9em;
+    text-align: center;
+    padding-top: 3%;
+  }
 `;
 
-const HunterTableMetaTd = styled(HunterTableTd)`
+const HunterTableRankMetaTd = styled(HunterTableTd)`
   border: none;
   text-align: left;
   border-bottom:solid 1px silver;
   font-weight: bold;
+  width: 35%;
+  @media (max-width: ${WIDTH.MOBILE}) {
+    display: none;
+  }
 `;
 
-const HunterTableRankMetaTd = styled.td`
-  padding: 5px 30px; 
+const HunterTableRankDataTd = styled(HunterTableTd)`
+  @media (max-width: ${WIDTH.MOBILE}) {
+    display: none;
+  }
+`;
+
+const HunterTableTitleMetaTd = styled.td`
+  padding: 2% 4%; 
   border: none;
   text-align: left;
   font-weight: bold;
+  @media (max-width: ${WIDTH.MOBILE}) {
+    display: none;
+  }
 `;
 
-const HunterTableRankDataTd = styled.td`
-  padding: 5px 30px; 
+const HunterTableTitleDataTd = styled.td`
+  padding: 2% 4%; 
   border: none;
   text-align: right;
+  @media (max-width: ${WIDTH.MOBILE}) {
+    display: none;
+  }
 `;
 
 const NotDescriptionWrapper = styled(DescriptionWrapper)`
 `;
 
 const NotRankingWrapper = styled(RankingWrapper)`
- width: 100%;
- height: 475px;
- text-align: center;
+  width: 100%;
+  height: 59.1vh;
+  text-align: center;
+  @media (max-width: ${WIDTH.MOBILE}) {
+    height: 66vh;
+  }
 `;
 
 export const RankingBox = memo(({
-  current_top_three_array,
+  current_top_ten_array,
   difficulty_title,
   setRankingState
 }) => {
@@ -203,7 +250,7 @@ export const RankingBox = memo(({
   const handleElementary = () => {
     setRankingState((prev) => ({
       ...prev,
-      current_top_three_array: prev.top_three_elementary,
+      current_top_ten_array: prev.top_ten_elementary,
       difficulty_title: "初級編"
     }));
   };
@@ -212,7 +259,7 @@ export const RankingBox = memo(({
   const handleIntermediate = () => {
     setRankingState((prev) => ({
       ...prev,
-      current_top_three_array: prev.top_three_intermediate,
+      current_top_ten_array: prev.top_ten_intermediate,
       difficulty_title: "中級編"
     }));
   };
@@ -221,7 +268,7 @@ export const RankingBox = memo(({
   const handleAdvanced = () => {
     setRankingState((prev) => ({
       ...prev,
-      current_top_three_array: prev.top_three_advanced,
+      current_top_ten_array: prev.top_ten_advanced,
       difficulty_title: "上級編"
     }));
   };
@@ -261,28 +308,34 @@ export const RankingBox = memo(({
   return (
     <>
       <TitleLineWrapper>
-        <ButtonWrapper 
+        <IconButton
+          sx={{
+            fontSize: '4.0em'
+          }}
         >
           <ArrowLeftIcon
             fontSize='inherit' 
             sx={{ color: `${COLORS.BLACK}` }}
             onClick={() => handleLeftArrow(difficulty_title)}
           />
-        </ButtonWrapper>
+        </IconButton>
         <ChangeGraphBoxSentenceWrapper>
           {difficulty_title}
         </ChangeGraphBoxSentenceWrapper>
-        <ButtonWrapper
+        <IconButton
+          sx={{
+            fontSize: '4.0em'
+          }}
         >
           <ArrowRightIcon
             fontSize='inherit' 
             sx={{ color: `${COLORS.BLACK}` }}
             onClick={() => handleRightArrow(difficulty_title)}
           />
-        </ButtonWrapper>
+        </IconButton>
       </TitleLineWrapper>
       {
-        current_top_three_array.length ?
+        current_top_ten_array.length ?
           <RankingWrapper>
             <CustomTable>
               <CustomThead>
@@ -294,21 +347,22 @@ export const RankingBox = memo(({
               </CustomThead>
               <tbody>
                 {
-                  current_top_three_array.map(({
+                  current_top_ten_array.map(({
                     game_management: { 
                       result_time 
                     }, 
                     user: {
                       name,
                       rank,
-                      active_title
+                      active_title,
+                      image
                     }
                   }, index) => (
                     <tr>
                       <RankingDataTd>{index + 1}</RankingDataTd>
                       <TimeDataTd>
                         {
-                          getClearTime(0, result_time).slice(3)
+                          getClearTime(0, result_time)
                         }
                       </TimeDataTd>
                       <HunterDataTd>
@@ -316,7 +370,7 @@ export const RankingBox = memo(({
                           <AvatarWrapper>
                             <Avatar
                               alt="Hunter"
-                              src={TemporaryUserImage}
+                              src={image || DefaultAvatarImage}
                               sx={{ width: 110, height: 110 }}
                             />
                           </AvatarWrapper>
@@ -329,20 +383,20 @@ export const RankingBox = memo(({
                                   </HunterTableNameTd>
                                 </tr>
                                 <tr>
-                                  <HunterTableMetaTd>
-                                    ランク
-                                  </HunterTableMetaTd>
-                                  <HunterTableTd>
-                                    {rank}
-                                  </HunterTableTd>
-                                </tr>
-                                <tr>
                                   <HunterTableRankMetaTd>
-                                    称号
+                                    ランク
                                   </HunterTableRankMetaTd>
                                   <HunterTableRankDataTd>
-                                    {active_title}
+                                    {rank}
                                   </HunterTableRankDataTd>
+                                </tr>
+                                <tr>
+                                  <HunterTableTitleMetaTd>
+                                    称号
+                                  </HunterTableTitleMetaTd>
+                                  <HunterTableTitleDataTd>
+                                    {active_title}
+                                  </HunterTableTitleDataTd>
                                 </tr>
                               </tbody>
                             </HunterTable>

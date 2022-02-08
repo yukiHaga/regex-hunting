@@ -4,6 +4,9 @@ import styled from 'styled-components';
 // DescriptonWrapper
 import { DescriptionWrapper } from '../shared_style.js';
 
+// Responsive
+import { WIDTH } from '../../style_constants.js';
+
 const GameStartDescriptionWrapper = styled(DescriptionWrapper)`
   text-align: center;
 `;
@@ -11,11 +14,12 @@ const GameStartDescriptionWrapper = styled(DescriptionWrapper)`
 const GameStartDescriptionSentenceWrapper = styled(DescriptionWrapper)`
   display: inline-block;
   text-align: left;
-  font-size: 36px;
-  font-family: YuGothic;
+  font-size: 2.3em;
   font-style: normal;
   font-weight: bold;
-  line-height: 36px;
+  @media (max-width: ${WIDTH.MOBILE}) {
+    font-size: 0.9em;
+  }
 `;
 
 export const GameStartDescriptionSentence = ({children}) => {

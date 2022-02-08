@@ -16,8 +16,10 @@ import { Games } from './containers/Games.jsx';
 import { UseTreaties } from './containers/UseTreaties.jsx';
 import { PrivacyPolicies } from './containers/PrivacyPolicies.jsx';
 import { PasswordResets } from './containers/PasswordResets.jsx';
+import { SendEmail } from './containers/SendEmail.jsx';
 import { PasswordUpdates } from './containers/PasswordUpdates.jsx';
 import { ExternalAuth } from './containers/ExternalAuth.jsx';
+import { NotFoundPage } from './containers/NotFoundPage.jsx';
 import ScrollToTop from './scroll/ScrollToTop.jsx';
 
 // Provider
@@ -25,6 +27,7 @@ import { UserProvider } from "./context/UserProvider.js";
 
 // App Component
 function App() {
+   
   return (
     <React.StrictMode>
       <UserProvider>
@@ -44,10 +47,11 @@ function App() {
             />
 
             {/* マイページ */}
+            {/* ログインユーザー以外は見れないページ*/}
             <Route 
-              exact path="/my-page" 
-              element={<MyPages />} 
-            />
+              exact path="/my-page"
+              element={<MyPages />}
+            /> 
 
             {/* ランキングページ */}
             <Route 
@@ -56,6 +60,7 @@ function App() {
             />
 
             {/* アカウント設定ページ */}
+            {/* ログインユーザー以外は見れないページ*/}
             <Route 
               exact path="/account-settings" 
               element={<AccountSettings />} 
@@ -84,12 +89,23 @@ function App() {
               exact path="/users/password/new" 
               element={<PasswordResets />} 
             />
+            {/* パスワードリセット申請をした後に遷移するページ*/}
+            <Route
+              exact path="/users/password/sent"
+              element={<SendEmail />}
+            />
 
             {/* パスワード更新ページ */}
             {/* exactの場合、リセットパスワードトークンがURLに含まれていたら反応ないかも*/}
             <Route 
               exact path="/users/password/edit" 
               element={<PasswordUpdates />} 
+            />
+
+            {/* どのページにも一致しなかったらこのページにアクセスされる*/}
+            <Route 
+              path="/*" 
+              element={<NotFoundPage />} 
             />
           </Routes>
         </Router>

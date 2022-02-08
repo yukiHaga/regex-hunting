@@ -2,7 +2,7 @@
 import { COLORS } from '../style_constants.js';
 
 // タイトルカラーを取り扱う関数
-// フラッシュメッセージと答えを表示するダイアログでhandleTitleColorTypeを使用する
+// 答えを表示するダイアログでhandleTitleColorTypeを使用する
 export const handleTitleColorType = (flash_title) => {
   switch (flash_title) {
     case "Good":

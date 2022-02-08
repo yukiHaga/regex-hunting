@@ -3,9 +3,10 @@ import styled from 'styled-components';
 
 // Presentational Components
 import { Header } from '../components/Headers/Header.jsx';
-import { FakeHeader } from '../components/Headers/FakeHeader.jsx';
 import { Footer } from '../components/Footers/Footer.jsx';
 import { RankingBox } from '../components/Games/RankingBox';
+import { LoginDialog } from '../components/Dialogs/LoginDialog.jsx';
+import { SignUpDialog } from '../components/Dialogs/SignUpDialog.jsx';
 
 // Contextオブジェクト
 import { UserContext } from "../context/UserProvider.js";
@@ -22,15 +23,11 @@ import { getRanking } from '../apis/ranking.js';
 // HTTP_STATUS_CODE
 import { HTTP_STATUS_CODE } from '../constants';
 
-const FakeBlock = styled.div`
-  background-color: ${COLORS.SUB};
-  height: 56px;
-`;
-
 // メインのラッパー
 const MainWrapper = styled.div`
   background-color: ${COLORS.SUB};
-  padding-bottom: 56px;
+  padding-top: 3%;
+  padding-bottom: 2.65%;
 `;
 
 export const Rankings = () => {
@@ -48,15 +45,24 @@ export const Rankings = () => {
   } = useContext(UserContext);
 
   const initialState = {
-    top_three_elementary: [],
-    top_three_intermediate: [],
-    top_three_advanced: [],
-    current_top_three_array: [],
+    top_ten_elementary: [],
+    top_ten_intermediate: [],
+    top_ten_advanced: [],
+    current_top_ten_array: [],
     difficulty_title: ""
   };
 
   // ランキングを制御するstate
   const [rankingState, setRankingState] = useState(initialState);
+
+  // モーダルに関するstateの初期値
+  const loginInitialState = {
+    isOpenDialog: false,
+    modalType: ""
+  }
+
+  // モーダルを管理するstate
+  const [state, setState] = useState(loginInitialState);
 
   // ブラウザをリロードしてもログイン状態を維持するためのuseEffect
   useLayoutEffect(() => {
@@ -95,10 +101,10 @@ export const Rankings = () => {
     getRanking().then((data) => {
       setRankingState((prev) => ({
         ...prev,
-        top_three_elementary: data.top_three_elementary,
-        top_three_intermediate: data.top_three_intermediate,
-        top_three_advanced: data.top_three_advanced,
-        current_top_three_array: data.top_three_elementary,
+        top_ten_elementary: data.top_ten_elementary,
+        top_ten_intermediate: data.top_ten_intermediate,
+        top_ten_advanced: data.top_ten_advanced,
+        current_top_ten_array: data.top_ten_elementary,
         difficulty_title: "初級編"
       }));
     }).catch((e) => {
@@ -127,17 +133,48 @@ export const Rankings = () => {
  
   return (
     <>
-      <Header /> 
-      <FakeHeader />
-      <FakeBlock />
+      <Header 
+        onClickLink={(modalType) => setState({
+          isOpenDialog: true,
+          modalType: modalType
+        })}
+      /> 
       <MainWrapper>
         <RankingBox
-          current_top_three_array={rankingState.current_top_three_array}
+          current_top_ten_array={rankingState.current_top_ten_array}
           difficulty_title={rankingState.difficulty_title}
           setRankingState={setRankingState}
         />
       </MainWrapper>
       <Footer />
+      {
+        state.isOpenDialog && state.modalType === "login" &&
+          <LoginDialog 
+            isOpen={state.isOpenDialog}
+            onClose={() => setState({
+              isOpenDialog: false,
+              modalType: ""
+            })}
+            onClick={() => setState({
+              isOpenDialog: true,
+              modalType: "signUp"
+            })}
+          />
+      }
+      {
+        state.isOpenDialog && state.modalType === "signUp" &&
+          <SignUpDialog 
+            isOpen={state.isOpenDialog}
+            onClose={() => setState({
+              isOpenDialog: false,
+              modalType: ""
+            })}
+            onClick={() => setState({
+              isOpenDialog: true,
+              modalType: "login"
+            })}
+          />
+      }
     </>
   );
 };

@@ -9,12 +9,15 @@ import { BlueBaseLink } from '../shared_style.js';
 
 const CreateAccountSentenceWrapper = styled(DescriptionWrapper)`
   text-align: center;
-  margin-bottom: 16px;
+  width: 100%;
+  margin 0 auto;
+  margin-bottom: 5%;
 `;
 
 const CreateAccountAgreeSentenceWrapper = styled(DescriptionWrapper)`
   display: inline-block;
   text-align: left;
+  font-size: 0.9em;
 `;
 
 export const CreateAccountSentence = () => {
@@ -31,7 +34,7 @@ export const CreateAccountSentence = () => {
             プライバシーポリシー
           </BlueBaseLink>
           に同意するものとします。
-          <br/>ユーザー名はランキングに表示されます。
+          <br />ユーザー名はランキングに表示されます。
           (アカウント設定で編集や非表示が可能です)
         </CreateAccountAgreeSentenceWrapper>
       </CreateAccountSentenceWrapper>

@@ -6,15 +6,15 @@ class SorceryCore < ActiveRecord::Migration[6.0]
       t.integer :total_experience, null: false, default: 0
       t.integer :maximum_experience_per_rank, null: false, default: 500
       t.integer :temporary_experience, null: false, default: 0
-      t.integer :open_rank, null: false, default: 0
+      t.boolean :open_rank, null: false, default: true
       t.integer :active_title, null: false, default: 0
 
       # sorcery
-      t.string :email,            null: false, index: { unique: true }
+      t.string :email, null: false, index: { unique: true }
       t.string :crypted_password
       t.string :salt
 
-      t.timestamps                null: false
+      t.timestamps null: false
     end
   end
 end

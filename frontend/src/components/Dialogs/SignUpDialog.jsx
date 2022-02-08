@@ -17,7 +17,7 @@ import { useNavigate } from "react-router-dom";
 import { COLORS } from '../../style_constants.js';
 
 // Images
-import SignUpImage from '../../images/sign_up.png';
+import SignUpImage from '../../images/sign_up.svg';
 
 // Button
 import { SignUpButton } from '../Buttons/SignUpButton.jsx'
@@ -50,28 +50,32 @@ import { UserContext } from "../../context/UserProvider.js";
 import { gitHubOAuth, googleOAuth } from '../../urls/index'; 
 
 const CustomDialogInnerWrapper = styled.div`
-  padding-top: 10px;
-  padding-right: 10px;
-  padding-left: 10px;
+  padding-top: 3%;
+  padding-right: 3%;
+  padding-left: 3%;
   background-color: ${COLORS.WHITE};
   text-align: center;
 `;
 
 const CustomDialogTitleImage = styled.img`
-  height: 50px;
-  width: 80px
+  width: 45%;
   object-fit: contain;
-  padding: 8px 23px;
+  padding: 2% 8%;
 `;
 
-const CustomDialogContent = styled(DialogContent)`
-  height: 500px;
-  width: 400px;
+const CustomForm = styled.form`
+  width: 100%;
 `;
 
+const CustomFormControl = styled(FormControl)`
+  width: 100%;
+`;
+
+// ここのwidthはpx指定しないとレイアウトが崩れるので、pxにした
 const CustomFilledInput = styled(FilledInput)`
-  width: 400px;
-  margin-bottom: 16px;
+  margin-bottom: ${({
+    errors_box
+  }) => typeof errors_box === 'undefined' && '4%' };
 `;
 
 export const SignUpDialog = ({
@@ -139,7 +143,7 @@ export const SignUpDialog = ({
         }
       });
     }).then(() => 
-      navigate('/my-page?user=login', { state: { display: true, success: "アカウントを登録しました。"}})
+      navigate('/my-page', { state: { display: true, success: "アカウントを登録しました。"}})
     ).catch((e) => {
       if(e.response.status === HTTP_STATUS_CODE.NOT_FOUND){
         dispatch({
@@ -171,7 +175,7 @@ export const SignUpDialog = ({
       required: "メールアドレスを入力してください。", 
       pattern: {
         value: /^[A-Za-z0-9]{1}[A-Za-z0-9_.-]*@{1}[A-Za-z0-9_.-]{1,}.[A-Za-z0-9]{1,}$/,
-        message: "英数字, @, ドメインが含まれるメールアドレスを入力してください。"
+        message: "英数字, @, ドメインを含めて入力してください。"
       }
     },
     password: {
@@ -182,7 +186,7 @@ export const SignUpDialog = ({
       },
       pattern: {
         value: /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?\d)[!-~]+$/,
-        message: "大文字, 小文字, 数字が含まれるパスワードを入力してください。"
+        message: "大文字, 小文字, 数字を含めて入力してください。"
       }
     },
     passwordConfirmation: {
@@ -193,7 +197,7 @@ export const SignUpDialog = ({
       },
       pattern: {
         value: /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?\d)[!-~]+$/,
-        message: "大文字, 小文字, 数字が含まれるパスワードを入力してください。"
+        message: "大文字, 小文字, 数字を含めて入力してください。"
       },
       validate: {
         confirmPassword: (value) => value === password.current || "パスワードが一致しません。" 
@@ -205,80 +209,90 @@ export const SignUpDialog = ({
     <Dialog
       open={isOpen}
       onClose={onClose}
+      maxWidth='xs'
     >
       <CustomDialogInnerWrapper> 
         <CloseButton onClose={onClose} fontSize="small" /> 
         <CustomDialogTitleImage src={SignUpImage} alt="SignUp" />
-        <CustomDialogContent>
+        <DialogContent>
           <CreateAccountSentence />
-          <form onSubmit={handleSubmit(onSubmit)}>
+          <CustomForm onSubmit={handleSubmit(onSubmit)}>
             <Controller 
               name="NameBox"
               control={control}
               defaultValue=""
               rules={registerOptions.name}
               render={({ field }) => (
-                <FormControl variant="filled">              
+                <CustomFormControl variant="filled">              
                   <InputLabel htmlFor="name-component-filled">名前</InputLabel>
                   <CustomFilledInput
                     {...field}
                     type="text"
                     id="name-component-filled"
                     label="name"
+                    errors_box={errors.NameBox}
                   />
-                </FormControl>              
+                  {
+                    errors.NameBox && <InputErrorSentence>
+                                        {errors.NameBox.message}
+                                      </InputErrorSentence>
+                  }
+                </CustomFormControl>              
               )}
             />
-            {errors.NameBox && <InputErrorSentence>
-                                  {errors.NameBox.message}
-                                </InputErrorSentence>}
             <Controller 
               name="EmailBox"
               control={control}
               defaultValue=""
               rules={registerOptions.email}
               render={({ field }) => (
-                <FormControl variant="filled">              
+                <CustomFormControl variant="filled">              
                   <InputLabel htmlFor="email-component-filled">メールアドレス</InputLabel>
                   <CustomFilledInput
                     {...field}
                     type="email"
                     id="email-component-filled"
                     label="email"
+                    errors_box={errors.EmailBox}
                   />
-                </FormControl>              
+                  {
+                    errors.EmailBox && <InputErrorSentence>
+                                         {errors.EmailBox.message}
+                                       </InputErrorSentence>
+                  }
+                </CustomFormControl>              
               )}
             />
-            {errors.EmailBox && <InputErrorSentence>
-                                  {errors.EmailBox.message}
-                                </InputErrorSentence>}
             <Controller 
               name="PasswordBox"
               control={control}
               defaultValue=""
               rules={registerOptions.password}
               render={({ field }) => (
-                <FormControl variant="filled">              
+                <CustomFormControl variant="filled">              
                   <InputLabel htmlFor="password-component-filled">パスワード</InputLabel>
                   <CustomFilledInput
                     {...field}
                     type="password"
                     id="password-component-filled"
                     label="password"
+                    errors_box={errors.PasswordBox}
                   />
-                </FormControl>              
+                  {
+                    errors.PasswordBox && <InputErrorSentence>
+                                            {errors.PasswordBox.message}
+                                          </InputErrorSentence>
+                  }
+                </CustomFormControl>              
               )}
             />
-            {errors.PasswordBox && <InputErrorSentence>
-                                     {errors.PasswordBox.message}
-                                   </InputErrorSentence>}
             <Controller 
               name="PasswordConfirmationBox"
               control={control}
               defaultValue=""
               rules={registerOptions.passwordConfirmation}
               render={({ field }) => (
-                <FormControl variant="filled">              
+                <CustomFormControl variant="filled">              
                   <InputLabel htmlFor="password-confirmation-component-filled">
                     パスワード(確認用)
                   </InputLabel>
@@ -287,22 +301,26 @@ export const SignUpDialog = ({
                     type="password"
                     id="password-confirmation-component-filled"
                     label="password-confirmation"
+                    errors_box={errors.PasswordConfirmationBox}
                   />
-                </FormControl>              
+                  {
+                    errors.PasswordConfirmationBox && <InputErrorSentence>
+                                                        {errors.PasswordConfirmationBox.message}
+                                                      </InputErrorSentence>
+                  }
+                </CustomFormControl>              
               )}
             />
-            {errors.PasswordConfirmationBox && <InputErrorSentence>
-                                                 {errors.PasswordConfirmationBox.message}
-                                               </InputErrorSentence>}
             <SignUpButton disabled={!isValid} />
-
             {
               requestUserState.errors.title === 'Record Not Found' && 
-                <SubmitErrorSentence>
+                <SubmitErrorSentence
+                  errors_title={requestUserState.errors.title}
+                >
                   {requestUserState.errors.detail}
                 </SubmitErrorSentence>
             }
-          </form>
+          </CustomForm>
           <OrDirectionSentence />
           <OAuthLoginButton 
             url={googleOAuth}
@@ -317,7 +335,7 @@ export const SignUpDialog = ({
             type="GitHub"
           />
           <HaveAccountSentence onClick={onClick} />
-        </CustomDialogContent>
+        </DialogContent>
       </CustomDialogInnerWrapper>
     </Dialog>
   );
