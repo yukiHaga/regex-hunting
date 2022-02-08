@@ -242,7 +242,6 @@ export const AccountSettingBox = ({
           />
           <CustomLabel htmlFor="icon-button-file">
             <Input 
-              accept="image/*" 
               id="icon-button-file" 
               type="file" 
               accept=".png, .jpg, .jpeg"

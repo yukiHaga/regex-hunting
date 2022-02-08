@@ -304,7 +304,7 @@ export const RankingBox = memo(({
                       <RankingDataTd>{index + 1}</RankingDataTd>
                       <TimeDataTd>
                         {
-                          getClearTime(0, result_time).slice(3)
+                          getClearTime(0, result_time)
                         }
                       </TimeDataTd>
                       <HunterDataTd>
