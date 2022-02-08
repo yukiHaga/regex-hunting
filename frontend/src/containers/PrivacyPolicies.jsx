@@ -8,11 +8,18 @@ import { Footer } from '../components/Footers/Footer.jsx';
 // Colors
 import { COLORS } from '../style_constants.js';
 
+// Responsive
+import { WIDTH } from '../style_constants.js';
+
 // メインのラッパー
 const MainWrapper = styled.div`
   background-color: ${COLORS.SUB};
   padding-top: 4%;
   padding-bottom: 4%;
+  @media (max-width: ${WIDTH.MOBILE}) {
+    padding-top: 13%;
+    padding-bottom: 13%;
+  }
 `;
 
 const TitleWrapper = styled.h1`
@@ -22,6 +29,10 @@ const TitleWrapper = styled.h1`
   font-style: normal;
   color: ${COLORS.BLACK};
   margin-top: 0px;
+  @media (max-width: ${WIDTH.MOBILE}) {
+    font-size: 1.5em;
+    margin-bottom: 5%;
+  }
 `;
 
 const CustomParagraphWrapper = styled.p`
@@ -31,6 +42,10 @@ const CustomParagraphWrapper = styled.p`
   width: 60%;
   margin: 0 auto;
   margin-bottom: 3%;
+  @media (max-width: ${WIDTH.MOBILE}) {
+    font-size: 1.0em;
+    width: 80%;
+  }
 `;
 
 const SemiTitleWrapper = styled.h3`
@@ -39,6 +54,12 @@ const SemiTitleWrapper = styled.h3`
   width: 60%;
   margin: 0 auto;
   margin-bottom: 0.5%;
+  @media (max-width: ${WIDTH.MOBILE}) {
+    font-size: 1.0em;
+    width: 80%;
+    margin-top: 7%;
+    margin-bottom: 2%;
+  }
 `;
 
 const CustomSecondParagraphWrapper = styled.p`
@@ -48,6 +69,10 @@ const CustomSecondParagraphWrapper = styled.p`
   width: 60%;
   margin: 0 auto;
   margin-bottom: 1%;
+  @media (max-width: ${WIDTH.MOBILE}) {
+    font-size: 1.0em;
+    width: 80%;
+  }
 `;
 
 const CustomUlWrapper = styled.ul`
@@ -56,6 +81,10 @@ const CustomUlWrapper = styled.ul`
   width: 60%;
   margin: 0 auto;
   margin-bottom: 3%;
+  @media (max-width: ${WIDTH.MOBILE}) {
+    font-size: 1.0em;
+    width: 80%;
+  }
 `;
 
 const CustomURLWrapper = styled.div`
@@ -65,6 +94,12 @@ const CustomURLWrapper = styled.div`
   margin: 0 auto;
   margin-bottom: 3%;
   text-decoration: none;
+  @media (max-width: ${WIDTH.MOBILE}) {
+    font-size: 1.0em;
+    width: 80%;
+    margin-top: 2%;
+    margin-bottom: 2%;
+  }
 `;
 
 const CustomAnchor = styled.a`
@@ -83,6 +118,12 @@ const CustomEmailWrapper = styled.div`
   margin: 0 auto;
   text-decoration: none;
   margin-bottom: 1%;
+  @media (max-width: ${WIDTH.MOBILE}) {
+    font-size: 1.0em;
+    width: 80%;
+    margin-top: 2%;
+    margin-bottom: 2%;
+  }
 `;
 
 export const PrivacyPolicies = () => {
