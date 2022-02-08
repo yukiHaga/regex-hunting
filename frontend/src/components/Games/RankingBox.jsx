@@ -24,6 +24,9 @@ import DefaultAvatarImage from '../../images/default_avatar.png';
 
 import IconButton from '@mui/material/IconButton';
 
+// Responsive
+import { WIDTH } from '../../style_constants.js';
+
 const TitleLineWrapper = styled.div`
   display: flex;
   justify-content: space-evenly;
@@ -34,12 +37,19 @@ const ChangeGraphBoxSentenceWrapper = styled(DescriptionWrapper)`
   font-size: 2.3em;
   text-align: center;
   padding-top: 1.1%;
+  @media (max-width: ${WIDTH.MOBILE}) {
+    font-size: 2.0em;
+    padding-top: 4.5%;
+  }
 `;
 
 const RankingWrapper = styled.div`
  width: 80%;
  margin: 0 auto;
  margin-top: 2%;
+ @media (max-width: ${WIDTH.MOBILE}) {
+   width: 100%;
+ }
 `;
 
 const CustomThead = styled.thead`
@@ -54,9 +64,12 @@ const CustomTable = styled.table`
   font-size: 1.1em;
   margin: 0 auto;
   box-shadow: 0 0px 20px rgba(0,0,0,0.2);
-  width: 80%;
+  width: 75%;
   border: 1px solid rgba(0,0,0,.2);
   margin-bottom: 2%;
+  @media (max-width: ${WIDTH.MOBILE}) {
+    width: 90%;
+  }
 `;
 
 const RankingTd = styled.td`
@@ -66,6 +79,10 @@ const RankingTd = styled.td`
   border-bottom:solid 1px silver;
   width: 5%;
   font-weight: bold;
+  @media (max-width: ${WIDTH.MOBILE}) {
+    width: 20%;
+    font-size: 0.9em;
+  }
 `;
 
 const TimeTd = styled.td`
@@ -75,6 +92,10 @@ const TimeTd = styled.td`
   border-bottom:solid 1px silver;
   width: 10%;
   font-weight: bold;
+  @media (max-width: ${WIDTH.MOBILE}) {
+    width: 40%;
+    font-size: 0.9em;
+  }
 `;
 
 const HunterTd = styled.td`
@@ -84,6 +105,10 @@ const HunterTd = styled.td`
   border-bottom:solid 1px silver;
   width: 65%;
   font-weight: bold;
+  @media (max-width: ${WIDTH.MOBILE}) {
+    width: 40%;
+    font-size: 0.9em;
+  }
 `;
 
 const RankingDataTd = styled.td`
@@ -114,11 +139,21 @@ const HunterDataTd = styled.td`
 
 // ステータスのラッパー
 const StatusWrapper = styled.div`
-  display: flex
+  display: flex;
+  @media (max-width: ${WIDTH.MOBILE}) {
+    display: block;
+    padding-top: 8%;
+    padding-bottom: 8%;
+  }
 `;
 
 const AvatarWrapper = styled.div`
   align-self: center;
+  @media (max-width: ${WIDTH.MOBILE}) {
+    padding-bottom: 2%;
+    display: flex;
+    justify-content: center;
+  }
 `;
 
 // ハンター項目内のテーブル
@@ -150,6 +185,11 @@ const HunterTableNameTd = styled(HunterTableTd)`
   font-size: 1.3em;
   text-align: left;
   color: ${COLORS.BLACK};
+  @media (max-width: ${WIDTH.MOBILE}) {
+    font-size: 0.9em;
+    text-align: center;
+    padding-top: 3%;
+  }
 `;
 
 const HunterTableRankMetaTd = styled(HunterTableTd)`
@@ -158,6 +198,15 @@ const HunterTableRankMetaTd = styled(HunterTableTd)`
   border-bottom:solid 1px silver;
   font-weight: bold;
   width: 35%;
+  @media (max-width: ${WIDTH.MOBILE}) {
+    display: none;
+  }
+`;
+
+const HunterTableRankDataTd = styled(HunterTableTd)`
+  @media (max-width: ${WIDTH.MOBILE}) {
+    display: none;
+  }
 `;
 
 const HunterTableTitleMetaTd = styled.td`
@@ -165,21 +214,30 @@ const HunterTableTitleMetaTd = styled.td`
   border: none;
   text-align: left;
   font-weight: bold;
+  @media (max-width: ${WIDTH.MOBILE}) {
+    display: none;
+  }
 `;
 
 const HunterTableTitleDataTd = styled.td`
   padding: 2% 4%; 
   border: none;
   text-align: right;
+  @media (max-width: ${WIDTH.MOBILE}) {
+    display: none;
+  }
 `;
 
 const NotDescriptionWrapper = styled(DescriptionWrapper)`
 `;
 
 const NotRankingWrapper = styled(RankingWrapper)`
- width: 100%;
- height: 59.1vh;
- text-align: center;
+  width: 100%;
+  height: 59.1vh;
+  text-align: center;
+  @media (max-width: ${WIDTH.MOBILE}) {
+    height: 66vh;
+  }
 `;
 
 export const RankingBox = memo(({
@@ -328,9 +386,9 @@ export const RankingBox = memo(({
                                   <HunterTableRankMetaTd>
                                     ランク
                                   </HunterTableRankMetaTd>
-                                  <HunterTableTd>
+                                  <HunterTableRankDataTd>
                                     {rank}
-                                  </HunterTableTd>
+                                  </HunterTableRankDataTd>
                                 </tr>
                                 <tr>
                                   <HunterTableTitleMetaTd>
