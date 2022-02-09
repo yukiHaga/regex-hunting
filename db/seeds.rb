@@ -31,6 +31,7 @@ Monster.create!(
   difficulty: 'advanced'
 )
 
+# 解放条件
 release_condition = %w[
   ユーザー登録に成功
   ランクが2に到達
