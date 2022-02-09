@@ -3,7 +3,7 @@ import { useLocation } from 'react-router-dom';
 import styled from 'styled-components';
 
 // Image
-import MainTitleImage from '../images/main_title.svg';
+import MainTitleImage from '../images/main_title.png';
 import GroupBackGroundImage from '../images/group_background.png';
 import BattleSceneImage from '../images/battle_scene.png';
 import MyPageImage from '../images/my_page_image.png';

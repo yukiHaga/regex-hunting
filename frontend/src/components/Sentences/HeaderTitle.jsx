@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 
 // Image
-import MainTitleImage from '../../images/main_title.svg';
+import MainTitleImage from '../../images/main_title.png';
 
 // Responsive
 import { WIDTH } from '../../style_constants.js';
