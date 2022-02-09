@@ -15,7 +15,7 @@ import { BaseLink } from '../components/shared_style.js';
 
 // Image
 import ClawFlashImage from '../images/moment_claw_image.png'; 
-import ErrorBackGroundImage from '../images/error_background.svg';
+import ErrorBackGroundImage from '../images/error_background.png';
 import ErrorCodeImage from '../images/error_code.svg';
 
 // 初登場のアニメーション
