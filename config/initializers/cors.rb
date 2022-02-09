@@ -8,7 +8,7 @@
 # credentials: trueを設定することで、フロント側でCookieを保持することができる
 Rails.application.config.middleware.insert_before 0, Rack::Cors do
   allow do
-    origins 'http://localhost:3001', 'https://regex-hunting.herokuapp.com/'
+    origins 'http://localhost:3001', 'https://regex-hunting.com/'
 
     resource '*',
              headers: :any,

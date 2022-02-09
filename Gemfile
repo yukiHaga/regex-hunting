@@ -80,3 +80,6 @@ gem 'config'
 
 # シリアライザー
 gem 'active_model_serializers'
+
+# seed_fu
+gem 'seed-fu'

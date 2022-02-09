@@ -269,6 +269,9 @@ GEM
       rubocop (>= 1.7.0, < 2.0)
     ruby-progressbar (1.11.0)
     ruby2_keywords (0.0.5)
+    seed-fu (2.3.9)
+      activerecord (>= 3.1)
+      activesupport (>= 3.1)
     sexp_processor (4.16.0)
     sorcery (0.16.2)
       bcrypt (~> 3.1)
@@ -321,6 +324,7 @@ DEPENDENCIES
   rails_best_practices
   rubocop
   rubocop-rails
+  seed-fu
   sorcery
   spring
   spring-watcher-listen (~> 2.0.0)
