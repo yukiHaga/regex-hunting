@@ -22,6 +22,7 @@ Rails.application.routes.draw do
 
   # React Routerを本番環境で動かす為に必要なルーティング
   # railsのルーティングについて書いている部分より下に追記する
+  # Railsのルートは上から順にマッチするかを判定していく
   get '*path', to: 'application#fallback_index_html', constraints: ->(request) {
     !request.xhr? && request.format.html?
   }
