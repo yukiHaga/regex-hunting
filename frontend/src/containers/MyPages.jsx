@@ -20,7 +20,7 @@ import { SecondSelectBox } from '../components/Games/SecondSelectBox.jsx';
 import { TitleFlashMessage } from '../components/FlashMessages/TitleFlashMessage.jsx';
  
 // Images
-import ElementaryGameContentImage from '../images/elementary_game_content.png';
+import ElementaryGameContentImage from '../images/elementary_game_content.jpg';
 import IntermediateGameContentImage from '../images/intermediate_game_content.png';
 
 // Contextオブジェクト

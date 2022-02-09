@@ -5,10 +5,10 @@ import styled from 'styled-components';
 // Image
 import MainTitleImage from '../images/main_title.png';
 import GroupBackGroundImage from '../images/group_background.png';
-import BattleSceneImage from '../images/battle_scene.png';
-import MyPageImage from '../images/my_page_image.png';
-import RaknkingImage from '../images/ranking_image.png';
-import ElementaryGameContentImage from '../images/elementary_game_content.png';
+import BattleSceneImage from '../images/battle_scene.jpg';
+import MyPageImage from '../images/my_page_image.jpg';
+import RaknkingImage from '../images/ranking_image.jpg';
+import ElementaryGameContentImage from '../images/elementary_game_content.jpg';
 import IntermediateGameContentImage from '../images/intermediate_game_content.png';
 
 // Presentational Components
@@ -302,7 +302,7 @@ export const LandingPages = () => {
       </SecondWrapper>
       <ThirdWrapper>
         <GameDescriptionSentence>
-          アカウント作成すると、学習頻度や正答数の推移を<br />確認できます。
+          アカウント作成すると、学習頻度や最速タイムを<br />確認できます。
         </GameDescriptionSentence>
         <ThirdMyPageImageCover src={MyPageImage} alt="my-page" />
       </ThirdWrapper>
