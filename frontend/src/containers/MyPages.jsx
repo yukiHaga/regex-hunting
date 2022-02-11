@@ -13,7 +13,7 @@ import { TitleCard } from '../components/Games/TitleCard.jsx';
 import { Footer } from '../components/Footers/Footer.jsx';
 import { ReleaseConditionDialog } from '../components/Dialogs/ReleaseConditionDialog.jsx'
 import { CircularMask } from '../components/loads/CircularMask.jsx';
-import { LearningAnalysisBox } from '../components/Games/LearningAnalysisBox.jsx';
+import { GameClearCountBox } from '../components/Games/GameClearCountBox.jsx';
 import { TimeAnalysisBox } from '../components/Games/TimeAnalysisBox.jsx';
 import { FastAnalysisBox } from '../components/Games/FastAnalysisBox.jsx';
 import { SecondSelectBox } from '../components/Games/SecondSelectBox.jsx';
@@ -194,11 +194,11 @@ export const MyPages = () => {
   const initialState = {
     game_frequencies_per_day: {},
     total_time_per_difficulty: {},
-    correct_avg_per_difficulty: {},
+    game_clear_count_per_difficulty: {},
     fast_time_per_difficulty: {},
     owned_titles: [],
     selected_total_time: 0,
-    selected_correct_avg: 0,
+    selected_game_clear_count: 0,
     selected_fast_time: 0,
     difficulty_month_title: "",
     isOpenDialog: false,
@@ -274,11 +274,11 @@ export const MyPages = () => {
           ...prev,
           game_frequencies_per_day: data.game_frequencies_per_day,
           total_time_per_difficulty: data.total_time_per_difficulty,
-          correct_avg_per_difficulty: data.correct_avg_per_difficulty,
+          game_clear_count_per_difficulty: data.game_clear_count_per_difficulty,
           fast_time_per_difficulty: data.fast_time_per_difficulty,
           owned_titles: data.owned_titles,
           selected_total_time: data.total_time_per_difficulty.elementary,
-          selected_correct_avg: data.correct_avg_per_difficulty.elementary,
+          selected_game_clear_count: data.game_clear_count_per_difficulty.elementary,
           selected_fast_time: data.fast_time_per_difficulty.elementary,
           difficulty_month_title: `初級編(${this_month}月)`,
           get_page_info: true
@@ -360,8 +360,8 @@ export const MyPages = () => {
                   <TimeAnalysisBox
                     time={myPageState.selected_total_time} 
                   />
-                  <LearningAnalysisBox 
-                    num={myPageState.selected_correct_avg} 
+                  <GameClearCountBox
+                    count={myPageState.selected_game_clear_count} 
                   />
                   <FastAnalysisBox
                     minutes={myPageState.selected_fast_time} 
