@@ -5,6 +5,7 @@ class ApplicationController < ActionController::API
   include ActionController::MimeResponds
   protect_from_forgery with: :exception
   before_action :require_login
+  skip_before_action :require_login, only: :fallback_index_html
 
   # React Routerを本番環境で動かすために必要なメソッド
   # ルーティングにこのメソッドが実行されるように定義した
