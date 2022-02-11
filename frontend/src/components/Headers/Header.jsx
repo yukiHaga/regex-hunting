@@ -139,7 +139,8 @@ export const Header = memo(({
               <Button
                 key="1"
                 sx={{ my: 2, color: 'white', display: 'block', width: '6vw' }}
-                href='/rankings'
+                component={BaseLink}
+                to="/rankings"
               >
                 ランキング
               </Button>
@@ -150,7 +151,15 @@ export const Header = memo(({
                   <Box sx={{ flexGrow: 0, display: { xs: 'none', md: 'none', lg: 'flex' } }}>
                     <Button
                       key="1"
-                      sx={{ my: 2, color: 'white', display: 'block', width: '6vw' }}
+                      sx={{ 
+                        my: 2, 
+                        color: 'white', 
+                        display: 'block', 
+                        width: '6vw',
+                        '&:hover': {
+                          opacity: 0.7
+                        }
+                      }}
                       onClick={() => onClickLink("login")}
                     >
                       ログイン
@@ -159,7 +168,15 @@ export const Header = memo(({
                   <Box sx={{ flexGrow: 0, display: { xs: 'none', md: 'none', lg: 'flex' } }}>
                     <Button
                       key="1"
-                      sx={{ my: 2, color: 'white', display: 'block', width: '7vw' }}
+                      sx={{ 
+                        my: 2, 
+                        color: 'white', 
+                        display: 'block', 
+                        width: '7vw', 
+                        '&:hover': {
+                          opacity: 0.7
+                        }
+                      }}
                       onClick={() => onClickLink("signUp")}
                     >
                       新規会員登録
