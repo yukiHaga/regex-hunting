@@ -25,6 +25,7 @@ import MenuItem from '@mui/material/MenuItem';
 
 // LPページの場合、onClickLinkはモーダル管理のstateを更新する関数
 // ログインしている場合、onClickLinkは何もない。
+// hrefではなく、React RouterのLinkコンポーネントを使う
 export const Header = memo(({
   onClickLink,
   setMobileState
