@@ -9,6 +9,9 @@ import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
 import Button from '@mui/material/Button';
 
+// BaseLink
+import { BaseLink } from '../shared_style.js';
+
 const FooterWrapper = styled.div`
   background-color: ${COLORS.BROWN};
 `;
@@ -27,7 +30,8 @@ export const Footer = () => {
                 <Button
                   key="1"
                   sx={{ my: 2, color: 'white', display: 'block' }}
-                  href='/policy'
+                  component={BaseLink}
+                  to="/policy"
                 >
                   利用規約
                 </Button>
@@ -36,7 +40,8 @@ export const Footer = () => {
                 <Button
                   key="1"
                   sx={{ my: 2, color: 'white', display: 'block' }}
-                  href='/privacy-policy'
+                  component={BaseLink}
+                  to="/privacy-policy"
                 >
                   プライバシーポリシー
                 </Button>
