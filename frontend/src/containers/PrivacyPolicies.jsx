@@ -1,4 +1,5 @@
-import React, { Fragment } from 'react';
+import React, { Fragment, useEffect, useContext } from 'react';
+import { useLocation, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 
 // Presentational Components
@@ -10,6 +11,15 @@ import { COLORS } from '../style_constants.js';
 
 // Responsive
 import { WIDTH } from '../style_constants.js';
+
+// Contextオブジェクト
+import { UserContext } from "../context/UserProvider.js";
+
+// ログイン状態を確認するAPIコール関数
+import { checkLoginStatus } from '../apis/checkLoginStatus.js'; 
+
+// HTTP_STATUS_CODE
+import { HTTP_STATUS_CODE } from '../constants';
 
 // メインのラッパー
 const MainWrapper = styled.div`
@@ -127,6 +137,65 @@ const CustomEmailWrapper = styled.div`
 `;
 
 export const PrivacyPolicies = () => {
+
+  // useContext
+  // requestUserStateには、requestState, userState, errorsが格納されている
+  // userStateにはsessionとuserが格納されている
+  const { 
+    requestUserState: { 
+      sessionState
+    },
+    dispatch, 
+    requestUserActionTyps
+  } = useContext(UserContext);
+
+  // location
+  const location = useLocation();
+
+  // navigation
+  const navigate = useNavigate();
+
+  // ブラウザをリロードしてもログイン状態を維持するためのuseEffect
+  useEffect(() => {
+    if(sessionState === false){
+      dispatch({ type: requestUserActionTyps.REQUEST });
+      checkLoginStatus().then((data) => {
+        dispatch({
+          type: requestUserActionTyps.REQUEST_SUCCESS,
+          payload: {
+            session: data.session,
+            user: data.user,
+          }
+        });
+        if(!data.session && location.key === 'default') {
+          navigate(
+            '/', 
+            { state: { display: true, success: "ログインしてください。"}}
+          )
+        }
+      }).catch((e) => {
+        if(e.response.status === HTTP_STATUS_CODE.NOT_FOUND){
+          dispatch({
+            type: requestUserActionTyps.REQUEST_FAILURE,
+            payload: {
+              errors: e.response.data.errors
+            }
+          });
+        } else {
+          throw e;
+        }
+      })
+    }
+  }, [
+    dispatch, 
+    sessionState,
+    requestUserActionTyps.REQUEST, 
+    requestUserActionTyps.REQUEST_SUCCESS,
+    requestUserActionTyps.REQUEST_FAILURE,
+    navigate,
+    location.key
+  ]);
+
   return (
     <>
       <Header /> 
