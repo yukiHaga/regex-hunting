@@ -26,11 +26,11 @@ export const CreateAccountSentence = () => {
       <CreateAccountSentenceWrapper>
         <CreateAccountAgreeSentenceWrapper>
           アカウントを作成することにより、
-          <BlueBaseLink to={'/policy'} target="_blank" rel="noopener noreferrer">
+          <BlueBaseLink to="/policy" target="_blank" rel="noopener noreferrer">
             利用規約
           </BlueBaseLink>
           および
-          <BlueBaseLink to={'/privacy-policy'} target="_blank" rel="noopener noreferrer">
+          <BlueBaseLink to="/privacy-policy" target="_blank" rel="noopener noreferrer">
             プライバシーポリシー
           </BlueBaseLink>
           に同意するものとします。
