@@ -44,7 +44,7 @@ export const SecondSelectBox = ({
     setMyPageState((prev) => ({
       ...prev,
       selected_total_time: prev.total_time_per_difficulty.elementary,
-      selected_correct_avg: prev.correct_avg_per_difficulty.elementary,
+      selected_game_clear_count: prev.game_clear_count_per_difficulty.elementary,
       selected_fast_time: prev.fast_time_per_difficulty.elementary,
       difficulty_month_title: `初級編(${this_month}月)`
     }));
@@ -55,7 +55,7 @@ export const SecondSelectBox = ({
     setMyPageState((prev) => ({
       ...prev,
       selected_total_time: prev.total_time_per_difficulty.intermediate,
-      selected_correct_avg: prev.correct_avg_per_difficulty.intermediate,
+      selected_game_clear_count: prev.game_clear_count_per_difficulty.intermediate,
       selected_fast_time: prev.fast_time_per_difficulty.intermediate,
       difficulty_month_title: `中級編(${this_month}月)`
     }));
@@ -66,7 +66,7 @@ export const SecondSelectBox = ({
     setMyPageState((prev) => ({
       ...prev,
       selected_total_time: prev.total_time_per_difficulty.advanced,
-      selected_correct_avg: prev.correct_avg_per_difficulty.advanced,
+      selected_game_clear_count: prev.game_clear_count_per_difficulty.advanced,
       selected_fast_time: prev.fast_time_per_difficulty.advanced,
       difficulty_month_title: `上級編(${this_month}月)`
     }));

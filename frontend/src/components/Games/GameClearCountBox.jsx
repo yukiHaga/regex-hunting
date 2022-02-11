@@ -13,7 +13,7 @@ import { COLORS } from '../../style_constants.js';
 
 import { WIDTH } from '../../style_constants.js';
 
-const LearningAnalysisBoxWrapper = styled.div`
+const GameClearCountBoxWrapper = styled.div`
   width: 18%;
   height: 30%;
   background-color: ${COLORS.WHITE};
@@ -30,7 +30,7 @@ const ContentTitleWrapper = styled.div`
  }
 `;
 
-const ContentNumWrapper = styled.div`
+const ContentCountWrapper = styled.div`
   font-size: 3.0em;
   color: ${COLORS.MAIN};
   @media (max-width: ${WIDTH.DEV_TOOL}) {
@@ -45,26 +45,26 @@ const CustomSpan = styled.span`
  }
 `;
 
-export const LearningAnalysisBox = memo(({
-  num
+export const GameClearCountBox = memo(({
+  count
 }) => {
 
-  const [numState, setNumState] = useState(0);
+  const [countState, setCountState] = useState(0);
 
   useEffect(() => {
     const timer = setTimeout(() => {
-      setNumState(num);
+      setCountState(count);
     }, 400);
     return () => clearTimeout(timer);
   }, [
-    num
+    count
   ])
 
   return (
     <>
-      <LearningAnalysisBoxWrapper>
+      <GameClearCountBoxWrapper>
         <CircularProgressbarWithChildren 
-          value={numState ? numState : 0} 
+          value={countState ? countState : 0} 
           strokeWidth={4}
           styles={buildStyles({
             // Rotation of path and trail, in number of turns (0-1)
@@ -85,19 +85,19 @@ export const LearningAnalysisBox = memo(({
             trailColor: '#d6d6d6',
             backgroundColor: '#3e98c7',
           })}
-          maxValue={10}
+          maxValue={1}
         >
           <ContentTitleWrapper>
-            平均正解数
+            クリア回数
           </ContentTitleWrapper>
-          <ContentNumWrapper>
-            {num ? num : "0"}
+          <ContentCountWrapper>
+            {count ? count : "0"}
             <CustomSpan>
-              問
+              回
             </CustomSpan>
-          </ContentNumWrapper>
+          </ContentCountWrapper>
         </CircularProgressbarWithChildren>
-      </LearningAnalysisBoxWrapper>
+      </GameClearCountBoxWrapper>
     </>
   );
 });
