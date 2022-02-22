@@ -7,9 +7,6 @@ import { DialogContent, Dialog } from '@mui/material';
 // Colors
 import { COLORS } from '../../style_constants.js';
 
-// Image
-import ElementaryMonsterImage from '../../images/elementary.png'; 
-
 // NextButton
 import ArrowRightIcon from '@mui/icons-material/ArrowRight';
 
@@ -44,18 +41,6 @@ const TitleWrapper = styled.div`
   color: ${COLORS.BLACK};
   width: 80%;
   margin: 0 auto;
-`;
-
-const MonsterImageBoxWrapper = styled.div`
- text-align: right;
- width: 86%;
- margin-top: 7%;
-`;
-
-const MonsterImageWrapper = styled.img`
-  width: 25%;
-  height: 25%;
-  object-fit: contain;
 `;
 
 // フェードアウトのアニメーション
@@ -192,7 +177,7 @@ export const ElementaryGameDescriptionDialog = ({
   const slideContent = useMemo(() => [
     {
       title: "初級編",
-      sentence: "初級編を始める前に、正規表現とは何か?、どんなことができるのか？を学習しましょう。そして、初級編のゲームを通して、正規表現を作る際に使う基礎的なメタ文字をマスターしましょう！",
+      sentence: "初級編を始める前に、正規表現とは何か?、文字クラスとは何か？を学習しましょう。そして、初級編のゲームを通して、文字クラスを使用した正規表現をマスターしましょう！",
       slide_num: 0
     },
     {
@@ -201,7 +186,7 @@ export const ElementaryGameDescriptionDialog = ({
       slide_num: 1
     },
     {
-      title: "正規表現を作る上で重要なメタ文字",
+      title: "正規表現を作る上で重要な特殊文字",
       sentence: "正規表現は、「文字列」と「メタ文字」で構成されています。そのため、メタ文字を知らないと正規表現を作ることができません。メタ文字とは、特殊な働きをする文字列です。メタ文字の例として、「[a-z]」というメタ文字は「a~zの中の一文字」を表します。また、「\\d」というメタ文字は0~9までの1つの数字を表します。",
       slide_num: 2
     },
@@ -336,12 +321,6 @@ export const ElementaryGameDescriptionDialog = ({
                 <SentenceWrapper>
                   {slideState.sentence}
                 </SentenceWrapper>
-                {
-                  slideState.slide_num === 0 &&
-                    <MonsterImageBoxWrapper>
-                      <MonsterImageWrapper src={ElementaryMonsterImage} />
-                    </MonsterImageBoxWrapper>
-                }
                 {
                   slideState.slide_num === 3 &&
                     <>
