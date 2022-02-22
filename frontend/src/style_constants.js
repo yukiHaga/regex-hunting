@@ -24,6 +24,10 @@ export const COLORS = {
   EXPERIENCE: '#00a968',
   LIGHT_GRAY: '#f6f6f6',
   HP_BLUE: '#3399ff',
+  CODE_RED: '#ff8fa3',
+  CODE_YELLOW: '#ffc56d',
+  CODE_BLUE: '#38c7ff',
+  CODE_BLACK: '#444444'
 };
 
 // フォントサイズを決める際に、適宜定義する。
