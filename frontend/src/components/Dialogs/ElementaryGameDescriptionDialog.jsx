@@ -209,6 +209,11 @@ const CodeBlueSpan = styled.span`
   color: ${COLORS.CODE_BLUE};
 `;
 
+const CodeComentSpan = styled.span`
+  color: ${COLORS.WHITE};
+  opacity: 0.7;
+`;
+
 // isOpenはgameState.game_description_open
 // game_description_openは、game_description_open
 // click_description_openは、ゲーム開始後にスライドを見るをクリックしたかを表すprops
@@ -226,12 +231,12 @@ export const ElementaryGameDescriptionDialog = ({
   const slideContent = useMemo(() => [
     {
       title: "初級編",
-      sentence: "初級編を始める前に、正規表現とは何か?、文字クラスとは何か？を学習しましょう。そして、初級編のゲームを通して、文字クラスを使用した正規表現をマスターしましょう！",
+      sentence: "初級編を始める前に、正規表現とは何か?、文字クラスとは何か？を学習しましょう！ そして、初級編のゲームを通して、文字クラスを使用した正規表現をマスターしましょう！",
       slide_num: 0
     },
     {
       title: "What’s 正規表現？",
-      sentence: "正規表現とは、複数の文字列からルールを見つけ出し、そのルールをパターンで表現したものです。正規表現は、「文字列」と「特殊文字」で構成されます。正規表現とプログラミング言語の正規表現用メソッドを併用することによって、複数の文字列から特定の文字を取得したり、置換したりすることができます。",
+      sentence: "正規表現とは、複数の文字列からルールを見つけ出し、そのルールをパターンで表現したものです。正規表現は、「文字列」と「特殊文字」で構成されます。しかし、「文字列」または「特殊文字」のみで構成することもできます。正規表現とプログラミング言語の正規表現用メソッドを併用することによって、複数の文字列から特定の文字を取得したり、置換したりすることができます。",
       slide_num: 1
     },
     {
@@ -391,21 +396,40 @@ export const ElementaryGameDescriptionDialog = ({
                           </CodeLineWrapper>
                           <BlankLineWrapper />
                           <ComentLineWrapper>
-                            {'//'} [A-Z][a-zA-Z]+は、JavaScript, React, TypeScriptにマッチする正規表現
+                            {'//'} [A-Z][a-zA-Z]+は、JavaScript, React, TypeScriptにマッチする正規表現です。
                           </ComentLineWrapper>
                           <CodeLineWrapper>
                             <CodeRedSpan>const</CodeRedSpan> regex_pattern <CodeYellowSpan>=</CodeYellowSpan> <CodeYellowSpan>/[A-Z][a-zA-Z]+/g</CodeYellowSpan>;
                           </CodeLineWrapper>
                           <BlankLineWrapper />
                           <ComentLineWrapper>
-                            {'//'} matchメソッドを用いることで、文字列中から正規表現を満たす文字列を取得できる
+                            {'//'} matchメソッドを用いることで、文字列中から正規表現を満たす文字列を取得できます。
                           </ComentLineWrapper>
                           <CodeLineWrapper>
-                            console.<CodeBlueSpan>log</CodeBlueSpan>(target.<CodeBlueSpan>match</CodeBlueSpan>(regex_pattern));
+                            console.<CodeBlueSpan>log</CodeBlueSpan>(target.<CodeBlueSpan>match</CodeBlueSpan>(regex_pattern)); <CodeComentSpan>{'//'} => [ 'JavaScript', 'React', 'TypeScript' ]</CodeComentSpan>
                           </CodeLineWrapper>
+                        </CodeBlockDiv>
+                      </CodeBlockWrapper>
+                    </>
+                }
+                {
+                  slideState.slide_num === 2 &&
+                    <>
+                      <CodeBlockWrapper>
+                        <CodeBlockDiv> 
                           <ComentLineWrapper>
-                            {'//'} => [ 'JavaScript', 'React', 'TypeScript' ] 
+                            {'//'} 以下の{'/.../g'}の...にある[acz#]は、a, c, z, #のどれか1文字を表す正規表現です。
                           </ComentLineWrapper>
+                          <CodeLineWrapper>
+                            <CodeRedSpan>const</CodeRedSpan> regex_pattern_1 <CodeYellowSpan>=</CodeYellowSpan> <CodeYellowSpan>/[acz#]/g</CodeYellowSpan>;
+                          </CodeLineWrapper>
+                          <BlankLineWrapper />
+                          <ComentLineWrapper>
+                            {'//'} 以下の{'/.../g'}の...にある[a-z#%]は、aからz, #, %のどれか1文字を表す正規表現です。
+                          </ComentLineWrapper>
+                          <CodeLineWrapper>
+                            <CodeRedSpan>const</CodeRedSpan> regex_pattern_1 <CodeYellowSpan>=</CodeYellowSpan> <CodeYellowSpan>/[a-z#%]/g</CodeYellowSpan>;
+                          </CodeLineWrapper>
                         </CodeBlockDiv>
                       </CodeBlockWrapper>
                     </>
