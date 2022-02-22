@@ -236,18 +236,23 @@ export const ElementaryGameDescriptionDialog = ({
     },
     {
       title: "What’s 正規表現？",
-      sentence: "正規表現とは、複数の文字列からルールを見つけ出し、そのルールをパターンで表現したものです。正規表現は、「文字列」と「特殊文字」で構成されます。しかし、「文字列」または「特殊文字」のみで構成することもできます。正規表現とプログラミング言語の正規表現用メソッドを併用することによって、複数の文字列から特定の文字を取得したり、置換したりすることができます。",
+      sentence: "正規表現とは、複数の文字列からルールを見つけ出し、そのルールをパターンで表現したものです。正規表現は、基本的に「文字列」と「メタ文字」で構成されます。正規表現とプログラミング言語の正規表現用メソッドを併用することによって、複数の文字列から特定の文字を取得したり、置換したりすることができます。",
       slide_num: 1
     },
     {
       title: "文字クラスとは？",
-      sentence: "文字クラス([...])とは、指定した文字のどれか1文字を表す特殊文字です。[...]の...に、現れても良い1文字を複数指定します。例えば、[acz#]と書くと、[acz#]は、a, c, z, #のどれか1文字を表します。また、文字クラスの別の使い方として、[...]の中に-を書くと、文字の範囲を指定できます。例えば、[a-z]はaからzの小文字アルファベット1文字を表します。[1-9]は、0から9の1桁の数字を表します。範囲は複数指定できるので、[a-zA-Z]や[a-zA-Z1-9]と書くこともできます。文字クラス内で文字指定と範囲指定を併用することもできるので、[a-z#%]と書くことも可能です。",
+      sentence: "文字クラス([...])とは、指定した文字のどれか1文字を表すメタ文字です。[...]の...に、現れても良い1文字を複数指定します。例えば、[acz#]と書くと、[acz#]は、a, c, z, #のどれか1文字を表します。また、文字クラスの別の使い方として、[...]の中に-を書くと、文字の範囲を指定できます。例えば、[a-z]はaからzの小文字アルファベット1文字を表します。[1-9]は、0から9の1桁の数字を表します。範囲は複数指定できるので、[a-zA-Z]や[a-zA-Z1-9]と書くこともできます。文字クラス内で文字指定と範囲指定を併用することもできるので、[a-z#%]と書くことも可能です。",
       slide_num: 2
+    },
+    {
+      title: "正規表現を作るコツ",
+      sentence: "「\"gray grey\"という文字列のgrayとgreyにマッチするような正規表現を求めよ」と言われた場合、1つの文字クラスのみで作られた正規表現ではマッチできません。理由は、文字クラスは指定した1文字を表すだけであり、2文字以上の文字列にマッチさせることができないからです。この場合、まずはgrayとgreyの共通文字と共通ではない文字を見つけます。共通な文字はg, r, yです。そして、共通ではない文字はa, eです。aとeは、grayとgreyの3番目に位置する文字です。したがって、「gr[ae]y」という正規表現を用いることで、grayとgreyにマッチさせることができます。",
+      slide_num: 3
     },
     {
       title: "ルール説明",
       sentence: "初級編では、文字クラスを使用した正規表現を学習していきます。時間内に正しい正規表現を入力すると、モンスターに攻撃できます。モンスターのHPを0にしたらゲームクリアです！",
-      slide_num: 3
+      slide_num: 4
     }
   ], []);
 
@@ -264,9 +269,9 @@ export const ElementaryGameDescriptionDialog = ({
 
   // 右カーソルをクリックで左へずらす
   // スライドが右のスライドになる
-  // slideState.slide_numが3より小さい場合、右カーソルが機能する
+  // slideState.slide_numが4より小さい場合、右カーソルが機能する
   const changeSlideToRight = useCallback(() => {
-    if(slideState.slide_num < 3) {
+    if(slideState.slide_num < 4) {
       setSlideState((prev) => ({
         ...prev,
         slide_in: false,
@@ -437,6 +442,29 @@ export const ElementaryGameDescriptionDialog = ({
                 {
                   slideState.slide_num === 3 &&
                     <>
+                      <CodeBlockWrapper>
+                        <CodeBlockDiv> 
+                          <CodeLineWrapper>
+                            <CodeRedSpan>const</CodeRedSpan> target <CodeYellowSpan>=</CodeYellowSpan> <CodeYellowSpan>"gray grey"</CodeYellowSpan>;
+                          </CodeLineWrapper>
+                          <BlankLineWrapper />
+                          <ComentLineWrapper>
+                            {'//'} gr[ae]yは、gray, greyにマッチするような正規表現です。
+                          </ComentLineWrapper>
+                          <CodeLineWrapper>
+                            <CodeRedSpan>const</CodeRedSpan> regex_pattern <CodeYellowSpan>=</CodeYellowSpan> <CodeYellowSpan>/gr[ae]y/g</CodeYellowSpan>;
+                          </CodeLineWrapper>
+                          <BlankLineWrapper />
+                          <CodeLineWrapper>
+                            console.<CodeBlueSpan>log</CodeBlueSpan>(target.<CodeBlueSpan>match</CodeBlueSpan>(regex_pattern)); <CodeComentSpan>{'//'} => [ 'gray', 'grey' ]</CodeComentSpan>
+                          </CodeLineWrapper>
+                        </CodeBlockDiv>
+                      </CodeBlockWrapper>
+                    </>
+                }
+                {
+                  slideState.slide_num === 4 &&
+                    <>
                       <WarningSentenceWrapper>
                         ※ UX向上の為、音が出ます。音量が気になる方は下げて頂くようお願いします。
                       </WarningSentenceWrapper>
@@ -481,18 +509,18 @@ export const ElementaryGameDescriptionDialog = ({
                 <Tooltip 
                   title={<div>進む<br />( 右矢印キー → )</div>}
                   placement="top"
-                  disableHoverListener={slideState.slide_num === 3}
+                  disableHoverListener={slideState.slide_num === 4}
                   sx={{
-                    opacity: slideState.slide_num === 3 ? 0 : 1,
+                    opacity: slideState.slide_num === 4 ? 0 : 1,
                   }}
                 >
                   <IconButton
                     sx={{
                       fontSize: '4.0em',
-                      opacity: slideState.slide_num === 3 ? 0.1 : 1,
-                      cursor: slideState.slide_num === 3 && "default"
+                      opacity: slideState.slide_num === 4 ? 0.1 : 1,
+                      cursor: slideState.slide_num === 4 && "default"
                     }}
-                    disableRipple={slideState.slide_num === 3}
+                    disableRipple={slideState.slide_num === 4}
                   >
                     <ArrowRightIcon 
                       fontSize='inherit' 
