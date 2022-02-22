@@ -7,9 +7,6 @@ import { DialogContent, Dialog } from '@mui/material';
 // Colors
 import { COLORS } from '../../style_constants.js';
 
-// Image
-import ElementaryMonsterImage from '../../images/elementary.png'; 
-
 // NextButton
 import ArrowRightIcon from '@mui/icons-material/ArrowRight';
 
@@ -44,18 +41,6 @@ const TitleWrapper = styled.div`
   color: ${COLORS.BLACK};
   width: 80%;
   margin: 0 auto;
-`;
-
-const MonsterImageBoxWrapper = styled.div`
- text-align: right;
- width: 86%;
- margin-top: 7%;
-`;
-
-const MonsterImageWrapper = styled.img`
-  width: 25%;
-  height: 25%;
-  object-fit: contain;
 `;
 
 // フェードアウトのアニメーション
@@ -147,6 +132,43 @@ const SentenceWrapper = styled.div`
   color: ${COLORS.BLACK};
 `;
 
+const CodeBlockWrapper = styled.div`
+  border-radius: 3px;
+  width: 100%;
+  margin: 0 auto;
+  margin-top: 3%;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.2);
+`;
+
+const CodeBlockDiv = styled.div`
+  width: 100%;
+  border-radius: 3px;
+  font-size: 1.1em;
+  background-color: ${COLORS.CODE_BLACK};
+  color: ${COLORS.WHITE};
+  outline: none;
+  border: none;
+  padding-top: 2%;
+  padding-bottom: 2%;
+  margin: 0 auto;
+  text-align: center;
+`;
+
+const CodeLineWrapper = styled.div`
+  text-align: left;
+  width: 85%;
+  margin: 0 auto;
+`;
+
+const BlankLineWrapper = styled(CodeLineWrapper)`
+  height: 2vh;
+`;
+
+const ComentLineWrapper = styled(CodeLineWrapper)`
+  color: ${COLORS.WHITE};
+  opacity: 0.7;
+`;
+
 const ButtonLineWrapper = styled.div`
   width: 80%;
   text-align: right;
@@ -175,6 +197,23 @@ const OuterButtonsWrapper = styled.div`
   justify-content: center;
 `;
 
+const CodeRedSpan = styled.span`
+  color: ${COLORS.CODE_RED};
+`;
+
+const CodeYellowSpan = styled.span`
+  color: ${COLORS.CODE_YELLOW};
+`;
+
+const CodeBlueSpan = styled.span`
+  color: ${COLORS.CODE_BLUE};
+`;
+
+const CodeComentSpan = styled.span`
+  color: ${COLORS.WHITE};
+  opacity: 0.7;
+`;
+
 // isOpenはgameState.game_description_open
 // game_description_openは、game_description_open
 // click_description_openは、ゲーム開始後にスライドを見るをクリックしたかを表すprops
@@ -192,23 +231,28 @@ export const ElementaryGameDescriptionDialog = ({
   const slideContent = useMemo(() => [
     {
       title: "初級編",
-      sentence: "初級編を始める前に、正規表現とは何か?、どんなことができるのか？を学習しましょう。そして、初級編のゲームを通して、正規表現を作る際に使う基礎的なメタ文字をマスターしましょう！",
+      sentence: "初級編を始める前に、正規表現とは何か?、文字クラスとは何か？を学習しましょう！ そして、初級編のゲームを通して、文字クラスを使用した正規表現をマスターしましょう！",
       slide_num: 0
     },
     {
       title: "What’s 正規表現？",
-      sentence: "正規表現とは、複数の文字列からルールを見つけ出し、そのルールをパターンで表現したものです。正規表現を用いることで、文字列中に特定の文字が含まれているか判定できます。そして、含んでいる場合、どの位置にあるかを知ることができます。",
+      sentence: "正規表現とは、複数の文字列からルールを見つけ出し、そのルールをパターンで表現したものです。正規表現は、基本的に「文字列」と「メタ文字」で構成されます。正規表現とプログラミング言語の正規表現用メソッドを併用することによって、複数の文字列から特定の文字を取得したり、置換したりすることができます。",
       slide_num: 1
     },
     {
-      title: "正規表現を作る上で重要なメタ文字",
-      sentence: "正規表現は、「文字列」と「メタ文字」で構成されています。そのため、メタ文字を知らないと正規表現を作ることができません。メタ文字とは、特殊な働きをする文字列です。メタ文字の例として、「[a-z]」というメタ文字は「a~zの中の一文字」を表します。また、「\\d」というメタ文字は0~9までの1つの数字を表します。",
+      title: "文字クラスとは？",
+      sentence: "文字クラス([...])とは、指定した文字のどれか1文字を表すメタ文字です。[...]の...に、現れても良い1文字を複数指定します。例えば、[acz#]と書くと、[acz#]は、a, c, z, #のどれか1文字を表します。また、文字クラスの別の使い方として、[...]の中に-を書くと、文字の範囲を指定できます。例えば、[a-z]はaからzの小文字アルファベット1文字を表します。[1-9]は、0から9の1桁の数字を表します。範囲は複数指定できるので、[a-zA-Z]や[a-zA-Z1-9]と書くこともできます。文字クラス内で文字指定と範囲指定を併用することもできるので、[a-z#%]と書くことも可能です。",
       slide_num: 2
     },
     {
-      title: "ルール説明",
-      sentence: "初級編では、重要なメタ文字を使った正規表現を学習していきます。時間内に正しい正規表現を入力すると、モンスターに攻撃できます。モンスターのHPを0にしたらゲームクリアです！",
+      title: "正規表現を作るコツ",
+      sentence: "「\"gray grey\"という文字列のgrayとgreyにマッチするような正規表現を求めよ」と言われた場合、1つの文字クラスのみで作られた正規表現ではマッチできません。理由は、文字クラスは指定した1文字を表すだけであり、2文字以上の文字列にマッチさせることができないからです。この場合、まずはgrayとgreyの共通文字と共通ではない文字を見つけます。共通な文字はg, r, yです。そして、共通ではない文字はa, eです。aとeは、grayとgreyの3番目に位置する文字です。したがって、「gr[ae]y」という正規表現を用いることで、grayとgreyにマッチさせることができます。",
       slide_num: 3
+    },
+    {
+      title: "ルール説明",
+      sentence: "初級編では、文字クラスを使用した正規表現を学習していきます。時間内に正しい正規表現を入力すると、モンスターに攻撃できます。モンスターのHPを0にしたらゲームクリアです！",
+      slide_num: 4
     }
   ], []);
 
@@ -225,9 +269,9 @@ export const ElementaryGameDescriptionDialog = ({
 
   // 右カーソルをクリックで左へずらす
   // スライドが右のスライドになる
-  // slideState.slide_numが3より小さい場合、右カーソルが機能する
+  // slideState.slide_numが4より小さい場合、右カーソルが機能する
   const changeSlideToRight = useCallback(() => {
-    if(slideState.slide_num < 3) {
+    if(slideState.slide_num < 4) {
       setSlideState((prev) => ({
         ...prev,
         slide_in: false,
@@ -338,12 +382,88 @@ export const ElementaryGameDescriptionDialog = ({
                 </SentenceWrapper>
                 {
                   slideState.slide_num === 0 &&
-                    <MonsterImageBoxWrapper>
-                      <MonsterImageWrapper src={ElementaryMonsterImage} />
-                    </MonsterImageBoxWrapper>
+                    <>
+                      <WarningSentenceWrapper>
+                        ※ JavaScriptにおける正規表現を説明していますが、内容自体は他の言語にも適用できます。
+                      </WarningSentenceWrapper>
+                    </>
+                }
+                {
+                  slideState.slide_num === 1 &&
+                    <>
+                      <CodeBlockWrapper>
+                        <CodeBlockDiv> 
+                          <ComentLineWrapper>
+                            {'//'} 正規表現を適用させる文字列
+                          </ComentLineWrapper>
+                          <CodeLineWrapper>
+                            <CodeRedSpan>const</CodeRedSpan> target <CodeYellowSpan>=</CodeYellowSpan> <CodeYellowSpan>"JavaScript and React are different. TypeScript is a great language."</CodeYellowSpan>;
+                          </CodeLineWrapper>
+                          <BlankLineWrapper />
+                          <ComentLineWrapper>
+                            {'//'} [A-Z][a-zA-Z]+は、JavaScript, React, TypeScriptにマッチする正規表現です。
+                          </ComentLineWrapper>
+                          <CodeLineWrapper>
+                            <CodeRedSpan>const</CodeRedSpan> regex_pattern <CodeYellowSpan>=</CodeYellowSpan> <CodeYellowSpan>/[A-Z][a-zA-Z]+/g</CodeYellowSpan>;
+                          </CodeLineWrapper>
+                          <BlankLineWrapper />
+                          <ComentLineWrapper>
+                            {'//'} matchメソッドを用いることで、文字列中から正規表現を満たす文字列を取得できます。
+                          </ComentLineWrapper>
+                          <CodeLineWrapper>
+                            console.<CodeBlueSpan>log</CodeBlueSpan>(target.<CodeBlueSpan>match</CodeBlueSpan>(regex_pattern)); <CodeComentSpan>{'//'} => [ 'JavaScript', 'React', 'TypeScript' ]</CodeComentSpan>
+                          </CodeLineWrapper>
+                        </CodeBlockDiv>
+                      </CodeBlockWrapper>
+                    </>
+                }
+                {
+                  slideState.slide_num === 2 &&
+                    <>
+                      <CodeBlockWrapper>
+                        <CodeBlockDiv> 
+                          <ComentLineWrapper>
+                            {'//'} 以下の{'/.../g'}の...にある[acz#]は、a, c, z, #のどれか1文字を表す正規表現です。
+                          </ComentLineWrapper>
+                          <CodeLineWrapper>
+                            <CodeRedSpan>const</CodeRedSpan> regex_pattern_1 <CodeYellowSpan>=</CodeYellowSpan> <CodeYellowSpan>/[acz#]/g</CodeYellowSpan>;
+                          </CodeLineWrapper>
+                          <BlankLineWrapper />
+                          <ComentLineWrapper>
+                            {'//'} 以下の{'/.../g'}の...にある[a-z#%]は、aからz, #, %のどれか1文字を表す正規表現です。
+                          </ComentLineWrapper>
+                          <CodeLineWrapper>
+                            <CodeRedSpan>const</CodeRedSpan> regex_pattern_1 <CodeYellowSpan>=</CodeYellowSpan> <CodeYellowSpan>/[a-z#%]/g</CodeYellowSpan>;
+                          </CodeLineWrapper>
+                        </CodeBlockDiv>
+                      </CodeBlockWrapper>
+                    </>
                 }
                 {
                   slideState.slide_num === 3 &&
+                    <>
+                      <CodeBlockWrapper>
+                        <CodeBlockDiv> 
+                          <CodeLineWrapper>
+                            <CodeRedSpan>const</CodeRedSpan> target <CodeYellowSpan>=</CodeYellowSpan> <CodeYellowSpan>"gray grey"</CodeYellowSpan>;
+                          </CodeLineWrapper>
+                          <BlankLineWrapper />
+                          <ComentLineWrapper>
+                            {'//'} gr[ae]yは、gray, greyにマッチするような正規表現です。
+                          </ComentLineWrapper>
+                          <CodeLineWrapper>
+                            <CodeRedSpan>const</CodeRedSpan> regex_pattern <CodeYellowSpan>=</CodeYellowSpan> <CodeYellowSpan>/gr[ae]y/g</CodeYellowSpan>;
+                          </CodeLineWrapper>
+                          <BlankLineWrapper />
+                          <CodeLineWrapper>
+                            console.<CodeBlueSpan>log</CodeBlueSpan>(target.<CodeBlueSpan>match</CodeBlueSpan>(regex_pattern)); <CodeComentSpan>{'//'} => [ 'gray', 'grey' ]</CodeComentSpan>
+                          </CodeLineWrapper>
+                        </CodeBlockDiv>
+                      </CodeBlockWrapper>
+                    </>
+                }
+                {
+                  slideState.slide_num === 4 &&
                     <>
                       <WarningSentenceWrapper>
                         ※ UX向上の為、音が出ます。音量が気になる方は下げて頂くようお願いします。
@@ -389,18 +509,18 @@ export const ElementaryGameDescriptionDialog = ({
                 <Tooltip 
                   title={<div>進む<br />( 右矢印キー → )</div>}
                   placement="top"
-                  disableHoverListener={slideState.slide_num === 3}
+                  disableHoverListener={slideState.slide_num === 4}
                   sx={{
-                    opacity: slideState.slide_num === 3 ? 0 : 1,
+                    opacity: slideState.slide_num === 4 ? 0 : 1,
                   }}
                 >
                   <IconButton
                     sx={{
                       fontSize: '4.0em',
-                      opacity: slideState.slide_num === 3 ? 0.1 : 1,
-                      cursor: slideState.slide_num === 3 && "default"
+                      opacity: slideState.slide_num === 4 ? 0.1 : 1,
+                      cursor: slideState.slide_num === 4 && "default"
                     }}
-                    disableRipple={slideState.slide_num === 3}
+                    disableRipple={slideState.slide_num === 4}
                   >
                     <ArrowRightIcon 
                       fontSize='inherit' 
