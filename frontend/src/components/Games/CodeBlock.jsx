@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef, useCallback } from 'react';
+import React, { useState, useLayoutEffect, useEffect, useRef, useCallback } from 'react';
 import styled, { keyframes } from 'styled-components';
 
 // Colors
@@ -251,7 +251,7 @@ export const CodeBlock = ({
   ]);
 
   // イベントリスナー
-  useEffect(() => {
+  useLayoutEffect(() => {
     // game_description_openがfalseかつclick_meta_openがfalseの時に実行される
     // つまり、スライド一覧とメタ文字一覧のダイアログが開いていないとき、if文の条件式がtrueになる
     if(!game_description_open && !click_meta_open) {
