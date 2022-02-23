@@ -212,7 +212,7 @@ export const QuestionBlock = ({
             input_regex_object: {},
             key_available: true,
             time_active: true,
-            flash_display: false
+            flash_display: false,
           }));
         }, 2000);
         return () => clearTimeout(timer);

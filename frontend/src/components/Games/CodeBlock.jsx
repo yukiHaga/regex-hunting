@@ -71,7 +71,8 @@ const CodeBlockDiv = styled.div`
 
 // 日本語にmaxlengh属性は聞かない
 export const CodeBlock = ({
-  gameState, 
+  correct_questions,
+  questions,
   setGameState,
   target_sentence,
   sample_answer,
@@ -156,6 +157,8 @@ export const CodeBlock = ({
 
   // イベントリスナー
   useEffect(() => {
+    // game_description_openがfalseかつclick_meta_openがfalseの時に実行される
+    // つまり、スライド一覧とメタ文字一覧のダイアログが開いていないとき、if文の条件式がtrueになる
     if(!game_description_open && !click_meta_open) {
       const handlekeyPress = (e) => {
         if(e.key !== 'Enter' && key_available === true) {
@@ -190,15 +193,17 @@ export const CodeBlock = ({
             const audio = new Audio(DecisionSound);
             audio.play();
             if(current_question_judgement === "correct") {
-              gameState.correct_questions.push({
-                question: gameState.questions[0],
+              correct_questions.push({
+                question: questions[0],
                 sentence_num: sentence_num,
                 input_regex: input_regex
               });
-              gameState.questions.shift();
+              questions.shift();
               const current_hp = monster_hp - calculateDamage(user_attack, monster_defence);
 
               const audio = new Audio(CutMonsterSound);
+
+              // エンター押して正解した時に実行されるsetGameState
               setGameState((prev) => ({
                 ...prev,
                 input_regex_object: input_regex_object,
@@ -216,11 +221,14 @@ export const CodeBlock = ({
               audio.play();
               setCodeState("");
             } else {
-              setGameState({
-                ...gameState,
+              // エンター押して不正解の時に実行されるsetGameState
+              console.log("不正解");
+              setGameState((prev) => ({
+                ...prev,
                 input_regex_object: input_regex_object,
                 match_array: input_match_array,
-              });
+              }));
+              console.log("不正解コンソール後のsetGameState実行後のコンソール");
             }
           }
         } catch(e) {
@@ -248,7 +256,8 @@ export const CodeBlock = ({
       }
     }
   }, [
-    gameState, 
+    correct_questions,
+    questions,
     setGameState, 
     target_sentence,
     sample_answer,

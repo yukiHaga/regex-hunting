@@ -597,7 +597,8 @@ export const Games = () => {
                 </GameBlockWrapper>
                 <CodeBlockWrapper>
                   <CodeBlock 
-                    gameState={gameState} 
+                    correct_questions={gameState.correct_questions}
+                    questions={gameState.questions}
                     setGameState={setGameState}
                     target_sentence={gameState.target_sentence}
                     sample_answer={gameState.sample_answer}
