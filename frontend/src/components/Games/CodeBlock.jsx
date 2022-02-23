@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useCallback } from 'react';
 import styled, { keyframes } from 'styled-components';
 
 // Colors
@@ -155,88 +155,106 @@ export const CodeBlock = ({
     }
   };
 
+  const handlekeyPress = useCallback((e) => {
+    if(e.key !== 'Enter' && key_available === true) {
+      const audio = new Audio(TypeSound);
+      audio.play();
+      setCodeState((prev) => prev + e.key);
+    }
+  }, [
+    key_available
+  ]);
+
+  const handleBackSpace = useCallback((e) => {
+    if(e.key === 'Backspace' && key_available === true) {
+      const audio = new Audio(BackSound);
+      audio.play();
+      setCodeState((prev) => prev.slice(0, -1));
+    }
+  }, [
+    key_available
+  ]);
+
+  console.log(click_meta_open);
+
+  // question_judgementがprogressならEnterを押せるようにする
+  const handleEnter = useCallback((e) => {
+    try {
+      if(e.key === 'Enter' && question_judgement === 'progress' && key_available === true) {
+        const input_regex = inputRefObject.current.innerText;
+        const input_regex_object = getRegexObject(input_regex); 
+        const input_match_array = getMatchArray(target_sentence, input_regex);
+        const sample_match_array = getMatchArray(target_sentence, sample_answer);
+        const input_match_words = getMatchWords(input_match_array);
+        const sample_match_words = getMatchWords(sample_match_array);
+        const current_question_judgement = getQuestionJudgement(
+          input_match_words, 
+          sample_match_words
+        ); 
+        const audio = new Audio(DecisionSound);
+        audio.play();
+        if(current_question_judgement === "correct") {
+          correct_questions.push({
+            question: questions[0],
+            sentence_num: sentence_num,
+            input_regex: input_regex
+          });
+          questions.shift();
+          const current_hp = monster_hp - calculateDamage(user_attack, monster_defence);
+
+          const audio = new Audio(CutMonsterSound);
+
+          // エンター押して正解した時に実行されるsetGameState
+          setGameState((prev) => ({
+            ...prev,
+            input_regex_object: input_regex_object,
+            match_array: input_match_array,
+            question_judgement: current_question_judgement,
+            correct_questions: prev.correct_questions,
+            questions: prev.questions,
+            monster_hp: current_hp,
+            flash_display: true,
+            flash_title: "Good",
+            commentary: prev.next_commentary,
+            next_commentary: prev?.questions["0"]?.commentary || "no_next_commentary",
+            key_available: false,
+          }));
+          audio.play();
+          setCodeState("");
+        } else {
+          // エンター押して不正解の時に実行されるsetGameState
+          setGameState((prev) => ({
+            ...prev,
+            input_regex_object: input_regex_object,
+            match_array: input_match_array,
+            click_meta_open: false
+          }));
+          console.log("setGameStateを実行した");
+        }
+      }
+    } catch(e) {
+      const audio = new Audio(ErrorSound);
+      audio.play();
+    }
+  }, [
+    correct_questions,
+    key_available,
+    monster_defence,
+    monster_hp,
+    question_judgement,
+    questions,
+    sample_answer,
+    sentence_num,
+    setGameState,
+    target_sentence,
+    user_attack
+  ]);
+
   // イベントリスナー
   useEffect(() => {
     // game_description_openがfalseかつclick_meta_openがfalseの時に実行される
     // つまり、スライド一覧とメタ文字一覧のダイアログが開いていないとき、if文の条件式がtrueになる
     if(!game_description_open && !click_meta_open) {
-      const handlekeyPress = (e) => {
-        if(e.key !== 'Enter' && key_available === true) {
-          const audio = new Audio(TypeSound);
-          audio.play();
-          setCodeState((prev) => prev + e.key);
-        }
-      };
-
-      const handleBackSpace = (e) => {
-        if(e.key === 'Backspace' && key_available === true) {
-          const audio = new Audio(BackSound);
-          audio.play();
-          setCodeState((prev) => prev.slice(0, -1));
-        }
-      };
-
-      // question_judgementがprogressならEnterを押せるようにする
-      const handleEnter = (e) => {
-        try {
-          if(e.key === 'Enter' && question_judgement === 'progress' && key_available === true) {
-            const input_regex = inputRefObject.current.innerText;
-            const input_regex_object = getRegexObject(input_regex); 
-            const input_match_array = getMatchArray(target_sentence, input_regex);
-            const sample_match_array = getMatchArray(target_sentence, sample_answer);
-            const input_match_words = getMatchWords(input_match_array);
-            const sample_match_words = getMatchWords(sample_match_array);
-            const current_question_judgement = getQuestionJudgement(
-              input_match_words, 
-              sample_match_words
-            ); 
-            const audio = new Audio(DecisionSound);
-            audio.play();
-            if(current_question_judgement === "correct") {
-              correct_questions.push({
-                question: questions[0],
-                sentence_num: sentence_num,
-                input_regex: input_regex
-              });
-              questions.shift();
-              const current_hp = monster_hp - calculateDamage(user_attack, monster_defence);
-
-              const audio = new Audio(CutMonsterSound);
-
-              // エンター押して正解した時に実行されるsetGameState
-              setGameState((prev) => ({
-                ...prev,
-                input_regex_object: input_regex_object,
-                match_array: input_match_array,
-                question_judgement: current_question_judgement,
-                correct_questions: prev.correct_questions,
-                questions: prev.questions,
-                monster_hp: current_hp,
-                flash_display: true,
-                flash_title: "Good",
-                commentary: prev.next_commentary,
-                next_commentary: prev?.questions["0"]?.commentary || "no_next_commentary",
-                key_available: false,
-              }));
-              audio.play();
-              setCodeState("");
-            } else {
-              // エンター押して不正解の時に実行されるsetGameState
-              console.log("不正解");
-              setGameState((prev) => ({
-                ...prev,
-                input_regex_object: input_regex_object,
-                match_array: input_match_array,
-              }));
-              console.log("不正解コンソール後のsetGameState実行後のコンソール");
-            }
-          }
-        } catch(e) {
-          const audio = new Audio(ErrorSound);
-          audio.play();
-        }
-      };
-
       // 入力をコントロールするイベントリスナー
       document.addEventListener("keypress", handlekeyPress);
 
@@ -246,6 +264,7 @@ export const CodeBlock = ({
       // エンターキーをコントロールするイベントリスナー
       document.addEventListener("keydown", handleEnter);
 
+      // アンマウント時の処理をここに書く
       // イベントを消すクリーンアップ関数を返す
       return () => {
         document.removeEventListener("keypress", handlekeyPress);
@@ -256,19 +275,11 @@ export const CodeBlock = ({
       }
     }
   }, [
-    correct_questions,
-    questions,
-    setGameState, 
-    target_sentence,
-    sample_answer,
-    monster_hp,
-    monster_defence,
-    question_judgement,
-    key_available,
-    user_attack,
-    sentence_num,
+    handlekeyPress,
+    handleBackSpace,
+    handleEnter,
     game_description_open,
-    click_meta_open,
+    click_meta_open
   ]);
 
   // question_judgementがfalseの時に実行される処理
