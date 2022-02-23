@@ -45,6 +45,8 @@ export const GameFooter = ({
               <Box sx={{ flexGrow: 0, display: { xs: 'flex', md: 'flex' } }}>
                 <Button
                   key="1"
+                  disableFocusRipple={true}
+                  disableRipple={true}
                   sx={{ my: 2, color: 'white', display: 'block' }}
                   onClick={handleGameDescriptionDialog}
                 >
@@ -54,6 +56,8 @@ export const GameFooter = ({
               <Box sx={{ flexGrow: 0, display: { xs: 'flex', md: 'flex' } }}>
                 <Button
                   key="1"
+                  disableFocusRipple={true}
+                  disableRipple={true}
                   sx={{ my: 2, color: 'white', display: 'block' }}
                   onClick={handleMetaDialog}
                 >

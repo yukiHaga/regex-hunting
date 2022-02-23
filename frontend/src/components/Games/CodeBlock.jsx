@@ -227,7 +227,7 @@ export const CodeBlock = ({
             ...prev,
             input_regex_object: input_regex_object,
             match_array: input_match_array,
-            click_meta_open: false
+            click_meta_open: false,
           }));
           console.log("setGameStateを実行した");
         }
@@ -255,6 +255,7 @@ export const CodeBlock = ({
     // game_description_openがfalseかつclick_meta_openがfalseの時に実行される
     // つまり、スライド一覧とメタ文字一覧のダイアログが開いていないとき、if文の条件式がtrueになる
     if(!game_description_open && !click_meta_open) {
+      console.log("if文のなか");
       // 入力をコントロールするイベントリスナー
       document.addEventListener("keypress", handlekeyPress);
 
@@ -267,6 +268,7 @@ export const CodeBlock = ({
       // アンマウント時の処理をここに書く
       // イベントを消すクリーンアップ関数を返す
       return () => {
+        console.log("returnのなか");
         document.removeEventListener("keypress", handlekeyPress);
 
         document.removeEventListener("keydown", handleBackSpace);
