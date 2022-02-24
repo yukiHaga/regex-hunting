@@ -67,7 +67,7 @@ export const GameFooter = ({
                 <ModalLinkBlock
                   onClick={handleMetaDialog}
                 >
-                  メタ文字一覧 
+                  特殊文字一覧 
                 </ModalLinkBlock>
               </Box>
             </Box>
