@@ -214,8 +214,6 @@ export const Games = () => {
   // ゲーム状態を管理するstate
   const [gameState, setGameState] = useState(initialState);
 
-  console.log(gameState.click_meta_open);
-
   // React Routerで画面遷移するとユーザーが保持できないので、
   // useEffectで再度リクエストを出す。
   // 初回レンダリング時および、依存配列の要素のどれかが
