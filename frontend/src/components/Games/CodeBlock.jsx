@@ -1,4 +1,4 @@
-import React, { useState, useLayoutEffect, useEffect, useRef, useCallback } from 'react';
+import React, { useState, useEffect, useRef, useCallback } from 'react';
 import styled, { keyframes } from 'styled-components';
 
 // Colors
@@ -89,6 +89,7 @@ export const CodeBlock = ({
   game_description_open,
   click_meta_open
 }) => {
+  console.log(click_meta_open);
 
   const [inputState, setCodeState] = useState("");
   const inputRefObject = useRef("");
@@ -181,6 +182,7 @@ export const CodeBlock = ({
   const handleEnter = useCallback((e) => {
     try {
       if(e.key === 'Enter' && question_judgement === 'progress' && key_available === true) {
+        console.log("tryの中にいる");
         const input_regex = inputRefObject.current.innerText;
         const input_regex_object = getRegexObject(input_regex); 
         const input_match_array = getMatchArray(target_sentence, input_regex);
@@ -246,11 +248,11 @@ export const CodeBlock = ({
     sentence_num,
     setGameState,
     target_sentence,
-    user_attack
+    user_attack,
   ]);
 
   // イベントリスナー
-  useLayoutEffect(() => {
+  useEffect(() => {
     // game_description_openがfalseかつclick_meta_openがfalseの時に実行される
     // つまり、スライド一覧とメタ文字一覧のダイアログが開いていないとき、if文の条件式がtrueになる
     if(!game_description_open && !click_meta_open) {

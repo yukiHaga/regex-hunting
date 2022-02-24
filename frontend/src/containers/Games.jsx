@@ -214,6 +214,8 @@ export const Games = () => {
   // ゲーム状態を管理するstate
   const [gameState, setGameState] = useState(initialState);
 
+  console.log(gameState.click_meta_open);
+
   // React Routerで画面遷移するとユーザーが保持できないので、
   // useEffectで再度リクエストを出す。
   // 初回レンダリング時および、依存配列の要素のどれかが
@@ -493,15 +495,6 @@ export const Games = () => {
           <CircularMask />
         :
           <>
-            {
-              gameState.game_description_open &&
-                <ElementaryGameDescriptionDialog
-                  isOpen={gameState.game_description_open}
-                  setGameState={setGameState}
-                  game_description_open={gameState.game_description_open}
-                  click_description_open={gameState.click_description_open}
-                />
-            }
             <Header />
             <MainContentWrapper>
               {  
@@ -637,6 +630,15 @@ export const Games = () => {
             <GameFooter 
               setGameState={setGameState}
             />
+            {
+              gameState.game_description_open &&
+                <ElementaryGameDescriptionDialog
+                  isOpen={gameState.game_description_open}
+                  setGameState={setGameState}
+                  game_description_open={gameState.game_description_open}
+                  click_description_open={gameState.click_description_open}
+                />
+            }
             {
               gameState.game_result === "win" && !gameState.rank_up && !gameState.check_answer &&
                 <GameClearDialog
