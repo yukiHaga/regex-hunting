@@ -5,7 +5,7 @@ Question.seed(
     sentence: '1, 5, 9にマッチする正規表現を入力せよ。',
     target_sentence: '1 5 9',
     sample_answer: '\\d',
-    hint: '1桁の数字を表すメタ文字を使って、正規表現を作ってみましょう。',
+    hint: '1桁の数字を表す特殊文字を使って、正規表現を作ってみましょう。',
     commentary: '\\dは1桁の数字を表します。[0-9]または[159]でマッチさせることもできます。',
     difficulty: 'elementary'
   },
