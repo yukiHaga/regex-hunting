@@ -7,10 +7,24 @@ import { COLORS } from '../../style_constants.js';
 import Container from '@mui/material/Container';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
-import Button from '@mui/material/Button';
 
 const FooterWrapper = styled.div`
   background-color: ${COLORS.BROWN};
+  height: 8.7vh;
+  display: flex;
+  align-items: center;
+`;
+
+const ModalLinkBlock = styled.div`
+  cursor: pointer;
+  :hover {
+    opacity: 0.7;
+  }
+  text-decoration: none;
+  color: ${COLORS.WHITE};
+  font-size: 0.9em;
+  margin-left: 6%;
+  width: 9vw;
 `;
 
 export const GameFooter = ({
@@ -43,26 +57,18 @@ export const GameFooter = ({
           <Toolbar disableGutters>
             <Box sx={{ flexDirection: { xs: 'column', md: 'row' }, display: 'flex' }}>
               <Box sx={{ flexGrow: 0, display: { xs: 'flex', md: 'flex' } }}>
-                <Button
-                  key="1"
-                  disableFocusRipple={true}
-                  disableRipple={true}
-                  sx={{ my: 2, color: 'white', display: 'block' }}
+                <ModalLinkBlock
                   onClick={handleGameDescriptionDialog}
                 >
                   スライドを見る
-                </Button>
+                </ModalLinkBlock>
               </Box>
               <Box sx={{ flexGrow: 0, display: { xs: 'flex', md: 'flex' } }}>
-                <Button
-                  key="1"
-                  disableFocusRipple={true}
-                  disableRipple={true}
-                  sx={{ my: 2, color: 'white', display: 'block' }}
+                <ModalLinkBlock
                   onClick={handleMetaDialog}
                 >
                   メタ文字一覧 
-                </Button>
+                </ModalLinkBlock>
               </Box>
             </Box>
           </Toolbar>
