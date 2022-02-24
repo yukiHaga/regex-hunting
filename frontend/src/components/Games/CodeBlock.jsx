@@ -227,7 +227,6 @@ export const CodeBlock = ({
             ...prev,
             input_regex_object: input_regex_object,
             match_array: input_match_array,
-            click_meta_open: false,
           }));
           console.log("setGameStateを実行した");
         }
