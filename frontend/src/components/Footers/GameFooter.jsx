@@ -14,7 +14,7 @@ const FooterWrapper = styled.div`
 `;
 
 export const GameFooter = ({
-  setGameState
+  setGameState,
 }) => {
 
   // game_description_openがtrue, click_description_opneがtrueの時、
