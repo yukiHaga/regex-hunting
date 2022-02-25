@@ -200,7 +200,6 @@ export const CodeBlock = ({
           });
           questions.shift();
           const current_hp = monster_hp - calculateDamage(user_attack, monster_defence);
-
           const audio = new Audio(CutMonsterSound);
 
           // エンター押して正解した時に実行されるsetGameState
