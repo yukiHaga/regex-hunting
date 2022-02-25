@@ -67,8 +67,8 @@ const TargetSentenceWrapper = styled.div`
 `;
 
 const CustomSpan = styled.span`
-  color: ${(props) => props.backgroundcolor && COLORS.WORD_BLUE};
-  background-color: ${(props) => props.backgroundcolor && COLORS.WORD_BACK};
+  color: ${({ backgroundcolor }) => backgroundcolor && COLORS.WORD_BLUE};
+  background-color: ${({ backgroundcolor }) => backgroundcolor && COLORS.WORD_BACK};
 `;
 
 export const QuestionBlock = ({ 
