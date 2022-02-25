@@ -9,7 +9,8 @@ import BattleSceneImage from '../images/battle_scene.jpg';
 import MyPageImage from '../images/my_page_image.jpg';
 import RaknkingImage from '../images/ranking_image.jpg';
 import ElementaryGameContentImage from '../images/elementary_game_content.jpg';
-import IntermediateGameContentImage from '../images/intermediate_game_content.png';
+import IntermediateGameContentImage from '../images/intermediate_game_content.jpg';
+import AdvancedGameContentImage from '../images/intermediate_game_content.png';
 
 // Presentational Components
 import { Header } from '../components/Headers/Header.jsx';
