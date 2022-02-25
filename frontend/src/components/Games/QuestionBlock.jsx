@@ -328,7 +328,8 @@ export const QuestionBlock = ({
     rank,
     total_experience,
     maximum_experience_per_rank,
-    temporary_experience
+    temporary_experience,
+    memoIncorrectCount
   ]);
 
   // マッチした箇所をリプレイスするライブラリをrequireしてくる
