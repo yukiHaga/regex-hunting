@@ -21,6 +21,8 @@ import { GameClearDialog } from '../components/Dialogs/GameClearDialog.jsx'
 import { GameOverDialog } from '../components/Dialogs/GameOverDialog.jsx'
 import { CheckAnswerDialog } from '../components/Dialogs/CheckAnswerDialog.jsx'
 import { ElementaryGameDescriptionDialog } from '../components/Dialogs/ElementaryGameDescriptionDialog.jsx'
+import { IntermediateGameDescriptionDialog } from '../components/Dialogs/IntermediateGameDescriptionDialog.jsx'
+
 import { RankUpDialog } from '../components/Dialogs/RankUpDialog.jsx';
 import { CheckMetaDialog } from '../components/Dialogs/CheckMetaDialog.jsx';
 import { CutImage } from '../components/Games/CutImage.jsx';
@@ -636,8 +638,17 @@ export const Games = () => {
               setGameState={setGameState}
             />
             {
-              gameState.game_description_open &&
+              gameState.game_description_open && difficulty === 'elementary' &&
                 <ElementaryGameDescriptionDialog
+                  isOpen={gameState.game_description_open}
+                  setGameState={setGameState}
+                  game_description_open={gameState.game_description_open}
+                  click_description_open={gameState.click_description_open}
+                />
+            }
+            {
+              gameState.game_description_open && difficulty === 'intermediate' &&
+                <IntermediateGameDescriptionDialog
                   isOpen={gameState.game_description_open}
                   setGameState={setGameState}
                   game_description_open={gameState.game_description_open}
