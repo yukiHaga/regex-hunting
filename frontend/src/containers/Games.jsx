@@ -546,7 +546,14 @@ export const Games = () => {
                       {
                         difficulty === 'intermediate' &&
                           <>
-                            <IntermediateMonster />
+                            <IntermediateMonster 
+                              monster_hp={gameState.monster_hp}
+                              monster_max_hp={gameState.monster_max_hp}
+                              question_judgement={gameState.question_judgement}
+                              first_appearance={gameState.first_appearance}
+                              game_result={gameState.game_result}
+                              game_description_open={gameState.game_description_open}
+                            />
                           </>
                       }
                       {

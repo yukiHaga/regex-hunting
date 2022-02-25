@@ -7,7 +7,7 @@ export const getMonsterName = (difficulty) => {
       monsterName = 'スクータムの群れ';
       break;
     case 'intermediate':
-      monsterName = 'カスアリウスの群れ';
+      monsterName = 'カスアリウス';
       break;
     case 'advanced':
       monsterName = 'オルファラ・ラパクス';

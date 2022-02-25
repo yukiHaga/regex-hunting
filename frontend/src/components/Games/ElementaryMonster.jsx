@@ -1,5 +1,5 @@
 import React from 'react';
-import styled, { keyframes } from 'styled-components';
+import styled from 'styled-components';
 
 // Colors
 import { COLORS } from '../../style_constants.js';
@@ -10,43 +10,10 @@ import ElementaryMonsterImage from '../../images/elementary.png';
 // handleColorType 
 import { handleColorType } from '../../functions/handleColorType.js';
 
-// 攻撃されたときのアニメーション
-const ElementaryMonsterFlash = keyframes`
-  20%{
-    opacity: 0;
-  }
-  40%{
-    opacity: 1;
-  }
-  60%{
-    opacity: 0;
-  }
-  80%{
-    opacity: 1;
-  }
-`;
-
-// 初登場のアニメーション
-const FadeInAnime = keyframes`
-  from {
-    opacity: 0;
-  }
-
-  to {
-    opacity: 1;
-  }
-`;
-
-// 倒されたときのアニメーション
-const FadeOutAnime = keyframes`
-  from {
-    opacity: 1;
-  }
-
-  to {
-    opacity: 0;
-  }
-`;
+// アニメーション
+import { MonsterFlash } from '../shared_style.js';
+import { FadeInAnime } from '../shared_style.js';
+import { FadeOutAnime } from '../shared_style.js';
 
 const ElementaryWrapper = styled.div`
   animation-name: ${(props) => props.game_result === "win" && FadeOutAnime};
@@ -69,7 +36,7 @@ const ElementaryMonsterWrapper = styled.img`
   width: 50%;
   height: 50%
   object-fit: contain;
-  animation-name: ${(props) => props.question_judgement === "correct" && ElementaryMonsterFlash};
+  animation-name: ${(props) => props.question_judgement === "correct" && MonsterFlash};
   animation-duration: 1s;
   animation-timing-function: linear;
   animation-iteration-count: 1;
@@ -106,8 +73,6 @@ export const ElementaryMonster = ({
   game_result,
   game_description_open
 }) => {
-
-
   return (
     <>
       {

@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled, { keyframes } from 'styled-components';
 //import Button from '@mui/material/Button';
 
 // constants
@@ -85,4 +85,44 @@ export const DescriptionWrapper = styled.div`
   color: ${COLORS.BLACK};
   font-style: normal;
   letter-spacing: 0.05em;
+`;
+
+// モンスター関連のアニメーション
+//
+// 攻撃されたときのアニメーション
+export const MonsterFlash = keyframes`
+  20%{
+    opacity: 0;
+  }
+  40%{
+    opacity: 1;
+  }
+  60%{
+    opacity: 0;
+  }
+  80%{
+    opacity: 1;
+  }
+`;
+
+// 初登場のアニメーション
+export const FadeInAnime = keyframes`
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+`;
+
+// 倒されたときのアニメーション
+export const FadeOutAnime = keyframes`
+  from {
+    opacity: 1;
+  }
+
+  to {
+    opacity: 0;
+  }
 `;
