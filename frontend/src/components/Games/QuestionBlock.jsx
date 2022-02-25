@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useMemo } from 'react';
 import styled from 'styled-components';
 
 // Colors
@@ -116,6 +116,29 @@ export const QuestionBlock = ({
     }
     return jpDifficulty;
   };
+
+  // 各難易度における不正解の上限数を出力する関数 
+  // この関数の値を使用することで、難易度毎のゲームの終了タイミングをコントロールできる
+  const getIncorrectCount = (difficulty) => {
+    let incorrectCount;
+    switch (difficulty){
+      case 'elementary':
+        incorrectCount = 5;
+        break;
+      case 'intermediate':
+        incorrectCount = 5;
+        break;
+      case 'advanced':
+        incorrectCount = 4;
+        break;
+      default:
+        console.log('エラーが起きました');
+    }
+    return incorrectCount;
+  };
+
+  // 各難易度における不正解の上限数は、1回計算すれば十分なので、メモ化する
+  const memoIncorrectCount = useMemo(() => getIncorrectCount(difficulty), [difficulty])
 
   // 最初のメッセージからsetTimeOutを制御するif文
   // このuseEffectがあるおかげで、最初のモンスターセンテンスが
@@ -244,7 +267,7 @@ export const QuestionBlock = ({
         key_available: false,
         time_active: false
       }));
-      if(incorrect_questions.length === 5) {
+      if(incorrect_questions.length === memoIncorrectCount) {
         const timer = setTimeout(() => {
           setGameState((prev) => ({
             ...prev,
