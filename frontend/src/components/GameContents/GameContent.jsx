@@ -120,7 +120,7 @@ export const GameContent = memo(({
         sentence = '最大量指定子, 選択, 括弧をマスターして、カスアリウスを倒そう！';
         break;
       case 'advanced':
-        sentence = '先読み, アンカーをマスターして、オルファ・ラパクスを倒そう！';
+        sentence = 'アンカー, 先読みをマスターして、オルファ・ラパクスを倒そう！';
         break;
       default:
         sentence = 'エラーが発生しています。';
