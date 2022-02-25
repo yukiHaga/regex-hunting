@@ -24,33 +24,33 @@ Question.seed(
   # 3問目
   {
     id: 17,
-    sentence: '<html>, <h>, <p>, <span>にマッチする正規表現を入力せよ',
-    target_sentence: '<html> <h> <p> <span>',
+    sentence: '<html>, <p>, <span>にマッチする正規表現を入力せよ',
+    target_sentence: '<html> <p> <span>',
     sample_answer: '<[a-z]+>',
     hint: '文字列, 文字クラス, 量指定子(+)を使用して、正規表現を作ってみましょう。',
-    commentary: '[a-z]+はaからzの1文字が1文字以上を表します。そのため、<[a-z]+>で<html>, <h>, <p>, <span>にマッチするような正規表現を表します。 <\\w+>でマッチさせることもできます。',
+    commentary: '[a-z]+はaからzの1文字が1文字以上を表します。そのため、<[a-z]+>で<html>, <p>, <span>にマッチするような正規表現を表します。 <\\w+>でマッチさせることもできます。',
     difficulty: 'intermediate'
   },
 
   # 4問目
   {
     id: 18,
-    sentence: '<html>, <h>, <p>, <span>, <h5>, <h6>にマッチする正規表現を入力せよ。',
-    target_sentence: '<html> <h> <p> <span> <h5> <h6>',
+    sentence: '<span>, <h5>, <h6>にマッチする正規表現を入力せよ。',
+    target_sentence: '<span> <h5> <h6>',
     sample_answer: '<[a-z]+[1-6]?>',
     hint: '文字列, 文字クラス, 量指定子を使用して、正規表現を作ってみましょう。',
-    commentary: '[1-6]?は、1から6の1桁の数字またはなしを表します。そのため、<[a-z]+[1-6]?>で<html>, <h>, <p>, <span>, <h5>, <h6>にマッチするような正規表現を表します。<[a-z56]+>または<[a-z1-6]+>でマッチさせることもできます。',
+    commentary: '[1-6]?は、1から6の1桁の数字またはなしを表します。そのため、<[a-z]+[1-6]?>で<span>, <h5>, <h6>にマッチするような正規表現を表します。<[a-z56]+>または<[a-z1-6]+>でマッチさせることもできます。',
     difficulty: 'intermediate'
   },
 
   # 5問目
   {
     id: 19,
-    sentence: '<p>, <p class=\"red\">, <p class=\"blue\">にマッチする正規表現を入力せよ。',
-    target_sentence: '<p> <p class=\"red\"> <p class=\"blue\">',
-    sample_answer: '<p(?: class=\"[a-z]+\")?>',
+    sentence: '<p>, <p class=\"blue\">にマッチする正規表現を入力せよ。',
+    target_sentence: '<p> <p class=\"blue\">',
+    sample_answer: '<p(?: class=\"blue\")?>',
     hint: '文字列, 括弧, 文字クラス, 量指定子を使用して、正規表現を作ってみましょう。',
-    commentary: '<p>と、属性値を持つ<p>がターゲットテキストです。属性値を持つまたは持たないという条件から、ターゲットテキストにマッチできる正規表現は、<p(...)?>という形であることが予想できます。class=\"...\"の部分は、class=\"[a-z]+\"で表すことができます。そのため、<p(?: class=\"[a-z]+\")?>で<p>, <p class=\"red\">, <p class=\"blue\">にマッチするような正規表現を表します。',
+    commentary: '<p>と、属性値を持つ<p>がターゲットテキストです。属性値を持つまたは持たないという条件から、ターゲットテキストにマッチできる正規表現は、<p(...)?>という形であることが予想できます。そのため、<p(?: class=\"blue\")?>で<p>, <p class=\"blue\">にマッチするような正規表現を表します。',
     difficulty: 'intermediate'
   },
 
@@ -123,11 +123,11 @@ Question.seed(
   # 12問目
   {
     id: 26,
-    sentence: '1, 112, 11212, 1121212, 112121212にマッチする正規表現を入力せよ。',
-    target_sentence: '1 112 11212 1121212 112121212',
+    sentence: '1, 112, 11212, 1121212にマッチする正規表現を入力せよ。',
+    target_sentence: '1 112 11212 1121212',
     sample_answer: '1(?:12)*',
     hint: '文字列, 括弧, 量指定子(*)を使用して、正規表現を作ってみましょう。',
-    commentary: '全ての数は、先頭が1から始まります。その後、12が0回以上繰り返されています。そのため、1(?:12)*で1, 112, 11212, 1121212, 112121212にマッチする正規表現を表します。',
+    commentary: '全ての数は、先頭が1から始まります。その後、12が0回以上繰り返されています。そのため、1(?:12)*で1, 112, 11212, 1121212にマッチする正規表現を表します。',
     difficulty: 'intermediate'
   },
 

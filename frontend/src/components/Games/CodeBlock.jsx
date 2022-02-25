@@ -94,6 +94,7 @@ export const CodeBlock = ({
   const inputRefObject = useRef("");
 
   // regex_objectを生成する関数
+  // テンプレートリテラルの括弧(を無くすと、なぜか機能しなくなったので、残しとく。
   const getRegexObject = (
     input_regex
   ) => {
