@@ -12,7 +12,7 @@ Monster.seed(
     id: 2,
     name: 'カスアリウス',
     max_hp: 100,
-    attack: 100,
+    attack: 55,
     defence: 10,
     difficulty: 'intermediate'
   },
