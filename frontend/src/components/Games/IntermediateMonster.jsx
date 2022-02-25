@@ -23,8 +23,8 @@ const IntermediateWrapper = styled.div`
 
 // 初登場時のモンスター
 const FirstIntermediateMonsterWrapper = styled.img`
-  width: 23%;
-  height: 23%;
+  width: 26%;
+  height: 26%;
   object-fit: contain;
   animation-name: ${FadeInAnime};
   animation-duration: 3s;
@@ -32,8 +32,8 @@ const FirstIntermediateMonsterWrapper = styled.img`
 `;
 
 const IntermediateMonsterWrapper = styled.img`
-  width: 23%;
-  height: 23%
+  width: 26%;
+  height: 26%
   object-fit: contain;
   animation-name: ${(props) => props.question_judgement === "correct" && MonsterFlash};
   animation-duration: 1s;
