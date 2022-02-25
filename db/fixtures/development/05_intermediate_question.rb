@@ -46,11 +46,11 @@ Question.seed(
   # 5問目
   {
     id: 19,
-    sentence: '<p>, <p class=\"blue\">にマッチする正規表現を入力せよ。',
-    target_sentence: '<p> <p class=\"blue\">',
-    sample_answer: '<p(?: class=\"blue\")?>',
+    sentence: '<p>, <p class={Blue}>にマッチする正規表現を入力せよ。',
+    target_sentence: '<p> <p class={Blue}>',
+    sample_answer: '<p(?: class={Blue})?>',
     hint: '文字列, 括弧, 文字クラス, 量指定子を使用して、正規表現を作ってみましょう。',
-    commentary: '<p>と、属性値を持つ<p>がターゲットテキストです。属性値を持つまたは持たないという条件から、ターゲットテキストにマッチできる正規表現は、<p(...)?>という形であることが予想できます。そのため、<p(?: class=\"blue\")?>で<p>, <p class=\"blue\">にマッチするような正規表現を表します。',
+    commentary: '<p>と、属性値を持つ<p>がターゲットテキストです。属性値を持つまたは持たないという条件から、ターゲットテキストにマッチできる正規表現は、<p(...)?>という形であることが予想できます。そのため、<p(?: class={Blue})?>で<p>, <p class={Blue}>にマッチするような正規表現を表します。',
     difficulty: 'intermediate'
   },
 
