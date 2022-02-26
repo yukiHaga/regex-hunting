@@ -231,7 +231,7 @@ export const IntermediateGameDescriptionDialog = ({
   const slideContent = useMemo(() => [
     {
       title: "中級編",
-      sentence: "中級編を始める前に、最大量指定子、選択、括弧について学習しましょう！ そして、中級編のゲームを通して、これらの特殊文字を使用した正規表現をマスターしましょう！",
+      sentence: "中級編を始める前に、最大量指定子(? * + {min,max})、括弧について学習しましょう！ そして、中級編のゲームを通して、これらの特殊文字を使用した正規表現をマスターしましょう！",
       slide_num: 0
     },
     {
