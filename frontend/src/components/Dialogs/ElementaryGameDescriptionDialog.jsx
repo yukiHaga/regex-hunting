@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useCallback, useMemo } from 'react';
-import styled, { keyframes } from 'styled-components';
+import styled from 'styled-components';
 
 // ダイアログ
 import { DialogContent, Dialog } from '@mui/material';
@@ -20,6 +20,9 @@ import { FinallyGameRestartButton } from '../Buttons/FinallyGameRestartButton.js
 // ツールチップ
 import Tooltip from '@mui/material/Tooltip';
 import IconButton from '@mui/material/IconButton';
+
+// スライドアニメーション関係の関数
+import { slideFunction } from '../../functions/slideFunction.js';
 
 const CustomDialogInnerWrapper = styled.div`
   background-color: ${COLORS.SUB};
@@ -42,72 +45,6 @@ const TitleWrapper = styled.div`
   width: 80%;
   margin: 0 auto;
 `;
-
-// フェードアウトのアニメーション
-// transform: translateXは、x方向に動かすって意味
-// x方向の位置をどんどん原点に近づけることで、右から左に動いているように見える
-const LeftSlideOutAnime = keyframes`
-  0% {
-    opacity: 1;
-    transform: translateX(0);
-  }
-  100% {
-    opacity: 0;
-    transform: translateX(-50%);
-  }
-`;
-
-const LeftSlideInAnime = keyframes`
-  0% {
-    opacity: 0;
-    transform: translateX(50%);
-  }
-  100% {
-    opacity: 1;
-    transform: translateX(0);
-  }
-`;
-
-const RightSlideOutAnime = keyframes`
-  0% {
-    opacity: 1;
-    transform: translateX(0);
-  }
-  100% {
-    opacity: 0;
-    transform: translateX(50%);
-  }
-`;
-
-const RightSlideInAnime = keyframes`
-  0% {
-    opacity: 0;
-    transform: translateX(-50%);
-  }
-  100% {
-    opacity: 1;
-    transform: translateX(0);
-  }
-`;
-
-const slideFunction = (
-  slide_in,
-  slide_out,
-  direction
-) => {
-  switch (true){
-    case slide_out && !slide_in && direction === "left":
-      return LeftSlideOutAnime;
-    case !slide_out && slide_in && direction === "left":
-      return LeftSlideInAnime;
-    case slide_out && !slide_in && direction === "right":
-      return RightSlideOutAnime;
-    case !slide_out && slide_in && direction === "right":
-      return RightSlideInAnime;
-    default:
-      return false;
-  }
-};
 
 // animationプロパティは1つしか存在できない
 // 2個存在する場合、2個目で1個目が上書きされる

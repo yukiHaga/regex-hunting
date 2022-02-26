@@ -126,3 +126,52 @@ export const FadeOutAnime = keyframes`
     opacity: 0;
   }
 `;
+
+// スライド関連のアニメーション
+//
+// transform: translateXは、x方向に動かすって意味
+// x方向の位置をどんどん原点に近づけることで、右から左に動いているように見える
+export const LeftSlideOutAnime = keyframes`
+  0% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+  100% {
+    opacity: 0;
+    transform: translateX(-50%);
+  }
+`;
+
+export const LeftSlideInAnime = keyframes`
+  0% {
+    opacity: 0;
+    transform: translateX(50%);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+`;
+
+export const RightSlideOutAnime = keyframes`
+  0% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+  100% {
+    opacity: 0;
+    transform: translateX(50%);
+  }
+`;
+
+export const RightSlideInAnime = keyframes`
+  0% {
+    opacity: 0;
+    transform: translateX(-50%);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+`;
+

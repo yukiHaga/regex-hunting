@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useCallback, useMemo } from 'react';
-import styled, { keyframes } from 'styled-components';
+import styled from 'styled-components';
 
 // ダイアログ
 import { DialogContent, Dialog } from '@mui/material';
@@ -20,6 +20,9 @@ import { FinallyGameRestartButton } from '../Buttons/FinallyGameRestartButton.js
 // ツールチップ
 import Tooltip from '@mui/material/Tooltip';
 import IconButton from '@mui/material/IconButton';
+
+// スライドアニメーション関係の関数
+import { slideFunction } from '../../functions/slideFunction.js';
 
 const CustomDialogInnerWrapper = styled.div`
   background-color: ${COLORS.SUB};
@@ -42,72 +45,6 @@ const TitleWrapper = styled.div`
   width: 80%;
   margin: 0 auto;
 `;
-
-// フェードアウトのアニメーション
-// transform: translateXは、x方向に動かすって意味
-// x方向の位置をどんどん原点に近づけることで、右から左に動いているように見える
-const LeftSlideOutAnime = keyframes`
-  0% {
-    opacity: 1;
-    transform: translateX(0);
-  }
-  100% {
-    opacity: 0;
-    transform: translateX(-50%);
-  }
-`;
-
-const LeftSlideInAnime = keyframes`
-  0% {
-    opacity: 0;
-    transform: translateX(50%);
-  }
-  100% {
-    opacity: 1;
-    transform: translateX(0);
-  }
-`;
-
-const RightSlideOutAnime = keyframes`
-  0% {
-    opacity: 1;
-    transform: translateX(0);
-  }
-  100% {
-    opacity: 0;
-    transform: translateX(50%);
-  }
-`;
-
-const RightSlideInAnime = keyframes`
-  0% {
-    opacity: 0;
-    transform: translateX(-50%);
-  }
-  100% {
-    opacity: 1;
-    transform: translateX(0);
-  }
-`;
-
-const slideFunction = (
-  slide_in,
-  slide_out,
-  direction
-) => {
-  switch (true){
-    case slide_out && !slide_in && direction === "left":
-      return LeftSlideOutAnime;
-    case !slide_out && slide_in && direction === "left":
-      return LeftSlideInAnime;
-    case slide_out && !slide_in && direction === "right":
-      return RightSlideOutAnime;
-    case !slide_out && slide_in && direction === "right":
-      return RightSlideInAnime;
-    default:
-      return false;
-  }
-};
 
 // animationプロパティは1つしか存在できない
 // 2個存在する場合、2個目で1個目が上書きされる
@@ -240,19 +177,29 @@ export const IntermediateGameDescriptionDialog = ({
       slide_num: 1
     },
     {
-      title: "選択とは？",
+      title: "?の使い方",
       sentence: "文字クラス([...])とは、指定した文字のどれか1文字を表す特殊文字です。[...]の...に、現れても良い1文字を複数指定します。例えば、[acz#]と書くと、[acz#]は、a, c, z, #のどれか1文字を表します。また、文字クラスの別の使い方として、[...]の中に-を書くと、文字の範囲を指定できます。例えば、[a-z]はaからzの小文字アルファベット1文字を表します。[1-9]は、0から9の1桁の数字を表します。範囲は複数指定できるので、[a-zA-Z]や[a-zA-Z1-9]と書くこともできます。文字クラス内で文字指定と範囲指定を併用することもできるので、[a-z#%]と書くことも可能です。",
       slide_num: 2
     },
     {
-      title: "括弧とは？",
+      title: "*と+の使い方",
       sentence: "「\"gray grey\"という文字列のgrayとgreyにマッチするような正規表現を求めよ」と言われた場合、1つの文字クラスのみで作られた正規表現ではマッチできません。理由は、文字クラスは指定した1文字を表すだけであり、2文字以上の文字列にマッチさせることができないからです。この場合、まずはgrayとgreyの共通文字と共通ではない文字を見つけます。共通な文字はg, r, yです。そして、共通ではない文字はa, eです。aとeは、grayとgreyの3番目に位置する文字です。したがって、「gr[ae]y」という正規表現を用いることで、grayとgreyにマッチさせることができます。",
       slide_num: 3
     },
     {
+      title: "{min,max}の使い方",
+      sentence: "「\"gray grey\"という文字列のgrayとgreyにマッチするような正規表現を求めよ」と言われた場合、1つの文字クラスのみで作られた正規表現ではマッチできません。理由は、文字クラスは指定した1文字を表すだけであり、2文字以上の文字列にマッチさせることができないからです。この場合、まずはgrayとgreyの共通文字と共通ではない文字を見つけます。共通な文字はg, r, yです。そして、共通ではない文字はa, eです。aとeは、grayとgreyの3番目に位置する文字です。したがって、「gr[ae]y」という正規表現を用いることで、grayとgreyにマッチさせることができます。",
+      slide_num: 4
+    },
+    {
+      title: "括弧とは？",
+      sentence: "「\"gray grey\"という文字列のgrayとgreyにマッチするような正規表現を求めよ」と言われた場合、1つの文字クラスのみで作られた正規表現ではマッチできません。理由は、文字クラスは指定した1文字を表すだけであり、2文字以上の文字列にマッチさせることができないからです。この場合、まずはgrayとgreyの共通文字と共通ではない文字を見つけます。共通な文字はg, r, yです。そして、共通ではない文字はa, eです。aとeは、grayとgreyの3番目に位置する文字です。したがって、「gr[ae]y」という正規表現を用いることで、grayとgreyにマッチさせることができます。",
+      slide_num: 5
+    },
+    {
       title: "ルール説明",
       sentence: "中級編では、最大量指定子、選択、括弧を使用した正規表現を学習していきます。時間内に正しい正規表現を入力すると、モンスターに攻撃できます。モンスターのHPを0にしたらゲームクリアです！",
-      slide_num: 4
+      slide_num: 6
     }
   ], []);
 
@@ -269,9 +216,9 @@ export const IntermediateGameDescriptionDialog = ({
 
   // 右カーソルをクリックで左へずらす
   // スライドが右のスライドになる
-  // slideState.slide_numが4より小さい場合、右カーソルが機能する
+  // slideState.slide_numが6より小さい場合、右カーソルが機能する
   const changeSlideToRight = useCallback(() => {
-    if(slideState.slide_num < 4) {
+    if(slideState.slide_num < 6) {
       setSlideState((prev) => ({
         ...prev,
         slide_in: false,
@@ -463,7 +410,7 @@ export const IntermediateGameDescriptionDialog = ({
                     </>
                 }
                 {
-                  slideState.slide_num === 4 &&
+                  slideState.slide_num === 6 &&
                     <>
                       <WarningSentenceWrapper>
                         ※ UX向上の為、音が出ます。音量が気になる方は下げて頂くようお願いします。
@@ -509,18 +456,18 @@ export const IntermediateGameDescriptionDialog = ({
                 <Tooltip 
                   title={<div>進む<br />( 右矢印キー → )</div>}
                   placement="top"
-                  disableHoverListener={slideState.slide_num === 4}
+                  disableHoverListener={slideState.slide_num === 6}
                   sx={{
-                    opacity: slideState.slide_num === 4 ? 0 : 1,
+                    opacity: slideState.slide_num === 6 ? 0 : 1,
                   }}
                 >
                   <IconButton
                     sx={{
                       fontSize: '4.0em',
-                      opacity: slideState.slide_num === 4 ? 0.1 : 1,
-                      cursor: slideState.slide_num === 4 && "default"
+                      opacity: slideState.slide_num === 6 ? 0.1 : 1,
+                      cursor: slideState.slide_num === 6 && "default"
                     }}
-                    disableRipple={slideState.slide_num === 4}
+                    disableRipple={slideState.slide_num === 6}
                   >
                     <ArrowRightIcon 
                       fontSize='inherit' 
