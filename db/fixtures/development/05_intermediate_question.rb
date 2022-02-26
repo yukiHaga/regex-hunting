@@ -6,7 +6,7 @@ Question.seed(
     target_sentence: 'argument arguement',
     sample_answer: 'argue?ment',
     hint: '文字列と量指定子(?)を使用して、正規表現を作ってみましょう。',
-    commentary: 'e?は、eまたはなしを表します。そのため、argue?mentでargument, arguementにマッチするような正規表現を表します。argument|arguementまたはargu(?:m|em)entでマッチさせることもできます。',
+    commentary: 'e?は、eまたはなしを表します。そのため、argue?mentでargument, arguementにマッチするような正規表現を表します。',
     difficulty: 'intermediate'
   },
 
@@ -17,7 +17,7 @@ Question.seed(
     target_sentence: 'environment enviroment',
     sample_answer: 'environ?ment',
     hint: '文字列と量指定子(?)を使用して、正規表現を作ってみましょう。',
-    commentary: 'n?は、nまたはなしを表します。そのため、environ?mentでenvironment, enviromentにマッチするような正規表現を表します。environment|enviromentまたはenviro(?:nm|m)entでマッチさせることもできます。',
+    commentary: 'n?は、nまたはなしを表します。そのため、environ?mentでenvironment, enviromentにマッチするような正規表現を表します。',
     difficulty: 'intermediate'
   },
 
@@ -28,7 +28,7 @@ Question.seed(
     target_sentence: '<html> <p> <span>',
     sample_answer: '<[a-z]+>',
     hint: '文字列, 文字クラス, 量指定子(+)を使用して、正規表現を作ってみましょう。',
-    commentary: '[a-z]+はaからzの1文字が1文字以上を表します。そのため、<[a-z]+>で<html>, <p>, <span>にマッチするような正規表現を表します。 <\\w+>でマッチさせることもできます。',
+    commentary: '[a-z]+はaからzの1文字が1文字以上を表します。そのため、<[a-z]+>で<html>, <p>, <span>にマッチするような正規表現を表します。',
     difficulty: 'intermediate'
   },
 
@@ -101,11 +101,11 @@ Question.seed(
   # 10問目
   {
     id: 24,
-    sentence: 'book, breakにマッチする正規表現を入力せよ。',
-    target_sentence: 'book break',
-    sample_answer: 'b(?:oo|rea)k',
-    hint: '文字列, 括弧, 選択を使用して、正規表現を作ってみましょう。',
-    commentary: 'bookとbreakの共通な文字列はb, kです。共通ではない文字列はooとreaです。ooとreaは2文字以上の単語なので、選択を使うとoo|reaと表せます。したがって、b(?:oo|rea)kはbook, breakにマッチする正規表現を表します。ちなみに、括弧を使わない場合、boo|reakという正規表現になります。この正規表現は、boo, reakにマッチする為、bookとbreakにはマッチしません。気をつけるべきことは、選択の優先順位は非常に低いということです。括弧を使用することで、選択の範囲を限定できます。そのため、解答では括弧を使用しました。余談ですが、b[a-z]+kでマッチさせることもできます。',
+    sentence: 'React, JavaScript にマッチする正規表現を入力せよ。',
+    target_sentence: 'React is a JavaScript library',
+    sample_answer: '[A-Z][a-zA-Z]+',
+    hint: '文字クラス, 量指定子を使用して、正規表現を作ってみましょう。',
+    commentary: 'Reactという文字列とJavaScriptという文字列に共通することは、先頭が大文字ということです。大文字1文字を表す正規表現は[A-Z]です。2文字目以降は大文字と小文字が存在するので、[a-zA-Z]と表すことができます。したがって、React, JavaScriptにマッチする正規表現は、[A-Z][a-zA-Z]+であることが分かります。',
     difficulty: 'intermediate'
   },
 
@@ -134,11 +134,11 @@ Question.seed(
   # 13問目
   {
     id: 27,
-    sentence: '-1.5, 0, 2, -123, -110.9にマッチする正規表現を入力せよ。',
-    target_sentence: '-1.5 0 2 -123 -110.9',
-    sample_answer: '-?\\d{1,3}(?:\.\\d)?',
+    sentence: '123, -110.9にマッチする正規表現を入力せよ。',
+    target_sentence: '123 -110.9',
+    sample_answer: '-?\\d{3}(?:\.\\d)?',
     hint: '\\d, 量指定子を使用して、正規表現を作ってみましょう。',
-    commentary: 'マイナスがあるかないかは-?で表すことができます。マイナスと小数点との間には1桁以上3桁以下の数が存在するので、\\d{1,3}で表すことができます。小数点と小数第一位の数があるかないかは(?:\.\\d)?で表すことができます。.自体は任意の1文字を表すので、純粋に.として使いたい場合、\\でエスケープします。したがって、-?\\d{1,3}(?:\.\\d)?で-1.5, 0, 2, -123, -110.9にマッチする正規表現を表します。',
+    commentary: 'マイナスがあるかないかは-?で表すことができます。マイナスと小数点との間には3桁の数字が存在するので、\\d{3}で表すことができます。小数点と小数第一位の数があるかないかは(?:\.\\d)?で表すことができます。.自体は任意の1文字を表すので、純粋に.として使いたい場合、\\でエスケープします。したがって、-?\\d{3}(?:\.\\d)?で-123, -110.9にマッチする正規表現を表します。',
     difficulty: 'intermediate'
   },
 
