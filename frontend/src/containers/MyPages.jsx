@@ -21,7 +21,7 @@ import { TitleFlashMessage } from '../components/FlashMessages/TitleFlashMessage
  
 // Images
 import ElementaryGameContentImage from '../images/elementary_game_content.jpg';
-import IntermediateGameContentImage from '../images/intermediate_game_content.png';
+import IntermediateGameContentImage from '../images/intermediate_game_content.jpg';
 
 // Contextオブジェクト
 import { UserContext } from "../context/UserProvider.js";
