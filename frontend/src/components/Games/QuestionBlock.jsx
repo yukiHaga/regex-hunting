@@ -117,6 +117,28 @@ export const QuestionBlock = ({
     return jpDifficulty;
   };
 
+  // 難易度毎のモンスターからダメージを喰らう時のセンテンス
+  const getDamageSentence = (difficulty) => {
+    let damageSentence;
+    switch (difficulty){
+      case 'elementary':
+        damageSentence = 'ハンターに20ダメージ';
+        break;
+      case 'intermediate':
+        damageSentence = 'ハンターに20ダメージ';
+        break;
+      case 'advanced':
+        damageSentence = 'ハンターに25ダメージ';
+        break;
+      default:
+        console.log('エラーが起きました');
+    }
+    return damageSentence;
+  };
+
+  // 難易度毎のモンスターからダメージを喰らう時のセンテンスは、1回計算すれば十分なので、メモ化する
+  const memoDamageSentence = useMemo(() => getDamageSentence(difficulty), [difficulty])
+
   // 各難易度における不正解の上限数を出力する関数 
   // この関数の値を使用することで、難易度毎のゲームの終了タイミングをコントロールできる
   const getIncorrectCount = (difficulty) => {
@@ -263,7 +285,7 @@ export const QuestionBlock = ({
     if(game_result === "progress" && question_judgement === "incorrect") {
       setGameState((prev) => ({
         ...prev,
-        sentence: `ハンターに10ダメージ`,
+        sentence: memoDamageSentence,
         key_available: false,
         time_active: false
       }));
@@ -329,7 +351,8 @@ export const QuestionBlock = ({
     total_experience,
     maximum_experience_per_rank,
     temporary_experience,
-    memoIncorrectCount
+    memoIncorrectCount,
+    memoDamageSentence
   ]);
 
   // マッチした箇所をリプレイスするライブラリをrequireしてくる
