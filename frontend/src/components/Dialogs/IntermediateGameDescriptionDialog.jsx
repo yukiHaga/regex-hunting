@@ -320,7 +320,8 @@ export const IntermediateGameDescriptionDialog = ({
           <DialogContent
             sx={{
               height: "75vh",
-              pb: "0"
+              pb: "0",
+              overflowX: "hidden"
             }}
           >
             <DynamicSlideContentWrapper>
