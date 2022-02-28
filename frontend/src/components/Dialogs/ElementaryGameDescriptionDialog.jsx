@@ -65,7 +65,7 @@ const SentenceWrapper = styled.div`
   font-weight: normal;
   font-size: 1.1em;
   text-align: left;
-  margin-top: 5%;
+  margin-top: 4%;
   color: ${COLORS.BLACK};
 `;
 
@@ -370,7 +370,7 @@ export const ElementaryGameDescriptionDialog = ({
                             {'//'} 以下の{'/.../g'}の...にある[a-z#%]は、aからz, #, %のどれか1文字を表す正規表現です。
                           </ComentLineWrapper>
                           <CodeLineWrapper>
-                            <CodeRedSpan>const</CodeRedSpan> regex_pattern_1 <CodeYellowSpan>=</CodeYellowSpan> <CodeYellowSpan>/[a-z#%]/g</CodeYellowSpan>;
+                            <CodeRedSpan>const</CodeRedSpan> regex_pattern_2 <CodeYellowSpan>=</CodeYellowSpan> <CodeYellowSpan>/[a-z#%]/g</CodeYellowSpan>;
                           </CodeLineWrapper>
                         </CodeBlockDiv>
                       </CodeBlockWrapper>

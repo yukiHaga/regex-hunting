@@ -65,7 +65,7 @@ const SentenceWrapper = styled.div`
   font-weight: normal;
   font-size: 1.1em;
   text-align: left;
-  margin-top: 5%;
+  margin-top: 4%;
   color: ${COLORS.BLACK};
 `;
 
@@ -75,6 +75,10 @@ const CodeBlockWrapper = styled.div`
   margin: 0 auto;
   margin-top: 3%;
   box-shadow: 0 4px 6px rgba(0,0,0,0.2);
+`;
+
+const CaptureCodeBlockWrapper = styled(CodeBlockWrapper)`
+  margin-top: 2%;
 `;
 
 const CodeBlockDiv = styled.div`
@@ -128,6 +132,10 @@ const WarningSentenceWrapper = styled.div`
   color: ${COLORS.RED};
 `;
 
+const CaptureWarningSentenceWrapper = styled(WarningSentenceWrapper)`
+  margin-top: 1%;
+`;
+
 const OuterButtonsWrapper = styled.div`
   margin: 0 auto;
   display: flex;
@@ -173,32 +181,32 @@ export const IntermediateGameDescriptionDialog = ({
     },
     {
       title: "最大量指定子とは？",
-      sentence: "正規表現とは、複数の文字列からルールを見つけ出し、そのルールをパターンで表現したものです。正規表現は、基本的に「文字列」と「特殊文字」で構成されます。正規表現とプログラミング言語の正規表現用メソッドを併用することによって、複数の文字列から特定の文字を取得したり、置換したりすることができます。",
+      sentence: "最大量指定子(? * + {min,max})とは、ある文字列の繰り返しを表現するための特殊文字です。ある文字列の直後に最大量指定子を置くと、その文字列に対して最大量指定子を適用させることができます。正規表現で最大量指定子を使用することによって、繰り返しの文字列にマッチさせるのが簡単になります。以降のスライドでは、各最大量指定子の使用方法について説明します。",
       slide_num: 1
     },
     {
       title: "?の使い方",
-      sentence: "文字クラス([...])とは、指定した文字のどれか1文字を表す特殊文字です。[...]の...に、現れても良い1文字を複数指定します。例えば、[acz#]と書くと、[acz#]は、a, c, z, #のどれか1文字を表します。また、文字クラスの別の使い方として、[...]の中に-を書くと、文字の範囲を指定できます。例えば、[a-z]はaからzの小文字アルファベット1文字を表します。[1-9]は、0から9の1桁の数字を表します。範囲は複数指定できるので、[a-zA-Z]や[a-zA-Z1-9]と書くこともできます。文字クラス内で文字指定と範囲指定を併用することもできるので、[a-z#%]と書くことも可能です。",
+      sentence: "最大量指定子?は、直前の1文字があってもなくてもよいという意味を表します。文字列の直後に?を置くことで、その文字列に?の意味が適用されます。例えば、n?はnがあってもなくても良いという意味を表します。n?を使用したenviron?mentという正規表現は、environment, enviromentという文字列にマッチさせることができます。このように、直前の1文字があってもなくてもよいという正規表現を作りたい時に、?を使います。",
       slide_num: 2
     },
     {
-      title: "*と+の使い方",
-      sentence: "「\"gray grey\"という文字列のgrayとgreyにマッチするような正規表現を求めよ」と言われた場合、1つの文字クラスのみで作られた正規表現ではマッチできません。理由は、文字クラスは指定した1文字を表すだけであり、2文字以上の文字列にマッチさせることができないからです。この場合、まずはgrayとgreyの共通文字と共通ではない文字を見つけます。共通な文字はg, r, yです。そして、共通ではない文字はa, eです。aとeは、grayとgreyの3番目に位置する文字です。したがって、「gr[ae]y」という正規表現を用いることで、grayとgreyにマッチさせることができます。",
+      title: "+と*の使い方",
+      sentence: "最大量指定子+は、直前の1文字の1回以上の繰り返しという意味を表し、最大量指定子*は、直前の1文字の0回以上の繰り返しという意味を表します。+と*の意味は似ています。大きな違いとして、+の場合は少なくとも1回はマッチしないといけませんが、*の場合はなくても大丈夫です。以下の例では、o+がoの1回以上の繰り返しを表すので、cとkの間にoがない単語(ck)にはマッチしないことが分かります。直前の1文字を繰り返したい正規表現を作りたい時に、*や+を使います。",
       slide_num: 3
     },
     {
       title: "{min,max}の使い方",
-      sentence: "「\"gray grey\"という文字列のgrayとgreyにマッチするような正規表現を求めよ」と言われた場合、1つの文字クラスのみで作られた正規表現ではマッチできません。理由は、文字クラスは指定した1文字を表すだけであり、2文字以上の文字列にマッチさせることができないからです。この場合、まずはgrayとgreyの共通文字と共通ではない文字を見つけます。共通な文字はg, r, yです。そして、共通ではない文字はa, eです。aとeは、grayとgreyの3番目に位置する文字です。したがって、「gr[ae]y」という正規表現を用いることで、grayとgreyにマッチさせることができます。",
+      sentence: "最大量指定子{min,max}は、直前の1文字がmin回以上、max回以上の繰り返しという意味を表します。例えば、\\dは1桁の数字を表すので、\\d{3,5}は3桁以上、5桁以下の数字を表します。{min,max}以外にも、{min}や{min,}という書き方があります。{min}は直前の1文字がmin回を表し、{min,}は直前の1文字がmin回以上を表します。例えば、\\d{3}は3桁の数字を表し、\\d{3,}は3桁以上の数字を表します。直前の1文字の繰り返し回数を制御したい時に、{min,max}を使います。",
       slide_num: 4
     },
     {
       title: "括弧とは？",
-      sentence: "「\"gray grey\"という文字列のgrayとgreyにマッチするような正規表現を求めよ」と言われた場合、1つの文字クラスのみで作られた正規表現ではマッチできません。理由は、文字クラスは指定した1文字を表すだけであり、2文字以上の文字列にマッチさせることができないからです。この場合、まずはgrayとgreyの共通文字と共通ではない文字を見つけます。共通な文字はg, r, yです。そして、共通ではない文字はa, eです。aとeは、grayとgreyの3番目に位置する文字です。したがって、「gr[ae]y」という正規表現を用いることで、grayとgreyにマッチさせることができます。",
+      sentence: "最大量指定子(? * + {min,max})は、どれも直前の1文字を対象とする特殊文字です。2文字以上の文字を繰り返したい時はどうすれば良いのでしょうか？ そのような時は括弧を使用します。括弧を使用することで、複数の文字列を1つのグループとして扱うことができます。そのグループに最大量指定子が使用できるので、2文字以上の文字列を繰り返すことができます。",
       slide_num: 5
     },
     {
       title: "ルール説明",
-      sentence: "中級編では、最大量指定子、選択、括弧を使用した正規表現を学習していきます。時間内に正しい正規表現を入力すると、モンスターに攻撃できます。モンスターのHPを0にしたらゲームクリアです！",
+      sentence: "中級編では、最大量指定子、括弧を使用した正規表現を学習していきます。時間内に正しい正規表現を入力すると、モンスターに攻撃できます。モンスターのHPを0にしたらゲームクリアです！",
       slide_num: 6
     }
   ], []);
@@ -344,21 +352,21 @@ export const IntermediateGameDescriptionDialog = ({
                             {'//'} 正規表現を適用させる文字列
                           </ComentLineWrapper>
                           <CodeLineWrapper>
-                            <CodeRedSpan>const</CodeRedSpan> target <CodeYellowSpan>=</CodeYellowSpan> <CodeYellowSpan>"JavaScript and React are different. TypeScript is a great language."</CodeYellowSpan>;
+                            <CodeRedSpan>const</CodeRedSpan> target <CodeYellowSpan>=</CodeYellowSpan> <CodeYellowSpan>"メラ メラメラ メラメラメラ"</CodeYellowSpan>;
                           </CodeLineWrapper>
                           <BlankLineWrapper />
                           <ComentLineWrapper>
-                            {'//'} [A-Z][a-zA-Z]+は、JavaScript, React, TypeScriptにマッチする正規表現です。
+                            {'//'} (メラ)+は、メラ, メラメラ, メラメラメラにマッチする正規表現です。
                           </ComentLineWrapper>
                           <CodeLineWrapper>
-                            <CodeRedSpan>const</CodeRedSpan> regex_pattern <CodeYellowSpan>=</CodeYellowSpan> <CodeYellowSpan>/[A-Z][a-zA-Z]+/g</CodeYellowSpan>;
+                            <CodeRedSpan>const</CodeRedSpan> regex_pattern <CodeYellowSpan>=</CodeYellowSpan> <CodeYellowSpan>/(メラ)+/g</CodeYellowSpan>;
                           </CodeLineWrapper>
                           <BlankLineWrapper />
                           <ComentLineWrapper>
                             {'//'} matchメソッドを用いることで、文字列中から正規表現を満たす文字列を取得できます。
                           </ComentLineWrapper>
                           <CodeLineWrapper>
-                            console.<CodeBlueSpan>log</CodeBlueSpan>(target.<CodeBlueSpan>match</CodeBlueSpan>(regex_pattern)); <CodeComentSpan>{'//'} => [ 'JavaScript', 'React', 'TypeScript' ]</CodeComentSpan>
+                            console.<CodeBlueSpan>log</CodeBlueSpan>(target.<CodeBlueSpan>match</CodeBlueSpan>(regex_pattern)); <CodeComentSpan>{'//'} => ['メラ', 'メラメラ', 'メラメラメラ']</CodeComentSpan>
                           </CodeLineWrapper>
                         </CodeBlockDiv>
                       </CodeBlockWrapper>
@@ -370,17 +378,24 @@ export const IntermediateGameDescriptionDialog = ({
                       <CodeBlockWrapper>
                         <CodeBlockDiv> 
                           <ComentLineWrapper>
-                            {'//'} 以下の{'/.../g'}の...にある[acz#]は、a, c, z, #のどれか1文字を表す正規表現です。
+                            {'//'} 正規表現を適用させる文字列
                           </ComentLineWrapper>
                           <CodeLineWrapper>
-                            <CodeRedSpan>const</CodeRedSpan> regex_pattern_1 <CodeYellowSpan>=</CodeYellowSpan> <CodeYellowSpan>/[acz#]/g</CodeYellowSpan>;
+                            <CodeRedSpan>const</CodeRedSpan> target <CodeYellowSpan>=</CodeYellowSpan> <CodeYellowSpan>"environment enviroment"</CodeYellowSpan>;
                           </CodeLineWrapper>
                           <BlankLineWrapper />
                           <ComentLineWrapper>
-                            {'//'} 以下の{'/.../g'}の...にある[a-z#%]は、aからz, #, %のどれか1文字を表す正規表現です。
+                            {'//'} environ?mentは、environment enviromentにマッチする正規表現です。
                           </ComentLineWrapper>
                           <CodeLineWrapper>
-                            <CodeRedSpan>const</CodeRedSpan> regex_pattern_1 <CodeYellowSpan>=</CodeYellowSpan> <CodeYellowSpan>/[a-z#%]/g</CodeYellowSpan>;
+                            <CodeRedSpan>const</CodeRedSpan> regex_pattern <CodeYellowSpan>=</CodeYellowSpan> <CodeYellowSpan>/environ?ment/g</CodeYellowSpan>;
+                          </CodeLineWrapper>
+                          <BlankLineWrapper />
+                          <ComentLineWrapper>
+                            {'//'} matchメソッドを用いることで、文字列中から正規表現を満たす文字列を取得できます。
+                          </ComentLineWrapper>
+                          <CodeLineWrapper>
+                            console.<CodeBlueSpan>log</CodeBlueSpan>(target.<CodeBlueSpan>match</CodeBlueSpan>(regex_pattern)); <CodeComentSpan>{'//'} => ['environment', 'enviroment']</CodeComentSpan>
                           </CodeLineWrapper>
                         </CodeBlockDiv>
                       </CodeBlockWrapper>
@@ -392,21 +407,79 @@ export const IntermediateGameDescriptionDialog = ({
                       <CodeBlockWrapper>
                         <CodeBlockDiv> 
                           <CodeLineWrapper>
-                            <CodeRedSpan>const</CodeRedSpan> target <CodeYellowSpan>=</CodeYellowSpan> <CodeYellowSpan>"gray grey"</CodeYellowSpan>;
-                          </CodeLineWrapper>
-                          <BlankLineWrapper />
-                          <ComentLineWrapper>
-                            {'//'} gr[ae]yは、gray, greyにマッチするような正規表現です。
-                          </ComentLineWrapper>
-                          <CodeLineWrapper>
-                            <CodeRedSpan>const</CodeRedSpan> regex_pattern <CodeYellowSpan>=</CodeYellowSpan> <CodeYellowSpan>/gr[ae]y/g</CodeYellowSpan>;
+                            <CodeRedSpan>const</CodeRedSpan> target <CodeYellowSpan>=</CodeYellowSpan> <CodeYellowSpan>"ck cook coook cooook"</CodeYellowSpan>;
                           </CodeLineWrapper>
                           <BlankLineWrapper />
                           <CodeLineWrapper>
-                            console.<CodeBlueSpan>log</CodeBlueSpan>(target.<CodeBlueSpan>match</CodeBlueSpan>(regex_pattern)); <CodeComentSpan>{'//'} => [ 'gray', 'grey' ]</CodeComentSpan>
+                            <CodeRedSpan>const</CodeRedSpan> regex_pattern_1 <CodeYellowSpan>=</CodeYellowSpan> <CodeYellowSpan>/co*k/g</CodeYellowSpan>; <CodeComentSpan>{'//'} co*kは、ck cook coook cooookにマッチする正規表現</CodeComentSpan>
+                          </CodeLineWrapper>
+                          <CodeLineWrapper>
+                            <CodeRedSpan>const</CodeRedSpan> regex_pattern_2 <CodeYellowSpan>=</CodeYellowSpan> <CodeYellowSpan>/co+k/g</CodeYellowSpan>; <CodeComentSpan>{'//'} co+kは、cook coook cooookにマッチする正規表現</CodeComentSpan>
+                          </CodeLineWrapper>
+                          <BlankLineWrapper />
+                          <CodeLineWrapper>
+                            console.<CodeBlueSpan>log</CodeBlueSpan>(target.<CodeBlueSpan>match</CodeBlueSpan>(regex_pattern_1)); <CodeComentSpan>{'//'} => ['ck', 'cook', 'coook', 'cooook']</CodeComentSpan>
+                          </CodeLineWrapper>
+                          <CodeLineWrapper>
+                            console.<CodeBlueSpan>log</CodeBlueSpan>(target.<CodeBlueSpan>match</CodeBlueSpan>(regex_pattern_2)); <CodeComentSpan>{'//'} => ['cook', 'coook', 'cooook']</CodeComentSpan>
                           </CodeLineWrapper>
                         </CodeBlockDiv>
                       </CodeBlockWrapper>
+                    </>
+                }
+                {
+                  slideState.slide_num === 4 &&
+                    <>
+                      <CodeBlockWrapper>
+                        <CodeBlockDiv> 
+                          <CodeLineWrapper>
+                            <CodeRedSpan>const</CodeRedSpan> target <CodeYellowSpan>=</CodeYellowSpan> <CodeYellowSpan>"150 is greater than 15."</CodeYellowSpan>;
+                          </CodeLineWrapper>
+                          <BlankLineWrapper />
+                          <CodeLineWrapper>
+                            <CodeRedSpan>const</CodeRedSpan> regex_pattern_1 <CodeYellowSpan>=</CodeYellowSpan> <CodeYellowSpan>/\d{'{'}3{'}'}/g</CodeYellowSpan>; <CodeComentSpan>{'//'} \d{'{'}3{'}'}は、3桁の数字にマッチする正規表現</CodeComentSpan>
+                          </CodeLineWrapper>
+                          <CodeLineWrapper>
+                            <CodeRedSpan>const</CodeRedSpan> regex_pattern_2 <CodeYellowSpan>=</CodeYellowSpan> <CodeYellowSpan>/\d{'{'}2,3{'}'}/g</CodeYellowSpan>; <CodeComentSpan>{'//'} \d{'{'}2,3{'}'}は、2桁~3桁の数字にマッチする正規表現</CodeComentSpan>
+                          </CodeLineWrapper>
+                          <BlankLineWrapper />
+                          <CodeLineWrapper>
+                            console.<CodeBlueSpan>log</CodeBlueSpan>(target.<CodeBlueSpan>match</CodeBlueSpan>(regex_pattern_1)); <CodeComentSpan>{'//'} => ['150']</CodeComentSpan>
+                          </CodeLineWrapper>
+                          <CodeLineWrapper>
+                            console.<CodeBlueSpan>log</CodeBlueSpan>(target.<CodeBlueSpan>match</CodeBlueSpan>(regex_pattern_2)); <CodeComentSpan>{'//'} => ['150', '15']</CodeComentSpan>
+                          </CodeLineWrapper>
+                        </CodeBlockDiv>
+                      </CodeBlockWrapper>
+                    </>
+                }
+                {
+                  slideState.slide_num === 5 &&
+                    <>
+                      <CaptureWarningSentenceWrapper>
+                        ※ 括弧の使用方法の理解を促すために、非キャプチャグループについての説明は省略させていただきます。
+                      </CaptureWarningSentenceWrapper>
+                      <CaptureCodeBlockWrapper>
+                        <CodeBlockDiv> 
+                          <CodeLineWrapper>
+                            <CodeRedSpan>const</CodeRedSpan> target <CodeYellowSpan>=</CodeYellowSpan> <CodeYellowSpan>"1, 112, 11212, 1121212"</CodeYellowSpan>;
+                          </CodeLineWrapper>
+                          <BlankLineWrapper />
+                          <CodeLineWrapper>
+                            <CodeRedSpan>const</CodeRedSpan> regex_pattern_1 <CodeYellowSpan>=</CodeYellowSpan> <CodeYellowSpan>/1(12)*/g</CodeYellowSpan>; <CodeComentSpan>{'//'} (12)*は、12の0回以上の繰り返しを表す。</CodeComentSpan>
+                          </CodeLineWrapper>
+                          <CodeLineWrapper>
+                            <CodeRedSpan>const</CodeRedSpan> regex_pattern_2 <CodeYellowSpan>=</CodeYellowSpan> <CodeYellowSpan>/112*/g</CodeYellowSpan>; <CodeComentSpan>{'//'} 2*は、2の0回以上の繰り返しを表す。</CodeComentSpan>
+                          </CodeLineWrapper>
+                          <BlankLineWrapper />
+                          <CodeLineWrapper>
+                            console.<CodeBlueSpan>log</CodeBlueSpan>(target.<CodeBlueSpan>match</CodeBlueSpan>(regex_pattern_1)); <CodeComentSpan>{'//'} => ['1', '112', '11212', '1121212']</CodeComentSpan>
+                          </CodeLineWrapper>
+                          <CodeLineWrapper>
+                            console.<CodeBlueSpan>log</CodeBlueSpan>(target.<CodeBlueSpan>match</CodeBlueSpan>(regex_pattern_2)); <CodeComentSpan>{'//'} => ['112', '112', '112']</CodeComentSpan>
+                          </CodeLineWrapper>
+                        </CodeBlockDiv>
+                      </CaptureCodeBlockWrapper>
                     </>
                 }
                 {
