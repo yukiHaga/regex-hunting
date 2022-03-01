@@ -186,17 +186,17 @@ export const IntermediateGameDescriptionDialog = ({
     },
     {
       title: "?の使い方",
-      sentence: "最大量指定子?は、直前の1文字があってもなくてもよいという意味を表します。文字列の直後に?を置くことで、その文字列に?の意味が適用されます。例えば、n?はnがあってもなくても良いという意味を表します。n?を使用したenviron?mentという正規表現は、environment, enviromentという文字列にマッチさせることができます。このように、直前の1文字があってもなくてもよいという正規表現を作りたい時に、?を使います。",
+      sentence: "最大量指定子?は、直前の1文字があればマッチさせるが、なくてもよいという意味を表します。文字列の直後に?を置くことで、その文字列に?の意味が適用されます。例えば、n?はnがあればマッチさせるが、なくてもよいという意味を表します。n?を使用したenviron?mentという正規表現は、environment, enviromentという文字列にマッチさせることができます。このように、直前の1文字があってもなくてもよいという正規表現を作りたい時に、?を使います。",
       slide_num: 2
     },
     {
       title: "+と*の使い方",
-      sentence: "最大量指定子+は、直前の1文字の1回以上の繰り返しという意味を表し、最大量指定子*は、直前の1文字の0回以上の繰り返しという意味を表します。+と*の意味は似ています。大きな違いとして、+の場合は少なくとも1回はマッチしないといけませんが、*の場合はなくても大丈夫です。以下の例では、o+がoの1回以上の繰り返しを表すので、cとkの間にoがない単語(ck)にはマッチしないことが分かります。直前の1文字を繰り返したい正規表現を作りたい時に、*や+を使います。",
+      sentence: "最大量指定子+は、直前の1文字の1回以上の繰り返しという意味を表し、最大量指定子*は、直前の1文字の0回以上の繰り返しという意味を表します。+と*の意味は似ています。大きな違いとして、+の場合は少なくとも1回はマッチしないといけませんが、*の場合はなくても大丈夫です。以下の例のo+は、oの1回以上繰り返しマッチを表すので、cとkの間にoがない単語(ck)にはマッチしないことが分かります。直前の1文字を繰り返したい正規表現を作りたい時に、*や+を使います。",
       slide_num: 3
     },
     {
       title: "{min,max}の使い方",
-      sentence: "最大量指定子{min,max}は、直前の1文字がmin回以上、max回以上の繰り返しという意味を表します。例えば、\\dは1桁の数字を表すので、\\d{3,5}は3桁以上、5桁以下の数字を表します。{min,max}以外にも、{min}や{min,}という書き方があります。{min}は直前の1文字がmin回を表し、{min,}は直前の1文字がmin回以上を表します。例えば、\\d{3}は3桁の数字を表し、\\d{3,}は3桁以上の数字を表します。直前の1文字の繰り返し回数を制御したい時に、{min,max}を使います。",
+      sentence: "最大量指定子{min,max}は、直前の1文字がmin回以上、max回以上の繰り返しという意味を表します。例えば、\\dは1桁の数字にマッチするので、\\d{3,5}は3桁以上、5桁以下の数字にマッチします。{min,max}以外にも、{min}や{min,}という書き方があります。{min}は直前の1文字にmin回繰り返しマッチを表し、{min,}は直前の1文字にmin回以上繰り返しマッチを表します。例えば、\\d{3}は3桁の数字、\\d{3,}は3桁以上の数字にマッチします。直前の1文字の繰り返し回数を制御したい時に、{min,max}を使います。",
       slide_num: 4
     },
     {
@@ -467,10 +467,10 @@ export const IntermediateGameDescriptionDialog = ({
                           </CodeLineWrapper>
                           <BlankLineWrapper />
                           <CodeLineWrapper>
-                            <CodeRedSpan>const</CodeRedSpan> regex_pattern_1 <CodeYellowSpan>=</CodeYellowSpan> <CodeYellowSpan>/1(12)*/g</CodeYellowSpan>; <CodeComentSpan>{'//'} (12)*は、12の0回以上の繰り返しを表す。</CodeComentSpan>
+                            <CodeRedSpan>const</CodeRedSpan> regex_pattern_1 <CodeYellowSpan>=</CodeYellowSpan> <CodeYellowSpan>/1(12)*/g</CodeYellowSpan>; <CodeComentSpan>{'//'} (12)*は、12の0回以上の繰り返しマッチを表す。</CodeComentSpan>
                           </CodeLineWrapper>
                           <CodeLineWrapper>
-                            <CodeRedSpan>const</CodeRedSpan> regex_pattern_2 <CodeYellowSpan>=</CodeYellowSpan> <CodeYellowSpan>/112*/g</CodeYellowSpan>; <CodeComentSpan>{'//'} 2*は、2の0回以上の繰り返しを表す。</CodeComentSpan>
+                            <CodeRedSpan>const</CodeRedSpan> regex_pattern_2 <CodeYellowSpan>=</CodeYellowSpan> <CodeYellowSpan>/112*/g</CodeYellowSpan>; <CodeComentSpan>{'//'} 2*は、2の0回以上の繰り返しマッチを表す。</CodeComentSpan>
                           </CodeLineWrapper>
                           <BlankLineWrapper />
                           <CodeLineWrapper>

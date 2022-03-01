@@ -47,6 +47,12 @@ const StyledTableCell = styled(TableCell)`
   font-size: 1em;
 `;
 
+// background-color: ${({key}) => key % 2 === 0 ? COLORS.WHITE : COLORS.WHITE}
+const StyledTableDataCell = styled(TableCell)`
+  font-size: 1em;
+  width: 86%;  
+`;
+
 const StyledTableRow = styled(TableRow)`
   color: ${COLORS.BLACK};
 `;
@@ -59,20 +65,37 @@ const StyledTableHeadCell = styled(StyledTableCell)`
   color: ${COLORS.WHITE};
 `;
 
+const ExampleData = styled.div`
+  font-size: 1em;
+  margin-top: 2%;
+  margin-bottom: 1%;
+`;
+
 // データを作成する関数
-const createData = (id, name, data) => {
+const createData = (id, name, data, example) => {
   return {
     id: id,
     name: name,
     data: data,
+    example: example
   }
 };
 
 // テーブルのデータ
 const rows = [
-  createData(1, '[...]', '指定した文字のどれか1文字を表します。'),
-  createData(2, '\\d', '1桁の数字を表します。[0-9]で書き換え可能です。'),
-  createData(3, '\\w', 'アンダースコアを含む半角英数字1文字を表します。[A-Za-z0-9_]で書き換え可能です。')
+  createData(1, '[...]', '指定した文字のどれか1文字にマッチします。ハイフンを使用して文字の範囲を指定することもできます。文字クラスの中に\\d等を書くこともできます。', 'ex) [aq],  [a-z],  [E\\d]'),
+  createData(2, '[^...]', '[^...]は否定文字クラスという特殊文字です。指定した文字以外の1文字にマッチします。例えば、[^A]はA以外の1文字、[^ABC]はA、B、C以外の1文字にマッチします。[^ABC]は[^A-C]に書き換え可能です。', 'ex) [aq],  [a-z],  [E\\d]'),
+  createData(3, '\\d', '1桁の数字にマッチします。[0-9]で書き換え可能です。', false),
+  createData(4, '\\w', 'アンダースコアを含む半角英数字1文字にマッチします。\\wは[A-Za-z0-9_]に書き換え可能です。', false),
+  createData(5, '.', '行末文字(\\n、\\r、\\u2028、\\u2029)を除くあらゆる1文字にマッチします。注意すべきことは、文字クラス([...])内で.を使用すると、ただの文字列として扱われることです。', false),
+  createData(6, '\\s', 'スペース、タブ、改ページ、改行を含むホワイトスペース文字にマッチします。', false),
+  createData(7, '\\t', 'タブにマッチします。', false),
+  createData(8, '\\r', '復帰文字にマッチします。', false),
+  createData(9, '\\n', '改行文字にマッチします。', false),
+  createData(10, '\\D', 'あらゆる数字以外の文字にマッチします。\\Dは[^0-9]に書き換え可能です。', false),
+  createData(11, '\\W', 'アンダースコアを含む半角英数字以外の1文字にマッチします。\\Wは[^A-Za-z0-9_]に書き換え可能です。', false),
+  createData(12, '\\S', 'ホワイトスペース以外の文字にマッチします。', false),
+  createData(13, '\\', 'ある文字の前に\\を書くことで、ある文字をエスケープすることができます。エスケープ対象の文字が特殊文字であるか、または、エスケープ対象の文字と\\の組み合わせに特別な意味がなければ、エスケープ対象の文字が、ただの文字としてマッチするようになる。', false),
 ];
 
 // click_meta_openがtrueの時に開くモーダル
@@ -122,7 +145,13 @@ export const CheckMetaDialog = ({
                         <StyledTableCell align="center" component="th" scope="row">
                           {row.name}
                         </StyledTableCell>
-                        <StyledTableCell>{row.data}</StyledTableCell>
+                        <StyledTableDataCell>
+                          {row.data}
+                          {
+                            row.example &&
+                              <ExampleData>{row.example}</ExampleData>
+                          }
+                        </StyledTableDataCell>
                       </StyledTableRow>
                     ))}
                   </TableBody>

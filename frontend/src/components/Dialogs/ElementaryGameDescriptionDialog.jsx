@@ -77,6 +77,10 @@ const CodeBlockWrapper = styled.div`
   box-shadow: 0 4px 6px rgba(0,0,0,0.2);
 `;
 
+const SpecialCodeBlockWrapper = styled(CodeBlockWrapper)`
+  margin-top: 2%;
+`;
+
 const CodeBlockDiv = styled.div`
   width: 100%;
   border-radius: 3px;
@@ -151,6 +155,10 @@ const CodeComentSpan = styled.span`
   opacity: 0.7;
 `;
 
+const SpecialWarningSentenceWrapper = styled(WarningSentenceWrapper)`
+  margin-top: 1.5%;
+`;
+
 // isOpenはgameState.game_description_open
 // game_description_openは、game_description_open
 // click_description_openは、ゲーム開始後にスライドを見るをクリックしたかを表すprops
@@ -178,7 +186,7 @@ export const ElementaryGameDescriptionDialog = ({
     },
     {
       title: "文字クラスとは？",
-      sentence: "文字クラス([...])とは、指定した文字のどれか1文字を表す特殊文字です。[...]の...に、現れても良い1文字を複数指定します。例えば、[acz#]と書くと、[acz#]は、a, c, z, #のどれか1文字を表します。また、文字クラスの別の使い方として、[...]の中に-を書くと、文字の範囲を指定できます。例えば、[a-z]はaからzの小文字アルファベット1文字を表します。[1-9]は、0から9の1桁の数字を表します。範囲は複数指定できるので、[a-zA-Z]や[a-zA-Z1-9]と書くこともできます。文字クラス内で文字指定と範囲指定を併用することもできるので、[a-z#%]と書くことも可能です。",
+      sentence: "文字クラス([...])とは、指定した文字のどれか1文字にマッチする特殊文字です。[...]の...に、現れても良い1文字を複数指定します。例えば、[acz#]と書くと、[acz#]は、a, c, z, #のどれか1文字にマッチします。また、文字クラスの別の使い方として、[...]の中に-を書くと、文字の範囲を指定できます。例えば、[a-z]はaからzの小文字アルファベット1文字にマッチします。[1-9]は、0から9の1桁の数字にマッチします。範囲は複数指定できるので、[a-zA-Z]や[a-zA-Z1-9]と書くこともできます。文字クラス内で文字指定と範囲指定を併用することもできるので、[a-z#%]と書くことも可能です。",
       slide_num: 2
     },
     {
@@ -329,7 +337,8 @@ export const ElementaryGameDescriptionDialog = ({
                 {
                   slideState.slide_num === 1 &&
                     <>
-                      <CodeBlockWrapper>
+                      <SpecialWarningSentenceWrapper>理解を促すために、特殊な意味を持つ文字列は全て「特殊文字」として分類します。</SpecialWarningSentenceWrapper>
+                      <SpecialCodeBlockWrapper>
                         <CodeBlockDiv> 
                           <ComentLineWrapper>
                             {'//'} 正規表現を適用させる文字列
@@ -352,7 +361,7 @@ export const ElementaryGameDescriptionDialog = ({
                             console.<CodeBlueSpan>log</CodeBlueSpan>(target.<CodeBlueSpan>match</CodeBlueSpan>(regex_pattern)); <CodeComentSpan>{'//'} => [ 'JavaScript', 'React', 'TypeScript' ]</CodeComentSpan>
                           </CodeLineWrapper>
                         </CodeBlockDiv>
-                      </CodeBlockWrapper>
+                      </SpecialCodeBlockWrapper>
                     </>
                 }
                 {
@@ -361,14 +370,14 @@ export const ElementaryGameDescriptionDialog = ({
                       <CodeBlockWrapper>
                         <CodeBlockDiv> 
                           <ComentLineWrapper>
-                            {'//'} 以下の{'/.../g'}の...にある[acz#]は、a, c, z, #のどれか1文字を表す正規表現です。
+                            {'//'} 以下の{'/.../g'}の...にある[acz#]は、a, c, z, #のどれか1文字にマッチする正規表現です。
                           </ComentLineWrapper>
                           <CodeLineWrapper>
                             <CodeRedSpan>const</CodeRedSpan> regex_pattern_1 <CodeYellowSpan>=</CodeYellowSpan> <CodeYellowSpan>/[acz#]/g</CodeYellowSpan>;
                           </CodeLineWrapper>
                           <BlankLineWrapper />
                           <ComentLineWrapper>
-                            {'//'} 以下の{'/.../g'}の...にある[a-z#%]は、aからz, #, %のどれか1文字を表す正規表現です。
+                            {'//'} 以下の{'/.../g'}の...にある[a-z#%]は、aからz, #, %のどれか1文字にマッチする正規表現です。
                           </ComentLineWrapper>
                           <CodeLineWrapper>
                             <CodeRedSpan>const</CodeRedSpan> regex_pattern_2 <CodeYellowSpan>=</CodeYellowSpan> <CodeYellowSpan>/[a-z#%]/g</CodeYellowSpan>;
@@ -387,7 +396,7 @@ export const ElementaryGameDescriptionDialog = ({
                           </CodeLineWrapper>
                           <BlankLineWrapper />
                           <ComentLineWrapper>
-                            {'//'} gr[ae]yは、gray, greyにマッチするような正規表現です。
+                            {'//'} gr[ae]yは、gray, greyにマッチする正規表現です。
                           </ComentLineWrapper>
                           <CodeLineWrapper>
                             <CodeRedSpan>const</CodeRedSpan> regex_pattern <CodeYellowSpan>=</CodeYellowSpan> <CodeYellowSpan>/gr[ae]y/g</CodeYellowSpan>;
