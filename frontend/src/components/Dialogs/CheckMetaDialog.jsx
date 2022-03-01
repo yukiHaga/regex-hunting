@@ -28,6 +28,9 @@ import ArrowLeftIcon from '@mui/icons-material/ArrowLeft';
 
 import IconButton from '@mui/material/IconButton';
 
+// スライドアニメーション関係の関数
+import { slideFunction } from '../../functions/slideFunction.js';
+
 // コードブロック関係
 import { CodeBlockWrapper } from '../shared_style.js';
 import { CodeBlockDiv } from '../shared_style.js';
@@ -100,6 +103,19 @@ const CustomCodeBlockWrapper = styled(CodeBlockWrapper)`
   margin-top: 0.8%;
 `;
 
+// animationプロパティは1つしか存在できない
+// 2個存在する場合、2個目で1個目が上書きされる
+const SlideContentWrapper = styled.div`
+  width: 100%;
+  margin: 0 auto;
+  transform: translateX(0);
+  animation: ${({ 
+    slide_in, 
+    slide_out,
+    direction
+  }) => slideFunction(slide_in, slide_out, direction)} 0.7s ease forwards;
+`;
+
 // データを作成する関数
 const createData = (id, name, data, example) => {
   return {
@@ -146,27 +162,37 @@ export const CheckMetaDialog = ({
 
   const initialState = {
     name: '文字クラス',
-    data: characterClassesRows
+    data: characterClassesRows,
+    slide_in: false,
+    slide_out: false,
+    direction: "",
   };
 
   const [rowState, setRowState] = useState(initialState);
 
-  // rowStateを文字クラスのデータにする関数
-  const handleCharacterClassesRows = () => {
+  // テーブルのデータを制御する関数
+  // 右カーソルか左カーソルをクリックするとこれが呼び出される
+  const handleDataRows = (
+    name,
+    data,
+    direction
+  ) => {
     setRowState((prev) => ({
       ...prev,
-      name: '文字クラス',
-      data: characterClassesRows
+      slide_in: false,
+      slide_out: true,
+      direction: direction,
     }));
-  };
-
-  // rowStateを量指定子のデータにする関数
-  const handleQuantifiersRows = () => {
-    setRowState((prev) => ({
-      ...prev,
-      name: '量指定子',
-      data: quantifiersRows
-    }));
+    setTimeout(() => {
+      setRowState((prev) => ({
+        ...prev,
+        name: name,
+        data: data,
+        slide_in: true,
+        slide_out: false,
+        direction: direction,
+      }));
+    }, 350);
   };
 
   // 左矢印のリンクを制御する関数
@@ -175,10 +201,10 @@ export const CheckMetaDialog = ({
   const handleLeftArrow = ({name}) => {
     switch (name){
       case '量指定子':
-        handleCharacterClassesRows();
+        handleDataRows('文字クラス', characterClassesRows, 'right')
         break;
       default:
-        handleQuantifiersRows();
+        handleDataRows('文字クラス', characterClassesRows, 'right')
     }
   };
 
@@ -186,10 +212,10 @@ export const CheckMetaDialog = ({
   const handleRightArrow = ({name}) => {
     switch (name){
       case '文字クラス':
-        handleQuantifiersRows();
+        handleDataRows('量指定子', quantifiersRows, 'left');
         break;
       default:
-        handleQuantifiersRows();
+        handleDataRows('量指定子', quantifiersRows, 'left');
     }
   };
 
@@ -209,7 +235,11 @@ export const CheckMetaDialog = ({
             }
           />
         </BackToModalButtonWrapper>
-        <DialogContent>
+        <DialogContent
+          sx={{
+            overflowX: "hidden"
+          }}
+        >
           <SectionWrapper>
             <Toolbar
               sx={{justifyContent: 'center'}}
@@ -245,6 +275,11 @@ export const CheckMetaDialog = ({
                 />
               </IconButton>
             </Toolbar>
+            <SlideContentWrapper
+              slide_in={rowState.slide_in}
+              slide_out={rowState.slide_out}
+              direction={rowState.direction}
+            >
               <TableContainer component={Paper} sx={{ maxHeight: 490 }}>
                 <Table aria-label="customized table">
                   <StyledTableHead>
@@ -314,6 +349,7 @@ export const CheckMetaDialog = ({
                   </TableBody>
                 </Table>
               </TableContainer>
+            </SlideContentWrapper>
           </SectionWrapper>
         </DialogContent>
       </CustomDialogInnerWrapper>
