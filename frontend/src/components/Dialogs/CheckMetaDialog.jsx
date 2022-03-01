@@ -1,4 +1,4 @@
-import React from 'react';
+import { useState } from 'react';
 import styled from 'styled-components';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
@@ -20,15 +20,20 @@ import Typography from '@mui/material/Typography';
 // 戻るボタン
 import { BackToModalButton } from '../Buttons/BackToModalButton.jsx';
 
+// NextButton
+import ArrowRightIcon from '@mui/icons-material/ArrowRight';
+
+// PrevButton
+import ArrowLeftIcon from '@mui/icons-material/ArrowLeft';
+
+import IconButton from '@mui/material/IconButton';
+
 const CustomDialogInnerWrapper = styled.div`
   padding-right: 3%;
   padding-left: 3%;
   padding-top: 2%;
   background-color: ${COLORS.SUB};
   width: 70vw;
-`;
-
-const CustomDialogContent = styled(DialogContent)`
 `;
 
 // backボタンのラッパー 
@@ -39,7 +44,8 @@ const BackToModalButtonWrapper = styled.div`
 `;
 
 const SectionWrapper = styled.div`
-  margin-top: 4%;
+  margin-top: 1.5%;
+  margin-bottom: 2%;
 `;
 
 // background-color: ${({key}) => key % 2 === 0 ? COLORS.WHITE : COLORS.WHITE}
@@ -59,6 +65,10 @@ const StyledTableRow = styled(TableRow)`
 
 const StyledTableHead = styled(TableHead)`
   background-color: ${COLORS.MAIN};
+  position: -webkit-sticky;
+  position: sticky;
+  top: 0;
+  z-index: 1;
 `;
 
 const StyledTableHeadCell = styled(StyledTableCell)`
@@ -81,8 +91,8 @@ const createData = (id, name, data, example) => {
   }
 };
 
-// テーブルのデータ
-const rows = [
+// 文字クラスのデータ
+const characterClassesRows = [
   createData(1, '[...]', '指定した文字のどれか1文字にマッチします。ハイフンを使用して文字の範囲を指定することもできます。文字クラスの中に\\d等を書くこともできます。', 'ex) [aq],  [a-z],  [E\\d]'),
   createData(2, '[^...]', '[^...]は否定文字クラスという特殊文字です。指定した文字以外の1文字にマッチします。例えば、[^A]はA以外の1文字、[^ABC]はA、B、C以外の1文字にマッチします。[^ABC]は[^A-C]に書き換え可能です。', 'ex) [aq],  [a-z],  [E\\d]'),
   createData(3, '\\d', '1桁の数字にマッチします。[0-9]で書き換え可能です。', false),
@@ -98,11 +108,71 @@ const rows = [
   createData(13, '\\', 'ある文字の前に\\を書くことで、ある文字をエスケープすることができます。エスケープ対象の文字が特殊文字であるか、または、エスケープ対象の文字と\\の組み合わせに特別な意味がなければ、エスケープ対象の文字が、ただの文字としてマッチするようになります。', false),
 ];
 
+// 量指定子のデータ
+const quantifiersRows = [
+  createData(1, '?', '直前の1文字があればマッチさせるが、なくてもよいという意味を表します。1つの文字クラスは1つの単位を表すので、括弧をつけなくても量指定子を指定することができます。2文字以上の文字列を繰り返しマッチさせたい場合、括弧で括ってから量指定子を指定します。', 'ex) n?,  [aq]?,  [a-z]?,  (Script)?'),
+  createData(2, '+', '直前の1文字に1回以上の繰り返しマッチという意味を表します。', 'ex) o+,  [a-z]+,  (12)+'),
+  createData(3, '*', '直前の1文字に0回以上の繰り返しマッチという意味を表します。', 'ex) o*,  [a-z]*,  (12)*'),
+  createData(4, '{min}', '直前の1文字に{min}回繰り返しマッチという意味を表します。', 'ex) \\d{3}'),
+  createData(5, '{min,}', '直前の1文字に{min}回以上の繰り返しマッチという意味を表します。', 'ex) \\d{3,}'),
+  createData(6, '{min,max}', '直前の1文字にmin回以上、max回以下の繰り返しマッチという意味を表します。', 'ex) \\d{2,3}'),
+];
+
+
 // click_meta_openがtrueの時に開くモーダル
 export const CheckMetaDialog = ({
   isOpen,
   setGameState
 }) => {
+
+  const initialState = {
+    name: '文字クラス',
+    data: characterClassesRows
+  };
+
+  const [rowState, setRowState] = useState(initialState);
+
+  // rowStateを文字クラスのデータにする関数
+  const handleCharacterClassesRows = () => {
+    setRowState((prev) => ({
+      ...prev,
+      name: '文字クラス',
+      data: characterClassesRows
+    }));
+  };
+
+  // rowStateを量指定子のデータにする関数
+  const handleQuantifiersRows = () => {
+    setRowState((prev) => ({
+      ...prev,
+      name: '量指定子',
+      data: quantifiersRows
+    }));
+  };
+
+  // 左矢印のリンクを制御する関数
+  // difficulty_month_titleは初め初級が入る
+  // そのため、defaultは上級の関数が実行される
+  const handleLeftArrow = ({name}) => {
+    switch (name){
+      case '量指定子':
+        handleCharacterClassesRows();
+        break;
+      default:
+        handleQuantifiersRows();
+    }
+  };
+
+  // 右矢印のリンクを制御する関数
+  const handleRightArrow = ({name}) => {
+    switch (name){
+      case '文字クラス':
+        handleQuantifiersRows();
+        break;
+      default:
+        handleQuantifiersRows();
+    }
+  };
 
   return(
     <Dialog
@@ -120,18 +190,43 @@ export const CheckMetaDialog = ({
             }
           />
         </BackToModalButtonWrapper>
-        <CustomDialogContent>
+        <DialogContent>
           <SectionWrapper>
-            <Toolbar>
+            <Toolbar
+              sx={{justifyContent: 'center'}}
+            >
+              <IconButton
+                sx={{
+                  fontSize: '2.5em'
+                }}
+              >
+                <ArrowLeftIcon
+                  fontSize='inherit' 
+                  sx={{ color: `${COLORS.BLACK}` }}
+                  onClick={() => handleLeftArrow(rowState)}
+                />
+              </IconButton>
               <Typography
                 variant="h6"
                 id="tableTitle"
                 component="div"
+                align="center"
               >
-                文字クラス
+                {rowState.name}
               </Typography>
+              <IconButton
+                sx={{
+                  fontSize: '2.5em'
+                }}
+              >
+                <ArrowRightIcon
+                  fontSize='inherit' 
+                  sx={{ color: `${COLORS.BLACK}` }}
+                  onClick={() => handleRightArrow(rowState)}
+                />
+              </IconButton>
             </Toolbar>
-              <TableContainer component={Paper}>
+              <TableContainer component={Paper} sx={{ maxHeight: 490 }}>
                 <Table aria-label="customized table">
                   <StyledTableHead>
                     <TableRow>
@@ -140,7 +235,7 @@ export const CheckMetaDialog = ({
                     </TableRow>
                   </StyledTableHead>
                   <TableBody>
-                    {rows.map((row) => (
+                    {rowState.data.map((row) => (
                       <StyledTableRow key={row.id}>
                         <StyledTableCell align="center" component="th" scope="row">
                           {row.name}
@@ -158,7 +253,7 @@ export const CheckMetaDialog = ({
                 </Table>
               </TableContainer>
           </SectionWrapper>
-        </CustomDialogContent>
+        </DialogContent>
       </CustomDialogInnerWrapper>
     </Dialog>
   );
