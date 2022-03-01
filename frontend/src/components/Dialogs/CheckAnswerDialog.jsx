@@ -82,6 +82,7 @@ const QuestionNumFakeWrapper = styled.div`
   height: 5.5%;
   width: 10%;
 `;
+
 const QuestionNumWrapper = styled.div`
   background-color: ${COLORS.MAIN};
   width: 8%;
