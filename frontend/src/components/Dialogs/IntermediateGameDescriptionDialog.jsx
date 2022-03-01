@@ -24,6 +24,20 @@ import IconButton from '@mui/material/IconButton';
 // スライドアニメーション関係の関数
 import { slideFunction } from '../../functions/slideFunction.js';
 
+// コードブロック関係
+import { CodeBlockWrapper } from '../shared_style.js';
+import { CodeBlockDiv } from '../shared_style.js';
+import { CodeLineWrapper } from '../shared_style.js';
+import { BlankLineWrapper } from '../shared_style.js';
+import { ComentLineWrapper } from '../shared_style.js';
+import { CodeRedSpan } from '../shared_style.js';
+import { CodeYellowSpan } from '../shared_style.js';
+import { CodeBlueSpan } from '../shared_style.js';
+import { CodeComentSpan } from '../shared_style.js';
+
+// 説明スライドのワーニングセンテンス
+import { WarningSentenceWrapper } from '../shared_style.js';
+
 const CustomDialogInnerWrapper = styled.div`
   background-color: ${COLORS.SUB};
   text-align: center;
@@ -69,45 +83,8 @@ const SentenceWrapper = styled.div`
   color: ${COLORS.BLACK};
 `;
 
-const CodeBlockWrapper = styled.div`
-  border-radius: 3px;
-  width: 100%;
-  margin: 0 auto;
-  margin-top: 3%;
-  box-shadow: 0 4px 6px rgba(0,0,0,0.2);
-`;
-
 const CaptureCodeBlockWrapper = styled(CodeBlockWrapper)`
   margin-top: 2%;
-`;
-
-const CodeBlockDiv = styled.div`
-  width: 100%;
-  border-radius: 3px;
-  font-size: 1.1em;
-  background-color: ${COLORS.CODE_BLACK};
-  color: ${COLORS.WHITE};
-  outline: none;
-  border: none;
-  padding-top: 2%;
-  padding-bottom: 2%;
-  margin: 0 auto;
-  text-align: center;
-`;
-
-const CodeLineWrapper = styled.div`
-  text-align: left;
-  width: 85%;
-  margin: 0 auto;
-`;
-
-const BlankLineWrapper = styled(CodeLineWrapper)`
-  height: 2vh;
-`;
-
-const ComentLineWrapper = styled(CodeLineWrapper)`
-  color: ${COLORS.WHITE};
-  opacity: 0.7;
 `;
 
 const ButtonLineWrapper = styled.div`
@@ -123,15 +100,6 @@ const ButtonWrapper = styled.div`
   display: inline-block;
 `;
 
-const WarningSentenceWrapper = styled.div`
-  font-style: normal;
-  font-weight: normal;
-  font-size: 1.1em;
-  text-align: center;
-  margin-top: 5%;
-  color: ${COLORS.RED};
-`;
-
 const CaptureWarningSentenceWrapper = styled(WarningSentenceWrapper)`
   margin-top: 1%;
 `;
@@ -140,23 +108,6 @@ const OuterButtonsWrapper = styled.div`
   margin: 0 auto;
   display: flex;
   justify-content: center;
-`;
-
-const CodeRedSpan = styled.span`
-  color: ${COLORS.CODE_RED};
-`;
-
-const CodeYellowSpan = styled.span`
-  color: ${COLORS.CODE_YELLOW};
-`;
-
-const CodeBlueSpan = styled.span`
-  color: ${COLORS.CODE_BLUE};
-`;
-
-const CodeComentSpan = styled.span`
-  color: ${COLORS.WHITE};
-  opacity: 0.7;
 `;
 
 // isOpenはgameState.game_description_open

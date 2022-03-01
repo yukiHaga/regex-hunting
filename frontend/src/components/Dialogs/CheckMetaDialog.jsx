@@ -28,6 +28,17 @@ import ArrowLeftIcon from '@mui/icons-material/ArrowLeft';
 
 import IconButton from '@mui/material/IconButton';
 
+// コードブロック関係
+import { CodeBlockWrapper } from '../shared_style.js';
+import { CodeBlockDiv } from '../shared_style.js';
+import { CodeLineWrapper } from '../shared_style.js';
+import { BlankLineWrapper } from '../shared_style.js';
+import { ComentLineWrapper } from '../shared_style.js';
+import { CodeRedSpan } from '../shared_style.js';
+import { CodeYellowSpan } from '../shared_style.js';
+import { CodeBlueSpan } from '../shared_style.js';
+import { CodeComentSpan } from '../shared_style.js';
+
 const CustomDialogInnerWrapper = styled.div`
   padding-right: 3%;
   padding-left: 3%;
@@ -75,10 +86,18 @@ const StyledTableHeadCell = styled(StyledTableCell)`
   color: ${COLORS.WHITE};
 `;
 
+const NonGreedyName = styled.div`
+  font-size: 1em;
+`;
+
 const ExampleData = styled.div`
   font-size: 1em;
   margin-top: 2%;
   margin-bottom: 1%;
+`;
+
+const CustomCodeBlockWrapper = styled(CodeBlockWrapper)`
+  margin-top: 0.8%;
 `;
 
 // データを作成する関数
@@ -93,8 +112,8 @@ const createData = (id, name, data, example) => {
 
 // 文字クラスのデータ
 const characterClassesRows = [
-  createData(1, '[...]', '指定した文字のどれか1文字にマッチします。ハイフンを使用して文字の範囲を指定することもできます。文字クラスの中に\\d等を書くこともできます。', 'ex) [aq],  [a-z],  [E\\d]'),
-  createData(2, '[^...]', '[^...]は否定文字クラスという特殊文字です。指定した文字以外の1文字にマッチします。例えば、[^A]はA以外の1文字、[^ABC]はA、B、C以外の1文字にマッチします。[^ABC]は[^A-C]に書き換え可能です。', 'ex) [aq],  [a-z],  [E\\d]'),
+  createData(1, '[...]', '指定した文字のどれか1文字にマッチします。ハイフンを使用して文字の範囲を指定することもできます。文字クラスの中に\\d等を書くこともできます。', '[aq],  [a-z],  [E\\d]'),
+  createData(2, '[^...]', '[^...]は否定文字クラスという特殊文字です。指定した文字以外の1文字にマッチします。例えば、[^A]はA以外の1文字、[^ABC]はA、B、C以外の1文字にマッチします。[^ABC]は[^A-C]に書き換え可能です。', '[aq],  [a-z],  [E\\d]'),
   createData(3, '\\d', '1桁の数字にマッチします。[0-9]で書き換え可能です。', false),
   createData(4, '\\w', 'アンダースコアを含む半角英数字1文字にマッチします。\\wは[A-Za-z0-9_]に書き換え可能です。', false),
   createData(5, '.', '行末文字(\\n、\\r、\\u2028、\\u2029)を除くあらゆる1文字にマッチします。注意すべきことは、文字クラス([...])内で.を使用すると、ただの文字列として扱われることです。', false),
@@ -110,14 +129,14 @@ const characterClassesRows = [
 
 // 量指定子のデータ
 const quantifiersRows = [
-  createData(1, '?', '直前の1文字があればマッチさせるが、なくてもよいという意味を表します。1つの文字クラスは1つの単位を表すので、括弧をつけなくても量指定子を指定することができます。2文字以上の文字列を繰り返しマッチさせたい場合、括弧で括ってから量指定子を指定します。', 'ex) n?,  [aq]?,  [a-z]?,  (Script)?'),
-  createData(2, '+', '直前の1文字に1回以上の繰り返しマッチという意味を表します。', 'ex) o+,  [a-z]+,  (12)+'),
-  createData(3, '*', '直前の1文字に0回以上の繰り返しマッチという意味を表します。', 'ex) o*,  [a-z]*,  (12)*'),
-  createData(4, '{min}', '直前の1文字に{min}回繰り返しマッチという意味を表します。', 'ex) \\d{3}'),
-  createData(5, '{min,}', '直前の1文字に{min}回以上の繰り返しマッチという意味を表します。', 'ex) \\d{3,}'),
-  createData(6, '{min,max}', '直前の1文字にmin回以上、max回以下の繰り返しマッチという意味を表します。', 'ex) \\d{2,3}'),
+  createData(1, '?', '直前の1文字があればマッチさせるが、なくてもよいという意味を表します。1つの文字クラスは1つの単位を表すので、括弧をつけなくても量指定子を指定することができます。2文字以上の文字列を繰り返しマッチさせたい場合、括弧で括ってから量指定子を指定します。', 'n?,  [aq]?,  [a-z]?,  (Script)?'),
+  createData(2, '+', '直前の1文字に1回以上の繰り返しマッチという意味を表します。', 'o+,  [a-z]+,  (12)+'),
+  createData(3, '*', '直前の1文字に0回以上の繰り返しマッチという意味を表します。', 'o*,  [a-z]*,  (12)*'),
+  createData(4, '{min}', '直前の1文字に{min}回繰り返しマッチという意味を表します。', '\\d{3}'),
+  createData(5, '{min,}', '直前の1文字に{min}回以上の繰り返しマッチという意味を表します。', '\\d{3,}'),
+  createData(6, '{min,max}', '直前の1文字にmin回以上、max回以下の繰り返しマッチという意味を表します。', '\\d{2,3}'),
+  createData(7, '??', '最大量指定子の後ろに?をつけると、最小量指定子になります。+や?等は最大量指定子であり、できる限り多くマッチしようと試みます。最小量指定子は最大量指定子の逆で、マッチする文字列が見つかれば、マッチを試行するのをやめます。', 'ターゲットテキストがsome <foo> <bar> new </bar> </foo> thingの場合')
 ];
-
 
 // click_meta_openがtrueの時に開くモーダル
 export const CheckMetaDialog = ({
@@ -239,12 +258,55 @@ export const CheckMetaDialog = ({
                       <StyledTableRow key={row.id}>
                         <StyledTableCell align="center" component="th" scope="row">
                           {row.name}
+                          {
+                            row.name === '??' &&
+                              <>
+                                <NonGreedyName>+?</NonGreedyName>
+                                <NonGreedyName>*?</NonGreedyName>
+                                <NonGreedyName>{'{'}n{'}'}?</NonGreedyName>
+                                <NonGreedyName>{'{'}n,{'}'}?</NonGreedyName>
+                                <NonGreedyName>{'{'}n,m{'}'}?</NonGreedyName>
+                              </>
+                          }
                         </StyledTableCell>
                         <StyledTableDataCell>
                           {row.data}
                           {
                             row.example &&
-                              <ExampleData>{row.example}</ExampleData>
+                              <ExampleData>{`ex) ${row.example}`}</ExampleData>
+                          }
+                          {
+                            row.example === 'ターゲットテキストがsome <foo> <bar> new </bar> </foo> thingの場合' &&
+                              <CustomCodeBlockWrapper>
+                                <CodeBlockDiv> 
+                                  <CodeLineWrapper>
+                                    <CodeRedSpan>const</CodeRedSpan> target <CodeYellowSpan>=</CodeYellowSpan> <CodeYellowSpan>"some {'<'}foo{'>'} {'<'}bar{'>'} new {'<'}/bar{'>'} {'<'}/foo{'>'} thing"</CodeYellowSpan>;
+                                  </CodeLineWrapper>
+                                  <BlankLineWrapper />
+                                  <CodeLineWrapper>
+                                    <CodeRedSpan>const</CodeRedSpan> regex_pattern_1 <CodeYellowSpan>=</CodeYellowSpan> <CodeYellowSpan>/{'<'}.*{'>'}/g</CodeYellowSpan>; <CodeComentSpan>{'//'} 最大量指定子を用いた正規表現</CodeComentSpan>
+                                  </CodeLineWrapper>
+                                  <CodeLineWrapper>
+                                    <CodeRedSpan>const</CodeRedSpan> regex_pattern_1 <CodeYellowSpan>=</CodeYellowSpan> <CodeYellowSpan>/{'<'}.*?{'>'}/g</CodeYellowSpan>; <CodeComentSpan>{'//'} 最小量指定子を用いた正規表現</CodeComentSpan>
+                                  </CodeLineWrapper>
+                                  <BlankLineWrapper />
+                                  <ComentLineWrapper>
+                                  </ComentLineWrapper>
+                                  <CodeLineWrapper>
+                                    console.<CodeBlueSpan>log</CodeBlueSpan>(target.<CodeBlueSpan>match</CodeBlueSpan>(regex_pattern_1));
+                                  </CodeLineWrapper>
+                                  <ComentLineWrapper>
+                                    {'// => '} ['{'<'}foo{'>'} {'<'}bar{'>'} new {'<'}/bar{'>'} {'<'}/foo{'>'}']
+                                  </ComentLineWrapper>
+                                  <BlankLineWrapper />
+                                  <CodeLineWrapper>
+                                    console.<CodeBlueSpan>log</CodeBlueSpan>(target.<CodeBlueSpan>match</CodeBlueSpan>(regex_pattern_2));
+                                  </CodeLineWrapper>
+                                  <ComentLineWrapper>
+                                    {'// => '} ['{'<'}foo{'>'}', '{'<'}bar{'>'}', '{'<'}/bar{'>'}', '{'<'}/foo{'>'}']
+                                  </ComentLineWrapper>
+                                </CodeBlockDiv>
+                              </CustomCodeBlockWrapper>
                           }
                         </StyledTableDataCell>
                       </StyledTableRow>
