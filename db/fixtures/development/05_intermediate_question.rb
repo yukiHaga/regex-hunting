@@ -49,7 +49,7 @@ Question.seed(
     sentence: '<p>, <p class={Blue}>にマッチする正規表現を入力せよ。',
     target_sentence: '<p> <p class={Blue}>',
     sample_answer: '<p(?: class={Blue})?>',
-    hint: '文字列, 括弧, 文字クラス, 量指定子を使用して、正規表現を作ってみましょう。',
+    hint: '文字列, キャプチャグループ, 文字クラス, 量指定子を使用して、正規表現を作ってみましょう。',
     commentary: '<p>と、属性値を持つ<p>がターゲットテキストです。属性値を持つまたは持たないという条件から、ターゲットテキストにマッチできる正規表現は、<p(...)?>という形であることが予想できます。そのため、<p(?: class={Blue})?>で<p>, <p class={Blue}>にマッチするような正規表現を表します。',
     difficulty: 'intermediate'
   },
@@ -126,7 +126,7 @@ Question.seed(
     sentence: '1, 112, 11212, 1121212にマッチする正規表現を入力せよ。',
     target_sentence: '1 112 11212 1121212',
     sample_answer: '1(?:12)*',
-    hint: '文字列, 括弧, 量指定子(*)を使用して、正規表現を作ってみましょう。',
+    hint: '文字列, キャプチャグループ, 量指定子(*)を使用して、正規表現を作ってみましょう。',
     commentary: '全ての数は、先頭が1から始まります。その後、12が0回以上繰り返されています。そのため、1(?:12)*で1, 112, 11212, 1121212にマッチする正規表現を表します。',
     difficulty: 'intermediate'
   },
@@ -148,8 +148,8 @@ Question.seed(
     sentence: 'Java, JavaScriptにマッチする正規表現を入力せよ。',
     target_sentence: 'Java JavaScript Python',
     sample_answer: 'Java(?:Script)?',
-    hint: '文字列, 括弧, 量指定子(?)を使用して、正規表現を作ってみましょう。',
-    commentary: 'Javaという文字列と、JavaScriptという文字列の違いは、Scriptという文字列があるかないかです。Scriptという文字列があるまたはなしは、(?:Script)?でマッチさせることができます。そのため、Java(?:Script)?でJava, JavaScriptにマッチするような正規表現を表します。もし括弧をつけない場合、正規表現はJavaScript?となります。これは、JavaScript, JavaScripにマッチするだけであり、Javaにはマッチしません。?の対象はあくまで直前の1文字であるためです。括弧を使うことで、1文字以上の文字列を?の対象にすることができます。',
+    hint: '文字列, キャプチャグループ, 量指定子(?)を使用して、正規表現を作ってみましょう。',
+    commentary: 'Javaという文字列と、JavaScriptという文字列の違いは、Scriptという文字列があるかないかです。Scriptという文字列があるまたはなしは、(?:Script)?でマッチさせることができます。そのため、Java(?:Script)?でJava, JavaScriptにマッチするような正規表現を表します。もしキャプチャグループをつけない場合、正規表現はJavaScript?となります。これは、JavaScript, JavaScripにマッチするだけであり、Javaにはマッチしません。?の対象はあくまで直前の1文字であるためです。キャプチャグループを使うことで、1文字以上の文字列を?の対象にすることができます。',
     difficulty: 'intermediate'
   },
 )
