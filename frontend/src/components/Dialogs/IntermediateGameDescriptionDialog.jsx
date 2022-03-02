@@ -127,7 +127,7 @@ export const IntermediateGameDescriptionDialog = ({
   const slideContent = useMemo(() => [
     {
       title: "中級編",
-      sentence: "中級編を始める前に、最大量指定子(? * + {min,max})、括弧について学習しましょう！ そして、中級編のゲームを通して、これらの特殊文字を使用した正規表現をマスターしましょう！",
+      sentence: "中級編を始める前に、最大量指定子(? * + {min,max})、キャプチャグループについて学習しましょう！ そして、中級編のゲームを通して、これらの特殊文字を使用した正規表現をマスターしましょう！",
       slide_num: 0
     },
     {
@@ -151,8 +151,8 @@ export const IntermediateGameDescriptionDialog = ({
       slide_num: 4
     },
     {
-      title: "括弧とは？",
-      sentence: "最大量指定子(? * + {min,max})は、どれも直前の1文字を対象とする特殊文字です。2文字以上の文字を繰り返したい時はどうすれば良いのでしょうか？ そのような時は括弧を使用します。括弧を使用することで、複数の文字列を1つのグループとして扱うことができます。そのグループに最大量指定子が使用できるので、2文字以上の文字列を繰り返すことができます。",
+      title: "キャプチャグループとは？",
+      sentence: "最大量指定子(? * + {min,max})は、どれも直前の1文字を対象とする特殊文字です。2文字以上の文字を繰り返したい時はどうすれば良いのでしょうか？ そのような時はキャプチャグループ((...))を使用します。キャプチャグループを使用することで、複数の文字列を1つのグループとして扱うことができます。そのグループに最大量指定子を指定できるので、2文字以上の文字列を繰り返すことができます。本サービスは、厳密性より見やすさと分かりやすさを重視しているので、基本的には非キャプチャグループ((?...))ではなく、キャプチャグループ((...))を使用します。",
       slide_num: 5
     },
     {
@@ -329,9 +329,6 @@ export const IntermediateGameDescriptionDialog = ({
                     <>
                       <CodeBlockWrapper>
                         <CodeBlockDiv> 
-                          <ComentLineWrapper>
-                            {'//'} 正規表現を適用させる文字列
-                          </ComentLineWrapper>
                           <CodeLineWrapper>
                             <CodeRedSpan>const</CodeRedSpan> target <CodeYellowSpan>=</CodeYellowSpan> <CodeYellowSpan>"environment enviroment"</CodeYellowSpan>;
                           </CodeLineWrapper>
@@ -408,9 +405,6 @@ export const IntermediateGameDescriptionDialog = ({
                 {
                   slideState.slide_num === 5 &&
                     <>
-                      <CaptureWarningSentenceWrapper>
-                        ※ 括弧の使用方法の理解を促すために、非キャプチャグループについての説明は省略させていただきます。
-                      </CaptureWarningSentenceWrapper>
                       <CaptureCodeBlockWrapper>
                         <CodeBlockDiv> 
                           <CodeLineWrapper>

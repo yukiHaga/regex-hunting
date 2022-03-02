@@ -117,7 +117,7 @@ export const GameContent = memo(({
         sentence = '文字クラスをマスターして、スクータムの群れを倒そう！';
         break;
       case 'intermediate':
-        sentence = '最大量指定子、括弧をマスターして、カスアリウスを倒そう！';
+        sentence = '最大量指定子、キャプチャグループをマスターして、カスアリウスを倒そう！';
         break;
       case 'advanced':
         sentence = '選択、先読みをマスターして、オルファ・ラパクスを倒そう！';

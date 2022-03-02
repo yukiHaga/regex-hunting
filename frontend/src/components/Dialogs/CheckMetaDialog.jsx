@@ -103,6 +103,14 @@ const CustomCodeBlockWrapper = styled(CodeBlockWrapper)`
   margin-top: 0.8%;
 `;
 
+const CustomUl = styled.ul`
+
+`;
+
+const CustomLi = styled.li`
+
+`;
+
 // animationプロパティは1つしか存在できない
 // 2個存在する場合、2個目で1個目が上書きされる
 const SlideContentWrapper = styled.div`
@@ -154,6 +162,15 @@ const quantifiersRows = [
   createData(7, '??', '最大量指定子の後ろに?をつけると、最小量指定子になります。+や?等は最大量指定子であり、できる限り多くマッチしようと試みます。最小量指定子は最大量指定子の逆で、マッチする文字列が見つかれば、マッチを試行するのをやめます。', 'ターゲットテキストがsome <foo> <bar> new </bar> </foo> thingの場合')
 ];
 
+// 括弧のデータ
+const groupsRows = [
+  createData(1, '(...)', 'キャプチャグループの用途は、主に以下の3つです。', false),
+  createData(2, '\\n', '括弧の用途は、主に以下の3つです。', false),
+  createData(3, '(?:x)', '括弧の用途は、主に以下の3つです。', false),
+  createData(4, '(?<Name>x)', '括弧の用途は、主に以下の3つです。', false),
+  createData(5, '\\k<Name>', '括弧の用途は、主に以下の3つです。', false),
+];
+
 // click_meta_openがtrueの時に開くモーダル
 export const CheckMetaDialog = ({
   isOpen,
@@ -203,6 +220,9 @@ export const CheckMetaDialog = ({
       case '量指定子':
         handleDataRows('文字クラス', characterClassesRows, 'right')
         break;
+      case 'キャプチャグループ':
+        handleDataRows('量指定子', quantifiersRows, 'right')
+        break;
       default:
         handleDataRows('文字クラス', characterClassesRows, 'right')
     }
@@ -213,6 +233,9 @@ export const CheckMetaDialog = ({
     switch (name){
       case '文字クラス':
         handleDataRows('量指定子', quantifiersRows, 'left');
+        break;
+      case '量指定子':
+        handleDataRows('キャプチャグループ', groupsRows, 'left');
         break;
       default:
         handleDataRows('量指定子', quantifiersRows, 'left');
@@ -342,6 +365,20 @@ export const CheckMetaDialog = ({
                                   </ComentLineWrapper>
                                 </CodeBlockDiv>
                               </CustomCodeBlockWrapper>
+                          }
+                          {
+                            row.name === '(...)' &&
+                              <CustomUl>
+                                <CustomLi>
+                                  量指定子の対象となるグループを作る
+                                </CustomLi>
+                                <CustomLi>
+                                  選択の範囲を限定する
+                                </CustomLi>
+                                <CustomLi>
+                                  後方参照のためにキャプチャ(マッチしたテキストを記憶)する。
+                                </CustomLi>
+                              </CustomUl>
                           }
                         </StyledTableDataCell>
                       </StyledTableRow>
