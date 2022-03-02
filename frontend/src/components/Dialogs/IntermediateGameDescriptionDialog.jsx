@@ -300,7 +300,7 @@ export const IntermediateGameDescriptionDialog = ({
                             {'//'} 正規表現を適用させる文字列
                           </ComentLineWrapper>
                           <CodeLineWrapper>
-                            <CodeRedSpan>const</CodeRedSpan> target <CodeYellowSpan>=</CodeYellowSpan> <CodeYellowSpan>"メラ メラメラ メラメラメラ"</CodeYellowSpan>;
+                            <CodeRedSpan>const</CodeRedSpan> target <CodeYellowSpan>=</CodeYellowSpan> <CodeYellowSpan>'メラ メラメラ メラメラメラ'</CodeYellowSpan>;
                           </CodeLineWrapper>
                           <BlankLineWrapper />
                           <ComentLineWrapper>
@@ -326,7 +326,7 @@ export const IntermediateGameDescriptionDialog = ({
                       <CodeBlockWrapper>
                         <CodeBlockDiv> 
                           <CodeLineWrapper>
-                            <CodeRedSpan>const</CodeRedSpan> target <CodeYellowSpan>=</CodeYellowSpan> <CodeYellowSpan>"environment enviroment"</CodeYellowSpan>;
+                            <CodeRedSpan>const</CodeRedSpan> target <CodeYellowSpan>=</CodeYellowSpan> <CodeYellowSpan>'environment enviroment'</CodeYellowSpan>;
                           </CodeLineWrapper>
                           <BlankLineWrapper />
                           <ComentLineWrapper>
@@ -352,7 +352,7 @@ export const IntermediateGameDescriptionDialog = ({
                       <CodeBlockWrapper>
                         <CodeBlockDiv> 
                           <CodeLineWrapper>
-                            <CodeRedSpan>const</CodeRedSpan> target <CodeYellowSpan>=</CodeYellowSpan> <CodeYellowSpan>"ck cook coook cooook"</CodeYellowSpan>;
+                            <CodeRedSpan>const</CodeRedSpan> target <CodeYellowSpan>=</CodeYellowSpan> <CodeYellowSpan>'ck cook coook cooook'</CodeYellowSpan>;
                           </CodeLineWrapper>
                           <BlankLineWrapper />
                           <CodeLineWrapper>
@@ -378,7 +378,7 @@ export const IntermediateGameDescriptionDialog = ({
                       <CodeBlockWrapper>
                         <CodeBlockDiv> 
                           <CodeLineWrapper>
-                            <CodeRedSpan>const</CodeRedSpan> target <CodeYellowSpan>=</CodeYellowSpan> <CodeYellowSpan>"150 is greater than 15."</CodeYellowSpan>;
+                            <CodeRedSpan>const</CodeRedSpan> target <CodeYellowSpan>=</CodeYellowSpan> <CodeYellowSpan>'150 is greater than 15.'</CodeYellowSpan>;
                           </CodeLineWrapper>
                           <BlankLineWrapper />
                           <CodeLineWrapper>
@@ -404,14 +404,14 @@ export const IntermediateGameDescriptionDialog = ({
                       <CaptureCodeBlockWrapper>
                         <CodeBlockDiv> 
                           <CodeLineWrapper>
-                            <CodeRedSpan>const</CodeRedSpan> target <CodeYellowSpan>=</CodeYellowSpan> <CodeYellowSpan>"1, 112, 11212, 1121212"</CodeYellowSpan>;
+                            <CodeRedSpan>const</CodeRedSpan> target <CodeYellowSpan>=</CodeYellowSpan> <CodeYellowSpan>'1, 112, 11212, 1121212'</CodeYellowSpan>;
                           </CodeLineWrapper>
                           <BlankLineWrapper />
                           <CodeLineWrapper>
-                            <CodeRedSpan>const</CodeRedSpan> regex_pattern_1 <CodeYellowSpan>=</CodeYellowSpan> <CodeYellowSpan>/1(12)*/g</CodeYellowSpan>; <CodeComentSpan>{'//'} (12)*は、12の0回以上の繰り返しマッチを表す。</CodeComentSpan>
+                            <CodeRedSpan>const</CodeRedSpan> regex_pattern_1 <CodeYellowSpan>=</CodeYellowSpan> <CodeYellowSpan>/1(12)*/g</CodeYellowSpan>; <CodeComentSpan>{'//'} (12)*は、12の0回以上の繰り返しマッチを表します。</CodeComentSpan>
                           </CodeLineWrapper>
                           <CodeLineWrapper>
-                            <CodeRedSpan>const</CodeRedSpan> regex_pattern_2 <CodeYellowSpan>=</CodeYellowSpan> <CodeYellowSpan>/112*/g</CodeYellowSpan>; <CodeComentSpan>{'//'} 2*は、2の0回以上の繰り返しマッチを表す。</CodeComentSpan>
+                            <CodeRedSpan>const</CodeRedSpan> regex_pattern_2 <CodeYellowSpan>=</CodeYellowSpan> <CodeYellowSpan>/112*/g</CodeYellowSpan>; <CodeComentSpan>{'//'} 2*は、2の0回以上の繰り返しマッチを表します。</CodeComentSpan>
                           </CodeLineWrapper>
                           <BlankLineWrapper />
                           <CodeLineWrapper>

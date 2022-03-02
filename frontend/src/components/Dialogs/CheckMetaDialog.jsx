@@ -47,7 +47,7 @@ const CustomDialogInnerWrapper = styled.div`
   padding-left: 3%;
   padding-top: 2%;
   background-color: ${COLORS.SUB};
-  width: 70vw;
+  width: 75vw;
 `;
 
 // backボタンのラッパー 
@@ -95,8 +95,8 @@ const NonGreedyName = styled.div`
 
 const ExampleData = styled.div`
   font-size: 1em;
-  margin-top: 2%;
-  margin-bottom: 1%;
+  margin-top: 1.5%;
+  margin-bottom: 0.5%;
 `;
 
 const CustomCodeBlockWrapper = styled(CodeBlockWrapper)`
@@ -148,12 +148,12 @@ const characterClassesRows = [
   createData(10, '\\D', 'あらゆる数字以外の文字にマッチします。\\Dは[^0-9]に書き換え可能です。', false),
   createData(11, '\\W', 'アンダースコアを含む半角英数字以外の1文字にマッチします。\\Wは[^A-Za-z0-9_]に書き換え可能です。', false),
   createData(12, '\\S', 'ホワイトスペース以外の文字にマッチします。', false),
-  createData(13, '\\', 'ある文字の前に\\を書くことで、ある文字をエスケープすることができます。エスケープ対象の文字が特殊文字であるか、または、エスケープ対象の文字と\\の組み合わせに特別な意味がなければ、エスケープ対象の文字が、ただの文字としてマッチするようになります。', false),
+  createData(13, '\\', 'ある文字の前に\\を書くことで、ある文字をエスケープすることができます。エスケープ対象の文字が特殊文字であるか、または、エスケープ対象の文字と\\の組み合わせに特別な意味がなければ、エスケープ対象の文字が、ただの文字としてマッチするようになります。また、\\を文字列として扱いたい場合、\\を\\でエスケープします。', false),
 ];
 
 // 量指定子のデータ
 const quantifiersRows = [
-  createData(1, '?', '直前の1文字があればマッチさせるが、なくてもよいという意味を表します。1つの文字クラスは1つの単位を表すので、括弧をつけなくても量指定子を指定することができます。2文字以上の文字列を繰り返しマッチさせたい場合、括弧で括ってから量指定子を指定します。', 'n?,  [aq]?,  [a-z]?,  (Script)?'),
+  createData(1, '?', '直前の1文字があればマッチさせるが、なくてもよいという意味を表します。1つの文字クラスは1つの単位を表すので、キャプチャグループを使用しなくても量指定子を指定することができます。2文字以上の文字列を繰り返しマッチさせたい場合、キャプチャグループで括ってから量指定子を指定します。', 'n?,  [aq]?,  [a-z]?,  (Script)?'),
   createData(2, '+', '直前の1文字に1回以上の繰り返しマッチという意味を表します。', 'o+,  [a-z]+,  (12)+'),
   createData(3, '*', '直前の1文字に0回以上の繰り返しマッチという意味を表します。', 'o*,  [a-z]*,  (12)*'),
   createData(4, '{min}', '直前の1文字に{min}回繰り返しマッチという意味を表します。', '\\d{3}'),
@@ -164,11 +164,11 @@ const quantifiersRows = [
 
 // 括弧のデータ
 const groupsRows = [
-  createData(1, '(...)', 'キャプチャグループの用途は、主に以下の3つです。', false),
-  createData(2, '\\n', '括弧の用途は、主に以下の3つです。', false),
-  createData(3, '(?:x)', '括弧の用途は、主に以下の3つです。', false),
-  createData(4, '(?<Name>x)', '括弧の用途は、主に以下の3つです。', false),
-  createData(5, '\\k<Name>', '括弧の用途は、主に以下の3つです。', false),
+  createData(1, '(...)', 'キャプチャグループを使用する目的は、主に以下の3つです。', false),
+  createData(2, '\\n', '\\nは、キャプチャした文字列を呼び出すときに使用します。', 'ターゲットテキストがThis is "<span>React</span>"の場合'),
+  createData(3, '(?:...)', '(?:...)は、非キャプチャグループです。キャプチャグループのキャプチャ機能がないバージョンです。主に1つのグループを作りたい時に使用します。', false),
+  createData(4, '(?<Name>...)', '(?<Name>...)は名前付きキャプチャグループです。キャプチャした文字列を独自の名前で呼び出すことができます。呼び出すときは、\\k<Name>を使用します。主に、キャプチャしたいが正規表現中に多くの括弧が存在する場合に、名前付きキャプチャグループを使用します。', false),
+  createData(5, '\\k<Name>', '\\k<Name>は、名前付きキャプチャした文字列を呼び出す時に使用します。', 'ターゲットテキストがThis is "Regex Hunting"の場合'),
 ];
 
 // click_meta_openがtrueの時に開くモーダル
@@ -338,14 +338,14 @@ export const CheckMetaDialog = ({
                               <CustomCodeBlockWrapper>
                                 <CodeBlockDiv> 
                                   <CodeLineWrapper>
-                                    <CodeRedSpan>const</CodeRedSpan> target <CodeYellowSpan>=</CodeYellowSpan> <CodeYellowSpan>"some {'<'}foo{'>'} {'<'}bar{'>'} new {'<'}/bar{'>'} {'<'}/foo{'>'} thing"</CodeYellowSpan>;
+                                    <CodeRedSpan>const</CodeRedSpan> target <CodeYellowSpan>=</CodeYellowSpan> <CodeYellowSpan>'some {'<'}foo{'>'} {'<'}bar{'>'} new {'<'}/bar{'>'} {'<'}/foo{'>'} thing'</CodeYellowSpan>;
                                   </CodeLineWrapper>
                                   <BlankLineWrapper />
                                   <CodeLineWrapper>
                                     <CodeRedSpan>const</CodeRedSpan> regex_pattern_1 <CodeYellowSpan>=</CodeYellowSpan> <CodeYellowSpan>/{'<'}.*{'>'}/g</CodeYellowSpan>; <CodeComentSpan>{'//'} 最大量指定子を用いた正規表現</CodeComentSpan>
                                   </CodeLineWrapper>
                                   <CodeLineWrapper>
-                                    <CodeRedSpan>const</CodeRedSpan> regex_pattern_1 <CodeYellowSpan>=</CodeYellowSpan> <CodeYellowSpan>/{'<'}.*?{'>'}/g</CodeYellowSpan>; <CodeComentSpan>{'//'} 最小量指定子を用いた正規表現</CodeComentSpan>
+                                    <CodeRedSpan>const</CodeRedSpan> regex_pattern_2 <CodeYellowSpan>=</CodeYellowSpan> <CodeYellowSpan>/{'<'}.*?{'>'}/g</CodeYellowSpan>; <CodeComentSpan>{'//'} 最小量指定子を用いた正規表現</CodeComentSpan>
                                   </CodeLineWrapper>
                                   <BlankLineWrapper />
                                   <ComentLineWrapper>
@@ -368,17 +368,72 @@ export const CheckMetaDialog = ({
                           }
                           {
                             row.name === '(...)' &&
-                              <CustomUl>
-                                <CustomLi>
-                                  量指定子の対象となるグループを作る
-                                </CustomLi>
-                                <CustomLi>
-                                  選択の範囲を限定する
-                                </CustomLi>
-                                <CustomLi>
-                                  後方参照のためにキャプチャ(マッチしたテキストを記憶)する。
-                                </CustomLi>
-                              </CustomUl>
+                              <>
+                                <CustomUl>
+                                  <CustomLi>
+                                    量指定子の対象となるグループを作る
+                                  </CustomLi>
+                                  <CustomLi>
+                                    選択の範囲を限定する
+                                  </CustomLi>
+                                  <CustomLi>
+                                    後方参照のためにキャプチャ(マッチした文字列を記憶)する
+                                  </CustomLi>
+                                </CustomUl>
+                                キャプチャグループを使用すると、複数の文字列を1つのグループにできます。そして、グループ部分にマッチする文字列が存在する場合、その文字列をキャプチャ(マッチした文字列を記憶)します。キャプチャした文字列は、正規表現中のキャプチャした位置より後ろで利用することができます(後方参照)。また、グループを作りたいがキャプチャ機能は不要な場合、非キャプチャグループを使用します。パフォーマンスを考えると、キャプチャ機能が不要な場合、非キャプチャグループを使用した方がいいです。しかし、本サービスでは、厳密性よりも見やすさと分かりやすさを重視している為、基本的には非キャプチャグループではなく、キャプチャグループを使用します。
+                              </>
+                          }
+                          {
+                            row.example === 'ターゲットテキストがThis is "<span>React</span>"の場合' &&
+                              <CustomCodeBlockWrapper>
+                                <CodeBlockDiv> 
+                                  <CodeLineWrapper>
+                                    <CodeRedSpan>const</CodeRedSpan> target <CodeYellowSpan>=</CodeYellowSpan> <CodeYellowSpan>'This is "{'<'}span{'>'}React{'<'}/span{'>'}"'</CodeYellowSpan>;
+                                  </CodeLineWrapper>
+                                  <BlankLineWrapper />
+                                  <ComentLineWrapper>
+                                    {'// '}キャプチャした文字列を、{'\\'}1で呼び出します。
+                                  </ComentLineWrapper>
+                                  <CodeLineWrapper>
+                                    <CodeRedSpan>const</CodeRedSpan> regex_pattern <CodeYellowSpan>=</CodeYellowSpan> <CodeYellowSpan>/{'<'}(span){'>'}.*?{'<'}\/{'\\'}1{'>'}/g</CodeYellowSpan>;
+                                  </CodeLineWrapper>
+                                  <BlankLineWrapper />
+                                  <ComentLineWrapper>
+                                  </ComentLineWrapper>
+                                  <CodeLineWrapper>
+                                    console.<CodeBlueSpan>log</CodeBlueSpan>(target.<CodeBlueSpan>match</CodeBlueSpan>(regex_pattern));
+                                  </CodeLineWrapper>
+                                  <ComentLineWrapper>
+                                    {'// => '} ['{'<'}span{'>'}React{'<'}/span{'>'}'] ]
+                                  </ComentLineWrapper>
+                                </CodeBlockDiv>
+                              </CustomCodeBlockWrapper>
+                          }
+                          {
+                            row.example === 'ターゲットテキストがThis is "Regex Hunting"の場合' &&
+                              <CustomCodeBlockWrapper>
+                                <CodeBlockDiv> 
+                                  <CodeLineWrapper>
+                                    <CodeRedSpan>const</CodeRedSpan> target <CodeYellowSpan>=</CodeYellowSpan> <CodeYellowSpan>'This is "Regex Hunting"'</CodeYellowSpan>;
+                                  </CodeLineWrapper>
+                                  <BlankLineWrapper />
+                                  <ComentLineWrapper>
+                                    {'// '}名前付きキャプチャした文字列を、\k{'<'}quote{'>'}で呼び出します。
+                                  </ComentLineWrapper>
+                                  <CodeLineWrapper>
+                                    <CodeRedSpan>const</CodeRedSpan> regex_pattern <CodeYellowSpan>=</CodeYellowSpan> <CodeYellowSpan>/(?{'<'}quote{'>'}['"])(.*?)\k{'<'}quote{'>'}/g</CodeYellowSpan>;
+                                  </CodeLineWrapper>
+                                  <BlankLineWrapper />
+                                  <ComentLineWrapper>
+                                  </ComentLineWrapper>
+                                  <CodeLineWrapper>
+                                    console.<CodeBlueSpan>log</CodeBlueSpan>(target.<CodeBlueSpan>match</CodeBlueSpan>(regex_pattern));
+                                  </CodeLineWrapper>
+                                  <ComentLineWrapper>
+                                    {'// => '} ['"Regex Hunting"']
+                                  </ComentLineWrapper>
+                                </CodeBlockDiv>
+                              </CustomCodeBlockWrapper>
                           }
                         </StyledTableDataCell>
                       </StyledTableRow>

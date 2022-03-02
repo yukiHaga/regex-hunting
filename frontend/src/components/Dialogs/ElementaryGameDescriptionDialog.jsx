@@ -142,7 +142,7 @@ export const ElementaryGameDescriptionDialog = ({
     },
     {
       title: "正規表現を作るコツ",
-      sentence: "「\"gray grey\"という文字列のgrayとgreyにマッチするような正規表現を求めよ」と言われた場合、1つの文字クラスのみで作られた正規表現ではマッチできません。理由は、文字クラスは指定した1文字を表すだけであり、2文字以上の文字列にマッチさせることができないからです。この場合、まずはgrayとgreyの共通な文字と共通ではない文字を見つけます。共通な文字はg, r, yです。そして、共通ではない文字はa, eです。aとeは、grayとgreyの3番目に位置する文字です。したがって、gr[ae]yという正規表現を用いることで、grayとgreyにマッチさせることができます。",
+      sentence: "'gray grey'という文字列のgrayとgreyにマッチするような正規表現を求めよ」と言われた場合、1つの文字クラスのみで作られた正規表現ではマッチできません。理由は、文字クラスは指定した1文字を表すだけであり、2文字以上の文字列にマッチさせることができないからです。この場合、まずはgrayとgreyの共通な文字と共通ではない文字を見つけます。共通な文字はg, r, yです。そして、共通ではない文字はa, eです。aとeは、grayとgreyの3番目に位置する文字です。したがって、gr[ae]yという正規表現を用いることで、grayとgreyにマッチさせることができます。",
       slide_num: 3
     },
     {
@@ -295,7 +295,7 @@ export const ElementaryGameDescriptionDialog = ({
                             {'//'} 正規表現を適用させる文字列
                           </ComentLineWrapper>
                           <CodeLineWrapper>
-                            <CodeRedSpan>const</CodeRedSpan> target <CodeYellowSpan>=</CodeYellowSpan> <CodeYellowSpan>"JavaScript and React are different. TypeScript is a great language."</CodeYellowSpan>;
+                            <CodeRedSpan>const</CodeRedSpan> target <CodeYellowSpan>=</CodeYellowSpan> <CodeYellowSpan>'JavaScript and React are different. TypeScript is a great language.'</CodeYellowSpan>;
                           </CodeLineWrapper>
                           <BlankLineWrapper />
                           <ComentLineWrapper>
@@ -343,7 +343,7 @@ export const ElementaryGameDescriptionDialog = ({
                       <CodeBlockWrapper>
                         <CodeBlockDiv> 
                           <CodeLineWrapper>
-                            <CodeRedSpan>const</CodeRedSpan> target <CodeYellowSpan>=</CodeYellowSpan> <CodeYellowSpan>"gray grey"</CodeYellowSpan>;
+                            <CodeRedSpan>const</CodeRedSpan> target <CodeYellowSpan>=</CodeYellowSpan> <CodeYellowSpan>'gray grey'</CodeYellowSpan>;
                           </CodeLineWrapper>
                           <BlankLineWrapper />
                           <ComentLineWrapper>
