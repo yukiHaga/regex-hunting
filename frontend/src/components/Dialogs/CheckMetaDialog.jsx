@@ -54,7 +54,7 @@ const CustomDialogInnerWrapper = styled.div`
   padding-left: 3%;
   padding-top: 2%;
   background-color: ${COLORS.SUB};
-  width: 75vw;
+  width: 77vw;
 `;
 
 // backボタンのラッパー 
@@ -314,8 +314,6 @@ export const CheckMetaDialog = ({
                                     <CodeRedSpan>const</CodeRedSpan> regex_pattern_2 <CodeYellowSpan>=</CodeYellowSpan> <CodeYellowSpan>/{'<'}.*?{'>'}/g</CodeYellowSpan>; <CodeComentSpan>{'//'} 最小量指定子を用いた正規表現</CodeComentSpan>
                                   </CodeLineWrapper>
                                   <BlankLineWrapper />
-                                  <ComentLineWrapper>
-                                  </ComentLineWrapper>
                                   <CodeLineWrapper>
                                     console.<CodeBlueSpan>log</CodeBlueSpan>(target.<CodeBlueSpan>match</CodeBlueSpan>(regex_pattern_1));
                                   </CodeLineWrapper>
@@ -364,8 +362,6 @@ export const CheckMetaDialog = ({
                                     <CodeRedSpan>const</CodeRedSpan> regex_pattern <CodeYellowSpan>=</CodeYellowSpan> <CodeYellowSpan>/{'<'}(span){'>'}.*?{'<'}\/{'\\'}1{'>'}/g</CodeYellowSpan>;
                                   </CodeLineWrapper>
                                   <BlankLineWrapper />
-                                  <ComentLineWrapper>
-                                  </ComentLineWrapper>
                                   <CodeLineWrapper>
                                     console.<CodeBlueSpan>log</CodeBlueSpan>(target.<CodeBlueSpan>match</CodeBlueSpan>(regex_pattern));
                                   </CodeLineWrapper>
@@ -390,8 +386,6 @@ export const CheckMetaDialog = ({
                                     <CodeRedSpan>const</CodeRedSpan> regex_pattern <CodeYellowSpan>=</CodeYellowSpan> <CodeYellowSpan>/(?{'<'}quote{'>'}['"])(.*?)\k{'<'}quote{'>'}/g</CodeYellowSpan>;
                                   </CodeLineWrapper>
                                   <BlankLineWrapper />
-                                  <ComentLineWrapper>
-                                  </ComentLineWrapper>
                                   <CodeLineWrapper>
                                     console.<CodeBlueSpan>log</CodeBlueSpan>(target.<CodeBlueSpan>match</CodeBlueSpan>(regex_pattern));
                                   </CodeLineWrapper>
@@ -423,8 +417,6 @@ export const CheckMetaDialog = ({
                                     <CodeRedSpan>const</CodeRedSpan> regex_pattern_2 <CodeYellowSpan>=</CodeYellowSpan> <CodeYellowSpan>/This is (React|JavaScript)/g</CodeYellowSpan>;
                                   </CodeLineWrapper>
                                   <BlankLineWrapper />
-                                  <ComentLineWrapper>
-                                  </ComentLineWrapper>
                                   <CodeLineWrapper>
                                     console.<CodeBlueSpan>log</CodeBlueSpan>(target.<CodeBlueSpan>match</CodeBlueSpan>(regex_pattern_1));
                                   </CodeLineWrapper>
@@ -438,6 +430,47 @@ export const CheckMetaDialog = ({
                                   <ComentLineWrapper>
                                     {'// => '} ['This is React', 'This is JavaScript']
                                   </ComentLineWrapper>
+                                </CodeBlockDiv>
+                              </CustomCodeBlockWrapper>
+                          }
+                          {
+                            row.example === 'ターゲット文字列がThis water(100ml) is 100yenの場合' &&
+                              <CustomCodeBlockWrapper>
+                                <CodeBlockDiv> 
+                                  <CodeLineWrapper>
+                                    <CodeRedSpan>const</CodeRedSpan> target <CodeYellowSpan>=</CodeYellowSpan> <CodeYellowSpan>'This water(100ml) is 100yen'</CodeYellowSpan>;
+                                  </CodeLineWrapper>
+                                  <BlankLineWrapper />
+                                  <CodeLineWrapper>
+                                    <CodeRedSpan>const</CodeRedSpan> regex_pattern_1 <CodeYellowSpan>=</CodeYellowSpan> <CodeYellowSpan>/\d{'{'}3{'}'}/g</CodeYellowSpan>;
+                                  </CodeLineWrapper>
+                                  <BlankLineWrapper />
+                                  <ComentLineWrapper>
+                                    {'// '}肯定の先読みを使用した正規表現
+                                  </ComentLineWrapper>
+                                  <ComentLineWrapper>
+                                    {'// '}3桁の数字の後ろに、yenという文字列があるかを調べることができます。
+                                  </ComentLineWrapper>
+                                  <ComentLineWrapper>
+                                    {'// '}肯定の先読みでマッチした文字列は、全体の正規表現のマッチ結果に含まれません。
+                                  </ComentLineWrapper>
+                                  <CodeLineWrapper>
+                                    <CodeRedSpan>const</CodeRedSpan> regex_pattern_2 <CodeYellowSpan>=</CodeYellowSpan> <CodeYellowSpan>/\d{'{'}3{'}'}(?=yen)/g</CodeYellowSpan>;
+                                  </CodeLineWrapper>
+                                  <BlankLineWrapper />
+                                  <ComentLineWrapper>
+                                    {'// '}肯定の先読みを使用しない場合、金額以外の数字もマッチしてしまいます。
+                                  </ComentLineWrapper>
+                                  <CodeLineWrapper>
+                                    console.<CodeBlueSpan>log</CodeBlueSpan>(target.<CodeBlueSpan>match</CodeBlueSpan>(regex_pattern_1)); <CodeComentSpan>{'// => '} ['100', '100']</CodeComentSpan>
+                                  </CodeLineWrapper>
+                                  <BlankLineWrapper />
+                                  <ComentLineWrapper>
+                                    {'// '}肯定の先読みを使用した場合、金額の数字のみにマッチさせることができます。
+                                  </ComentLineWrapper>
+                                  <CodeLineWrapper>
+                                    console.<CodeBlueSpan>log</CodeBlueSpan>(target.<CodeBlueSpan>match</CodeBlueSpan>(regex_pattern_2)); <CodeComentSpan>{'// => '} ['100']</CodeComentSpan> 
+                                  </CodeLineWrapper>
                                 </CodeBlockDiv>
                               </CustomCodeBlockWrapper>
                           }
