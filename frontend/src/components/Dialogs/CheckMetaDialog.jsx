@@ -54,7 +54,7 @@ const CustomDialogInnerWrapper = styled.div`
   padding-left: 3%;
   padding-top: 2%;
   background-color: ${COLORS.SUB};
-  width: 77vw;
+  width: 83vw;
 `;
 
 // backボタンのラッパー 
@@ -78,6 +78,11 @@ const StyledTableCell = styled(TableCell)`
 const StyledTableDataCell = styled(TableCell)`
   font-size: 1em;
   width: 86%;  
+`;
+
+const StyledDescriptionDiv = styled.div`
+  font-size: 1em;
+  margin-top: 4%;
 `;
 
 const StyledTableRow = styled(TableRow)`
@@ -473,6 +478,69 @@ export const CheckMetaDialog = ({
                                   </CodeLineWrapper>
                                 </CodeBlockDiv>
                               </CustomCodeBlockWrapper>
+                          }
+                          {
+                            row.example === 'ターゲット文字列がThis water(500ml) is 100yenの場合' &&
+                              <>
+                                <CustomCodeBlockWrapper>
+                                  <CodeBlockDiv> 
+                                    <CodeLineWrapper>
+                                      <CodeRedSpan>const</CodeRedSpan> target <CodeYellowSpan>=</CodeYellowSpan> <CodeYellowSpan>'This water(500ml) is 100yen'</CodeYellowSpan>;
+                                    </CodeLineWrapper>
+                                    <BlankLineWrapper />
+                                    <ComentLineWrapper>
+                                      {'// '}否定の先読みを使用した正規表現
+                                    </ComentLineWrapper>
+                                    <ComentLineWrapper>
+                                      {'// '}3桁の数字の後ろにyenという文字列がないような3桁の数字にマッチします。
+                                    </ComentLineWrapper>
+                                    <CodeLineWrapper>
+                                      <CodeRedSpan>const</CodeRedSpan> regex_pattern <CodeYellowSpan>=</CodeYellowSpan> <CodeYellowSpan>/\d{'{'}3{'}'}(?!yen)/g</CodeYellowSpan>;
+                                    </CodeLineWrapper>
+                                    <BlankLineWrapper />
+                                    <CodeLineWrapper>
+                                      console.<CodeBlueSpan>log</CodeBlueSpan>(target.<CodeBlueSpan>match</CodeBlueSpan>(regex_pattern)); <CodeComentSpan>{'// => '} ['500']</CodeComentSpan>
+                                    </CodeLineWrapper>
+                                  </CodeBlockDiv>
+                                </CustomCodeBlockWrapper>
+                                <StyledDescriptionDiv>
+                                  また、以下のコードのように、マッチさせたくない文字列を含んでいるかをチェックするために、否定の先読みを使うこともできます。
+                                </StyledDescriptionDiv>
+                                <ExampleData>{`ex) 不正な郵便番号(000-0000)にマッチさせたくない場合`}</ExampleData>
+                                <CustomCodeBlockWrapper>
+                                  <CodeBlockDiv> 
+                                    <CodeLineWrapper>
+                                      <CodeRedSpan>const</CodeRedSpan> target_1 <CodeYellowSpan>=</CodeYellowSpan> <CodeYellowSpan>000-0000</CodeYellowSpan>; <CodeComentSpan>{'//'} 不正な郵便番号</CodeComentSpan>
+                                    </CodeLineWrapper>
+                                    <CodeLineWrapper>
+                                      <CodeRedSpan>const</CodeRedSpan> target_2 <CodeYellowSpan>=</CodeYellowSpan> <CodeYellowSpan>171-0022</CodeYellowSpan>; <CodeComentSpan>{'//'} 正当な郵便番号</CodeComentSpan>
+                                    </CodeLineWrapper>
+                                    <BlankLineWrapper />
+                                    <ComentLineWrapper>
+                                      {'// '}否定の先読みを使用した正規表現
+                                    </ComentLineWrapper>
+                                    <ComentLineWrapper>
+                                      {'// '}ターゲット文字列が0{'{'}3{'}'}-0{'{'}4{'}'}にマッチしない場合、否定の先読みが成功します。
+                                    </ComentLineWrapper>
+                                    <ComentLineWrapper>
+                                      {'// '}否定の先読みが成功した場合、ターゲット文字列が000-0000ではないことが確定します。
+                                    </ComentLineWrapper>
+                                    <ComentLineWrapper>
+                                      {'// '}否定の先読みが成功後、\d{'{'}3{'}'}-\d{'{'}4{'}'}がターゲット文字列にマッチするかを試行します。
+                                    </ComentLineWrapper>
+                                    <CodeLineWrapper>
+                                      <CodeRedSpan>const</CodeRedSpan> regex_pattern <CodeYellowSpan>=</CodeYellowSpan> <CodeYellowSpan>/(?!0{'{'}3{'}'}-0{'{'}4{'}'})\d{'{'}3{'}'}-\d{'{'}4{'}'}/g</CodeYellowSpan>;
+                                    </CodeLineWrapper>
+                                    <BlankLineWrapper />
+                                    <CodeLineWrapper>
+                                      console.<CodeBlueSpan>log</CodeBlueSpan>(target_1.<CodeBlueSpan>match</CodeBlueSpan>(regex_pattern)); <CodeComentSpan>{'// => '} null</CodeComentSpan>
+                                    </CodeLineWrapper>
+                                    <CodeLineWrapper>
+                                      console.<CodeBlueSpan>log</CodeBlueSpan>(target_2.<CodeBlueSpan>match</CodeBlueSpan>(regex_pattern)); <CodeComentSpan>{'// => '} ['171-0022']</CodeComentSpan>
+                                    </CodeLineWrapper>
+                                  </CodeBlockDiv>
+                                </CustomCodeBlockWrapper>
+                              </>
                           }
                         </StyledTableDataCell>
                       </StyledTableRow>
