@@ -43,9 +43,11 @@ import { CodeBlueSpan } from '../shared_style.js';
 import { CodeComentSpan } from '../shared_style.js';
 
 // テーブルの行のデータ
-import { characterClassesRows } from './dataRows.js'
-import { quantifiersRows } from './dataRows.js'
-import { groupsRows } from './dataRows.js'
+import { characterClassesRows } from './dataRows.js';
+import { quantifiersRows } from './dataRows.js';
+import { groupsRows } from './dataRows.js';
+import { alternationsRows } from './dataRows.js';
+import { lookAroundsRows } from './dataRows.js';
 
 const CustomDialogInnerWrapper = styled.div`
   padding-right: 3%;
@@ -108,12 +110,12 @@ const CustomCodeBlockWrapper = styled(CodeBlockWrapper)`
   margin-top: 0.8%;
 `;
 
-const CustomUl = styled.ul`
+const CustomUl = styled.ul``;
 
-`;
+const CustomLi = styled.li``;
 
-const CustomLi = styled.li`
-
+const CustomTitle = styled.div`
+  width: 15vw;
 `;
 
 // animationプロパティは1つしか存在できない
@@ -195,6 +197,12 @@ export const CheckMetaDialog = ({
       case '量指定子':
         handleDataRows('キャプチャグループ', groupsRows, 'left');
         break;
+      case 'キャプチャグループ':
+        handleDataRows('選択', alternationsRows, 'left');
+        break;
+      case '選択':
+        handleDataRows('先後読み', lookAroundsRows, 'left');
+        break;
       default:
         handleDataRows('量指定子', quantifiersRows, 'left');
     }
@@ -239,7 +247,7 @@ export const CheckMetaDialog = ({
               <Typography
                 variant="h6"
                 id="tableTitle"
-                component="div"
+                component={CustomTitle}
                 align="center"
               >
                 {rowState.name}
@@ -292,7 +300,7 @@ export const CheckMetaDialog = ({
                               <ExampleData>{`ex) ${row.example}`}</ExampleData>
                           }
                           {
-                            row.example === 'ターゲットテキストがsome <foo> <bar> new </bar> </foo> thingの場合' &&
+                            row.example === 'ターゲット文字列がsome <foo> <bar> new </bar> </foo> thingの場合' &&
                               <CustomCodeBlockWrapper>
                                 <CodeBlockDiv> 
                                   <CodeLineWrapper>
@@ -342,7 +350,7 @@ export const CheckMetaDialog = ({
                               </>
                           }
                           {
-                            row.example === 'ターゲットテキストがThis is "<span>React</span>"の場合' &&
+                            row.example === 'ターゲット文字列がThis is "<span>React</span>"の場合' &&
                               <CustomCodeBlockWrapper>
                                 <CodeBlockDiv> 
                                   <CodeLineWrapper>
@@ -362,13 +370,13 @@ export const CheckMetaDialog = ({
                                     console.<CodeBlueSpan>log</CodeBlueSpan>(target.<CodeBlueSpan>match</CodeBlueSpan>(regex_pattern));
                                   </CodeLineWrapper>
                                   <ComentLineWrapper>
-                                    {'// => '} ['{'<'}span{'>'}React{'<'}/span{'>'}'] ]
+                                    {'// => '} ['{'<'}span{'>'}React{'<'}/span{'>'}']
                                   </ComentLineWrapper>
                                 </CodeBlockDiv>
                               </CustomCodeBlockWrapper>
                           }
                           {
-                            row.example === 'ターゲットテキストがThis is "Regex Hunting"の場合' &&
+                            row.example === 'ターゲット文字列がThis is "Regex Hunting"の場合' &&
                               <CustomCodeBlockWrapper>
                                 <CodeBlockDiv> 
                                   <CodeLineWrapper>
@@ -389,6 +397,46 @@ export const CheckMetaDialog = ({
                                   </CodeLineWrapper>
                                   <ComentLineWrapper>
                                     {'// => '} ['"Regex Hunting"']
+                                  </ComentLineWrapper>
+                                </CodeBlockDiv>
+                              </CustomCodeBlockWrapper>
+                          }
+                          {
+                            row.example === 'ターゲット文字列がThis is React This is JavaScriptの場合' &&
+                              <CustomCodeBlockWrapper>
+                                <CodeBlockDiv> 
+                                  <CodeLineWrapper>
+                                    <CodeRedSpan>const</CodeRedSpan> target <CodeYellowSpan>=</CodeYellowSpan> <CodeYellowSpan>'This is React This is JavaScript'</CodeYellowSpan>;
+                                  </CodeLineWrapper>
+                                  <BlankLineWrapper />
+                                  <ComentLineWrapper>
+                                    {'// '}選択のみを使用します。
+                                  </ComentLineWrapper>
+                                  <CodeLineWrapper>
+                                    <CodeRedSpan>const</CodeRedSpan> regex_pattern_1 <CodeYellowSpan>=</CodeYellowSpan> <CodeYellowSpan>/This is React|JavaScript/g</CodeYellowSpan>;
+                                  </CodeLineWrapper>
+                                  <BlankLineWrapper />
+                                  <ComentLineWrapper>
+                                    {'// '}キャプチャグループと選択を使用します。
+                                  </ComentLineWrapper>
+                                  <CodeLineWrapper>
+                                    <CodeRedSpan>const</CodeRedSpan> regex_pattern_2 <CodeYellowSpan>=</CodeYellowSpan> <CodeYellowSpan>/This is (React|JavaScript)/g</CodeYellowSpan>;
+                                  </CodeLineWrapper>
+                                  <BlankLineWrapper />
+                                  <ComentLineWrapper>
+                                  </ComentLineWrapper>
+                                  <CodeLineWrapper>
+                                    console.<CodeBlueSpan>log</CodeBlueSpan>(target.<CodeBlueSpan>match</CodeBlueSpan>(regex_pattern_1));
+                                  </CodeLineWrapper>
+                                  <ComentLineWrapper>
+                                    {'// => '} ['This is React', 'JavaScript']
+                                  </ComentLineWrapper>
+                                  <BlankLineWrapper />
+                                  <CodeLineWrapper>
+                                    console.<CodeBlueSpan>log</CodeBlueSpan>(target.<CodeBlueSpan>match</CodeBlueSpan>(regex_pattern_2));
+                                  </CodeLineWrapper>
+                                  <ComentLineWrapper>
+                                    {'// => '} ['This is React', 'This is JavaScript']
                                   </ComentLineWrapper>
                                 </CodeBlockDiv>
                               </CustomCodeBlockWrapper>
