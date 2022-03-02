@@ -42,6 +42,11 @@ import { CodeYellowSpan } from '../shared_style.js';
 import { CodeBlueSpan } from '../shared_style.js';
 import { CodeComentSpan } from '../shared_style.js';
 
+// テーブルの行のデータ
+import { characterClassesRows } from './dataRows.js'
+import { quantifiersRows } from './dataRows.js'
+import { groupsRows } from './dataRows.js'
+
 const CustomDialogInnerWrapper = styled.div`
   padding-right: 3%;
   padding-left: 3%;
@@ -123,53 +128,6 @@ const SlideContentWrapper = styled.div`
     direction
   }) => slideFunction(slide_in, slide_out, direction)} 0.7s ease forwards;
 `;
-
-// データを作成する関数
-const createData = (id, name, data, example) => {
-  return {
-    id: id,
-    name: name,
-    data: data,
-    example: example
-  }
-};
-
-// 文字クラスのデータ
-const characterClassesRows = [
-  createData(1, '[...]', '指定した文字のどれか1文字にマッチします。ハイフンを使用して文字の範囲を指定することもできます。文字クラスの中に\\d等を書くこともできます。', '[aq],  [a-z],  [E\\d]'),
-  createData(2, '[^...]', '[^...]は否定文字クラスという特殊文字です。指定した文字以外の1文字にマッチします。例えば、[^A]はA以外の1文字、[^ABC]はA、B、C以外の1文字にマッチします。[^ABC]は[^A-C]に書き換え可能です。', '[aq],  [a-z],  [E\\d]'),
-  createData(3, '\\d', '1桁の数字にマッチします。[0-9]で書き換え可能です。', false),
-  createData(4, '\\w', 'アンダースコアを含む半角英数字1文字にマッチします。\\wは[A-Za-z0-9_]に書き換え可能です。', false),
-  createData(5, '.', '行末文字(\\n、\\r、\\u2028、\\u2029)を除くあらゆる1文字にマッチします。注意すべきことは、文字クラス([...])内で.を使用すると、ただの文字列として扱われることです。', false),
-  createData(6, '\\s', 'スペース、タブ、改ページ、改行を含むホワイトスペース文字にマッチします。', false),
-  createData(7, '\\t', 'タブにマッチします。', false),
-  createData(8, '\\r', '復帰文字にマッチします。', false),
-  createData(9, '\\n', '改行文字にマッチします。', false),
-  createData(10, '\\D', 'あらゆる数字以外の文字にマッチします。\\Dは[^0-9]に書き換え可能です。', false),
-  createData(11, '\\W', 'アンダースコアを含む半角英数字以外の1文字にマッチします。\\Wは[^A-Za-z0-9_]に書き換え可能です。', false),
-  createData(12, '\\S', 'ホワイトスペース以外の文字にマッチします。', false),
-  createData(13, '\\', 'ある文字の前に\\を書くことで、ある文字をエスケープすることができます。エスケープ対象の文字が特殊文字であるか、または、エスケープ対象の文字と\\の組み合わせに特別な意味がなければ、エスケープ対象の文字が、ただの文字としてマッチするようになります。また、\\を文字列として扱いたい場合、\\を\\でエスケープします。', false),
-];
-
-// 量指定子のデータ
-const quantifiersRows = [
-  createData(1, '?', '直前の1文字があればマッチさせるが、なくてもよいという意味を表します。1つの文字クラスは1つの単位を表すので、キャプチャグループを使用しなくても量指定子を指定することができます。2文字以上の文字列を繰り返しマッチさせたい場合、キャプチャグループで括ってから量指定子を指定します。', 'n?,  [aq]?,  [a-z]?,  (Script)?'),
-  createData(2, '+', '直前の1文字に1回以上の繰り返しマッチという意味を表します。', 'o+,  [a-z]+,  (12)+'),
-  createData(3, '*', '直前の1文字に0回以上の繰り返しマッチという意味を表します。', 'o*,  [a-z]*,  (12)*'),
-  createData(4, '{min}', '直前の1文字に{min}回繰り返しマッチという意味を表します。', '\\d{3}'),
-  createData(5, '{min,}', '直前の1文字に{min}回以上の繰り返しマッチという意味を表します。', '\\d{3,}'),
-  createData(6, '{min,max}', '直前の1文字にmin回以上、max回以下の繰り返しマッチという意味を表します。', '\\d{2,3}'),
-  createData(7, '??', '最大量指定子の後ろに?をつけると、最小量指定子になります。+や?等は最大量指定子であり、できる限り多くマッチしようと試みます。最小量指定子は最大量指定子の逆で、マッチする文字列が見つかれば、マッチを試行するのをやめます。', 'ターゲットテキストがsome <foo> <bar> new </bar> </foo> thingの場合')
-];
-
-// 括弧のデータ
-const groupsRows = [
-  createData(1, '(...)', 'キャプチャグループを使用する目的は、主に以下の3つです。', false),
-  createData(2, '\\n', '\\nは、キャプチャした文字列を呼び出すときに使用します。', 'ターゲットテキストがThis is "<span>React</span>"の場合'),
-  createData(3, '(?:...)', '(?:...)は、非キャプチャグループです。キャプチャグループのキャプチャ機能がないバージョンです。主に1つのグループを作りたい時に使用します。', false),
-  createData(4, '(?<Name>...)', '(?<Name>...)は名前付きキャプチャグループです。キャプチャした文字列を独自の名前で呼び出すことができます。呼び出すときは、\\k<Name>を使用します。主に、キャプチャしたいが正規表現中に多くの括弧が存在する場合に、名前付きキャプチャグループを使用します。', false),
-  createData(5, '\\k<Name>', '\\k<Name>は、名前付きキャプチャした文字列を呼び出す時に使用します。', 'ターゲットテキストがThis is "Regex Hunting"の場合'),
-];
 
 // click_meta_openがtrueの時に開くモーダル
 export const CheckMetaDialog = ({
