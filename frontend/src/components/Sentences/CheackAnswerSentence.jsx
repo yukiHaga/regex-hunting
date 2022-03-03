@@ -1,4 +1,3 @@
-import React from 'react';
 import styled from 'styled-components';
 
 // DescriptonWrapper
@@ -23,7 +22,7 @@ export const CheackAnswerSentence = ({
   const handleAnswer = () => {
     setGameState((prev) => ({
       ...prev,
-      check_answer: true
+      checkAnswer: true
     }));
   };
 

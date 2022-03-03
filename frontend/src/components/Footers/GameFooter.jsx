@@ -31,22 +31,22 @@ export const GameFooter = ({
   setGameState,
 }) => {
 
-  // game_description_openがtrue, click_description_opneがtrueの時、
+  // gameDescriptionOpenがtrue, clickDescriptionOpenがtrueの時、
   // スライドを見る用の説明モーダルが開く
   const handleGameDescriptionDialog = () => {
     setGameState((prev) => ({
       ...prev,  
-      game_description_open: true,
-      click_description_open: true
+      gameDescriptionOpen: true,
+      clickDescriptionOpen: true
     }));
   }
 
-  // click_meta_openがtrueの時、
+  // clickMetaOpenがtrueの時、
   // メタ文字一覧のモーダルが開く
   const handleMetaDialog = () => {
     setGameState((prev) => ({
       ...prev,  
-      click_meta_open: true
+      clickMetaOpen: true
     }));
   }
 

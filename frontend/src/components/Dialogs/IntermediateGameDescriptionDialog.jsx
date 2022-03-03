@@ -68,10 +68,10 @@ const SlideContentWrapper = styled.div`
   margin: 0 auto;
   transform: translateX(0);
   animation: ${({ 
-    slide_in, 
-    slide_out,
+    slideIn, 
+    slideOut,
     direction
-  }) => slideFunction(slide_in, slide_out, direction)} 0.7s ease forwards;
+  }) => slideFunction(slideIn, slideOut, direction)} 0.7s ease forwards;
 `;
 
 const SentenceWrapper = styled.div`
@@ -107,64 +107,64 @@ const OuterButtonsWrapper = styled.div`
   justify-content: center;
 `;
 
-// isOpenはgameState.game_description_open
-// game_description_openは、game_description_open
-// click_description_openは、ゲーム開始後にスライドを見るをクリックしたかを表すprops
+// isOpenはgameState.gameDescriptionOpen
+// gameDescriptionOpenは、gameDescriptionOpen
+// clickDescriptionOpenは、ゲーム開始後にスライドを見るをクリックしたかを表すprops
 // ゲーム開始後にスライドを見るをクリックしたなら、trueになる
 export const IntermediateGameDescriptionDialog = ({
   isOpen,
   setGameState,
-  game_description_open,
-  click_description_open
+  gameDescriptionOpen,
+  clickDescriptionOpen
 }) => {
 
   // 第2引数に空の依存配列を渡した場合、初回の1回のみ実行され、
   // 2度目以降のレンダリング時にはキャッシュから値を取得する
-  // 最初のslide_numを0とした
+  // 最初のslideNumを0とした
   const slideContent = useMemo(() => [
     {
       title: "中級編",
       sentence: "中級編を始める前に、最大量指定子(? * + {min,max})、キャプチャグループについて学習しましょう！ そして、中級編のゲームを通して、これらの特殊文字を使用した正規表現をマスターしましょう！",
-      slide_num: 0
+      slideNum: 0
     },
     {
       title: "最大量指定子とは？",
       sentence: "最大量指定子(? * + {min,max})とは、ある文字列に繰り返しマッチさせるための特殊文字です。ある文字列の直後に最大量指定子を置くと、その文字列に対して最大量指定子を適用させることができます。正規表現で最大量指定子を使用することによって、繰り返しの文字列にマッチさせるのが簡単になります。以降のスライドでは、各最大量指定子の使用方法について説明します。",
-      slide_num: 1
+      slideNum: 1
     },
     {
       title: "?の使い方",
       sentence: "最大量指定子?は、直前の1文字があればマッチさせるが、なくてもよいという意味を表します。文字列の直後に?を置くことで、その文字列に?の意味が適用されます。例えば、n?はnがあればマッチさせるが、なくてもよいという意味を表します。n?を使用したenviron?mentという正規表現は、environment, enviromentという文字列にマッチさせることができます。このように、直前の1文字があってもなくてもよいという正規表現を作りたい時に、?を使います。",
-      slide_num: 2
+      slideNum: 2
     },
     {
       title: "+と*の使い方",
       sentence: "最大量指定子+は、直前の1文字に1回以上の繰り返しマッチという意味を表し、最大量指定子*は、直前の1文字に0回以上の繰り返しマッチという意味を表します。+と*の意味は似ています。大きな違いとして、+の場合は少なくとも1回はマッチしないといけませんが、*の場合はなくても大丈夫です。以下の例のo+は、oの1回以上繰り返しマッチを表すので、cとkの間にoがない単語(ck)にはマッチしないことが分かります。直前の1文字を繰り返したい正規表現を作りたい時に、*や+を使います。",
-      slide_num: 3
+      slideNum: 3
     },
     {
       title: "{min,max}の使い方",
       sentence: "最大量指定子{min,max}は、直前の1文字にmin回以上、max回以上の繰り返しマッチという意味を表します。例えば、\\dは1桁の数字にマッチするので、\\d{3,5}は3桁以上、5桁以下の数字にマッチします。{min,max}以外にも、{min}や{min,}という書き方があります。{min}は直前の1文字にmin回繰り返しマッチを表し、{min,}は直前の1文字にmin回以上繰り返しマッチを表します。例えば、\\d{3}は3桁の数字、\\d{3,}は3桁以上の数字にマッチします。直前の1文字の繰り返し回数を制御したい時に、{min,max}を使います。",
-      slide_num: 4
+      slideNum: 4
     },
     {
       title: "キャプチャグループとは？",
       sentence: "最大量指定子(? * + {min,max})は、どれも直前の1文字を対象とする特殊文字です。2文字以上の文字を繰り返したい時はどうすれば良いのでしょうか？ そのような時はキャプチャグループ((...))を使用します。キャプチャグループを使用することで、複数の文字列を1つのグループとして扱うことができます。そのグループに最大量指定子を指定できるので、2文字以上の文字列を繰り返すことができます。本サービスでは、厳密性より見やすさと分かりやすさを重視している為、基本的には非キャプチャグループ((?:...))ではなく、キャプチャグループ((...))を使用します。",
-      slide_num: 5
+      slideNum: 5
     },
     {
       title: "ルール説明",
       sentence: "中級編では、最大量指定子、括弧を使用した正規表現を学習していきます。時間内に正しい正規表現を入力すると、モンスターに攻撃できます。モンスターのHPを0にしたらゲームクリアです！",
-      slide_num: 6
+      slideNum: 6
     }
   ], []);
 
   const initialState = {
     title: slideContent[0]["title"],
     sentence: slideContent[0]["sentence"],
-    slide_num: slideContent[0]["slide_num"],
-    slide_in: false,
-    slide_out: false,
+    slideNum: slideContent[0]["slideNum"],
+    slideIn: false,
+    slideOut: false,
     direction: "",
   };
 
@@ -172,62 +172,62 @@ export const IntermediateGameDescriptionDialog = ({
 
   // 右カーソルをクリックで左へずらす
   // スライドが右のスライドになる
-  // slideState.slide_numが6より小さい場合、右カーソルが機能する
+  // slideState.slideNumが6より小さい場合、右カーソルが機能する
   const changeSlideToRight = useCallback(() => {
-    if(slideState.slide_num < 6) {
+    if(slideState.slideNum < 6) {
       setSlideState((prev) => ({
         ...prev,
-        slide_in: false,
-        slide_out: true,
+        slideIn: false,
+        slideOut: true,
         direction: "left"
       }));
       setTimeout(() => {
         setSlideState((prev) => ({
           ...prev,
-          title: slideContent[prev.slide_num + 1]["title"],
-          sentence: slideContent[prev.slide_num + 1]["sentence"],
-          slide_num: slideContent[prev.slide_num + 1]["slide_num"],
-          slide_in: true,
-          slide_out: false,
+          title: slideContent[prev.slideNum + 1]["title"],
+          sentence: slideContent[prev.slideNum + 1]["sentence"],
+          slideNum: slideContent[prev.slideNum + 1]["slideNum"],
+          slideIn: true,
+          slideOut: false,
           direction: "left",
         }));
       }, 350);
     }
   }, [
     slideContent,
-    slideState.slide_num
+    slideState.slideNum
   ]);
 
   // 左カーソルをクリックで右へずらす
   // スライドが左のスライドになる
-  // slideState.slide_numが1より大きくないと、左カーソルが機能しないようにした
+  // slideState.slideNumが1より大きくないと、左カーソルが機能しないようにした
   const changeSlideToLeft = useCallback(() => {
-    if(slideState.slide_num > 0) {
+    if(slideState.slideNum > 0) {
       setSlideState((prev) => ({
         ...prev,
-        slide_in: false,
-        slide_out: true,
+        slideIn: false,
+        slideOut: true,
         direction: "right"
       }));
       setTimeout(() => {
         setSlideState((prev) => ({
           ...prev,
-          title: slideContent[prev.slide_num - 1]["title"],
-          sentence: slideContent[prev.slide_num - 1]["sentence"],
-          slide_num: slideContent[prev.slide_num - 1]["slide_num"],
-          slide_in: true,
-          slide_out: false,
+          title: slideContent[prev.slideNum - 1]["title"],
+          sentence: slideContent[prev.slideNum - 1]["sentence"],
+          slideNum: slideContent[prev.slideNum - 1]["slideNum"],
+          slideIn: true,
+          slideOut: false,
           direction: "right",
         }));
       }, 350);
     }
   }, [
     slideContent,
-    slideState.slide_num
+    slideState.slideNum
   ]);
 
   useEffect(() => {
-    if(game_description_open) {
+    if(gameDescriptionOpen) {
       const handleRightkeyPress = (e) => {
         if(e.key !== 'Enter' && e.key === 'ArrowRight') {
           changeSlideToRight();
@@ -253,7 +253,7 @@ export const IntermediateGameDescriptionDialog = ({
       }
     }
   }, [
-    game_description_open,
+    gameDescriptionOpen,
     changeSlideToRight,
     changeSlideToLeft,
   ]);
@@ -274,8 +274,8 @@ export const IntermediateGameDescriptionDialog = ({
           >
             <DynamicSlideContentWrapper>
               <SlideContentWrapper
-                slide_in={slideState.slide_in}
-                slide_out={slideState.slide_out}
+                slideIn={slideState.slideIn}
+                slideOut={slideState.slideOut}
                 direction={slideState.direction}
               >
                 <TitleWrapper>
@@ -285,7 +285,7 @@ export const IntermediateGameDescriptionDialog = ({
                   {slideState.sentence}
                 </SentenceWrapper>
                 {
-                  slideState.slide_num === 0 &&
+                  slideState.slideNum === 0 &&
                     <>
                       <WarningSentenceWrapper>
                         ※ JavaScriptにおける正規表現を説明していますが、内容自体は他の言語にも適用できます。
@@ -293,7 +293,7 @@ export const IntermediateGameDescriptionDialog = ({
                     </>
                 }
                 {
-                  slideState.slide_num === 1 &&
+                  slideState.slideNum === 1 &&
                     <>
                       <CodeBlockWrapper>
                         <CodeBlockDiv> 
@@ -322,7 +322,7 @@ export const IntermediateGameDescriptionDialog = ({
                     </>
                 }
                 {
-                  slideState.slide_num === 2 &&
+                  slideState.slideNum === 2 &&
                     <>
                       <CodeBlockWrapper>
                         <CodeBlockDiv> 
@@ -348,7 +348,7 @@ export const IntermediateGameDescriptionDialog = ({
                     </>
                 }
                 {
-                  slideState.slide_num === 3 &&
+                  slideState.slideNum === 3 &&
                     <>
                       <CodeBlockWrapper>
                         <CodeBlockDiv> 
@@ -374,7 +374,7 @@ export const IntermediateGameDescriptionDialog = ({
                     </>
                 }
                 {
-                  slideState.slide_num === 4 &&
+                  slideState.slideNum === 4 &&
                     <>
                       <CodeBlockWrapper>
                         <CodeBlockDiv> 
@@ -400,7 +400,7 @@ export const IntermediateGameDescriptionDialog = ({
                     </>
                 }
                 {
-                  slideState.slide_num === 5 &&
+                  slideState.slideNum === 5 &&
                     <>
                       <CaptureCodeBlockWrapper>
                         <CodeBlockDiv> 
@@ -426,14 +426,14 @@ export const IntermediateGameDescriptionDialog = ({
                     </>
                 }
                 {
-                  slideState.slide_num === 6 &&
+                  slideState.slideNum === 6 &&
                     <>
                       <WarningSentenceWrapper>
                         ※ UX向上の為、音が出ます。音量が気になる方は下げて頂くようお願いします。
                       </WarningSentenceWrapper>
                       <OuterButtonsWrapper>
                         {
-                          click_description_open ?
+                          clickDescriptionOpen ?
                             <FinallyGameRestartButton setGameState={setGameState} />
                           :
                             <FinallyGameStartButton setGameState={setGameState} />
@@ -445,7 +445,7 @@ export const IntermediateGameDescriptionDialog = ({
             </DynamicSlideContentWrapper>
             <ButtonLineWrapper>
               {
-                slideState.slide_num !== 0 &&
+                slideState.slideNum !== 0 &&
                   <ButtonWrapper 
                     onClick={changeSlideToLeft}
                   >
@@ -472,18 +472,18 @@ export const IntermediateGameDescriptionDialog = ({
                 <Tooltip 
                   title={<div>進む<br />( 右矢印キー → )</div>}
                   placement="top"
-                  disableHoverListener={slideState.slide_num === 6}
+                  disableHoverListener={slideState.slideNum === 6}
                   sx={{
-                    opacity: slideState.slide_num === 6 ? 0 : 1,
+                    opacity: slideState.slideNum === 6 ? 0 : 1,
                   }}
                 >
                   <IconButton
                     sx={{
                       fontSize: '4.0em',
-                      opacity: slideState.slide_num === 6 ? 0.1 : 1,
-                      cursor: slideState.slide_num === 6 && "default"
+                      opacity: slideState.slideNum === 6 ? 0.1 : 1,
+                      cursor: slideState.slideNum === 6 && "default"
                     }}
-                    disableRipple={slideState.slide_num === 6}
+                    disableRipple={slideState.slideNum === 6}
                   >
                     <ArrowRightIcon 
                       fontSize='inherit' 

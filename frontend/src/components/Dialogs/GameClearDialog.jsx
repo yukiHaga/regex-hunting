@@ -123,42 +123,42 @@ const ButtonsWrapper = styled.div`
 `;
 
 const ColorTimeSpan = styled.span`
-  color: ${({ milli_sec }) => milli_sec < 60000 && COLORS.RED }
+  color: ${({ milliSec }) => milliSec < 60000 && COLORS.RED }
 `;
 
 export const GameClearDialog = ({
   isOpen,
   difficulty,
-  correct_questions,
-  incorrect_questions,
+  correctQuestions,
+  incorrectQuestions,
   setGameState,
   getGameStart,
   initialState,
-  game_start_time,
-  game_end_time,
-  has_user,
+  gameStartTime,
+  gameEndTime,
+  hasUser,
   rank,
-  total_experience, 
-  maximum_experience_per_rank, 
-  temporary_experience,
-  prev_temporary_experience,
-  dialog_gage_up,
-  game_result,
-  rank_up
+  totalExperience, 
+  maximumExperiencePerRank, 
+  temporaryExperience,
+  prevTemporaryExperience,
+  dialogGageUp,
+  gameResult,
+  rankUp
 }) => {
 
-  const clear_time = useMemo(() => getClearTime(
-    game_start_time, 
-    game_end_time
+  const clearTime = useMemo(() => getClearTime(
+    gameStartTime, 
+    gameEndTime
   ), [
-    game_start_time,
-    game_end_time
+    gameStartTime,
+    gameEndTime
   ]);
 
-  const share_clear_time = useMemo(() => clear_time.slice(3), [clear_time]);
+  const shareClearTime = useMemo(() => clearTime.slice(3), [clearTime]);
 
   // このミリ秒はタイムに色をつけるために使う
-  const milli_sec = game_end_time - game_start_time;
+  const milliSec = gameEndTime - gameStartTime;
 
   return(
     <Dialog
@@ -166,7 +166,7 @@ export const GameClearDialog = ({
       maxWidth='lg'        
     >
       <CustomDialogInnerWrapper
-        has_user={has_user}
+        hasUser={hasUser}
       > 
         <CustomDialogTitleWrapper>
           <CustomSpan>GAME CLEAR</CustomSpan>
@@ -180,22 +180,22 @@ export const GameClearDialog = ({
             <tbody>
               <tr>
                 <MetaTd>正解数</MetaTd> 
-                <CustomTd>{ `${correct_questions.length}問` }</CustomTd>
+                <CustomTd>{ `${correctQuestions.length}問` }</CustomTd>
               </tr>
               <tr>
                 <MetaTd>不正解数</MetaTd> 
-                <CustomTd>{ `${incorrect_questions.length || "0"}問` }</CustomTd>
+                <CustomTd>{ `${incorrectQuestions.length || "0"}問` }</CustomTd>
               </tr>
               <tr>
                 <MetaTd>クリアタイム</MetaTd> 
                 <CustomTd>
-                  <ColorTimeSpan milli_sec={milli_sec} >
-                    { clear_time }
+                  <ColorTimeSpan milliSec={milliSec} >
+                    { clearTime }
                   </ColorTimeSpan>
                 </CustomTd>
               </tr>
               {
-                has_user && 
+                hasUser && 
                   <>
                     <tr>
                       <ExperienceMetaTd>獲得経験値</ExperienceMetaTd> 
@@ -207,13 +207,11 @@ export const GameClearDialog = ({
                       <ExperienceGageTd colSpan={2}>
                         <DialogExperienceBox 
                           rank={rank}
-                          total_experience={total_experience}
-                          maximum_experience_per_rank={maximum_experience_per_rank}
-                          temporary_experience={temporary_experience} 
-                          prev_temporary_experience={prev_temporary_experience}
-                          dialog_gage_up={dialog_gage_up}
-                          difficulty={difficulty}
-                          setGameState={setGameState}
+                          totalExperience={totalExperience}
+                          maximumExperiencePerRank={maximumExperiencePerRank}
+                          temporaryExperience={temporaryExperience} 
+                          prevTemporaryExperience={prevTemporaryExperience}
+                          dialogGageUp={dialogGageUp}
                         />
                       </ExperienceGageTd>
                     </tr>
@@ -233,12 +231,13 @@ export const GameClearDialog = ({
             />
             <ResultShareButton 
               difficulty={difficulty}             
-              game_result={game_result}
-              rank_up={rank_up}
-              clear_time={share_clear_time}
+              gameResult={gameResult}
+              rankUp={rankUp}
+              rank={rank}
+              clearTime={shareClearTime}
             />
             {
-              has_user ?
+              hasUser ?
                 <BackToMyPageButton />
               : 
                 <BackToTopButton />

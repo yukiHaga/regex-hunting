@@ -31,23 +31,23 @@ const ExperienceGageWrapper = styled.div`
 
 // ExperienceGageのExperienceの幅を取り扱う関数
 const handleExperienceGage = (
-  temporary_experience,
-  maximum_experience_per_rank
+  temporaryExperience,
+  maximumExperiencePerRank
 ) => {
-  if(temporary_experience >= maximum_experience_per_rank) {
+  if(temporaryExperience >= maximumExperiencePerRank) {
     return '100%';
   } else {
-    return `${(temporary_experience / maximum_experience_per_rank) * 100}%`;
+    return `${(temporaryExperience / maximumExperiencePerRank) * 100}%`;
   }
 };
 
 const InnerExperienceGageWrapper = styled.div`
   width: ${({
-    temporary_experience,
-    maximum_experience_per_rank
-  }) => handleExperienceGage(temporary_experience, maximum_experience_per_rank)};
-  transition: ${({ dialog_gage_up }) => '2s' };
-  transition-timing-function: ${({ dialog_gage_up }) => 'linear' };
+    temporaryExperience,
+    maximumExperiencePerRank
+  }) => handleExperienceGage(temporaryExperience, maximumExperiencePerRank)};
+  transition: ${({ dialogGageUp }) => '2s' };
+  transition-timing-function: ${({ dialogGageUp }) => 'linear' };
   height: 10px;
   background-color: ${COLORS.EXPERIENCE};
   border-radius: 10px;
@@ -59,17 +59,16 @@ const InnerExperienceGageWrapper = styled.div`
 
 export const DialogExperienceBox = ({
   rank,
-  total_experience,
-  maximum_experience_per_rank, 
-  temporary_experience,
-  prev_temporary_experience,
-  dialog_gage_up,
-  setGameState,
+  totalExperience,
+  maximumExperiencePerRank, 
+  temporaryExperience,
+  prevTemporaryExperience,
+  dialogGageUp,
 }) => {
 
   const initialState = {
-    temporary_experience: 
-      dialog_gage_up ? prev_temporary_experience : temporary_experience
+    temporaryExperience: 
+      dialogGageUp ? prevTemporaryExperience : temporaryExperience
   };
 
   const [ 
@@ -79,46 +78,45 @@ export const DialogExperienceBox = ({
 
   // 最初にマウントされた後に実行されるuseEffect
   useEffect(() => {
-    if(dialog_gage_up) {
+    if(dialogGageUp) {
       const timer = setTimeout(() => {
         const audio = new Audio(GageUpSounds);
         audio.play();
         setTemporaryExperienceState((prev) => ({
           ...prev,
-          temporary_experience: temporary_experience,
+          temporaryExperience: temporaryExperience,
         }));
       }, 4900);
       return () => clearTimeout(timer);
     }
   },[
-    temporary_experience,
-    dialog_gage_up,
-    maximum_experience_per_rank,
-    setGameState
+    temporaryExperience,
+    dialogGageUp,
+    maximumExperiencePerRank,
   ]);
 
   return (
     <>
       <ExperienceBoxWrapper>
         <ExperienceTextWrapper>
-          現在の経験値： { total_experience }
+          現在の経験値： { totalExperience }
         </ExperienceTextWrapper>
         <ExperienceGageWrapper>
           {
-            (temporary_experience / maximum_experience_per_rank) !== 0 &&
+            (temporaryExperience / maximumExperiencePerRank) !== 0 &&
               <InnerExperienceGageWrapper 
-                temporary_experience={temporaryExperienceState.temporary_experience}
-                maximum_experience_per_rank={maximum_experience_per_rank}
-                dialog_gage_up={dialog_gage_up}
+                temporaryExperience={temporaryExperienceState.temporaryExperience}
+                maximumExperiencePerRank={maximumExperiencePerRank}
+                dialogGageUp={dialogGageUp}
               />
           }
         </ExperienceGageWrapper>
         <ExperienceTextWrapper>
           ランクアップに必要な経験値： { 
-            temporaryExperienceState.temporary_experience >= maximum_experience_per_rank ?
+            temporaryExperienceState.temporaryExperience >= maximumExperiencePerRank ?
               0
             :
-              maximum_experience_per_rank - temporaryExperienceState.temporary_experience 
+              maximumExperiencePerRank - temporaryExperienceState.temporaryExperience 
           }
         </ExperienceTextWrapper>
       </ExperienceBoxWrapper>

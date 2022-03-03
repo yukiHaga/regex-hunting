@@ -54,10 +54,10 @@ const GageOuterWrapper = styled.div`
 const GageWrapper = styled.div`
   height: 100%;
   width: ${({
-    user_hp,
-    user_max_hp
-  }) => `${100 * (user_hp / user_max_hp)}%`};
-  background-color: ${({ user_hp }) => handleColorType(user_hp)};
+    userHp,
+    userMaxHp
+  }) => `${100 * (userHp / userMaxHp)}%`};
+  background-color: ${({ userHp }) => handleColorType(userHp)};
   box-sizing: border-box;
   border: none;
   outline: none;
@@ -70,14 +70,14 @@ const GageWrapper = styled.div`
 `;
 
 export const HpGage = ({
-  user_hp,
-  user_max_hp
+  userHp,
+  userMaxHp
 }) => {
   return (
     <>
       <HpGageWrapper>
         <TypeWrapper
-          user_hp={user_hp}
+          userHp={userHp}
         >
           <Fuchiue>
             HP 
@@ -87,10 +87,10 @@ export const HpGage = ({
         <FixWrapper>
           <GageOuterWrapper>
             {
-              (user_hp / user_max_hp) !== 0 &&
+              (userHp / userMaxHp) !== 0 &&
                 <GageWrapper 
-                  user_hp={user_hp}
-                  user_max_hp={user_max_hp}
+                  userHp={userHp}
+                  userMaxHp={userMaxHp}
                 />
             }
           </GageOuterWrapper>

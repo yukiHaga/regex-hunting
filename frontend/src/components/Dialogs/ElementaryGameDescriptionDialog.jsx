@@ -68,10 +68,10 @@ const SlideContentWrapper = styled.div`
   margin: 0 auto;
   transform: translateX(0);
   animation: ${({ 
-    slide_in, 
-    slide_out,
+    slideIn, 
+    slideOut,
     direction
-  }) => slideFunction(slide_in, slide_out, direction)} 0.7s ease forwards;
+  }) => slideFunction(slideIn, slideOut, direction)} 0.7s ease forwards;
 `;
 
 const SentenceWrapper = styled.div`
@@ -111,54 +111,54 @@ const SpecialWarningSentenceWrapper = styled(WarningSentenceWrapper)`
   margin-top: 1.5%;
 `;
 
-// isOpenはgameState.game_description_open
-// game_description_openは、game_description_open
-// click_description_openは、ゲーム開始後にスライドを見るをクリックしたかを表すprops
+// isOpenはgameState.gameDescriptionOpen
+// gameDescriptionOpenは、gameDescriptionOpen
+// clickDescriptionOpenは、ゲーム開始後にスライドを見るをクリックしたかを表すprops
 // ゲーム開始後にスライドを見るをクリックしたなら、trueになる
 export const ElementaryGameDescriptionDialog = ({
   isOpen,
   setGameState,
-  game_description_open,
-  click_description_open
+  gameDescriptionOpen,
+  clickDescriptionOpen
 }) => {
 
   // 第2引数に空の依存配列を渡した場合、初回の1回のみ実行され、
   // 2度目以降のレンダリング時にはキャッシュから値を取得する
-  // 最初のslide_numを0とした
+  // 最初のslideNumを0とした
   const slideContent = useMemo(() => [
     {
       title: "初級編",
       sentence: "初級編を始める前に、正規表現とは何か？、文字クラスとは何か？を学習しましょう！ そして、初級編のゲームを通して、文字クラスを使用した正規表現をマスターしましょう！",
-      slide_num: 0
+      slideNum: 0
     },
     {
       title: "What’s 正規表現？",
       sentence: "正規表現とは、複数の文字列からルールを見つけ出し、そのルールをパターンで表現したものです。正規表現は、基本的に「文字列」と「特殊文字」で構成されます。正規表現とプログラミング言語の正規表現用メソッドを併用することによって、複数の文字列から特定の文字を取得したり、置換したりすることができます。",
-      slide_num: 1
+      slideNum: 1
     },
     {
       title: "文字クラスとは？",
       sentence: "文字クラス([...])とは、指定した文字のどれか1文字にマッチする特殊文字です。[...]の...に、現れても良い1文字を複数指定します。例えば、[acz#]と書くと、[acz#]は、a, c, z, #のどれか1文字にマッチします。また、文字クラスの別の使い方として、[...]の中に-を書くと、文字の範囲を指定できます。例えば、[a-z]はaからzの小文字アルファベット1文字にマッチします。[1-9]は、0から9の1桁の数字にマッチします。範囲は複数指定できるので、[a-zA-Z]や[a-zA-Z1-9]と書くこともできます。文字クラス内で文字指定と範囲指定を併用することもできるので、[a-z#%]と書くことも可能です。",
-      slide_num: 2
+      slideNum: 2
     },
     {
       title: "正規表現を作るコツ",
       sentence: "'gray grey'という文字列のgrayとgreyにマッチするような正規表現を求めよ」と言われた場合、1つの文字クラスのみで作られた正規表現ではマッチできません。理由は、文字クラスは指定した1文字を表すだけであり、2文字以上の文字列にマッチさせることができないからです。この場合、まずはgrayとgreyの共通な文字と共通ではない文字を見つけます。共通な文字はg, r, yです。そして、共通ではない文字はa, eです。aとeは、grayとgreyの3番目に位置する文字です。したがって、gr[ae]yという正規表現を用いることで、grayとgreyにマッチさせることができます。",
-      slide_num: 3
+      slideNum: 3
     },
     {
       title: "ルール説明",
       sentence: "初級編では、文字クラスを使用した正規表現を学習していきます。時間内に正しい正規表現を入力すると、モンスターに攻撃できます。モンスターのHPを0にしたらゲームクリアです！",
-      slide_num: 4
+      slideNum: 4
     }
   ], []);
 
   const initialState = {
     title: slideContent[0]["title"],
     sentence: slideContent[0]["sentence"],
-    slide_num: slideContent[0]["slide_num"],
-    slide_in: false,
-    slide_out: false,
+    slideNum: slideContent[0]["slideNum"],
+    slideIn: false,
+    slideOut: false,
     direction: "",
   };
 
@@ -166,62 +166,62 @@ export const ElementaryGameDescriptionDialog = ({
 
   // 右カーソルをクリックで左へずらす
   // スライドが右のスライドになる
-  // slideState.slide_numが4より小さい場合、右カーソルが機能する
+  // slideState.slideNumが4より小さい場合、右カーソルが機能する
   const changeSlideToRight = useCallback(() => {
-    if(slideState.slide_num < 4) {
+    if(slideState.slideNum < 4) {
       setSlideState((prev) => ({
         ...prev,
-        slide_in: false,
-        slide_out: true,
+        slideIn: false,
+        slideOut: true,
         direction: "left"
       }));
       setTimeout(() => {
         setSlideState((prev) => ({
           ...prev,
-          title: slideContent[prev.slide_num + 1]["title"],
-          sentence: slideContent[prev.slide_num + 1]["sentence"],
-          slide_num: slideContent[prev.slide_num + 1]["slide_num"],
-          slide_in: true,
-          slide_out: false,
+          title: slideContent[prev.slideNum + 1]["title"],
+          sentence: slideContent[prev.slideNum + 1]["sentence"],
+          slideNum: slideContent[prev.slideNum + 1]["slideNum"],
+          slideIn: true,
+          slideOut: false,
           direction: "left",
         }));
       }, 350);
     }
   }, [
     slideContent,
-    slideState.slide_num
+    slideState.slideNum
   ]);
 
   // 左カーソルをクリックで右へずらす
   // スライドが左のスライドになる
-  // slideState.slide_numが1より大きくないと、左カーソルが機能しないようにした
+  // slideState.slideNumが1より大きくないと、左カーソルが機能しないようにした
   const changeSlideToLeft = useCallback(() => {
-    if(slideState.slide_num > 0) {
+    if(slideState.slideNum > 0) {
       setSlideState((prev) => ({
         ...prev,
-        slide_in: false,
-        slide_out: true,
+        slideIn: false,
+        slideOut: true,
         direction: "right"
       }));
       setTimeout(() => {
         setSlideState((prev) => ({
           ...prev,
-          title: slideContent[prev.slide_num - 1]["title"],
-          sentence: slideContent[prev.slide_num - 1]["sentence"],
-          slide_num: slideContent[prev.slide_num - 1]["slide_num"],
-          slide_in: true,
-          slide_out: false,
+          title: slideContent[prev.slideNum - 1]["title"],
+          sentence: slideContent[prev.slideNum - 1]["sentence"],
+          slideNum: slideContent[prev.slideNum - 1]["slideNum"],
+          slideIn: true,
+          slideOut: false,
           direction: "right",
         }));
       }, 350);
     }
   }, [
     slideContent,
-    slideState.slide_num
+    slideState.slideNum
   ]);
 
   useEffect(() => {
-    if(game_description_open) {
+    if(gameDescriptionOpen) {
       const handleRightkeyPress = (e) => {
         if(e.key !== 'Enter' && e.key === 'ArrowRight') {
           changeSlideToRight();
@@ -247,7 +247,7 @@ export const ElementaryGameDescriptionDialog = ({
       }
     }
   }, [
-    game_description_open,
+    gameDescriptionOpen,
     changeSlideToRight,
     changeSlideToLeft,
   ]);
@@ -268,8 +268,8 @@ export const ElementaryGameDescriptionDialog = ({
           >
             <DynamicSlideContentWrapper>
               <SlideContentWrapper
-                slide_in={slideState.slide_in}
-                slide_out={slideState.slide_out}
+                slideIn={slideState.slideIn}
+                slideOut={slideState.slideOut}
                 direction={slideState.direction}
               >
                 <TitleWrapper>
@@ -279,7 +279,7 @@ export const ElementaryGameDescriptionDialog = ({
                   {slideState.sentence}
                 </SentenceWrapper>
                 {
-                  slideState.slide_num === 0 &&
+                  slideState.slideNum === 0 &&
                     <>
                       <WarningSentenceWrapper>
                         ※ JavaScriptにおける正規表現を説明していますが、内容自体は他の言語にも適用できます。
@@ -287,7 +287,7 @@ export const ElementaryGameDescriptionDialog = ({
                     </>
                 }
                 {
-                  slideState.slide_num === 1 &&
+                  slideState.slideNum === 1 &&
                     <>
                       <SpecialWarningSentenceWrapper>※ 本サービスでは、特殊な意味を持つ文字列は全て「特殊文字」として分類します。</SpecialWarningSentenceWrapper>
                       <SpecialCodeBlockWrapper>
@@ -317,7 +317,7 @@ export const ElementaryGameDescriptionDialog = ({
                     </>
                 }
                 {
-                  slideState.slide_num === 2 &&
+                  slideState.slideNum === 2 &&
                     <>
                       <CodeBlockWrapper>
                         <CodeBlockDiv> 
@@ -339,7 +339,7 @@ export const ElementaryGameDescriptionDialog = ({
                     </>
                 }
                 {
-                  slideState.slide_num === 3 &&
+                  slideState.slideNum === 3 &&
                     <>
                       <CodeBlockWrapper>
                         <CodeBlockDiv> 
@@ -362,14 +362,14 @@ export const ElementaryGameDescriptionDialog = ({
                     </>
                 }
                 {
-                  slideState.slide_num === 4 &&
+                  slideState.slideNum === 4 &&
                     <>
                       <WarningSentenceWrapper>
                         ※ UX向上の為、音が出ます。音量が気になる方は下げて頂くようお願いします。
                       </WarningSentenceWrapper>
                       <OuterButtonsWrapper>
                         {
-                          click_description_open ?
+                          clickDescriptionOpen ?
                             <FinallyGameRestartButton setGameState={setGameState} />
                           :
                             <FinallyGameStartButton setGameState={setGameState} />
@@ -381,7 +381,7 @@ export const ElementaryGameDescriptionDialog = ({
             </DynamicSlideContentWrapper>
             <ButtonLineWrapper>
               {
-                slideState.slide_num !== 0 &&
+                slideState.slideNum !== 0 &&
                   <ButtonWrapper 
                     onClick={changeSlideToLeft}
                   >
@@ -408,18 +408,18 @@ export const ElementaryGameDescriptionDialog = ({
                 <Tooltip 
                   title={<div>進む<br />( 右矢印キー → )</div>}
                   placement="top"
-                  disableHoverListener={slideState.slide_num === 4}
+                  disableHoverListener={slideState.slideNum === 4}
                   sx={{
-                    opacity: slideState.slide_num === 4 ? 0 : 1,
+                    opacity: slideState.slideNum === 4 ? 0 : 1,
                   }}
                 >
                   <IconButton
                     sx={{
                       fontSize: '4.0em',
-                      opacity: slideState.slide_num === 4 ? 0.1 : 1,
-                      cursor: slideState.slide_num === 4 && "default"
+                      opacity: slideState.slideNum === 4 ? 0.1 : 1,
+                      cursor: slideState.slideNum === 4 && "default"
                     }}
-                    disableRipple={slideState.slide_num === 4}
+                    disableRipple={slideState.slideNum === 4}
                   >
                     <ArrowRightIcon 
                       fontSize='inherit' 

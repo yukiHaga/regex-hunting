@@ -133,10 +133,10 @@ const SlideContentWrapper = styled.div`
   margin: 0 auto;
   transform: translateX(0);
   animation: ${({ 
-    slide_in, 
-    slide_out,
+    slideIn, 
+    slideOut,
     direction
-  }) => slideFunction(slide_in, slide_out, direction)} 0.7s ease forwards;
+  }) => slideFunction(slideIn, slideOut, direction)} 0.7s ease forwards;
 `;
 
 const CustomWarningSentenceWrapper = styled(WarningSentenceWrapper)`
@@ -148,7 +148,7 @@ const CustomCodeBlockDiv = styled(CodeBlockDiv)`
   font-size: 1.0em;
 `;
 
-// click_meta_openがtrueの時に開くモーダル
+// clickMetaOpenがtrueの時に開くモーダル
 export const CheckMetaDialog = ({
   isOpen,
   setGameState
@@ -157,8 +157,8 @@ export const CheckMetaDialog = ({
   const initialState = {
     name: '文字クラス',
     data: characterClassesRows,
-    slide_in: false,
-    slide_out: false,
+    slideIn: false,
+    slideOut: false,
     direction: "",
   };
 
@@ -173,8 +173,8 @@ export const CheckMetaDialog = ({
   ) => {
     setRowState((prev) => ({
       ...prev,
-      slide_in: false,
-      slide_out: true,
+      slideIn: false,
+      slideOut: true,
       direction: direction,
     }));
     setTimeout(() => {
@@ -182,15 +182,14 @@ export const CheckMetaDialog = ({
         ...prev,
         name: name,
         data: data,
-        slide_in: true,
-        slide_out: false,
+        slideIn: true,
+        slideOut: false,
         direction: direction,
       }));
     }, 350);
   };
 
   // 左矢印のリンクを制御する関数
-  // difficulty_month_titleは初め初級が入る
   // そのため、defaultは上級の関数が実行される
   const handleLeftArrow = ({name}) => {
     switch (name){
@@ -236,7 +235,7 @@ export const CheckMetaDialog = ({
             onClick={
               () => setGameState((prev) => ({
                 ...prev,
-                click_meta_open: false
+                clickMetaOpen: false
               }))
             }
           />
@@ -282,8 +281,8 @@ export const CheckMetaDialog = ({
               </IconButton>
             </Toolbar>
             <SlideContentWrapper
-              slide_in={rowState.slide_in}
-              slide_out={rowState.slide_out}
+              slideIn={rowState.slideIn}
+              slideOut={rowState.slideOut}
               direction={rowState.direction}
             >
               <TableContainer component={Paper} sx={{ maxHeight: 490 }}>
