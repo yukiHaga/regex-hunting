@@ -72,15 +72,15 @@ const SectionWrapper = styled.div`
   margin-bottom: 2%;
 `;
 
-// background-color: ${({key}) => key % 2 === 0 ? COLORS.WHITE : COLORS.WHITE}
 const StyledTableCell = styled(TableCell)`
   font-size: 1em;
 `;
 
-// background-color: ${({key}) => key % 2 === 0 ? COLORS.WHITE : COLORS.WHITE}
 const StyledTableDataCell = styled(TableCell)`
   font-size: 1em;
   width: 86%;  
+  text-align: justify;
+  text-justify: inter-ideograph;
 `;
 
 const StyledDescriptionDiv = styled.div`
@@ -143,6 +143,10 @@ const CustomWarningSentenceWrapper = styled(WarningSentenceWrapper)`
   font-size: 1.0em;
   margin-top: 0.5%;
 `;  
+
+const CustomCodeBlockDiv = styled(CodeBlockDiv)`
+  font-size: 1.0em;
+`;
 
 // click_meta_openがtrueの時に開くモーダル
 export const CheckMetaDialog = ({
@@ -327,7 +331,7 @@ export const CheckMetaDialog = ({
                           {
                             row.example === 'ターゲット文字列がsome <foo> <bar> new </bar> </foo> thingの場合' &&
                               <CustomCodeBlockWrapper>
-                                <CodeBlockDiv> 
+                                <CustomCodeBlockDiv> 
                                   <CodeLineWrapper>
                                     <CodeRedSpan>const</CodeRedSpan> target <CodeYellowSpan>=</CodeYellowSpan> <CodeYellowSpan>'some {'<'}foo{'>'} {'<'}bar{'>'} new {'<'}/bar{'>'} {'<'}/foo{'>'} thing'</CodeYellowSpan>;
                                   </CodeLineWrapper>
@@ -352,7 +356,7 @@ export const CheckMetaDialog = ({
                                   <ComentLineWrapper>
                                     {'// => '} ['{'<'}foo{'>'}', '{'<'}bar{'>'}', '{'<'}/bar{'>'}', '{'<'}/foo{'>'}']
                                   </ComentLineWrapper>
-                                </CodeBlockDiv>
+                                </CustomCodeBlockDiv>
                               </CustomCodeBlockWrapper>
                           }
                           {
@@ -375,7 +379,7 @@ export const CheckMetaDialog = ({
                           {
                             row.example === 'ターゲット文字列がThis is "<span>React</span>"の場合' &&
                               <CustomCodeBlockWrapper>
-                                <CodeBlockDiv> 
+                                <CustomCodeBlockDiv> 
                                   <CodeLineWrapper>
                                     <CodeRedSpan>const</CodeRedSpan> target <CodeYellowSpan>=</CodeYellowSpan> <CodeYellowSpan>'This is "{'<'}span{'>'}React{'<'}/span{'>'}"'</CodeYellowSpan>;
                                   </CodeLineWrapper>
@@ -393,13 +397,13 @@ export const CheckMetaDialog = ({
                                   <ComentLineWrapper>
                                     {'// => '} ['{'<'}span{'>'}React{'<'}/span{'>'}']
                                   </ComentLineWrapper>
-                                </CodeBlockDiv>
+                                </CustomCodeBlockDiv>
                               </CustomCodeBlockWrapper>
                           }
                           {
                             row.example === 'ターゲット文字列がThis is "Regex Hunting"の場合' &&
                               <CustomCodeBlockWrapper>
-                                <CodeBlockDiv> 
+                                <CustomCodeBlockDiv> 
                                   <CodeLineWrapper>
                                     <CodeRedSpan>const</CodeRedSpan> target <CodeYellowSpan>=</CodeYellowSpan> <CodeYellowSpan>'This is "Regex Hunting"'</CodeYellowSpan>;
                                   </CodeLineWrapper>
@@ -417,13 +421,13 @@ export const CheckMetaDialog = ({
                                   <ComentLineWrapper>
                                     {'// => '} ['"Regex Hunting"']
                                   </ComentLineWrapper>
-                                </CodeBlockDiv>
+                                </CustomCodeBlockDiv>
                               </CustomCodeBlockWrapper>
                           }
                           {
                             row.example === 'ターゲット文字列がThis is React This is JavaScriptの場合' &&
                               <CustomCodeBlockWrapper>
-                                <CodeBlockDiv> 
+                                <CustomCodeBlockDiv> 
                                   <CodeLineWrapper>
                                     <CodeRedSpan>const</CodeRedSpan> target <CodeYellowSpan>=</CodeYellowSpan> <CodeYellowSpan>'This is React This is JavaScript'</CodeYellowSpan>;
                                   </CodeLineWrapper>
@@ -455,13 +459,13 @@ export const CheckMetaDialog = ({
                                   <ComentLineWrapper>
                                     {'// => '} ['This is React', 'This is JavaScript']
                                   </ComentLineWrapper>
-                                </CodeBlockDiv>
+                                </CustomCodeBlockDiv>
                               </CustomCodeBlockWrapper>
                           }
                           {
                             row.example === 'ターゲット文字列がThis water(100ml) is 100yenの場合' &&
                               <CustomCodeBlockWrapper>
-                                <CodeBlockDiv> 
+                                <CustomCodeBlockDiv> 
                                   <CodeLineWrapper>
                                     <CodeRedSpan>const</CodeRedSpan> target <CodeYellowSpan>=</CodeYellowSpan> <CodeYellowSpan>'This water(100ml) is 100yen'</CodeYellowSpan>;
                                   </CodeLineWrapper>
@@ -496,14 +500,14 @@ export const CheckMetaDialog = ({
                                   <CodeLineWrapper>
                                     console.<CodeBlueSpan>log</CodeBlueSpan>(target.<CodeBlueSpan>match</CodeBlueSpan>(regex_pattern_2)); <CodeComentSpan>{'// => '} ['100']</CodeComentSpan> 
                                   </CodeLineWrapper>
-                                </CodeBlockDiv>
+                                </CustomCodeBlockDiv>
                               </CustomCodeBlockWrapper>
                           }
                           {
                             row.example === 'ターゲット文字列がThis water(500ml) is 100yenの場合' &&
                               <>
                                 <CustomCodeBlockWrapper>
-                                  <CodeBlockDiv> 
+                                  <CustomCodeBlockDiv> 
                                     <CodeLineWrapper>
                                       <CodeRedSpan>const</CodeRedSpan> target <CodeYellowSpan>=</CodeYellowSpan> <CodeYellowSpan>'This water(500ml) is 100yen'</CodeYellowSpan>;
                                     </CodeLineWrapper>
@@ -521,14 +525,14 @@ export const CheckMetaDialog = ({
                                     <CodeLineWrapper>
                                       console.<CodeBlueSpan>log</CodeBlueSpan>(target.<CodeBlueSpan>match</CodeBlueSpan>(regex_pattern)); <CodeComentSpan>{'// => '} ['500']</CodeComentSpan>
                                     </CodeLineWrapper>
-                                  </CodeBlockDiv>
+                                  </CustomCodeBlockDiv>
                                 </CustomCodeBlockWrapper>
                                 <StyledDescriptionDiv>
                                   また、以下のコードのように、マッチさせたくない文字列を含んでいるかをチェックするために、否定の先読みを使うこともできます。
                                 </StyledDescriptionDiv>
                                 <ExampleData>{`ex) 不正な郵便番号(000-0000)にマッチさせたくない場合`}</ExampleData>
                                 <CustomCodeBlockWrapper>
-                                  <CodeBlockDiv> 
+                                  <CustomCodeBlockDiv> 
                                     <CodeLineWrapper>
                                       <CodeRedSpan>const</CodeRedSpan> target_1 <CodeYellowSpan>=</CodeYellowSpan> <CodeYellowSpan>000-0000</CodeYellowSpan>; <CodeComentSpan>{'//'} 不正な郵便番号</CodeComentSpan>
                                     </CodeLineWrapper>
@@ -558,7 +562,7 @@ export const CheckMetaDialog = ({
                                     <CodeLineWrapper>
                                       console.<CodeBlueSpan>log</CodeBlueSpan>(target_2.<CodeBlueSpan>match</CodeBlueSpan>(regex_pattern)); <CodeComentSpan>{'// => '} ['171-0022']</CodeComentSpan>
                                     </CodeLineWrapper>
-                                  </CodeBlockDiv>
+                                  </CustomCodeBlockDiv>
                                 </CustomCodeBlockWrapper>
                               </>
                           }
@@ -566,7 +570,7 @@ export const CheckMetaDialog = ({
                             row.example === 'ターゲット文字列がhttps://www.regex-hunting.com/gamesの場合' &&
                               <>
                                 <CustomCodeBlockWrapper>
-                                  <CodeBlockDiv> 
+                                  <CustomCodeBlockDiv> 
                                     <CodeLineWrapper>
                                       <CodeRedSpan>const</CodeRedSpan> target <CodeYellowSpan>=</CodeYellowSpan> <CodeYellowSpan>'https://www.regex-hunting.com/games'</CodeYellowSpan>;
                                     </CodeLineWrapper>
@@ -587,7 +591,7 @@ export const CheckMetaDialog = ({
                                     <CodeLineWrapper>
                                       console.<CodeBlueSpan>log</CodeBlueSpan>(target.<CodeBlueSpan>match</CodeBlueSpan>(regex_pattern)); <CodeComentSpan>{'// => '}['www.regex-hunting.com/games']</CodeComentSpan>
                                     </CodeLineWrapper>
-                                  </CodeBlockDiv>
+                                  </CustomCodeBlockDiv>
                                 </CustomCodeBlockWrapper>
                               </>
                           }
@@ -595,7 +599,7 @@ export const CheckMetaDialog = ({
                             row.example === 'ターゲット文字列がReact17.0 React16.0 React15.6の場合' &&
                               <>
                                 <CustomCodeBlockWrapper>
-                                  <CodeBlockDiv> 
+                                  <CustomCodeBlockDiv> 
                                     <CodeLineWrapper>
                                       <CodeRedSpan>const</CodeRedSpan> target <CodeYellowSpan>=</CodeYellowSpan> <CodeYellowSpan>'React17.0 React16.0 React15.6'</CodeYellowSpan>;
                                     </CodeLineWrapper>
@@ -616,7 +620,7 @@ export const CheckMetaDialog = ({
                                     <CodeLineWrapper>
                                       console.<CodeBlueSpan>log</CodeBlueSpan>(target.<CodeBlueSpan>match</CodeBlueSpan>(regex_pattern)); <CodeComentSpan>{'// => '}['React17.0']</CodeComentSpan>
                                     </CodeLineWrapper>
-                                  </CodeBlockDiv>
+                                  </CustomCodeBlockDiv>
                                 </CustomCodeBlockWrapper>
                               </>
                           }
