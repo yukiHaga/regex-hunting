@@ -91,7 +91,7 @@ const ShockAnime = keyframes`
 // MainGameContentWrapperコンポーネント
 const MainGameContentWrapper = styled.div`
   animation: ${
-    ({ question_judgement }) => question_judgement === "incorrect" && ShockAnime
+    ({ questionJudgement }) => questionJudgement === "incorrect" && ShockAnime
   } 0.5s linear 1;
 `;
 
@@ -163,54 +163,54 @@ export const Games = () => {
 
   // ゲーム初期状態のstate
   const initialState = {
-    game_management: {},
+    gameManagement: {},
     questions: [],
-    user_hp: 100,
-    user_max_hp: 100,
-    user_attack: 20,
-    user_defence: 30,
-    monster_attack: {},
-    monster_defence: {},
-    monster_hp: 100,
-    monster_max_hp: 100,
-    correct_questions: [],
-    incorrect_questions: [],
+    userHp: 100,
+    userMaxHp: 100,
+    userAttack: 20,
+    userDefence: 30,
+    monsterAttack: {},
+    monsterDefence: {},
+    monsterHp: 100,
+    monsterMaxHp: 100,
+    correctQuestions: [],
+    incorrectQuestions: [],
     sentence: 'ロード中',
-    next_sentence: "",
-    sentence_num: 0,
-    next_sentence_num: 0,
-    target_sentence: "",
-    next_target_sentence: "",
-    sample_answer: [],
+    nextSentence: "",
+    sentenceNum: 0,
+    nextSentenceNum: 0,
+    targetSentence: "",
+    nextTargetSentence: "",
+    sampleAnswer: [],
     hint: "",
-    next_hint: "",
-    match_array: [],
+    nextHint: "",
+    matchArray: [],
     commentary: "",
-    next_commentary: "",
-    flash_display: false,
-    flash_title: "",
-    input_regex_object: {},
-    key_available: false,
-    game_result: "",
-    first_appearance: true,
-    question_judgement: "progress",
-    time_active: false,
-    check_answer: false,
-    game_start_time: 0,
-    game_end_time: 0,
-    game_description_open: false,
-    has_user: false,
+    nextCommentary: "",
+    flashDisplay: false,
+    flashTitle: "",
+    inputRegexObject: {},
+    keyAvailable: false,
+    gameResult: "",
+    firstAppearance: true,
+    questionJudgement: "progress",
+    timeActive: false,
+    checkAnswer: false,
+    gameStartTime: 0,
+    gameEndTime: 0,
+    gameDescriptionOpen: false,
+    hasUser: false,
     rank: 1,
-    total_experience: 0, 
-    maximum_experience_per_rank: 500, 
-    temporary_experience: 0,
-    prev_temporary_experience: 0,
-    dialog_gage_up: false,
-    send_game_data: false,
-    rank_up: false,
-    active_title: "見習いハンター",
-    click_description_open: false,
-    click_meta_open: false,
+    totalExperience: 0, 
+    maximumExperiencePerRank: 500, 
+    temporaryExperience: 0,
+    prevTemporaryExperience: 0,
+    dialogGageUp: false,
+    sendGameData: false,
+    rankUp: false,
+    activeTitle: "見習いハンター",
+    clickDescriptionOpen: false,
+    clickMetaOpen: false,
   }
 
   // ゲーム状態を管理するstate
@@ -252,7 +252,7 @@ export const Games = () => {
         }
       })
     }
-    if(!Object.keys(gameState.game_management).length){
+    if(!Object.keys(gameState.gameManagement).length){
       dispatch({
         type: requestUserActionTyps.REQUEST_SUCCESS,
         payload: {
@@ -264,20 +264,20 @@ export const Games = () => {
         setGameState((prev) => ({
           ...prev,
           sentence: `${getMonsterName(difficulty)}が現れた！`,
-          next_sentence: data.questions["0"].sentence,
-          next_sentence_num: 1,
-          next_target_sentence: data.questions["0"].target_sentence,
-          game_management: data.game_management,
+          nextSentence: data.questions["0"].sentence,
+          nextSentenceNum: 1,
+          nextTargetSentence: data.questions["0"].target_sentence,
+          gameManagement: data.game_management,
           questions: data.questions,
-          monster_attack: data.monster.attack,
-          monster_defence: data.monster.defence,
-          monster_hp: data.monster.max_hp,
-          monster_max_hp: data.monster.max_hp,
-          sample_answer: data.questions["0"].sample_answer,
-          next_hint: data.questions["0"].hint,
-          next_commentary: data.questions["0"].commentary,
-          game_description_open: true,
-          has_user: sessionState ? 
+          monsterAttack: data.monster.attack,
+          monsterDefence: data.monster.defence,
+          monsterHp: data.monster.max_hp,
+          monsterMaxHp: data.monster.max_hp,
+          sampleAnswer: data.questions["0"].sample_answer,
+          nextHint: data.questions["0"].hint,
+          nextCommentary: data.questions["0"].commentary,
+          gameDescriptionOpen: true,
+          hasUser: sessionState ? 
             true
           : 
             false,
@@ -285,26 +285,26 @@ export const Games = () => {
             data.user.rank 
           : 
             prev.rank,
-          total_experience: sessionState ?
+          totalExperience: sessionState ?
             data.user.total_experience 
           : 
-            prev.total_experience, 
-          maximum_experience_per_rank: sessionState ?
+            prev.totalExperience, 
+          maximumExperiencePerRank: sessionState ?
             data.user.maximum_experience_per_rank 
           : 
-            prev.maximum_experience_per_rank, 
-          temporary_experience: sessionState ?
+            prev.maximumExperiencePerRank, 
+          temporaryExperience: sessionState ?
             data.user.temporary_experience
           :
-            prev.temporary_experience,
-          prev_temporary_experience: sessionState ?
+            prev.temporaryExperience,
+          prevTemporaryExperience: sessionState ?
             data.user.prev_temporary_experience
           :
-            prev.prev_temporary_experience,
-          active_title: sessionState ?
+            prev.prevTemporaryExperience,
+          activeTitle: sessionState ?
             data.user.active_title
           :
-            prev.active_title
+            prev.activeTitle
         })); 
       }).catch((e) => {
         if(e.response.status === HTTP_STATUS_CODE.NOT_FOUND){
@@ -320,7 +320,7 @@ export const Games = () => {
   }, [
     dispatch, 
     difficulty,
-    gameState.game_management,
+    gameState.gameManagement,
     sessionState,
     requestUserActionTyps.REQUEST, 
     requestUserActionTyps.REQUEST_SUCCESS,
@@ -329,14 +329,14 @@ export const Games = () => {
 
   // 戦闘bgm
   useEffect(() => {
-    if(gameState.game_result !== "") {
-      battleAudioState.audio.loop = gameState.game_result === "progress" ? 
+    if(gameState.gameResult !== "") {
+      battleAudioState.audio.loop = gameState.gameResult === "progress" ? 
                                       true 
                                     : 
                                       false;
-      if(gameState.game_result === "progress" && !gameState.game_description_open && !gameState.click_meta_open) {
+      if(gameState.gameResult === "progress" && !gameState.gameDescriptionOpen && !gameState.clickMetaOpen) {
         battleAudioState.audio.play();
-      } else if (gameState.game_result === "win" || gameState.game_result === "lose") {
+      } else if (gameState.gameResult === "win" || gameState.gameResult === "lose") {
         battleAudioState.audio.pause();
         battleAudioState.audio.currentTime = 0;
       } else {
@@ -344,59 +344,59 @@ export const Games = () => {
       }
     }
   }, [
-    gameState.game_result,
-    gameState.game_description_open,
-    gameState.click_meta_open,
+    gameState.gameResult,
+    gameState.gameDescriptionOpen,
+    gameState.clickMetaOpen,
     battleAudioState.audio
   ])
 
   // ゲームクリア時の音
   useEffect(() => {
-    if(gameState.game_result === "win") {
+    if(gameState.gameResult === "win") {
       const audio = new Audio(GameClearSound);
       audio.play();
     }
   }, [
-    gameState.game_result
+    gameState.gameResult
   ]);
 
   // ゲームオーバーの音
   useEffect(() => {
-    if(gameState.game_result === "lose") {
+    if(gameState.gameResult === "lose") {
       const audio = new Audio(GameOverSound);
       audio.play();
     }
   }, [
-    gameState.game_result
+    gameState.gameResult
   ]);
 
   // ゲーム終了時のロジック
   // ログインの有無に関わらず、勝つか負けるとゲームのデータをサーバー側へ送る
-  // gameState.send_game_dataがfalse。gameState.game_resultがwinまたはlose時だけ発動
+  // gameState.sendGameDataがfalse。gameState.gameResultがwinまたはlose時だけ発動
   // そのため、絶対1回しか発動しない
   // result_timeの単位はミリ秒である。
   // ユーザーがログインしていなくても送る。
   // ログインユーザーの場合、contextを更新する
   // ログインユーザーしかsessionStateはtrueにならないので、そこを利用する
   useEffect(() => {
-    if(!gameState.send_game_data && (gameState.game_result === "win" || gameState.game_result === "lose")){
+    if(!gameState.sendGameData && (gameState.gameResult === "win" || gameState.gameResult === "lose")){
       const timer = setTimeout(() => {
         postGameFinish({
           game_management: {
             difficulty: difficulty, 
-            game_result: gameState.game_result,
-            result_time: gameState.game_end_time - gameState.game_start_time
+            game_result: gameState.gameResult,
+            result_time: gameState.gameEndTime - gameState.gameStartTime
           },
           judgement: {
-            correct: gameState.correct_questions, 
-            incorrect: gameState.incorrect_questions
+            correct: gameState.correctQuestions, 
+            incorrect: gameState.incorrectQuestions
           },
           current_user: {
             rank: gameState.rank,
-            total_experience: gameState.total_experience,
-            maximum_experience_per_rank: gameState.maximum_experience_per_rank,
-            temporary_experience: gameState.temporary_experience,
-            active_title: gameState.active_title
+            total_experience: gameState.totalExperience,
+            maximum_experience_per_rank: gameState.maximumExperiencePerRank,
+            temporary_experience: gameState.temporaryExperience,
+            active_title: gameState.activeTitle
           }
         }).then((data) => {
           if(sessionState) {
@@ -417,9 +417,9 @@ export const Games = () => {
           }
           setGameState((prev) => ({
             ...prev,
-            send_game_data: data.send_game_data,
-            dialog_gage_up: false,
-            has_user: sessionState ? 
+            sendGameData: data.send_game_data,
+            dialogGageUp: false,
+            hasUser: sessionState ? 
               true
             : 
               false,
@@ -427,37 +427,37 @@ export const Games = () => {
               data.user.rank 
             : 
               prev.rank,
-            total_experience: sessionState ?
+            totalExperience: sessionState ?
               data.user.total_experience 
             : 
-              prev.total_experience, 
-            maximum_experience_per_rank: sessionState ?
+              prev.totalExperience, 
+            maximumExperiencePerRank: sessionState ?
               data.user.maximum_experience_per_rank 
             : 
-              prev.maximum_experience_per_rank, 
-            temporary_experience: sessionState ?
+              prev.maximumExperiencePerRank, 
+            temporaryExperience: sessionState ?
               data.user.temporary_experience
             :
-              prev.temporary_experience,
-            prev_temporary_experience: sessionState ?
+              prev.temporaryExperience,
+            prevTemporaryExperience: sessionState ?
               data.user.prev_temporary_experience
             :
-              prev.prev_temporary_experience,
-            active_title: sessionState ?
+              prev.prevTemporaryExperience,
+            activeTitle: sessionState ?
               data.user.active_title
             :
-              prev.active_title,
-            rank_up: sessionState?
+              prev.activeTitle,
+            rankUp: sessionState?
               data.user.rank_up
             :
-              prev.rank_up
+              prev.rankUp
           })); 
         }).catch((e) => {
           if(e.response.status === HTTP_STATUS_CODE.NOT_FOUND){
             setGameState((prev) => ({
               ...prev,
-              send_game_data: true,
-              dialog_gage_up: false,
+              sendGameData: true,
+              dialogGageUp: false,
             })); 
           } else {
             throw e;
@@ -468,18 +468,17 @@ export const Games = () => {
     }
   }, [
     difficulty,
-    gameState.game_result,
-    gameState.correct_questions,
-    gameState.incorrect_questions,
-    gameState.game_end_time, 
-    gameState.game_start_time,
-    gameState.maximum_experience_per_rank,
+    gameState.gameResult,
+    gameState.correctQuestions,
+    gameState.incorrectQuestions,
+    gameState.gameEndTime, 
+    gameState.gameStartTime,
+    gameState.maximumExperiencePerRank,
     gameState.rank, 
-    gameState.result_time, 
-    gameState.temporary_experience, 
-    gameState.total_experience, 
-    gameState.send_game_data,
-    gameState.active_title,
+    gameState.temporaryExperience, 
+    gameState.totalExperience, 
+    gameState.sendGameData,
+    gameState.activeTitle,
     sessionState,
     requestUserActionTyps.REQUEST_FAILURE, 
     requestUserActionTyps.REQUEST_SUCCESS,
@@ -491,22 +490,22 @@ export const Games = () => {
   return (
     <>
       {
-        requestState === REQUEST_STATE.LOADING && gameState.game_description_open ?
+        requestState === REQUEST_STATE.LOADING && gameState.gameDescriptionOpen ?
           <CircularMask />
         :
           <>
             <Header />
             <MainContentWrapper>
               {  
-                gameState.flash_display && 
+                gameState.flashDisplay && 
                   <JudgementFlashMessage 
-                    flash_display={gameState.flash_display}
-                    flash_title={gameState.flash_title}
+                    flashDisplay={gameState.flashDisplay}
+                    flashTitle={gameState.flashTitle}
                   />
               }
               <BackGroundImageCover src={RealBackGroundImage} />
               <MainGameContentWrapper
-                question_judgement={gameState.question_judgement}
+                questionJudgement={gameState.questionJudgement}
               >
                 <GameBlockWrapper>
                   <HintBarWrapper>
@@ -520,28 +519,28 @@ export const Games = () => {
                         difficulty === 'elementary' && 
                           <>
                             <ElementaryMonster 
-                              monster_hp={gameState.monster_hp}
-                              monster_max_hp={gameState.monster_max_hp}
-                              question_judgement={gameState.question_judgement}
-                              first_appearance={gameState.first_appearance}
-                              game_result={gameState.game_result}
-                              game_description_open={gameState.game_description_open}
+                              monsterHp={gameState.monsterHp}
+                              monsterMaxHp={gameState.monsterMaxHp}
+                              questionJudgement={gameState.questionJudgement}
+                              firstAppearance={gameState.firstAppearance}
+                              gameResult={gameState.gameResult}
+                              gameDescriptionOpen={gameState.gameDescriptionOpen}
                             />
                             <ElementaryMonster 
-                              monster_hp={gameState.monster_hp}
-                              monster_max_hp={gameState.monster_max_hp}
-                              question_judgement={gameState.question_judgement}
-                              first_appearance={gameState.first_appearance}
-                              game_result={gameState.game_result}
-                              game_description_open={gameState.game_description_open}
+                              monsterHp={gameState.monsterHp}
+                              monsterMaxHp={gameState.monsterMaxHp}
+                              questionJudgement={gameState.questionJudgement}
+                              firstAppearance={gameState.firstAppearance}
+                              gameResult={gameState.gameResult}
+                              gameDescriptionOpen={gameState.gameDescriptionOpen}
                             />
                             <ElementaryMonster 
-                              monster_hp={gameState.monster_hp}
-                              monster_max_hp={gameState.monster_max_hp}
-                              question_judgement={gameState.question_judgement}
-                              first_appearance={gameState.first_appearance}
-                              game_result={gameState.game_result}
-                              game_description_open={gameState.game_description_open}
+                              monsterHp={gameState.monsterHp}
+                              monsterMaxHp={gameState.monsterMaxHp}
+                              questionJudgement={gameState.questionJudgement}
+                              firstAppearance={gameState.firstAppearance}
+                              gameResult={gameState.gameResult}
+                              gameDescriptionOpen={gameState.gameDescriptionOpen}
                             />
                           </>
                       }
@@ -549,12 +548,12 @@ export const Games = () => {
                         difficulty === 'intermediate' &&
                           <>
                             <IntermediateMonster 
-                              monster_hp={gameState.monster_hp}
-                              monster_max_hp={gameState.monster_max_hp}
-                              question_judgement={gameState.question_judgement}
-                              first_appearance={gameState.first_appearance}
-                              game_result={gameState.game_result}
-                              game_description_open={gameState.game_description_open}
+                              monsterHp={gameState.monsterHp}
+                              monsterMaxHp={gameState.monsterMaxHp}
+                              questionJudgement={gameState.questionJudgement}
+                              firstAppearance={gameState.firstAppearance}
+                              gameResult={gameState.gameResult}
+                              gameDescriptionOpen={gameState.gameDescriptionOpen}
                             />
                           </>
                       }
@@ -569,67 +568,67 @@ export const Games = () => {
                       <QuestionBlock 
                         difficulty={difficulty} 
                         sentence={gameState.sentence}
-                        next_sentence={gameState.next_sentence}
-                        sentence_num={gameState.sentence_num}
-                        next_sentence_num={gameState.next_sentence_num}
-                        target_sentence={gameState.target_sentence}
-                        next_target_sentence={gameState.next_target_sentence}
-                        next_hint={gameState.next_hint}
-                        match_array={gameState.match_array}
-                        question_judgement={gameState.question_judgement}
+                        nextSentence={gameState.nextSentence}
+                        sentenceNum={gameState.sentenceNum}
+                        nextSentenceNum={gameState.nextSentenceNum}
+                        targetSentence={gameState.targetSentence}
+                        nextTargetSentence={gameState.nextTargetSentence}
+                        nextHint={gameState.nextHint}
+                        matchArray={gameState.matchArray}
+                        questionJudgement={gameState.questionJudgement}
                         gameState={gameState}
                         setGameState={setGameState}
-                        input_regex_object={gameState.input_regex_object}
-                        correct_questions={gameState.correct_questions}
-                        incorrect_questions={gameState.incorrect_questions}
-                        game_description_open={gameState.game_description_open}
-                        game_result={gameState.game_result}
-                        has_user={gameState.has_user}
+                        inputRegexObject={gameState.inputRegexObject}
+                        correctQuestions={gameState.correctQuestions}
+                        incorrectQuestions={gameState.incorrectQuestions}
+                        gameDescriptionOpen={gameState.gameDescriptionOpen}
+                        gameResult={gameState.gameResult}
+                        hasUser={gameState.hasUser}
                         rank={gameState.rank}
-                        total_experience={gameState.total_experience} 
-                        maximum_experience_per_rank={gameState.maximum_experience_per_rank} 
-                        temporary_experience={gameState.temporary_experience}
-                        prev_temporary_experience={gameState.prev_temporary_experience}
-                        click_meta_open={gameState.click_meta_open}
+                        totalExperience={gameState.totalExperience} 
+                        maximumExperiencePerRank={gameState.maximumExperiencePerRank} 
+                        temporaryExperience={gameState.temporaryExperience}
+                        prevTemporaryExperience={gameState.prevTemporaryExperience}
+                        clickMetaOpen={gameState.clickMetaOpen}
                       />
                     </QuestionBlockWrapper>
                   </BattleBlockWrapper>
                 </GameBlockWrapper>
                 <CodeBlockWrapper>
                   <CodeBlock 
-                    correct_questions={gameState.correct_questions}
+                    correctQuestions={gameState.correctQuestions}
                     questions={gameState.questions}
                     setGameState={setGameState}
-                    target_sentence={gameState.target_sentence}
-                    sample_answer={gameState.sample_answer}
-                    monster_hp={gameState.monster_hp}
-                    monster_max_hp={gameState.monster_max_hp}
-                    monster_attack={gameState.monster_attack}
-                    monster_defence={gameState.monster_defence}
-                    question_judgement={gameState.question_judgement}
-                    flash_display={gameState.flash_display}
-                    key_available={gameState.key_available}
-                    user_attack={gameState.user_attack}
-                    sentence_num={gameState.sentence_num}
-                    game_description_open={gameState.game_description_open}
-                    click_meta_open={gameState.click_meta_open}
+                    targetSentence={gameState.targetSentence}
+                    sampleAnswer={gameState.sampleAnswer}
+                    monsterHp={gameState.monsterHp}
+                    monsterMaxHp={gameState.monsterMaxHp}
+                    monsterAttack={gameState.monsterAttack}
+                    monsterDefence={gameState.monsterDefence}
+                    questionJudgement={gameState.questionJudgement}
+                    flashDisplay={gameState.flashDisplay}
+                    keyAvailable={gameState.keyAvailable}
+                    userAttack={gameState.userAttack}
+                    sentenceNum={gameState.sentenceNum}
+                    gameDescriptionOpen={gameState.gameDescriptionOpen}
+                    clickMetaOpen={gameState.clickMetaOpen}
                   />
                 </CodeBlockWrapper>
                 <GageBlockWrapper>
                   <TimeGage 
                     gameState={gameState} 
                     setGameState={setGameState}
-                    time_active={gameState.time_active}
-                    monster_attack={gameState.monster_attack}
-                    user_defence={gameState.user_defence}
-                    user_hp={gameState.user_hp}
-                    sentence_num={gameState.sentence_num}
-                    click_description_open={gameState.click_description_open}
-                    click_meta_open={gameState.click_meta_open}
+                    timeActive={gameState.timeActive}
+                    monsterAttack={gameState.monsterAttack}
+                    userDefence={gameState.userDefence}
+                    userHp={gameState.userHp}
+                    sentenceNum={gameState.sentenceNum}
+                    clickDescriptionOpen={gameState.clickDescriptionOpen}
+                    clickMetaOpen={gameState.clickMetaOpen}
                   />
                   <HpGage 
-                    user_hp={gameState.user_hp}
-                    user_max_hp={gameState.user_max_hp}
+                    userHp={gameState.userHp}
+                    userMaxHp={gameState.userMaxHp}
                   />
                 </GageBlockWrapper>
               </MainGameContentWrapper>
@@ -638,102 +637,102 @@ export const Games = () => {
               setGameState={setGameState}
             />
             {
-              gameState.game_description_open && difficulty === 'elementary' &&
+              gameState.gameDescriptionOpen && difficulty === 'elementary' &&
                 <ElementaryGameDescriptionDialog
-                  isOpen={gameState.game_description_open}
+                  isOpen={gameState.gameDescriptionOpen}
                   setGameState={setGameState}
-                  game_description_open={gameState.game_description_open}
-                  click_description_open={gameState.click_description_open}
+                  gameDescriptionOpen={gameState.gameDescriptionOpen}
+                  clickDescriptionOpen={gameState.clickDescriptionOpen}
                 />
             }
             {
-              gameState.game_description_open && difficulty === 'intermediate' &&
+              gameState.gameDescriptionOpen && difficulty === 'intermediate' &&
                 <IntermediateGameDescriptionDialog
-                  isOpen={gameState.game_description_open}
+                  isOpen={gameState.gameDescriptionOpen}
                   setGameState={setGameState}
-                  game_description_open={gameState.game_description_open}
-                  click_description_open={gameState.click_description_open}
+                  gameDescriptionOpen={gameState.gameDescriptionOpen}
+                  clickDescriptionOpen={gameState.clickDescriptionOpen}
                 />
             }
             {
-              gameState.game_result === "win" && !gameState.rank_up && !gameState.check_answer &&
+              gameState.gameResult === "win" && !gameState.rankUp && !gameState.checkAnswer &&
                 <GameClearDialog
-                  isOpen={gameState.game_result === "win"}
+                  isOpen={gameState.gameResult === "win"}
                   difficulty={difficulty} 
-                  correct_questions={gameState.correct_questions}
-                  incorrect_questions={gameState.incorrect_questions}
+                  correctQuestions={gameState.correctQuestions}
+                  incorrectQuestions={gameState.incorrectQuestions}
                   setGameState={setGameState}
                   getGameStart={getGameStart}
                   initialState={initialState}
-                  game_start_time={gameState.game_start_time}
-                  game_end_time={gameState.game_end_time}
-                  has_user={gameState.has_user}
+                  gameStartTime={gameState.gameStartTime}
+                  gameEndTime={gameState.gameEndTime}
+                  hasUser={gameState.hasUser}
                   rank={gameState.rank}
-                  total_experience={gameState.total_experience} 
-                  maximum_experience_per_rank={gameState.maximum_experience_per_rank} 
-                  temporary_experience={gameState.temporary_experience}
-                  prev_temporary_experience={gameState.prev_temporary_experience}
-                  dialog_gage_up={gameState.dialog_gage_up}
-                  game_result={gameState.game_result}
-                  rank_up={gameState.rank_up}
+                  totalExperience={gameState.totalExperience} 
+                  maximumExperiencePerRank={gameState.maximumExperiencePerRank} 
+                  temporaryExperience={gameState.temporaryExperience}
+                  prevTemporaryExperience={gameState.prevTemporaryExperience}
+                  dialogGageUp={gameState.dialogGageUp}
+                  gameResult={gameState.gameResult}
+                  rankUp={gameState.rankUp}
                 />
             }
             {
-              gameState.game_result === "lose" && !gameState.check_answer &&
+              gameState.gameResult === "lose" && !gameState.checkAnswer &&
                 <GameOverDialog
-                  isOpen={gameState.game_result === "lose"}
+                  isOpen={gameState.gameResult === "lose"}
                   difficulty={difficulty} 
-                  correct_questions={gameState.correct_questions}
-                  incorrect_questions={gameState.incorrect_questions}
+                  correctQuestions={gameState.correctQuestions}
+                  incorrectQuestions={gameState.incorrectQuestions}
                   setGameState={setGameState}
                   getGameStart={getGameStart}
                   initialState={initialState}
-                  has_user={gameState.has_user}
+                  hasUser={gameState.hasUser}
                   rank={gameState.rank}
-                  total_experience={gameState.total_experience}
-                  maximum_experience_per_rank={gameState.maximum_experience_per_rank}
-                  temporary_experience={gameState.temporary_experience} 
-                  prev_temporary_experience={gameState.prev_temporary_experience}
-                  dialog_gage_up={gameState.dialog_gage_up}
-                  game_result={gameState.game_result}
-                  rank_up={gameState.rank_up}
+                  totalExperience={gameState.totalExperience}
+                  maximumExperiencePerRank={gameState.maximumExperiencePerRank}
+                  temporaryExperience={gameState.temporaryExperience} 
+                  prevTemporaryExperience={gameState.prevTemporaryExperience}
+                  dialogGageUp={gameState.dialogGageUp}
+                  gameResult={gameState.gameResult}
+                  rankUp={gameState.rankUp}
                 />
             }
             {
-              gameState.check_answer && 
+              gameState.checkAnswer && 
                 <CheckAnswerDialog
-                  isOpen={gameState.check_answer}
+                  isOpen={gameState.checkAnswer}
                   difficulty={difficulty} 
-                  correct_questions={gameState.correct_questions}
-                  incorrect_questions={gameState.incorrect_questions}
+                  correctQuestions={gameState.correctQuestions}
+                  incorrectQuestions={gameState.incorrectQuestions}
                   setGameState={setGameState}
                 />
             }
             {
-              gameState.rank_up && 
+              gameState.rankUp && 
                 <RankUpDialog
-                  isOpen={gameState.rank_up}
+                  isOpen={gameState.rankUp}
                   rank={gameState.rank}
-                  active_title={gameState.active_title}
+                  activeTitle={gameState.activeTitle}
                   setGameState={setGameState}
                   difficulty={difficulty} 
-                  game_result={gameState.game_result}
-                  rank_up={gameState.rank_up}
+                  gameResult={gameState.gameResult}
+                  rankUp={gameState.rankUp}
                 />
             }
             {
-              gameState.click_meta_open &&
+              gameState.clickMetaOpen &&
                 <CheckMetaDialog
-                  isOpen={gameState.click_meta_open}
+                  isOpen={gameState.clickMetaOpen}
                   setGameState={setGameState}
                 />
             }
             {
-              gameState.game_result === "progress" && gameState.question_judgement === "correct" && 
+              gameState.gameResult === "progress" && gameState.questionJudgement === "correct" && 
                 <CutImage />
             }
             {
-              gameState.game_result === "progress" && gameState.question_judgement === "incorrect" && 
+              gameState.gameResult === "progress" && gameState.questionJudgement === "incorrect" && 
                 <ClawImage />
             }
           </>
