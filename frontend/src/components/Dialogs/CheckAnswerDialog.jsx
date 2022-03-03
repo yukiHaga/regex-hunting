@@ -202,7 +202,8 @@ const CommentaryTitleWrapper = styled.div`
 const CommentaryWrapper = styled.div`
   font-size: 1em;
   color: ${COLORS.BLACK};
-  text-align: left;
+  text-align: justify;
+  text-justify: inter-ideograph;
 `;
 
 export const CheckAnswerDialog = ({
