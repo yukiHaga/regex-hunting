@@ -19,22 +19,22 @@ const JudgementMessageTitle = styled.div`
 `;
 
 export const JudgementFlashMessage = ({
-  flash_display,
-  flash_title,
+  flashDisplay,
+  flashTitle,
 }) => {
 
-  const [display, setDisplay] = useState(flash_display);
+  const [display, setDisplay] = useState(flashDisplay);
 
   const handleClose = () => {
     setDisplay(false);
   };
 
   useEffect(() => {
-    if(flash_display) {
-      setDisplay(flash_display);
+    if(flashDisplay) {
+      setDisplay(flashDisplay);
     }
   },[
-    flash_display
+    flashDisplay
   ])
 
   return (
@@ -57,10 +57,10 @@ export const JudgementFlashMessage = ({
         <Alert 
           icon={false} 
           variant="filled" 
-          severity={flash_title === "Good" ? "success" : "error"}
+          severity={flashTitle === "Good" ? "success" : "error"}
         >
           <JudgementMessageTitle>
-            {flash_title}
+            {flashTitle}
           </JudgementMessageTitle>
         </Alert>
       </Snackbar>

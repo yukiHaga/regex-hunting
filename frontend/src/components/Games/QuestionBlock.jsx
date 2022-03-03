@@ -67,35 +67,33 @@ const TargetSentenceWrapper = styled.div`
 `;
 
 const CustomSpan = styled.span`
-  color: ${({ backgroundcolor }) => backgroundcolor && COLORS.WORD_BLUE};
-  background-color: ${({ backgroundcolor }) => backgroundcolor && COLORS.WORD_BACK};
+  color: ${({ backgroundColor }) => backgroundColor && COLORS.WORD_BLUE};
+  background-color: ${({ backgroundColor }) => backgroundColor && COLORS.WORD_BACK};
 `;
 
 export const QuestionBlock = ({ 
   difficulty, 
   sentence,
-  next_sentence,
-  target_sentence,
-  next_target_sentence,
-  sentence_num,
-  next_sentence_num,
-  next_hint,
-  match_array,
-  question_judgement,
-  gameState,
+  nextSentence,
+  sentenceNum,
+  nextSentenceNum,
+  targetSentence,
+  nextTargetSentence,
+  nextHint,
+  matchArray,
+  questionJudgement,
   setGameState,
-  input_regex_object,
-  correct_questions,
-  incorrect_questions,
-  game_description_open,
-  game_result,
-  has_user,
+  inputRegexObject,
+  correctQuestions,
+  incorrectQuestions,
+  gameDescriptionOpen,
+  gameResult,
+  hasUser,
   rank,
-  total_experience,
-  maximum_experience_per_rank,
-  temporary_experience,
-  prev_temporary_experience,
-  click_meta_open
+  totalExperience,
+  maximumExperiencePerRank,
+  temporaryExperience,
+  clickMetaOpen
 }) => {
 
   // 難易度を日本語に変換する関数
@@ -166,22 +164,22 @@ export const QuestionBlock = ({
   // このuseEffectがあるおかげで、最初のモンスターセンテンスが
   // 問題1のセンテンスに自動で切り替わる
   useEffect(() => {
-    if (!game_description_open && !click_meta_open && sentence === `${getMonsterName(difficulty)}が現れた！`){
+    if (!gameDescriptionOpen && !clickMetaOpen && sentence === `${getMonsterName(difficulty)}が現れた！`){
       const timer = setTimeout(() => {
         setGameState((prev) => ({
           ...prev,
-          sentence: next_sentence,
-          next_sentence: prev.questions["1"].sentence,
-          sentence_num: next_sentence_num,
-          next_sentence_num: prev.next_sentence_num + 1,
-          target_sentence: next_target_sentence,
-          next_target_sentence: prev.questions["1"].target_sentence,
-          hint: next_hint,
-          next_hint: prev.questions["1"].hint,
+          sentence: nextSentence,
+          nextSentence: prev.questions["1"].sentence,
+          sentenceNum: nextSentenceNum,
+          nextSentenceNum: prev.nextSentenceNum + 1,
+          targetSentence: nextTargetSentence,
+          nextTargetSentence: prev.questions["1"].target_sentence,
+          hint: nextHint,
+          nextHint: prev.questions["1"].hint,
           key_available: true,
           first_appearance: false,
           time_active: true,
-          game_result: "progress"
+          gameResult: "progress"
         }));
       }, 3000);
       return () => clearTimeout(timer);
@@ -189,51 +187,51 @@ export const QuestionBlock = ({
   }, [
     difficulty,
     sentence,
-    target_sentence,
-    next_sentence,
-    next_sentence_num,
-    next_target_sentence,
-    next_hint,
+    targetSentence,
+    nextSentence,
+    nextSentenceNum,
+    nextTargetSentence,
+    nextHint,
     setGameState,
-    game_description_open,
-    click_meta_open
+    gameDescriptionOpen,
+    clickMetaOpen
   ]);
 
-  // question_judgementがcorrectの時に実行されるuseEffect
+  // questionJudgementがcorrectの時に実行されるuseEffect
   // ダメージセンテンスがQuestionBlockに表示される
   // その後、次の問題のセンテンスが表示される
   useEffect(() => {
-    if(game_result === "progress" && question_judgement === "correct") {
+    if(gameResult === "progress" && questionJudgement === "correct") {
       setGameState((prev) => ({
         ...prev,
         sentence: `${getMonsterName(difficulty)}に10ダメージ`,
         key_available: false,
         time_active: false,
       }));
-      if(correct_questions.length === 10) {
+      if(correctQuestions.length === 10) {
         const timer = setTimeout(() => {
           setGameState((prev) => ({
             ...prev,
             sentence: "ゲームクリア！",
-            next_sentence: "no_sentence",
-            sentence_num: 0,
-            next_sentence_num: 0,
-            target_sentence: "",
-            next_target_sentence: "",
+            nextSentence: "no_sentence",
+            sentenceNum: 0,
+            nextSentenceNum: 0,
+            targetSentence: "",
+            nextTargetSentence: "",
             hint: "",
-            next_hint: "",
-            question_judgement: "collect",
-            match_array: [],
+            nextHint: "",
+            questionJudgement: "collect",
+            matchArray: [],
             sample_answer: "no_sample_answer",
-            input_regex_object: {},
+            inputRegexObject: {},
             key_available: false,
-            game_result: "win",
+            gameResult: "win",
             time_active: false,
             game_end_time: performance.now(),
-            total_experience: has_user ? 
-              total_experience + getExperience(difficulty) : prev.total_experience,
-            temporary_experience: has_user ? 
-              temporary_experience + getExperience(difficulty) : prev.temporary_experience,
+            totalExperience: hasUser ? 
+              totalExperience + getExperience(difficulty) : prev.totalExperience,
+            temporaryExperience: hasUser ? 
+              temporaryExperience + getExperience(difficulty) : prev.temporaryExperience,
             dialog_gage_up: true,
             flash_display: false
           }));
@@ -243,18 +241,18 @@ export const QuestionBlock = ({
         const timer = setTimeout(() => {
           setGameState((prev) => ({
             ...prev,
-            sentence: next_sentence,
-            next_sentence: prev?.questions["1"]?.sentence || "no_sentence",
-            sentence_num: next_sentence_num,
-            next_sentence_num: prev?.next_sentence_num + 1 || "no_sentence_num",
-            target_sentence: next_target_sentence,
-            next_target_sentence: prev?.questions["1"]?.target_sentence || "no_target_sentence",
-            question_judgement: "progress",
-            match_array: [],
+            sentence: nextSentence,
+            nextSentence: prev?.questions["1"]?.sentence || "no_sentence",
+            sentenceNum: nextSentenceNum,
+            nextSentenceNum: prev?.nextSentenceNum + 1 || "no_sentence_num",
+            targetSentence: nextTargetSentence,
+            nextTargetSentence: prev?.questions["1"]?.target_sentence || "no_target_sentence",
+            questionJudgement: "progress",
+            matchArray: [],
             sample_answer: prev?.questions["0"]?.sample_answer || "no_sample_answer",
-            hint: next_hint,
-            next_hint: prev?.questions["1"]?.hint || "no_hint",
-            input_regex_object: {},
+            hint: nextHint,
+            nextHint: prev?.questions["1"]?.hint || "no_hint",
+            inputRegexObject: {},
             key_available: true,
             time_active: true,
             flash_display: false,
@@ -264,49 +262,49 @@ export const QuestionBlock = ({
       }
     }
   },[
-    question_judgement,
+    questionJudgement,
     difficulty,
     setGameState,
-    next_sentence,
-    next_sentence_num,
-    next_target_sentence,
-    next_hint,
-    correct_questions.length,
-    game_result,
+    nextSentence,
+    nextSentenceNum,
+    nextTargetSentence,
+    nextHint,
+    correctQuestions.length,
+    gameResult,
     rank,
-    total_experience,
-    maximum_experience_per_rank,
-    temporary_experience,
-    has_user
+    totalExperience,
+    maximumExperiencePerRank,
+    temporaryExperience,
+    hasUser
   ]);
 
-  // question_judgementがincorrectの時に実行されるuseEffect
+  // questionJudgementがincorrectの時に実行されるuseEffect
   useEffect(() => {
-    if(game_result === "progress" && question_judgement === "incorrect") {
+    if(gameResult === "progress" && questionJudgement === "incorrect") {
       setGameState((prev) => ({
         ...prev,
         sentence: memoDamageSentence,
         key_available: false,
         time_active: false
       }));
-      if(incorrect_questions.length === memoIncorrectCount) {
+      if(incorrectQuestions.length === memoIncorrectCount) {
         const timer = setTimeout(() => {
           setGameState((prev) => ({
             ...prev,
             sentence: "ゲームオーバー",
-            next_sentence: "no_sentence",
-            sentence_num: 0,
-            next_sentence_num: 0,
-            target_sentence: "",
-            next_target_sentence: "",
+            nextSentence: "no_sentence",
+            sentenceNum: 0,
+            nextSentenceNum: 0,
+            targetSentence: "",
+            nextTargetSentence: "",
             hint: "",
-            next_hint: "",
-            question_judgement: "incollect",
-            match_array: [],
+            nextHint: "",
+            questionJudgement: "incollect",
+            matchArray: [],
             sample_answer: "no_sample_answer",
-            input_regex_object: {},
+            inputRegexObject: {},
             key_available: false,
-            game_result: "lose",
+            gameResult: "lose",
             time_active: false,
             game_end_time: performance.now(),
             flash_display: false,
@@ -317,18 +315,18 @@ export const QuestionBlock = ({
         const timer = setTimeout(() => {
           setGameState((prev) => ({
             ...prev,
-            sentence: next_sentence,
-            next_sentence: prev?.questions["1"]?.sentence || "no_sentence",
-            sentence_num: next_sentence_num,
-            next_sentence_num: prev?.next_sentence_num + 1 || "no_sentence_num",
-            target_sentence: next_target_sentence,
-            next_target_sentence: prev?.questions["1"]?.target_sentence || "no_target_sentence",
-            question_judgement: "progress",
-            match_array: [],
+            sentence: nextSentence,
+            nextSentence: prev?.questions["1"]?.sentence || "no_sentence",
+            sentenceNum: nextSentenceNum,
+            nextSentenceNum: prev?.nextSentenceNum + 1 || "no_sentence_num",
+            targetSentence: nextTargetSentence,
+            nextTargetSentence: prev?.questions["1"]?.target_sentence || "no_target_sentence",
+            questionJudgement: "progress",
+            matchArray: [],
             sample_answer: prev?.questions["0"]?.sample_answer || "no_sample_answer",
-            hint: next_hint,
-            next_hint: prev?.questions["1"].hint || "no_hint",
-            input_regex_object: {},
+            hint: nextHint,
+            nextHint: prev?.questions["1"].hint || "no_hint",
+            inputRegexObject: {},
             key_available: true,
             time_active: true,
             flash_display: false
@@ -338,19 +336,19 @@ export const QuestionBlock = ({
       }
     }
   },[
-    question_judgement,
+    questionJudgement,
     difficulty,
     setGameState,
-    next_sentence,
-    next_sentence_num,
-    next_target_sentence,
-    next_hint,
-    incorrect_questions.length,
-    game_result,
+    nextSentence,
+    nextSentenceNum,
+    nextTargetSentence,
+    nextHint,
+    incorrectQuestions.length,
+    gameResult,
     rank,
-    total_experience,
-    maximum_experience_per_rank,
-    temporary_experience,
+    totalExperience,
+    maximumExperiencePerRank,
+    temporaryExperience,
     memoIncorrectCount,
     memoDamageSentence
   ]);
@@ -363,18 +361,18 @@ export const QuestionBlock = ({
       <QuestionBlockWrapper>
         <QuestionWrapper>
           <DifficultyWrapper>
-            {sentence_num ? `Q${sentence_num}` : getJpDifficulty(difficulty)}
+            {sentenceNum ? `Q${sentenceNum}` : getJpDifficulty(difficulty)}
           </DifficultyWrapper>
           <SentenceWrapper>
             {sentence}
           </SentenceWrapper>
           <TargetSentenceWrapper>
             {
-              target_sentence &&
-                reactStringReplace(target_sentence, input_regex_object, (match, i) => (
+              targetSentence &&
+                reactStringReplace(targetSentence, inputRegexObject, (match, i) => (
                   <CustomSpan 
                     key={i} 
-                    backgroundcolor={i}
+                    backgroundColor={i}
                   >
                     {match}
                   </CustomSpan>     

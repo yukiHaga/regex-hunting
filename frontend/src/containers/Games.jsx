@@ -576,7 +576,6 @@ export const Games = () => {
                         nextHint={gameState.nextHint}
                         matchArray={gameState.matchArray}
                         questionJudgement={gameState.questionJudgement}
-                        gameState={gameState}
                         setGameState={setGameState}
                         inputRegexObject={gameState.inputRegexObject}
                         correctQuestions={gameState.correctQuestions}
@@ -588,7 +587,6 @@ export const Games = () => {
                         totalExperience={gameState.totalExperience} 
                         maximumExperiencePerRank={gameState.maximumExperiencePerRank} 
                         temporaryExperience={gameState.temporaryExperience}
-                        prevTemporaryExperience={gameState.prevTemporaryExperience}
                         clickMetaOpen={gameState.clickMetaOpen}
                       />
                     </QuestionBlockWrapper>
