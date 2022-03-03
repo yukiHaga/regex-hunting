@@ -288,7 +288,7 @@ export const ElementaryGameDescriptionDialog = ({
                 {
                   slideState.slide_num === 1 &&
                     <>
-                      <SpecialWarningSentenceWrapper>本サービスでは、特殊な意味を持つ文字列は全て「特殊文字」として分類します。</SpecialWarningSentenceWrapper>
+                      <SpecialWarningSentenceWrapper>※ 本サービスでは、特殊な意味を持つ文字列は全て「特殊文字」として分類します。</SpecialWarningSentenceWrapper>
                       <SpecialCodeBlockWrapper>
                         <CodeBlockDiv> 
                           <ComentLineWrapper>

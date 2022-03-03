@@ -49,6 +49,9 @@ import { groupsRows } from './dataRows.js';
 import { alternationsRows } from './dataRows.js';
 import { lookAroundsRows } from './dataRows.js';
 
+// 説明スライドのワーニングセンテンス
+import { WarningSentenceWrapper } from '../shared_style.js';
+
 const CustomDialogInnerWrapper = styled.div`
   padding-right: 3%;
   padding-left: 3%;
@@ -135,6 +138,11 @@ const SlideContentWrapper = styled.div`
     direction
   }) => slideFunction(slide_in, slide_out, direction)} 0.7s ease forwards;
 `;
+
+const CustomWarningSentenceWrapper = styled(WarningSentenceWrapper)`
+  font-size: 1.0em;
+  margin-top: 0.5%;
+`;  
 
 // click_meta_openがtrueの時に開くモーダル
 export const CheckMetaDialog = ({
@@ -301,6 +309,18 @@ export const CheckMetaDialog = ({
                         <StyledTableDataCell>
                           {row.data}
                           {
+                            row.example === 'ターゲット文字列がhttps://www.regex-hunting.com/gamesの場合' &&
+                              <CustomWarningSentenceWrapper>   
+                                ※ IEとSafariは肯定の後読みをサポートしていません。その点を注意していただくようお願いします。
+                              </CustomWarningSentenceWrapper>   
+                          }
+                          {
+                            row.example === 'ターゲット文字列がReact17.0 React16.0 React15.6の場合' &&
+                              <CustomWarningSentenceWrapper>   
+                                ※ IEとSafariは否定の後読みをサポートしていません。その点を注意していただくようお願いします。
+                              </CustomWarningSentenceWrapper>   
+                          }
+                          {
                             row.example &&
                               <ExampleData>{`ex) ${row.example}`}</ExampleData>
                           }
@@ -451,7 +471,7 @@ export const CheckMetaDialog = ({
                                   </CodeLineWrapper>
                                   <BlankLineWrapper />
                                   <ComentLineWrapper>
-                                    {'// '}肯定の先読みを使用した正規表現
+                                    {'// '}金額の数字にマッチする正規表現
                                   </ComentLineWrapper>
                                   <ComentLineWrapper>
                                     {'// '}3桁の数字の後ろに、yenという文字列があるかを調べることができます。
@@ -489,7 +509,7 @@ export const CheckMetaDialog = ({
                                     </CodeLineWrapper>
                                     <BlankLineWrapper />
                                     <ComentLineWrapper>
-                                      {'// '}否定の先読みを使用した正規表現
+                                      {'// '}mlの数字にマッチする正規表現
                                     </ComentLineWrapper>
                                     <ComentLineWrapper>
                                       {'// '}3桁の数字の後ろにyenという文字列がないような3桁の数字にマッチします。
@@ -517,7 +537,7 @@ export const CheckMetaDialog = ({
                                     </CodeLineWrapper>
                                     <BlankLineWrapper />
                                     <ComentLineWrapper>
-                                      {'// '}否定の先読みを使用した正規表現
+                                      {'// '}正当な郵便番号にマッチする正規表現
                                     </ComentLineWrapper>
                                     <ComentLineWrapper>
                                       {'// '}ターゲット文字列が0{'{'}3{'}'}-0{'{'}4{'}'}にマッチしない場合、否定の先読みが成功します。
@@ -537,6 +557,64 @@ export const CheckMetaDialog = ({
                                     </CodeLineWrapper>
                                     <CodeLineWrapper>
                                       console.<CodeBlueSpan>log</CodeBlueSpan>(target_2.<CodeBlueSpan>match</CodeBlueSpan>(regex_pattern)); <CodeComentSpan>{'// => '} ['171-0022']</CodeComentSpan>
+                                    </CodeLineWrapper>
+                                  </CodeBlockDiv>
+                                </CustomCodeBlockWrapper>
+                              </>
+                          }
+                          {
+                            row.example === 'ターゲット文字列がhttps://www.regex-hunting.com/gamesの場合' &&
+                              <>
+                                <CustomCodeBlockWrapper>
+                                  <CodeBlockDiv> 
+                                    <CodeLineWrapper>
+                                      <CodeRedSpan>const</CodeRedSpan> target <CodeYellowSpan>=</CodeYellowSpan> <CodeYellowSpan>'https://www.regex-hunting.com/games'</CodeYellowSpan>;
+                                    </CodeLineWrapper>
+                                    <BlankLineWrapper />
+                                    <ComentLineWrapper>
+                                      {'// '}www以降にマッチする正規表現
+                                    </ComentLineWrapper>
+                                    <ComentLineWrapper>
+                                      {'// '}後読みでhttps://という文字列にマッチした位置から、[-\/a-z]+がマッチするかを試行します。
+                                    </ComentLineWrapper>
+                                    <CodeLineWrapper>
+                                      <CodeRedSpan>const</CodeRedSpan> regex_pattern <CodeYellowSpan>=</CodeYellowSpan> <CodeYellowSpan>/(?{'<'}=https:\/\/)[-\/\.a-z]+/g</CodeYellowSpan>;
+                                    </CodeLineWrapper>
+                                    <BlankLineWrapper />
+                                    <ComentLineWrapper>
+                                      {'// '}www以降を取得できます。
+                                    </ComentLineWrapper>
+                                    <CodeLineWrapper>
+                                      console.<CodeBlueSpan>log</CodeBlueSpan>(target.<CodeBlueSpan>match</CodeBlueSpan>(regex_pattern)); <CodeComentSpan>{'// => '}['www.regex-hunting.com/games']</CodeComentSpan>
+                                    </CodeLineWrapper>
+                                  </CodeBlockDiv>
+                                </CustomCodeBlockWrapper>
+                              </>
+                          }
+                          {
+                            row.example === 'ターゲット文字列がReact17.0 React16.0 React15.6の場合' &&
+                              <>
+                                <CustomCodeBlockWrapper>
+                                  <CodeBlockDiv> 
+                                    <CodeLineWrapper>
+                                      <CodeRedSpan>const</CodeRedSpan> target <CodeYellowSpan>=</CodeYellowSpan> <CodeYellowSpan>'React17.0 React16.0 React15.6'</CodeYellowSpan>;
+                                    </CodeLineWrapper>
+                                    <BlankLineWrapper />
+                                    <ComentLineWrapper>
+                                      {'// '}最新バージョンのReactにマッチする正規表現
+                                    </ComentLineWrapper>
+                                    <ComentLineWrapper>
+                                      {'// '}全てのReactのバージョンにマッチした後、
+                                    </ComentLineWrapper>
+                                    <ComentLineWrapper>
+                                      {'// '}否定の後読みによって、マッチした文字列の末尾が条件を満たすかチェックします。
+                                    </ComentLineWrapper>
+                                    <CodeLineWrapper>
+                                      <CodeRedSpan>const</CodeRedSpan> regex_pattern <CodeYellowSpan>=</CodeYellowSpan> <CodeYellowSpan>/React1[5-7].\d(?{'<'}!1[5-6].\d)/g</CodeYellowSpan>;
+                                    </CodeLineWrapper>
+                                    <BlankLineWrapper />
+                                    <CodeLineWrapper>
+                                      console.<CodeBlueSpan>log</CodeBlueSpan>(target.<CodeBlueSpan>match</CodeBlueSpan>(regex_pattern)); <CodeComentSpan>{'// => '}['React17.0']</CodeComentSpan>
                                     </CodeLineWrapper>
                                   </CodeBlockDiv>
                                 </CustomCodeBlockWrapper>
