@@ -78,7 +78,8 @@ const SentenceWrapper = styled.div`
   font-style: normal;
   font-weight: normal;
   font-size: 1.1em;
-  text-align: left;
+  text-align: justify;
+  text-justify: inter-ideograph;
   margin-top: 4%;
   color: ${COLORS.BLACK};
 `;
