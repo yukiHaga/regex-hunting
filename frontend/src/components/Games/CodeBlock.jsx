@@ -25,6 +25,7 @@ const CodeBlockWrapper = styled.div`
   padding-bottom: 0.67%;
   padding-right: 1%;
   padding-left: 1%;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.2);
 `;
 
 const AnchorWrapper = styled.div`
