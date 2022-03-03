@@ -600,11 +600,8 @@ export const Games = () => {
                     targetSentence={gameState.targetSentence}
                     sampleAnswer={gameState.sampleAnswer}
                     monsterHp={gameState.monsterHp}
-                    monsterMaxHp={gameState.monsterMaxHp}
-                    monsterAttack={gameState.monsterAttack}
                     monsterDefence={gameState.monsterDefence}
                     questionJudgement={gameState.questionJudgement}
-                    flashDisplay={gameState.flashDisplay}
                     keyAvailable={gameState.keyAvailable}
                     userAttack={gameState.userAttack}
                     sentenceNum={gameState.sentenceNum}

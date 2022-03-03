@@ -72,56 +72,51 @@ const CodeBlockDiv = styled.div`
 
 // 日本語にmaxlengh属性は聞かない
 export const CodeBlock = ({
-  correct_questions,
+  correctQuestions,
   questions,
   setGameState,
-  target_sentence,
-  sample_answer,
-  monster_hp,
-  monster_max_hp,
-  monster_attack,
-  monster_defence,
-  question_judgement,
-  flash_display,
-  commentary,
-  key_available,
-  user_attack,
-  sentence_num,
-  game_description_open,
-  click_meta_open
+  targetSentence,
+  sampleAnswer,
+  monsterHp,
+  monsterDefence,
+  questionJudgement,
+  keyAvailable,
+  userAttack,
+  sentenceNum,
+  gameDescriptionOpen,
+  clickMetaOpen
 }) => {
 
   const [inputState, setCodeState] = useState("");
   const inputRefObject = useRef("");
 
-  // regex_objectを生成する関数
+  // regexObjectを生成する関数
   // テンプレートリテラルの括弧(を無くすと、なぜか機能しなくなったので、残しとく。
   const getRegexObject = (
-    input_regex
+    inputRegex
   ) => {
-    const input_regex_object = new RegExp(`(${input_regex})`, 'g');
-    return input_regex_object;
+    return new RegExp(`(${inputRegex})`, 'g');
   }
 
   // パターンに一致した文字列を配列として返す関数
   // matchAllはIteratorを返す
   // indexは、string[1]のように使うために必要
   const getMatchArray = (
-    target_sentence,
-    input_regex
+    targetSentence,
+    inputRegex
   ) => {
     try {
-      const regex_object = new RegExp(`${input_regex}`, 'g');
-      const matchesIterator = target_sentence.matchAll(regex_object);
-      const match_array = [];
+      const regexObject = new RegExp(`${inputRegex}`, 'g');
+      const matchesIterator = targetSentence.matchAll(regexObject);
+      const matchArray = [];
       for (const match of matchesIterator) {
-        match_array.push({
+        matchArray.push({
           match: match[0], 
           index: match.index, 
           input: match.input
         })
       }
-      return match_array;
+      return matchArray;
     } catch(e) {
       throw e;
     }
@@ -129,25 +124,25 @@ export const CodeBlock = ({
 
   // getMatchArrayの戻り値を、マッチした文字列を要素とした配列に加工する関数
   const getMatchWords = (
-    match_array
+    matchArray
   ) => {
-    return match_array.map((value) => value.match);
+    return matchArray.map((value) => value.match);
   };
 
   // マッチした配列と答えのマッチした配列が一致しているかを返す関数
   // ロジックに不備があったので、改善した
   // 正解判定のロジックなので、いつかまた修正が必要かもしれない
   const getQuestionJudgement = (
-    input_match_words,
-    sample_match_words
+    inputMatchWords,
+    sampleMatchWords
   ) => {
-    if(input_match_words.length > 0) {
+    if(inputMatchWords.length > 0) {
       if(
         Boolean(
-          !input_match_words.filter((value, index) => {
-            return !(sample_match_words[index] === value);
+          !inputMatchWords.filter((value, index) => {
+            return !(sampleMatchWords[index] === value);
           }).length
-      ) && input_match_words.length === sample_match_words.length) {
+      ) && inputMatchWords.length === sampleMatchWords.length) {
         return "correct";
       } else {
         return "progress";
@@ -158,65 +153,65 @@ export const CodeBlock = ({
   };
 
   const handlekeyPress = useCallback((e) => {
-    if(e.key !== 'Enter' && key_available === true) {
+    if(e.key !== 'Enter' && keyAvailable === true) {
       const audio = new Audio(TypeSound);
       audio.play();
       setCodeState((prev) => prev + e.key);
     }
   }, [
-    key_available
+    keyAvailable
   ]);
 
   const handleBackSpace = useCallback((e) => {
-    if(e.key === 'Backspace' && key_available === true) {
+    if(e.key === 'Backspace' && keyAvailable === true) {
       const audio = new Audio(BackSound);
       audio.play();
       setCodeState((prev) => prev.slice(0, -1));
     }
   }, [
-    key_available
+    keyAvailable
   ]);
 
-  // question_judgementがprogressならEnterを押せるようにする
+  // questionJudgementがprogressならEnterを押せるようにする
   const handleEnter = useCallback((e) => {
     try {
-      if(e.key === 'Enter' && question_judgement === 'progress' && key_available === true) {
-        const input_regex = inputRefObject.current.innerText;
-        const input_regex_object = getRegexObject(input_regex); 
-        const input_match_array = getMatchArray(target_sentence, input_regex);
-        const sample_match_array = getMatchArray(target_sentence, sample_answer);
-        const input_match_words = getMatchWords(input_match_array);
-        const sample_match_words = getMatchWords(sample_match_array);
-        const current_question_judgement = getQuestionJudgement(
-          input_match_words, 
-          sample_match_words
+      if(e.key === 'Enter' && questionJudgement === 'progress' && keyAvailable === true) {
+        const inputRegex = inputRefObject.current.innerText;
+        const inputRegexObject = getRegexObject(inputRegex); 
+        const inputMatchArray = getMatchArray(targetSentence, inputRegex);
+        const sampleMatchArray = getMatchArray(targetSentence, sampleAnswer);
+        const inputMatchWords = getMatchWords(inputMatchArray);
+        const sampleMatchWords = getMatchWords(sampleMatchArray);
+        const currentQuestionJudgement = getQuestionJudgement(
+          inputMatchWords, 
+          sampleMatchWords
         ); 
         const audio = new Audio(DecisionSound);
         audio.play();
-        if(current_question_judgement === "correct") {
-          correct_questions.push({
+        if(currentQuestionJudgement === "correct") {
+          correctQuestions.push({
             question: questions[0],
-            sentence_num: sentence_num,
-            input_regex: input_regex
+            sentenceNum: sentenceNum,
+            inputRegex: inputRegex
           });
           questions.shift();
-          const current_hp = monster_hp - calculateDamage(user_attack, monster_defence);
+          const currentHp = monsterHp - calculateDamage(userAttack, monsterDefence);
           const audio = new Audio(CutMonsterSound);
 
           // エンター押して正解した時に実行されるsetGameState
           setGameState((prev) => ({
             ...prev,
-            input_regex_object: input_regex_object,
-            match_array: input_match_array,
-            question_judgement: current_question_judgement,
-            correct_questions: prev.correct_questions,
+            inputRegexObject: inputRegexObject,
+            matchArray: inputMatchArray,
+            questionJudgement: currentQuestionJudgement,
+            correctQuestions: prev.correctQuestions,
             questions: prev.questions,
-            monster_hp: current_hp,
-            flash_display: true,
-            flash_title: "Good",
-            commentary: prev.next_commentary,
-            next_commentary: prev?.questions["0"]?.commentary || "no_next_commentary",
-            key_available: false,
+            monsterHp: currentHp,
+            flashDisplay: true,
+            flashTitle: "Good",
+            commentary: prev.nextCommentary,
+            nextCommentary: prev?.questions["0"]?.commentary || "no_next_commentary",
+            keyAvailable: false,
           }));
           audio.play();
           setCodeState("");
@@ -224,8 +219,8 @@ export const CodeBlock = ({
           // エンター押して不正解の時に実行されるsetGameState
           setGameState((prev) => ({
             ...prev,
-            input_regex_object: input_regex_object,
-            match_array: input_match_array,
+            inputRegexObject: inputRegexObject,
+            matchArray: inputMatchArray,
           }));
         }
       }
@@ -234,24 +229,24 @@ export const CodeBlock = ({
       audio.play();
     }
   }, [
-    correct_questions,
-    key_available,
-    monster_defence,
-    monster_hp,
-    question_judgement,
+    correctQuestions,
+    keyAvailable,
+    monsterDefence,
+    monsterHp,
+    questionJudgement,
     questions,
-    sample_answer,
-    sentence_num,
+    sampleAnswer,
+    sentenceNum,
     setGameState,
-    target_sentence,
-    user_attack,
+    targetSentence,
+    userAttack,
   ]);
 
   // イベントリスナー
   useEffect(() => {
-    // game_description_openがfalseかつclick_meta_openがfalseの時に実行される
+    // gameDescriptionOpenがfalseかつclickMetaOpenがfalseの時に実行される
     // つまり、スライド一覧とメタ文字一覧のダイアログが開いていないとき、if文の条件式がtrueになる
-    if(!game_description_open && !click_meta_open) {
+    if(!gameDescriptionOpen && !clickMetaOpen) {
       // 入力をコントロールするイベントリスナー
       document.addEventListener("keypress", handlekeyPress);
 
@@ -275,19 +270,19 @@ export const CodeBlock = ({
     handlekeyPress,
     handleBackSpace,
     handleEnter,
-    game_description_open,
-    click_meta_open
+    gameDescriptionOpen,
+    clickMetaOpen
   ]);
 
-  // question_judgementがfalseの時に実行される処理
+  // questionJudgementがfalseの時に実行される処理
   // この処理のおかげで、時間内に解けなかった時、
   // コードブロックを初期化してくれる
   useEffect(() => {
-    if(question_judgement === 'incorrect') {
+    if(questionJudgement === 'incorrect') {
       setCodeState("");
     }
   },[
-    question_judgement
+    questionJudgement
   ]);
 
   return (

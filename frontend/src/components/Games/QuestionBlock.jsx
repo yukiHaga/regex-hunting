@@ -176,9 +176,9 @@ export const QuestionBlock = ({
           nextTargetSentence: prev.questions["1"].target_sentence,
           hint: nextHint,
           nextHint: prev.questions["1"].hint,
-          key_available: true,
-          first_appearance: false,
-          time_active: true,
+          keyAvailable: true,
+          firstAppearance: false,
+          timeActive: true,
           gameResult: "progress"
         }));
       }, 3000);
@@ -205,8 +205,8 @@ export const QuestionBlock = ({
       setGameState((prev) => ({
         ...prev,
         sentence: `${getMonsterName(difficulty)}に10ダメージ`,
-        key_available: false,
-        time_active: false,
+        keyAvailable: false,
+        timeActive: false,
       }));
       if(correctQuestions.length === 10) {
         const timer = setTimeout(() => {
@@ -222,18 +222,18 @@ export const QuestionBlock = ({
             nextHint: "",
             questionJudgement: "collect",
             matchArray: [],
-            sample_answer: "no_sample_answer",
+            sampleAnswer: "no_sample_answer",
             inputRegexObject: {},
-            key_available: false,
+            keyAvailable: false,
             gameResult: "win",
-            time_active: false,
-            game_end_time: performance.now(),
+            timeActive: false,
+            gameEndTime: performance.now(),
             totalExperience: hasUser ? 
               totalExperience + getExperience(difficulty) : prev.totalExperience,
             temporaryExperience: hasUser ? 
               temporaryExperience + getExperience(difficulty) : prev.temporaryExperience,
-            dialog_gage_up: true,
-            flash_display: false
+            dialogGageUp: true,
+            flashDisplay: false
           }));
         }, 1000);
         return () => clearTimeout(timer);
@@ -249,13 +249,13 @@ export const QuestionBlock = ({
             nextTargetSentence: prev?.questions["1"]?.target_sentence || "no_target_sentence",
             questionJudgement: "progress",
             matchArray: [],
-            sample_answer: prev?.questions["0"]?.sample_answer || "no_sample_answer",
+            sampleAnswer: prev?.questions["0"]?.sample_answer || "no_sample_answer",
             hint: nextHint,
             nextHint: prev?.questions["1"]?.hint || "no_hint",
             inputRegexObject: {},
-            key_available: true,
-            time_active: true,
-            flash_display: false,
+            keyAvailable: true,
+            timeActive: true,
+            flashDisplay: false,
           }));
         }, 2000);
         return () => clearTimeout(timer);
@@ -284,8 +284,8 @@ export const QuestionBlock = ({
       setGameState((prev) => ({
         ...prev,
         sentence: memoDamageSentence,
-        key_available: false,
-        time_active: false
+        keyAvailable: false,
+        timeActive: false
       }));
       if(incorrectQuestions.length === memoIncorrectCount) {
         const timer = setTimeout(() => {
@@ -301,13 +301,13 @@ export const QuestionBlock = ({
             nextHint: "",
             questionJudgement: "incollect",
             matchArray: [],
-            sample_answer: "no_sample_answer",
+            sampleAnswer: "no_sample_answer",
             inputRegexObject: {},
-            key_available: false,
+            keyAvailable: false,
             gameResult: "lose",
-            time_active: false,
-            game_end_time: performance.now(),
-            flash_display: false,
+            timeActive: false,
+            gameEndTime: performance.now(),
+            flashDisplay: false,
           }));
         }, 1000);
         return () => clearTimeout(timer);
@@ -323,13 +323,13 @@ export const QuestionBlock = ({
             nextTargetSentence: prev?.questions["1"]?.target_sentence || "no_target_sentence",
             questionJudgement: "progress",
             matchArray: [],
-            sample_answer: prev?.questions["0"]?.sample_answer || "no_sample_answer",
+            sampleAnswer: prev?.questions["0"]?.sample_answer || "no_sample_answer",
             hint: nextHint,
             nextHint: prev?.questions["1"].hint || "no_hint",
             inputRegexObject: {},
-            key_available: true,
-            time_active: true,
-            flash_display: false
+            keyAvailable: true,
+            timeActive: true,
+            flashDisplay: false
           }));
         }, 2000);
         return () => clearTimeout(timer);
