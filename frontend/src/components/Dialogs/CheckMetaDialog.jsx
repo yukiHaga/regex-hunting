@@ -644,9 +644,6 @@ export const CheckMetaDialog = ({
                                       {'// '}最新バージョンのReactにマッチする正規表現
                                     </ComentLineWrapper>
                                     <ComentLineWrapper>
-                                      {'// '}全てのReactのバージョンにマッチした後、
-                                    </ComentLineWrapper>
-                                    <ComentLineWrapper>
                                       {'// '}否定の後読みによって、マッチした文字列の末尾が条件を満たすかチェックします。
                                     </ComentLineWrapper>
                                     <CodeLineWrapper>
