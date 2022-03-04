@@ -303,14 +303,14 @@ export const ElementaryGameDescriptionDialog = ({
                             {'//'} [A-Z][a-zA-Z]+は、JavaScript, React, TypeScriptにマッチする正規表現です。
                           </ComentLineWrapper>
                           <CodeLineWrapper>
-                            <CodeRedSpan>const</CodeRedSpan> regex_pattern <CodeYellowSpan>=</CodeYellowSpan> <CodeYellowSpan>/[A-Z][a-zA-Z]+/g</CodeYellowSpan>;
+                            <CodeRedSpan>const</CodeRedSpan> regex <CodeYellowSpan>=</CodeYellowSpan> <CodeYellowSpan>/[A-Z][a-zA-Z]+/g</CodeYellowSpan>;
                           </CodeLineWrapper>
                           <BlankLineWrapper />
                           <ComentLineWrapper>
                             {'//'} matchメソッドを用いることで、文字列中から正規表現を満たす文字列を取得できます。
                           </ComentLineWrapper>
                           <CodeLineWrapper>
-                            console.<CodeBlueSpan>log</CodeBlueSpan>(target.<CodeBlueSpan>match</CodeBlueSpan>(regex_pattern)); <CodeComentSpan>{'//'} => [ 'JavaScript', 'React', 'TypeScript' ]</CodeComentSpan>
+                            console.<CodeBlueSpan>log</CodeBlueSpan>(target.<CodeBlueSpan>match</CodeBlueSpan>(regex)); <CodeComentSpan>{'//'} => [ 'JavaScript', 'React', 'TypeScript' ]</CodeComentSpan>
                           </CodeLineWrapper>
                         </CodeBlockDiv>
                       </SpecialCodeBlockWrapper>
@@ -325,14 +325,14 @@ export const ElementaryGameDescriptionDialog = ({
                             {'//'} 以下の{'/.../g'}の...にある[acz#]は、a, c, z, #のどれか1文字にマッチする正規表現です。
                           </ComentLineWrapper>
                           <CodeLineWrapper>
-                            <CodeRedSpan>const</CodeRedSpan> regex_pattern_1 <CodeYellowSpan>=</CodeYellowSpan> <CodeYellowSpan>/[acz#]/g</CodeYellowSpan>;
+                            <CodeRedSpan>const</CodeRedSpan> regex1 <CodeYellowSpan>=</CodeYellowSpan> <CodeYellowSpan>/[acz#]/g</CodeYellowSpan>;
                           </CodeLineWrapper>
                           <BlankLineWrapper />
                           <ComentLineWrapper>
                             {'//'} 以下の{'/.../g'}の...にある[a-z#%]は、aからz, #, %のどれか1文字にマッチする正規表現です。
                           </ComentLineWrapper>
                           <CodeLineWrapper>
-                            <CodeRedSpan>const</CodeRedSpan> regex_pattern_2 <CodeYellowSpan>=</CodeYellowSpan> <CodeYellowSpan>/[a-z#%]/g</CodeYellowSpan>;
+                            <CodeRedSpan>const</CodeRedSpan> regex2 <CodeYellowSpan>=</CodeYellowSpan> <CodeYellowSpan>/[a-z#%]/g</CodeYellowSpan>;
                           </CodeLineWrapper>
                         </CodeBlockDiv>
                       </CodeBlockWrapper>
@@ -351,11 +351,11 @@ export const ElementaryGameDescriptionDialog = ({
                             {'//'} gr[ae]yは、gray, greyにマッチする正規表現です。
                           </ComentLineWrapper>
                           <CodeLineWrapper>
-                            <CodeRedSpan>const</CodeRedSpan> regex_pattern <CodeYellowSpan>=</CodeYellowSpan> <CodeYellowSpan>/gr[ae]y/g</CodeYellowSpan>;
+                            <CodeRedSpan>const</CodeRedSpan> regex <CodeYellowSpan>=</CodeYellowSpan> <CodeYellowSpan>/gr[ae]y/g</CodeYellowSpan>;
                           </CodeLineWrapper>
                           <BlankLineWrapper />
                           <CodeLineWrapper>
-                            console.<CodeBlueSpan>log</CodeBlueSpan>(target.<CodeBlueSpan>match</CodeBlueSpan>(regex_pattern)); <CodeComentSpan>{'//'} => [ 'gray', 'grey' ]</CodeComentSpan>
+                            console.<CodeBlueSpan>log</CodeBlueSpan>(target.<CodeBlueSpan>match</CodeBlueSpan>(regex)); <CodeComentSpan>{'//'} => [ 'gray', 'grey' ]</CodeComentSpan>
                           </CodeLineWrapper>
                         </CodeBlockDiv>
                       </CodeBlockWrapper>

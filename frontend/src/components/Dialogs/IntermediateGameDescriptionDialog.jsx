@@ -308,14 +308,14 @@ export const IntermediateGameDescriptionDialog = ({
                             {'//'} (メラ)+は、メラ, メラメラ, メラメラメラにマッチする正規表現です。
                           </ComentLineWrapper>
                           <CodeLineWrapper>
-                            <CodeRedSpan>const</CodeRedSpan> regex_pattern <CodeYellowSpan>=</CodeYellowSpan> <CodeYellowSpan>/(メラ)+/g</CodeYellowSpan>;
+                            <CodeRedSpan>const</CodeRedSpan> regex <CodeYellowSpan>=</CodeYellowSpan> <CodeYellowSpan>/(メラ)+/g</CodeYellowSpan>;
                           </CodeLineWrapper>
                           <BlankLineWrapper />
                           <ComentLineWrapper>
                             {'//'} matchメソッドを用いることで、文字列中から正規表現を満たす文字列を取得できます。
                           </ComentLineWrapper>
                           <CodeLineWrapper>
-                            console.<CodeBlueSpan>log</CodeBlueSpan>(target.<CodeBlueSpan>match</CodeBlueSpan>(regex_pattern)); <CodeComentSpan>{'//'} => ['メラ', 'メラメラ', 'メラメラメラ']</CodeComentSpan>
+                            console.<CodeBlueSpan>log</CodeBlueSpan>(target.<CodeBlueSpan>match</CodeBlueSpan>(regex)); <CodeComentSpan>{'//'} => ['メラ', 'メラメラ', 'メラメラメラ']</CodeComentSpan>
                           </CodeLineWrapper>
                         </CodeBlockDiv>
                       </CodeBlockWrapper>
@@ -334,14 +334,14 @@ export const IntermediateGameDescriptionDialog = ({
                             {'//'} environ?mentは、environment enviromentにマッチする正規表現です。
                           </ComentLineWrapper>
                           <CodeLineWrapper>
-                            <CodeRedSpan>const</CodeRedSpan> regex_pattern <CodeYellowSpan>=</CodeYellowSpan> <CodeYellowSpan>/environ?ment/g</CodeYellowSpan>;
+                            <CodeRedSpan>const</CodeRedSpan> regex <CodeYellowSpan>=</CodeYellowSpan> <CodeYellowSpan>/environ?ment/g</CodeYellowSpan>;
                           </CodeLineWrapper>
                           <BlankLineWrapper />
                           <ComentLineWrapper>
                             {'//'} matchメソッドを用いることで、文字列中から正規表現を満たす文字列を取得できます。
                           </ComentLineWrapper>
                           <CodeLineWrapper>
-                            console.<CodeBlueSpan>log</CodeBlueSpan>(target.<CodeBlueSpan>match</CodeBlueSpan>(regex_pattern)); <CodeComentSpan>{'//'} => ['environment', 'enviroment']</CodeComentSpan>
+                            console.<CodeBlueSpan>log</CodeBlueSpan>(target.<CodeBlueSpan>match</CodeBlueSpan>(regex)); <CodeComentSpan>{'//'} => ['environment', 'enviroment']</CodeComentSpan>
                           </CodeLineWrapper>
                         </CodeBlockDiv>
                       </CodeBlockWrapper>
@@ -357,17 +357,17 @@ export const IntermediateGameDescriptionDialog = ({
                           </CodeLineWrapper>
                           <BlankLineWrapper />
                           <CodeLineWrapper>
-                            <CodeRedSpan>const</CodeRedSpan> regex_pattern_1 <CodeYellowSpan>=</CodeYellowSpan> <CodeYellowSpan>/co*k/g</CodeYellowSpan>; <CodeComentSpan>{'//'} co*kは、ck cook coook cooookにマッチする正規表現</CodeComentSpan>
+                            <CodeRedSpan>const</CodeRedSpan> regex1 <CodeYellowSpan>=</CodeYellowSpan> <CodeYellowSpan>/co*k/g</CodeYellowSpan>; <CodeComentSpan>{'//'} co*kは、ck cook coook cooookにマッチする正規表現</CodeComentSpan>
                           </CodeLineWrapper>
                           <CodeLineWrapper>
-                            <CodeRedSpan>const</CodeRedSpan> regex_pattern_2 <CodeYellowSpan>=</CodeYellowSpan> <CodeYellowSpan>/co+k/g</CodeYellowSpan>; <CodeComentSpan>{'//'} co+kは、cook coook cooookにマッチする正規表現</CodeComentSpan>
+                            <CodeRedSpan>const</CodeRedSpan> regex2 <CodeYellowSpan>=</CodeYellowSpan> <CodeYellowSpan>/co+k/g</CodeYellowSpan>; <CodeComentSpan>{'//'} co+kは、cook coook cooookにマッチする正規表現</CodeComentSpan>
                           </CodeLineWrapper>
                           <BlankLineWrapper />
                           <CodeLineWrapper>
-                            console.<CodeBlueSpan>log</CodeBlueSpan>(target.<CodeBlueSpan>match</CodeBlueSpan>(regex_pattern_1)); <CodeComentSpan>{'//'} => ['ck', 'cook', 'coook', 'cooook']</CodeComentSpan>
+                            console.<CodeBlueSpan>log</CodeBlueSpan>(target.<CodeBlueSpan>match</CodeBlueSpan>(regex1)); <CodeComentSpan>{'//'} => ['ck', 'cook', 'coook', 'cooook']</CodeComentSpan>
                           </CodeLineWrapper>
                           <CodeLineWrapper>
-                            console.<CodeBlueSpan>log</CodeBlueSpan>(target.<CodeBlueSpan>match</CodeBlueSpan>(regex_pattern_2)); <CodeComentSpan>{'//'} => ['cook', 'coook', 'cooook']</CodeComentSpan>
+                            console.<CodeBlueSpan>log</CodeBlueSpan>(target.<CodeBlueSpan>match</CodeBlueSpan>(regex2)); <CodeComentSpan>{'//'} => ['cook', 'coook', 'cooook']</CodeComentSpan>
                           </CodeLineWrapper>
                         </CodeBlockDiv>
                       </CodeBlockWrapper>
@@ -383,17 +383,17 @@ export const IntermediateGameDescriptionDialog = ({
                           </CodeLineWrapper>
                           <BlankLineWrapper />
                           <CodeLineWrapper>
-                            <CodeRedSpan>const</CodeRedSpan> regex_pattern_1 <CodeYellowSpan>=</CodeYellowSpan> <CodeYellowSpan>/\d{'{'}3{'}'}/g</CodeYellowSpan>; <CodeComentSpan>{'//'} \d{'{'}3{'}'}は、3桁の数字にマッチする正規表現</CodeComentSpan>
+                            <CodeRedSpan>const</CodeRedSpan> regex1 <CodeYellowSpan>=</CodeYellowSpan> <CodeYellowSpan>/\d{'{'}3{'}'}/g</CodeYellowSpan>; <CodeComentSpan>{'//'} \d{'{'}3{'}'}は、3桁の数字にマッチする正規表現</CodeComentSpan>
                           </CodeLineWrapper>
                           <CodeLineWrapper>
-                            <CodeRedSpan>const</CodeRedSpan> regex_pattern_2 <CodeYellowSpan>=</CodeYellowSpan> <CodeYellowSpan>/\d{'{'}2,3{'}'}/g</CodeYellowSpan>; <CodeComentSpan>{'//'} \d{'{'}2,3{'}'}は、2桁~3桁の数字にマッチする正規表現</CodeComentSpan>
+                            <CodeRedSpan>const</CodeRedSpan> regex2 <CodeYellowSpan>=</CodeYellowSpan> <CodeYellowSpan>/\d{'{'}2,3{'}'}/g</CodeYellowSpan>; <CodeComentSpan>{'//'} \d{'{'}2,3{'}'}は、2桁~3桁の数字にマッチする正規表現</CodeComentSpan>
                           </CodeLineWrapper>
                           <BlankLineWrapper />
                           <CodeLineWrapper>
-                            console.<CodeBlueSpan>log</CodeBlueSpan>(target.<CodeBlueSpan>match</CodeBlueSpan>(regex_pattern_1)); <CodeComentSpan>{'//'} => ['150']</CodeComentSpan>
+                            console.<CodeBlueSpan>log</CodeBlueSpan>(target.<CodeBlueSpan>match</CodeBlueSpan>(regex1)); <CodeComentSpan>{'//'} => ['150']</CodeComentSpan>
                           </CodeLineWrapper>
                           <CodeLineWrapper>
-                            console.<CodeBlueSpan>log</CodeBlueSpan>(target.<CodeBlueSpan>match</CodeBlueSpan>(regex_pattern_2)); <CodeComentSpan>{'//'} => ['150', '15']</CodeComentSpan>
+                            console.<CodeBlueSpan>log</CodeBlueSpan>(target.<CodeBlueSpan>match</CodeBlueSpan>(regex2)); <CodeComentSpan>{'//'} => ['150', '15']</CodeComentSpan>
                           </CodeLineWrapper>
                         </CodeBlockDiv>
                       </CodeBlockWrapper>
@@ -409,17 +409,17 @@ export const IntermediateGameDescriptionDialog = ({
                           </CodeLineWrapper>
                           <BlankLineWrapper />
                           <CodeLineWrapper>
-                            <CodeRedSpan>const</CodeRedSpan> regex_pattern_1 <CodeYellowSpan>=</CodeYellowSpan> <CodeYellowSpan>/1(12)*/g</CodeYellowSpan>; <CodeComentSpan>{'//'} (12)*は、12の0回以上の繰り返しマッチを表します。</CodeComentSpan>
+                            <CodeRedSpan>const</CodeRedSpan> regex1 <CodeYellowSpan>=</CodeYellowSpan> <CodeYellowSpan>/1(12)*/g</CodeYellowSpan>; <CodeComentSpan>{'//'} (12)*は、12の0回以上の繰り返しマッチを表します。</CodeComentSpan>
                           </CodeLineWrapper>
                           <CodeLineWrapper>
-                            <CodeRedSpan>const</CodeRedSpan> regex_pattern_2 <CodeYellowSpan>=</CodeYellowSpan> <CodeYellowSpan>/112*/g</CodeYellowSpan>; <CodeComentSpan>{'//'} 2*は、2の0回以上の繰り返しマッチを表します。</CodeComentSpan>
+                            <CodeRedSpan>const</CodeRedSpan> regex2 <CodeYellowSpan>=</CodeYellowSpan> <CodeYellowSpan>/112*/g</CodeYellowSpan>; <CodeComentSpan>{'//'} 2*は、2の0回以上の繰り返しマッチを表します。</CodeComentSpan>
                           </CodeLineWrapper>
                           <BlankLineWrapper />
                           <CodeLineWrapper>
-                            console.<CodeBlueSpan>log</CodeBlueSpan>(target.<CodeBlueSpan>match</CodeBlueSpan>(regex_pattern_1)); <CodeComentSpan>{'//'} => ['1', '112', '11212', '1121212']</CodeComentSpan>
+                            console.<CodeBlueSpan>log</CodeBlueSpan>(target.<CodeBlueSpan>match</CodeBlueSpan>(regex1)); <CodeComentSpan>{'//'} => ['1', '112', '11212', '1121212']</CodeComentSpan>
                           </CodeLineWrapper>
                           <CodeLineWrapper>
-                            console.<CodeBlueSpan>log</CodeBlueSpan>(target.<CodeBlueSpan>match</CodeBlueSpan>(regex_pattern_2)); <CodeComentSpan>{'//'} => ['112', '112', '112']</CodeComentSpan>
+                            console.<CodeBlueSpan>log</CodeBlueSpan>(target.<CodeBlueSpan>match</CodeBlueSpan>(regex2)); <CodeComentSpan>{'//'} => ['112', '112', '112']</CodeComentSpan>
                           </CodeLineWrapper>
                         </CodeBlockDiv>
                       </CaptureCodeBlockWrapper>
