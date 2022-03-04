@@ -68,8 +68,8 @@ export const TitleSettingButton = ({
         ...prev,
         isOpenDialog: false,
         name: "",
-        release_date: "",
-        release_condition: "",
+        releaseDate: "",
+        releaseCondition: "",
         display: true,
         message: "称号を変更しました。"
       }));
@@ -79,8 +79,8 @@ export const TitleSettingButton = ({
           ...prev,
           isOpenDialog: false,
           name: "",
-          release_date: "",
-          release_condition: "",
+          releaseDate: "",
+          releaseCondition: "",
           display: e.response.data.errors.display,
           message: e.response.data.errors.message
         }));

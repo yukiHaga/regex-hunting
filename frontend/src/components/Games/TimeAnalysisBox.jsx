@@ -54,17 +54,17 @@ export const TimeAnalysisBox = memo(({
 }) => {
 
   // ゲージと分の関数
-  const format_min = useMemo(() => getMinute(time), [time]);
+  const formatMin = useMemo(() => getMinute(time), [time]);
 
   const [timeState, setTimeState] = useState(0);
 
   useEffect(() => {
     const timer = setTimeout(() => {
-      setTimeState(format_min);
+      setTimeState(formatMin);
     }, 400);
     return () => clearTimeout(timer);
   }, [
-    format_min
+    formatMin
   ])
 
   return (

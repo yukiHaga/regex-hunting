@@ -48,7 +48,7 @@ export const FastAnalysisBox = memo(({
 
   // 今月の最速タイムを出力する処理 
   // minutesに任意の難易度の最速タイムが入っている
-  const format_fastest_time =  useMemo(() => getClearTime(0, minutes), [minutes]);
+  const formatFastestTime =  useMemo(() => getClearTime(0, minutes), [minutes]);
 
   return (
     <>
@@ -81,7 +81,7 @@ export const FastAnalysisBox = memo(({
             最速タイム
           </ContentTitleWrapper>
           <ContentPercentWrapper>
-            {minutes ? format_fastest_time : "なし"}
+            {minutes ? formatFastestTime : "なし"}
           </ContentPercentWrapper>
         </CircularProgressbarWithChildren>
       </FastAnalysisBoxWrapper>
