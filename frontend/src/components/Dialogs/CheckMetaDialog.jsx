@@ -26,6 +26,8 @@ import ArrowRightIcon from '@mui/icons-material/ArrowRight';
 // PrevButton
 import ArrowLeftIcon from '@mui/icons-material/ArrowLeft';
 
+// ツールチップ
+import Tooltip from '@mui/material/Tooltip';
 import IconButton from '@mui/material/IconButton';
 
 // スライドアニメーション関係の関数
@@ -48,6 +50,7 @@ import { quantifiersRows } from './dataRows.js';
 import { groupsRows } from './dataRows.js';
 import { alternationsRows } from './dataRows.js';
 import { lookAroundsRows } from './dataRows.js';
+import { anchorsRows } from './dataRows.js';
 
 // 説明スライドのワーニングセンテンス
 import { WarningSentenceWrapper } from '../shared_style.js';
@@ -156,6 +159,8 @@ export const CheckMetaDialog = ({
 
   const initialState = {
     name: '文字クラス',
+    prevName: 'アンカー',
+    nextName: '量指定子',
     data: characterClassesRows,
     slideIn: false,
     slideOut: false,
@@ -168,6 +173,8 @@ export const CheckMetaDialog = ({
   // 右カーソルか左カーソルをクリックするとこれが呼び出される
   const handleDataRows = (
     name,
+    prevName,
+    nextName,
     data,
     direction
   ) => {
@@ -181,6 +188,8 @@ export const CheckMetaDialog = ({
       setRowState((prev) => ({
         ...prev,
         name: name,
+        prevName: prevName,
+        nextName: nextName,
         data: data,
         slideIn: true,
         slideOut: false,
@@ -193,14 +202,26 @@ export const CheckMetaDialog = ({
   // そのため、defaultは上級の関数が実行される
   const handleLeftArrow = ({name}) => {
     switch (name){
+      case '文字クラス':
+        handleDataRows('アンカー', '先後読み', '文字クラス', anchorsRows, 'right');
+        break;
       case '量指定子':
-        handleDataRows('文字クラス', characterClassesRows, 'right')
+        handleDataRows('文字クラス', 'アンカー', '量指定子', characterClassesRows, 'right');
         break;
       case 'キャプチャグループ':
-        handleDataRows('量指定子', quantifiersRows, 'right')
+        handleDataRows('量指定子', '文字クラス', 'キャプチャグループ', quantifiersRows, 'right');
+        break;
+      case '選択':
+        handleDataRows('キャプチャグループ', '量指定子', '選択', groupsRows, 'right');
+        break;
+      case '先後読み':
+        handleDataRows('選択', 'キャプチャグループ', '先後読み', alternationsRows, 'right');
+        break;
+      case 'アンカー':
+        handleDataRows('先後読み', '選択', 'アンカー', lookAroundsRows, 'right');
         break;
       default:
-        handleDataRows('文字クラス', characterClassesRows, 'right')
+        handleDataRows('文字クラス', 'アンカー', '量指定子', characterClassesRows, 'right');
     }
   };
 
@@ -208,19 +229,25 @@ export const CheckMetaDialog = ({
   const handleRightArrow = ({name}) => {
     switch (name){
       case '文字クラス':
-        handleDataRows('量指定子', quantifiersRows, 'left');
+        handleDataRows('量指定子', '文字クラス', 'キャプチャグループ', quantifiersRows, 'left');
         break;
       case '量指定子':
-        handleDataRows('キャプチャグループ', groupsRows, 'left');
+        handleDataRows('キャプチャグループ', '量指定子', '選択', groupsRows, 'left');
         break;
       case 'キャプチャグループ':
-        handleDataRows('選択', alternationsRows, 'left');
+        handleDataRows('選択', 'キャプチャグループ', '先後読み', alternationsRows, 'left');
         break;
       case '選択':
-        handleDataRows('先後読み', lookAroundsRows, 'left');
+        handleDataRows('先後読み', '選択', 'アンカー', lookAroundsRows, 'left');
+        break;
+      case '先後読み':
+        handleDataRows('アンカー', '先後読み', '文字クラス', anchorsRows, 'left');
+        break;
+      case 'アンカー':
+        handleDataRows('文字クラス', 'アンカー', '量指定子', characterClassesRows, 'left');
         break;
       default:
-        handleDataRows('量指定子', quantifiersRows, 'left');
+        handleDataRows('量指定子', '文字クラス', 'キャプチャグループ', quantifiersRows, 'left');
     }
   };
 
@@ -249,17 +276,22 @@ export const CheckMetaDialog = ({
             <Toolbar
               sx={{justifyContent: 'center'}}
             >
-              <IconButton
-                sx={{
-                  fontSize: '2.5em'
-                }}
+              <Tooltip 
+                title={rowState.prevName}
+                placement="top"
               >
-                <ArrowLeftIcon
-                  fontSize='inherit' 
-                  sx={{ color: `${COLORS.BLACK}` }}
-                  onClick={() => handleLeftArrow(rowState)}
-                />
-              </IconButton>
+                <IconButton
+                  sx={{
+                    fontSize: '2.5em'
+                  }}
+                >
+                  <ArrowLeftIcon
+                    fontSize='inherit' 
+                    sx={{ color: `${COLORS.BLACK}` }}
+                    onClick={() => handleLeftArrow(rowState)}
+                  />
+                </IconButton>
+              </Tooltip>
               <Typography
                 variant="h6"
                 id="tableTitle"
@@ -268,17 +300,22 @@ export const CheckMetaDialog = ({
               >
                 {rowState.name}
               </Typography>
-              <IconButton
-                sx={{
-                  fontSize: '2.5em'
-                }}
+              <Tooltip 
+                title={rowState.nextName}
+                placement="top"
               >
-                <ArrowRightIcon
-                  fontSize='inherit' 
-                  sx={{ color: `${COLORS.BLACK}` }}
-                  onClick={() => handleRightArrow(rowState)}
-                />
-              </IconButton>
+                <IconButton
+                  sx={{
+                    fontSize: '2.5em'
+                  }}
+                >
+                  <ArrowRightIcon
+                    fontSize='inherit' 
+                    sx={{ color: `${COLORS.BLACK}` }}
+                    onClick={() => handleRightArrow(rowState)}
+                  />
+                </IconButton>
+              </Tooltip>
             </Toolbar>
             <SlideContentWrapper
               slideIn={rowState.slideIn}
@@ -312,13 +349,13 @@ export const CheckMetaDialog = ({
                         <StyledTableDataCell>
                           {row.data}
                           {
-                            row.example === 'ターゲット文字列がhttps://www.regex-hunting.com/gamesの場合' &&
+                            row.example === 'ターゲット文字列内のwww以降にマッチさせたい場合' &&
                               <CustomWarningSentenceWrapper>   
                                 ※ IEとSafariは肯定の後読みをサポートしていません。その点を注意していただくようお願いします。
                               </CustomWarningSentenceWrapper>   
                           }
                           {
-                            row.example === 'ターゲット文字列がReact17.0 React16.0 React15.6の場合' &&
+                            row.example === 'ターゲット文字列内の最新バージョンのReactにマッチさせたい場合' &&
                               <CustomWarningSentenceWrapper>   
                                 ※ IEとSafariは否定の後読みをサポートしていません。その点を注意していただくようお願いします。
                               </CustomWarningSentenceWrapper>   
@@ -328,7 +365,7 @@ export const CheckMetaDialog = ({
                               <ExampleData>{`ex) ${row.example}`}</ExampleData>
                           }
                           {
-                            row.example === 'ターゲット文字列がsome <foo> <bar> new </bar> </foo> thingの場合' &&
+                            row.example === 'ターゲット文字列内の各タグにマッチさせたい場合' &&
                               <CustomCodeBlockWrapper>
                                 <CustomCodeBlockDiv> 
                                   <CodeLineWrapper>
@@ -376,7 +413,7 @@ export const CheckMetaDialog = ({
                               </>
                           }
                           {
-                            row.example === 'ターゲット文字列がThis is "<span>React</span>"の場合' &&
+                            row.example === 'ターゲット文字列内の"<span>React</span>"にマッチさせたい場合' &&
                               <CustomCodeBlockWrapper>
                                 <CustomCodeBlockDiv> 
                                   <CodeLineWrapper>
@@ -400,7 +437,7 @@ export const CheckMetaDialog = ({
                               </CustomCodeBlockWrapper>
                           }
                           {
-                            row.example === 'ターゲット文字列がThis is "Regex Hunting"の場合' &&
+                            row.example === 'ターゲット文字列内の"Regex Hunting"にマッチさせたい場合' &&
                               <CustomCodeBlockWrapper>
                                 <CustomCodeBlockDiv> 
                                   <CodeLineWrapper>
@@ -424,7 +461,7 @@ export const CheckMetaDialog = ({
                               </CustomCodeBlockWrapper>
                           }
                           {
-                            row.example === 'ターゲット文字列がThis is React This is JavaScriptの場合' &&
+                            row.example === 'ターゲット文字列内のThis is ReactとThis is JavaScriptにマッチさせたい場合' &&
                               <CustomCodeBlockWrapper>
                                 <CustomCodeBlockDiv> 
                                   <CodeLineWrapper>
@@ -462,7 +499,7 @@ export const CheckMetaDialog = ({
                               </CustomCodeBlockWrapper>
                           }
                           {
-                            row.example === 'ターゲット文字列がThis water(100ml) is 100yenの場合' &&
+                            row.example === 'ターゲット文字列内の金額の数字のみにマッチさせたい場合' &&
                               <CustomCodeBlockWrapper>
                                 <CustomCodeBlockDiv> 
                                   <CodeLineWrapper>
@@ -503,7 +540,7 @@ export const CheckMetaDialog = ({
                               </CustomCodeBlockWrapper>
                           }
                           {
-                            row.example === 'ターゲット文字列がThis water(500ml) is 100yenの場合' &&
+                            row.example === 'ターゲット文字列内のmlの数字のみにマッチさせたい場合' &&
                               <>
                                 <CustomCodeBlockWrapper>
                                   <CustomCodeBlockDiv> 
@@ -566,7 +603,7 @@ export const CheckMetaDialog = ({
                               </>
                           }
                           {
-                            row.example === 'ターゲット文字列がhttps://www.regex-hunting.com/gamesの場合' &&
+                            row.example === 'ターゲット文字列内のwww以降にマッチさせたい場合' &&
                               <>
                                 <CustomCodeBlockWrapper>
                                   <CustomCodeBlockDiv> 
@@ -595,7 +632,7 @@ export const CheckMetaDialog = ({
                               </>
                           }
                           {
-                            row.example === 'ターゲット文字列がReact17.0 React16.0 React15.6の場合' &&
+                            row.example === 'ターゲット文字列内の最新バージョンのReactにマッチさせたい場合' &&
                               <>
                                 <CustomCodeBlockWrapper>
                                   <CustomCodeBlockDiv> 
@@ -618,6 +655,123 @@ export const CheckMetaDialog = ({
                                     <BlankLineWrapper />
                                     <CodeLineWrapper>
                                       console.<CodeBlueSpan>log</CodeBlueSpan>(target.<CodeBlueSpan>match</CodeBlueSpan>(regex)); <CodeComentSpan>{'// => '}['React17.0']</CodeComentSpan>
+                                    </CodeLineWrapper>
+                                  </CustomCodeBlockDiv>
+                                </CustomCodeBlockWrapper>
+                              </>
+                          }
+                          {
+                            row.example === '先頭のcatという文字列にマッチさせたい場合' &&
+                              <>
+                                <CustomCodeBlockWrapper>
+                                  <CustomCodeBlockDiv> 
+                                    <CodeLineWrapper>
+                                      <CodeRedSpan>const</CodeRedSpan> target <CodeYellowSpan>=</CodeYellowSpan> <CodeYellowSpan>'cat dog cat'</CodeYellowSpan>;
+                                    </CodeLineWrapper>
+                                    <BlankLineWrapper />
+                                    <CodeLineWrapper>
+                                      <CodeRedSpan>const</CodeRedSpan> regex1 <CodeYellowSpan>=</CodeYellowSpan> <CodeYellowSpan>/cat/g</CodeYellowSpan>;
+                                    </CodeLineWrapper>
+                                    <BlankLineWrapper />
+                                    <ComentLineWrapper>
+                                      {'// '}先頭のcatにマッチする正規表現
+                                    </ComentLineWrapper>
+                                    <ComentLineWrapper>
+                                      {'// '}^でターゲット文字列の行頭にマッチした後、
+                                    </ComentLineWrapper>
+                                    <ComentLineWrapper>
+                                      {'// '}ターゲット文字列がcatにマッチするかを調べます。
+                                    </ComentLineWrapper>
+                                    <ComentLineWrapper>
+                                      {'// '}そのため、ターゲット文字列内の2個目のcatにはマッチしません。
+                                    </ComentLineWrapper>
+                                    <CodeLineWrapper>
+                                      <CodeRedSpan>const</CodeRedSpan> regex2 <CodeYellowSpan>=</CodeYellowSpan> <CodeYellowSpan>/^cat/g</CodeYellowSpan>;
+                                    </CodeLineWrapper>
+                                    <BlankLineWrapper />
+                                    <CodeLineWrapper>
+                                      console.<CodeBlueSpan>log</CodeBlueSpan>(target.<CodeBlueSpan>match</CodeBlueSpan>(regex1)); <CodeComentSpan>{'// => '}['cat', 'cat']</CodeComentSpan>
+                                    </CodeLineWrapper>
+                                    <CodeLineWrapper>
+                                      console.<CodeBlueSpan>log</CodeBlueSpan>(target.<CodeBlueSpan>match</CodeBlueSpan>(regex2)); <CodeComentSpan>{'// => '}['cat']</CodeComentSpan>
+                                    </CodeLineWrapper>
+                                  </CustomCodeBlockDiv>
+                                </CustomCodeBlockWrapper>
+                              </>
+                          }
+                          {
+                            row.example === '末尾のcatという文字列にマッチさせたい場合' &&
+                              <>
+                                <CustomCodeBlockWrapper>
+                                  <CustomCodeBlockDiv> 
+                                    <CodeLineWrapper>
+                                      <CodeRedSpan>const</CodeRedSpan> target <CodeYellowSpan>=</CodeYellowSpan> <CodeYellowSpan>'cat dog cat'</CodeYellowSpan>;
+                                    </CodeLineWrapper>
+                                    <BlankLineWrapper />
+                                    <CodeLineWrapper>
+                                      <CodeRedSpan>const</CodeRedSpan> regex1 <CodeYellowSpan>=</CodeYellowSpan> <CodeYellowSpan>/cat/g</CodeYellowSpan>;
+                                    </CodeLineWrapper>
+                                    <BlankLineWrapper />
+                                    <ComentLineWrapper>
+                                      {'// '}末尾のcatにマッチする正規表現
+                                    </ComentLineWrapper>
+                                    <ComentLineWrapper>
+                                      {'// '}ターゲット文字列がcatにマッチした後、
+                                    </ComentLineWrapper>
+                                    <ComentLineWrapper>
+                                      {'// '}$で、ターゲット文字列の末尾にマッチするかを調べます。
+                                    </ComentLineWrapper>
+                                    <ComentLineWrapper>
+                                      {'// '}そのため、ターゲット文字列内の1個目のcatにはマッチしません。
+                                    </ComentLineWrapper>
+                                    <CodeLineWrapper>
+                                      <CodeRedSpan>const</CodeRedSpan> regex2 <CodeYellowSpan>=</CodeYellowSpan> <CodeYellowSpan>/cat$/g</CodeYellowSpan>;
+                                    </CodeLineWrapper>
+                                    <BlankLineWrapper />
+                                    <CodeLineWrapper>
+                                      console.<CodeBlueSpan>log</CodeBlueSpan>(target.<CodeBlueSpan>match</CodeBlueSpan>(regex1)); <CodeComentSpan>{'// => '}['cat', 'cat']</CodeComentSpan>
+                                    </CodeLineWrapper>
+                                    <CodeLineWrapper>
+                                      console.<CodeBlueSpan>log</CodeBlueSpan>(target.<CodeBlueSpan>match</CodeBlueSpan>(regex2)); <CodeComentSpan>{'// => '}['cat']</CodeComentSpan>
+                                    </CodeLineWrapper>
+                                  </CustomCodeBlockDiv>
+                                </CustomCodeBlockWrapper>
+                              </>
+                          }
+                          {
+                            row.example === '単体のcatという文字列にマッチさせたい場合' &&
+                              <>
+                                <CustomCodeBlockWrapper>
+                                  <CustomCodeBlockDiv> 
+                                    <CodeLineWrapper>
+                                      <CodeRedSpan>const</CodeRedSpan> target <CodeYellowSpan>=</CodeYellowSpan> <CodeYellowSpan>'cat dog cats indicate'</CodeYellowSpan>;
+                                    </CodeLineWrapper>
+                                    <BlankLineWrapper />
+                                    <CodeLineWrapper>
+                                      <CodeRedSpan>const</CodeRedSpan> regex1 <CodeYellowSpan>=</CodeYellowSpan> <CodeYellowSpan>/cat/g</CodeYellowSpan>;
+                                    </CodeLineWrapper>
+                                    <BlankLineWrapper />
+                                    <ComentLineWrapper>
+                                      {'// '}単体のcatにマッチする正規表現
+                                    </ComentLineWrapper>
+                                    <ComentLineWrapper>
+                                      {'// '}\bで単語境界にマッチした後、catがマッチするかを調べます。
+                                    </ComentLineWrapper>
+                                    <ComentLineWrapper>
+                                      {'// '}その後、\bで単語境界にマッチさせます。
+                                    </ComentLineWrapper>
+                                    <ComentLineWrapper>
+                                      {'// '}そのため、catsやindicate内のcatにはマッチしません。
+                                    </ComentLineWrapper>
+                                    <CodeLineWrapper>
+                                      <CodeRedSpan>const</CodeRedSpan> regex2 <CodeYellowSpan>=</CodeYellowSpan> <CodeYellowSpan>/\bcat\b/g</CodeYellowSpan>;
+                                    </CodeLineWrapper>
+                                    <BlankLineWrapper />
+                                    <CodeLineWrapper>
+                                      console.<CodeBlueSpan>log</CodeBlueSpan>(target.<CodeBlueSpan>match</CodeBlueSpan>(regex1)); <CodeComentSpan>{'// => '}['cat', 'cat', 'cat']</CodeComentSpan>
+                                    </CodeLineWrapper>
+                                    <CodeLineWrapper>
+                                      console.<CodeBlueSpan>log</CodeBlueSpan>(target.<CodeBlueSpan>match</CodeBlueSpan>(regex2)); <CodeComentSpan>{'// => '}['cat']</CodeComentSpan>
                                     </CodeLineWrapper>
                                   </CustomCodeBlockDiv>
                                 </CustomCodeBlockWrapper>
