@@ -336,21 +336,21 @@ export const CheckMetaDialog = ({
                                   </CodeLineWrapper>
                                   <BlankLineWrapper />
                                   <CodeLineWrapper>
-                                    <CodeRedSpan>const</CodeRedSpan> regex_pattern_1 <CodeYellowSpan>=</CodeYellowSpan> <CodeYellowSpan>/{'<'}.*{'>'}/g</CodeYellowSpan>; <CodeComentSpan>{'//'} 最大量指定子を用いた正規表現</CodeComentSpan>
+                                    <CodeRedSpan>const</CodeRedSpan> regex1 <CodeYellowSpan>=</CodeYellowSpan> <CodeYellowSpan>/{'<'}.*{'>'}/g</CodeYellowSpan>; <CodeComentSpan>{'//'} 最大量指定子を用いた正規表現</CodeComentSpan>
                                   </CodeLineWrapper>
                                   <CodeLineWrapper>
-                                    <CodeRedSpan>const</CodeRedSpan> regex_pattern_2 <CodeYellowSpan>=</CodeYellowSpan> <CodeYellowSpan>/{'<'}.*?{'>'}/g</CodeYellowSpan>; <CodeComentSpan>{'//'} 最小量指定子を用いた正規表現</CodeComentSpan>
+                                    <CodeRedSpan>const</CodeRedSpan> regex2 <CodeYellowSpan>=</CodeYellowSpan> <CodeYellowSpan>/{'<'}.*?{'>'}/g</CodeYellowSpan>; <CodeComentSpan>{'//'} 最小量指定子を用いた正規表現</CodeComentSpan>
                                   </CodeLineWrapper>
                                   <BlankLineWrapper />
                                   <CodeLineWrapper>
-                                    console.<CodeBlueSpan>log</CodeBlueSpan>(target.<CodeBlueSpan>match</CodeBlueSpan>(regex_pattern_1));
+                                    console.<CodeBlueSpan>log</CodeBlueSpan>(target.<CodeBlueSpan>match</CodeBlueSpan>(regex1));
                                   </CodeLineWrapper>
                                   <ComentLineWrapper>
                                     {'// => '} ['{'<'}foo{'>'} {'<'}bar{'>'} new {'<'}/bar{'>'} {'<'}/foo{'>'}']
                                   </ComentLineWrapper>
                                   <BlankLineWrapper />
                                   <CodeLineWrapper>
-                                    console.<CodeBlueSpan>log</CodeBlueSpan>(target.<CodeBlueSpan>match</CodeBlueSpan>(regex_pattern_2));
+                                    console.<CodeBlueSpan>log</CodeBlueSpan>(target.<CodeBlueSpan>match</CodeBlueSpan>(regex2));
                                   </CodeLineWrapper>
                                   <ComentLineWrapper>
                                     {'// => '} ['{'<'}foo{'>'}', '{'<'}bar{'>'}', '{'<'}/bar{'>'}', '{'<'}/foo{'>'}']
@@ -387,11 +387,11 @@ export const CheckMetaDialog = ({
                                     {'// '}キャプチャした文字列を、{'\\'}1で呼び出します。
                                   </ComentLineWrapper>
                                   <CodeLineWrapper>
-                                    <CodeRedSpan>const</CodeRedSpan> regex_pattern <CodeYellowSpan>=</CodeYellowSpan> <CodeYellowSpan>/{'<'}(span){'>'}.*?{'<'}\/{'\\'}1{'>'}/g</CodeYellowSpan>;
+                                    <CodeRedSpan>const</CodeRedSpan> regex <CodeYellowSpan>=</CodeYellowSpan> <CodeYellowSpan>/{'<'}(span){'>'}.*?{'<'}\/{'\\'}1{'>'}/g</CodeYellowSpan>;
                                   </CodeLineWrapper>
                                   <BlankLineWrapper />
                                   <CodeLineWrapper>
-                                    console.<CodeBlueSpan>log</CodeBlueSpan>(target.<CodeBlueSpan>match</CodeBlueSpan>(regex_pattern));
+                                    console.<CodeBlueSpan>log</CodeBlueSpan>(target.<CodeBlueSpan>match</CodeBlueSpan>(regex));
                                   </CodeLineWrapper>
                                   <ComentLineWrapper>
                                     {'// => '} ['{'<'}span{'>'}React{'<'}/span{'>'}']
@@ -411,11 +411,11 @@ export const CheckMetaDialog = ({
                                     {'// '}名前付きキャプチャした文字列を、\k{'<'}quote{'>'}で呼び出します。
                                   </ComentLineWrapper>
                                   <CodeLineWrapper>
-                                    <CodeRedSpan>const</CodeRedSpan> regex_pattern <CodeYellowSpan>=</CodeYellowSpan> <CodeYellowSpan>/(?{'<'}quote{'>'}['"])(.*?)\k{'<'}quote{'>'}/g</CodeYellowSpan>;
+                                    <CodeRedSpan>const</CodeRedSpan> regex <CodeYellowSpan>=</CodeYellowSpan> <CodeYellowSpan>/(?{'<'}quote{'>'}['"])(.*?)\k{'<'}quote{'>'}/g</CodeYellowSpan>;
                                   </CodeLineWrapper>
                                   <BlankLineWrapper />
                                   <CodeLineWrapper>
-                                    console.<CodeBlueSpan>log</CodeBlueSpan>(target.<CodeBlueSpan>match</CodeBlueSpan>(regex_pattern));
+                                    console.<CodeBlueSpan>log</CodeBlueSpan>(target.<CodeBlueSpan>match</CodeBlueSpan>(regex));
                                   </CodeLineWrapper>
                                   <ComentLineWrapper>
                                     {'// => '} ['"Regex Hunting"']
@@ -435,25 +435,25 @@ export const CheckMetaDialog = ({
                                     {'// '}選択のみを使用します。
                                   </ComentLineWrapper>
                                   <CodeLineWrapper>
-                                    <CodeRedSpan>const</CodeRedSpan> regex_pattern_1 <CodeYellowSpan>=</CodeYellowSpan> <CodeYellowSpan>/This is React|JavaScript/g</CodeYellowSpan>;
+                                    <CodeRedSpan>const</CodeRedSpan> regex1 <CodeYellowSpan>=</CodeYellowSpan> <CodeYellowSpan>/This is React|JavaScript/g</CodeYellowSpan>;
                                   </CodeLineWrapper>
                                   <BlankLineWrapper />
                                   <ComentLineWrapper>
                                     {'// '}キャプチャグループと選択を使用します。
                                   </ComentLineWrapper>
                                   <CodeLineWrapper>
-                                    <CodeRedSpan>const</CodeRedSpan> regex_pattern_2 <CodeYellowSpan>=</CodeYellowSpan> <CodeYellowSpan>/This is (React|JavaScript)/g</CodeYellowSpan>;
+                                    <CodeRedSpan>const</CodeRedSpan> regex2 <CodeYellowSpan>=</CodeYellowSpan> <CodeYellowSpan>/This is (React|JavaScript)/g</CodeYellowSpan>;
                                   </CodeLineWrapper>
                                   <BlankLineWrapper />
                                   <CodeLineWrapper>
-                                    console.<CodeBlueSpan>log</CodeBlueSpan>(target.<CodeBlueSpan>match</CodeBlueSpan>(regex_pattern_1));
+                                    console.<CodeBlueSpan>log</CodeBlueSpan>(target.<CodeBlueSpan>match</CodeBlueSpan>(regex1));
                                   </CodeLineWrapper>
                                   <ComentLineWrapper>
                                     {'// => '} ['This is React', 'JavaScript']
                                   </ComentLineWrapper>
                                   <BlankLineWrapper />
                                   <CodeLineWrapper>
-                                    console.<CodeBlueSpan>log</CodeBlueSpan>(target.<CodeBlueSpan>match</CodeBlueSpan>(regex_pattern_2));
+                                    console.<CodeBlueSpan>log</CodeBlueSpan>(target.<CodeBlueSpan>match</CodeBlueSpan>(regex2));
                                   </CodeLineWrapper>
                                   <ComentLineWrapper>
                                     {'// => '} ['This is React', 'This is JavaScript']
@@ -470,7 +470,7 @@ export const CheckMetaDialog = ({
                                   </CodeLineWrapper>
                                   <BlankLineWrapper />
                                   <CodeLineWrapper>
-                                    <CodeRedSpan>const</CodeRedSpan> regex_pattern_1 <CodeYellowSpan>=</CodeYellowSpan> <CodeYellowSpan>/\d{'{'}3{'}'}/g</CodeYellowSpan>;
+                                    <CodeRedSpan>const</CodeRedSpan> regex1 <CodeYellowSpan>=</CodeYellowSpan> <CodeYellowSpan>/\d{'{'}3{'}'}/g</CodeYellowSpan>;
                                   </CodeLineWrapper>
                                   <BlankLineWrapper />
                                   <ComentLineWrapper>
@@ -483,21 +483,21 @@ export const CheckMetaDialog = ({
                                     {'// '}肯定の先読みでマッチした文字列は、全体の正規表現のマッチ結果に含まれません。
                                   </ComentLineWrapper>
                                   <CodeLineWrapper>
-                                    <CodeRedSpan>const</CodeRedSpan> regex_pattern_2 <CodeYellowSpan>=</CodeYellowSpan> <CodeYellowSpan>/\d{'{'}3{'}'}(?=yen)/g</CodeYellowSpan>;
+                                    <CodeRedSpan>const</CodeRedSpan> regex2 <CodeYellowSpan>=</CodeYellowSpan> <CodeYellowSpan>/\d{'{'}3{'}'}(?=yen)/g</CodeYellowSpan>;
                                   </CodeLineWrapper>
                                   <BlankLineWrapper />
                                   <ComentLineWrapper>
                                     {'// '}肯定の先読みを使用しない場合、金額以外の数字もマッチしてしまいます。
                                   </ComentLineWrapper>
                                   <CodeLineWrapper>
-                                    console.<CodeBlueSpan>log</CodeBlueSpan>(target.<CodeBlueSpan>match</CodeBlueSpan>(regex_pattern_1)); <CodeComentSpan>{'// => '} ['100', '100']</CodeComentSpan>
+                                    console.<CodeBlueSpan>log</CodeBlueSpan>(target.<CodeBlueSpan>match</CodeBlueSpan>(regex1)); <CodeComentSpan>{'// => '} ['100', '100']</CodeComentSpan>
                                   </CodeLineWrapper>
                                   <BlankLineWrapper />
                                   <ComentLineWrapper>
                                     {'// '}肯定の先読みを使用した場合、金額の数字のみにマッチさせることができます。
                                   </ComentLineWrapper>
                                   <CodeLineWrapper>
-                                    console.<CodeBlueSpan>log</CodeBlueSpan>(target.<CodeBlueSpan>match</CodeBlueSpan>(regex_pattern_2)); <CodeComentSpan>{'// => '} ['100']</CodeComentSpan> 
+                                    console.<CodeBlueSpan>log</CodeBlueSpan>(target.<CodeBlueSpan>match</CodeBlueSpan>(regex2)); <CodeComentSpan>{'// => '} ['100']</CodeComentSpan> 
                                   </CodeLineWrapper>
                                 </CustomCodeBlockDiv>
                               </CustomCodeBlockWrapper>
@@ -518,11 +518,11 @@ export const CheckMetaDialog = ({
                                       {'// '}3桁の数字の後ろにyenという文字列がないような3桁の数字にマッチします。
                                     </ComentLineWrapper>
                                     <CodeLineWrapper>
-                                      <CodeRedSpan>const</CodeRedSpan> regex_pattern <CodeYellowSpan>=</CodeYellowSpan> <CodeYellowSpan>/\d{'{'}3{'}'}(?!yen)/g</CodeYellowSpan>;
+                                      <CodeRedSpan>const</CodeRedSpan> regex <CodeYellowSpan>=</CodeYellowSpan> <CodeYellowSpan>/\d{'{'}3{'}'}(?!yen)/g</CodeYellowSpan>;
                                     </CodeLineWrapper>
                                     <BlankLineWrapper />
                                     <CodeLineWrapper>
-                                      console.<CodeBlueSpan>log</CodeBlueSpan>(target.<CodeBlueSpan>match</CodeBlueSpan>(regex_pattern)); <CodeComentSpan>{'// => '} ['500']</CodeComentSpan>
+                                      console.<CodeBlueSpan>log</CodeBlueSpan>(target.<CodeBlueSpan>match</CodeBlueSpan>(regex)); <CodeComentSpan>{'// => '} ['500']</CodeComentSpan>
                                     </CodeLineWrapper>
                                   </CustomCodeBlockDiv>
                                 </CustomCodeBlockWrapper>
@@ -533,10 +533,10 @@ export const CheckMetaDialog = ({
                                 <CustomCodeBlockWrapper>
                                   <CustomCodeBlockDiv> 
                                     <CodeLineWrapper>
-                                      <CodeRedSpan>const</CodeRedSpan> target_1 <CodeYellowSpan>=</CodeYellowSpan> <CodeYellowSpan>000-0000</CodeYellowSpan>; <CodeComentSpan>{'//'} 不正な郵便番号</CodeComentSpan>
+                                      <CodeRedSpan>const</CodeRedSpan> target1 <CodeYellowSpan>=</CodeYellowSpan> <CodeYellowSpan>000-0000</CodeYellowSpan>; <CodeComentSpan>{'//'} 不正な郵便番号</CodeComentSpan>
                                     </CodeLineWrapper>
                                     <CodeLineWrapper>
-                                      <CodeRedSpan>const</CodeRedSpan> target_2 <CodeYellowSpan>=</CodeYellowSpan> <CodeYellowSpan>171-0022</CodeYellowSpan>; <CodeComentSpan>{'//'} 正当な郵便番号</CodeComentSpan>
+                                      <CodeRedSpan>const</CodeRedSpan> target2 <CodeYellowSpan>=</CodeYellowSpan> <CodeYellowSpan>171-0022</CodeYellowSpan>; <CodeComentSpan>{'//'} 正当な郵便番号</CodeComentSpan>
                                     </CodeLineWrapper>
                                     <BlankLineWrapper />
                                     <ComentLineWrapper>
@@ -552,14 +552,14 @@ export const CheckMetaDialog = ({
                                       {'// '}否定の先読みが成功後、\d{'{'}3{'}'}-\d{'{'}4{'}'}がターゲット文字列にマッチするかを試行します。
                                     </ComentLineWrapper>
                                     <CodeLineWrapper>
-                                      <CodeRedSpan>const</CodeRedSpan> regex_pattern <CodeYellowSpan>=</CodeYellowSpan> <CodeYellowSpan>/(?!0{'{'}3{'}'}-0{'{'}4{'}'})\d{'{'}3{'}'}-\d{'{'}4{'}'}/g</CodeYellowSpan>;
+                                      <CodeRedSpan>const</CodeRedSpan> regex <CodeYellowSpan>=</CodeYellowSpan> <CodeYellowSpan>/(?!0{'{'}3{'}'}-0{'{'}4{'}'})\d{'{'}3{'}'}-\d{'{'}4{'}'}/g</CodeYellowSpan>;
                                     </CodeLineWrapper>
                                     <BlankLineWrapper />
                                     <CodeLineWrapper>
-                                      console.<CodeBlueSpan>log</CodeBlueSpan>(target_1.<CodeBlueSpan>match</CodeBlueSpan>(regex_pattern)); <CodeComentSpan>{'// => '} null</CodeComentSpan>
+                                      console.<CodeBlueSpan>log</CodeBlueSpan>(target1.<CodeBlueSpan>match</CodeBlueSpan>(regex)); <CodeComentSpan>{'// => '} null</CodeComentSpan>
                                     </CodeLineWrapper>
                                     <CodeLineWrapper>
-                                      console.<CodeBlueSpan>log</CodeBlueSpan>(target_2.<CodeBlueSpan>match</CodeBlueSpan>(regex_pattern)); <CodeComentSpan>{'// => '} ['171-0022']</CodeComentSpan>
+                                      console.<CodeBlueSpan>log</CodeBlueSpan>(target2.<CodeBlueSpan>match</CodeBlueSpan>(regex)); <CodeComentSpan>{'// => '} ['171-0022']</CodeComentSpan>
                                     </CodeLineWrapper>
                                   </CustomCodeBlockDiv>
                                 </CustomCodeBlockWrapper>
@@ -581,14 +581,14 @@ export const CheckMetaDialog = ({
                                       {'// '}後読みでhttps://という文字列にマッチした位置から、[-\/a-z]+がマッチするかを試行します。
                                     </ComentLineWrapper>
                                     <CodeLineWrapper>
-                                      <CodeRedSpan>const</CodeRedSpan> regex_pattern <CodeYellowSpan>=</CodeYellowSpan> <CodeYellowSpan>/(?{'<'}=https:\/\/)[-\/\.a-z]+/g</CodeYellowSpan>;
+                                      <CodeRedSpan>const</CodeRedSpan> regex <CodeYellowSpan>=</CodeYellowSpan> <CodeYellowSpan>/(?{'<'}=https:\/\/)[-\/\.a-z]+/g</CodeYellowSpan>;
                                     </CodeLineWrapper>
                                     <BlankLineWrapper />
                                     <ComentLineWrapper>
                                       {'// '}www以降を取得できます。
                                     </ComentLineWrapper>
                                     <CodeLineWrapper>
-                                      console.<CodeBlueSpan>log</CodeBlueSpan>(target.<CodeBlueSpan>match</CodeBlueSpan>(regex_pattern)); <CodeComentSpan>{'// => '}['www.regex-hunting.com/games']</CodeComentSpan>
+                                      console.<CodeBlueSpan>log</CodeBlueSpan>(target.<CodeBlueSpan>match</CodeBlueSpan>(regex)); <CodeComentSpan>{'// => '}['www.regex-hunting.com/games']</CodeComentSpan>
                                     </CodeLineWrapper>
                                   </CustomCodeBlockDiv>
                                 </CustomCodeBlockWrapper>
@@ -613,11 +613,11 @@ export const CheckMetaDialog = ({
                                       {'// '}否定の後読みによって、マッチした文字列の末尾が条件を満たすかチェックします。
                                     </ComentLineWrapper>
                                     <CodeLineWrapper>
-                                      <CodeRedSpan>const</CodeRedSpan> regex_pattern <CodeYellowSpan>=</CodeYellowSpan> <CodeYellowSpan>/React1[5-7].\d(?{'<'}!1[5-6].\d)/g</CodeYellowSpan>;
+                                      <CodeRedSpan>const</CodeRedSpan> regex <CodeYellowSpan>=</CodeYellowSpan> <CodeYellowSpan>/React1[5-7].\d(?{'<'}!1[5-6].\d)/g</CodeYellowSpan>;
                                     </CodeLineWrapper>
                                     <BlankLineWrapper />
                                     <CodeLineWrapper>
-                                      console.<CodeBlueSpan>log</CodeBlueSpan>(target.<CodeBlueSpan>match</CodeBlueSpan>(regex_pattern)); <CodeComentSpan>{'// => '}['React17.0']</CodeComentSpan>
+                                      console.<CodeBlueSpan>log</CodeBlueSpan>(target.<CodeBlueSpan>match</CodeBlueSpan>(regex)); <CodeComentSpan>{'// => '}['React17.0']</CodeComentSpan>
                                     </CodeLineWrapper>
                                   </CustomCodeBlockDiv>
                                 </CustomCodeBlockWrapper>
