@@ -111,8 +111,8 @@ export const ReleaseConditionDialog = ({
   isOpen,
   onClose,
   name,
-  release_date,
-  release_condition,
+  releaseDate,
+  releaseCondition,
   setMyPageState
 }) => {
 
@@ -123,7 +123,7 @@ export const ReleaseConditionDialog = ({
       maxWidth="xs"
     >
       <CustomDialogInnerWrapper 
-        release_date={release_date}
+        releaseDate={releaseDate}
         name={name}
       > 
         <BackToModalButtonWrapper>
@@ -136,14 +136,14 @@ export const ReleaseConditionDialog = ({
         </CustomDialogTitleWrapper> 
         <CustomDialogContent>
           <CustomDialogContentSentence>
-            {release_condition}
+            {releaseCondition}
           </CustomDialogContentSentence>
         </CustomDialogContent>
         <CustomDialogContentReleaseSentenceWrapper>
           <CustomDialogContentReleaseSentence>
             {
-              release_date ?
-                `解放日: ${release_date.replace(/-/g, '/')}`
+              releaseDate ?
+                `解放日: ${releaseDate.replace(/-/g, '/')}`
               :
                 '未解放'
             }
@@ -153,7 +153,7 @@ export const ReleaseConditionDialog = ({
           <TitleSettingButton 
             name={name}
             setMyPageState={setMyPageState}
-            disabled={!release_date}
+            disabled={!releaseDate}
           />
         </ButtonsWrapper>
       </CustomDialogInnerWrapper>

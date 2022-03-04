@@ -41,25 +41,25 @@ const ResultShareButtonTextWrapper = styled.div`
 
 export const ResultShareButton = ({
   difficulty,
-  game_result,
-  rank_up,
+  gameResult,
+  rankUp,
   rank,
-  clear_time
+  clearTime
 }) => {
 
   // Twitterカードのセンテンスを取得する関数
-  const getText = (difficulty, game_result, rank_up) => {
-    if(game_result === 'win' && !rank_up) {
-      return `${getMonsterName(difficulty)}の討伐に成功しました！ クリアタイムは${clear_time}です。`
-    } else if (game_result === 'lose' && !rank_up) {
+  const getText = (difficulty, gameResult, rankUp) => {
+    if(gameResult === 'win' && !rankUp) {
+      return `${getMonsterName(difficulty)}の討伐に成功しました！ クリアタイムは${clearTime}です。`
+    } else if (gameResult === 'lose' && !rankUp) {
       return `${getMonsterName(difficulty)}の討伐に失敗しました...`
-    } else if (game_result === 'win' && rank_up) {
+    } else if (gameResult === 'win' && rankUp) {
       return `ランクアップしました！現在のランクは${rank}です。`
     }
   };
 
   // 取得したセンテンスを変数textに代入
-  const text = getText(difficulty, game_result, rank_up);
+  const text = getText(difficulty, gameResult, rankUp);
 
   return (
     <>

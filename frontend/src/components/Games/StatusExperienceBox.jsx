@@ -30,21 +30,21 @@ const ExperienceGageWrapper = styled.div`
 
 // ExperienceGageのExperienceの幅を取り扱う関数
 const handleExperienceGage = (
-  temporary_experience,
-  maximum_experience_per_rank
+  temporaryExperience,
+  maximumExperiencePerRank
 ) => {
-  if(temporary_experience >= maximum_experience_per_rank) {
+  if(temporaryExperience >= maximumExperiencePerRank) {
     return '100%';
   } else {
-    return `${(temporary_experience / maximum_experience_per_rank) * 100}%`;
+    return `${(temporaryExperience / maximumExperiencePerRank) * 100}%`;
   }
 };
 
 const InnerExperienceGageWrapper = styled.div`
   width: ${({
-    temporary_experience,
-    maximum_experience_per_rank
-  }) => handleExperienceGage(temporary_experience, maximum_experience_per_rank)};
+    temporaryExperience,
+    maximumExperiencePerRank
+  }) => handleExperienceGage(temporaryExperience, maximumExperiencePerRank)};
   height: 10px;
   background-color: ${COLORS.EXPERIENCE};
   border-radius: 10px;
@@ -55,32 +55,32 @@ const InnerExperienceGageWrapper = styled.div`
 `;
 
 export const StatusExperienceBox = memo(({
-  total_experience,
-  maximum_experience_per_rank, 
-  temporary_experience,
+  totalExperience,
+  maximumExperiencePerRank, 
+  temporaryExperience,
 }) => {
 
   return (
     <>
       <ExperienceBoxWrapper>
         <ExperienceTextWrapper>
-          現在の経験値： { total_experience }
+          現在の経験値： { totalExperience }
         </ExperienceTextWrapper>
         <ExperienceGageWrapper>
           {
-            (temporary_experience / maximum_experience_per_rank) !== 0 &&
+            (temporaryExperience / maximumExperiencePerRank) !== 0 &&
               <InnerExperienceGageWrapper 
-                temporary_experience={temporary_experience}
-                maximum_experience_per_rank={maximum_experience_per_rank}
+                temporaryExperience={temporaryExperience}
+                maximumExperiencePerRank={maximumExperiencePerRank}
               />
           }
         </ExperienceGageWrapper>
         <ExperienceTextWrapper>
           ランクアップに必要な経験値： { 
-            temporary_experience >= maximum_experience_per_rank ?
+            temporaryExperience >= maximumExperiencePerRank ?
               0
             :
-              maximum_experience_per_rank - temporary_experience 
+              maximumExperiencePerRank - temporaryExperience 
           }
         </ExperienceTextWrapper>
       </ExperienceBoxWrapper>

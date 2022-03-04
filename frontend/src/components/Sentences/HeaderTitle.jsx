@@ -11,13 +11,13 @@ import { WIDTH } from '../../style_constants.js';
 import { BaseLink } from '../shared_style.js';
 
 const MainTitleImageCover = styled.img`
-  width: 18%;
-  height: auto;
+  width: 14vw;
+  height: 9vh;
   object-fit: contain;
   max-width: 100%;
-  height: auto;
   @media (max-width: ${WIDTH.MOBILE}) {
-    width: 40%;
+    width: 30vw;
+    height: 7vh;
   };
 `;
 

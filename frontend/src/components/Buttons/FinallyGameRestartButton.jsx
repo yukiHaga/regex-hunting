@@ -39,8 +39,8 @@ export const FinallyGameRestartButton = ({
   ) => {
     setGameState((prev) => ({
       ...prev,
-      game_description_open: false,
-      click_description_open: false
+      gameDescriptionOpen: false,
+      clickDescriptionOpen: false
     })); 
   };
 

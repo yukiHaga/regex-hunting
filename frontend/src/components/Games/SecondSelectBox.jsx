@@ -10,6 +10,8 @@ import ArrowRightIcon from '@mui/icons-material/ArrowRight';
 // PrevButton
 import ArrowLeftIcon from '@mui/icons-material/ArrowLeft';
 
+// ツールチップ
+import Tooltip from '@mui/material/Tooltip';
 import IconButton from '@mui/material/IconButton';
 
 // DescriptionWrapper 
@@ -34,19 +36,23 @@ const SecondSelectBoxSentenceWrapper = styled(DescriptionWrapper)`
 `;
 
 export const SecondSelectBox = ({
-  difficulty_month_title,
+  difficultyMonthTitle,
+  prevDifficultyMonthTitle,
+  nextDifficultyMonthTitle,
   setMyPageState,
-  this_month
+  thisMonth
 }) => {
 
   // 初級のデータを表示する関数
   const handleElementary = () => {
     setMyPageState((prev) => ({
       ...prev,
-      selected_total_time: prev.total_time_per_difficulty.elementary,
-      selected_game_clear_count: prev.game_clear_count_per_difficulty.elementary,
-      selected_fast_time: prev.fast_time_per_difficulty.elementary,
-      difficulty_month_title: `初級編(${this_month}月)`
+      selectedTotalTime: prev.totalTimePerDifficulty.elementary,
+      selectedGameClearCount: prev.gameClearCountPerDifficulty.elementary,
+      selectedFastTime: prev.fastTimePerDifficulty.elementary,
+      difficultyMonthTitle: `初級編(${thisMonth}月)`,
+      prevDifficultyMonthTitle: `上級編(${thisMonth}月)`,
+      nextDifficultyMonthTitle: `中級編(${thisMonth}月)`
     }));
   };
 
@@ -54,10 +60,12 @@ export const SecondSelectBox = ({
   const handleIntermediate = () => {
     setMyPageState((prev) => ({
       ...prev,
-      selected_total_time: prev.total_time_per_difficulty.intermediate,
-      selected_game_clear_count: prev.game_clear_count_per_difficulty.intermediate,
-      selected_fast_time: prev.fast_time_per_difficulty.intermediate,
-      difficulty_month_title: `中級編(${this_month}月)`
+      selectedTotalTime: prev.totalTimePerDifficulty.intermediate,
+      selectedGameClearCount: prev.gameClearCountPerDifficulty.intermediate,
+      selectedFastTime: prev.fastTimePerDifficulty.intermediate,
+      difficultyMonthTitle: `中級編(${thisMonth}月)`,
+      prevDifficultyMonthTitle: `初級編(${thisMonth}月)`,
+      nextDifficultyMonthTitle: `上級編(${thisMonth}月)`
     }));
   };
 
@@ -65,22 +73,24 @@ export const SecondSelectBox = ({
   const handleAdvanced = () => {
     setMyPageState((prev) => ({
       ...prev,
-      selected_total_time: prev.total_time_per_difficulty.advanced,
-      selected_game_clear_count: prev.game_clear_count_per_difficulty.advanced,
-      selected_fast_time: prev.fast_time_per_difficulty.advanced,
-      difficulty_month_title: `上級編(${this_month}月)`
+      selectedTotalTime: prev.totalTimePerDifficulty.advanced,
+      selectedGameClearCount: prev.gameClearCountPerDifficulty.advanced,
+      selectedFastTime: prev.fastTimePerDifficulty.advanced,
+      difficultyMonthTitle: `上級編(${thisMonth}月)`,
+      prevDifficultyMonthTitle: `中級編(${thisMonth}月)`,
+      nextDifficultyMonthTitle: `初級編(${thisMonth}月)`
     }));
   };
 
   // 左矢印のリンクを制御する関数
-  // difficulty_month_titleは初め初級が入る
+  // difficultyMonthTitleは初め初級が入る
   // そのため、defaultは上級の関数が実行される
-  const handleLeftArrow = (difficulty_month_title) => {
-    switch (difficulty_month_title){
-      case `中級編(${this_month}月)`:
+  const handleLeftArrow = (difficultyMonthTitle) => {
+    switch (difficultyMonthTitle){
+      case `中級編(${thisMonth}月)`:
         handleElementary();
         break;
-      case `上級編(${this_month}月)`:
+      case `上級編(${thisMonth}月)`:
         handleIntermediate(); 
         break;
       default:
@@ -89,14 +99,14 @@ export const SecondSelectBox = ({
   };
 
   // 右矢印のリンクを制御する関数
-  // difficulty_month_titleは初め初級が入る
+  // difficultyMonthTitleは初め初級が入る
   // そのため、defaultは中級の関数が実行される
-  const handleRightArrow = (difficulty_month_title) => {
-    switch (difficulty_month_title){
-      case `中級編(${this_month}月)`:
+  const handleRightArrow = (difficultyMonthTitle) => {
+    switch (difficultyMonthTitle){
+      case `中級編(${thisMonth}月)`:
         handleAdvanced();
         break;
-      case `上級編(${this_month}月)`:
+      case `上級編(${thisMonth}月)`:
         handleElementary();
         break;
       default:
@@ -106,31 +116,41 @@ export const SecondSelectBox = ({
 
   return (
     <TitleLineWrapper>
-      <IconButton
-        sx={{
-          fontSize: '2.5em'
-        }}
+      <Tooltip 
+        title={prevDifficultyMonthTitle}
+        placement="top"
       >
-        <ArrowLeftIcon
-          fontSize='inherit' 
-          sx={{ color: `${COLORS.BLACK}` }}
-          onClick={() => handleLeftArrow(difficulty_month_title)}
-        />
-      </IconButton>
+        <IconButton
+          sx={{
+            fontSize: '2.5em'
+          }}
+        >
+          <ArrowLeftIcon
+            fontSize='inherit' 
+            sx={{ color: `${COLORS.BLACK}` }}
+            onClick={() => handleLeftArrow(difficultyMonthTitle)}
+          />
+        </IconButton>
+      </Tooltip>
       <SecondSelectBoxSentenceWrapper>
-        {difficulty_month_title}
+        {difficultyMonthTitle}
       </SecondSelectBoxSentenceWrapper>
-      <IconButton
-        sx={{
-          fontSize: '2.5em'
-        }}
+      <Tooltip 
+        title={nextDifficultyMonthTitle}
+        placement="top"
       >
-        <ArrowRightIcon
-          fontSize='inherit' 
-          sx={{ color: `${COLORS.BLACK}` }}
-          onClick={() => handleRightArrow(difficulty_month_title)}
-        />
-      </IconButton>
+        <IconButton
+          sx={{
+            fontSize: '2.5em'
+          }}
+        >
+          <ArrowRightIcon
+            fontSize='inherit' 
+            sx={{ color: `${COLORS.BLACK}` }}
+            onClick={() => handleRightArrow(difficultyMonthTitle)}
+          />
+        </IconButton>
+      </Tooltip>
     </TitleLineWrapper>
   );
 }

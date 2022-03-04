@@ -40,8 +40,8 @@ export const FinallyGameStartButton = ({
   ) => {
     setGameState((prev) => ({
       ...prev,
-      game_description_open: false,
-      game_start_time: performance.now(),
+      gameDescriptionOpen: false,
+      gameStartTime: performance.now(),
     })); 
   };
 

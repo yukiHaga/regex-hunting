@@ -13,7 +13,7 @@ import { WIDTH } from '../../style_constants.js';
 const StartButtonWrapper = styled(RedRoundButton)`
   border-style: none;
   margin-top: 3%;
-  margin-bottom: 7%;
+  margin-bottom: 7.05%;
   box-shadow: 0 2px 4px rgba(0,0,0,0.3);
   transition: 0.3s;
   :hover {

@@ -80,8 +80,8 @@ const CustomFormControl = styled(FormControl)`
 
 const CustomFilledEmailInput = styled(FilledInput)`
   margin-bottom: ${({
-    errors_email_box
-  }) => typeof errors_email_box === 'undefined' && '5%' };
+    errorsEmailBox
+  }) => typeof errorsEmailBox === 'undefined' && '5%' };
 `;
 
 const PasswordResetsButtonWrapper = styled.div`
@@ -108,7 +108,7 @@ export const PasswordResets = () => {
     email: { 
       required: "メールアドレスを入力してください。", 
       pattern: {
-        value: /^[A-Za-z0-9]{1}[A-Za-z0-9_.-]*@{1}[A-Za-z0-9_.-]{1,}.[A-Za-z0-9]{1,}$/,
+        value: /^[A-Za-z0-9][A-Za-z0-9_.-]*@[A-Za-z0-9_.-]+.[A-Za-z0-9]+$/,
         message: "英数字, @, ドメインを含めて入力してください。"
       }
     }
@@ -157,7 +157,7 @@ export const PasswordResets = () => {
                       type="email"
                       id="email-component-filled"
                       label="email"
-                      errors_email_box={errors.EmailBox}
+                      errorsEmailBox={errors.EmailBox}
                     />
                   </CustomFormControl>              
                 )}

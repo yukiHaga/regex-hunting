@@ -17,9 +17,6 @@ import { useForm, Controller } from "react-hook-form";
 // Colors
 import { COLORS } from '../../style_constants.js';
 
-// Images
-import LoginImage from '../../images/login.svg';
-
 // Button
 import { LoginButton } from '../Buttons/LoginButton.jsx'
 import { OAuthLoginButton } from '../Buttons/OAuthLoginButton.jsx';
@@ -58,10 +55,24 @@ const CustomDialogInnerWrapper = styled.div`
   text-align: center;
 `;
 
-const CustomDialogTitleImage = styled.img`
-  width: 41%;
-  object-fit: contain;
-  padding: 2% 8%;
+// title
+const TitleWrapper = styled.div`
+  font-family: Raleway;
+  font-style: italic;
+  font-weight: bold;
+  font-size: 1.8em;
+  color: ${COLORS.SUB};
+  -webkit-text-stroke: 5px #030002;
+  text-stroke: 5px #030002;
+  position: relative;
+  padding-bottom: 2%;
+  padding-top: 1%;
+`;
+
+// fuchiue
+const Fuchiue = styled.span`
+  -webkit-text-stroke: 0;
+  position: absolute;
 `;
 
 const CustomForm = styled.form`
@@ -172,7 +183,7 @@ export const LoginDialog = ({
     >
       <CustomDialogInnerWrapper> 
         <CloseButton onClose={onClose} fontSize="small" /> 
-        <CustomDialogTitleImage src={LoginImage} alt="Login" />
+        <TitleWrapper><Fuchiue>Login</Fuchiue>Login</TitleWrapper>
         <DialogContent>
           <CustomForm onSubmit={handleSubmit(onSubmit)}>
             <Controller 
