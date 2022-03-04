@@ -10,6 +10,8 @@ import ArrowRightIcon from '@mui/icons-material/ArrowRight';
 // PrevButton
 import ArrowLeftIcon from '@mui/icons-material/ArrowLeft';
 
+// ツールチップ
+import Tooltip from '@mui/material/Tooltip';
 import IconButton from '@mui/material/IconButton';
 
 // DescriptionWrapper 
@@ -35,6 +37,8 @@ const SecondSelectBoxSentenceWrapper = styled(DescriptionWrapper)`
 
 export const SecondSelectBox = ({
   difficultyMonthTitle,
+  prevDifficultyMonthTitle,
+  nextDifficultyMonthTitle,
   setMyPageState,
   thisMonth
 }) => {
@@ -46,7 +50,9 @@ export const SecondSelectBox = ({
       selectedTotalTime: prev.totalTimePerDifficulty.elementary,
       selectedGameClearCount: prev.gameClearCountPerDifficulty.elementary,
       selectedFastTime: prev.fastTimePerDifficulty.elementary,
-      difficultyMonthTitle: `初級編(${thisMonth}月)`
+      difficultyMonthTitle: `初級編(${thisMonth}月)`,
+      prevDifficultyMonthTitle: `上級編(${thisMonth}月)`,
+      nextDifficultyMonthTitle: `中級編(${thisMonth}月)`
     }));
   };
 
@@ -57,7 +63,9 @@ export const SecondSelectBox = ({
       selectedTotalTime: prev.totalTimePerDifficulty.intermediate,
       selectedGameClearCount: prev.gameClearCountPerDifficulty.intermediate,
       selectedFastTime: prev.fastTimePerDifficulty.intermediate,
-      difficultyMonthTitle: `中級編(${thisMonth}月)`
+      difficultyMonthTitle: `中級編(${thisMonth}月)`,
+      prevDifficultyMonthTitle: `初級編(${thisMonth}月)`,
+      nextDifficultyMonthTitle: `上級編(${thisMonth}月)`
     }));
   };
 
@@ -68,7 +76,9 @@ export const SecondSelectBox = ({
       selectedTotalTime: prev.totalTimePerDifficulty.advanced,
       selectedGameClearCount: prev.gameClearCountPerDifficulty.advanced,
       selectedFastTime: prev.fastTimePerDifficulty.advanced,
-      difficultyMonthTitle: `上級編(${thisMonth}月)`
+      difficultyMonthTitle: `上級編(${thisMonth}月)`,
+      prevDifficultyMonthTitle: `中級編(${thisMonth}月)`,
+      nextDifficultyMonthTitle: `初級編(${thisMonth}月)`
     }));
   };
 
@@ -106,31 +116,41 @@ export const SecondSelectBox = ({
 
   return (
     <TitleLineWrapper>
-      <IconButton
-        sx={{
-          fontSize: '2.5em'
-        }}
+      <Tooltip 
+        title={prevDifficultyMonthTitle}
+        placement="top"
       >
-        <ArrowLeftIcon
-          fontSize='inherit' 
-          sx={{ color: `${COLORS.BLACK}` }}
-          onClick={() => handleLeftArrow(difficultyMonthTitle)}
-        />
-      </IconButton>
+        <IconButton
+          sx={{
+            fontSize: '2.5em'
+          }}
+        >
+          <ArrowLeftIcon
+            fontSize='inherit' 
+            sx={{ color: `${COLORS.BLACK}` }}
+            onClick={() => handleLeftArrow(difficultyMonthTitle)}
+          />
+        </IconButton>
+      </Tooltip>
       <SecondSelectBoxSentenceWrapper>
         {difficultyMonthTitle}
       </SecondSelectBoxSentenceWrapper>
-      <IconButton
-        sx={{
-          fontSize: '2.5em'
-        }}
+      <Tooltip 
+        title={nextDifficultyMonthTitle}
+        placement="top"
       >
-        <ArrowRightIcon
-          fontSize='inherit' 
-          sx={{ color: `${COLORS.BLACK}` }}
-          onClick={() => handleRightArrow(difficultyMonthTitle)}
-        />
-      </IconButton>
+        <IconButton
+          sx={{
+            fontSize: '2.5em'
+          }}
+        >
+          <ArrowRightIcon
+            fontSize='inherit' 
+            sx={{ color: `${COLORS.BLACK}` }}
+            onClick={() => handleRightArrow(difficultyMonthTitle)}
+          />
+        </IconButton>
+      </Tooltip>
     </TitleLineWrapper>
   );
 }
