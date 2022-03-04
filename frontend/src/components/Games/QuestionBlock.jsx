@@ -16,7 +16,7 @@ const QuestionBlockWrapper = styled.div`
   height: 13.4vh;
   margin: 0 auto;
   width: 60%;
-  box-shadow: 0 0px 20px rgba(0,0,0,0.2);
+  box-shadow: 0 4px 6px rgba(0,0,0,0.2);
 `;
 
 const QuestionWrapper = styled.div`
@@ -50,8 +50,8 @@ const DifficultyWrapper = styled.div`
   font-style: normal;
   position: absolute;
   z-index: 0;
-  padding-top: 0.73%;
-  padding-bottom: 0.73%;
+  padding-top: 0.74%;
+  padding-bottom: 0.74%;
 `;
 
 // ターゲットセンテンス
