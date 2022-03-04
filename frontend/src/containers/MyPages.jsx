@@ -193,14 +193,14 @@ export const MyPages = () => {
   // タイトルカードのモーダルで使う
   const initialState = {
     gameFrequenciesPerDay: {},
-    totalTimePerDifficulty: {},
-    gameClearCountPerDifficulty: {},
     fastTimePerDifficulty: {},
     ownedTitles: [],
     selectedTotalTime: 0,
     selectedGameClearCount: 0,
     selectedFastTime: 0,
-    difficultyMonthTitle: "",
+    difficultyMonthTitle: `初級編(${thisMonth}月)`,
+    prevDifficultyMonthTitle: `上級編(${thisMonth}月)`,
+    nextDifficultyMonthTitle: `中級編(${thisMonth}月)`,
     isOpenDialog: false,
     name: "",
     releaseDate: "",
@@ -280,7 +280,6 @@ export const MyPages = () => {
           selectedTotalTime: data.total_time_per_difficulty.elementary,
           selectedGameClearCount: data.game_clear_count_per_difficulty.elementary,
           selectedFastTime: data.fast_time_per_difficulty.elementary,
-          difficultyMonthTitle: `初級編(${thisMonth}月)`,
           getPageInfo: true
         })); 
       }).catch((e) => {
@@ -352,6 +351,8 @@ export const MyPages = () => {
                 <MainSecondSelectWrapper>
                   <SecondSelectBox 
                     difficultyMonthTitle={myPageState.difficultyMonthTitle}
+                    prevDifficultyMonthTitle={myPageState.prevDifficultyMonthTitle}
+                    nextDifficultyMonthTitle={myPageState.nextDifficultyMonthTitle}
                     setMyPageState={setMyPageState}
                     thisMonth={thisMonth}
                   />

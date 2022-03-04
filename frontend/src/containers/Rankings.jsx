@@ -49,7 +49,12 @@ export const Rankings = () => {
     topTenIntermediate: [],
     topTenAdvanced: [],
     currentTopTenArray: [],
-    difficultyTitle: ""
+    difficultyTitle: "",
+    prevDifficultyTitle: "上級編",
+    nextDifficultyTitle: "中級編",
+    slideIn: false,
+    slideOut: false,
+    direction: "",
   };
 
   // ランキングを制御するstate
@@ -144,6 +149,7 @@ export const Rankings = () => {
           currentTopTenArray={rankingState.currentTopTenArray}
           difficultyTitle={rankingState.difficultyTitle}
           setRankingState={setRankingState}
+          rankingState={rankingState}
         />
       </MainWrapper>
       <Footer />
