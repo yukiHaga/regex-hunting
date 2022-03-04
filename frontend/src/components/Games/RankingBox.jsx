@@ -22,10 +22,15 @@ import { DescriptionWrapper } from '../shared_style.js';
 // デフォルトのアバター画像
 import DefaultAvatarImage from '../../images/default_avatar.png';
 
+// ツールチップ
+import Tooltip from '@mui/material/Tooltip';
 import IconButton from '@mui/material/IconButton';
 
 // Responsive
 import { WIDTH } from '../../style_constants.js';
+
+// スライドアニメーション関係の関数
+import { slideFunction } from '../../functions/slideFunction.js';
 
 const TitleLineWrapper = styled.div`
   display: flex;
@@ -54,6 +59,7 @@ const RankingWrapper = styled.div`
 
 const CustomThead = styled.thead`
   box-shadow: 0 1px 2px rgba(0,0,0,0.3);
+  background-color: ${COLORS.MAIN};
 `;
 
 const CustomTable = styled.table`
@@ -78,7 +84,7 @@ const RankingTd = styled.td`
   text-align: center;
   border-bottom:solid 1px silver;
   width: 5%;
-  font-weight: bold;
+  color: ${COLORS.WHITE};
   @media (max-width: ${WIDTH.MOBILE}) {
     width: 20%;
     font-size: 0.9em;
@@ -91,7 +97,7 @@ const TimeTd = styled.td`
   text-align: center;
   border-bottom:solid 1px silver;
   width: 10%;
-  font-weight: bold;
+  color: ${COLORS.WHITE};
   @media (max-width: ${WIDTH.MOBILE}) {
     width: 40%;
     font-size: 0.9em;
@@ -104,7 +110,7 @@ const HunterTd = styled.td`
   text-align: center;
   border-bottom:solid 1px silver;
   width: 65%;
-  font-weight: bold;
+  color: ${COLORS.WHITE};
   @media (max-width: ${WIDTH.MOBILE}) {
     width: 40%;
     font-size: 0.9em;
@@ -240,37 +246,96 @@ const NotRankingWrapper = styled(RankingWrapper)`
   }
 `;
 
+// animationプロパティは1つしか存在できない
+// 2個存在する場合、2個目で1個目が上書きされる
+const SlideContentWrapper = styled.div`
+  width: 100%;
+  margin: 0 auto;
+  transform: translateX(0);
+  animation: ${({ 
+    slideIn, 
+    slideOut,
+    direction
+  }) => slideFunction(slideIn, slideOut, direction)} 0.7s ease forwards;
+`;
+
 export const RankingBox = memo(({
   currentTopTenArray,
   difficultyTitle,
+  rankingState,
   setRankingState
 }) => {
 
   // 初級のデータを表示する関数
-  const handleElementary = () => {
+  const handleElementary = (
+    direction
+  ) => {
     setRankingState((prev) => ({
       ...prev,
-      currentTopTenArray: prev.topTenElementary,
-      difficultyTitle: "初級編"
+      slideIn: false,
+      slideOut: true,
+      direction: direction,
     }));
+    setTimeout(() => {
+      setRankingState((prev) => ({
+        ...prev,
+        currentTopTenArray: prev.topTenElementary,
+        difficultyTitle: "初級編",
+        prevDifficultyTitle: "上級編",
+        nextDifficultyTitle: "中級編",
+        slideIn: true,
+        slideOut: false,
+        direction: direction,
+      }));
+    }, 350);
   };
 
   // 中級のデータを表示する関数
-  const handleIntermediate = () => {
+  const handleIntermediate = (
+    direction
+  ) => {
     setRankingState((prev) => ({
       ...prev,
-      currentTopTenArray: prev.topTenIntermediate,
-      difficultyTitle: "中級編"
+      slidein: false,
+      slideout: true,
+      direction: direction,
     }));
+    setTimeout(() => {
+      setRankingState((prev) => ({
+        ...prev,
+        currentTopTenArray: prev.topTenIntermediate,
+        difficultyTitle: "中級編",
+        prevDifficultyTitle: "初級編",
+        nextDifficultyTitle: "上級編",
+        slideIn: false,
+        slideOut: true,
+        direction: direction,
+      }));
+    }, 350);
   };
 
   // 上級のデータを表示する関数
-  const handleAdvanced = () => {
+  const handleAdvanced = (
+    direction
+  ) => {
     setRankingState((prev) => ({
       ...prev,
-      currentTopTenArray: prev.topTenAdvanced,
-      difficultyTitle: "上級編"
+      slideIn: false,
+      slideOut: true,
+      direction: direction,
     }));
+    setTimeout(() => {
+      setRankingState((prev) => ({
+        ...prev,
+        currentTopTenArray: prev.topTenAdvanced,
+        difficultyTitle: "上級編",
+        prevDifficultyTitle: "中級編",
+        nextDifficultyTitle: "初級編",
+        slideIn: false,
+        slideOut: true,
+        direction: direction,
+      }));
+    }, 350);
   };
 
   // 左矢印のリンクを制御する関数
@@ -279,13 +344,13 @@ export const RankingBox = memo(({
   const handleLeftArrow = (difficultyTitle) => {
     switch (difficultyTitle){
       case '中級編':
-        handleElementary();
+        handleElementary('right');
         break;
       case '上級編':
-        handleIntermediate(); 
+        handleIntermediate('right'); 
         break;
       default:
-        handleAdvanced();
+        handleAdvanced('right');
     }
   };
 
@@ -295,120 +360,136 @@ export const RankingBox = memo(({
   const handleRightArrow = (difficultyTitle) => {
     switch (difficultyTitle){
       case '中級編':
-        handleAdvanced();
+        handleAdvanced('left');
         break;
       case '上級編':
-        handleElementary();
+        handleElementary('left');
         break;
       default:
-        handleIntermediate(); 
+        handleIntermediate('left'); 
     }
   };
 
   return (
     <>
       <TitleLineWrapper>
-        <IconButton
-          sx={{
-            fontSize: '4.0em'
-          }}
+        <Tooltip 
+          title={rankingState.prevDifficultyTitle}
+          placement="top"
         >
-          <ArrowLeftIcon
-            fontSize='inherit' 
-            sx={{ color: `${COLORS.BLACK}` }}
-            onClick={() => handleLeftArrow(difficultyTitle)}
-          />
-        </IconButton>
+          <IconButton
+            sx={{
+              fontSize: '4.0em'
+            }}
+          >
+            <ArrowLeftIcon
+              fontSize='inherit' 
+              sx={{ color: `${COLORS.BLACK}` }}
+              onClick={() => handleLeftArrow(difficultyTitle)}
+            />
+          </IconButton>
+        </Tooltip>
         <ChangeGraphBoxSentenceWrapper>
           {difficultyTitle}
         </ChangeGraphBoxSentenceWrapper>
-        <IconButton
-          sx={{
-            fontSize: '4.0em'
-          }}
+        <Tooltip 
+          title={rankingState.nextDifficultyTitle}
+          placement="top"
         >
-          <ArrowRightIcon
-            fontSize='inherit' 
-            sx={{ color: `${COLORS.BLACK}` }}
-            onClick={() => handleRightArrow(difficultyTitle)}
-          />
-        </IconButton>
+          <IconButton
+            sx={{
+              fontSize: '4.0em'
+            }}
+          >
+            <ArrowRightIcon
+              fontSize='inherit' 
+              sx={{ color: `${COLORS.BLACK}` }}
+              onClick={() => handleRightArrow(difficultyTitle)}
+            />
+          </IconButton>
+        </Tooltip> 
       </TitleLineWrapper>
       {
         currentTopTenArray.length ?
-          <RankingWrapper>
-            <CustomTable>
-              <CustomThead>
-                <tr>
-                  <RankingTd>順位</RankingTd>
-                  <TimeTd>クリアタイム</TimeTd>
-                  <HunterTd>ハンター</HunterTd>
-                </tr>
-              </CustomThead>
-              <tbody>
-                {
-                  currentTopTenArray.map(({
-                    game_management: { 
-                      result_time 
-                    }, 
-                    user: {
-                      name,
-                      rank,
-                      active_title,
-                      image
-                    }
-                  }, index) => (
-                    <tr>
-                      <RankingDataTd>{index + 1}</RankingDataTd>
-                      <TimeDataTd>
-                        {
-                          getClearTime(0, result_time)
-                        }
-                      </TimeDataTd>
-                      <HunterDataTd>
-                        <StatusWrapper>
-                          <AvatarWrapper>
-                            <Avatar
-                              alt="Hunter"
-                              src={image || DefaultAvatarImage}
-                              sx={{ width: 110, height: 110 }}
-                            />
-                          </AvatarWrapper>
-                          <HunterTableWrapper>
-                            <HunterTable>
-                              <tbody>
-                                <tr>
-                                  <HunterTableNameTd colSpan={2}>
-                                    {name}
-                                  </HunterTableNameTd>
-                                </tr>
-                                <tr>
-                                  <HunterTableRankMetaTd>
-                                    ランク
-                                  </HunterTableRankMetaTd>
-                                  <HunterTableRankDataTd>
-                                    {rank}
-                                  </HunterTableRankDataTd>
-                                </tr>
-                                <tr>
-                                  <HunterTableTitleMetaTd>
-                                    称号
-                                  </HunterTableTitleMetaTd>
-                                  <HunterTableTitleDataTd>
-                                    {active_title}
-                                  </HunterTableTitleDataTd>
-                                </tr>
-                              </tbody>
-                            </HunterTable>
-                          </HunterTableWrapper>
-                        </StatusWrapper>
-                      </HunterDataTd>
-                    </tr>
-                  ))
-                }
-              </tbody>
-            </CustomTable>
-          </RankingWrapper>
+          <SlideContentWrapper
+            slideIn={rankingState.slideIn}
+            slideOut={rankingState.slideOut}
+            direction={rankingState.direction}
+          >
+            <RankingWrapper>
+              <CustomTable>
+                <CustomThead>
+                  <tr>
+                    <RankingTd>順位</RankingTd>
+                    <TimeTd>クリアタイム</TimeTd>
+                    <HunterTd>ハンター</HunterTd>
+                  </tr>
+                </CustomThead>
+                <tbody>
+                  {
+                    currentTopTenArray.map(({
+                      game_management: { 
+                        result_time 
+                      }, 
+                      user: {
+                        name,
+                        rank,
+                        active_title,
+                        image
+                      }
+                    }, index) => (
+                      <tr>
+                        <RankingDataTd>{index + 1}</RankingDataTd>
+                        <TimeDataTd>
+                          {
+                            getClearTime(0, result_time)
+                          }
+                        </TimeDataTd>
+                        <HunterDataTd>
+                          <StatusWrapper>
+                            <AvatarWrapper>
+                              <Avatar
+                                alt="Hunter"
+                                src={image || DefaultAvatarImage}
+                                sx={{ width: 110, height: 110 }}
+                              />
+                            </AvatarWrapper>
+                            <HunterTableWrapper>
+                              <HunterTable>
+                                <tbody>
+                                  <tr>
+                                    <HunterTableNameTd colSpan={2}>
+                                      {name}
+                                    </HunterTableNameTd>
+                                  </tr>
+                                  <tr>
+                                    <HunterTableRankMetaTd>
+                                      ランク
+                                    </HunterTableRankMetaTd>
+                                    <HunterTableRankDataTd>
+                                      {rank}
+                                    </HunterTableRankDataTd>
+                                  </tr>
+                                  <tr>
+                                    <HunterTableTitleMetaTd>
+                                      称号
+                                    </HunterTableTitleMetaTd>
+                                    <HunterTableTitleDataTd>
+                                      {active_title}
+                                    </HunterTableTitleDataTd>
+                                  </tr>
+                                </tbody>
+                              </HunterTable>
+                            </HunterTableWrapper>
+                          </StatusWrapper>
+                        </HunterDataTd>
+                      </tr>
+                    ))
+                  }
+                </tbody>
+              </CustomTable>
+            </RankingWrapper>
+          </SlideContentWrapper>
         :
           <NotRankingWrapper>
             <NotDescriptionWrapper>
