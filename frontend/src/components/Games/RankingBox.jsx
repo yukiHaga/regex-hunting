@@ -296,8 +296,8 @@ export const RankingBox = memo(({
   ) => {
     setRankingState((prev) => ({
       ...prev,
-      slidein: false,
-      slideout: true,
+      slideIn: false,
+      slideOut: true,
       direction: direction,
     }));
     setTimeout(() => {
@@ -307,8 +307,8 @@ export const RankingBox = memo(({
         difficultyTitle: "中級編",
         prevDifficultyTitle: "初級編",
         nextDifficultyTitle: "上級編",
-        slideIn: false,
-        slideOut: true,
+        slideIn: true,
+        slideOut: false,
         direction: direction,
       }));
     }, 350);
@@ -331,8 +331,8 @@ export const RankingBox = memo(({
         difficultyTitle: "上級編",
         prevDifficultyTitle: "中級編",
         nextDifficultyTitle: "初級編",
-        slideIn: false,
-        slideOut: true,
+        slideIn: true,
+        slideOut: false,
         direction: direction,
       }));
     }, 350);
@@ -343,6 +343,9 @@ export const RankingBox = memo(({
   // そのため、defaultは上級の関数が実行される
   const handleLeftArrow = (difficultyTitle) => {
     switch (difficultyTitle){
+      case '初級編':
+        handleAdvanced('right');
+        break;
       case '中級編':
         handleElementary('right');
         break;
@@ -359,6 +362,9 @@ export const RankingBox = memo(({
   // そのため、defaultは中級の関数が実行される
   const handleRightArrow = (difficultyTitle) => {
     switch (difficultyTitle){
+      case '初級編':
+        handleIntermediate('left'); 
+        break;
       case '中級編':
         handleAdvanced('left');
         break;
