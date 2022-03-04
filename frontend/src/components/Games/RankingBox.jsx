@@ -241,8 +241,8 @@ const NotRankingWrapper = styled(RankingWrapper)`
 `;
 
 export const RankingBox = memo(({
-  current_top_ten_array,
-  difficulty_title,
+  currentTopTenArray,
+  difficultyTitle,
   setRankingState
 }) => {
 
@@ -250,8 +250,8 @@ export const RankingBox = memo(({
   const handleElementary = () => {
     setRankingState((prev) => ({
       ...prev,
-      current_top_ten_array: prev.top_ten_elementary,
-      difficulty_title: "初級編"
+      currentTopTenArray: prev.topTenElementary,
+      difficultyTitle: "初級編"
     }));
   };
 
@@ -259,8 +259,8 @@ export const RankingBox = memo(({
   const handleIntermediate = () => {
     setRankingState((prev) => ({
       ...prev,
-      current_top_ten_array: prev.top_ten_intermediate,
-      difficulty_title: "中級編"
+      currentTopTenArray: prev.topTenIntermediate,
+      difficultyTitle: "中級編"
     }));
   };
 
@@ -268,16 +268,16 @@ export const RankingBox = memo(({
   const handleAdvanced = () => {
     setRankingState((prev) => ({
       ...prev,
-      current_top_ten_array: prev.top_ten_advanced,
-      difficulty_title: "上級編"
+      currentTopTenArray: prev.topTenAdvanced,
+      difficultyTitle: "上級編"
     }));
   };
 
   // 左矢印のリンクを制御する関数
-  // difficulty_titleは初め初級が入る
+  // difficultyTitleは初め初級が入る
   // そのため、defaultは上級の関数が実行される
-  const handleLeftArrow = (difficulty_title) => {
-    switch (difficulty_title){
+  const handleLeftArrow = (difficultyTitle) => {
+    switch (difficultyTitle){
       case '中級編':
         handleElementary();
         break;
@@ -290,10 +290,10 @@ export const RankingBox = memo(({
   };
 
   // 右矢印のリンクを制御する関数
-  // difficulty_titleは初め初級が入る
+  // difficultyTitleは初め初級が入る
   // そのため、defaultは中級の関数が実行される
-  const handleRightArrow = (difficulty_title) => {
-    switch (difficulty_title){
+  const handleRightArrow = (difficultyTitle) => {
+    switch (difficultyTitle){
       case '中級編':
         handleAdvanced();
         break;
@@ -316,11 +316,11 @@ export const RankingBox = memo(({
           <ArrowLeftIcon
             fontSize='inherit' 
             sx={{ color: `${COLORS.BLACK}` }}
-            onClick={() => handleLeftArrow(difficulty_title)}
+            onClick={() => handleLeftArrow(difficultyTitle)}
           />
         </IconButton>
         <ChangeGraphBoxSentenceWrapper>
-          {difficulty_title}
+          {difficultyTitle}
         </ChangeGraphBoxSentenceWrapper>
         <IconButton
           sx={{
@@ -330,12 +330,12 @@ export const RankingBox = memo(({
           <ArrowRightIcon
             fontSize='inherit' 
             sx={{ color: `${COLORS.BLACK}` }}
-            onClick={() => handleRightArrow(difficulty_title)}
+            onClick={() => handleRightArrow(difficultyTitle)}
           />
         </IconButton>
       </TitleLineWrapper>
       {
-        current_top_ten_array.length ?
+        currentTopTenArray.length ?
           <RankingWrapper>
             <CustomTable>
               <CustomThead>
@@ -347,7 +347,7 @@ export const RankingBox = memo(({
               </CustomThead>
               <tbody>
                 {
-                  current_top_ten_array.map(({
+                  currentTopTenArray.map(({
                     game_management: { 
                       result_time 
                     }, 

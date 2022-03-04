@@ -79,10 +79,10 @@ const ExpTd = styled(CustomTd)`
 export const UserStatus = memo(({
   name,
   rank,
-  active_title,
-  temporary_experience,
-  total_experience,
-  maximum_experience_per_rank,
+  activeTitle,
+  temporaryExperience,
+  totalExperience,
+  maximumExperiencePerRank,
   image
 }) => {
 
@@ -111,14 +111,14 @@ export const UserStatus = memo(({
             </tr>
             <tr>
               <MetaTd>称号</MetaTd> 
-              <CustomTd>{active_title}</CustomTd>
+              <CustomTd>{activeTitle}</CustomTd>
             </tr>
             <tr>
               <ExpTd colSpan={2}>
                 <StatusExperienceBox 
-                  temporary_experience={temporary_experience}
-                  total_experience={total_experience}
-                  maximum_experience_per_rank={maximum_experience_per_rank}
+                  temporaryExperience={temporaryExperience}
+                  totalExperience={totalExperience}
+                  maximumExperiencePerRank={maximumExperiencePerRank}
                 />
               </ExpTd>
             </tr>

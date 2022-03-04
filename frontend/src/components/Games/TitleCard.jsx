@@ -18,6 +18,7 @@ import SelfEffacementBackground from '../../images/self_effacement_background.pn
 import HeroBackground from '../../images/hero_background.png';
 
 // heigthはpx指定しないとダメ
+// heightをvhにしてみる
 const InnerTitleCardWrapper = styled.div`
   width: 17%;
   height: 200px;
@@ -80,7 +81,7 @@ const getImage = (name) => {
 
 export const TitleCard = memo(({
   name,
-  release_date,
+  releaseDate,
   onClick
 }) => {
 
@@ -91,7 +92,7 @@ export const TitleCard = memo(({
         name={name}
       >
         {
-          !release_date &&
+          !releaseDate &&
             <>
               <MaskTitleCardWrapper />
             </>

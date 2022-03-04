@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useMemo } from 'react';
 import styled from 'styled-components';
 
 // Colors
@@ -16,7 +16,7 @@ const QuestionBlockWrapper = styled.div`
   height: 13.4vh;
   margin: 0 auto;
   width: 60%;
-  box-shadow: 0 0px 20px rgba(0,0,0,0.2);
+  box-shadow: 0 4px 6px rgba(0,0,0,0.2);
 `;
 
 const QuestionWrapper = styled.div`
@@ -50,8 +50,8 @@ const DifficultyWrapper = styled.div`
   font-style: normal;
   position: absolute;
   z-index: 0;
-  padding-top: 0.73%;
-  padding-bottom: 0.73%;
+  padding-top: 0.74%;
+  padding-bottom: 0.74%;
 `;
 
 // ターゲットセンテンス
@@ -67,35 +67,33 @@ const TargetSentenceWrapper = styled.div`
 `;
 
 const CustomSpan = styled.span`
-  color: ${(props) => props.backgroundcolor && COLORS.WORD_BLUE};
-  background-color: ${(props) => props.backgroundcolor && COLORS.WORD_BACK};
+  color: ${({ backgroundColor }) => backgroundColor && COLORS.WORD_BLUE};
+  background-color: ${({ backgroundColor }) => backgroundColor && COLORS.WORD_BACK};
 `;
 
 export const QuestionBlock = ({ 
   difficulty, 
   sentence,
-  next_sentence,
-  target_sentence,
-  next_target_sentence,
-  sentence_num,
-  next_sentence_num,
-  next_hint,
-  match_array,
-  question_judgement,
-  gameState,
+  nextSentence,
+  sentenceNum,
+  nextSentenceNum,
+  targetSentence,
+  nextTargetSentence,
+  nextHint,
+  matchArray,
+  questionJudgement,
   setGameState,
-  input_regex_object,
-  correct_questions,
-  incorrect_questions,
-  game_description_open,
-  game_result,
-  has_user,
+  inputRegexObject,
+  correctQuestions,
+  incorrectQuestions,
+  gameDescriptionOpen,
+  gameResult,
+  hasUser,
   rank,
-  total_experience,
-  maximum_experience_per_rank,
-  temporary_experience,
-  prev_temporary_experience,
-  click_meta_open
+  totalExperience,
+  maximumExperiencePerRank,
+  temporaryExperience,
+  clickMetaOpen
 }) => {
 
   // 難易度を日本語に変換する関数
@@ -117,26 +115,71 @@ export const QuestionBlock = ({
     return jpDifficulty;
   };
 
+  // 難易度毎のモンスターからダメージを喰らう時のセンテンス
+  const getDamageSentence = (difficulty) => {
+    let damageSentence;
+    switch (difficulty){
+      case 'elementary':
+        damageSentence = 'ハンターに20ダメージ';
+        break;
+      case 'intermediate':
+        damageSentence = 'ハンターに20ダメージ';
+        break;
+      case 'advanced':
+        damageSentence = 'ハンターに25ダメージ';
+        break;
+      default:
+        console.log('エラーが起きました');
+    }
+    return damageSentence;
+  };
+
+  // 難易度毎のモンスターからダメージを喰らう時のセンテンスは、1回計算すれば十分なので、メモ化する
+  const memoDamageSentence = useMemo(() => getDamageSentence(difficulty), [difficulty])
+
+  // 各難易度における不正解の上限数を出力する関数 
+  // この関数の値を使用することで、難易度毎のゲームの終了タイミングをコントロールできる
+  const getIncorrectCount = (difficulty) => {
+    let incorrectCount;
+    switch (difficulty){
+      case 'elementary':
+        incorrectCount = 5;
+        break;
+      case 'intermediate':
+        incorrectCount = 5;
+        break;
+      case 'advanced':
+        incorrectCount = 4;
+        break;
+      default:
+        console.log('エラーが起きました');
+    }
+    return incorrectCount;
+  };
+
+  // 各難易度における不正解の上限数は、1回計算すれば十分なので、メモ化する
+  const memoIncorrectCount = useMemo(() => getIncorrectCount(difficulty), [difficulty])
+
   // 最初のメッセージからsetTimeOutを制御するif文
   // このuseEffectがあるおかげで、最初のモンスターセンテンスが
   // 問題1のセンテンスに自動で切り替わる
   useEffect(() => {
-    if (!game_description_open && !click_meta_open && sentence === `${getMonsterName(difficulty)}が現れた！`){
+    if (!gameDescriptionOpen && !clickMetaOpen && sentence === `${getMonsterName(difficulty)}が現れた！`){
       const timer = setTimeout(() => {
         setGameState((prev) => ({
           ...prev,
-          sentence: next_sentence,
-          next_sentence: prev.questions["1"].sentence,
-          sentence_num: next_sentence_num,
-          next_sentence_num: prev.next_sentence_num + 1,
-          target_sentence: next_target_sentence,
-          next_target_sentence: prev.questions["1"].target_sentence,
-          hint: next_hint,
-          next_hint: prev.questions["1"].hint,
-          key_available: true,
-          first_appearance: false,
-          time_active: true,
-          game_result: "progress"
+          sentence: nextSentence,
+          nextSentence: prev.questions["1"].sentence,
+          sentenceNum: nextSentenceNum,
+          nextSentenceNum: prev.nextSentenceNum + 1,
+          targetSentence: nextTargetSentence,
+          nextTargetSentence: prev.questions["1"].target_sentence,
+          hint: nextHint,
+          nextHint: prev.questions["1"].hint,
+          keyAvailable: true,
+          firstAppearance: false,
+          timeActive: true,
+          gameResult: "progress"
         }));
       }, 3000);
       return () => clearTimeout(timer);
@@ -144,53 +187,53 @@ export const QuestionBlock = ({
   }, [
     difficulty,
     sentence,
-    target_sentence,
-    next_sentence,
-    next_sentence_num,
-    next_target_sentence,
-    next_hint,
+    targetSentence,
+    nextSentence,
+    nextSentenceNum,
+    nextTargetSentence,
+    nextHint,
     setGameState,
-    game_description_open,
-    click_meta_open
+    gameDescriptionOpen,
+    clickMetaOpen
   ]);
 
-  // question_judgementがcorrectの時に実行されるuseEffect
+  // questionJudgementがcorrectの時に実行されるuseEffect
   // ダメージセンテンスがQuestionBlockに表示される
   // その後、次の問題のセンテンスが表示される
   useEffect(() => {
-    if(game_result === "progress" && question_judgement === "correct") {
+    if(gameResult === "progress" && questionJudgement === "correct") {
       setGameState((prev) => ({
         ...prev,
         sentence: `${getMonsterName(difficulty)}に10ダメージ`,
-        key_available: false,
-        time_active: false,
+        keyAvailable: false,
+        timeActive: false,
       }));
-      if(correct_questions.length === 10) {
+      if(correctQuestions.length === 10) {
         const timer = setTimeout(() => {
           setGameState((prev) => ({
             ...prev,
             sentence: "ゲームクリア！",
-            next_sentence: "no_sentence",
-            sentence_num: 0,
-            next_sentence_num: 0,
-            target_sentence: "",
-            next_target_sentence: "",
+            nextSentence: "no_sentence",
+            sentenceNum: 0,
+            nextSentenceNum: 0,
+            targetSentence: "",
+            nextTargetSentence: "",
             hint: "",
-            next_hint: "",
-            question_judgement: "collect",
-            match_array: [],
-            sample_answer: "no_sample_answer",
-            input_regex_object: {},
-            key_available: false,
-            game_result: "win",
-            time_active: false,
-            game_end_time: performance.now(),
-            total_experience: has_user ? 
-              total_experience + getExperience(difficulty) : prev.total_experience,
-            temporary_experience: has_user ? 
-              temporary_experience + getExperience(difficulty) : prev.temporary_experience,
-            dialog_gage_up: true,
-            flash_display: false
+            nextHint: "",
+            questionJudgement: "collect",
+            matchArray: [],
+            sampleAnswer: "no_sample_answer",
+            inputRegexObject: {},
+            keyAvailable: false,
+            gameResult: "win",
+            timeActive: false,
+            gameEndTime: performance.now(),
+            totalExperience: hasUser ? 
+              totalExperience + getExperience(difficulty) : prev.totalExperience,
+            temporaryExperience: hasUser ? 
+              temporaryExperience + getExperience(difficulty) : prev.temporaryExperience,
+            dialogGageUp: true,
+            flashDisplay: false
           }));
         }, 1000);
         return () => clearTimeout(timer);
@@ -198,73 +241,73 @@ export const QuestionBlock = ({
         const timer = setTimeout(() => {
           setGameState((prev) => ({
             ...prev,
-            sentence: next_sentence,
-            next_sentence: prev?.questions["1"]?.sentence || "no_sentence",
-            sentence_num: next_sentence_num,
-            next_sentence_num: prev?.next_sentence_num + 1 || "no_sentence_num",
-            target_sentence: next_target_sentence,
-            next_target_sentence: prev?.questions["1"]?.target_sentence || "no_target_sentence",
-            question_judgement: "progress",
-            match_array: [],
-            sample_answer: prev?.questions["0"]?.sample_answer || "no_sample_answer",
-            hint: next_hint,
-            next_hint: prev?.questions["1"]?.hint || "no_hint",
-            input_regex_object: {},
-            key_available: true,
-            time_active: true,
-            flash_display: false
+            sentence: nextSentence,
+            nextSentence: prev?.questions["1"]?.sentence || "no_sentence",
+            sentenceNum: nextSentenceNum,
+            nextSentenceNum: prev?.nextSentenceNum + 1 || "no_sentence_num",
+            targetSentence: nextTargetSentence,
+            nextTargetSentence: prev?.questions["1"]?.target_sentence || "no_target_sentence",
+            questionJudgement: "progress",
+            matchArray: [],
+            sampleAnswer: prev?.questions["0"]?.sample_answer || "no_sample_answer",
+            hint: nextHint,
+            nextHint: prev?.questions["1"]?.hint || "no_hint",
+            inputRegexObject: {},
+            keyAvailable: true,
+            timeActive: true,
+            flashDisplay: false,
           }));
         }, 2000);
         return () => clearTimeout(timer);
       }
     }
   },[
-    question_judgement,
+    questionJudgement,
     difficulty,
     setGameState,
-    next_sentence,
-    next_sentence_num,
-    next_target_sentence,
-    next_hint,
-    correct_questions.length,
-    game_result,
+    nextSentence,
+    nextSentenceNum,
+    nextTargetSentence,
+    nextHint,
+    correctQuestions.length,
+    gameResult,
     rank,
-    total_experience,
-    maximum_experience_per_rank,
-    temporary_experience,
-    has_user
+    totalExperience,
+    maximumExperiencePerRank,
+    temporaryExperience,
+    hasUser
   ]);
 
-  // question_judgementがincorrectの時に実行されるuseEffect
+  // questionJudgementがincorrectの時に実行されるuseEffect
   useEffect(() => {
-    if(game_result === "progress" && question_judgement === "incorrect") {
+    if(gameResult === "progress" && questionJudgement === "incorrect") {
       setGameState((prev) => ({
         ...prev,
-        sentence: `ハンターに10ダメージ`,
-        key_available: false,
-        time_active: false
+        sentence: memoDamageSentence,
+        keyAvailable: false,
+        timeActive: false
       }));
-      if(incorrect_questions.length === 5) {
+      if(incorrectQuestions.length === memoIncorrectCount) {
         const timer = setTimeout(() => {
           setGameState((prev) => ({
             ...prev,
             sentence: "ゲームオーバー",
-            next_sentence: "no_sentence",
-            sentence_num: 0,
-            next_sentence_num: 0,
-            target_sentence: "",
-            next_target_sentence: "",
+            nextSentence: "no_sentence",
+            sentenceNum: 0,
+            nextSentenceNum: 0,
+            targetSentence: "",
+            nextTargetSentence: "",
             hint: "",
-            next_hint: "",
-            question_judgement: "incollect",
-            match_array: [],
-            sample_answer: "no_sample_answer",
-            input_regex_object: {},
-            key_available: false,
-            game_result: "lose",
-            time_active: false,
-            game_end_time: performance.now(),
-            flash_display: false,
+            nextHint: "",
+            questionJudgement: "incollect",
+            matchArray: [],
+            sampleAnswer: "no_sample_answer",
+            inputRegexObject: {},
+            keyAvailable: false,
+            gameResult: "lose",
+            timeActive: false,
+            gameEndTime: performance.now(),
+            flashDisplay: false,
           }));
         }, 1000);
         return () => clearTimeout(timer);
@@ -272,40 +315,42 @@ export const QuestionBlock = ({
         const timer = setTimeout(() => {
           setGameState((prev) => ({
             ...prev,
-            sentence: next_sentence,
-            next_sentence: prev?.questions["1"]?.sentence || "no_sentence",
-            sentence_num: next_sentence_num,
-            next_sentence_num: prev?.next_sentence_num + 1 || "no_sentence_num",
-            target_sentence: next_target_sentence,
-            next_target_sentence: prev?.questions["1"]?.target_sentence || "no_target_sentence",
-            question_judgement: "progress",
-            match_array: [],
-            sample_answer: prev?.questions["0"]?.sample_answer || "no_sample_answer",
-            hint: next_hint,
-            next_hint: prev?.questions["1"].hint || "no_hint",
-            input_regex_object: {},
-            key_available: true,
-            time_active: true,
-            flash_display: false
+            sentence: nextSentence,
+            nextSentence: prev?.questions["1"]?.sentence || "no_sentence",
+            sentenceNum: nextSentenceNum,
+            nextSentenceNum: prev?.nextSentenceNum + 1 || "no_sentence_num",
+            targetSentence: nextTargetSentence,
+            nextTargetSentence: prev?.questions["1"]?.target_sentence || "no_target_sentence",
+            questionJudgement: "progress",
+            matchArray: [],
+            sampleAnswer: prev?.questions["0"]?.sample_answer || "no_sample_answer",
+            hint: nextHint,
+            nextHint: prev?.questions["1"].hint || "no_hint",
+            inputRegexObject: {},
+            keyAvailable: true,
+            timeActive: true,
+            flashDisplay: false
           }));
         }, 2000);
         return () => clearTimeout(timer);
       }
     }
   },[
-    question_judgement,
+    questionJudgement,
     difficulty,
     setGameState,
-    next_sentence,
-    next_sentence_num,
-    next_target_sentence,
-    next_hint,
-    incorrect_questions.length,
-    game_result,
+    nextSentence,
+    nextSentenceNum,
+    nextTargetSentence,
+    nextHint,
+    incorrectQuestions.length,
+    gameResult,
     rank,
-    total_experience,
-    maximum_experience_per_rank,
-    temporary_experience
+    totalExperience,
+    maximumExperiencePerRank,
+    temporaryExperience,
+    memoIncorrectCount,
+    memoDamageSentence
   ]);
 
   // マッチした箇所をリプレイスするライブラリをrequireしてくる
@@ -316,18 +361,18 @@ export const QuestionBlock = ({
       <QuestionBlockWrapper>
         <QuestionWrapper>
           <DifficultyWrapper>
-            {sentence_num ? `Q${sentence_num}` : getJpDifficulty(difficulty)}
+            {sentenceNum ? `Q${sentenceNum}` : getJpDifficulty(difficulty)}
           </DifficultyWrapper>
           <SentenceWrapper>
             {sentence}
           </SentenceWrapper>
           <TargetSentenceWrapper>
             {
-              target_sentence &&
-                reactStringReplace(target_sentence, input_regex_object, (match, i) => (
+              targetSentence &&
+                reactStringReplace(targetSentence, inputRegexObject, (match, i) => (
                   <CustomSpan 
                     key={i} 
-                    backgroundcolor={i}
+                    backgroundColor={i}
                   >
                     {match}
                   </CustomSpan>     

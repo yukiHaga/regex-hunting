@@ -80,14 +80,14 @@ const CustomFormControl = styled(FormControl)`
 
 const CustomFilledPasswordInput = styled(FilledInput)`
   margin-bottom: ${({
-    errors_password_box
-  }) => typeof errors_password_box === 'undefined' && '5%' };
+    errorsPasswordBox
+  }) => typeof errorsPasswordBox === 'undefined' && '5%' };
 `;
 
 const CustomFilledPasswordConfirmationInput = styled(FilledInput)`
   margin-bottom: ${({
-    errors_password_confirmation_box
-  }) => typeof errors_password_confirmation_box === 'undefined' && '5%' };
+    errorsPasswordConfirmationBox
+  }) => typeof errorsPasswordConfirmationBox === 'undefined' && '5%' };
 `;
 
 const PasswordUpdatesButtonWrapper = styled.div`
@@ -198,7 +198,7 @@ export const PasswordUpdates = () => {
                       type="password"
                       id="password-component-filled"
                       label="password"
-                      errors_password_box={errors.PasswordBox}
+                      errorsPasswordBox={errors.PasswordBox}
                     />
                   </CustomFormControl>              
                 )}
@@ -221,7 +221,7 @@ export const PasswordUpdates = () => {
                       type="password"
                       id="password-confirmation-component-filled"
                       label="password-confirmation"
-                      errors_password_confirmation_box={errors.PasswordConfirmationBox}
+                      errorsPasswordConfirmationBox={errors.PasswordConfirmationBox}
                     />
                   </CustomFormControl>              
                 )}

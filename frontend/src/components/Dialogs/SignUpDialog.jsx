@@ -16,9 +16,6 @@ import { useNavigate } from "react-router-dom";
 // Colors
 import { COLORS } from '../../style_constants.js';
 
-// Images
-import SignUpImage from '../../images/sign_up.svg';
-
 // Button
 import { SignUpButton } from '../Buttons/SignUpButton.jsx'
 import { OAuthLoginButton } from '../Buttons/OAuthLoginButton.jsx';
@@ -57,10 +54,24 @@ const CustomDialogInnerWrapper = styled.div`
   text-align: center;
 `;
 
-const CustomDialogTitleImage = styled.img`
-  width: 45%;
-  object-fit: contain;
-  padding: 2% 8%;
+// title
+const TitleWrapper = styled.div`
+  font-family: Raleway;
+  font-style: italic;
+  font-weight: bold;
+  font-size: 1.8em;
+  color: ${COLORS.SUB};
+  -webkit-text-stroke: 5px #030002;
+  text-stroke: 5px #030002;
+  position: relative;
+  padding-bottom: 2%;
+  padding-top: 1%;
+`;
+
+// fuchiue
+const Fuchiue = styled.span`
+  -webkit-text-stroke: 0;
+  position: absolute;
 `;
 
 const CustomForm = styled.form`
@@ -213,7 +224,7 @@ export const SignUpDialog = ({
     >
       <CustomDialogInnerWrapper> 
         <CloseButton onClose={onClose} fontSize="small" /> 
-        <CustomDialogTitleImage src={SignUpImage} alt="SignUp" />
+        <TitleWrapper><Fuchiue>SignUp</Fuchiue>SignUp</TitleWrapper>
         <DialogContent>
           <CreateAccountSentence />
           <CustomForm onSubmit={handleSubmit(onSubmit)}>

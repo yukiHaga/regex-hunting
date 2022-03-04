@@ -71,14 +71,14 @@ const CustomFormControl = styled(FormControl)`
 
 const CustomFilledNameInput = styled(FilledInput)`
   margin-bottom: ${({
-    errors_name_box
-  }) => typeof errors_name_box === 'undefined' && '4%' };
+    errorsNameBox
+  }) => typeof errorsNameBox === 'undefined' && '4%' };
 `;
 
 const CustomFilledEmailInput = styled(FilledInput)`
   margin-bottom: ${({
-    errors_email_box
-  }) => typeof errors_email_box === 'undefined' && '4%' };
+    errorsEmailBox
+  }) => typeof errorsEmailBox === 'undefined' && '4%' };
 `;
 
 const AccoutSettingButtonWrapper = styled.div`
@@ -111,7 +111,7 @@ export const AccountSettingBox = ({
 
   const initialState = {
     upload: false,
-    image_url: user.image || DefaultAvatarImage,
+    imageUrl: user.image || DefaultAvatarImage,
     image: {}
   }
 
@@ -148,7 +148,7 @@ export const AccountSettingBox = ({
         setUploadState((prev) => ({
           ...prev,
           upload: true,
-          image_url: URL.createObjectURL(files[0]),
+          imageUrl: URL.createObjectURL(files[0]),
           image: {
             name: files[0] ? files[0].name : 'unknown_file',
             data: reader.result
@@ -185,7 +185,7 @@ export const AccountSettingBox = ({
     email: { 
       required: "メールアドレスを入力してください。", 
       pattern: {
-        value: /^[A-Za-z0-9]{1}[A-Za-z0-9_.-]*@{1}[A-Za-z0-9_.-]{1,}.[A-Za-z0-9]{1,}$/,
+        value: /^[A-Za-z0-9][A-Za-z0-9_.-]*@[A-Za-z0-9_.-]+.[A-Za-z0-9]+$/,
         message: "英数字, @, ドメインを含めて入力してください。"
       }
     }
@@ -237,7 +237,7 @@ export const AccountSettingBox = ({
         <AccountSettingBoxImageWrapper>
           <Avatar
             alt="Hunter"
-            src={uploadState.image_url}
+            src={uploadState.imageUrl}
             sx={{ width: 200, height: 200 }}
           />
           <CustomLabel htmlFor="icon-button-file">
@@ -271,7 +271,7 @@ export const AccountSettingBox = ({
                     type="text"
                     id="name-component-filled"
                     label="name"
-                    errors_name_box={errors.NameBox}
+                    errorsNameBox={errors.NameBox}
                   />
                 </CustomFormControl>              
               )}
@@ -292,7 +292,7 @@ export const AccountSettingBox = ({
                     type="email"
                     id="email-component-filled"
                     label="email"
-                    errors_email_box={errors.EmailBox}
+                    errorsEmailBox={errors.EmailBox}
                   />
                 </CustomFormControl>              
               )}

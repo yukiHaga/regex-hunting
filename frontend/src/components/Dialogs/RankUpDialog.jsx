@@ -100,28 +100,28 @@ const MetaTd = styled(CustomTd)`
   padding-left: 4%;
 `;
 
-// gameStateのrank_upがtrueの時に開くモーダル
-// サーバーに送ったゲームデータの戻り値のrank_upがtrueの場合、開く
+// gameStateのrankUpがtrueの時に開くモーダル
+// サーバーに送ったゲームデータの戻り値のrankUpがtrueの場合、開く
 // このコンポーネントに渡るpropsは、サーバーに送ったゲームデータの戻り値のデータ
 // このrankはランクアップ後のランク値が格納されている
 export const RankUpDialog = ({
   isOpen,
   rank,
-  active_title,
+  activeTitle,
   setGameState,
-  rank_up,
+  rankUp,
   difficulty,
-  game_result
+  gameResult
 }) => {
 
   // ゲームクリア時の音
   useEffect(() => {
-    if(rank_up) {
+    if(rankUp) {
       const audio = new Audio(RankUpSound);
       audio.play();
     }
   }, [
-    rank_up
+    rankUp
   ]);
 
   return(
@@ -135,8 +135,8 @@ export const RankUpDialog = ({
             onClick={
               () => setGameState((prev) => ({
                 ...prev,
-                rank_up: false,
-                dialog_gage_up: false
+                rankUp: false,
+                dialogGageUp: false
               }))
             }
           />
@@ -160,15 +160,15 @@ export const RankUpDialog = ({
               </tr>
               <tr>
                 <MetaTd>称号</MetaTd> 
-                <CustomTd>{active_title}</CustomTd>
+                <CustomTd>{activeTitle}</CustomTd>
               </tr>
             </tbody>
           </CustomTable>
           <ButtonsWrapper>
             <ResultShareButton 
-              rank_up={rank_up}
+              rankUp={rankUp}
               difficulty={difficulty}
-              game_result={game_result}
+              gameResult={gameResult}
               rank={rank}
             />
           </ButtonsWrapper>

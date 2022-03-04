@@ -71,20 +71,20 @@ export const RestartGameButton = ({
       setGameState({
         ...initialState,
         sentence: `${getMonsterName(difficulty)}が現れた！`,
-        next_sentence: data.questions["0"].sentence,
-        next_sentence_num: 1,
-        next_target_sentence: data.questions["0"].target_sentence,
-        game_management: data.game_management,
+        nextSentence: data.questions["0"].sentence,
+        nextSentenceNum: 1,
+        nextTargetSentence: data.questions["0"].target_sentence,
+        gameManagement: data.game_management,
         questions: data.questions,
-        monster_attack: data.monster.attack,
-        monster_defence: data.monster.defence,
-        monster_hp: data.monster.max_hp,
-        monster_max_hp: data.monster.max_hp,
-        sample_answer: data.questions["0"].sample_answer,
-        next_commentary: data.questions["0"].commentary,
-        next_hint: data.questions["0"].hint,
-        game_start_time: performance.now(),
-        has_user: sessionState ? 
+        monsterAttack: data.monster.attack,
+        monsterDefence: data.monster.defence,
+        monsterHp: data.monster.max_hp,
+        monsterMaxHp: data.monster.max_hp,
+        sampleAnswer: data.questions["0"].sample_answer,
+        nextCommentary: data.questions["0"].commentary,
+        nextHint: data.questions["0"].hint,
+        gameStartTime: performance.now(),
+        hasUser: sessionState ? 
           true
         : 
           false,
@@ -92,22 +92,22 @@ export const RestartGameButton = ({
           data.user.rank 
         : 
           initialState.rank,
-        total_experience: sessionState ?
+        totalExperience: sessionState ?
           data.user.total_experience 
         : 
-          initialState.total_experience, 
-        maximum_experience_per_rank: sessionState ?
+          initialState.totalExperience, 
+        maximumExperiencePerRank: sessionState ?
           data.user.maximum_experience_per_rank 
         : 
-          initialState.maximum_experience_per_rank, 
-        temporary_experience: sessionState ?
+          initialState.maximumExperiencePerRank, 
+        temporaryExperience: sessionState ?
           data.user.temporary_experience
         :
-          initialState.temporary_experience,
-        prev_temporary_experience: sessionState ?
+          initialState.temporaryExperience,
+        prevTemporaryExperience: sessionState ?
           data.user.prev_temporary_experience
         :
-          initialState.prev_temporary_experience
+          initialState.prevTemporaryExperience
       }); 
     }).catch((e) => {
       if(e.response.status === HTTP_STATUS_CODE.NOT_FOUND){

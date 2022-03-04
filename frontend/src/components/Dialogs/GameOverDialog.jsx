@@ -119,20 +119,20 @@ const ExperienceTd = styled(CustomTd)`
 export const GameOverDialog = ({
   isOpen,
   difficulty,
-  correct_questions,
-  incorrect_questions,
+  correctQuestions,
+  incorrectQuestions,
   setGameState,
   getGameStart,
   initialState,
-  has_user,
+  hasUser,
   rank,
-  total_experience,
-  maximum_experience_per_rank,
-  temporary_experience,
-  prev_temporary_experience,
-  dialog_gage_up,
-  game_result,
-  rank_up
+  totalExperience,
+  maximumExperiencePerRank,
+  temporaryExperience,
+  prevTemporaryExperience,
+  dialogGageUp,
+  gameResult,
+  rankUp
 }) => {
 
   return(
@@ -141,7 +141,7 @@ export const GameOverDialog = ({
       maxWidth='lg'        
     >
       <CustomDialogInnerWrapper
-        has_user={has_user}
+        hasUser={hasUser}
       > 
         <CustomDialogTitleWrapper>
           <CustomSpan>GAME OVER</CustomSpan>
@@ -155,30 +155,30 @@ export const GameOverDialog = ({
             <tbody>
               <tr>
                 <MetaTd>正解数</MetaTd> 
-                <CustomTd>{ `${correct_questions.length}問` }</CustomTd>
+                <CustomTd>{ `${correctQuestions.length}問` }</CustomTd>
               </tr>
               <tr>
                 <MetaTd>不正解数</MetaTd> 
-                <CustomTd>{ `${incorrect_questions.length || "0"}問` }</CustomTd>
+                <CustomTd>{ `${incorrectQuestions.length || "0"}問` }</CustomTd>
               </tr>
               {
-                has_user && 
+                hasUser && 
                   <>
                     <tr>
                       <ExperienceMetaTd>獲得経験値</ExperienceMetaTd> 
                       <ExperienceTd>
-                        { temporary_experience }
+                        { temporaryExperience }
                       </ExperienceTd>
                     </tr>
                     <tr>
                       <ExperienceGageTd colSpan={2}>
                         <DialogExperienceBox 
                           rank={rank}
-                          total_experience={total_experience}
-                          maximum_experience_per_rank={maximum_experience_per_rank}
-                          temporary_experience={temporary_experience} 
-                          prev_temporary_experience={prev_temporary_experience}
-                          dialog_gage_up={dialog_gage_up}
+                          totalExperience={totalExperience}
+                          maximumExperiencePerRank={maximumExperiencePerRank}
+                          temporaryExperience={temporaryExperience} 
+                          prevTemporaryExperience={prevTemporaryExperience}
+                          dialogGageUp={dialogGageUp}
                         />
                       </ExperienceGageTd>
                     </tr>
@@ -198,11 +198,11 @@ export const GameOverDialog = ({
             />
             <ResultShareButton 
               difficulty={difficulty}             
-              game_result={game_result}
-              rank_up={rank_up}
+              gameResult={gameResult}
+              rankUp={rankUp}
             />
             {
-              has_user ?
+              hasUser ?
                 <BackToMyPageButton />
               : 
                 <BackToTopButton />

@@ -52,7 +52,6 @@ const BackToModalButtonWrapper = styled.div`
   z-index: 3;
 `;
 
-// background-color: ${COLORS.OCHER};
 const QuestionBlockWrapper = styled.div`
   width: 100%;
   border-radius: 3px;
@@ -82,6 +81,7 @@ const QuestionNumFakeWrapper = styled.div`
   height: 5.5%;
   width: 10%;
 `;
+
 const QuestionNumWrapper = styled.div`
   background-color: ${COLORS.MAIN};
   width: 8%;
@@ -201,14 +201,15 @@ const CommentaryTitleWrapper = styled.div`
 const CommentaryWrapper = styled.div`
   font-size: 1em;
   color: ${COLORS.BLACK};
-  text-align: left;
+  text-align: justify;
+  text-justify: inter-ideograph;
 `;
 
 export const CheckAnswerDialog = ({
   isOpen,
   difficulty,
-  correct_questions,
-  incorrect_questions,
+  correctQuestions,
+  incorrectQuestions,
   setGameState,
 }) => {
 
@@ -223,8 +224,8 @@ export const CheckAnswerDialog = ({
             onClick={
               () => setGameState((prev) => ({
                 ...prev,
-                check_answer: false,
-                dialog_gage_up: false
+                checkAnswer: false,
+                dialogGageUp: false
               }))
             }
           />
@@ -234,15 +235,15 @@ export const CheckAnswerDialog = ({
         </CustomDialogTitleWrapper> 
         <CustomDialogContent>
           {
-            incorrect_questions.length ? incorrect_questions.map(({ 
+            incorrectQuestions.length ? incorrectQuestions.map(({ 
               question, 
-              sentence_num 
+              sentenceNum 
             }) => (
               <QuestionBlockWrapper>
                 <QuestionWrapper>
                   <QuestionUpperWrapper>
                     <QuestionNumWrapper>
-                      {`Q${sentence_num}`}
+                      {`Q${sentenceNum}`}
                     </QuestionNumWrapper>
                     <QuestionNumFakeWrapper />
                     <QuestionSentenceWrapper>
@@ -278,16 +279,16 @@ export const CheckAnswerDialog = ({
         </CustomDialogTitleWrapper> 
         <CustomDialogContent>
           {
-            correct_questions.length ? correct_questions.map(({
+            correctQuestions.length ? correctQuestions.map(({
               question,
-              sentence_num, 
-              input_regex
+              sentenceNum, 
+              inputRegex
             }) => (
-              <QuestionBlockWrapper good_or_bad="good">
+              <QuestionBlockWrapper>
                 <QuestionWrapper>
                   <QuestionUpperWrapper>
                     <QuestionNumWrapper>
-                      {`Q${sentence_num}`}
+                      {`Q${sentenceNum}`}
                     </QuestionNumWrapper>
                     <QuestionNumFakeWrapper />
                     <QuestionSentenceWrapper>
@@ -311,7 +312,7 @@ export const CheckAnswerDialog = ({
                       /
                     </AnchorWrapper>
                     <CodeBlockDiv>
-                      {input_regex}
+                      {inputRegex}
                     </CodeBlockDiv>
                     <AnchorWrapper>
                       /g

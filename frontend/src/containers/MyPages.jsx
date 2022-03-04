@@ -21,7 +21,7 @@ import { TitleFlashMessage } from '../components/FlashMessages/TitleFlashMessage
  
 // Images
 import ElementaryGameContentImage from '../images/elementary_game_content.jpg';
-import IntermediateGameContentImage from '../images/intermediate_game_content.png';
+import IntermediateGameContentImage from '../images/intermediate_game_content.jpg';
 
 // Contextオブジェクト
 import { UserContext } from "../context/UserProvider.js";
@@ -186,28 +186,28 @@ export const MyPages = () => {
   } = useContext(UserContext);
 
   // 今月の月を計算する関数
-  const this_month = useMemo(() => getMonthOfTheMonth(), []);
+  const thisMonth = useMemo(() => getMonthOfTheMonth(), []);
 
   // myPageStateの最初の状態
-  // isOpenDialog, name, release_date, release_conditionは
+  // isOpenDialog, name, releaseDate, releaseConditionは
   // タイトルカードのモーダルで使う
   const initialState = {
-    game_frequencies_per_day: {},
-    total_time_per_difficulty: {},
-    game_clear_count_per_difficulty: {},
-    fast_time_per_difficulty: {},
-    owned_titles: [],
-    selected_total_time: 0,
-    selected_game_clear_count: 0,
-    selected_fast_time: 0,
-    difficulty_month_title: "",
+    gameFrequenciesPerDay: {},
+    totalTimePerDifficulty: {},
+    gameClearCountPerDifficulty: {},
+    fastTimePerDifficulty: {},
+    ownedTitles: [],
+    selectedTotalTime: 0,
+    selectedGameClearCount: 0,
+    selectedFastTime: 0,
+    difficultyMonthTitle: "",
     isOpenDialog: false,
     name: "",
-    release_date: "",
-    release_condition: "",
+    releaseDate: "",
+    releaseCondition: "",
     display: false,
     message: "",
-    get_page_info: false
+    getPageInfo: false
   };
 
   // MyPageの状態を管理するstate
@@ -265,23 +265,23 @@ export const MyPages = () => {
   // user存在時のみ発動するように、if文で制御した
   // 内部で今月のグラフのデータも算出している
   // sessionStateがtrueの時かつ、userがサーバーから取得できたときに実行する
-  // get_page_infoのおかげで、マイページのデータを取得したら、
+  // getPageInfoのおかげで、マイページのデータを取得したら、
   // このuseLayoutEffectは機能しないように設定されている
   useLayoutEffect(() => {
-    if(!myPageState.get_page_info && sessionState && Object.keys(user).length){
+    if(!myPageState.getPageInfo && sessionState && Object.keys(user).length){
       getMyPageInfo(user).then((data) => {
         setMyPageState((prev) => ({
           ...prev,
-          game_frequencies_per_day: data.game_frequencies_per_day,
-          total_time_per_difficulty: data.total_time_per_difficulty,
-          game_clear_count_per_difficulty: data.game_clear_count_per_difficulty,
-          fast_time_per_difficulty: data.fast_time_per_difficulty,
-          owned_titles: data.owned_titles,
-          selected_total_time: data.total_time_per_difficulty.elementary,
-          selected_game_clear_count: data.game_clear_count_per_difficulty.elementary,
-          selected_fast_time: data.fast_time_per_difficulty.elementary,
-          difficulty_month_title: `初級編(${this_month}月)`,
-          get_page_info: true
+          gameFrequenciesPerDay: data.game_frequencies_per_day,
+          totalTimePerDifficulty: data.total_time_per_difficulty,
+          gameClearCountPerDifficulty: data.game_clear_count_per_difficulty,
+          fastTimePerDifficulty: data.fast_time_per_difficulty,
+          ownedTitles: data.owned_titles,
+          selectedTotalTime: data.total_time_per_difficulty.elementary,
+          selectedGameClearCount: data.game_clear_count_per_difficulty.elementary,
+          selectedFastTime: data.fast_time_per_difficulty.elementary,
+          difficultyMonthTitle: `初級編(${thisMonth}月)`,
+          getPageInfo: true
         })); 
       }).catch((e) => {
         if(e.response.status === HTTP_STATUS_CODE.NOT_FOUND){
@@ -296,8 +296,8 @@ export const MyPages = () => {
   }, [
     user,
     sessionState,
-    this_month,
-    myPageState.get_page_info
+    thisMonth,
+    myPageState.getPageInfo
   ]);
 
   // ゲーム中のユーザーがトップページに戻ったときに
@@ -333,10 +333,10 @@ export const MyPages = () => {
                 <UserStatus
                   name={user.name}
                   rank={user.rank}
-                  active_title={user.active_title}
-                  temporary_experience={user.temporary_experience}
-                  total_experience={user.total_experience}
-                  maximum_experience_per_rank={user.maximum_experience_per_rank}
+                  activeTitle={user.active_title}
+                  temporaryExperience={user.temporary_experience}
+                  totalExperience={user.total_experience}
+                  maximumExperiencePerRank={user.maximum_experience_per_rank}
                   image={user.image}
                 />
                 <StudyHeatMapWrapper>
@@ -344,27 +344,27 @@ export const MyPages = () => {
                     学習カレンダー
                   </StudyHeatMapSentenceWrapper>
                   <StudyHeatMap 
-                    game_frequencies_per_day={myPageState.game_frequencies_per_day}
+                    gameFrequenciesPerDay={myPageState.gameFrequenciesPerDay}
                   />
                 </StudyHeatMapWrapper>
               </MainFirstWrapper>
               <MainSecondWrapper>
                 <MainSecondSelectWrapper>
                   <SecondSelectBox 
-                    difficulty_month_title={myPageState.difficulty_month_title}
+                    difficultyMonthTitle={myPageState.difficultyMonthTitle}
                     setMyPageState={setMyPageState}
-                    this_month={this_month}
+                    thisMonth={thisMonth}
                   />
                 </MainSecondSelectWrapper>
                 <MainSecondGraphWrapper>
                   <TimeAnalysisBox
-                    time={myPageState.selected_total_time} 
+                    time={myPageState.selectedTotalTime} 
                   />
                   <GameClearCountBox
-                    count={myPageState.selected_game_clear_count} 
+                    count={myPageState.selectedGameClearCount} 
                   />
                   <FastAnalysisBox
-                    minutes={myPageState.selected_fast_time} 
+                    minutes={myPageState.selectedFastTime} 
                   />
                 </MainSecondGraphWrapper>
               </MainSecondWrapper>
@@ -393,16 +393,16 @@ export const MyPages = () => {
                 </TitleListSentenceWrapper>
                 <TitleListWrapper>
                   {
-                    myPageState.owned_titles.map((obj) => (
+                    myPageState.ownedTitles.map((obj) => (
                       <TitleCard
                         name={obj.name}
-                        release_date={obj.release_date}
+                        releaseDate={obj.release_date}
                         onClick={() => setMyPageState((prev) => ({
                           ...prev,
                           isOpenDialog: true,   
                           name: obj.name,
-                          release_date: obj.release_date,
-                          release_condition: obj.release_condition
+                          releaseDate: obj.release_date,
+                          releaseCondition: obj.release_condition
                         }))}
                       />
                     ))
@@ -419,12 +419,12 @@ export const MyPages = () => {
                     ...prev,
                     isOpenDialog: false,
                     name: "",
-                    release_date: "",
-                    release_condition: ""
+                    releaseDate: "",
+                    releaseCondition: ""
                   }))}
                   name={myPageState.name}
-                  release_date={myPageState.release_date}
-                  release_condition={myPageState.release_condition}
+                  releaseDate={myPageState.releaseDate}
+                  releaseCondition={myPageState.releaseCondition}
                   setMyPageState={setMyPageState}
                 />
             }

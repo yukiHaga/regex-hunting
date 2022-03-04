@@ -19,11 +19,11 @@ const InnerStudyHeatMapWrapper = styled.div`
 `;
 
 export const StudyHeatMap = memo(({
-  game_frequencies_per_day,
+  gameFrequenciesPerDay,
 }) => {
 
   // 今月の月初
-  const this_month_first_day = useMemo(() => new Date(
+  const thisMonthFirstDay = useMemo(() => new Date(
     new Date(
       new Date().getFullYear(), 
       new Date().getMonth(), 
@@ -33,13 +33,13 @@ export const StudyHeatMap = memo(({
   ]);
 
   // 前月の月末
-  const prev_month_end_day = useMemo(() => new Date(
+  const prevMonthEndDay = useMemo(() => new Date(
     new Date().setDate(0), 
   ), [
   ]);
 
   // 今月の月末
-  const this_month_end_day = useMemo(() => new Date(
+  const thisMonthEndDay = useMemo(() => new Date(
     new Date(
       new Date().getFullYear(), 
       new Date().getMonth() + 1, 
@@ -51,21 +51,21 @@ export const StudyHeatMap = memo(({
   // 今月の日付とカウントをプロパティに持つオブジェクトを生成
   // レンダリング毎に行われる不要な計算をスキップするためにuseMemoを使用
   // useMemoで関数の結果を保持できる。
-  const month_obj = useMemo(() => makeThisMonthObj(
-    this_month_first_day,
-    this_month_end_day
+  const monthObj = useMemo(() => makeThisMonthObj(
+    thisMonthFirstDay,
+    thisMonthEndDay
   ),[
-    this_month_first_day,
-    this_month_end_day
+    thisMonthFirstDay,
+    thisMonthEndDay
   ]);
 
   // 日付とカウントをキーに持つオブジェクトを要素とした配列を生成 
-  const month_obj_array = useMemo(() => addCountToMonthArray(
-    game_frequencies_per_day,
-    month_obj
+  const monthObjArray = useMemo(() => addCountToMonthArray(
+    gameFrequenciesPerDay,
+    monthObj
   ),[
-    game_frequencies_per_day,
-    month_obj
+    gameFrequenciesPerDay,
+    monthObj
   ])
 
   // ヒートマップの色を返す関数
@@ -86,14 +86,14 @@ export const StudyHeatMap = memo(({
     <>
       <InnerStudyHeatMapWrapper>
         <CalendarHeatmap
-          startDate={prev_month_end_day}
-          endDate={this_month_end_day}
+          startDate={prevMonthEndDay}
+          endDate={thisMonthEndDay}
           showMonthLabels={false}
           showWeekdayLabels={true}
           showOutOfRangeDays={false}
           gutterSize={1}
           horizontal={false}
-          values={month_obj_array}
+          values={monthObjArray}
           tooltipDataAttrs={({count, date}) => {
             return {
               'data-tip': `ゲーム回数: ${count}, ${

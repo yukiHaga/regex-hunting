@@ -45,11 +45,11 @@ export const Rankings = () => {
   } = useContext(UserContext);
 
   const initialState = {
-    top_ten_elementary: [],
-    top_ten_intermediate: [],
-    top_ten_advanced: [],
-    current_top_ten_array: [],
-    difficulty_title: ""
+    topTenElementary: [],
+    topTenIntermediate: [],
+    topTenAdvanced: [],
+    currentTopTenArray: [],
+    difficultyTitle: ""
   };
 
   // ランキングを制御するstate
@@ -101,11 +101,11 @@ export const Rankings = () => {
     getRanking().then((data) => {
       setRankingState((prev) => ({
         ...prev,
-        top_ten_elementary: data.top_ten_elementary,
-        top_ten_intermediate: data.top_ten_intermediate,
-        top_ten_advanced: data.top_ten_advanced,
-        current_top_ten_array: data.top_ten_elementary,
-        difficulty_title: "初級編"
+        topTenElementary: data.top_ten_elementary,
+        topTenIntermediate: data.top_ten_intermediate,
+        topTenAdvanced: data.top_ten_advanced,
+        currentTopTenArray: data.top_ten_elementary,
+        difficultyTitle: "初級編"
       }));
     }).catch((e) => {
       if(e.response.status === HTTP_STATUS_CODE.NOT_FOUND){
@@ -141,8 +141,8 @@ export const Rankings = () => {
       /> 
       <MainWrapper>
         <RankingBox
-          current_top_ten_array={rankingState.current_top_ten_array}
-          difficulty_title={rankingState.difficulty_title}
+          currentTopTenArray={rankingState.currentTopTenArray}
+          difficultyTitle={rankingState.difficultyTitle}
           setRankingState={setRankingState}
         />
       </MainWrapper>

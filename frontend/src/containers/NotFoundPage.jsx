@@ -138,7 +138,7 @@ export const NotFoundPage = () => {
       </Mask>
       <MainWrapper>
         <ErrorCodeImageWrapper src={ErrorCodeImage} />
-        <CustomSentence>Sorry, the page you're looking con not found.</CustomSentence>
+        <CustomSentence>Sorry, the page you're looking for can not be found.</CustomSentence>
         <CustomSentence><CustomLink to="/">Back to Top</CustomLink></CustomSentence>
       </MainWrapper>
     </MainOuterWrapper>

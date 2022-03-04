@@ -84,7 +84,7 @@ const SentenceWrapper = styled.div`
   color: ${COLORS.BLACK};
 `;
 
-const SpecialCodeBlockWrapper = styled(CodeBlockWrapper)`
+const CaptureCodeBlockWrapper = styled(CodeBlockWrapper)`
   margin-top: 2%;
 `;
 
@@ -107,15 +107,11 @@ const OuterButtonsWrapper = styled.div`
   justify-content: center;
 `;
 
-const SpecialWarningSentenceWrapper = styled(WarningSentenceWrapper)`
-  margin-top: 1.5%;
-`;
-
 // isOpenはgameState.gameDescriptionOpen
 // gameDescriptionOpenは、gameDescriptionOpen
 // clickDescriptionOpenは、ゲーム開始後にスライドを見るをクリックしたかを表すprops
 // ゲーム開始後にスライドを見るをクリックしたなら、trueになる
-export const ElementaryGameDescriptionDialog = ({
+export const IntermediateGameDescriptionDialog = ({
   isOpen,
   setGameState,
   gameDescriptionOpen,
@@ -127,29 +123,39 @@ export const ElementaryGameDescriptionDialog = ({
   // 最初のslideNumを0とした
   const slideContent = useMemo(() => [
     {
-      title: "初級編",
-      sentence: "初級編を始める前に、正規表現とは何か？、文字クラスとは何か？を学習しましょう！ そして、初級編のゲームを通して、文字クラスを使用した正規表現をマスターしましょう！",
+      title: "中級編",
+      sentence: "中級編を始める前に、最大量指定子(? * + {min,max})、キャプチャグループについて学習しましょう！ そして、中級編のゲームを通して、これらの特殊文字を使用した正規表現をマスターしましょう！",
       slideNum: 0
     },
     {
-      title: "What’s 正規表現？",
-      sentence: "正規表現とは、複数の文字列からルールを見つけ出し、そのルールをパターンで表現したものです。正規表現は、基本的に「文字列」と「特殊文字」で構成されます。正規表現とプログラミング言語の正規表現用メソッドを併用することによって、複数の文字列から特定の文字を取得したり、置換したりすることができます。",
+      title: "最大量指定子とは？",
+      sentence: "最大量指定子(? * + {min,max})とは、ある文字列に繰り返しマッチさせるための特殊文字です。ある文字列の直後に最大量指定子を置くと、その文字列に対して最大量指定子を適用させることができます。正規表現で最大量指定子を使用することによって、繰り返しの文字列にマッチさせるのが簡単になります。以降のスライドでは、各最大量指定子の使用方法について説明します。",
       slideNum: 1
     },
     {
-      title: "文字クラスとは？",
-      sentence: "文字クラス([...])とは、指定した文字のどれか1文字にマッチする特殊文字です。[...]の...に、現れても良い1文字を複数指定します。例えば、[acz#]と書くと、[acz#]は、a, c, z, #のどれか1文字にマッチします。また、文字クラスの別の使い方として、[...]の中に-を書くと、文字の範囲を指定できます。例えば、[a-z]はaからzの小文字アルファベット1文字にマッチします。[1-9]は、0から9の1桁の数字にマッチします。範囲は複数指定できるので、[a-zA-Z]や[a-zA-Z1-9]と書くこともできます。文字クラス内で文字指定と範囲指定を併用することもできるので、[a-z#%]と書くことも可能です。",
+      title: "?の使い方",
+      sentence: "最大量指定子?は、直前の1文字があればマッチさせるが、なくてもよいという意味を表します。文字列の直後に?を置くことで、その文字列に?の意味が適用されます。例えば、n?はnがあればマッチさせるが、なくてもよいという意味を表します。n?を使用したenviron?mentという正規表現は、environment, enviromentという文字列にマッチさせることができます。このように、直前の1文字があってもなくてもよいという正規表現を作りたい時に、?を使います。",
       slideNum: 2
     },
     {
-      title: "正規表現を作るコツ",
-      sentence: "'gray grey'という文字列のgrayとgreyにマッチするような正規表現を求めよ」と言われた場合、1つの文字クラスのみで作られた正規表現ではマッチできません。理由は、文字クラスは指定した1文字を表すだけであり、2文字以上の文字列にマッチさせることができないからです。この場合、まずはgrayとgreyの共通な文字と共通ではない文字を見つけます。共通な文字はg, r, yです。そして、共通ではない文字はa, eです。aとeは、grayとgreyの3番目に位置する文字です。したがって、gr[ae]yという正規表現を用いることで、grayとgreyにマッチさせることができます。",
+      title: "+と*の使い方",
+      sentence: "最大量指定子+は、直前の1文字に1回以上の繰り返しマッチという意味を表し、最大量指定子*は、直前の1文字に0回以上の繰り返しマッチという意味を表します。+と*の意味は似ています。大きな違いとして、+の場合は少なくとも1回はマッチしないといけませんが、*の場合はなくても大丈夫です。以下の例のo+は、oの1回以上繰り返しマッチを表すので、cとkの間にoがない単語(ck)にはマッチしないことが分かります。直前の1文字を繰り返したい正規表現を作りたい時に、*や+を使います。",
       slideNum: 3
     },
     {
-      title: "ルール説明",
-      sentence: "初級編では、文字クラスを使用した正規表現を学習していきます。時間内に正しい正規表現を入力すると、モンスターに攻撃できます。モンスターのHPを0にしたらゲームクリアです！",
+      title: "{min,max}の使い方",
+      sentence: "最大量指定子{min,max}は、直前の1文字にmin回以上、max回以上の繰り返しマッチという意味を表します。例えば、\\dは1桁の数字にマッチするので、\\d{3,5}は3桁以上、5桁以下の数字にマッチします。{min,max}以外にも、{min}や{min,}という書き方があります。{min}は直前の1文字にmin回繰り返しマッチを表し、{min,}は直前の1文字にmin回以上繰り返しマッチを表します。例えば、\\d{3}は3桁の数字、\\d{3,}は3桁以上の数字にマッチします。直前の1文字の繰り返し回数を制御したい時に、{min,max}を使います。",
       slideNum: 4
+    },
+    {
+      title: "キャプチャグループとは？",
+      sentence: "最大量指定子(? * + {min,max})は、どれも直前の1文字を対象とする特殊文字です。2文字以上の文字を繰り返したい時はどうすれば良いのでしょうか？ そのような時はキャプチャグループ((...))を使用します。キャプチャグループを使用することで、複数の文字列を1つのグループとして扱うことができます。そのグループに最大量指定子を指定できるので、2文字以上の文字列を繰り返すことができます。本サービスでは、厳密性より見やすさと分かりやすさを重視している為、基本的には非キャプチャグループ((?:...))ではなく、キャプチャグループ((...))を使用します。",
+      slideNum: 5
+    },
+    {
+      title: "ルール説明",
+      sentence: "中級編では、最大量指定子、括弧を使用した正規表現を学習していきます。時間内に正しい正規表現を入力すると、モンスターに攻撃できます。モンスターのHPを0にしたらゲームクリアです！",
+      slideNum: 6
     }
   ], []);
 
@@ -166,9 +172,9 @@ export const ElementaryGameDescriptionDialog = ({
 
   // 右カーソルをクリックで左へずらす
   // スライドが右のスライドになる
-  // slideState.slideNumが4より小さい場合、右カーソルが機能する
+  // slideState.slideNumが6より小さい場合、右カーソルが機能する
   const changeSlideToRight = useCallback(() => {
-    if(slideState.slideNum < 4) {
+    if(slideState.slideNum < 6) {
       setSlideState((prev) => ({
         ...prev,
         slideIn: false,
@@ -289,31 +295,30 @@ export const ElementaryGameDescriptionDialog = ({
                 {
                   slideState.slideNum === 1 &&
                     <>
-                      <SpecialWarningSentenceWrapper>※ 本サービスでは、特殊な意味を持つ文字列は全て「特殊文字」として分類します。</SpecialWarningSentenceWrapper>
-                      <SpecialCodeBlockWrapper>
+                      <CodeBlockWrapper>
                         <CodeBlockDiv> 
                           <ComentLineWrapper>
                             {'//'} 正規表現を適用させる文字列
                           </ComentLineWrapper>
                           <CodeLineWrapper>
-                            <CodeRedSpan>const</CodeRedSpan> target <CodeYellowSpan>=</CodeYellowSpan> <CodeYellowSpan>'JavaScript and React are different. TypeScript is a great language.'</CodeYellowSpan>;
+                            <CodeRedSpan>const</CodeRedSpan> target <CodeYellowSpan>=</CodeYellowSpan> <CodeYellowSpan>'メラ メラメラ メラメラメラ'</CodeYellowSpan>;
                           </CodeLineWrapper>
                           <BlankLineWrapper />
                           <ComentLineWrapper>
-                            {'//'} [A-Z][a-zA-Z]+は、JavaScript, React, TypeScriptにマッチする正規表現です。
+                            {'//'} (メラ)+は、メラ, メラメラ, メラメラメラにマッチする正規表現です。
                           </ComentLineWrapper>
                           <CodeLineWrapper>
-                            <CodeRedSpan>const</CodeRedSpan> regex <CodeYellowSpan>=</CodeYellowSpan> <CodeYellowSpan>/[A-Z][a-zA-Z]+/g</CodeYellowSpan>;
+                            <CodeRedSpan>const</CodeRedSpan> regex <CodeYellowSpan>=</CodeYellowSpan> <CodeYellowSpan>/(メラ)+/g</CodeYellowSpan>;
                           </CodeLineWrapper>
                           <BlankLineWrapper />
                           <ComentLineWrapper>
                             {'//'} matchメソッドを用いることで、文字列中から正規表現を満たす文字列を取得できます。
                           </ComentLineWrapper>
                           <CodeLineWrapper>
-                            console.<CodeBlueSpan>log</CodeBlueSpan>(target.<CodeBlueSpan>match</CodeBlueSpan>(regex)); <CodeComentSpan>{'//'} => [ 'JavaScript', 'React', 'TypeScript' ]</CodeComentSpan>
+                            console.<CodeBlueSpan>log</CodeBlueSpan>(target.<CodeBlueSpan>match</CodeBlueSpan>(regex)); <CodeComentSpan>{'//'} => ['メラ', 'メラメラ', 'メラメラメラ']</CodeComentSpan>
                           </CodeLineWrapper>
                         </CodeBlockDiv>
-                      </SpecialCodeBlockWrapper>
+                      </CodeBlockWrapper>
                     </>
                 }
                 {
@@ -321,18 +326,22 @@ export const ElementaryGameDescriptionDialog = ({
                     <>
                       <CodeBlockWrapper>
                         <CodeBlockDiv> 
-                          <ComentLineWrapper>
-                            {'//'} 以下の{'/.../g'}の...にある[acz#]は、a, c, z, #のどれか1文字にマッチする正規表現です。
-                          </ComentLineWrapper>
                           <CodeLineWrapper>
-                            <CodeRedSpan>const</CodeRedSpan> regex1 <CodeYellowSpan>=</CodeYellowSpan> <CodeYellowSpan>/[acz#]/g</CodeYellowSpan>;
+                            <CodeRedSpan>const</CodeRedSpan> target <CodeYellowSpan>=</CodeYellowSpan> <CodeYellowSpan>'environment enviroment'</CodeYellowSpan>;
                           </CodeLineWrapper>
                           <BlankLineWrapper />
                           <ComentLineWrapper>
-                            {'//'} 以下の{'/.../g'}の...にある[a-z#%]は、aからz, #, %のどれか1文字にマッチする正規表現です。
+                            {'//'} environ?mentは、environment enviromentにマッチする正規表現です。
                           </ComentLineWrapper>
                           <CodeLineWrapper>
-                            <CodeRedSpan>const</CodeRedSpan> regex2 <CodeYellowSpan>=</CodeYellowSpan> <CodeYellowSpan>/[a-z#%]/g</CodeYellowSpan>;
+                            <CodeRedSpan>const</CodeRedSpan> regex <CodeYellowSpan>=</CodeYellowSpan> <CodeYellowSpan>/environ?ment/g</CodeYellowSpan>;
+                          </CodeLineWrapper>
+                          <BlankLineWrapper />
+                          <ComentLineWrapper>
+                            {'//'} matchメソッドを用いることで、文字列中から正規表現を満たす文字列を取得できます。
+                          </ComentLineWrapper>
+                          <CodeLineWrapper>
+                            console.<CodeBlueSpan>log</CodeBlueSpan>(target.<CodeBlueSpan>match</CodeBlueSpan>(regex)); <CodeComentSpan>{'//'} => ['environment', 'enviroment']</CodeComentSpan>
                           </CodeLineWrapper>
                         </CodeBlockDiv>
                       </CodeBlockWrapper>
@@ -344,18 +353,21 @@ export const ElementaryGameDescriptionDialog = ({
                       <CodeBlockWrapper>
                         <CodeBlockDiv> 
                           <CodeLineWrapper>
-                            <CodeRedSpan>const</CodeRedSpan> target <CodeYellowSpan>=</CodeYellowSpan> <CodeYellowSpan>'gray grey'</CodeYellowSpan>;
-                          </CodeLineWrapper>
-                          <BlankLineWrapper />
-                          <ComentLineWrapper>
-                            {'//'} gr[ae]yは、gray, greyにマッチする正規表現です。
-                          </ComentLineWrapper>
-                          <CodeLineWrapper>
-                            <CodeRedSpan>const</CodeRedSpan> regex <CodeYellowSpan>=</CodeYellowSpan> <CodeYellowSpan>/gr[ae]y/g</CodeYellowSpan>;
+                            <CodeRedSpan>const</CodeRedSpan> target <CodeYellowSpan>=</CodeYellowSpan> <CodeYellowSpan>'ck cook coook cooook'</CodeYellowSpan>;
                           </CodeLineWrapper>
                           <BlankLineWrapper />
                           <CodeLineWrapper>
-                            console.<CodeBlueSpan>log</CodeBlueSpan>(target.<CodeBlueSpan>match</CodeBlueSpan>(regex)); <CodeComentSpan>{'//'} => [ 'gray', 'grey' ]</CodeComentSpan>
+                            <CodeRedSpan>const</CodeRedSpan> regex1 <CodeYellowSpan>=</CodeYellowSpan> <CodeYellowSpan>/co*k/g</CodeYellowSpan>; <CodeComentSpan>{'//'} co*kは、ck cook coook cooookにマッチする正規表現</CodeComentSpan>
+                          </CodeLineWrapper>
+                          <CodeLineWrapper>
+                            <CodeRedSpan>const</CodeRedSpan> regex2 <CodeYellowSpan>=</CodeYellowSpan> <CodeYellowSpan>/co+k/g</CodeYellowSpan>; <CodeComentSpan>{'//'} co+kは、cook coook cooookにマッチする正規表現</CodeComentSpan>
+                          </CodeLineWrapper>
+                          <BlankLineWrapper />
+                          <CodeLineWrapper>
+                            console.<CodeBlueSpan>log</CodeBlueSpan>(target.<CodeBlueSpan>match</CodeBlueSpan>(regex1)); <CodeComentSpan>{'//'} => ['ck', 'cook', 'coook', 'cooook']</CodeComentSpan>
+                          </CodeLineWrapper>
+                          <CodeLineWrapper>
+                            console.<CodeBlueSpan>log</CodeBlueSpan>(target.<CodeBlueSpan>match</CodeBlueSpan>(regex2)); <CodeComentSpan>{'//'} => ['cook', 'coook', 'cooook']</CodeComentSpan>
                           </CodeLineWrapper>
                         </CodeBlockDiv>
                       </CodeBlockWrapper>
@@ -363,6 +375,58 @@ export const ElementaryGameDescriptionDialog = ({
                 }
                 {
                   slideState.slideNum === 4 &&
+                    <>
+                      <CodeBlockWrapper>
+                        <CodeBlockDiv> 
+                          <CodeLineWrapper>
+                            <CodeRedSpan>const</CodeRedSpan> target <CodeYellowSpan>=</CodeYellowSpan> <CodeYellowSpan>'150 is greater than 15.'</CodeYellowSpan>;
+                          </CodeLineWrapper>
+                          <BlankLineWrapper />
+                          <CodeLineWrapper>
+                            <CodeRedSpan>const</CodeRedSpan> regex1 <CodeYellowSpan>=</CodeYellowSpan> <CodeYellowSpan>/\d{'{'}3{'}'}/g</CodeYellowSpan>; <CodeComentSpan>{'//'} \d{'{'}3{'}'}は、3桁の数字にマッチする正規表現</CodeComentSpan>
+                          </CodeLineWrapper>
+                          <CodeLineWrapper>
+                            <CodeRedSpan>const</CodeRedSpan> regex2 <CodeYellowSpan>=</CodeYellowSpan> <CodeYellowSpan>/\d{'{'}2,3{'}'}/g</CodeYellowSpan>; <CodeComentSpan>{'//'} \d{'{'}2,3{'}'}は、2桁~3桁の数字にマッチする正規表現</CodeComentSpan>
+                          </CodeLineWrapper>
+                          <BlankLineWrapper />
+                          <CodeLineWrapper>
+                            console.<CodeBlueSpan>log</CodeBlueSpan>(target.<CodeBlueSpan>match</CodeBlueSpan>(regex1)); <CodeComentSpan>{'//'} => ['150']</CodeComentSpan>
+                          </CodeLineWrapper>
+                          <CodeLineWrapper>
+                            console.<CodeBlueSpan>log</CodeBlueSpan>(target.<CodeBlueSpan>match</CodeBlueSpan>(regex2)); <CodeComentSpan>{'//'} => ['150', '15']</CodeComentSpan>
+                          </CodeLineWrapper>
+                        </CodeBlockDiv>
+                      </CodeBlockWrapper>
+                    </>
+                }
+                {
+                  slideState.slideNum === 5 &&
+                    <>
+                      <CaptureCodeBlockWrapper>
+                        <CodeBlockDiv> 
+                          <CodeLineWrapper>
+                            <CodeRedSpan>const</CodeRedSpan> target <CodeYellowSpan>=</CodeYellowSpan> <CodeYellowSpan>'1, 112, 11212, 1121212'</CodeYellowSpan>;
+                          </CodeLineWrapper>
+                          <BlankLineWrapper />
+                          <CodeLineWrapper>
+                            <CodeRedSpan>const</CodeRedSpan> regex1 <CodeYellowSpan>=</CodeYellowSpan> <CodeYellowSpan>/1(12)*/g</CodeYellowSpan>; <CodeComentSpan>{'//'} (12)*は、12の0回以上の繰り返しマッチを表します。</CodeComentSpan>
+                          </CodeLineWrapper>
+                          <CodeLineWrapper>
+                            <CodeRedSpan>const</CodeRedSpan> regex2 <CodeYellowSpan>=</CodeYellowSpan> <CodeYellowSpan>/112*/g</CodeYellowSpan>; <CodeComentSpan>{'//'} 2*は、2の0回以上の繰り返しマッチを表します。</CodeComentSpan>
+                          </CodeLineWrapper>
+                          <BlankLineWrapper />
+                          <CodeLineWrapper>
+                            console.<CodeBlueSpan>log</CodeBlueSpan>(target.<CodeBlueSpan>match</CodeBlueSpan>(regex1)); <CodeComentSpan>{'//'} => ['1', '112', '11212', '1121212']</CodeComentSpan>
+                          </CodeLineWrapper>
+                          <CodeLineWrapper>
+                            console.<CodeBlueSpan>log</CodeBlueSpan>(target.<CodeBlueSpan>match</CodeBlueSpan>(regex2)); <CodeComentSpan>{'//'} => ['112', '112', '112']</CodeComentSpan>
+                          </CodeLineWrapper>
+                        </CodeBlockDiv>
+                      </CaptureCodeBlockWrapper>
+                    </>
+                }
+                {
+                  slideState.slideNum === 6 &&
                     <>
                       <WarningSentenceWrapper>
                         ※ UX向上の為、音が出ます。音量が気になる方は下げて頂くようお願いします。
@@ -408,18 +472,18 @@ export const ElementaryGameDescriptionDialog = ({
                 <Tooltip 
                   title={<div>進む<br />( 右矢印キー → )</div>}
                   placement="top"
-                  disableHoverListener={slideState.slideNum === 4}
+                  disableHoverListener={slideState.slideNum === 6}
                   sx={{
-                    opacity: slideState.slideNum === 4 ? 0 : 1,
+                    opacity: slideState.slideNum === 6 ? 0 : 1,
                   }}
                 >
                   <IconButton
                     sx={{
                       fontSize: '4.0em',
-                      opacity: slideState.slideNum === 4 ? 0.1 : 1,
-                      cursor: slideState.slideNum === 4 && "default"
+                      opacity: slideState.slideNum === 6 ? 0.1 : 1,
+                      cursor: slideState.slideNum === 6 && "default"
                     }}
-                    disableRipple={slideState.slideNum === 4}
+                    disableRipple={slideState.slideNum === 6}
                   >
                     <ArrowRightIcon 
                       fontSize='inherit' 

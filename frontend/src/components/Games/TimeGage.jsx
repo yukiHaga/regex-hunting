@@ -1,4 +1,3 @@
-import React from 'react';
 import styled, { keyframes } from 'styled-components';
 
 // Colors
@@ -63,9 +62,9 @@ const GageOuterWrapper = styled.div`
   box-shadow: inset 1px 1px 3px 0 rgba(0, 0, 0, 0.8), 1px 1px 0 0 rgba(255, 255, 255, 0.12);
 `;
 
-// 問題が表示された瞬間、QuestionBlock.jsxによってtime_activeがtrueになるので、
+// 問題が表示された瞬間、QuestionBlock.jsxによってtimeActiveがtrueになるので、
 // アニメーションが動き出す
-// click_description_openがtrueだと、アニメーションが一時停止する
+// clickDescriptionOpenがtrueだと、アニメーションが一時停止する
 const GageWrapper = styled.div`
   height: 100%;
   width: 100%;
@@ -74,12 +73,12 @@ const GageWrapper = styled.div`
   border: none;
   outline: none;
   animation: ${({
-    time_active,
-  }) => time_active && TimeGageAnime} 30s linear 1;
+    timeActive,
+  }) => timeActive && TimeGageAnime} 30s linear 1;
   animation-play-state: ${({
-    click_description_open,
-    click_meta_open
-  }) => (click_description_open || click_meta_open) ? 'paused' : 'running' };
+    clickDescriptionOpen,
+    clickMetaOpen
+  }) => (clickDescriptionOpen || clickMetaOpen) ? 'paused' : 'running' };
   border-radius: 10px;
   background-image: -webkit-linear-gradient(transparent 0%,rgba(255,255,255,.3) 50%,transparent 50%,rgba(0,0,0,.1) 100%);
   background-image: linear-gradient(transparent 0%,rgba(255,255,255,.3) 50%,transparent 50%,rgba(0,0,0,.1) 100%);
@@ -90,36 +89,36 @@ const GageWrapper = styled.div`
 export const TimeGage = ({
   gameState,
   setGameState,
-  time_active,
-  monster_attack,
-  user_defence,
-  user_hp,
-  sentence_num,
-  click_description_open,
-  click_meta_open
+  timeActive,
+  monsterAttack,
+  userDefence,
+  userHp,
+  sentenceNum,
+  clickDescriptionOpen,
+  clickMetaOpen
 }) => {
 
   // タイムゲージが0になった時に実行される関数
   const timeOut = () => {
-    gameState.incorrect_questions.push({
+    gameState.incorrectQuestions.push({
       question: gameState.questions[0],
-      sentence_num: sentence_num
+      sentenceNum: sentenceNum
     });
     gameState.questions.shift();
-    const current_hp = user_hp - calculateDamage(monster_attack, user_defence);
+    const currentHp = userHp - calculateDamage(monsterAttack, userDefence);
     const audio = new Audio(TackleSound);
     audio.play();
     setGameState((prev) => ({
       ...prev,
-      question_judgement: "incorrect",
-      incorrect_questions: prev.incorrect_questions,
+      questionJudgement: "incorrect",
+      incorrectQuestions: prev.incorrectQuestions,
       questions: prev.questions,
-      flash_display: true,
-      flash_title: "Bad",
-      commentary: prev.next_commentary,
-      next_commentary: prev?.questions["0"]?.commentary || "no_next_commentary",
-      key_available: false,
-      user_hp: current_hp
+      flashDisplay: true,
+      flashTitle: "Bad",
+      commentary: prev.nextCommentary,
+      nextCommentary: prev?.questions["0"]?.commentary || "no_next_commentary",
+      keyAvailable: false,
+      userHp: currentHp
     }));
   };
 
@@ -136,9 +135,9 @@ export const TimeGage = ({
           <GageOuterWrapper>
             <GageWrapper 
               onAnimationEnd={timeOut} 
-              time_active={time_active}
-              click_description_open={click_description_open}
-              click_meta_open={click_meta_open}
+              timeActive={timeActive}
+              clickDescriptionOpen={clickDescriptionOpen}
+              clickMetaOpen={clickMetaOpen}
             />
           </GageOuterWrapper>
         </FixWrapper>
