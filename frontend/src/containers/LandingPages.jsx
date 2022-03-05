@@ -277,8 +277,8 @@ export const LandingPages = () => {
           message={mobileState.message}
           setMobileState={setMobileState}
         />
-        <BackGroundImageCover width="868" heitht="495" src={GroupBackGroundImage} alt="main-image" />
-        <MainTitleImageCover width="1187" heitht="354" src={MainTitleImage} alt="main-title"/>
+        <BackGroundImageCover width="868" height="495" src={GroupBackGroundImage} alt="main-image" />
+        <MainTitleImageCover width="1187" height="354" src={MainTitleImage} alt="main-title"/>
         <Filter />
         <SubTitleSentence color={COLORS.SUB}>
           正規表現を学ぶ狩りに出よう
@@ -298,19 +298,19 @@ export const LandingPages = () => {
           Regex Huntingは、凶悪なモンスターを倒しながら<br/>
           正規表現が学べるゲーム型学習サービスです。
         </GameDescriptionSentence>
-        <SecondBattleSceneImageCover width="821" heitht="450" src={BattleSceneImage} alt="battle-scene"/>
+        <SecondBattleSceneImageCover width="821" height="450" src={BattleSceneImage} alt="battle-scene"/>
       </SecondWrapper>
       <ThirdWrapper>
         <GameDescriptionSentence>
           アカウント作成すると、学習頻度や最速タイムを<br />確認できます。
         </GameDescriptionSentence>
-        <ThirdMyPageImageCover width="914" heitht="501" src={MyPageImage} alt="my-page" />
+        <ThirdMyPageImageCover width="914" height="501" src={MyPageImage} alt="my-page" />
       </ThirdWrapper>
       <FourthWrapper>
         <RankingDescriptionSentence>
           全世界のハンターと競争して、<br />最強の正規表現ハンターを目指そう！
         </RankingDescriptionSentence>
-        <FourthRaknkingImageCover width="914" heitht="500" src={RaknkingImage} alt="ranking" />
+        <FourthRaknkingImageCover width="914" height="500" src={RaknkingImage} alt="ranking" />
       </FourthWrapper>
       <FifthWrapper id="gameContent">
         <GameStartDescriptionSentence>
