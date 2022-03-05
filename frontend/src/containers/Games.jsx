@@ -3,7 +3,7 @@ import { useParams } from 'react-router-dom';
 import styled, { keyframes } from 'styled-components';
 
 // Image
-import RealBackGroundImage from '../images/temporary_real_background_image.png';
+import RealBackGroundImage from '../images/temporary_real_background_image.jpg';
 
 // Presentational Components
 import { Header } from '../components/Headers/Header.jsx';
