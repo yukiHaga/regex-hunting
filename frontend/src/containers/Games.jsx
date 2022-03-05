@@ -68,7 +68,7 @@ const MainContentWrapper = styled.div`
 const BackGroundImageCover = styled.img`
   position: absolute;
   width: 100%;
-  height: 100%;
+  height: 80vh;
   top: 0;
   left: 0;
   right: 0;
