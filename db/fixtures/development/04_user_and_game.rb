@@ -22,7 +22,7 @@
         id: _m + 1,
         difficulty: :elementary,
         game_result: :win,
-        result_time: '60000',
+        result_time: '120000',
         play_date: Faker::Date.between(from: '2021-12-01', to: '2021-12-10'),
         user_id: n + 1
       }
@@ -49,7 +49,7 @@
         id: _m + 4,
         difficulty: :intermediate,
         game_result: :win,
-        result_time: '60000',
+        result_time: '120000',
         play_date: Faker::Date.between(from: '2021-12-01', to: '2021-12-10'),
         user_id: n + 1
       }
@@ -76,7 +76,7 @@
         id: _m + 7,
         difficulty: :advanced,
         game_result: :win,
-        result_time: '60000',
+        result_time: '120000',
         play_date: Faker::Date.between(from: '2021-12-01', to: '2021-12-10'),
         user_id: n + 1
       }
