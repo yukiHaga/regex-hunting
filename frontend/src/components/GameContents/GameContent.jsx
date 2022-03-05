@@ -145,7 +145,7 @@ export const GameContent = memo(({
           {difficultyTitle(difficulty)}
         </GameContentTitleWrapper>
         <GameContentDescriptionWrapper>
-          <GameContentImageWrapper src={image} />
+          <GameContentImageWrapper width="357" height="186" src={image}/>
           <GameContentMainWrapper>
             <GameContentSentenceWrapper>
               {(difficultySentence(difficulty))}

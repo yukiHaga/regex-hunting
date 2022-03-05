@@ -28,7 +28,7 @@ export const HeaderTitle = () => {
   return (
     <>
       <HeaderTitleLink to={`/`}>
-        <MainTitleImageCover src={MainTitleImage} alt="main-title" />
+        <MainTitleImageCover width="1187" heitht="354" src={MainTitleImage} alt="main-title" />
       </HeaderTitleLink>
     </>
   );
