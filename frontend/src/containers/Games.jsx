@@ -1,4 +1,4 @@
-import React, { useState, Fragment, useEffect, useLayoutEffect, useContext } from 'react';
+import React, { useState, Fragment, useEffect, useLayoutEffect, useContext, useRef } from 'react';
 import { useParams } from 'react-router-dom';
 import styled, { keyframes } from 'styled-components';
 
@@ -215,6 +215,9 @@ export const Games = () => {
 
   // ゲーム状態を管理するstate
   const [gameState, setGameState] = useState(initialState);
+
+  // 画像用のオブジェクト
+  const inputRefObject = useRef(null);
 
   // React Routerで画面遷移するとユーザーが保持できないので、
   // useEffectで再度リクエストを出す。
@@ -487,10 +490,11 @@ export const Games = () => {
 
   console.log(gameState);
 
+  // inputRefObject.current?.completeでゲームの背景画像が完全に読み込まれたかを制御できる
   return (
     <>
       {
-        requestState === REQUEST_STATE.LOADING && gameState.gameDescriptionOpen ?
+        requestState === REQUEST_STATE.LOADING && gameState.gameDescriptionOpen && !inputRefObject.current?.complete ?
           <CircularMask />
         :
           <>
@@ -503,7 +507,7 @@ export const Games = () => {
                     flashTitle={gameState.flashTitle}
                   />
               }
-              <BackGroundImageCover src={RealBackGroundImage} />
+              <BackGroundImageCover src={RealBackGroundImage} ref={inputRefObject} />
               <MainGameContentWrapper
                 questionJudgement={gameState.questionJudgement}
               >
