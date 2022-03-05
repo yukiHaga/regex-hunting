@@ -310,7 +310,7 @@ export const LandingPages = () => {
         <RankingDescriptionSentence>
           全世界のハンターと競争して、<br />最強の正規表現ハンターを目指そう！
         </RankingDescriptionSentence>
-        <FourthRaknkingImageCover src={RaknkingImage} alt="ranking" />
+        <FourthRaknkingImageCover width="914" heitht="500" src={RaknkingImage} alt="ranking" />
       </FourthWrapper>
       <FifthWrapper id="gameContent">
         <GameStartDescriptionSentence>
