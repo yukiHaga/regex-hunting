@@ -10,6 +10,9 @@ import { getMonsterName } from '../../functions/getMonsterName.js';
 // 各ゲームの獲得経験値を取得する関数
 import { getExperience } from '../../functions/getExperience.js';
 
+// サニタイズ用のライブラリをインポートしてくる
+import DOMPurify from "dompurify";
+
 const QuestionBlockWrapper = styled.div`
   background-color: ${COLORS.SUB};
   border-radius: 3px;
@@ -64,11 +67,6 @@ const TargetSentenceWrapper = styled.div`
   font-style: normal;
   vertical-align: center;
   padding-top: 1%;
-`;
-
-const CustomSpan = styled.span`
-  color: ${({ backgroundColor }) => backgroundColor && COLORS.WORD_BLUE};
-  background-color: ${({ backgroundColor }) => backgroundColor && COLORS.WORD_BACK};
 `;
 
 export const QuestionBlock = ({ 
@@ -375,7 +373,7 @@ export const QuestionBlock = ({
               inputRegexObject instanceof RegExp ?
                 <div 
                   dangerouslySetInnerHTML={{
-                    __html: stringReplace(targetSentence, inputRegexObject)
+                    __html: DOMPurify.sanitize(stringReplace(targetSentence, inputRegexObject))
                   }}
                 />
               :
