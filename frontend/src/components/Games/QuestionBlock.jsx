@@ -80,9 +80,9 @@ export const QuestionBlock = ({
   targetSentence,
   nextTargetSentence,
   nextHint,
-  matchArray,
   questionJudgement,
   setGameState,
+  inputRegex,
   inputRegexObject,
   correctQuestions,
   incorrectQuestions,
@@ -353,8 +353,12 @@ export const QuestionBlock = ({
     memoDamageSentence
   ]);
 
-  // マッチした箇所をリプレイスするライブラリをrequireしてくる
-  const reactStringReplace = require('react-string-replace');
+  // マッチした文字列にspanタグを挿入する関数
+  const stringReplace = (target, re) => {
+    return target.replace( re, (match) => (
+      `<span style='color: ${COLORS.WORD_BLUE}; background-color: ${COLORS.WORD_BACK};'>` + match + "</span>"
+    ));
+  }
 
   return (
     <>
@@ -368,15 +372,14 @@ export const QuestionBlock = ({
           </SentenceWrapper>
           <TargetSentenceWrapper>
             {
-              targetSentence &&
-                reactStringReplace(targetSentence, inputRegexObject, (match, i) => (
-                  <CustomSpan 
-                    key={i} 
-                    backgroundColor={i}
-                  >
-                    {match}
-                  </CustomSpan>     
-                ))
+              inputRegexObject instanceof RegExp ?
+                <div 
+                  dangerouslySetInnerHTML={{
+                    __html: stringReplace(targetSentence, inputRegexObject)
+                  }}
+                />
+              :
+                targetSentence
             }
           </TargetSentenceWrapper>
         </QuestionWrapper>
