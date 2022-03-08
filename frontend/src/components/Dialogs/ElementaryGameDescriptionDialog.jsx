@@ -46,7 +46,7 @@ const CustomDialogInnerWrapper = styled.div`
 `;
 
 const DynamicSlideContentWrapper = styled.div`
-  width: 80%;
+  width: 82%;
   height: 78%;
   margin: 0 auto;
 `;
@@ -307,7 +307,7 @@ export const ElementaryGameDescriptionDialog = ({
                           </CodeLineWrapper>
                           <BlankLineWrapper />
                           <ComentLineWrapper>
-                            {'//'} matchメソッドを用いることで、文字列中から正規表現を満たす文字列を取得できます。
+                            {'//'} matchメソッドを用いることで、文字列中から正規表現にマッチする文字列を取得できます。
                           </ComentLineWrapper>
                           <CodeLineWrapper>
                             console.<CodeBlueSpan>log</CodeBlueSpan>(target.<CodeBlueSpan>match</CodeBlueSpan>(regex)); <CodeComentSpan>{'//'} => [ 'JavaScript', 'React', 'TypeScript' ]</CodeComentSpan>
@@ -319,23 +319,27 @@ export const ElementaryGameDescriptionDialog = ({
                 {
                   slideState.slideNum === 2 &&
                     <>
-                      <CodeBlockWrapper>
+                      <SpecialCodeBlockWrapper>
                         <CodeBlockDiv> 
-                          <ComentLineWrapper>
-                            {'//'} 以下の{'/.../g'}の...にある[acz#]は、a, c, z, #のどれか1文字にマッチする正規表現です。
-                          </ComentLineWrapper>
                           <CodeLineWrapper>
-                            <CodeRedSpan>const</CodeRedSpan> regex1 <CodeYellowSpan>=</CodeYellowSpan> <CodeYellowSpan>/[acz#]/g</CodeYellowSpan>;
+                            <CodeRedSpan>const</CodeRedSpan> target <CodeYellowSpan>=</CodeYellowSpan> <CodeYellowSpan>'a c z # % @ b'</CodeYellowSpan>;
                           </CodeLineWrapper>
                           <BlankLineWrapper />
                           <ComentLineWrapper>
-                            {'//'} 以下の{'/.../g'}の...にある[a-z#%]は、aからz, #, %のどれか1文字にマッチする正規表現です。
+                            {'//'} [acz#]は、a, c, z, #のどれか1文字にマッチする正規表現です。
                           </ComentLineWrapper>
                           <CodeLineWrapper>
-                            <CodeRedSpan>const</CodeRedSpan> regex2 <CodeYellowSpan>=</CodeYellowSpan> <CodeYellowSpan>/[a-z#%]/g</CodeYellowSpan>;
+                            <CodeRedSpan>const</CodeRedSpan> regex <CodeYellowSpan>=</CodeYellowSpan> <CodeYellowSpan>/[acz#]/g</CodeYellowSpan>;
+                          </CodeLineWrapper>
+                          <BlankLineWrapper />
+                          <ComentLineWrapper>
+                            {'//'} matchメソッドを用いることで、文字列中から正規表現にマッチする文字列を取得できます。
+                          </ComentLineWrapper>
+                          <CodeLineWrapper>
+                            console.<CodeBlueSpan>log</CodeBlueSpan>(target.<CodeBlueSpan>match</CodeBlueSpan>(regex)); <CodeComentSpan>{'//'} => ['a', 'c', 'z', '#']</CodeComentSpan>
                           </CodeLineWrapper>
                         </CodeBlockDiv>
-                      </CodeBlockWrapper>
+                      </SpecialCodeBlockWrapper>
                     </>
                 }
                 {
