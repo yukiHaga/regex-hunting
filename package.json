@@ -15,5 +15,8 @@
     "node": "12.14.0",
     "npm": "6.13.4",
     "yarn": "1.22.10"
+  },
+  "dependencies": {
+    "dompurify": "^2.3.6"
   }
 }

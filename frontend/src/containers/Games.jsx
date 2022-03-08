@@ -189,6 +189,7 @@ export const Games = () => {
     nextCommentary: "",
     flashDisplay: false,
     flashTitle: "",
+    inputRegex: "",
     inputRegexObject: {},
     keyAvailable: false,
     gameResult: "",
@@ -578,9 +579,9 @@ export const Games = () => {
                         targetSentence={gameState.targetSentence}
                         nextTargetSentence={gameState.nextTargetSentence}
                         nextHint={gameState.nextHint}
-                        matchArray={gameState.matchArray}
                         questionJudgement={gameState.questionJudgement}
                         setGameState={setGameState}
+                        inputRegex={gameState.inputRegex}
                         inputRegexObject={gameState.inputRegexObject}
                         correctQuestions={gameState.correctQuestions}
                         incorrectQuestions={gameState.incorrectQuestions}

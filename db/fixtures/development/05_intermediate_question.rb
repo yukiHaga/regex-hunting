@@ -24,33 +24,33 @@ Question.seed(
   # 3問目
   {
     id: 17,
-    sentence: '<html>, <p>, <span>にマッチする正規表現を入力せよ',
-    target_sentence: '<html> <p> <span>',
-    sample_answer: '<[a-z]+>',
-    hint: '文字列, 文字クラス, 量指定子(+)を使用して、正規表現を作ってみましょう。',
-    commentary: '[a-z]+は、aからzの1文字に1回以上繰り返しマッチさせるという意味です。そのため、<[a-z]+>で<html>, <p>, <span>にマッチするような正規表現を表します。',
+    sentence: '195-3314, 195-33, 195#3にマッチする正規表現を入力せよ',
+    target_sentence: '195-3314 195-33 195#3',
+    sample_answer: '\\d{3}[-#]\\d{1,4}',
+    hint: '\\d, 文字クラス, 量指定子を使用して、正規表現を作ってみましょう。',
+    commentary: '-と#の前には3桁の数字があります。3桁の数字は\\d{3}でマッチさせることができます。-と#に関しては、[-#]でマッチさせることができます。-と#の後ろは1桁から4桁の数字です。1桁から4桁の数字は\\d{1,4}でマッチさせることができます。そのため、\\d{3}[-#]\\d{1,4}で195-3314, 195-33, 195#3にマッチするような正規表現を表します。',
     difficulty: 'intermediate'
   },
 
   # 4問目
   {
     id: 18,
-    sentence: '<span>, <h5>, <h6>にマッチする正規表現を入力せよ。',
-    target_sentence: '<span> <h5> <h6>',
-    sample_answer: '<[a-z]+[1-6]?>',
-    hint: '文字列, 文字クラス, 量指定子を使用して、正規表現を作ってみましょう。',
-    commentary: '[1-6]?は、1から6の1桁の数字があればマッチするが、なくてもよいという意味です。そのため、<[a-z]+[1-6]?>で<span>, <h5>, <h6>にマッチするような正規表現を表します。<[a-z56]+>または<[a-z1-6]+>でマッチさせることもできます。',
+    sentence: 'class, class={Blue}にマッチする正規表現を入力せよ。',
+    target_sentence: 'class class={Blue}',
+    sample_answer: 'class(={Blue})?',
+    hint: '文字列, キャプチャグループ, 量指定子を使用して、正規表現を作ってみましょう。',
+    commentary: 'classとclass={Blue}の共通な文字列はclassです。共通ではない文字列は={Blue}です。={Blue}があるかないかの違いなので、={Blue}は(={Blue})?でマッチさせることを考えます。そのため、class(={Blue})?でclass, class={Blue}にマッチするような正規表現を表します。',
     difficulty: 'intermediate'
   },
 
   # 5問目
   {
     id: 19,
-    sentence: '<p>, <p class={Blue}>にマッチする正規表現を入力せよ。',
-    target_sentence: '<p> <p class={Blue}>',
-    sample_answer: '<p(?: class={Blue})?>',
+    sentence: 'color={BLUE}, background-color={red}にマッチする正規表現を入力せよ。',
+    target_sentence: 'color={BLUE} background-color={red}',
+    sample_answer: '(background-)?color={[a-zA-Z]+}',
     hint: '文字列, キャプチャグループ, 文字クラス, 量指定子を使用して、正規表現を作ってみましょう。',
-    commentary: '<p>と、属性値を持つ<p>がターゲット文字列です。属性値を持つまたは持たないという条件から、ターゲット文字列にマッチできる正規表現は、<p(...)?>という形であることが予想できます。そのため、<p(?: class={Blue})?>で<p>, <p class={Blue}>にマッチするような正規表現を表します。',
+    commentary: 'colorとbackgournd-colorという文字列の違いは、background-がついているかです。colorとbackgroud-は、(background-)?colorでマッチさせることができます。={BLUE}と={red}は={[a-zA-Z]+}でマッチさせることができます。そのため、(background-)?color={[a-zA-Z]+}でcolor={BLUE}, background-color={red}にマッチするような正規表現を表します。',
     difficulty: 'intermediate'
   },
 
@@ -72,7 +72,7 @@ Question.seed(
     target_sentence: '1 10 100 1000 10000 100000',
     sample_answer: '\\d{4,}',
     hint: '1桁の数字にマッチする特殊文字と量指定子({min,})を使用して、正規表現を作ってみましょう。',
-    commentary: '\\d{4,}で1000, 10000, 100000にマッチするような正規表現を表します。[0-9]{4,}または1000(?:0*)でマッチさせることもできます。',
+    commentary: '\\d{4,}で1000, 10000, 100000にマッチするような正規表現を表します。[0-9]{4,}または1000(0*)でマッチさせることもできます。',
     difficulty: 'intermediate'
   },
 
@@ -125,9 +125,9 @@ Question.seed(
     id: 26,
     sentence: '1, 112, 11212, 1121212にマッチする正規表現を入力せよ。',
     target_sentence: '1 112 11212 1121212',
-    sample_answer: '1(?:12)*',
+    sample_answer: '1(12)*',
     hint: '文字列, キャプチャグループ, 量指定子(*)を使用して、正規表現を作ってみましょう。',
-    commentary: '全ての数は、先頭が1から始まります。その後、12が0回以上繰り返されています。そのため、1(?:12)*で1, 112, 11212, 1121212にマッチする正規表現を表します。',
+    commentary: '全ての数は、先頭が1から始まります。その後、12が0回以上繰り返されています。そのため、1(12)*で1, 112, 11212, 1121212にマッチする正規表現を表します。',
     difficulty: 'intermediate'
   },
 
@@ -136,9 +136,9 @@ Question.seed(
     id: 27,
     sentence: '123, -110.9にマッチする正規表現を入力せよ。',
     target_sentence: '123 -110.9',
-    sample_answer: '-?\\d{3}(?:\.\\d)?',
+    sample_answer: '-?\\d{3}(\.\\d)?',
     hint: '\\d, 量指定子を使用して、正規表現を作ってみましょう。',
-    commentary: 'マイナスがあるかないかは-?で表すことができます。マイナスと小数点との間には3桁の数字は、\\d{3}でマッチさせることができます。小数点と小数第一位の数があるかないかは、(?:\.\\d)?でマッチさせることができます。.自体は任意の1文字にマッチするので、純粋に.として使いたい場合、\\でエスケープします。したがって、-?\\d{3}(?:\.\\d)?で-123, -110.9にマッチする正規表現を表します。',
+    commentary: 'マイナスがあるかないかは-?で表すことができます。マイナスと小数点との間には3桁の数字は、\\d{3}でマッチさせることができます。小数点と小数第一位の数があるかないかは、(\.\\d)?でマッチさせることができます。.自体は任意の1文字にマッチするので、純粋に.として使いたい場合、\\でエスケープします。したがって、-?\\d{3}(\.\\d)?で-123, -110.9にマッチする正規表現を表します。',
     difficulty: 'intermediate'
   },
 
@@ -147,9 +147,9 @@ Question.seed(
     id: 28,
     sentence: 'Java, JavaScriptにマッチする正規表現を入力せよ。',
     target_sentence: 'Java JavaScript Python',
-    sample_answer: 'Java(?:Script)?',
+    sample_answer: 'Java(Script)?',
     hint: '文字列, キャプチャグループ, 量指定子(?)を使用して、正規表現を作ってみましょう。',
-    commentary: 'Javaという文字列と、JavaScriptという文字列の違いは、Scriptという文字列があるかないかです。Scriptという文字列があるまたはなしは、(?:Script)?でマッチさせることができます。そのため、Java(?:Script)?でJava, JavaScriptにマッチするような正規表現を表します。もしキャプチャグループをつけない場合、正規表現はJavaScript?となります。これは、JavaScript, JavaScripにマッチするだけであり、Javaにはマッチしません。?の対象はあくまで直前の1文字であるためです。キャプチャグループを使うことで、1文字以上の文字列を?の対象にすることができます。',
+    commentary: 'Javaという文字列と、JavaScriptという文字列の違いは、Scriptという文字列があるかないかです。Scriptという文字列があるまたはなしは、(Script)?でマッチさせることができます。そのため、Java(Script)?でJava, JavaScriptにマッチするような正規表現を表します。もしキャプチャグループをつけない場合、正規表現はJavaScript?となります。これは、JavaScript, JavaScripにマッチするだけであり、Javaにはマッチしません。?の対象はあくまで直前の1文字であるためです。キャプチャグループを使うことで、1文字以上の文字列を?の対象にすることができます。',
     difficulty: 'intermediate'
   },
 )

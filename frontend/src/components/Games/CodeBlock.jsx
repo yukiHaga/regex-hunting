@@ -201,6 +201,7 @@ export const CodeBlock = ({
           // エンター押して正解した時に実行されるsetGameState
           setGameState((prev) => ({
             ...prev,
+            inputRegex: inputRegex,
             inputRegexObject: inputRegexObject,
             matchArray: inputMatchArray,
             questionJudgement: currentQuestionJudgement,
@@ -219,6 +220,7 @@ export const CodeBlock = ({
           // エンター押して不正解の時に実行されるsetGameState
           setGameState((prev) => ({
             ...prev,
+            inputRegex: inputRegex,
             inputRegexObject: inputRegexObject,
             matchArray: inputMatchArray,
           }));

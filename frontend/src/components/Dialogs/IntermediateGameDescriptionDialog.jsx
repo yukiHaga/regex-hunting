@@ -46,7 +46,7 @@ const CustomDialogInnerWrapper = styled.div`
 `;
 
 const DynamicSlideContentWrapper = styled.div`
-  width: 80%;
+  width: 82%;
   height: 78%;
   margin: 0 auto;
 `;
@@ -312,7 +312,7 @@ export const IntermediateGameDescriptionDialog = ({
                           </CodeLineWrapper>
                           <BlankLineWrapper />
                           <ComentLineWrapper>
-                            {'//'} matchメソッドを用いることで、文字列中から正規表現を満たす文字列を取得できます。
+                            {'//'} matchメソッドを用いることで、文字列中から正規表現にマッチする文字列を取得できます。
                           </ComentLineWrapper>
                           <CodeLineWrapper>
                             console.<CodeBlueSpan>log</CodeBlueSpan>(target.<CodeBlueSpan>match</CodeBlueSpan>(regex)); <CodeComentSpan>{'//'} => ['メラ', 'メラメラ', 'メラメラメラ']</CodeComentSpan>
@@ -338,7 +338,7 @@ export const IntermediateGameDescriptionDialog = ({
                           </CodeLineWrapper>
                           <BlankLineWrapper />
                           <ComentLineWrapper>
-                            {'//'} matchメソッドを用いることで、文字列中から正規表現を満たす文字列を取得できます。
+                            {'//'} matchメソッドを用いることで、文字列中から正規表現にマッチする文字列を取得できます。
                           </ComentLineWrapper>
                           <CodeLineWrapper>
                             console.<CodeBlueSpan>log</CodeBlueSpan>(target.<CodeBlueSpan>match</CodeBlueSpan>(regex)); <CodeComentSpan>{'//'} => ['environment', 'enviroment']</CodeComentSpan>
