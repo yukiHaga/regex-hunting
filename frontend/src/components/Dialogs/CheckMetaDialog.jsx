@@ -570,10 +570,10 @@ export const CheckMetaDialog = ({
                                 <CustomCodeBlockWrapper>
                                   <CustomCodeBlockDiv> 
                                     <CodeLineWrapper>
-                                      <CodeRedSpan>const</CodeRedSpan> target1 <CodeYellowSpan>=</CodeYellowSpan> <CodeYellowSpan>000-0000</CodeYellowSpan>; <CodeComentSpan>{'//'} 不正な郵便番号</CodeComentSpan>
+                                      <CodeRedSpan>const</CodeRedSpan> target1 <CodeYellowSpan>=</CodeYellowSpan> <CodeYellowSpan>'000-0000'</CodeYellowSpan>; <CodeComentSpan>{'//'} 不正な郵便番号</CodeComentSpan>
                                     </CodeLineWrapper>
                                     <CodeLineWrapper>
-                                      <CodeRedSpan>const</CodeRedSpan> target2 <CodeYellowSpan>=</CodeYellowSpan> <CodeYellowSpan>171-0022</CodeYellowSpan>; <CodeComentSpan>{'//'} 正当な郵便番号</CodeComentSpan>
+                                      <CodeRedSpan>const</CodeRedSpan> target2 <CodeYellowSpan>=</CodeYellowSpan> <CodeYellowSpan>'171-0022'</CodeYellowSpan>; <CodeComentSpan>{'//'} 正当な郵便番号</CodeComentSpan>
                                     </CodeLineWrapper>
                                     <BlankLineWrapper />
                                     <ComentLineWrapper>
