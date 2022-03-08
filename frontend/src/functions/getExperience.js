@@ -6,10 +6,10 @@ export const getExperience = (difficulty) => {
       experience = 200;
       break;
     case 'intermediate':
-      experience = 400;
+      experience = 300;
       break;
     case 'advanced':
-      experience = 600;
+      experience = 400;
       break;
     default:
       console.log('エラーが起きました');
