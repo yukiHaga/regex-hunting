@@ -134,22 +134,22 @@ export const AdvancedGameDescriptionDialog = ({
     },
     {
       title: "肯定の先読みとは？",
-      sentence: "最大量指定子?は、直前の1文字があればマッチさせるが、なくてもよいという意味を表します。文字列の直後に?を置くことで、その文字列に?の意味が適用されます。例えば、n?はnがあればマッチさせるが、なくてもよいという意味を表します。n?を使用したenviron?mentという正規表現は、environment, enviromentという文字列にマッチさせることができます。このように、直前の1文字があってもなくてもよいという正規表現を作りたい時に、?を使います。",
+      sentence: "(?=...)は、肯定の先読みと呼ばれます。肯定の先読みは、まだ試行していない右の方の文字列に対して、...がマッチするかどうかを調べます。マッチする場合、肯定の先読みが成功し、...がマッチするかどうかの試行を開始した位置にマッチします。つまり、肯定の先読みは、...にマッチする文字列の位置を見つけます。重要なことは、全体の正規表現の最終的なマッチ結果に、肯定の先読みでマッチさせた文字列は含まれないということです。理由は、肯定の先読みのマッチ結果は位置を表すからです。肯定の先読みを使うことで、条件を絞ってマッチさせることができます。例えば、以下のコードのように、金額の数字のみにマッチさせることも可能になります。",
       slideNum: 2
     },
     {
       title: "否定の先読みとは？",
-      sentence: "最大量指定子+は、直前の1文字に1回以上の繰り返しマッチという意味を表し、最大量指定子*は、直前の1文字に0回以上の繰り返しマッチという意味を表します。+と*の意味は似ています。大きな違いとして、+の場合は少なくとも1回はマッチしないといけませんが、*の場合はなくても大丈夫です。以下の例のo+は、oの1回以上繰り返しマッチを表すので、cとkの間にoがない単語(ck)にはマッチしないことが分かります。直前の1文字を繰り返したい正規表現を作りたい時に、*や+を使います。",
+      sentence: "(?!...)は、否定の先読みと呼ばれます。肯定の先読みの=を!に変えると、否定の先読みになります。否定の先読みは、まだ試行していない右の方の文字列に対して、...がマッチしないかどうかを調べます。マッチしない場合、否定の先読みが成功し、...がマッチしないかどうかの試行を開始した位置にマッチします。つまり、否定の先読みは、...にマッチしない文字列の位置を見つけます。否定の先読みは、ある文字列を含まないようなマッチをさせたい時に使用します。",
       slideNum: 3
     },
     {
       title: "選択とは？",
-      sentence: "最大量指定子{min,max}は、直前の1文字にmin回以上、max回以上の繰り返しマッチという意味を表します。例えば、\\dは1桁の数字にマッチするので、\\d{3,5}は3桁以上、5桁以下の数字にマッチします。{min,max}以外にも、{min}や{min,}という書き方があります。{min}は直前の1文字にmin回繰り返しマッチを表し、{min,}は直前の1文字にmin回以上繰り返しマッチを表します。例えば、\\d{3}は3桁の数字、\\d{3,}は3桁以上の数字にマッチします。直前の1文字の繰り返し回数を制御したい時に、{min,max}を使います。",
+      sentence: "|は、選択と呼ばれます。またはという意味を持つ特殊文字です。選択を使うことで、複数の正規表現のどれかにマッチするような1つの正規表現を作ることができます。選択を使う上で注意すべきことは、選択の優先順位は非常に低いということです。例えば、This is React|JavaScriptという正規表現は、This is ReactまたはThis is JavaScriptにマッチする正規表現ではありません。React|JavaScriptで1つの塊に見えますが、選択の優先順位が非常に低いので、この正規表現はThis is ReactまたはJavaScriptにマッチする正規表現を表します。もし選択の範囲を限定したい場合、キャプチャグループを使用します。",
       slideNum: 4
     },
     {
       title: "アンカーとは？",
-      sentence: "最大量指定子(? * + {min,max})は、どれも直前の1文字を対象とする特殊文字です。2文字以上の文字を繰り返したい時はどうすれば良いのでしょうか？ そのような時はキャプチャグループ((...))を使用します。キャプチャグループを使用することで、複数の文字列を1つのグループとして扱うことができます。そのグループに最大量指定子を指定できるので、2文字以上の文字列を繰り返すことができます。本サービスでは、厳密性より見やすさと分かりやすさを重視している為、基本的には非キャプチャグループ((?:...))ではなく、キャプチャグループ((...))を使用します。",
+      sentence: "アンカーは、文字ではなく行頭や行末等の決められた位置にマッチする特殊文字です。行頭は^、行末は$でマッチさせることができます。行頭や行末にマッチを固定したい時に使用します。",
       slideNum: 5
     },
     {
@@ -324,27 +324,27 @@ export const AdvancedGameDescriptionDialog = ({
                 {
                   slideState.slideNum === 2 &&
                     <>
-                      <CodeBlockWrapper>
+                      <CaptureCodeBlockWrapper>
                         <CodeBlockDiv> 
                           <CodeLineWrapper>
-                            <CodeRedSpan>const</CodeRedSpan> target <CodeYellowSpan>=</CodeYellowSpan> <CodeYellowSpan>'environment enviroment'</CodeYellowSpan>;
+                            <CodeRedSpan>const</CodeRedSpan> target <CodeYellowSpan>=</CodeYellowSpan> <CodeYellowSpan>'This water(100ml) is 100yen'</CodeYellowSpan>;
                           </CodeLineWrapper>
                           <BlankLineWrapper />
                           <ComentLineWrapper>
-                            {'//'} environ?mentは、environment enviromentにマッチする正規表現です。
+                            {'//'} 金額の数字にマッチする正規表現 
+                          </ComentLineWrapper>
+                          <ComentLineWrapper>
+                            {'//'} 3桁の数字の後ろにyenという文字列があるような3桁の数字にマッチします。
                           </ComentLineWrapper>
                           <CodeLineWrapper>
-                            <CodeRedSpan>const</CodeRedSpan> regex <CodeYellowSpan>=</CodeYellowSpan> <CodeYellowSpan>/environ?ment/g</CodeYellowSpan>;
+                            <CodeRedSpan>const</CodeRedSpan> regex <CodeYellowSpan>=</CodeYellowSpan> <CodeYellowSpan>/\d{3}(?=yen)/g</CodeYellowSpan>;
                           </CodeLineWrapper>
                           <BlankLineWrapper />
-                          <ComentLineWrapper>
-                            {'//'} matchメソッドを用いることで、文字列中から正規表現にマッチする文字列を取得できます。
-                          </ComentLineWrapper>
                           <CodeLineWrapper>
-                            console.<CodeBlueSpan>log</CodeBlueSpan>(target.<CodeBlueSpan>match</CodeBlueSpan>(regex)); <CodeComentSpan>{'//'} => ['environment', 'enviroment']</CodeComentSpan>
+                            console.<CodeBlueSpan>log</CodeBlueSpan>(target.<CodeBlueSpan>match</CodeBlueSpan>(regex)); <CodeComentSpan>{'//'} => ['100']</CodeComentSpan>
                           </CodeLineWrapper>
                         </CodeBlockDiv>
-                      </CodeBlockWrapper>
+                      </CaptureCodeBlockWrapper>
                     </>
                 }
                 {
@@ -353,21 +353,21 @@ export const AdvancedGameDescriptionDialog = ({
                       <CodeBlockWrapper>
                         <CodeBlockDiv> 
                           <CodeLineWrapper>
-                            <CodeRedSpan>const</CodeRedSpan> target <CodeYellowSpan>=</CodeYellowSpan> <CodeYellowSpan>'ck cook coook cooook'</CodeYellowSpan>;
+                            <CodeRedSpan>const</CodeRedSpan> target <CodeYellowSpan>=</CodeYellowSpan> <CodeYellowSpan>'This water(500ml) is 100yen'</CodeYellowSpan>;
+                          </CodeLineWrapper>
+                          <BlankLineWrapper />
+                          <ComentLineWrapper>
+                            {'//'} mlの数字にマッチする正規表現 
+                          </ComentLineWrapper>
+                          <ComentLineWrapper>
+                            {'//'} 3桁の数字の後ろにyenという文字列がないような3桁の数字にマッチします。
+                          </ComentLineWrapper>
+                          <CodeLineWrapper>
+                            <CodeRedSpan>const</CodeRedSpan> regex1 <CodeYellowSpan>=</CodeYellowSpan> <CodeYellowSpan>/\\d{3}(?!yen)/g</CodeYellowSpan>;
                           </CodeLineWrapper>
                           <BlankLineWrapper />
                           <CodeLineWrapper>
-                            <CodeRedSpan>const</CodeRedSpan> regex1 <CodeYellowSpan>=</CodeYellowSpan> <CodeYellowSpan>/co*k/g</CodeYellowSpan>; <CodeComentSpan>{'//'} co*kは、ck cook coook cooookにマッチする正規表現</CodeComentSpan>
-                          </CodeLineWrapper>
-                          <CodeLineWrapper>
-                            <CodeRedSpan>const</CodeRedSpan> regex2 <CodeYellowSpan>=</CodeYellowSpan> <CodeYellowSpan>/co+k/g</CodeYellowSpan>; <CodeComentSpan>{'//'} co+kは、cook coook cooookにマッチする正規表現</CodeComentSpan>
-                          </CodeLineWrapper>
-                          <BlankLineWrapper />
-                          <CodeLineWrapper>
-                            console.<CodeBlueSpan>log</CodeBlueSpan>(target.<CodeBlueSpan>match</CodeBlueSpan>(regex1)); <CodeComentSpan>{'//'} => ['ck', 'cook', 'coook', 'cooook']</CodeComentSpan>
-                          </CodeLineWrapper>
-                          <CodeLineWrapper>
-                            console.<CodeBlueSpan>log</CodeBlueSpan>(target.<CodeBlueSpan>match</CodeBlueSpan>(regex2)); <CodeComentSpan>{'//'} => ['cook', 'coook', 'cooook']</CodeComentSpan>
+                            console.<CodeBlueSpan>log</CodeBlueSpan>(target.<CodeBlueSpan>match</CodeBlueSpan>(regex1)); <CodeComentSpan>{'//'} => ['500']</CodeComentSpan>
                           </CodeLineWrapper>
                         </CodeBlockDiv>
                       </CodeBlockWrapper>
@@ -376,27 +376,27 @@ export const AdvancedGameDescriptionDialog = ({
                 {
                   slideState.slideNum === 4 &&
                     <>
-                      <CodeBlockWrapper>
+                      <CaptureCodeBlockWrapper>
                         <CodeBlockDiv> 
                           <CodeLineWrapper>
-                            <CodeRedSpan>const</CodeRedSpan> target <CodeYellowSpan>=</CodeYellowSpan> <CodeYellowSpan>'150 is greater than 15.'</CodeYellowSpan>;
+                            <CodeRedSpan>const</CodeRedSpan> target <CodeYellowSpan>=</CodeYellowSpan> <CodeYellowSpan>'This is React This is JavaScript'</CodeYellowSpan>;
                           </CodeLineWrapper>
                           <BlankLineWrapper />
                           <CodeLineWrapper>
-                            <CodeRedSpan>const</CodeRedSpan> regex1 <CodeYellowSpan>=</CodeYellowSpan> <CodeYellowSpan>/\d{'{'}3{'}'}/g</CodeYellowSpan>; <CodeComentSpan>{'//'} \d{'{'}3{'}'}は、3桁の数字にマッチする正規表現</CodeComentSpan>
+                            <CodeRedSpan>const</CodeRedSpan> regex1 <CodeYellowSpan>=</CodeYellowSpan> <CodeYellowSpan>/This is React|JavaScript/g</CodeYellowSpan>; <CodeComentSpan>{'//'} 選択のみを使用した正規表現</CodeComentSpan>
                           </CodeLineWrapper>
                           <CodeLineWrapper>
-                            <CodeRedSpan>const</CodeRedSpan> regex2 <CodeYellowSpan>=</CodeYellowSpan> <CodeYellowSpan>/\d{'{'}2,3{'}'}/g</CodeYellowSpan>; <CodeComentSpan>{'//'} \d{'{'}2,3{'}'}は、2桁~3桁の数字にマッチする正規表現</CodeComentSpan>
+                            <CodeRedSpan>const</CodeRedSpan> regex2 <CodeYellowSpan>=</CodeYellowSpan> <CodeYellowSpan>/This is (React|JavaScript)/g</CodeYellowSpan>; <CodeComentSpan>{'//'} キャプチャグループと選択を使用した正規表現</CodeComentSpan>
                           </CodeLineWrapper>
                           <BlankLineWrapper />
                           <CodeLineWrapper>
-                            console.<CodeBlueSpan>log</CodeBlueSpan>(target.<CodeBlueSpan>match</CodeBlueSpan>(regex1)); <CodeComentSpan>{'//'} => ['150']</CodeComentSpan>
+                            console.<CodeBlueSpan>log</CodeBlueSpan>(target.<CodeBlueSpan>match</CodeBlueSpan>(regex1)); <CodeComentSpan>{'//'} => ['This is React', 'JavaScript']</CodeComentSpan>
                           </CodeLineWrapper>
                           <CodeLineWrapper>
-                            console.<CodeBlueSpan>log</CodeBlueSpan>(target.<CodeBlueSpan>match</CodeBlueSpan>(regex2)); <CodeComentSpan>{'//'} => ['150', '15']</CodeComentSpan>
+                            console.<CodeBlueSpan>log</CodeBlueSpan>(target.<CodeBlueSpan>match</CodeBlueSpan>(regex2)); <CodeComentSpan>{'//'} => ['This is React', 'This is JavaScript']</CodeComentSpan>
                           </CodeLineWrapper>
                         </CodeBlockDiv>
-                      </CodeBlockWrapper>
+                      </CaptureCodeBlockWrapper>
                     </>
                 }
                 {
@@ -405,21 +405,31 @@ export const AdvancedGameDescriptionDialog = ({
                       <CaptureCodeBlockWrapper>
                         <CodeBlockDiv> 
                           <CodeLineWrapper>
-                            <CodeRedSpan>const</CodeRedSpan> target <CodeYellowSpan>=</CodeYellowSpan> <CodeYellowSpan>'1, 112, 11212, 1121212'</CodeYellowSpan>;
+                            <CodeRedSpan>const</CodeRedSpan> target <CodeYellowSpan>=</CodeYellowSpan> <CodeYellowSpan>'cat dog cat'</CodeYellowSpan>;
                           </CodeLineWrapper>
                           <BlankLineWrapper />
                           <CodeLineWrapper>
-                            <CodeRedSpan>const</CodeRedSpan> regex1 <CodeYellowSpan>=</CodeYellowSpan> <CodeYellowSpan>/1(12)*/g</CodeYellowSpan>; <CodeComentSpan>{'//'} (12)*は、12の0回以上の繰り返しマッチを表します。</CodeComentSpan>
+                            <CodeRedSpan>const</CodeRedSpan> regex1 <CodeYellowSpan>=</CodeYellowSpan> <CodeYellowSpan>/cat/g</CodeYellowSpan>;
                           </CodeLineWrapper>
+                          <BlankLineWrapper />
+                          <ComentLineWrapper>
+                            {'//'} ^でターゲット文字列の行頭にマッチさせます。ターゲット文字列の行頭にマッチした後、
+                          </ComentLineWrapper>
+                          <ComentLineWrapper>
+                            {'//'} 残りの正規表現catが、ターゲット文字列にマッチするか調べます。
+                          </ComentLineWrapper>
+                          <ComentLineWrapper>
+                            {'//'} そのため、2番目のcatではなく、1番目のcatにのみマッチします。
+                          </ComentLineWrapper>
                           <CodeLineWrapper>
-                            <CodeRedSpan>const</CodeRedSpan> regex2 <CodeYellowSpan>=</CodeYellowSpan> <CodeYellowSpan>/112*/g</CodeYellowSpan>; <CodeComentSpan>{'//'} 2*は、2の0回以上の繰り返しマッチを表します。</CodeComentSpan>
+                            <CodeRedSpan>const</CodeRedSpan> regex2 <CodeYellowSpan>=</CodeYellowSpan> <CodeYellowSpan>/^cat/g</CodeYellowSpan>;
                           </CodeLineWrapper>
                           <BlankLineWrapper />
                           <CodeLineWrapper>
-                            console.<CodeBlueSpan>log</CodeBlueSpan>(target.<CodeBlueSpan>match</CodeBlueSpan>(regex1)); <CodeComentSpan>{'//'} => ['1', '112', '11212', '1121212']</CodeComentSpan>
+                            console.<CodeBlueSpan>log</CodeBlueSpan>(target.<CodeBlueSpan>match</CodeBlueSpan>(regex1)); <CodeComentSpan>{'//'} => ['cat', 'cat']</CodeComentSpan>
                           </CodeLineWrapper>
                           <CodeLineWrapper>
-                            console.<CodeBlueSpan>log</CodeBlueSpan>(target.<CodeBlueSpan>match</CodeBlueSpan>(regex2)); <CodeComentSpan>{'//'} => ['112', '112', '112']</CodeComentSpan>
+                            console.<CodeBlueSpan>log</CodeBlueSpan>(target.<CodeBlueSpan>match</CodeBlueSpan>(regex2)); <CodeComentSpan>{'//'} => ['cat']</CodeComentSpan>
                           </CodeLineWrapper>
                         </CodeBlockDiv>
                       </CaptureCodeBlockWrapper>
