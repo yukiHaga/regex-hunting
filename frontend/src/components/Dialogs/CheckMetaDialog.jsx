@@ -159,7 +159,7 @@ export const CheckMetaDialog = ({
 
   const initialState = {
     name: '文字クラス',
-    prevName: 'アンカー',
+    prevName: 'アンカー・単語境界',
     nextName: '量指定子',
     data: characterClassesRows,
     slideIn: false,
@@ -203,10 +203,10 @@ export const CheckMetaDialog = ({
   const handleLeftArrow = ({name}) => {
     switch (name){
       case '文字クラス':
-        handleDataRows('アンカー', '先後読み', '文字クラス', anchorsRows, 'right');
+        handleDataRows('アンカー・単語境界', '先後読み', '文字クラス', anchorsRows, 'right');
         break;
       case '量指定子':
-        handleDataRows('文字クラス', 'アンカー', '量指定子', characterClassesRows, 'right');
+        handleDataRows('文字クラス', 'アンカー・単語境界', '量指定子', characterClassesRows, 'right');
         break;
       case 'キャプチャグループ':
         handleDataRows('量指定子', '文字クラス', 'キャプチャグループ', quantifiersRows, 'right');
@@ -217,11 +217,11 @@ export const CheckMetaDialog = ({
       case '先後読み':
         handleDataRows('選択', 'キャプチャグループ', '先後読み', alternationsRows, 'right');
         break;
-      case 'アンカー':
-        handleDataRows('先後読み', '選択', 'アンカー', lookAroundsRows, 'right');
+      case 'アンカー・単語境界':
+        handleDataRows('先後読み', '選択', 'アンカー・単語境界', lookAroundsRows, 'right');
         break;
       default:
-        handleDataRows('文字クラス', 'アンカー', '量指定子', characterClassesRows, 'right');
+        handleDataRows('文字クラス', 'アンカー・単語境界', '量指定子', characterClassesRows, 'right');
     }
   };
 
@@ -238,13 +238,13 @@ export const CheckMetaDialog = ({
         handleDataRows('選択', 'キャプチャグループ', '先後読み', alternationsRows, 'left');
         break;
       case '選択':
-        handleDataRows('先後読み', '選択', 'アンカー', lookAroundsRows, 'left');
+        handleDataRows('先後読み', '選択', 'アンカー・単語境界', lookAroundsRows, 'left');
         break;
       case '先後読み':
-        handleDataRows('アンカー', '先後読み', '文字クラス', anchorsRows, 'left');
+        handleDataRows('アンカー・単語境界', '先後読み', '文字クラス', anchorsRows, 'left');
         break;
-      case 'アンカー':
-        handleDataRows('文字クラス', 'アンカー', '量指定子', characterClassesRows, 'left');
+      case 'アンカー・単語境界':
+        handleDataRows('文字クラス', 'アンカー・単語境界', '量指定子', characterClassesRows, 'left');
         break;
       default:
         handleDataRows('量指定子', '文字クラス', 'キャプチャグループ', quantifiersRows, 'left');
