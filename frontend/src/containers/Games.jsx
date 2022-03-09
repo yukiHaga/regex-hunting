@@ -566,7 +566,14 @@ export const Games = () => {
                       {
                         difficulty === 'advanced' &&
                           <>
-                            <AdvancedMonster />
+                            <AdvancedMonster 
+                              monsterHp={gameState.monsterHp}
+                              monsterMaxHp={gameState.monsterMaxHp}
+                              questionJudgement={gameState.questionJudgement}
+                              firstAppearance={gameState.firstAppearance}
+                              gameResult={gameState.gameResult}
+                              gameDescriptionOpen={gameState.gameDescriptionOpen}
+                            />
                           </>
                       }
                     </MonsterBlockWrapper>
