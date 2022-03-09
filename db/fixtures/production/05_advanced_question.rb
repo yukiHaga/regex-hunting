@@ -60,8 +60,8 @@ Question.seed(
     sentence: '単体のcatにマッチする正規表現を入力せよ。',
     target_sentence: 'dog cat cats indicate',
     sample_answer: '\\bcat\\b',
-    hint: "アンカー(\\b), 文字列を使用して、正規表現を作ってみましょう。",
-    commentary: '正規表現catをターゲット文字列に適用させると、catsやindicate内のcatにもマッチしてしまいます。そのため、アンカー(\\b)を使用します。\\bとcatを併用することで、単語内のcatにマッチするのを防げます。したがって、\\bcat\\bで単体のcatにマッチする正規表現を表します。cat(?![se])でマッチさせることもできます。',
+    hint: "単語境界(\\b), 文字列を使用して、正規表現を作ってみましょう。",
+    commentary: '正規表現catをターゲット文字列に適用させると、catsやindicate内のcatにもマッチしてしまいます。そのため、単語境界(\\b)を使用します。\\bとcatを併用することで、単語内のcatにマッチするのを防げます。したがって、\\bcat\\bで単体のcatにマッチする正規表現を表します。cat(?![se])でマッチさせることもできます。',
     difficulty: 'advanced'
   },
 
