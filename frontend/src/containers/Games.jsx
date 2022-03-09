@@ -22,6 +22,7 @@ import { GameOverDialog } from '../components/Dialogs/GameOverDialog.jsx'
 import { CheckAnswerDialog } from '../components/Dialogs/CheckAnswerDialog.jsx'
 import { ElementaryGameDescriptionDialog } from '../components/Dialogs/ElementaryGameDescriptionDialog.jsx'
 import { IntermediateGameDescriptionDialog } from '../components/Dialogs/IntermediateGameDescriptionDialog.jsx'
+import { AdvancedGameDescriptionDialog } from '../components/Dialogs/AdvancedGameDescriptionDialog.jsx'
 
 import { RankUpDialog } from '../components/Dialogs/RankUpDialog.jsx';
 import { CheckMetaDialog } from '../components/Dialogs/CheckMetaDialog.jsx';
@@ -648,6 +649,15 @@ export const Games = () => {
             {
               gameState.gameDescriptionOpen && difficulty === 'intermediate' &&
                 <IntermediateGameDescriptionDialog
+                  isOpen={gameState.gameDescriptionOpen}
+                  setGameState={setGameState}
+                  gameDescriptionOpen={gameState.gameDescriptionOpen}
+                  clickDescriptionOpen={gameState.clickDescriptionOpen}
+                />
+            }
+            {
+              gameState.gameDescriptionOpen && difficulty === 'advanced' &&
+                <AdvancedGameDescriptionDialog
                   isOpen={gameState.gameDescriptionOpen}
                   setGameState={setGameState}
                   gameDescriptionOpen={gameState.gameDescriptionOpen}
