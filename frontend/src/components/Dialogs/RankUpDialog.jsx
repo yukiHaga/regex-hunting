@@ -156,7 +156,7 @@ export const RankUpDialog = ({
             <tbody>
               <tr>
                 <MetaTd>ランク</MetaTd> 
-                <CustomTd>2</CustomTd>
+                <CustomTd>{rank}</CustomTd>
               </tr>
               <tr>
                 <MetaTd>称号</MetaTd> 
