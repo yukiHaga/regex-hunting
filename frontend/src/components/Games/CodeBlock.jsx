@@ -91,7 +91,8 @@ export const CodeBlock = ({
   const inputRefObject = useRef("");
 
   // regexObjectを生成する関数
-  // テンプレートリテラルの括弧(を無くすと、なぜか機能しなくなったので、残しとく。
+  // テンプレートリテラルの括弧(を無くすと、キャプチャしたものが配列に含まれなくなる。
+  // そのため、マッチした文字列がQuestionBlockに正確に反映されない時がある。
   const getRegexObject = (
     inputRegex
   ) => {
@@ -112,8 +113,7 @@ export const CodeBlock = ({
       for (const match of matchesIterator) {
         matchArray.push({
           match: match[0], 
-          index: match.index, 
-          input: match.input
+          index: match.index 
         })
       }
       return matchArray;
@@ -122,27 +122,19 @@ export const CodeBlock = ({
     }
   }
 
-  // getMatchArrayの戻り値を、マッチした文字列を要素とした配列に加工する関数
-  const getMatchWords = (
-    matchArray
-  ) => {
-    return matchArray.map((value) => value.match);
-  };
-
   // マッチした配列と答えのマッチした配列が一致しているかを返す関数
-  // ロジックに不備があったので、改善した
-  // 正解判定のロジックなので、いつかまた修正が必要かもしれない
-  const getQuestionJudgement = (
-    inputMatchWords,
-    sampleMatchWords
+  // V2では位置も考慮に入れている
+  const getQuestionJudgementV2 = (
+    inputMatchArray,
+    sampleMatchArray
   ) => {
-    if(inputMatchWords.length > 0) {
+    if(inputMatchArray.length > 0) {
       if(
         Boolean(
-          !inputMatchWords.filter((value, index) => {
-            return !(sampleMatchWords[index] === value);
+          !inputMatchArray.filter((value, index) => {
+            return !(sampleMatchArray[index]?.match === value.match && sampleMatchArray[index]?.index === value.index);
           }).length
-      ) && inputMatchWords.length === sampleMatchWords.length) {
+      ) && inputMatchArray.length === sampleMatchArray.length) {
         return "correct";
       } else {
         return "progress";
@@ -180,11 +172,9 @@ export const CodeBlock = ({
         const inputRegexObject = getRegexObject(inputRegex); 
         const inputMatchArray = getMatchArray(targetSentence, inputRegex);
         const sampleMatchArray = getMatchArray(targetSentence, sampleAnswer);
-        const inputMatchWords = getMatchWords(inputMatchArray);
-        const sampleMatchWords = getMatchWords(sampleMatchArray);
-        const currentQuestionJudgement = getQuestionJudgement(
-          inputMatchWords, 
-          sampleMatchWords
+        const currentQuestionJudgement = getQuestionJudgementV2(
+          inputMatchArray, 
+          sampleMatchArray
         ); 
         const audio = new Audio(DecisionSound);
         audio.play();
@@ -201,6 +191,7 @@ export const CodeBlock = ({
           // エンター押して正解した時に実行されるsetGameState
           setGameState((prev) => ({
             ...prev,
+            inputRegex: inputRegex,
             inputRegexObject: inputRegexObject,
             matchArray: inputMatchArray,
             questionJudgement: currentQuestionJudgement,
@@ -219,6 +210,7 @@ export const CodeBlock = ({
           // エンター押して不正解の時に実行されるsetGameState
           setGameState((prev) => ({
             ...prev,
+            inputRegex: inputRegex,
             inputRegexObject: inputRegexObject,
             matchArray: inputMatchArray,
           }));

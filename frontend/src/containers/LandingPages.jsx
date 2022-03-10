@@ -10,6 +10,7 @@ import MyPageImage from '../images/my_page_image.jpg';
 import RaknkingImage from '../images/ranking_image.jpg';
 import ElementaryGameContentImage from '../images/elementary_game_content.jpg';
 import IntermediateGameContentImage from '../images/intermediate_game_content.jpg';
+import AdvancedGameContentImage from '../images/advanced_game_content.jpg';
 
 // Presentational Components
 import { Header } from '../components/Headers/Header.jsx';
@@ -329,7 +330,7 @@ export const LandingPages = () => {
           />
           <GameContent 
             difficulty='advanced' 
-            image={IntermediateGameContentImage} 
+            image={AdvancedGameContentImage} 
             setMobileState={setMobileState}
           />
         </GameContentsWrapper>

@@ -10,6 +10,9 @@ import { getMonsterName } from '../../functions/getMonsterName.js';
 // 各ゲームの獲得経験値を取得する関数
 import { getExperience } from '../../functions/getExperience.js';
 
+// サニタイズ用のライブラリをインポートしてくる
+import DOMPurify from "dompurify";
+
 const QuestionBlockWrapper = styled.div`
   background-color: ${COLORS.SUB};
   border-radius: 3px;
@@ -66,11 +69,6 @@ const TargetSentenceWrapper = styled.div`
   padding-top: 1%;
 `;
 
-const CustomSpan = styled.span`
-  color: ${({ backgroundColor }) => backgroundColor && COLORS.WORD_BLUE};
-  background-color: ${({ backgroundColor }) => backgroundColor && COLORS.WORD_BACK};
-`;
-
 export const QuestionBlock = ({ 
   difficulty, 
   sentence,
@@ -80,9 +78,9 @@ export const QuestionBlock = ({
   targetSentence,
   nextTargetSentence,
   nextHint,
-  matchArray,
   questionJudgement,
   setGameState,
+  inputRegex,
   inputRegexObject,
   correctQuestions,
   incorrectQuestions,
@@ -353,8 +351,12 @@ export const QuestionBlock = ({
     memoDamageSentence
   ]);
 
-  // マッチした箇所をリプレイスするライブラリをrequireしてくる
-  const reactStringReplace = require('react-string-replace');
+  // マッチした文字列にspanタグを挿入する関数
+  const stringReplace = (target, re) => {
+    return target.replace(re, (match) => (
+      `<span style='color: ${COLORS.WORD_BLUE}; background-color: ${COLORS.WORD_BACK};'>` + match + "</span>"
+    ));
+  }
 
   return (
     <>
@@ -368,15 +370,14 @@ export const QuestionBlock = ({
           </SentenceWrapper>
           <TargetSentenceWrapper>
             {
-              targetSentence &&
-                reactStringReplace(targetSentence, inputRegexObject, (match, i) => (
-                  <CustomSpan 
-                    key={i} 
-                    backgroundColor={i}
-                  >
-                    {match}
-                  </CustomSpan>     
-                ))
+              inputRegexObject instanceof RegExp ?
+                <div 
+                  dangerouslySetInnerHTML={{
+                    __html: DOMPurify.sanitize(stringReplace(targetSentence, inputRegexObject))
+                  }}
+                />
+              :
+                targetSentence
             }
           </TargetSentenceWrapper>
         </QuestionWrapper>
