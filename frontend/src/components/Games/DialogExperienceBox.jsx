@@ -95,11 +95,18 @@ export const DialogExperienceBox = ({
     maximumExperiencePerRank,
   ]);
 
+  // 本当はprevTotalExperience的なのを作ればいいのだが、
+  // 1つの変更に対する影響範囲が大きいので、やめた
   return (
     <>
       <ExperienceBoxWrapper>
         <ExperienceTextWrapper>
-          現在の経験値： { totalExperience }
+          現在の経験値： { 
+            temporaryExperienceState.temporaryExperience === prevTemporaryExperience ?
+              totalExperience - (temporaryExperience - prevTemporaryExperience ) 
+            :
+              totalExperience
+          }
         </ExperienceTextWrapper>
         <ExperienceGageWrapper>
           {
