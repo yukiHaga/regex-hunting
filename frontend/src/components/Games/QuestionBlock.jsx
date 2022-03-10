@@ -353,7 +353,7 @@ export const QuestionBlock = ({
 
   // マッチした文字列にspanタグを挿入する関数
   const stringReplace = (target, re) => {
-    return target.replace( re, (match) => (
+    return target.replace(re, (match) => (
       `<span style='color: ${COLORS.WORD_BLUE}; background-color: ${COLORS.WORD_BACK};'>` + match + "</span>"
     ));
   }
