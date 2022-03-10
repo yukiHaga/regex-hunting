@@ -10,7 +10,7 @@ export const getMonsterName = (difficulty) => {
       monsterName = 'カスアリウス';
       break;
     case 'advanced':
-      monsterName = 'オルファラ・ラパクス';
+      monsterName = 'オルファ・ラパクス';
       break;
     default:
       console.log('エラーが起きました');
