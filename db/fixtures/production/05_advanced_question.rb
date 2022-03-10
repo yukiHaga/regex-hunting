@@ -70,7 +70,7 @@ Question.seed(
     id: 35,
     sentence: 'Vue.js React.js Node.jsにマッチする正規表現を入力せよ。',
     target_sentence: 'Vue.js React.js Node.js Express.js',
-    sample_answer: '/(Vue|React|Node)\.js/g',
+    sample_answer: '(Vue|React|Node)\.js',
     hint: 'キャプチャグループ, 選択, 文字列を使用して、正規表現を作ってみましょう。',
     commentary: 'Vue, React, Nodeのどれかにマッチさせたい場合、Vue|React|Nodeという正規表現を使用します。それぞれのマッチさせたい文字列に.jsが付いているので、Vue|React|Nodeの後ろに\\.jsを付け足します。この時、キャプチャグループを忘れると、Vue, React, Node.jsにマッチする正規表現を表してしまいます。したがって、(Vue|React|Node)\.jsでVue.js React.js Node.jsにマッチする正規表現を表します。',
     difficulty: 'advanced'
