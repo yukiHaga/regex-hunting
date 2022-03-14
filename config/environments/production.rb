@@ -102,4 +102,18 @@ Rails.application.configure do
   # config.active_record.database_selector = { delay: 2.seconds }
   # config.active_record.database_resolver = ActiveRecord::Middleware::DatabaseSelector::Resolver
   # config.active_record.database_resolver_context = ActiveRecord::Middleware::DatabaseSelector::Resolver::Session
+  config.action_mailer.default_url_options = Settings.default_url_options.to_h
+  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.smtp_settings = {
+    #gmail利用時はaddress,domain,portは下記で固定
+    address:"smtp.gmail.com",
+    domain: 'gmail.com',
+    port:587,
+    #gmailのユーザアカウント（xxxx@gmail.com)
+    user_name: Rails.application.credentials.dig(:gmail, :user_name),
+    #gmail２段階認証回避のためにアプリケーションでの利用パスワード
+    password: Rails.application.credentials.dig(:gmail, :password),
+    #パスワードをBase64でエンコード
+    authentication: :login
+  }
 end
