@@ -1,2 +1,4 @@
 default_url_options:
-  host: 'https://www.regex-hunting.com/'
+  host: 'www.regex-hunting.com'
+site:
+  top_url: 'https://www.regex-hunting.com/'
