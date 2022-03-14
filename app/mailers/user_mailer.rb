@@ -10,7 +10,7 @@ class UserMailer < ApplicationMailer
   # mailメソッドでのメール作成時、インスタンス変数を含めることができる
   def reset_password_email(user)
     @user = User.find(user.id)
-    @url  = "http://localhost:3001/users/password/edit?token=#{user&.reset_password_token}"
+    @url  = "#{Settings.site.top_url}users/password/edit?token=#{user&.reset_password_token}"
     mail(to: user.email,
          subject: 'パスワード再設定のお知らせ')
   end
