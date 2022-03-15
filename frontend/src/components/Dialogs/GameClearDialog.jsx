@@ -147,15 +147,13 @@ export const GameClearDialog = ({
   rankUp
 }) => {
 
-  const clearTime = useMemo(() => getClearTime(
+  const shareClearTime = useMemo(() => getClearTime(
     gameStartTime, 
     gameEndTime
   ), [
     gameStartTime,
-    gameEndTime
+    gameEndTime,
   ]);
-
-  const shareClearTime = useMemo(() => clearTime.slice(3), [clearTime]);
 
   // このミリ秒はタイムに色をつけるために使う
   const milliSec = gameEndTime - gameStartTime;
@@ -190,7 +188,7 @@ export const GameClearDialog = ({
                 <MetaTd>クリアタイム</MetaTd> 
                 <CustomTd>
                   <ColorTimeSpan milliSec={milliSec} >
-                    { clearTime }
+                    { shareClearTime }
                   </ColorTimeSpan>
                 </CustomTd>
               </tr>
