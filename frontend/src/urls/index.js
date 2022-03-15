@@ -1,6 +1,6 @@
 const DEFAULT_API_URL = `${process.env.REACT_APP_SERVER_URL}/api/v1`;
 const GITHUB_APP_ID = '420fbaef8a45fb65c5a9';
-const GITHUB_REDIRECT_URL = 'http://localhost:3001/callback/github/';
+const GITHUB_REDIRECT_URL = 'https://www.regex-hunting.com/callback/github/';
 const GOOGLE_APP_ID = '63383229438-hjv5021k3b43jjkf182772mg9mh6uvp9.apps.googleusercontent.com';
 const GOOGLE_REDIRECT_URL = 'https://www.regex-hunting.com/callback/google/';
 const GOOGLE_SCOPE = 'email profile';
