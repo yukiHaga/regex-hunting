@@ -64,7 +64,7 @@ export const ResultShareButton = ({
   return (
     <>
     <ResultShareButtonWrapper 
-      href={`https://twitter.com/share?url=http://localhost:3001/&text=${text}&hashtags=RegexHunting,正規表現,ゲーム`}
+      href={`https://twitter.com/share?text=${text}&hashtags=RegexHunting,正規表現,ゲーム&url=https://www.regex-hunting.com/`}
       target="_blank" 
       rel="noopener noreferrer"
     >
