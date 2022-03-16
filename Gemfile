@@ -89,3 +89,7 @@ gem 'seed-fu'
 
 # new Relic
 gem 'newrelic_rpm'
+
+# Sentry
+gem 'sentry-rails'
+gem 'sentry-ruby'
