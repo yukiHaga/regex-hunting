@@ -16,48 +16,43 @@ class Api::V1::RankingsController < ApplicationController
 
   private
 
-    # joinsメソッドでusersテーブルと内部結合する
-    # groupメソッドでusersテーブルのidに対してグループ化する(nameでグループ化すると、同じ名前のユーザーがいる為)
-    # groupメソッドを集計関数と一緒ではなく単体で使うと、指定したカラムでレコードがグループ化され、
-    # グループ毎に1番小さいidのレコードが表示される(裏側では全てのレコードが指定したカラムでグループ化されている)
-    # whereで取得するレコードに条件を設定する
-    # orderメソッドでresult_timeを小さい順にする(デフォルトで昇順。グループ化と検索の後に実行される)
-    # limitで取得するレコード数を制限する
-    # selectメソッドで取得するカラムを指定する。selectがないとjoinsはGameManagementの全カラムのデータを返す
-    # テーブルの指定→結合(joins)→取得条件(where)→グループ化(group)→検索(select)→順序(order)→LIMIT(limit)
-    # の順番でSQLが実行される
-    # その為、orderを実行した時点で、groupの返す1件がグループ毎のidが一番小さいレコードではなく、
-    # グループ毎のresult_timeが一番小さいレコードを返す
-    # (グループ毎に、result_timeが一番小さいレコードが昇順になっているため)
-    # その為、集計関数でデータを作らなくても、最小値のレコードは取得できる
-    # と思ったのだが、group化した時にMINを実行しないと、最小値の順になっていなかったので、
-    # MINを追加しました。MINを追加したらちゃんと最小順になった
+    # joinsメソッドでusersテーブルとgame_managementsテーブルを内部結合させる
+    # usersはopen_rankがtrue、game_managementsはdifficultyが実引数の値でgame_resultがwin
+    # usersテーブルのidでグループにする
+    # users.*, users.name, users.rank, users.active_title,
+    # 各ユーザーの最小のクリアタイムをmin_result_timeとして取得する
+    # orderでmin_result_timeの値でテーブルのレコードをASC(昇順)にする
+    # orderの優先順位はかなり低い。さらに低いのがlimit
+    # この時点で、クリアタイムが早い上位10件のデータが取得できているはずである
+    # with_attached_avatarでユーザーに紐づく画像を取得する
     def get_top_ten(difficulty)
-      top_ten_array = GameManagement.joins(:user)
-                                    .group('users.id')
-                                    .where(
-                                      difficulty: difficulty,
-                                      game_result: :win,
-                                      user_id: User.where(open_rank: true).pluck(:id)
-                                    )
-                                    .order(:result_time)
-                                    .limit(10)
-                                    .select(
-                                      "game_managements.*,
-                                       users.name,
-                                       users.rank,
-                                       users.active_title,
-                                       MIN(game_managements.result_time) AS min_result_time"
-                                    )
-                                    .eager_load(user: { avatar_attachment: :blob }).to_a
-                                    .map do |data|
+      top_ten_array = User.joins(:game_managements)
+                          .where(
+                            id: User.where(open_rank: true).pluck(:id),
+                            game_managements: {
+                              difficulty: difficulty,
+                              game_result: :win
+                            }
+                          )
+                          .group(:id)
+                          .select(
+                            "users.*,
+                             users.name,
+                             users.rank,
+                             users.active_title,
+                             MIN(game_managements.result_time) AS min_result_time"
+                          )
+                          .order('min_result_time')
+                          .limit(10)
+                          .with_attached_avatar.to_a
+                          .map do |data|
         {
-          game_management: data,
+          min_result_time: data.min_result_time,
           user: {
             name: data.name,
             rank: data.rank,
-            active_title: User.active_titles.key(data.active_title),
-            image: data.user.avatar.attached? ? url_for(data.user.avatar) : nil
+            active_title: data.active_title,
+            image: data.avatar.attached? ? url_for(data.avatar) : nil
           }
         }
       end
