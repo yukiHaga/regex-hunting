@@ -8,6 +8,7 @@ class SorceryCore < ActiveRecord::Migration[6.0]
       t.integer :temporary_experience, null: false, default: 0
       t.boolean :open_rank, null: false, default: true
       t.integer :active_title, null: false, default: 0
+      t.integer :role, null: false, default: 0
 
       # sorcery
       t.string :email, null: false, index: { unique: true }
