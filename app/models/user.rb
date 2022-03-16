@@ -20,6 +20,11 @@ class User < ApplicationRecord
     語り継がれし英雄: 7
   }
 
+  enum role: {
+    general: 0,
+    admin: 250
+  }
+
   validates :name, presence: true, length: { maximum: 10 }
 
   REGEX_PATTERN = /\A[A-Za-z0-9]{1}[A-Za-z0-9_.-]*@{1}[A-Za-z0-9_.-]{1,}.[A-Za-z0-9]{1,}\z/

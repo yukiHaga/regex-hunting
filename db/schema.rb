@@ -109,6 +109,7 @@ ActiveRecord::Schema.define(version: 2022_01_24_120114) do
     t.integer "temporary_experience", default: 0, null: false
     t.boolean "open_rank", default: true, null: false
     t.integer "active_title", default: 0, null: false
+    t.integer "role", default: 0, null: false
     t.string "email", null: false
     t.string "crypted_password"
     t.string "salt"
