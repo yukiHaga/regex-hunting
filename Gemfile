@@ -86,3 +86,6 @@ gem 'active_model_serializers'
 
 # seed_fu
 gem 'seed-fu'
+
+# new Relic
+gem 'newrelic_rpm'
