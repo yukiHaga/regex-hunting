@@ -19,8 +19,8 @@ class Api::V1::RankingsController < ApplicationController
     # joinsメソッドでusersテーブルとgame_managementsテーブルを内部結合させる
     # usersはopen_rankがtrue、game_managementsはdifficultyが実引数の値でgame_resultがwin
     # usersテーブルのidでグループにする
-    # users.name, users.rank, users.active_title, 各ユーザーの最小のクリアタイムをmin_result_time
-    # として取得する
+    # users.*, users.name, users.rank, users.active_title,
+    # 各ユーザーの最小のクリアタイムをmin_result_timeとして取得する
     # orderでmin_result_timeの値でテーブルのレコードをASC(昇順)にする
     # orderの優先順位はかなり低い。さらに低いのがlimit
     # この時点で、クリアタイムが早い上位10件のデータが取得できているはずである
@@ -36,12 +36,13 @@ class Api::V1::RankingsController < ApplicationController
                           )
                           .group(:id)
                           .select(
-                            "users.name, 
-                             users.rank, 
-                             users.active_title, 
+                            "users.*,
+                             users.name,
+                             users.rank,
+                             users.active_title,
                              MIN(game_managements.result_time) AS min_result_time"
                           )
-                          .order("min_result_time")
+                          .order('min_result_time')
                           .limit(10)
                           .with_attached_avatar.to_a
                           .map do |data|
