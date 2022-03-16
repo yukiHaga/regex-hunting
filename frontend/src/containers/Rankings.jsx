@@ -49,7 +49,7 @@ export const Rankings = () => {
     topTenIntermediate: [],
     topTenAdvanced: [],
     currentTopTenArray: [],
-    difficultyTitle: "",
+    difficultyTitle: "初級編",
     prevDifficultyTitle: "上級編",
     nextDifficultyTitle: "中級編",
     slideIn: false,

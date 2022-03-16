@@ -434,9 +434,7 @@ export const RankingBox = memo(({
                 <tbody>
                   {
                     currentTopTenArray.map(({
-                      game_management: { 
-                        result_time 
-                      }, 
+                      min_result_time,
                       user: {
                         name,
                         rank,
@@ -448,7 +446,7 @@ export const RankingBox = memo(({
                         <RankingDataTd>{index + 1}</RankingDataTd>
                         <TimeDataTd>
                           {
-                            getClearTime(0, result_time)
+                            getClearTime(0, min_result_time)
                           }
                         </TimeDataTd>
                         <HunterDataTd>
