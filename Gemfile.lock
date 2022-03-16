@@ -290,6 +290,14 @@ GEM
     seed-fu (2.3.9)
       activerecord (>= 3.1)
       activesupport (>= 3.1)
+    sentry-rails (5.2.0)
+      railties (>= 5.0)
+      sentry-ruby-core (~> 5.2.0)
+    sentry-ruby (5.2.0)
+      concurrent-ruby (~> 1.0, >= 1.0.2)
+      sentry-ruby-core (= 5.2.0)
+    sentry-ruby-core (5.2.0)
+      concurrent-ruby
     sexp_processor (4.16.0)
     sorcery (0.16.2)
       bcrypt (~> 3.1)
@@ -345,6 +353,8 @@ DEPENDENCIES
   rubocop
   rubocop-rails
   seed-fu
+  sentry-rails
+  sentry-ruby
   sorcery
   spring
   spring-watcher-listen (~> 2.0.0)
