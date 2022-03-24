@@ -9,7 +9,7 @@ import 'react-calendar-heatmap/dist/styles.css';
 import ReactTooltip from 'react-tooltip';
 
 // functions
-import { makeThisMonthObj } from '../../functions/makeThisMonthObj.js';
+import { makeThisMonthObj } from '../../functions/makeThisMonthObj.ts';
 import { addCountToMonthArray } from '../../functions/addCountToMonthArray.ts';
 
 const InnerStudyHeatMapWrapper = styled.div`
