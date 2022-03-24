@@ -8,7 +8,7 @@ import { COLORS } from '../../style_constants.js';
 import { getMonsterName } from '../../functions/getMonsterName.js';
 
 // 各ゲームの獲得経験値を取得する関数
-import { getExperience } from '../../functions/getExperience.js';
+import { getExperience } from '../../functions/getExperience.ts';
 
 // サニタイズ用のライブラリをインポートしてくる
 import DOMPurify from "dompurify";
@@ -69,8 +69,8 @@ const TargetSentenceWrapper = styled.div`
   padding-top: 1%;
 `;
 
-export const QuestionBlock = ({ 
-  difficulty, 
+export const QuestionBlock = ({
+  difficulty,
   sentence,
   nextSentence,
   sentenceNum,
@@ -135,7 +135,7 @@ export const QuestionBlock = ({
   // 難易度毎のモンスターからダメージを喰らう時のセンテンスは、1回計算すれば十分なので、メモ化する
   const memoDamageSentence = useMemo(() => getDamageSentence(difficulty), [difficulty])
 
-  // 各難易度における不正解の上限数を出力する関数 
+  // 各難易度における不正解の上限数を出力する関数
   // この関数の値を使用することで、難易度毎のゲームの終了タイミングをコントロールできる
   const getIncorrectCount = (difficulty) => {
     let incorrectCount;
@@ -226,9 +226,9 @@ export const QuestionBlock = ({
             gameResult: "win",
             timeActive: false,
             gameEndTime: performance.now(),
-            totalExperience: hasUser ? 
+            totalExperience: hasUser ?
               totalExperience + getExperience(difficulty) : prev.totalExperience,
-            temporaryExperience: hasUser ? 
+            temporaryExperience: hasUser ?
               temporaryExperience + getExperience(difficulty) : prev.temporaryExperience,
             dialogGageUp: true,
             flashDisplay: false
@@ -371,7 +371,7 @@ export const QuestionBlock = ({
           <TargetSentenceWrapper>
             {
               inputRegexObject instanceof RegExp ?
-                <div 
+                <div
                   dangerouslySetInnerHTML={{
                     __html: DOMPurify.sanitize(stringReplace(targetSentence, inputRegexObject))
                   }}

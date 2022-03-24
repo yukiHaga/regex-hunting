@@ -23,7 +23,7 @@ import { CheackAnswerSentence } from '../Sentences/CheackAnswerSentence.jsx';
 import { DialogExperienceBox } from '../Games/DialogExperienceBox.jsx';
 
 // 各ゲームの獲得経験値を取得する関数
-import { getExperience } from '../../functions/getExperience.js';
+import { getExperience } from '../../functions/getExperience.ts';
 
 // モンスター名を取得する関数
 import { getMonsterName } from '../../functions/getMonsterName.js';
