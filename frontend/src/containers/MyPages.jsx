@@ -43,7 +43,7 @@ import { REQUEST_STATE } from '../constants';
 import { COLORS } from '../style_constants.js';
 
 // 今月の月を取得する関数
-import { getMonthOfTheMonth } from '../functions/getMonthOfTheMonth.js';
+import { getMonthOfTheMonth } from '../functions/getMonthOfTheMonth.ts';
 
 import { WIDTH } from '../style_constants.js';
 
