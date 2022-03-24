@@ -7,12 +7,12 @@ import { DialogContent, Dialog } from '@mui/material';
 // Colors
 import { COLORS } from '../../style_constants.js';
 
-// DescriptionWrapper 
-import { DescriptionWrapper } from '../shared_style.js'; 
+// DescriptionWrapper
+import { DescriptionWrapper } from '../shared_style.js';
 
 // handleTitleColorType
 // タイトルカラーを取り扱う関数
-import { handleTitleColorType } from '../../functions/handleTitleColorType.js'
+import { handleTitleColorType } from '../../functions/handleTitleColorType.ts'
 
 // 戻るボタン
 import { BackToModalButton } from '../Buttons/BackToModalButton.jsx';
@@ -42,7 +42,7 @@ const CustomDialogContent = styled(DialogContent)`
   text-align: center;
 `;
 
-// backボタンのラッパー 
+// backボタンのラッパー
 // backボタンを固定してる
 const BackToModalButtonWrapper = styled.div`
   position: fixed;
@@ -125,7 +125,7 @@ const TargetSentenceWrapper = styled.div`
 const OuterCodeBlockWrapper = styled.div`
   margin: 0 auto;
   width: 100%;
-  margin-top: 3%; 
+  margin-top: 3%;
 `;
 
 const CodeBlockWrapper = styled.div`
@@ -213,11 +213,11 @@ export const CheckAnswerDialog = ({
   return(
     <Dialog
       open={isOpen}
-      maxWidth='lg'        
+      maxWidth='lg'
     >
-      <CustomDialogInnerWrapper> 
+      <CustomDialogInnerWrapper>
         <BackToModalButtonWrapper>
-          <BackToModalButton 
+          <BackToModalButton
             onClick={
               () => setGameState((prev) => ({
                 ...prev,
@@ -229,12 +229,12 @@ export const CheckAnswerDialog = ({
         </BackToModalButtonWrapper>
         <CustomDialogTitleWrapper title="Bad">
           Bad
-        </CustomDialogTitleWrapper> 
+        </CustomDialogTitleWrapper>
         <CustomDialogContent>
           {
-            incorrectQuestions.length ? incorrectQuestions.map(({ 
-              question, 
-              sentenceNum 
+            incorrectQuestions.length ? incorrectQuestions.map(({
+              question,
+              sentenceNum
             }) => (
               <QuestionBlockWrapper>
                 <QuestionWrapper>
@@ -273,12 +273,12 @@ export const CheckAnswerDialog = ({
         </CustomDialogContent>
         <CustomDialogTitleWrapper title="Good">
           Good
-        </CustomDialogTitleWrapper> 
+        </CustomDialogTitleWrapper>
         <CustomDialogContent>
           {
             correctQuestions.length ? correctQuestions.map(({
               question,
-              sentenceNum, 
+              sentenceNum,
               inputRegex
             }) => (
               <QuestionBlockWrapper>

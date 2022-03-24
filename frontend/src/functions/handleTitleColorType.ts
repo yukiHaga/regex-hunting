@@ -1,10 +1,12 @@
 // Colors
 import { COLORS } from '../style_constants.js';
 
+type HandleTitleColorType = (flashTitle: 'Good' | 'Bad') => string;
+
 // タイトルカラーを取り扱う関数
 // 答えを表示するダイアログでhandleTitleColorTypeを使用する
-export const handleTitleColorType = (flash_title) => {
-  switch (flash_title) {
+export const handleTitleColorType: HandleTitleColorType = (flashTitle) => {
+  switch (flashTitle) {
     case "Good":
       return COLORS.MAIN;
     case "Bad":
