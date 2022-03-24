@@ -22,7 +22,7 @@ import Tooltip from '@mui/material/Tooltip';
 import IconButton from '@mui/material/IconButton';
 
 // スライドアニメーション関係の関数
-import { slideFunction } from '../../functions/slideFunction.js';
+import { slideFunction } from '../../functions/slideFunction.ts';
 
 // コードブロック関係
 import { CodeBlockWrapper } from '../shared_style.js';
@@ -67,8 +67,8 @@ const SlideContentWrapper = styled.div`
   height: 100%;
   margin: 0 auto;
   transform: translateX(0);
-  animation: ${({ 
-    slideIn, 
+  animation: ${({
+    slideIn,
     slideOut,
     direction
   }) => slideFunction(slideIn, slideOut, direction)} 0.7s ease forwards;
@@ -262,9 +262,9 @@ export const IntermediateGameDescriptionDialog = ({
     <>
       <Dialog
         open={isOpen}
-        maxWidth='lg'        
+        maxWidth='lg'
       >
-        <CustomDialogInnerWrapper> 
+        <CustomDialogInnerWrapper>
           <DialogContent
             sx={{
               height: "75vh",
@@ -296,7 +296,7 @@ export const IntermediateGameDescriptionDialog = ({
                   slideState.slideNum === 1 &&
                     <>
                       <CodeBlockWrapper>
-                        <CodeBlockDiv> 
+                        <CodeBlockDiv>
                           <ComentLineWrapper>
                             {'//'} 正規表現を適用させる文字列
                           </ComentLineWrapper>
@@ -325,7 +325,7 @@ export const IntermediateGameDescriptionDialog = ({
                   slideState.slideNum === 2 &&
                     <>
                       <CodeBlockWrapper>
-                        <CodeBlockDiv> 
+                        <CodeBlockDiv>
                           <CodeLineWrapper>
                             <CodeRedSpan>const</CodeRedSpan> target <CodeYellowSpan>=</CodeYellowSpan> <CodeYellowSpan>'environment enviroment'</CodeYellowSpan>;
                           </CodeLineWrapper>
@@ -351,7 +351,7 @@ export const IntermediateGameDescriptionDialog = ({
                   slideState.slideNum === 3 &&
                     <>
                       <CodeBlockWrapper>
-                        <CodeBlockDiv> 
+                        <CodeBlockDiv>
                           <CodeLineWrapper>
                             <CodeRedSpan>const</CodeRedSpan> target <CodeYellowSpan>=</CodeYellowSpan> <CodeYellowSpan>'ck cook coook cooook'</CodeYellowSpan>;
                           </CodeLineWrapper>
@@ -377,7 +377,7 @@ export const IntermediateGameDescriptionDialog = ({
                   slideState.slideNum === 4 &&
                     <>
                       <CodeBlockWrapper>
-                        <CodeBlockDiv> 
+                        <CodeBlockDiv>
                           <CodeLineWrapper>
                             <CodeRedSpan>const</CodeRedSpan> target <CodeYellowSpan>=</CodeYellowSpan> <CodeYellowSpan>'150 is greater than 15.'</CodeYellowSpan>;
                           </CodeLineWrapper>
@@ -403,7 +403,7 @@ export const IntermediateGameDescriptionDialog = ({
                   slideState.slideNum === 5 &&
                     <>
                       <CaptureCodeBlockWrapper>
-                        <CodeBlockDiv> 
+                        <CodeBlockDiv>
                           <CodeLineWrapper>
                             <CodeRedSpan>const</CodeRedSpan> target <CodeYellowSpan>=</CodeYellowSpan> <CodeYellowSpan>'1, 112, 11212, 1121212'</CodeYellowSpan>;
                           </CodeLineWrapper>
@@ -446,10 +446,10 @@ export const IntermediateGameDescriptionDialog = ({
             <ButtonLineWrapper>
               {
                 slideState.slideNum !== 0 &&
-                  <ButtonWrapper 
+                  <ButtonWrapper
                     onClick={changeSlideToLeft}
                   >
-                    <Tooltip 
+                    <Tooltip
                       title={<div>戻る<br />( 左矢印キー ← )</div>}
                       placement="top"
                     >
@@ -459,17 +459,17 @@ export const IntermediateGameDescriptionDialog = ({
                         }}
                       >
                         <ArrowLeftIcon
-                          fontSize='inherit' 
+                          fontSize='inherit'
                           sx={{ color: `${COLORS.BLACK}` }}
                         />
                       </IconButton>
                     </Tooltip>
                   </ButtonWrapper>
               }
-              <ButtonWrapper 
+              <ButtonWrapper
                 onClick={changeSlideToRight}
               >
-                <Tooltip 
+                <Tooltip
                   title={<div>進む<br />( 右矢印キー → )</div>}
                   placement="top"
                   disableHoverListener={slideState.slideNum === 6}
@@ -485,8 +485,8 @@ export const IntermediateGameDescriptionDialog = ({
                     }}
                     disableRipple={slideState.slideNum === 6}
                   >
-                    <ArrowRightIcon 
-                      fontSize='inherit' 
+                    <ArrowRightIcon
+                      fontSize='inherit'
                       sx={{ color: `${COLORS.BLACK}` }}
                     />
                   </IconButton>

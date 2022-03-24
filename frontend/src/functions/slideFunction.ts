@@ -3,20 +3,22 @@ import { LeftSlideInAnime } from '../components/shared_style.js';
 import { RightSlideOutAnime } from '../components/shared_style.js';
 import { RightSlideInAnime } from '../components/shared_style.js';
 
+type SlideFunction = (slideIn: boolean, slideOut: boolean, direction: string) => string;
+
 // スライドアニメーションの関数
-export const slideFunction = (
-  slide_in,
-  slide_out,
+export const slideFunction: SlideFunction = (
+  slideIn,
+  slideOut,
   direction
 ) => {
   switch (true){
-    case slide_out && !slide_in && direction === "left":
+    case slideOut && !slideIn && direction === "left":
       return LeftSlideOutAnime;
-    case !slide_out && slide_in && direction === "left":
+    case !slideOut && slideIn && direction === "left":
       return LeftSlideInAnime;
-    case slide_out && !slide_in && direction === "right":
+    case slideOut && !slideIn && direction === "right":
       return RightSlideOutAnime;
-    case !slide_out && slide_in && direction === "right":
+    case !slideOut && slideIn && direction === "right":
       return RightSlideInAnime;
     default:
       return false;

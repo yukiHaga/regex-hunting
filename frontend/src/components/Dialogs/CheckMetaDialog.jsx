@@ -31,7 +31,7 @@ import Tooltip from '@mui/material/Tooltip';
 import IconButton from '@mui/material/IconButton';
 
 // スライドアニメーション関係の関数
-import { slideFunction } from '../../functions/slideFunction.js';
+import { slideFunction } from '../../functions/slideFunction.ts';
 
 // コードブロック関係
 import { CodeBlockWrapper } from '../shared_style.js';
@@ -63,7 +63,7 @@ const CustomDialogInnerWrapper = styled.div`
   width: 83vw;
 `;
 
-// backボタンのラッパー 
+// backボタンのラッパー
 // backボタンを固定してる
 const BackToModalButtonWrapper = styled.div`
   position: fixed;
@@ -81,7 +81,7 @@ const StyledTableCell = styled(TableCell)`
 
 const StyledTableDataCell = styled(TableCell)`
   font-size: 1em;
-  width: 86%;  
+  width: 86%;
   text-align: justify;
   text-justify: inter-ideograph;
 `;
@@ -135,8 +135,8 @@ const SlideContentWrapper = styled.div`
   width: 100%;
   margin: 0 auto;
   transform: translateX(0);
-  animation: ${({ 
-    slideIn, 
+  animation: ${({
+    slideIn,
     slideOut,
     direction
   }) => slideFunction(slideIn, slideOut, direction)} 0.7s ease forwards;
@@ -145,7 +145,7 @@ const SlideContentWrapper = styled.div`
 const CustomWarningSentenceWrapper = styled(WarningSentenceWrapper)`
   font-size: 1.0em;
   margin-top: 0.5%;
-`;  
+`;
 
 const CustomCodeBlockDiv = styled(CodeBlockDiv)`
   font-size: 1.0em;
@@ -256,9 +256,9 @@ export const CheckMetaDialog = ({
       open={isOpen}
       maxWidth='xl'
     >
-      <CustomDialogInnerWrapper> 
+      <CustomDialogInnerWrapper>
         <BackToModalButtonWrapper>
-          <BackToModalButton 
+          <BackToModalButton
             onClick={
               () => setGameState((prev) => ({
                 ...prev,
@@ -276,7 +276,7 @@ export const CheckMetaDialog = ({
             <Toolbar
               sx={{justifyContent: 'center'}}
             >
-              <Tooltip 
+              <Tooltip
                 title={rowState.prevName}
                 placement="top"
               >
@@ -286,7 +286,7 @@ export const CheckMetaDialog = ({
                   }}
                 >
                   <ArrowLeftIcon
-                    fontSize='inherit' 
+                    fontSize='inherit'
                     sx={{ color: `${COLORS.BLACK}` }}
                     onClick={() => handleLeftArrow(rowState)}
                   />
@@ -300,7 +300,7 @@ export const CheckMetaDialog = ({
               >
                 {rowState.name}
               </Typography>
-              <Tooltip 
+              <Tooltip
                 title={rowState.nextName}
                 placement="top"
               >
@@ -310,7 +310,7 @@ export const CheckMetaDialog = ({
                   }}
                 >
                   <ArrowRightIcon
-                    fontSize='inherit' 
+                    fontSize='inherit'
                     sx={{ color: `${COLORS.BLACK}` }}
                     onClick={() => handleRightArrow(rowState)}
                   />
@@ -350,15 +350,15 @@ export const CheckMetaDialog = ({
                           {row.data}
                           {
                             row.example === 'ターゲット文字列内のwww以降にマッチさせたい場合' &&
-                              <CustomWarningSentenceWrapper>   
+                              <CustomWarningSentenceWrapper>
                                 ※ IEとSafariは肯定の後読みをサポートしていません。その点を注意していただくようお願いします。
-                              </CustomWarningSentenceWrapper>   
+                              </CustomWarningSentenceWrapper>
                           }
                           {
                             row.example === 'ターゲット文字列内の最新バージョンのReactにマッチさせたい場合' &&
-                              <CustomWarningSentenceWrapper>   
+                              <CustomWarningSentenceWrapper>
                                 ※ IEとSafariは否定の後読みをサポートしていません。その点を注意していただくようお願いします。
-                              </CustomWarningSentenceWrapper>   
+                              </CustomWarningSentenceWrapper>
                           }
                           {
                             row.example &&
@@ -367,7 +367,7 @@ export const CheckMetaDialog = ({
                           {
                             row.example === 'ターゲット文字列内の各タグにマッチさせたい場合' &&
                               <CustomCodeBlockWrapper>
-                                <CustomCodeBlockDiv> 
+                                <CustomCodeBlockDiv>
                                   <CodeLineWrapper>
                                     <CodeRedSpan>const</CodeRedSpan> target <CodeYellowSpan>=</CodeYellowSpan> <CodeYellowSpan>'some {'<'}foo{'>'} {'<'}bar{'>'} new {'<'}/bar{'>'} {'<'}/foo{'>'} thing'</CodeYellowSpan>;
                                   </CodeLineWrapper>
@@ -415,7 +415,7 @@ export const CheckMetaDialog = ({
                           {
                             row.example === 'ターゲット文字列内の"<span>React</span>"にマッチさせたい場合' &&
                               <CustomCodeBlockWrapper>
-                                <CustomCodeBlockDiv> 
+                                <CustomCodeBlockDiv>
                                   <CodeLineWrapper>
                                     <CodeRedSpan>const</CodeRedSpan> target <CodeYellowSpan>=</CodeYellowSpan> <CodeYellowSpan>'This is "{'<'}span{'>'}React{'<'}/span{'>'}"'</CodeYellowSpan>;
                                   </CodeLineWrapper>
@@ -439,7 +439,7 @@ export const CheckMetaDialog = ({
                           {
                             row.example === 'ターゲット文字列内の"Regex Hunting"にマッチさせたい場合' &&
                               <CustomCodeBlockWrapper>
-                                <CustomCodeBlockDiv> 
+                                <CustomCodeBlockDiv>
                                   <CodeLineWrapper>
                                     <CodeRedSpan>const</CodeRedSpan> target <CodeYellowSpan>=</CodeYellowSpan> <CodeYellowSpan>'This is "Regex Hunting"'</CodeYellowSpan>;
                                   </CodeLineWrapper>
@@ -463,7 +463,7 @@ export const CheckMetaDialog = ({
                           {
                             row.example === 'ターゲット文字列内のThis is ReactとThis is JavaScriptにマッチさせたい場合' &&
                               <CustomCodeBlockWrapper>
-                                <CustomCodeBlockDiv> 
+                                <CustomCodeBlockDiv>
                                   <CodeLineWrapper>
                                     <CodeRedSpan>const</CodeRedSpan> target <CodeYellowSpan>=</CodeYellowSpan> <CodeYellowSpan>'This is React This is JavaScript'</CodeYellowSpan>;
                                   </CodeLineWrapper>
@@ -501,7 +501,7 @@ export const CheckMetaDialog = ({
                           {
                             row.example === 'ターゲット文字列内の金額の数字のみにマッチさせたい場合' &&
                               <CustomCodeBlockWrapper>
-                                <CustomCodeBlockDiv> 
+                                <CustomCodeBlockDiv>
                                   <CodeLineWrapper>
                                     <CodeRedSpan>const</CodeRedSpan> target <CodeYellowSpan>=</CodeYellowSpan> <CodeYellowSpan>'This water(100ml) is 100yen'</CodeYellowSpan>;
                                   </CodeLineWrapper>
@@ -534,7 +534,7 @@ export const CheckMetaDialog = ({
                                     {'// '}肯定の先読みを使用した場合、金額の数字のみにマッチさせることができます。
                                   </ComentLineWrapper>
                                   <CodeLineWrapper>
-                                    console.<CodeBlueSpan>log</CodeBlueSpan>(target.<CodeBlueSpan>match</CodeBlueSpan>(regex2)); <CodeComentSpan>{'// => '} ['100']</CodeComentSpan> 
+                                    console.<CodeBlueSpan>log</CodeBlueSpan>(target.<CodeBlueSpan>match</CodeBlueSpan>(regex2)); <CodeComentSpan>{'// => '} ['100']</CodeComentSpan>
                                   </CodeLineWrapper>
                                 </CustomCodeBlockDiv>
                               </CustomCodeBlockWrapper>
@@ -543,7 +543,7 @@ export const CheckMetaDialog = ({
                             row.example === 'ターゲット文字列内のmlの数字のみにマッチさせたい場合' &&
                               <>
                                 <CustomCodeBlockWrapper>
-                                  <CustomCodeBlockDiv> 
+                                  <CustomCodeBlockDiv>
                                     <CodeLineWrapper>
                                       <CodeRedSpan>const</CodeRedSpan> target <CodeYellowSpan>=</CodeYellowSpan> <CodeYellowSpan>'This water(500ml) is 100yen'</CodeYellowSpan>;
                                     </CodeLineWrapper>
@@ -568,7 +568,7 @@ export const CheckMetaDialog = ({
                                 </StyledDescriptionDiv>
                                 <ExampleData>{`ex) 不正な郵便番号(000-0000)にマッチさせたくない場合`}</ExampleData>
                                 <CustomCodeBlockWrapper>
-                                  <CustomCodeBlockDiv> 
+                                  <CustomCodeBlockDiv>
                                     <CodeLineWrapper>
                                       <CodeRedSpan>const</CodeRedSpan> target1 <CodeYellowSpan>=</CodeYellowSpan> <CodeYellowSpan>'000-0000'</CodeYellowSpan>; <CodeComentSpan>{'//'} 不正な郵便番号</CodeComentSpan>
                                     </CodeLineWrapper>
@@ -606,7 +606,7 @@ export const CheckMetaDialog = ({
                             row.example === 'ターゲット文字列内のwww以降にマッチさせたい場合' &&
                               <>
                                 <CustomCodeBlockWrapper>
-                                  <CustomCodeBlockDiv> 
+                                  <CustomCodeBlockDiv>
                                     <CodeLineWrapper>
                                       <CodeRedSpan>const</CodeRedSpan> target <CodeYellowSpan>=</CodeYellowSpan> <CodeYellowSpan>'https://www.regex-hunting.com/games'</CodeYellowSpan>;
                                     </CodeLineWrapper>
@@ -635,7 +635,7 @@ export const CheckMetaDialog = ({
                             row.example === 'ターゲット文字列内の最新バージョンのReactにマッチさせたい場合' &&
                               <>
                                 <CustomCodeBlockWrapper>
-                                  <CustomCodeBlockDiv> 
+                                  <CustomCodeBlockDiv>
                                     <CodeLineWrapper>
                                       <CodeRedSpan>const</CodeRedSpan> target <CodeYellowSpan>=</CodeYellowSpan> <CodeYellowSpan>'React17.0 React16.0 React15.6'</CodeYellowSpan>;
                                     </CodeLineWrapper>
@@ -661,7 +661,7 @@ export const CheckMetaDialog = ({
                             row.example === '先頭のcatという文字列にマッチさせたい場合' &&
                               <>
                                 <CustomCodeBlockWrapper>
-                                  <CustomCodeBlockDiv> 
+                                  <CustomCodeBlockDiv>
                                     <CodeLineWrapper>
                                       <CodeRedSpan>const</CodeRedSpan> target <CodeYellowSpan>=</CodeYellowSpan> <CodeYellowSpan>'cat dog cat'</CodeYellowSpan>;
                                     </CodeLineWrapper>
@@ -700,7 +700,7 @@ export const CheckMetaDialog = ({
                             row.example === '末尾のcatという文字列にマッチさせたい場合' &&
                               <>
                                 <CustomCodeBlockWrapper>
-                                  <CustomCodeBlockDiv> 
+                                  <CustomCodeBlockDiv>
                                     <CodeLineWrapper>
                                       <CodeRedSpan>const</CodeRedSpan> target <CodeYellowSpan>=</CodeYellowSpan> <CodeYellowSpan>'cat dog cat'</CodeYellowSpan>;
                                     </CodeLineWrapper>
@@ -739,7 +739,7 @@ export const CheckMetaDialog = ({
                             row.example === '単体のcatという文字列にマッチさせたい場合' &&
                               <>
                                 <CustomCodeBlockWrapper>
-                                  <CustomCodeBlockDiv> 
+                                  <CustomCodeBlockDiv>
                                     <CodeLineWrapper>
                                       <CodeRedSpan>const</CodeRedSpan> target <CodeYellowSpan>=</CodeYellowSpan> <CodeYellowSpan>'cat dog cats indicate'</CodeYellowSpan>;
                                     </CodeLineWrapper>

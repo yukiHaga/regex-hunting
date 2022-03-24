@@ -22,7 +22,7 @@ import Tooltip from '@mui/material/Tooltip';
 import IconButton from '@mui/material/IconButton';
 
 // スライドアニメーション関係の関数
-import { slideFunction } from '../../functions/slideFunction.js';
+import { slideFunction } from '../../functions/slideFunction.ts';
 
 // コードブロック関係
 import { CodeBlockWrapper } from '../shared_style.js';
@@ -67,8 +67,8 @@ const SlideContentWrapper = styled.div`
   height: 100%;
   margin: 0 auto;
   transform: translateX(0);
-  animation: ${({ 
-    slideIn, 
+  animation: ${({
+    slideIn,
     slideOut,
     direction
   }) => slideFunction(slideIn, slideOut, direction)} 0.7s ease forwards;
@@ -256,9 +256,9 @@ export const ElementaryGameDescriptionDialog = ({
     <>
       <Dialog
         open={isOpen}
-        maxWidth='lg'        
+        maxWidth='lg'
       >
-        <CustomDialogInnerWrapper> 
+        <CustomDialogInnerWrapper>
           <DialogContent
             sx={{
               height: "75vh",
@@ -291,7 +291,7 @@ export const ElementaryGameDescriptionDialog = ({
                     <>
                       <SpecialWarningSentenceWrapper>※ 本サービスでは、特殊な意味を持つ文字列は全て「特殊文字」として分類します。</SpecialWarningSentenceWrapper>
                       <SpecialCodeBlockWrapper>
-                        <CodeBlockDiv> 
+                        <CodeBlockDiv>
                           <ComentLineWrapper>
                             {'//'} 正規表現を適用させる文字列
                           </ComentLineWrapper>
@@ -320,7 +320,7 @@ export const ElementaryGameDescriptionDialog = ({
                   slideState.slideNum === 2 &&
                     <>
                       <SpecialCodeBlockWrapper>
-                        <CodeBlockDiv> 
+                        <CodeBlockDiv>
                           <CodeLineWrapper>
                             <CodeRedSpan>const</CodeRedSpan> target <CodeYellowSpan>=</CodeYellowSpan> <CodeYellowSpan>'a c z # % @ b'</CodeYellowSpan>;
                           </CodeLineWrapper>
@@ -346,7 +346,7 @@ export const ElementaryGameDescriptionDialog = ({
                   slideState.slideNum === 3 &&
                     <>
                       <CodeBlockWrapper>
-                        <CodeBlockDiv> 
+                        <CodeBlockDiv>
                           <CodeLineWrapper>
                             <CodeRedSpan>const</CodeRedSpan> target <CodeYellowSpan>=</CodeYellowSpan> <CodeYellowSpan>'gray grey'</CodeYellowSpan>;
                           </CodeLineWrapper>
@@ -386,10 +386,10 @@ export const ElementaryGameDescriptionDialog = ({
             <ButtonLineWrapper>
               {
                 slideState.slideNum !== 0 &&
-                  <ButtonWrapper 
+                  <ButtonWrapper
                     onClick={changeSlideToLeft}
                   >
-                    <Tooltip 
+                    <Tooltip
                       title={<div>戻る<br />( 左矢印キー ← )</div>}
                       placement="top"
                     >
@@ -399,17 +399,17 @@ export const ElementaryGameDescriptionDialog = ({
                         }}
                       >
                         <ArrowLeftIcon
-                          fontSize='inherit' 
+                          fontSize='inherit'
                           sx={{ color: `${COLORS.BLACK}` }}
                         />
                       </IconButton>
                     </Tooltip>
                   </ButtonWrapper>
               }
-              <ButtonWrapper 
+              <ButtonWrapper
                 onClick={changeSlideToRight}
               >
-                <Tooltip 
+                <Tooltip
                   title={<div>進む<br />( 右矢印キー → )</div>}
                   placement="top"
                   disableHoverListener={slideState.slideNum === 4}
@@ -425,8 +425,8 @@ export const ElementaryGameDescriptionDialog = ({
                     }}
                     disableRipple={slideState.slideNum === 4}
                   >
-                    <ArrowRightIcon 
-                      fontSize='inherit' 
+                    <ArrowRightIcon
+                      fontSize='inherit'
                       sx={{ color: `${COLORS.BLACK}` }}
                     />
                   </IconButton>

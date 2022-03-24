@@ -30,7 +30,7 @@ import IconButton from '@mui/material/IconButton';
 import { WIDTH } from '../../style_constants.js';
 
 // スライドアニメーション関係の関数
-import { slideFunction } from '../../functions/slideFunction.js';
+import { slideFunction } from '../../functions/slideFunction.ts';
 
 const TitleLineWrapper = styled.div`
   display: flex;

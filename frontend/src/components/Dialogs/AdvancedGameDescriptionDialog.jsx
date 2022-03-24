@@ -22,7 +22,7 @@ import Tooltip from '@mui/material/Tooltip';
 import IconButton from '@mui/material/IconButton';
 
 // スライドアニメーション関係の関数
-import { slideFunction } from '../../functions/slideFunction.js';
+import { slideFunction } from '../../functions/slideFunction.ts';
 
 // コードブロック関係
 import { CodeBlockWrapper } from '../shared_style.js';
@@ -67,8 +67,8 @@ const SlideContentWrapper = styled.div`
   height: 100%;
   margin: 0 auto;
   transform: translateX(0);
-  animation: ${({ 
-    slideIn, 
+  animation: ${({
+    slideIn,
     slideOut,
     direction
   }) => slideFunction(slideIn, slideOut, direction)} 0.7s ease forwards;
@@ -276,9 +276,9 @@ export const AdvancedGameDescriptionDialog = ({
     <>
       <Dialog
         open={isOpen}
-        maxWidth='lg'        
+        maxWidth='lg'
       >
-        <CustomDialogInnerWrapper> 
+        <CustomDialogInnerWrapper>
           <DialogContent
             sx={{
               height: "75vh",
@@ -310,7 +310,7 @@ export const AdvancedGameDescriptionDialog = ({
                   slideState.slideNum === 1 &&
                     <>
                       <CaptureCodeBlockWrapper>
-                        <CodeBlockDiv> 
+                        <CodeBlockDiv>
                           <ComentLineWrapper>
                             {'//'} 正規表現を適用させる文字列
                           </ComentLineWrapper>
@@ -335,7 +335,7 @@ export const AdvancedGameDescriptionDialog = ({
                         ※本サービスではgオプションを採用しています。
                       </CustomWarningSentenceWrapper>
                       <CaptureCodeBlockWrapper>
-                        <CustomCodeBlockDiv> 
+                        <CustomCodeBlockDiv>
                           <CodeLineWrapper>
                             <CodeRedSpan>const</CodeRedSpan> target <CodeYellowSpan>=</CodeYellowSpan> <CodeYellowSpan>'Python JavaScript Java'</CodeYellowSpan>;
                           </CodeLineWrapper>
@@ -360,13 +360,13 @@ export const AdvancedGameDescriptionDialog = ({
                   slideState.slideNum === 3 &&
                     <>
                       <CaptureCodeBlockWrapper>
-                        <CodeBlockDiv> 
+                        <CodeBlockDiv>
                           <CodeLineWrapper>
                             <CodeRedSpan>const</CodeRedSpan> target <CodeYellowSpan>=</CodeYellowSpan> <CodeYellowSpan>'This water(100ml) is 100yen'</CodeYellowSpan>;
                           </CodeLineWrapper>
                           <BlankLineWrapper />
                           <ComentLineWrapper>
-                            {'//'} 金額の数字にマッチする正規表現 
+                            {'//'} 金額の数字にマッチする正規表現
                           </ComentLineWrapper>
                           <ComentLineWrapper>
                             {'//'} 3桁の数字の後ろにyenという文字列があるような3桁の数字にマッチします。
@@ -386,13 +386,13 @@ export const AdvancedGameDescriptionDialog = ({
                   slideState.slideNum === 4 &&
                     <>
                       <CodeBlockWrapper>
-                        <CodeBlockDiv> 
+                        <CodeBlockDiv>
                           <CodeLineWrapper>
                             <CodeRedSpan>const</CodeRedSpan> target <CodeYellowSpan>=</CodeYellowSpan> <CodeYellowSpan>'This water(500ml) is 100yen'</CodeYellowSpan>;
                           </CodeLineWrapper>
                           <BlankLineWrapper />
                           <ComentLineWrapper>
-                            {'//'} mlの数字にマッチする正規表現 
+                            {'//'} mlの数字にマッチする正規表現
                           </ComentLineWrapper>
                           <ComentLineWrapper>
                             {'//'} 3桁の数字の後ろにyenという文字列がないような3桁の数字にマッチします。
@@ -412,7 +412,7 @@ export const AdvancedGameDescriptionDialog = ({
                   slideState.slideNum === 5 &&
                     <>
                       <CaptureCodeBlockWrapper>
-                        <CodeBlockDiv> 
+                        <CodeBlockDiv>
                           <CodeLineWrapper>
                             <CodeRedSpan>const</CodeRedSpan> target <CodeYellowSpan>=</CodeYellowSpan> <CodeYellowSpan>'This is React This is JavaScript'</CodeYellowSpan>;
                           </CodeLineWrapper>
@@ -438,7 +438,7 @@ export const AdvancedGameDescriptionDialog = ({
                   slideState.slideNum === 6 &&
                     <>
                       <CaptureCodeBlockWrapper>
-                        <CodeBlockDiv> 
+                        <CodeBlockDiv>
                           <CodeLineWrapper>
                             <CodeRedSpan>const</CodeRedSpan> target <CodeYellowSpan>=</CodeYellowSpan> <CodeYellowSpan>'cat dog cat'</CodeYellowSpan>;
                           </CodeLineWrapper>
@@ -491,10 +491,10 @@ export const AdvancedGameDescriptionDialog = ({
             <ButtonLineWrapper>
               {
                 slideState.slideNum !== 0 &&
-                  <ButtonWrapper 
+                  <ButtonWrapper
                     onClick={changeSlideToLeft}
                   >
-                    <Tooltip 
+                    <Tooltip
                       title={<div>戻る<br />( 左矢印キー ← )</div>}
                       placement="top"
                     >
@@ -504,17 +504,17 @@ export const AdvancedGameDescriptionDialog = ({
                         }}
                       >
                         <ArrowLeftIcon
-                          fontSize='inherit' 
+                          fontSize='inherit'
                           sx={{ color: `${COLORS.BLACK}` }}
                         />
                       </IconButton>
                     </Tooltip>
                   </ButtonWrapper>
               }
-              <ButtonWrapper 
+              <ButtonWrapper
                 onClick={changeSlideToRight}
               >
-                <Tooltip 
+                <Tooltip
                   title={<div>進む<br />( 右矢印キー → )</div>}
                   placement="top"
                   disableHoverListener={slideState.slideNum === 7}
@@ -530,8 +530,8 @@ export const AdvancedGameDescriptionDialog = ({
                     }}
                     disableRipple={slideState.slideNum === 7}
                   >
-                    <ArrowRightIcon 
-                      fontSize='inherit' 
+                    <ArrowRightIcon
+                      fontSize='inherit'
                       sx={{ color: `${COLORS.BLACK}` }}
                     />
                   </IconButton>
