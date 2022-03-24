@@ -1,9 +1,9 @@
 import React, { useState, useEffect, memo, useMemo } from 'react';
 import styled from 'styled-components';
 
-import { 
-  CircularProgressbarWithChildren, 
-  buildStyles, 
+import {
+  CircularProgressbarWithChildren,
+  buildStyles,
 } from 'react-circular-progressbar';
 
 import 'react-circular-progressbar/dist/styles.css';
@@ -12,7 +12,7 @@ import 'react-circular-progressbar/dist/styles.css';
 import { COLORS } from '../../style_constants.js';
 
 // ミリ秒を分に変換する関数
-import { getMinute } from '../../functions/getMinute.js';
+import { getMinute } from '../../functions/getMinute.ts';
 
 import { WIDTH } from '../../style_constants.js';
 
@@ -70,8 +70,8 @@ export const TimeAnalysisBox = memo(({
   return (
     <>
       <TimeAnalysisBoxWrapper>
-        <CircularProgressbarWithChildren 
-          value={timeState ? timeState : 0} 
+        <CircularProgressbarWithChildren
+          value={timeState ? timeState : 0}
           strokeWidth={4}
           styles={buildStyles({
             // Rotation of path and trail, in number of turns (0-1)
