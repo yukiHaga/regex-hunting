@@ -6,8 +6,8 @@ import { COLORS } from '../../style_constants.js';
 // Sounds
 import TackleSound from '../../sounds/tackle_25.mp3';
 
-// calculateDamage 
-import { calculateDamage } from '../../functions/calculateDamage.js';
+// calculateDamage
+import { calculateDamage } from '../../functions/calculateDamage.ts';
 
 const TimeGageWrapper = styled.div`
   background-color: ${COLORS.GAGE_GRAY};
@@ -127,14 +127,14 @@ export const TimeGage = ({
       <TimeGageWrapper>
         <TypeWrapper>
           <Fuchiue>
-            TIME 
+            TIME
           </Fuchiue>
           TIME
         </TypeWrapper>
         <FixWrapper>
           <GageOuterWrapper>
-            <GageWrapper 
-              onAnimationEnd={timeOut} 
+            <GageWrapper
+              onAnimationEnd={timeOut}
               timeActive={timeActive}
               clickDescriptionOpen={clickDescriptionOpen}
               clickMetaOpen={clickMetaOpen}

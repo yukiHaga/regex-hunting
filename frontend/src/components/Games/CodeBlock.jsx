@@ -11,8 +11,8 @@ import ErrorSound from '../../sounds/error_25.mp3';
 import DecisionSound from '../../sounds/decision_25.mp3';
 import CutMonsterSound from '../../sounds/cut_25.mp3';
 
-// calculateDamage 
-import { calculateDamage } from '../../functions/calculateDamage.js';
+// calculateDamage
+import { calculateDamage } from '../../functions/calculateDamage.ts';
 
 const CodeBlockWrapper = styled.div`
   background-color: ${COLORS.LIGHT_BLACK};
@@ -65,7 +65,7 @@ const CodeBlockDiv = styled.div`
     opacity: 0.5;
   };
   &:after {
-    content: "_"; 
+    content: "_";
     animation: ${blink} 1s infinite;
   };
 `;
@@ -112,8 +112,8 @@ export const CodeBlock = ({
       const matchArray = [];
       for (const match of matchesIterator) {
         matchArray.push({
-          match: match[0], 
-          index: match.index 
+          match: match[0],
+          index: match.index
         })
       }
       return matchArray;
@@ -169,13 +169,13 @@ export const CodeBlock = ({
     try {
       if(e.key === 'Enter' && questionJudgement === 'progress' && keyAvailable === true) {
         const inputRegex = inputRefObject.current.innerText;
-        const inputRegexObject = getRegexObject(inputRegex); 
+        const inputRegexObject = getRegexObject(inputRegex);
         const inputMatchArray = getMatchArray(targetSentence, inputRegex);
         const sampleMatchArray = getMatchArray(targetSentence, sampleAnswer);
         const currentQuestionJudgement = getQuestionJudgementV2(
-          inputMatchArray, 
+          inputMatchArray,
           sampleMatchArray
-        ); 
+        );
         const audio = new Audio(DecisionSound);
         audio.play();
         if(currentQuestionJudgement === "correct") {

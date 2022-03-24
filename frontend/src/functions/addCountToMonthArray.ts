@@ -4,7 +4,7 @@ type AddCountToMonthArray = {
   (
     gameFrequenciesPerDay: {[key: string]: number},
     monthObj: {[key: string]: number}
-  ): {count: number, date: string}[]
+  ): {count: number, date: string}[];
 };
 
 // 今月のゲームクリア日にだけ、propsのcountを追加する関数
