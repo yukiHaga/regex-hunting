@@ -1,4 +1,3 @@
-//@ts-check
 type GetExperience = (difficulty: 'elementary' | 'intermediate' | 'advanced') => number | undefined;
 
 // 各ゲームの獲得経験値を取得するための関数

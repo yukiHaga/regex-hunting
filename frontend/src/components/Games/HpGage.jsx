@@ -4,8 +4,8 @@ import styled from 'styled-components';
 // Colors
 import { COLORS } from '../../style_constants.js';
 
-// handleColorType 
-import { handleColorType } from '../../functions/handleColorType.js';
+// handleColorType
+import { handleColorType } from '../../functions/handleColorType.ts';
 
 const HpGageWrapper = styled.div`
   background-color: ${COLORS.GAGE_GRAY};
@@ -80,7 +80,7 @@ export const HpGage = ({
           userHp={userHp}
         >
           <Fuchiue>
-            HP 
+            HP
           </Fuchiue>
           HP
         </TypeWrapper>
@@ -88,7 +88,7 @@ export const HpGage = ({
           <GageOuterWrapper>
             {
               (userHp / userMaxHp) !== 0 &&
-                <GageWrapper 
+                <GageWrapper
                   userHp={userHp}
                   userMaxHp={userMaxHp}
                 />

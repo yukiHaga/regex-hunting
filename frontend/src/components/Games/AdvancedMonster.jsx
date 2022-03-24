@@ -4,10 +4,10 @@ import styled from 'styled-components';
 // Colors
 import { COLORS } from '../../style_constants.js';
 
-import AdvancedMonsterImage from '../../images/advanced.png'; 
+import AdvancedMonsterImage from '../../images/advanced.png';
 
-// handleColorType 
-import { handleColorType } from '../../functions/handleColorType.js';
+// handleColorType
+import { handleColorType } from '../../functions/handleColorType.ts';
 
 // アニメーション
 import { MonsterFlash } from '../shared_style.js';
@@ -90,26 +90,26 @@ export const AdvancedMonster = ({
   return (
     <>
       {
-        !gameDescriptionOpen && 
+        !gameDescriptionOpen &&
           <AdvancedWrapper
             gameResult={gameResult}
           >
             {
               firstAppearance ?
-                <FirstAdvancedMonsterWrapper 
-                  src={AdvancedMonsterImage} 
+                <FirstAdvancedMonsterWrapper
+                  src={AdvancedMonsterImage}
                 />
               :
-                <AdvancedMonsterWrapper 
-                  src={AdvancedMonsterImage} 
+                <AdvancedMonsterWrapper
+                  src={AdvancedMonsterImage}
                   questionJudgement={questionJudgement}
                 />
             }
             <HpGageWrapper
               firstAppearance={firstAppearance}
             >
-              <InnerHpGageWrapper 
-                monsterHp={monsterHp} 
+              <InnerHpGageWrapper
+                monsterHp={monsterHp}
                 monsterMaxHp={monsterMaxHp}
               />
             </HpGageWrapper>

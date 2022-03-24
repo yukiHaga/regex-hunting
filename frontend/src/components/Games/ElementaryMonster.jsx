@@ -5,10 +5,10 @@ import styled from 'styled-components';
 import { COLORS } from '../../style_constants.js';
 
 // Image
-import ElementaryMonsterImage from '../../images/elementary.png'; 
+import ElementaryMonsterImage from '../../images/elementary.png';
 
-// handleColorType 
-import { handleColorType } from '../../functions/handleColorType.js';
+// handleColorType
+import { handleColorType } from '../../functions/handleColorType.ts';
 
 // アニメーション
 import { MonsterFlash } from '../shared_style.js';
@@ -34,7 +34,7 @@ const FirstElementaryMonsterWrapper = styled.img`
 
 const ElementaryMonsterWrapper = styled.img`
   width: 50%;
-  height: 50%
+  height: 50%;
   object-fit: contain;
   animation-name: ${({ questionJudgement }) => questionJudgement === "correct" && MonsterFlash};
   animation-duration: 1s;
@@ -76,26 +76,26 @@ export const ElementaryMonster = ({
   return (
     <>
       {
-        !gameDescriptionOpen && 
+        !gameDescriptionOpen &&
           <ElementaryWrapper
             gameResult={gameResult}
           >
             {
               firstAppearance ?
-                <FirstElementaryMonsterWrapper 
-                  src={ElementaryMonsterImage} 
+                <FirstElementaryMonsterWrapper
+                  src={ElementaryMonsterImage}
                 />
               :
-                <ElementaryMonsterWrapper 
-                  src={ElementaryMonsterImage} 
+                <ElementaryMonsterWrapper
+                  src={ElementaryMonsterImage}
                   questionJudgement={questionJudgement}
                 />
             }
             <HpGageWrapper
               firstAppearance={firstAppearance}
             >
-              <InnerHpGageWrapper 
-                monsterHp={monsterHp} 
+              <InnerHpGageWrapper
+                monsterHp={monsterHp}
                 monsterMaxHp={monsterMaxHp}
               />
             </HpGageWrapper>
