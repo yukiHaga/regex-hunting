@@ -18,7 +18,7 @@ import { TimeAnalysisBox } from '../components/Games/TimeAnalysisBox.jsx';
 import { FastAnalysisBox } from '../components/Games/FastAnalysisBox.jsx';
 import { SecondSelectBox } from '../components/Games/SecondSelectBox.jsx';
 import { TitleFlashMessage } from '../components/FlashMessages/TitleFlashMessage.jsx';
- 
+
 // Images
 import ElementaryGameContentImage from '../images/elementary_game_content.jpg';
 import IntermediateGameContentImage from '../images/intermediate_game_content.jpg';
@@ -28,10 +28,10 @@ import AdvancedGameContentImage from '../images/advanced_game_content.jpg';
 import { UserContext } from "../context/UserProvider.js";
 
 // ログイン状態を確認するAPIコール関数
-import { checkLoginStatus } from '../apis/checkLoginStatus.js'; 
+import { checkLoginStatus } from '../apis/checkLoginStatus.js';
 
 // マイページの情報を取得するAPIコール関数
-import { getMyPageInfo } from '../apis/mypage.js'; 
+import { getMyPageInfo } from '../apis/mypage.js';
 
 // HTTP_STATUS_CODE
 import { HTTP_STATUS_CODE } from '../constants';
@@ -175,14 +175,14 @@ export const MyPages = () => {
   // useContext
   // requestUserStateには、requestState, userState, errorsが格納されている
   // userStateにはsessionとuserが格納されている
-  const { 
-    requestUserState: { 
+  const {
+    requestUserState: {
       requestState,
       sessionState,
       userState: { user },
       battleAudioState
     },
-    dispatch, 
+    dispatch,
     requestUserActionTyps
   } = useContext(UserContext);
 
@@ -234,7 +234,7 @@ export const MyPages = () => {
         });
         if(!data.session && location.key === 'default') {
           navigate(
-            '/', 
+            '/',
             { state: { display: true, success: "ログインしてください。"}}
           )
         }
@@ -252,9 +252,9 @@ export const MyPages = () => {
       })
     }
   }, [
-    dispatch, 
+    dispatch,
     sessionState,
-    requestUserActionTyps.REQUEST, 
+    requestUserActionTyps.REQUEST,
     requestUserActionTyps.REQUEST_SUCCESS,
     requestUserActionTyps.REQUEST_FAILURE,
     navigate,
@@ -282,12 +282,12 @@ export const MyPages = () => {
           selectedGameClearCount: data.game_clear_count_per_difficulty.elementary,
           selectedFastTime: data.fast_time_per_difficulty.elementary,
           getPageInfo: true
-        })); 
+        }));
       }).catch((e) => {
         if(e.response.status === HTTP_STATUS_CODE.NOT_FOUND){
           setMyPageState((prev) => ({
             ...prev,
-          })); 
+          }));
         } else {
           throw e;
         }
@@ -316,10 +316,10 @@ export const MyPages = () => {
     <>
       {
         requestState === REQUEST_STATE.LOADING ?
-          <CircularMask /> 
+          <CircularMask />
         :
           <>
-            <Header /> 
+            <Header />
             <MainWrapper>
               <SessionFlashMessage
                 location={location}
@@ -343,14 +343,14 @@ export const MyPages = () => {
                   <StudyHeatMapSentenceWrapper>
                     学習カレンダー
                   </StudyHeatMapSentenceWrapper>
-                  <StudyHeatMap 
+                  <StudyHeatMap
                     gameFrequenciesPerDay={myPageState.gameFrequenciesPerDay}
                   />
                 </StudyHeatMapWrapper>
               </MainFirstWrapper>
               <MainSecondWrapper>
                 <MainSecondSelectWrapper>
-                  <SecondSelectBox 
+                  <SecondSelectBox
                     difficultyMonthTitle={myPageState.difficultyMonthTitle}
                     prevDifficultyMonthTitle={myPageState.prevDifficultyMonthTitle}
                     nextDifficultyMonthTitle={myPageState.nextDifficultyMonthTitle}
@@ -360,13 +360,13 @@ export const MyPages = () => {
                 </MainSecondSelectWrapper>
                 <MainSecondGraphWrapper>
                   <TimeAnalysisBox
-                    time={myPageState.selectedTotalTime} 
+                    time={myPageState.selectedTotalTime}
                   />
                   <GameClearCountBox
-                    count={myPageState.selectedGameClearCount} 
+                    count={myPageState.selectedGameClearCount}
                   />
                   <FastAnalysisBox
-                    minutes={myPageState.selectedFastTime} 
+                    minutes={myPageState.selectedFastTime}
                   />
                 </MainSecondGraphWrapper>
               </MainSecondWrapper>
@@ -374,18 +374,18 @@ export const MyPages = () => {
                 <QuestSentenceWrapper>
                   クエスト一覧
                 </QuestSentenceWrapper>
-                <MyPageGameContentsWrapper> 
-                  <GameContent 
-                    difficulty='elementary' 
-                    image={ElementaryGameContentImage} 
+                <MyPageGameContentsWrapper>
+                  <GameContent
+                    difficulty='elementary'
+                    image={ElementaryGameContentImage}
                   />
-                  <GameContent 
-                    difficulty='intermediate' 
-                    image={IntermediateGameContentImage} 
+                  <GameContent
+                    difficulty='intermediate'
+                    image={IntermediateGameContentImage}
                   />
-                  <GameContent 
-                    difficulty='advanced' 
-                    image={AdvancedGameContentImage} 
+                  <GameContent
+                    difficulty='advanced'
+                    image={AdvancedGameContentImage}
                   />
                 </MyPageGameContentsWrapper>
               </SecondWrapper>
@@ -395,18 +395,20 @@ export const MyPages = () => {
                 </TitleListSentenceWrapper>
                 <TitleListWrapper>
                   {
-                    myPageState.ownedTitles.map((obj) => (
-                      <TitleCard
-                        name={obj.name}
-                        releaseDate={obj.release_date}
-                        onClick={() => setMyPageState((prev) => ({
-                          ...prev,
-                          isOpenDialog: true,   
-                          name: obj.name,
-                          releaseDate: obj.release_date,
-                          releaseCondition: obj.release_condition
-                        }))}
-                      />
+                    myPageState.ownedTitles.map((obj, index) => (
+                      <Fragment key={index}>
+                        <TitleCard
+                          name={obj.name}
+                          releaseDate={obj.release_date}
+                          onClick={() => setMyPageState((prev) => ({
+                            ...prev,
+                            isOpenDialog: true,
+                            name: obj.name,
+                            releaseDate: obj.release_date,
+                            releaseCondition: obj.release_condition
+                          }))}
+                        />
+                      </Fragment>
                     ))
                   }
                 </TitleListWrapper>
@@ -415,7 +417,7 @@ export const MyPages = () => {
             <Footer />
             {
               myPageState.isOpenDialog &&
-                <ReleaseConditionDialog 
+                <ReleaseConditionDialog
                   isOpen={myPageState.isOpenDialog}
                   onClose={() => setMyPageState((prev) => ({
                     ...prev,

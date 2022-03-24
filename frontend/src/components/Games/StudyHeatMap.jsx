@@ -10,7 +10,7 @@ import ReactTooltip from 'react-tooltip';
 
 // functions
 import { makeThisMonthObj } from '../../functions/makeThisMonthObj.js';
-import { addCountToMonthArray } from '../../functions/addCountToMonthArray.js';
+import { addCountToMonthArray } from '../../functions/addCountToMonthArray.ts';
 
 const InnerStudyHeatMapWrapper = styled.div`
   width: 100%;
@@ -25,8 +25,8 @@ export const StudyHeatMap = memo(({
   // 今月の月初
   const thisMonthFirstDay = useMemo(() => new Date(
     new Date(
-      new Date().getFullYear(), 
-      new Date().getMonth(), 
+      new Date().getFullYear(),
+      new Date().getMonth(),
       1
     )
   ), [
@@ -34,15 +34,15 @@ export const StudyHeatMap = memo(({
 
   // 前月の月末
   const prevMonthEndDay = useMemo(() => new Date(
-    new Date().setDate(0), 
+    new Date().setDate(0),
   ), [
   ]);
 
   // 今月の月末
   const thisMonthEndDay = useMemo(() => new Date(
     new Date(
-      new Date().getFullYear(), 
-      new Date().getMonth() + 1, 
+      new Date().getFullYear(),
+      new Date().getMonth() + 1,
       0
     )
   ), [
@@ -59,7 +59,7 @@ export const StudyHeatMap = memo(({
     thisMonthEndDay
   ]);
 
-  // 日付とカウントをキーに持つオブジェクトを要素とした配列を生成 
+  // 日付とカウントをキーに持つオブジェクトを要素とした配列を生成
   const monthObjArray = useMemo(() => addCountToMonthArray(
     gameFrequenciesPerDay,
     monthObj
@@ -74,7 +74,7 @@ export const StudyHeatMap = memo(({
       case count >= 1 && count <= 4 :
         return `color-github-${count}`
       case count > 4:
-        return 'color-github-4' 
+        return 'color-github-4'
       default:
         return 'color-empty'
     }

@@ -87,7 +87,7 @@ export const TitleCard = memo(({
 
   return (
     <>
-      <InnerTitleCardWrapper 
+      <InnerTitleCardWrapper
         onClick={onClick}
         name={name}
       >
