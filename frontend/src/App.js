@@ -20,14 +20,14 @@ import { SendEmail } from './containers/SendEmail.jsx';
 import { PasswordUpdates } from './containers/PasswordUpdates.jsx';
 import { ExternalAuth } from './containers/ExternalAuth.jsx';
 import { NotFoundPage } from './containers/NotFoundPage.jsx';
-import ScrollToTop from './scroll/ScrollToTop.jsx';
+import ScrollToTop from './scroll/ScrollToTop.tsx';
 
 // Provider
 import { UserProvider } from "./context/UserProvider.js";
 
 // App Component
 function App() {
-   
+
   return (
     <React.StrictMode>
       <UserProvider>
@@ -35,35 +35,35 @@ function App() {
           <ScrollToTop />
           <Routes>
             {/* LPページ */}
-            <Route 
-              exact path="/" 
-              element={<LandingPages />} 
+            <Route
+              exact path="/"
+              element={<LandingPages />}
             />
 
             {/* OAuth用のページ */}
-            <Route 
-              exact path="/callback/:provider/" 
-              element={<ExternalAuth />} 
+            <Route
+              exact path="/callback/:provider/"
+              element={<ExternalAuth />}
             />
 
             {/* マイページ */}
             {/* ログインユーザー以外は見れないページ*/}
-            <Route 
+            <Route
               exact path="/my-page"
               element={<MyPages />}
-            /> 
+            />
 
             {/* ランキングページ */}
-            <Route 
-              exact path="/rankings" 
-              element={<Rankings />} 
+            <Route
+              exact path="/rankings"
+              element={<Rankings />}
             />
 
             {/* アカウント設定ページ */}
             {/* ログインユーザー以外は見れないページ*/}
-            <Route 
-              exact path="/account-settings" 
-              element={<AccountSettings />} 
+            <Route
+              exact path="/account-settings"
+              element={<AccountSettings />}
             />
 
             {/* ゲームページ */}
@@ -73,21 +73,21 @@ function App() {
             />
 
             {/* 利用規約ページ */}
-            <Route 
-              exact path="/policy" 
-              element={<UseTreaties />} 
+            <Route
+              exact path="/policy"
+              element={<UseTreaties />}
             />
 
             {/* プライバシーポリシーページ */}
-            <Route 
-              exact path="/privacy-policy" 
-              element={<PrivacyPolicies />} 
+            <Route
+              exact path="/privacy-policy"
+              element={<PrivacyPolicies />}
             />
 
             {/* パスワードリセット申請ページ */}
-            <Route 
-              exact path="/users/password/new" 
-              element={<PasswordResets />} 
+            <Route
+              exact path="/users/password/new"
+              element={<PasswordResets />}
             />
             {/* パスワードリセット申請をした後に遷移するページ*/}
             <Route
@@ -97,15 +97,15 @@ function App() {
 
             {/* パスワード更新ページ */}
             {/* exactの場合、リセットパスワードトークンがURLに含まれていたら反応ないかも*/}
-            <Route 
-              exact path="/users/password/edit" 
-              element={<PasswordUpdates />} 
+            <Route
+              exact path="/users/password/edit"
+              element={<PasswordUpdates />}
             />
 
             {/* どのページにも一致しなかったらこのページにアクセスされる*/}
-            <Route 
-              path="/*" 
-              element={<NotFoundPage />} 
+            <Route
+              path="/*"
+              element={<NotFoundPage />}
             />
           </Routes>
         </Router>
