@@ -7,8 +7,8 @@ import { DialogContent, Dialog } from '@mui/material';
 // Colors
 import { COLORS } from '../../style_constants.js';
 
-// DescriptionWrapper 
-import { DescriptionWrapper } from '../shared_style.js'; 
+// DescriptionWrapper
+import { DescriptionWrapper } from '../shared_style.js';
 
 // Buttons
 import { BackToTopButton } from '../Buttons/BackToTopButton.jsx';
@@ -23,7 +23,7 @@ import { CheackAnswerSentence } from '../Sentences/CheackAnswerSentence.jsx';
 import { DialogExperienceBox } from '../Games/DialogExperienceBox.jsx';
 
 // モンスター名を取得する関数
-import { getMonsterName } from '../../functions/getMonsterName.js';
+import { getMonsterName } from '../../functions/getMonsterName.ts';
 
 const CustomDialogInnerWrapper = styled.div`
   width: 40vw;
@@ -71,7 +71,7 @@ const CustomTable = styled.table`
 `;
 
 const CustomTd = styled.td`
-  padding: 3%; 
+  padding: 3%;
   border: none;
   text-align: right;
   border-bottom:solid 1px silver;
@@ -95,7 +95,7 @@ const ButtonsWrapper = styled.div`
 `;
 
 const ExperienceGageTd = styled(CustomTd)`
-  padding-left: 5%; 
+  padding-left: 5%;
   border: none;
   text-align: left;
   border-bottom:solid 1px silver;
@@ -135,15 +135,15 @@ export const GameOverDialog = ({
   return(
     <Dialog
       open={isOpen}
-      maxWidth='lg'        
+      maxWidth='lg'
     >
       <CustomDialogInnerWrapper
         hasUser={hasUser}
-      > 
+      >
         <CustomDialogTitleWrapper>
           <CustomSpan>GAME OVER</CustomSpan>
           GAME OVER
-        </CustomDialogTitleWrapper> 
+        </CustomDialogTitleWrapper>
         <CustomDialogContent>
           <CustomDialogContentSentence>
             {`${getMonsterName(difficulty)}の討伐に失敗しました...`}
@@ -151,29 +151,29 @@ export const GameOverDialog = ({
           <CustomTable>
             <tbody>
               <tr>
-                <MetaTd>正解数</MetaTd> 
+                <MetaTd>正解数</MetaTd>
                 <CustomTd>{ `${correctQuestions.length}問` }</CustomTd>
               </tr>
               <tr>
-                <MetaTd>不正解数</MetaTd> 
+                <MetaTd>不正解数</MetaTd>
                 <CustomTd>{ `${incorrectQuestions.length || "0"}問` }</CustomTd>
               </tr>
               {
-                hasUser && 
+                hasUser &&
                   <>
                     <tr>
-                      <ExperienceMetaTd>獲得経験値</ExperienceMetaTd> 
+                      <ExperienceMetaTd>獲得経験値</ExperienceMetaTd>
                       <ExperienceTd>
                         { temporaryExperience }
                       </ExperienceTd>
                     </tr>
                     <tr>
                       <ExperienceGageTd colSpan={2}>
-                        <DialogExperienceBox 
+                        <DialogExperienceBox
                           rank={rank}
                           totalExperience={totalExperience}
                           maximumExperiencePerRank={maximumExperiencePerRank}
-                          temporaryExperience={temporaryExperience} 
+                          temporaryExperience={temporaryExperience}
                           prevTemporaryExperience={prevTemporaryExperience}
                           dialogGageUp={dialogGageUp}
                         />
@@ -187,21 +187,21 @@ export const GameOverDialog = ({
             setGameState={setGameState}
           />
           <ButtonsWrapper>
-            <RestartGameButton 
-              difficulty={difficulty}             
+            <RestartGameButton
+              difficulty={difficulty}
               setGameState={setGameState}
               getGameStart={getGameStart}
               initialState={initialState}
             />
-            <ResultShareButton 
-              difficulty={difficulty}             
+            <ResultShareButton
+              difficulty={difficulty}
               gameResult={gameResult}
               rankUp={rankUp}
             />
             {
               hasUser ?
                 <BackToMyPageButton />
-              : 
+              :
                 <BackToTopButton />
             }
           </ButtonsWrapper>

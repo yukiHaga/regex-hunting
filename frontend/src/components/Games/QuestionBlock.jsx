@@ -5,7 +5,7 @@ import styled from 'styled-components';
 import { COLORS } from '../../style_constants.js';
 
 // モンスター名を取得する関数
-import { getMonsterName } from '../../functions/getMonsterName.js';
+import { getMonsterName } from '../../functions/getMonsterName.ts';
 
 // 各ゲームの獲得経験値を取得する関数
 import { getExperience } from '../../functions/getExperience.ts';

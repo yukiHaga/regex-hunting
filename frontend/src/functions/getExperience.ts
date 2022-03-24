@@ -3,7 +3,7 @@ type GetExperience = (difficulty: 'elementary' | 'intermediate' | 'advanced') =>
 
 // 各ゲームの獲得経験値を取得するための関数
 export const getExperience: GetExperience = (difficulty) => {
-  let experience;
+  let experience: number | undefined;
   switch (difficulty){
     case 'elementary':
       experience = 200;

@@ -16,8 +16,7 @@ export const addCountToMonthArray: AddCountToMonthArray = (
   const monthObjArray = Object.entries(monthObj).map(([date, count]) => {
     return {
       date: date,
-      count: gameFrequenciesPerDay[date] ?
-      gameFrequenciesPerDay[date] : count
+      count: gameFrequenciesPerDay[date] ? gameFrequenciesPerDay[date] : count
     };
   });
   return monthObjArray;

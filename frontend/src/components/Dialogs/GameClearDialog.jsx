@@ -26,7 +26,7 @@ import { DialogExperienceBox } from '../Games/DialogExperienceBox.jsx';
 import { getExperience } from '../../functions/getExperience.ts';
 
 // モンスター名を取得する関数
-import { getMonsterName } from '../../functions/getMonsterName.js';
+import { getMonsterName } from '../../functions/getMonsterName.ts';
 
 // クリアタイムを取得する関数
 import { getClearTime } from '../../functions/getClearTime.ts';

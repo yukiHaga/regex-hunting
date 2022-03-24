@@ -34,19 +34,19 @@ import { CircularMask } from '../components/loads/CircularMask.jsx';
 import { UserContext } from "../context/UserProvider.js";
 
 // ログイン状態を確認するAPIコール関数
-import { checkLoginStatus } from '../apis/checkLoginStatus.js'; 
+import { checkLoginStatus } from '../apis/checkLoginStatus.js';
 
-// ゲームステータス, 問題, モンスターデータを取得する関数 
-import { getGameStart } from '../apis/gameManagement.js'; 
+// ゲームステータス, 問題, モンスターデータを取得する関数
+import { getGameStart } from '../apis/gameManagement.js';
 
-// ゲーム終了時の状態をサーバーへ送る関数 
-import { postGameFinish } from '../apis/gameManagement.js'; 
+// ゲーム終了時の状態をサーバーへ送る関数
+import { postGameFinish } from '../apis/gameManagement.js';
 
 // HTTP_STATUS_CODE
 import { HTTP_STATUS_CODE } from '../constants';
 
 // モンスター名を取得する関数
-import { getMonsterName } from '../functions/getMonsterName.js';
+import { getMonsterName } from '../functions/getMonsterName.ts';
 
 // ゲームクリア音
 import GameClearSound from '../sounds/game_clear_25.mp3';
@@ -110,7 +110,7 @@ const HintBarWrapper = styled.div`
 `;
 
 // BattleBlockWrapperコンポーネント
-// background-color: #F6F6DC;  
+// background-color: #F6F6DC;
 const BattleBlockWrapper = styled.div`
 `;
 
@@ -151,12 +151,12 @@ export const Games = () => {
 
   // useContext
   const {
-    requestUserState: { 
+    requestUserState: {
       requestState,
-      sessionState, 
-      battleAudioState 
-    }, 
-    dispatch, 
+      sessionState,
+      battleAudioState
+    },
+    dispatch,
     requestUserActionTyps
   } = useContext(UserContext);
 
@@ -203,8 +203,8 @@ export const Games = () => {
     gameDescriptionOpen: false,
     hasUser: false,
     rank: 1,
-    totalExperience: 0, 
-    maximumExperiencePerRank: 500, 
+    totalExperience: 0,
+    maximumExperiencePerRank: 500,
     temporaryExperience: 0,
     prevTemporaryExperience: 0,
     dialogGageUp: false,
@@ -226,7 +226,7 @@ export const Games = () => {
   // 初回レンダリング時および、依存配列の要素のどれかが
   // 変化したらuseEffectが実行される。
   // stateが変化しても、依存配列の要素が変化していないなら、
-  // useEffectは実行されない                    
+  // useEffectは実行されない
   // ログインしていたらsessionStateはtrueなので、最初のif文は実行されない。
   // ログインしててリロードするとsessionStateはfalseなので、最初のif文が実行される。
   // サーバー側でcurrent_userが存在しない場合、sessionStateはfalseとなる
@@ -282,22 +282,22 @@ export const Games = () => {
           nextHint: data.questions["0"].hint,
           nextCommentary: data.questions["0"].commentary,
           gameDescriptionOpen: true,
-          hasUser: sessionState ? 
+          hasUser: sessionState ?
             true
-          : 
+          :
             false,
           rank: sessionState ?
-            data.user.rank 
-          : 
+            data.user.rank
+          :
             prev.rank,
           totalExperience: sessionState ?
-            data.user.total_experience 
-          : 
-            prev.totalExperience, 
+            data.user.total_experience
+          :
+            prev.totalExperience,
           maximumExperiencePerRank: sessionState ?
-            data.user.maximum_experience_per_rank 
-          : 
-            prev.maximumExperiencePerRank, 
+            data.user.maximum_experience_per_rank
+          :
+            prev.maximumExperiencePerRank,
           temporaryExperience: sessionState ?
             data.user.temporary_experience
           :
@@ -310,24 +310,24 @@ export const Games = () => {
             data.user.active_title
           :
             prev.activeTitle
-        })); 
+        }));
       }).catch((e) => {
         if(e.response.status === HTTP_STATUS_CODE.NOT_FOUND){
           setGameState((prev) => ({
             ...prev,
             sentence: ""
-          })); 
+          }));
         } else {
           throw e;
         }
       });
     }
   }, [
-    dispatch, 
+    dispatch,
     difficulty,
     gameState.gameManagement,
     sessionState,
-    requestUserActionTyps.REQUEST, 
+    requestUserActionTyps.REQUEST,
     requestUserActionTyps.REQUEST_SUCCESS,
     requestUserActionTyps.REQUEST_FAILURE,
   ]);
@@ -335,9 +335,9 @@ export const Games = () => {
   // 戦闘bgm
   useEffect(() => {
     if(gameState.gameResult !== "") {
-      battleAudioState.audio.loop = gameState.gameResult === "progress" ? 
-                                      true 
-                                    : 
+      battleAudioState.audio.loop = gameState.gameResult === "progress" ?
+                                      true
+                                    :
                                       false;
       if(gameState.gameResult === "progress" && !gameState.gameDescriptionOpen && !gameState.clickMetaOpen) {
         battleAudioState.audio.play();
@@ -388,12 +388,12 @@ export const Games = () => {
       const timer = setTimeout(() => {
         postGameFinish({
           game_management: {
-            difficulty: difficulty, 
+            difficulty: difficulty,
             game_result: gameState.gameResult,
             result_time: gameState.gameEndTime - gameState.gameStartTime
           },
           judgement: {
-            correct: gameState.correctQuestions, 
+            correct: gameState.correctQuestions,
             incorrect: gameState.incorrectQuestions
           },
           current_user: {
@@ -424,22 +424,22 @@ export const Games = () => {
             ...prev,
             sendGameData: data.send_game_data,
             dialogGageUp: false,
-            hasUser: sessionState ? 
+            hasUser: sessionState ?
               true
-            : 
+            :
               false,
             rank: sessionState ?
-              data.user.rank 
-            : 
+              data.user.rank
+            :
               prev.rank,
             totalExperience: sessionState ?
-              data.user.total_experience 
-            : 
-              prev.totalExperience, 
+              data.user.total_experience
+            :
+              prev.totalExperience,
             maximumExperiencePerRank: sessionState ?
-              data.user.maximum_experience_per_rank 
-            : 
-              prev.maximumExperiencePerRank, 
+              data.user.maximum_experience_per_rank
+            :
+              prev.maximumExperiencePerRank,
             temporaryExperience: sessionState ?
               data.user.temporary_experience
             :
@@ -456,14 +456,14 @@ export const Games = () => {
               data.user.rank_up
             :
               prev.rankUp
-          })); 
+          }));
         }).catch((e) => {
           if(e.response.status === HTTP_STATUS_CODE.NOT_FOUND){
             setGameState((prev) => ({
               ...prev,
               sendGameData: true,
               dialogGageUp: false,
-            })); 
+            }));
           } else {
             throw e;
           }
@@ -476,16 +476,16 @@ export const Games = () => {
     gameState.gameResult,
     gameState.correctQuestions,
     gameState.incorrectQuestions,
-    gameState.gameEndTime, 
+    gameState.gameEndTime,
     gameState.gameStartTime,
     gameState.maximumExperiencePerRank,
-    gameState.rank, 
-    gameState.temporaryExperience, 
-    gameState.totalExperience, 
+    gameState.rank,
+    gameState.temporaryExperience,
+    gameState.totalExperience,
     gameState.sendGameData,
     gameState.activeTitle,
     sessionState,
-    requestUserActionTyps.REQUEST_FAILURE, 
+    requestUserActionTyps.REQUEST_FAILURE,
     requestUserActionTyps.REQUEST_SUCCESS,
     dispatch
   ]);
@@ -502,9 +502,9 @@ export const Games = () => {
           <>
             <Header />
             <MainContentWrapper>
-              {  
-                gameState.flashDisplay && 
-                  <JudgementFlashMessage 
+              {
+                gameState.flashDisplay &&
+                  <JudgementFlashMessage
                     flashDisplay={gameState.flashDisplay}
                     flashTitle={gameState.flashTitle}
                   />
@@ -515,16 +515,16 @@ export const Games = () => {
               >
                 <GameBlockWrapper>
                   <HintBarWrapper>
-                    <HintBar 
+                    <HintBar
                       hint={gameState.hint}
                     />
                   </HintBarWrapper>
                   <BattleBlockWrapper>
                     <MonsterBlockWrapper>
                       {
-                        difficulty === 'elementary' && 
+                        difficulty === 'elementary' &&
                           <>
-                            <ElementaryMonster 
+                            <ElementaryMonster
                               monsterHp={gameState.monsterHp}
                               monsterMaxHp={gameState.monsterMaxHp}
                               questionJudgement={gameState.questionJudgement}
@@ -532,7 +532,7 @@ export const Games = () => {
                               gameResult={gameState.gameResult}
                               gameDescriptionOpen={gameState.gameDescriptionOpen}
                             />
-                            <ElementaryMonster 
+                            <ElementaryMonster
                               monsterHp={gameState.monsterHp}
                               monsterMaxHp={gameState.monsterMaxHp}
                               questionJudgement={gameState.questionJudgement}
@@ -540,7 +540,7 @@ export const Games = () => {
                               gameResult={gameState.gameResult}
                               gameDescriptionOpen={gameState.gameDescriptionOpen}
                             />
-                            <ElementaryMonster 
+                            <ElementaryMonster
                               monsterHp={gameState.monsterHp}
                               monsterMaxHp={gameState.monsterMaxHp}
                               questionJudgement={gameState.questionJudgement}
@@ -553,7 +553,7 @@ export const Games = () => {
                       {
                         difficulty === 'intermediate' &&
                           <>
-                            <IntermediateMonster 
+                            <IntermediateMonster
                               monsterHp={gameState.monsterHp}
                               monsterMaxHp={gameState.monsterMaxHp}
                               questionJudgement={gameState.questionJudgement}
@@ -566,7 +566,7 @@ export const Games = () => {
                       {
                         difficulty === 'advanced' &&
                           <>
-                            <AdvancedMonster 
+                            <AdvancedMonster
                               monsterHp={gameState.monsterHp}
                               monsterMaxHp={gameState.monsterMaxHp}
                               questionJudgement={gameState.questionJudgement}
@@ -578,8 +578,8 @@ export const Games = () => {
                       }
                     </MonsterBlockWrapper>
                     <QuestionBlockWrapper>
-                      <QuestionBlock 
-                        difficulty={difficulty} 
+                      <QuestionBlock
+                        difficulty={difficulty}
                         sentence={gameState.sentence}
                         nextSentence={gameState.nextSentence}
                         sentenceNum={gameState.sentenceNum}
@@ -597,8 +597,8 @@ export const Games = () => {
                         gameResult={gameState.gameResult}
                         hasUser={gameState.hasUser}
                         rank={gameState.rank}
-                        totalExperience={gameState.totalExperience} 
-                        maximumExperiencePerRank={gameState.maximumExperiencePerRank} 
+                        totalExperience={gameState.totalExperience}
+                        maximumExperiencePerRank={gameState.maximumExperiencePerRank}
                         temporaryExperience={gameState.temporaryExperience}
                         clickMetaOpen={gameState.clickMetaOpen}
                       />
@@ -606,7 +606,7 @@ export const Games = () => {
                   </BattleBlockWrapper>
                 </GameBlockWrapper>
                 <CodeBlockWrapper>
-                  <CodeBlock 
+                  <CodeBlock
                     correctQuestions={gameState.correctQuestions}
                     questions={gameState.questions}
                     setGameState={setGameState}
@@ -623,8 +623,8 @@ export const Games = () => {
                   />
                 </CodeBlockWrapper>
                 <GageBlockWrapper>
-                  <TimeGage 
-                    gameState={gameState} 
+                  <TimeGage
+                    gameState={gameState}
                     setGameState={setGameState}
                     timeActive={gameState.timeActive}
                     monsterAttack={gameState.monsterAttack}
@@ -634,14 +634,14 @@ export const Games = () => {
                     clickDescriptionOpen={gameState.clickDescriptionOpen}
                     clickMetaOpen={gameState.clickMetaOpen}
                   />
-                  <HpGage 
+                  <HpGage
                     userHp={gameState.userHp}
                     userMaxHp={gameState.userMaxHp}
                   />
                 </GageBlockWrapper>
               </MainGameContentWrapper>
             </MainContentWrapper>
-            <GameFooter 
+            <GameFooter
               setGameState={setGameState}
             />
             {
@@ -675,7 +675,7 @@ export const Games = () => {
               gameState.gameResult === "win" && !gameState.rankUp && !gameState.checkAnswer &&
                 <GameClearDialog
                   isOpen={gameState.gameResult === "win"}
-                  difficulty={difficulty} 
+                  difficulty={difficulty}
                   correctQuestions={gameState.correctQuestions}
                   incorrectQuestions={gameState.incorrectQuestions}
                   setGameState={setGameState}
@@ -685,8 +685,8 @@ export const Games = () => {
                   gameEndTime={gameState.gameEndTime}
                   hasUser={gameState.hasUser}
                   rank={gameState.rank}
-                  totalExperience={gameState.totalExperience} 
-                  maximumExperiencePerRank={gameState.maximumExperiencePerRank} 
+                  totalExperience={gameState.totalExperience}
+                  maximumExperiencePerRank={gameState.maximumExperiencePerRank}
                   temporaryExperience={gameState.temporaryExperience}
                   prevTemporaryExperience={gameState.prevTemporaryExperience}
                   dialogGageUp={gameState.dialogGageUp}
@@ -698,7 +698,7 @@ export const Games = () => {
               gameState.gameResult === "lose" && !gameState.checkAnswer &&
                 <GameOverDialog
                   isOpen={gameState.gameResult === "lose"}
-                  difficulty={difficulty} 
+                  difficulty={difficulty}
                   correctQuestions={gameState.correctQuestions}
                   incorrectQuestions={gameState.incorrectQuestions}
                   setGameState={setGameState}
@@ -708,7 +708,7 @@ export const Games = () => {
                   rank={gameState.rank}
                   totalExperience={gameState.totalExperience}
                   maximumExperiencePerRank={gameState.maximumExperiencePerRank}
-                  temporaryExperience={gameState.temporaryExperience} 
+                  temporaryExperience={gameState.temporaryExperience}
                   prevTemporaryExperience={gameState.prevTemporaryExperience}
                   dialogGageUp={gameState.dialogGageUp}
                   gameResult={gameState.gameResult}
@@ -716,23 +716,23 @@ export const Games = () => {
                 />
             }
             {
-              gameState.checkAnswer && 
+              gameState.checkAnswer &&
                 <CheckAnswerDialog
                   isOpen={gameState.checkAnswer}
-                  difficulty={difficulty} 
+                  difficulty={difficulty}
                   correctQuestions={gameState.correctQuestions}
                   incorrectQuestions={gameState.incorrectQuestions}
                   setGameState={setGameState}
                 />
             }
             {
-              gameState.rankUp && 
+              gameState.rankUp &&
                 <RankUpDialog
                   isOpen={gameState.rankUp}
                   rank={gameState.rank}
                   activeTitle={gameState.activeTitle}
                   setGameState={setGameState}
-                  difficulty={difficulty} 
+                  difficulty={difficulty}
                   gameResult={gameState.gameResult}
                   rankUp={gameState.rankUp}
                 />
@@ -745,11 +745,11 @@ export const Games = () => {
                 />
             }
             {
-              gameState.gameResult === "progress" && gameState.questionJudgement === "correct" && 
+              gameState.gameResult === "progress" && gameState.questionJudgement === "correct" &&
                 <CutImage />
             }
             {
-              gameState.gameResult === "progress" && gameState.questionJudgement === "incorrect" && 
+              gameState.gameResult === "progress" && gameState.questionJudgement === "incorrect" &&
                 <ClawImage />
             }
           </>

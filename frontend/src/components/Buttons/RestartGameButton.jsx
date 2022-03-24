@@ -1,4 +1,4 @@
-import React, { Fragment, useContext } from 'react'; 
+import React, { Fragment, useContext } from 'react';
 import styled from 'styled-components';
 
 // Colors
@@ -11,7 +11,7 @@ import { HTTP_STATUS_CODE } from '../../constants';
 import { UserContext } from "../../context/UserProvider.js";
 
 // モンスター名を取得する関数
-import { getMonsterName } from '../../functions/getMonsterName.js';
+import { getMonsterName } from '../../functions/getMonsterName.ts';
 
 const RestartGameButtonWrapper = styled.div`
   border-style: none;
@@ -39,7 +39,7 @@ const RestartGameButtonTextWrapper = styled.div`
   padding-bottom: 8%;
 `;
 
-export const RestartGameButton = ({ 
+export const RestartGameButton = ({
   difficulty,
   setGameState,
   getGameStart,
@@ -48,15 +48,15 @@ export const RestartGameButton = ({
 
   // useContext
   const {
-    requestUserState: { sessionState }, 
-    dispatch, 
+    requestUserState: { sessionState },
+    dispatch,
     requestUserActionTyps
   } = useContext(UserContext);
 
   // リスタートを制御する関数
   const handleRestart = (
-    difficulty, 
-    setGameState, 
+    difficulty,
+    setGameState,
     getGameStart,
     initialState
   ) => {
@@ -84,22 +84,22 @@ export const RestartGameButton = ({
         nextCommentary: data.questions["0"].commentary,
         nextHint: data.questions["0"].hint,
         gameStartTime: performance.now(),
-        hasUser: sessionState ? 
+        hasUser: sessionState ?
           true
-        : 
+        :
           false,
         rank: sessionState ?
-          data.user.rank 
-        : 
+          data.user.rank
+        :
           initialState.rank,
         totalExperience: sessionState ?
-          data.user.total_experience 
-        : 
-          initialState.totalExperience, 
+          data.user.total_experience
+        :
+          initialState.totalExperience,
         maximumExperiencePerRank: sessionState ?
-          data.user.maximum_experience_per_rank 
-        : 
-          initialState.maximumExperiencePerRank, 
+          data.user.maximum_experience_per_rank
+        :
+          initialState.maximumExperiencePerRank,
         temporaryExperience: sessionState ?
           data.user.temporary_experience
         :
@@ -108,13 +108,13 @@ export const RestartGameButton = ({
           data.user.prev_temporary_experience
         :
           initialState.prevTemporaryExperience
-      }); 
+      });
     }).catch((e) => {
       if(e.response.status === HTTP_STATUS_CODE.NOT_FOUND){
         setGameState({
           ...initialState,
           sentence: ""
-        }); 
+        });
       } else {
         throw e;
       }
@@ -123,7 +123,7 @@ export const RestartGameButton = ({
 
   return (
     <>
-    <RestartGameButtonWrapper 
+    <RestartGameButtonWrapper
       onClick={() => handleRestart(difficulty, setGameState, getGameStart, initialState)}
     >
         <RestartGameButtonTextWrapper>

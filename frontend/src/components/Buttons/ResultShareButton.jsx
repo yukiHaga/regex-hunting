@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react'; 
+import React, { Fragment } from 'react';
 import styled from 'styled-components';
 
 // Colors
@@ -7,7 +7,7 @@ import { COLORS } from '../../style_constants.js';
 import { ColoredTwitterIcon } from '../Icons/CustomIcon.js';
 
 // モンスター名を取得する関数
-import { getMonsterName } from '../../functions/getMonsterName.js';
+import { getMonsterName } from '../../functions/getMonsterName.ts';
 
 const ResultShareButtonWrapper = styled.a`
   width: 90%;
@@ -63,9 +63,9 @@ export const ResultShareButton = ({
 
   return (
     <>
-    <ResultShareButtonWrapper 
+    <ResultShareButtonWrapper
       href={`https://twitter.com/share?text=${text}&hashtags=RegexHunting,正規表現,ゲーム&url=https://www.regex-hunting.com/`}
-      target="_blank" 
+      target="_blank"
       rel="noopener noreferrer"
     >
         <ResultShareButtonTextWrapper>
