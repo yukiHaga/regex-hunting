@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { userSessionsExist } from '../urls/index';
+import { userSessionsExist } from '../urls/index.ts';
 
 // ログインするためのAPIコール関数
 // postの第3引数にwithCredentials: trueを指定することで、

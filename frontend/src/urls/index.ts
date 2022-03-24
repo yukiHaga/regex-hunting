@@ -28,15 +28,18 @@ export const googleOAuth = `https://accounts.google.com/o/oauth2/auth?response_t
 // ランキング
 export const rankings = `${DEFAULT_API_URL}/ranking`;
 
+// 動的にURLを生成する関数の型
+type DynamicURL = (userIdOrId: number) => string;
+
 // ユーザー関係
-export const myPages = (user_id) => 
-  `${DEFAULT_API_URL}/users/${user_id}/my-page`;
-export const accountSettings = (user_id) => 
-  `${DEFAULT_API_URL}/users/${user_id}/account-settings`;
-export const titleSettings = (user_id) => 
-  `${DEFAULT_API_URL}/users/${user_id}/title-settings`;
+export const myPages: DynamicURL = (userId) =>
+  `${DEFAULT_API_URL}/users/${userId}/my-page`;
+export const accountSettings: DynamicURL = (userId) =>
+  `${DEFAULT_API_URL}/users/${userId}/account-settings`;
+export const titleSettings: DynamicURL = (userId) =>
+  `${DEFAULT_API_URL}/users/${userId}/title-settings`;
 
 // パスワードリセット関係
 export const passwordResetsCreate = `${DEFAULT_API_URL}/password_resets`;
-export const passwordResetsUpdate = (id) => 
+export const passwordResetsUpdate: DynamicURL = (id) =>
   `${DEFAULT_API_URL}/password_resets/${id}`;

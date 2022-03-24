@@ -1,7 +1,7 @@
 import axios from 'axios';
-import { gameManagementsStart } from '../urls/index';
+import { gameManagementsStart } from '../urls/index.ts';
 
-import { gameManagementsFinish } from '../urls/index';
+import { gameManagementsFinish } from '../urls/index.ts';
 
 // ゲームをスタートするためのAPI関数
 // postの第3引数にwithCredentials: trueを指定することで、

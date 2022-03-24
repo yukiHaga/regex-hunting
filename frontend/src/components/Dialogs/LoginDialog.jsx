@@ -2,8 +2,8 @@ import React, { useContext } from 'react';
 import styled from 'styled-components';
 
 // ログイン関係のAPIコール関数
-// deleteUserSession 
-import { postUserSession } from '../../apis/login'; 
+// deleteUserSession
+import { postUserSession } from '../../apis/login';
 
 // useNavigate
 import { useNavigate } from "react-router-dom";
@@ -45,7 +45,7 @@ import { HTTP_STATUS_CODE } from '../../constants';
 import { UserContext } from "../../context/UserProvider.js";
 
 // OAuthのURL
-import { gitHubOAuth, googleOAuth } from '../../urls/index'; 
+import { gitHubOAuth, googleOAuth } from '../../urls/index.ts';
 
 const CustomDialogInnerWrapper = styled.div`
   padding-top: 3%;
@@ -98,8 +98,8 @@ export const LoginDialog = ({
 
   // useContext
   const {
-    requestUserState, 
-    dispatch, 
+    requestUserState,
+    dispatch,
     requestUserActionTyps
   } = useContext(UserContext);
 
@@ -107,14 +107,14 @@ export const LoginDialog = ({
   let navigate = useNavigate();
 
   // useForm
-  const { 
-    control, 
-    handleSubmit, 
-    formState: { errors, isValid } 
+  const {
+    control,
+    handleSubmit,
+    formState: { errors, isValid }
   } = useForm({
     mode: 'all',
-    shouldUnregister: false 
-  }); 
+    shouldUnregister: false
+  });
 
   // Formの検証後に呼び出される関数
   // dataにはフォームに入力したデータが入る
@@ -122,7 +122,7 @@ export const LoginDialog = ({
   // postUserSessionで取得したdataを実引数として、dispatchを実行
   // reducer側でちゃんとstateは更新されている。
   // しかし、この関数内でstateをコンソール出力できない。
-  const onSubmit = ({EmailBox, PasswordBox}) => { 
+  const onSubmit = ({EmailBox, PasswordBox}) => {
     postUserSession({
       user: {
         email: EmailBox,
@@ -138,7 +138,7 @@ export const LoginDialog = ({
       });
     }).then(() => {
       return navigate('/my-page', { state: { display: true, success: "ログインしました。"}})
-    } 
+    }
     ).catch((e) => {
       if(e.response.status === HTTP_STATUS_CODE.NOT_FOUND){
         dispatch({
@@ -155,8 +155,8 @@ export const LoginDialog = ({
 
   // Formのバリデーション
   const registerOptions = {
-    email: { 
-      required: "メールアドレスを入力してください。", 
+    email: {
+      required: "メールアドレスを入力してください。",
       pattern: {
         value: /^[A-Za-z0-9]{1}[A-Za-z0-9_.-]*@{1}[A-Za-z0-9_.-]{1,}.[A-Za-z0-9]{1,}$/,
         message: "英数字, @, ドメインを含めて入力してください。"
@@ -181,18 +181,18 @@ export const LoginDialog = ({
       onClose={onClose}
       maxWidth='xs'
     >
-      <CustomDialogInnerWrapper> 
-        <CloseButton onClose={onClose} fontSize="small" /> 
+      <CustomDialogInnerWrapper>
+        <CloseButton onClose={onClose} fontSize="small" />
         <TitleWrapper><Fuchiue>Login</Fuchiue>Login</TitleWrapper>
         <DialogContent>
           <CustomForm onSubmit={handleSubmit(onSubmit)}>
-            <Controller 
+            <Controller
               name="EmailBox"
               control={control}
               defaultValue=""
               rules={registerOptions.email}
               render={({ field }) => (
-                <CustomFormControl variant="filled">              
+                <CustomFormControl variant="filled">
                   <InputLabel htmlFor="email-component-filled">メールアドレス</InputLabel>
                   <CustomFilledInput
                     {...field}
@@ -206,16 +206,16 @@ export const LoginDialog = ({
                                          {errors.EmailBox.message}
                                        </InputErrorSentence>
                   }
-                </CustomFormControl>              
+                </CustomFormControl>
               )}
             />
-            <Controller 
+            <Controller
               name="PasswordBox"
               control={control}
               defaultValue=""
               rules={registerOptions.password}
               render={({ field }) => (
-                <CustomFormControl variant="filled">              
+                <CustomFormControl variant="filled">
                   <InputLabel htmlFor="password-component-filled">パスワード</InputLabel>
                   <CustomFilledInput
                     {...field}
@@ -229,14 +229,14 @@ export const LoginDialog = ({
                                             {errors.PasswordBox.message}
                                           </InputErrorSentence>
                   }
-                </CustomFormControl>              
+                </CustomFormControl>
               )}
             />
-            <LoginButton 
-              disabled={!isValid} 
+            <LoginButton
+              disabled={!isValid}
             />
             {
-              requestUserState.errors.title === 'Record Not Found' && 
+              requestUserState.errors.title === 'Record Not Found' &&
                 <SubmitErrorSentence
                   errors_title={requestUserState.errors.title}
                 >
@@ -246,16 +246,16 @@ export const LoginDialog = ({
           </CustomForm>
           <PasswordResetSentence />
           <OrDirectionSentence />
-          <OAuthLoginButton 
-            url={googleOAuth} 
-            color={COLORS.PINK} 
-            icon={<ColoredGoogleIcon fontSize="large" />} 
+          <OAuthLoginButton
+            url={googleOAuth}
+            color={COLORS.PINK}
+            icon={<ColoredGoogleIcon fontSize="large" />}
             type="Google"
           />
-          <OAuthLoginButton 
+          <OAuthLoginButton
             url={gitHubOAuth}
-            color={COLORS.BLACK} 
-            icon={<ColoredGitHubIcon fontSize="large" />} 
+            color={COLORS.BLACK}
+            icon={<ColoredGitHubIcon fontSize="large" />}
             type="GitHub"
           />
           <SignUpSentence onClick={onClick} />

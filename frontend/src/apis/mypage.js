@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { myPages } from '../urls/index';
+import { myPages } from '../urls/index.ts';
 
 // マイページ情報を取得するAPIコール関数
 // postの第3引数にwithCredentials: trueを指定することで、

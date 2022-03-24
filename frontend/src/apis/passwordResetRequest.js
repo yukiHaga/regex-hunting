@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { passwordResetsCreate } from '../urls/index';
+import { passwordResetsCreate } from '../urls/index.ts';
 
 // リセットフォームに入力されたメールアドレスをサーバーに送信する関数
 // この関数が正常に終了後、別のベージに行って、

@@ -1,14 +1,14 @@
 import axios from 'axios';
-import { accountSettings } from '../urls/index';
+import { accountSettings } from '../urls/index.ts';
 
 // アカウントを更新した情報を取得するAPIコール関数
 // postの第3引数にwithCredentials: trueを指定することで、
 // API(Rails)と通信する際にデータにcookieを含めることができる
-export const patchAccountSetting = async ({ 
+export const patchAccountSetting = async ({
   user: {
-    id, 
-    name, 
-    email, 
+    id,
+    name,
+    email,
     open_rank,
   },
   image

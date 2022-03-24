@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { rankings } from '../urls/index';
+import { rankings } from '../urls/index.ts';
 
 // クリアタイムのランキングを取得するAPIコール関数
 // postの第3引数にwithCredentials: trueを指定することで、

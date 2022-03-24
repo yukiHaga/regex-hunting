@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { usersCreate } from '../urls/index';
+import { usersCreate } from '../urls/index.ts';
 
 // ログインするためのAPIコール関数
 export const postUser = async ({user: {

@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { titleSettings } from '../urls/index';
+import { titleSettings } from '../urls/index.ts';
 
 // タイトルをセッティングした情報を取得するAPIコール関数
 // postの第3引数にwithCredentials: trueを指定することで、
