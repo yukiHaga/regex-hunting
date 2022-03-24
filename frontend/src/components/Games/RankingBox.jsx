@@ -11,12 +11,12 @@ import ArrowRightIcon from '@mui/icons-material/ArrowRight';
 import ArrowLeftIcon from '@mui/icons-material/ArrowLeft';
 
 // クリアタイムを00:00:00のフォーマットで取得する関数
-import { getClearTime } from '../../functions/getClearTime.js';
+import { getClearTime } from '../../functions/getClearTime.ts';
 
 // Colors
 import { COLORS } from '../../style_constants.js';
 
-// DescriptionWrapper 
+// DescriptionWrapper
 import { DescriptionWrapper } from '../shared_style.js';
 
 // デフォルトのアバター画像
@@ -79,7 +79,7 @@ const CustomTable = styled.table`
 `;
 
 const RankingTd = styled.td`
-  padding: 1.3% 0; 
+  padding: 1.3% 0;
   border: none;
   text-align: center;
   border-bottom:solid 1px silver;
@@ -92,7 +92,7 @@ const RankingTd = styled.td`
 `;
 
 const TimeTd = styled.td`
-  padding: 1.3% 0; 
+  padding: 1.3% 0;
   border: none;
   text-align: center;
   border-bottom:solid 1px silver;
@@ -105,7 +105,7 @@ const TimeTd = styled.td`
 `;
 
 const HunterTd = styled.td`
-  padding: 1.3% 0; 
+  padding: 1.3% 0;
   border: none;
   text-align: center;
   border-bottom:solid 1px silver;
@@ -118,7 +118,7 @@ const HunterTd = styled.td`
 `;
 
 const RankingDataTd = styled.td`
-  padding: 1.5% 0; 
+  padding: 1.5% 0;
   border: none;
   text-align: center;
   border-bottom:solid 1px silver;
@@ -127,7 +127,7 @@ const RankingDataTd = styled.td`
 `;
 
 const TimeDataTd = styled.td`
-  padding: 1.5% 0; 
+  padding: 1.5% 0;
   border: none;
   text-align: center;
   border-bottom:solid 1px silver;
@@ -136,7 +136,7 @@ const TimeDataTd = styled.td`
 `;
 
 const HunterDataTd = styled.td`
-  padding: 1.5% 0; 
+  padding: 1.5% 0;
   border: none;
   text-align: center;
   border-bottom:solid 1px silver;
@@ -179,7 +179,7 @@ const HunterTable = styled.table`
 `;
 
 const HunterTableTd = styled.td`
-  padding: 2% 4%; 
+  padding: 2% 4%;
   border: none;
   text-align: right;
   border-bottom:solid 1px silver;
@@ -216,7 +216,7 @@ const HunterTableRankDataTd = styled(HunterTableTd)`
 `;
 
 const HunterTableTitleMetaTd = styled.td`
-  padding: 2% 4%; 
+  padding: 2% 4%;
   border: none;
   text-align: left;
   font-weight: bold;
@@ -226,7 +226,7 @@ const HunterTableTitleMetaTd = styled.td`
 `;
 
 const HunterTableTitleDataTd = styled.td`
-  padding: 2% 4%; 
+  padding: 2% 4%;
   border: none;
   text-align: right;
   @media (max-width: ${WIDTH.MOBILE}) {
@@ -252,8 +252,8 @@ const SlideContentWrapper = styled.div`
   width: 100%;
   margin: 0 auto;
   transform: translateX(0);
-  animation: ${({ 
-    slideIn, 
+  animation: ${({
+    slideIn,
     slideOut,
     direction
   }) => slideFunction(slideIn, slideOut, direction)} 0.7s ease forwards;
@@ -350,7 +350,7 @@ export const RankingBox = memo(({
         handleElementary('right');
         break;
       case '上級編':
-        handleIntermediate('right'); 
+        handleIntermediate('right');
         break;
       default:
         handleAdvanced('right');
@@ -363,7 +363,7 @@ export const RankingBox = memo(({
   const handleRightArrow = (difficultyTitle) => {
     switch (difficultyTitle){
       case '初級編':
-        handleIntermediate('left'); 
+        handleIntermediate('left');
         break;
       case '中級編':
         handleAdvanced('left');
@@ -372,14 +372,14 @@ export const RankingBox = memo(({
         handleElementary('left');
         break;
       default:
-        handleIntermediate('left'); 
+        handleIntermediate('left');
     }
   };
 
   return (
     <>
       <TitleLineWrapper>
-        <Tooltip 
+        <Tooltip
           title={rankingState.prevDifficultyTitle}
           placement="top"
         >
@@ -389,7 +389,7 @@ export const RankingBox = memo(({
             }}
           >
             <ArrowLeftIcon
-              fontSize='inherit' 
+              fontSize='inherit'
               sx={{ color: `${COLORS.BLACK}` }}
               onClick={() => handleLeftArrow(difficultyTitle)}
             />
@@ -398,7 +398,7 @@ export const RankingBox = memo(({
         <ChangeGraphBoxSentenceWrapper>
           {difficultyTitle}
         </ChangeGraphBoxSentenceWrapper>
-        <Tooltip 
+        <Tooltip
           title={rankingState.nextDifficultyTitle}
           placement="top"
         >
@@ -408,12 +408,12 @@ export const RankingBox = memo(({
             }}
           >
             <ArrowRightIcon
-              fontSize='inherit' 
+              fontSize='inherit'
               sx={{ color: `${COLORS.BLACK}` }}
               onClick={() => handleRightArrow(difficultyTitle)}
             />
           </IconButton>
-        </Tooltip> 
+        </Tooltip>
       </TitleLineWrapper>
       {
         currentTopTenArray.length ?

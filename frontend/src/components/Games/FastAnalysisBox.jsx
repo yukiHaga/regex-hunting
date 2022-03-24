@@ -1,9 +1,9 @@
 import React, { memo, useMemo } from 'react';
 import styled from 'styled-components';
 
-import { 
-  CircularProgressbarWithChildren, 
-  buildStyles, 
+import {
+  CircularProgressbarWithChildren,
+  buildStyles,
 } from 'react-circular-progressbar';
 
 import 'react-circular-progressbar/dist/styles.css';
@@ -13,7 +13,7 @@ import { COLORS } from '../../style_constants.js';
 
 // クリアタイムを取得する関数
 // マイページで使う場合、第1引数は0を指定する
-import { getClearTime } from '../../functions/getClearTime.js';
+import { getClearTime } from '../../functions/getClearTime.ts';
 
 import { WIDTH } from '../../style_constants.js';
 
@@ -46,15 +46,15 @@ export const FastAnalysisBox = memo(({
   minutes
 }) => {
 
-  // 今月の最速タイムを出力する処理 
+  // 今月の最速タイムを出力する処理
   // minutesに任意の難易度の最速タイムが入っている
   const formatFastestTime =  useMemo(() => getClearTime(0, minutes), [minutes]);
 
   return (
     <>
       <FastAnalysisBoxWrapper>
-        <CircularProgressbarWithChildren 
-          value={60} 
+        <CircularProgressbarWithChildren
+          value={60}
           strokeWidth={2}
           styles={buildStyles({
             // Rotation of path and trail, in number of turns (0-1)

@@ -7,8 +7,8 @@ import { DialogContent, Dialog } from '@mui/material';
 // Colors
 import { COLORS } from '../../style_constants.js';
 
-// DescriptionWrapper 
-import { DescriptionWrapper } from '../shared_style.js'; 
+// DescriptionWrapper
+import { DescriptionWrapper } from '../shared_style.js';
 
 // Buttons
 import { BackToTopButton } from '../Buttons/BackToTopButton.jsx';
@@ -29,7 +29,7 @@ import { getExperience } from '../../functions/getExperience.js';
 import { getMonsterName } from '../../functions/getMonsterName.js';
 
 // クリアタイムを取得する関数
-import { getClearTime } from '../../functions/getClearTime.js';
+import { getClearTime } from '../../functions/getClearTime.ts';
 
 const CustomDialogInnerWrapper = styled.div`
   width: 40vw;
@@ -111,7 +111,7 @@ const ExperienceGageTd = styled(CustomTd)`
   padding-left: 5%;
 `;
 
-const ButtonsWrapper = styled.div`  
+const ButtonsWrapper = styled.div`
   width: 100%;
   display: flex;
   justify-content: space-around;
@@ -135,8 +135,8 @@ export const GameClearDialog = ({
   gameEndTime,
   hasUser,
   rank,
-  totalExperience, 
-  maximumExperiencePerRank, 
+  totalExperience,
+  maximumExperiencePerRank,
   temporaryExperience,
   prevTemporaryExperience,
   dialogGageUp,
@@ -145,7 +145,7 @@ export const GameClearDialog = ({
 }) => {
 
   const shareClearTime = useMemo(() => getClearTime(
-    gameStartTime, 
+    gameStartTime,
     gameEndTime
   ), [
     gameStartTime,
@@ -158,15 +158,15 @@ export const GameClearDialog = ({
   return(
     <Dialog
       open={isOpen}
-      maxWidth='lg'        
+      maxWidth='lg'
     >
       <CustomDialogInnerWrapper
         hasUser={hasUser}
-      > 
+      >
         <CustomDialogTitleWrapper>
           <CustomSpan>GAME CLEAR</CustomSpan>
           GAME CLEAR
-        </CustomDialogTitleWrapper> 
+        </CustomDialogTitleWrapper>
         <CustomDialogContent>
           <CustomDialogContentSentence>
             {`${getMonsterName(difficulty)}の討伐に成功しました！`}
@@ -174,15 +174,15 @@ export const GameClearDialog = ({
           <CustomTable>
             <tbody>
               <tr>
-                <MetaTd>正解数</MetaTd> 
+                <MetaTd>正解数</MetaTd>
                 <CustomTd>{ `${correctQuestions.length}問` }</CustomTd>
               </tr>
               <tr>
-                <MetaTd>不正解数</MetaTd> 
+                <MetaTd>不正解数</MetaTd>
                 <CustomTd>{ `${incorrectQuestions.length || "0"}問` }</CustomTd>
               </tr>
               <tr>
-                <MetaTd>クリアタイム</MetaTd> 
+                <MetaTd>クリアタイム</MetaTd>
                 <CustomTd>
                   <ColorTimeSpan milliSec={milliSec} >
                     { shareClearTime }
@@ -190,21 +190,21 @@ export const GameClearDialog = ({
                 </CustomTd>
               </tr>
               {
-                hasUser && 
+                hasUser &&
                   <>
                     <tr>
-                      <ExperienceMetaTd>獲得経験値</ExperienceMetaTd> 
+                      <ExperienceMetaTd>獲得経験値</ExperienceMetaTd>
                       <ExperienceTd>
                         { getExperience(difficulty) }
                       </ExperienceTd>
                     </tr>
                     <tr>
                       <ExperienceGageTd colSpan={2}>
-                        <DialogExperienceBox 
+                        <DialogExperienceBox
                           rank={rank}
                           totalExperience={totalExperience}
                           maximumExperiencePerRank={maximumExperiencePerRank}
-                          temporaryExperience={temporaryExperience} 
+                          temporaryExperience={temporaryExperience}
                           prevTemporaryExperience={prevTemporaryExperience}
                           dialogGageUp={dialogGageUp}
                         />
@@ -218,14 +218,14 @@ export const GameClearDialog = ({
             setGameState={setGameState}
           />
           <ButtonsWrapper>
-            <RestartGameButton 
-              difficulty={difficulty}             
+            <RestartGameButton
+              difficulty={difficulty}
               setGameState={setGameState}
               getGameStart={getGameStart}
               initialState={initialState}
             />
-            <ResultShareButton 
-              difficulty={difficulty}             
+            <ResultShareButton
+              difficulty={difficulty}
               gameResult={gameResult}
               rankUp={rankUp}
               rank={rank}
@@ -234,7 +234,7 @@ export const GameClearDialog = ({
             {
               hasUser ?
                 <BackToMyPageButton />
-              : 
+              :
                 <BackToTopButton />
             }
           </ButtonsWrapper>
