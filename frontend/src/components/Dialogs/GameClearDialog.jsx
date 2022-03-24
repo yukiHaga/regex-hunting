@@ -16,9 +16,6 @@ import { RestartGameButton } from '../Buttons/RestartGameButton.jsx';
 import { ResultShareButton } from '../Buttons/ResultShareButton.jsx';
 import { BackToMyPageButton } from '../Buttons/BackToMyPageButton.jsx';
 
-// Contextオブジェクト
-import { UserContext } from "../../context/UserProvider.js";
-
 // Sentence
 import { CheackAnswerSentence } from '../Sentences/CheackAnswerSentence.jsx';
 

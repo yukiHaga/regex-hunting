@@ -10,9 +10,6 @@ import { COLORS } from '../../style_constants.js';
 // DescriptionWrapper 
 import { DescriptionWrapper } from '../shared_style.js'; 
 
-// Contextオブジェクト
-import { UserContext } from "../../context/UserProvider.js";
-
 // handleTitleColorType
 // タイトルカラーを取り扱う関数
 import { handleTitleColorType } from '../../functions/handleTitleColorType.js'
