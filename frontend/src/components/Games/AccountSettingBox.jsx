@@ -35,7 +35,7 @@ import { SubmitErrorSentence } from '../Sentences/SubmitErrorSentence.jsx';
 import { AccountSettingButton } from '../Buttons/AccountSettingButton.jsx';
 
 // アカウント情報を更新して、更新した情報を取得する関数
-import { patchAccountSetting } from '../../apis/accountSetting.js';
+import { patchAccountSetting } from '../../apis/accountSetting';
 
 // HTTP_STATUS_CODE
 import { HTTP_STATUS_CODE } from '../../constants';
@@ -71,14 +71,14 @@ const CustomFormControl = styled(FormControl)`
 
 const CustomFilledNameInput = styled(FilledInput)`
   margin-bottom: ${({
-    errorsNameBox
-  }) => typeof errorsNameBox === 'undefined' && '4%' };
+    errorsnamebox
+  }) => typeof errorsnamebox === 'undefined' && '4%' };
 `;
 
 const CustomFilledEmailInput = styled(FilledInput)`
   margin-bottom: ${({
-    errorsEmailBox
-  }) => typeof errorsEmailBox === 'undefined' && '4%' };
+    errorsemailbox
+  }) => typeof errorsemailbox === 'undefined' && '4%' };
 `;
 
 const AccoutSettingButtonWrapper = styled.div`
@@ -196,6 +196,9 @@ export const AccountSettingBox = ({
 
   // Formの検証後に呼び出される関数
   // dataにはフォームに入力したデータが入る
+  // patchAccountSettingに対して、catchをチェーンしている
+  // patchAccoutSetting内で例外が発生した場合、そのエラーを持つRejectedなPromiseを返されるので、
+  // catchで受け取ることができる
   const onSubmit = ({NameBox, EmailBox, OpenRankBox}) => {
     patchAccountSetting({
       user: {
@@ -271,7 +274,7 @@ export const AccountSettingBox = ({
                     type="text"
                     id="name-component-filled"
                     label="name"
-                    errorsNameBox={errors.NameBox}
+                    errorsnamebox={errors.NameBox}
                   />
                 </CustomFormControl>
               )}
@@ -292,7 +295,7 @@ export const AccountSettingBox = ({
                     type="email"
                     id="email-component-filled"
                     label="email"
-                    errorsEmailBox={errors.EmailBox}
+                    errorsemailbox={errors.EmailBox}
                   />
                 </CustomFormControl>
               )}
