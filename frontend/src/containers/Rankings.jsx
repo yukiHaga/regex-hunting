@@ -9,16 +9,16 @@ import { LoginDialog } from '../components/Dialogs/LoginDialog.jsx';
 import { SignUpDialog } from '../components/Dialogs/SignUpDialog.jsx';
 
 // Contextオブジェクト
-import { UserContext } from "../context/UserProvider.js";
+import { UserContext } from "../context/UserProvider.tsx";
 
 // Colors
 import { COLORS } from '../style_constants.js';
 
 // ログイン状態を確認するAPIコール関数
-import { checkLoginStatus } from '../apis/checkLoginStatus.js'; 
+import { checkLoginStatus } from '../apis/checkLoginStatus.js';
 
 // ランキングを取得するAPIコール関数
-import { getRanking } from '../apis/ranking.js'; 
+import { getRanking } from '../apis/ranking.js';
 
 // HTTP_STATUS_CODE
 import { HTTP_STATUS_CODE } from '../constants';
@@ -35,12 +35,12 @@ export const Rankings = () => {
   // useContext
   // requestUserStateには、requestState, userState, errorsが格納されている
   // userStateにはsessionとuserが格納されている
-  const { 
-    requestUserState: { 
+  const {
+    requestUserState: {
       sessionState,
       battleAudioState
     },
-    dispatch, 
+    dispatch,
     requestUserActionTyps
   } = useContext(UserContext);
 
@@ -94,9 +94,9 @@ export const Rankings = () => {
       })
     }
   }, [
-    dispatch, 
+    dispatch,
     sessionState,
-    requestUserActionTyps.REQUEST, 
+    requestUserActionTyps.REQUEST,
     requestUserActionTyps.REQUEST_SUCCESS,
     requestUserActionTyps.REQUEST_FAILURE
   ]);
@@ -135,15 +135,15 @@ export const Rankings = () => {
     battleAudioState.play,
     battleAudioState.audio
   ])
- 
+
   return (
     <>
-      <Header 
+      <Header
         onClickLink={(modalType) => setState({
           isOpenDialog: true,
           modalType: modalType
         })}
-      /> 
+      />
       <MainWrapper>
         <RankingBox
           currentTopTenArray={rankingState.currentTopTenArray}
@@ -155,7 +155,7 @@ export const Rankings = () => {
       <Footer />
       {
         state.isOpenDialog && state.modalType === "login" &&
-          <LoginDialog 
+          <LoginDialog
             isOpen={state.isOpenDialog}
             onClose={() => setState({
               isOpenDialog: false,
@@ -169,7 +169,7 @@ export const Rankings = () => {
       }
       {
         state.isOpenDialog && state.modalType === "signUp" &&
-          <SignUpDialog 
+          <SignUpDialog
             isOpen={state.isOpenDialog}
             onClose={() => setState({
               isOpenDialog: false,

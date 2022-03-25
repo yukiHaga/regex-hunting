@@ -1,13 +1,13 @@
 import React, { useState, useContext, memo } from 'react';
 
 // アイコン付きメニュー
-import { IconMenu } from '../Games/IconMenu.jsx' 
+import { IconMenu } from '../Games/IconMenu.jsx'
 
 // BaseLink
 import { BaseLink } from '../shared_style.js';
- 
+
 // Contextオブジェクト
-import { UserContext } from "../../context/UserProvider.js";
+import { UserContext } from "../../context/UserProvider.tsx";
 
 // ヘッダーをインポート
 import { HeaderTitle } from '../Sentences/HeaderTitle.jsx';
@@ -33,7 +33,7 @@ export const Header = memo(({
 
   // useContext
   const {
-    requestUserState: { sessionState, userState }, 
+    requestUserState: { sessionState, userState },
   } = useContext(UserContext);
 
   const [anchorElNav, setAnchorElNav] = useState(null);
@@ -66,9 +66,9 @@ export const Header = memo(({
   // flexGrowは空いたスペースへの伸び率を表している
   return (
     <>
-      <AppBar 
-        position="fixed" 
-        color="green" 
+      <AppBar
+        position="fixed"
+        color="green"
       >
         <Container maxWidth="xl">
           <Toolbar disableGutters>
@@ -104,18 +104,18 @@ export const Header = memo(({
                   display: { xs: 'block', md: 'block', lg: 'none' },
                 }}
               >
-                <MenuItem 
-                  key="1" 
+                <MenuItem
+                  key="1"
                   component={BaseLink}
-                  to="/rankings" 
+                  to="/rankings"
                   onClick={handleCloseNavMenu}
                 >
                   <Typography textAlign="center">
                     ランキング
                   </Typography>
                 </MenuItem>
-                <MenuItem 
-                  key="2" 
+                <MenuItem
+                  key="2"
                   component={BaseLink}
                   to="/"
                   onClick={handleMobileState}
@@ -124,8 +124,8 @@ export const Header = memo(({
                     ログイン
                   </Typography>
                 </MenuItem>
-                <MenuItem 
-                  key="3" 
+                <MenuItem
+                  key="3"
                   component={BaseLink}
                   to="/"
                   onClick={handleMobileState}
@@ -147,15 +147,15 @@ export const Header = memo(({
               </Button>
             </Box>
             {
-              sessionState === false && onClickLink && 
+              sessionState === false && onClickLink &&
                 <>
                   <Box sx={{ flexGrow: 0, display: { xs: 'none', md: 'none', lg: 'flex' } }}>
                     <Button
                       key="1"
-                      sx={{ 
-                        my: 2, 
-                        color: 'white', 
-                        display: 'block', 
+                      sx={{
+                        my: 2,
+                        color: 'white',
+                        display: 'block',
                         width: '6vw',
                         '&:hover': {
                           opacity: 0.7
@@ -169,11 +169,11 @@ export const Header = memo(({
                   <Box sx={{ flexGrow: 0, display: { xs: 'none', md: 'none', lg: 'flex' } }}>
                     <Button
                       key="1"
-                      sx={{ 
-                        my: 2, 
-                        color: 'white', 
-                        display: 'block', 
-                        width: '7vw', 
+                      sx={{
+                        my: 2,
+                        color: 'white',
+                        display: 'block',
+                        width: '7vw',
                         '&:hover': {
                           opacity: 0.7
                         }
@@ -186,8 +186,8 @@ export const Header = memo(({
                 </>
             }
             {
-              sessionState && userState && 
-                <IconMenu 
+              sessionState && userState &&
+                <IconMenu
                   anchorElUser={anchorElUser}
                   handleOpenUserMenu={handleOpenUserMenu}
                   handleCloseUserMenu={handleCloseUserMenu}

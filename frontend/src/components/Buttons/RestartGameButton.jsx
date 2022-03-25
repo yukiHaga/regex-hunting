@@ -8,7 +8,7 @@ import { COLORS } from '../../style_constants.js';
 import { HTTP_STATUS_CODE } from '../../constants';
 
 // Contextオブジェクト
-import { UserContext } from "../../context/UserProvider.js";
+import { UserContext } from "../../context/UserProvider.tsx";
 
 // モンスター名を取得する関数
 import { getMonsterName } from '../../functions/getMonsterName.ts';

@@ -29,10 +29,10 @@ import { SubTitleSentence } from '../components/Sentences/SubTitleSentence.jsx';
 import { MobileFlashMessage } from '../components/FlashMessages/MobileFlashMessage.jsx';
 
 // Contextオブジェクト
-import { UserContext } from "../context/UserProvider.js";
+import { UserContext } from "../context/UserProvider.tsx";
 
 // ログイン状態を確認するAPIコール関数
-import { checkLoginStatus } from '../apis/checkLoginStatus.js'; 
+import { checkLoginStatus } from '../apis/checkLoginStatus.js';
 
 // HTTP_STATUS_CODE
 import { HTTP_STATUS_CODE } from '../constants';
@@ -183,7 +183,7 @@ const GameContentsWrapper = styled.div`
   flex-wrap: wrap;
 `;
 
-export const LandingPages = () => { 
+export const LandingPages = () => {
 
   // モーダルに関するstateの初期値
   const loginInitialState = {
@@ -205,11 +205,11 @@ export const LandingPages = () => {
 
   // useContext
   const {
-    requestUserState: { 
-      sessionState, 
-      battleAudioState 
-    }, 
-    dispatch, 
+    requestUserState: {
+      sessionState,
+      battleAudioState
+    },
+    dispatch,
     requestUserActionTyps
   } = useContext(UserContext);
 
@@ -242,7 +242,7 @@ export const LandingPages = () => {
       })
     }
   }, [
-    dispatch, 
+    dispatch,
     sessionState,
     requestUserActionTyps.REQUEST_SUCCESS,
     requestUserActionTyps.REQUEST_FAILURE
@@ -262,7 +262,7 @@ export const LandingPages = () => {
 
   return (
     <>
-      <Header 
+      <Header
         onClickLink={(modalType) => setState({
           isOpenDialog: true,
           modalType: modalType
@@ -317,20 +317,20 @@ export const LandingPages = () => {
         <GameStartDescriptionSentence>
           3種類のクエストをクリアして、正規表現を極めよう！
         </GameStartDescriptionSentence>
-        <GameContentsWrapper> 
-          <GameContent 
-            difficulty='elementary' 
-            image={ElementaryGameContentImage} 
+        <GameContentsWrapper>
+          <GameContent
+            difficulty='elementary'
+            image={ElementaryGameContentImage}
             setMobileState={setMobileState}
           />
-          <GameContent 
-            difficulty='intermediate' 
-            image={IntermediateGameContentImage} 
+          <GameContent
+            difficulty='intermediate'
+            image={IntermediateGameContentImage}
             setMobileState={setMobileState}
           />
-          <GameContent 
-            difficulty='advanced' 
-            image={AdvancedGameContentImage} 
+          <GameContent
+            difficulty='advanced'
+            image={AdvancedGameContentImage}
             setMobileState={setMobileState}
           />
         </GameContentsWrapper>
@@ -338,7 +338,7 @@ export const LandingPages = () => {
       <Footer />
       {
         state.isOpenDialog && state.modalType === "login" &&
-          <LoginDialog 
+          <LoginDialog
             isOpen={state.isOpenDialog}
             onClose={() => setState({
               isOpenDialog: false,
@@ -352,7 +352,7 @@ export const LandingPages = () => {
       }
       {
         state.isOpenDialog && state.modalType === "signUp" &&
-          <SignUpDialog 
+          <SignUpDialog
             isOpen={state.isOpenDialog}
             onClose={() => setState({
               isOpenDialog: false,

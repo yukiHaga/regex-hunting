@@ -31,7 +31,7 @@ import { ClawImage } from '../components/Games/ClawImage.jsx';
 import { CircularMask } from '../components/loads/CircularMask.jsx';
 
 // Contextオブジェクト
-import { UserContext } from "../context/UserProvider.js";
+import { UserContext } from "../context/UserProvider.tsx";
 
 // ログイン状態を確認するAPIコール関数
 import { checkLoginStatus } from '../apis/checkLoginStatus.js';

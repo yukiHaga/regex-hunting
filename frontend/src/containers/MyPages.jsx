@@ -25,7 +25,7 @@ import IntermediateGameContentImage from '../images/intermediate_game_content.jp
 import AdvancedGameContentImage from '../images/advanced_game_content.jpg';
 
 // Contextオブジェクト
-import { UserContext } from "../context/UserProvider.js";
+import { UserContext } from "../context/UserProvider.tsx";
 
 // ログイン状態を確認するAPIコール関数
 import { checkLoginStatus } from '../apis/checkLoginStatus.js';

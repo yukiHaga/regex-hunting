@@ -13,10 +13,10 @@ import { COLORS } from '../style_constants.js';
 import { WIDTH } from '../style_constants.js';
 
 // Contextオブジェクト
-import { UserContext } from "../context/UserProvider.js";
+import { UserContext } from "../context/UserProvider.tsx";
 
 // ログイン状態を確認するAPIコール関数
-import { checkLoginStatus } from '../apis/checkLoginStatus.js'; 
+import { checkLoginStatus } from '../apis/checkLoginStatus.js';
 
 // HTTP_STATUS_CODE
 import { HTTP_STATUS_CODE } from '../constants';
@@ -141,11 +141,11 @@ export const PrivacyPolicies = () => {
   // useContext
   // requestUserStateには、requestState, userState, errorsが格納されている
   // userStateにはsessionとuserが格納されている
-  const { 
-    requestUserState: { 
+  const {
+    requestUserState: {
       sessionState
     },
-    dispatch, 
+    dispatch,
     requestUserActionTyps
   } = useContext(UserContext);
 
@@ -169,7 +169,7 @@ export const PrivacyPolicies = () => {
         });
         if(!data.session && location.key === 'default') {
           navigate(
-            '/', 
+            '/',
             { state: { display: true, success: "ログインしてください。"}}
           )
         }
@@ -187,9 +187,9 @@ export const PrivacyPolicies = () => {
       })
     }
   }, [
-    dispatch, 
+    dispatch,
     sessionState,
-    requestUserActionTyps.REQUEST, 
+    requestUserActionTyps.REQUEST,
     requestUserActionTyps.REQUEST_SUCCESS,
     requestUserActionTyps.REQUEST_FAILURE,
     navigate,
@@ -198,7 +198,7 @@ export const PrivacyPolicies = () => {
 
   return (
     <>
-      <Header /> 
+      <Header />
       <MainWrapper>
         <TitleWrapper>
           プライバシーポリシー
@@ -206,7 +206,7 @@ export const PrivacyPolicies = () => {
         <CustomParagraphWrapper>
           Regex Hunting（以下「本サービス」といいます）が提供するサービスにおける、ユーザーについての個人情報を含む利用者情報の取り扱いについて、以下のとおりプライバシーポリシーを定めます。
         </CustomParagraphWrapper>
-        <SemiTitleWrapper>  
+        <SemiTitleWrapper>
           1. お客様から取得する情報
         </SemiTitleWrapper>
         <CustomSecondParagraphWrapper>
@@ -222,7 +222,7 @@ export const PrivacyPolicies = () => {
           <li>本サービスの滞在時間、入力履歴、購買履歴等の本サービスにおけるお客様の行動履歴</li>
           <li>本サービスの起動時間、入力履歴、購買履歴等の本サービスの利用履歴</li>
         </CustomUlWrapper>
-        <SemiTitleWrapper>  
+        <SemiTitleWrapper>
           2. お客様の情報を利用する目的
         </SemiTitleWrapper>
         <CustomSecondParagraphWrapper>
@@ -241,7 +241,7 @@ export const PrivacyPolicies = () => {
           <li>本サービス規約の変更等を通知するため</li>
           <li>以上の他、本サービスの提供、維持、保護及び改善のため</li>
         </CustomUlWrapper>
-        <SemiTitleWrapper>  
+        <SemiTitleWrapper>
           3. 第三者提供
         </SemiTitleWrapper>
         <CustomSecondParagraphWrapper>
@@ -254,7 +254,7 @@ export const PrivacyPolicies = () => {
           <li>事業パートナーと共同利用する場合（具体的な共同利用がある場合は、その内容を別途公表します。）</li>
           <li>その他、法律によって合法的に第三者提供が許されている場合</li>
         </CustomUlWrapper>
-        <SemiTitleWrapper>  
+        <SemiTitleWrapper>
           4. アクセス解析ツール
         </SemiTitleWrapper>
         <CustomSecondParagraphWrapper>
@@ -265,13 +265,13 @@ export const PrivacyPolicies = () => {
             Google アナリティクス利用規約
           </CustomAnchor>
         </CustomURLWrapper>
-        <SemiTitleWrapper>  
+        <SemiTitleWrapper>
           5. プライバシーポリシーの変更
         </SemiTitleWrapper>
         <CustomBottomParagraphWrapper>
           本サービスは、必要に応じて、このプライバシーポリシーの内容を変更します。この場合、変更後のプライバシーポリシーの施行時期と内容を適切な方法により周知または通知します。
         </CustomBottomParagraphWrapper>
-        <SemiTitleWrapper>  
+        <SemiTitleWrapper>
           6. お問い合わせ
         </SemiTitleWrapper>
         <CustomSecondParagraphWrapper>
@@ -283,7 +283,7 @@ export const PrivacyPolicies = () => {
         <CustomBottomParagraphWrapper>
           この場合、必ず、運転免許証のご提示等本サービスが指定する方法により、ご本人からのご請求であることの確認をさせていただきます。なお、情報の開示請求については、開示の有無に関わらず、ご申請時に一件あたり1,000円の事務手数料を申し受けます。
         </CustomBottomParagraphWrapper>
-        <SemiTitleWrapper>  
+        <SemiTitleWrapper>
           7. 事業者の名称
         </SemiTitleWrapper>
         <CustomBottomParagraphWrapper>

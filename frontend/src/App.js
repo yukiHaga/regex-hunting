@@ -23,7 +23,7 @@ import { NotFoundPage } from './containers/NotFoundPage.jsx';
 import ScrollToTop from './scroll/ScrollToTop.tsx';
 
 // Provider
-import { UserProvider } from "./context/UserProvider.js";
+import { UserProvider } from "./context/UserProvider.tsx";
 
 // App Component
 function App() {

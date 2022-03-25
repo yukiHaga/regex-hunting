@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
 
 // Contextオブジェクト
-import { UserContext } from "../../context/UserProvider.js";
+import { UserContext } from "../../context/UserProvider.tsx";
 
 // MUI
 import Avatar from '@mui/material/Avatar';
@@ -93,7 +93,7 @@ const Input = styled.input`
 const CustomLabel = styled.label`
   position: absolute;
   top: 67%;
-  right: 33%; 
+  right: 33%;
 `;
 
 export const AccountSettingBox = ({
@@ -104,8 +104,8 @@ export const AccountSettingBox = ({
   // useContext
   // requestUserStateには、requestState, userState, errorsが格納されている
   // userStateにはsessionとuserが格納されている
-  const { 
-    dispatch, 
+  const {
+    dispatch,
     requestUserActionTyps
   } = useContext(UserContext);
 
@@ -160,14 +160,14 @@ export const AccountSettingBox = ({
   };
 
   // useForm
-  const { 
-    control, 
-    handleSubmit, 
-    formState: { errors, isValid } 
+  const {
+    control,
+    handleSubmit,
+    formState: { errors, isValid }
   } = useForm({
     mode: 'all',
-    shouldUnregister: false 
-  }); 
+    shouldUnregister: false
+  });
 
   // Formのバリデーション
   const registerOptions = {
@@ -182,8 +182,8 @@ export const AccountSettingBox = ({
         message: "10文字以下の名前を入力してください。"
       },
     },
-    email: { 
-      required: "メールアドレスを入力してください。", 
+    email: {
+      required: "メールアドレスを入力してください。",
       pattern: {
         value: /^[A-Za-z0-9][A-Za-z0-9_.-]*@[A-Za-z0-9_.-]+.[A-Za-z0-9]+$/,
         message: "英数字, @, ドメインを含めて入力してください。"
@@ -196,7 +196,7 @@ export const AccountSettingBox = ({
 
   // Formの検証後に呼び出される関数
   // dataにはフォームに入力したデータが入る
-  const onSubmit = ({NameBox, EmailBox, OpenRankBox}) => { 
+  const onSubmit = ({NameBox, EmailBox, OpenRankBox}) => {
     patchAccountSetting({
       user: {
         id: user.id,
@@ -213,8 +213,8 @@ export const AccountSettingBox = ({
           user: data.user,
         }
       });
-    }).then(() => 
-      navigate('/my-page', { 
+    }).then(() =>
+      navigate('/my-page', {
         state: { display: true, success: "アカウントを更新しました。"}
       })
     ).catch((e) => {
@@ -241,15 +241,15 @@ export const AccountSettingBox = ({
             sx={{ width: 200, height: 200 }}
           />
           <CustomLabel htmlFor="icon-button-file">
-            <Input 
-              id="icon-button-file" 
-              type="file" 
+            <Input
+              id="icon-button-file"
+              type="file"
               accept=".png, .jpg, .jpeg"
               onChange={(e) => handleUpload(e)}
             />
-            <IconButton 
-              color="primary" 
-              aria-label="upload picture" 
+            <IconButton
+              color="primary"
+              aria-label="upload picture"
               component="span"
             >
               <PhotoCamera />
@@ -258,13 +258,13 @@ export const AccountSettingBox = ({
         </AccountSettingBoxImageWrapper>
         <AccountSettingBoxFormWrapper>
           <CustomForm onSubmit={handleSubmit(onSubmit)}>
-            <Controller 
+            <Controller
               name="NameBox"
               control={control}
               defaultValue={user.name}
               rules={registerOptions.name}
               render={({ field }) => (
-                <CustomFormControl variant="filled">              
+                <CustomFormControl variant="filled">
                   <InputLabel htmlFor="name-component-filled">名前</InputLabel>
                   <CustomFilledNameInput
                     {...field}
@@ -273,19 +273,19 @@ export const AccountSettingBox = ({
                     label="name"
                     errorsNameBox={errors.NameBox}
                   />
-                </CustomFormControl>              
+                </CustomFormControl>
               )}
             />
             {errors.NameBox && <InputErrorSentence>
                                   {errors.NameBox.message}
                                 </InputErrorSentence>}
-            <Controller 
+            <Controller
               name="EmailBox"
               control={control}
               defaultValue={user.email}
               rules={registerOptions.email}
               render={({ field }) => (
-                <CustomFormControl variant="filled">              
+                <CustomFormControl variant="filled">
                   <InputLabel htmlFor="email-component-filled">メールアドレス</InputLabel>
                   <CustomFilledEmailInput
                     {...field}
@@ -294,13 +294,13 @@ export const AccountSettingBox = ({
                     label="email"
                     errorsEmailBox={errors.EmailBox}
                   />
-                </CustomFormControl>              
+                </CustomFormControl>
               )}
             />
             {errors.EmailBox && <InputErrorSentence>
                                   {errors.EmailBox.message}
                                 </InputErrorSentence>}
-            <Controller 
+            <Controller
               name="OpenRankBox"
               control={control}
               defaultValue={user.open_rank}
@@ -310,21 +310,21 @@ export const AccountSettingBox = ({
                       key={1}
                       label='ランキングを公開する'
                       control={
-                        <Checkbox 
-                          {...field} 
-                          defaultChecked={user.open_rank} 
+                        <Checkbox
+                          {...field}
+                          defaultChecked={user.open_rank}
                         />
                       }
                     />
               )}
             />
             <AccoutSettingButtonWrapper>
-              <AccountSettingButton 
-                disabled={!isValid} 
+              <AccountSettingButton
+                disabled={!isValid}
               />
             </AccoutSettingButtonWrapper>
             {
-              requestUserState.errors.title === 'Bad Request' && 
+              requestUserState.errors.title === 'Bad Request' &&
                 <SubmitErrorSentence>
                   {requestUserState.errors.detail}
                 </SubmitErrorSentence>

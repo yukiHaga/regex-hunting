@@ -1,10 +1,10 @@
-import React, { Fragment, useContext } from 'react'; 
+import React, { Fragment, useContext } from 'react';
 import styled from 'styled-components';
 
 import { BaseLink } from '../shared_style';
 
 // Contextオブジェクト
-import { UserContext } from "../../context/UserProvider.js";
+import { UserContext } from "../../context/UserProvider.tsx";
 
 // Colors
 import { COLORS } from '../../style_constants.js';
@@ -46,11 +46,11 @@ export const TitleSettingButton = ({
   // useContext
   // requestUserStateには、requestState, userState, errorsが格納されている
   // userStateにはsessionとuserが格納されている
-  const { 
-    requestUserState: { 
+  const {
+    requestUserState: {
       userState: { user }
     },
-    dispatch, 
+    dispatch,
     requestUserActionTyps
   } = useContext(UserContext);
 
@@ -92,8 +92,8 @@ export const TitleSettingButton = ({
 
   return (
     <>
-      <TitleSettingButtonWrapper 
-        to={'/my-page'} 
+      <TitleSettingButtonWrapper
+        to={'/my-page'}
         onClick={handleTitleSetting}
         disabled={disabled}
       >

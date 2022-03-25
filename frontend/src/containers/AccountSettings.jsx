@@ -9,10 +9,10 @@ import { AccountSettingBox } from '../components/Games/AccountSettingBox.jsx';
 import { CircularMask } from '../components/loads/CircularMask.jsx';
 
 // Contextオブジェクト
-import { UserContext } from "../context/UserProvider.js";
+import { UserContext } from "../context/UserProvider.tsx";
 
 // ログイン状態を確認するAPIコール関数
-import { checkLoginStatus } from '../apis/checkLoginStatus.js'; 
+import { checkLoginStatus } from '../apis/checkLoginStatus.js';
 
 // REQUEST_STATE
 import { REQUEST_STATE } from '../constants';
@@ -35,15 +35,15 @@ export const AccountSettings = () => {
   // useContext
   // requestUserStateには、requestState, userState, errorsが格納されている
   // userStateにはsessionとuserが格納されている
-  const { 
+  const {
     requestUserState,
-    requestUserState: { 
+    requestUserState: {
       requestState,
       sessionState,
       userState: { user },
       battleAudioState
     },
-    dispatch, 
+    dispatch,
     requestUserActionTyps
   } = useContext(UserContext);
 
@@ -68,7 +68,7 @@ export const AccountSettings = () => {
         });
         if(!data.session && location.key === 'default') {
           navigate(
-            '/', 
+            '/',
             { state: { display: true, success: "ログインしてください。"}}
           )
         }
@@ -86,9 +86,9 @@ export const AccountSettings = () => {
       })
     }
   }, [
-    dispatch, 
+    dispatch,
     sessionState,
-    requestUserActionTyps.REQUEST, 
+    requestUserActionTyps.REQUEST,
     requestUserActionTyps.REQUEST_SUCCESS,
     requestUserActionTyps.REQUEST_FAILURE,
     navigate,
@@ -117,9 +117,9 @@ export const AccountSettings = () => {
           <CircularMask />
         :
           <>
-            <Header /> 
+            <Header />
             <MainWrapper>
-              <AccountSettingBox 
+              <AccountSettingBox
                 requestUserState={requestUserState}
                 user={user}
               />

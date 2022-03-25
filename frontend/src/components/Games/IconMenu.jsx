@@ -13,13 +13,13 @@ import Typography from '@mui/material/Typography';
 import { BaseLink } from '../shared_style.js';
 
 // Contextオブジェクト
-import { UserContext } from "../../context/UserProvider.js";
+import { UserContext } from "../../context/UserProvider.tsx";
 
 // デフォルトのアバター画像
 import DefaultAvatarImage from '../../images/default_avatar.png';
 
 // ログイン関係のAPIコール関数
-import { deleteUserSession } from '../../apis/login'; 
+import { deleteUserSession } from '../../apis/login';
 
 // HTTP_STATUS_CODE
 import { HTTP_STATUS_CODE } from '../../constants';
@@ -32,8 +32,8 @@ export const IconMenu = memo(({
 
   // useContext
   const {
-    requestUserState: { userState: { user } }, 
-    dispatch, 
+    requestUserState: { userState: { user } },
+    dispatch,
     requestUserActionTyps
   } = useContext(UserContext);
 
@@ -52,7 +52,7 @@ export const IconMenu = memo(({
       });
     }).then(() => {
       navigate('/', { state: { display: true, success: "ログアウトしました。"}})
-    } 
+    }
     ).catch((e) => {
       if(e.response.status === HTTP_STATUS_CODE.NOT_FOUND){
         dispatch({
@@ -72,9 +72,9 @@ export const IconMenu = memo(({
       <Box sx={{ flexGrow: 0, mx: 2}}>
         <Tooltip title={user.name} >
           <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-            <Avatar 
-              alt="user-icon" 
-              src={user.image || DefaultAvatarImage} 
+            <Avatar
+              alt="user-icon"
+              src={user.image || DefaultAvatarImage}
             />
           </IconButton>
         </Tooltip>
@@ -94,7 +94,7 @@ export const IconMenu = memo(({
           open={Boolean(anchorElUser)}
           onClose={handleCloseUserMenu}
         >
-          <MenuItem 
+          <MenuItem
             key="1"
             component={BaseLink}
             to="/my-page"
@@ -104,7 +104,7 @@ export const IconMenu = memo(({
               マイページ
             </Typography>
           </MenuItem>
-          <MenuItem 
+          <MenuItem
             key="2"
             component={BaseLink}
             to="/account-settings"
@@ -114,7 +114,7 @@ export const IconMenu = memo(({
               アカウント設定
             </Typography>
           </MenuItem>
-          <MenuItem 
+          <MenuItem
             onClick={handleLogout}
           >
             <Typography textAlign="center">

@@ -41,7 +41,7 @@ import { SubmitErrorSentence } from '../Sentences/SubmitErrorSentence.jsx';
 import { HTTP_STATUS_CODE } from '../../constants';
 
 // Contextオブジェクト
-import { UserContext } from "../../context/UserProvider.js";
+import { UserContext } from "../../context/UserProvider.tsx";
 
 // OAuthのURL
 import { gitHubOAuth, googleOAuth } from '../../urls/index.ts';
