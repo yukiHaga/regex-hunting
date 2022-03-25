@@ -32,7 +32,7 @@ import { InputErrorSentence } from '../Sentences/InputErrorSentence.jsx';
 import { SubmitErrorSentence } from '../Sentences/SubmitErrorSentence.jsx';
 
 // Button
-import { AccountSettingButton } from '../Buttons/AccountSettingButton.jsx';
+import { AccountSettingButton } from '../Buttons/AccountSettingButton.tsx';
 
 // アカウント情報を更新して、更新した情報を取得する関数
 import { patchAccountSetting } from '../../apis/accountSetting';

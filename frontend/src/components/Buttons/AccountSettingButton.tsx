@@ -1,12 +1,12 @@
-import React, { Fragment } from 'react'; 
+import React, { Fragment } from 'react';
 import styled from 'styled-components';
 
 import { BlueRoundButton } from '../shared_style';
 
 const AccountSettingButtonWrapper = styled(BlueRoundButton)`
   border-style: none;
-  opacity: ${(props) => props.disabled ? 0.3 : 1};
-  pointer-events: ${(props) => props.disabled ? 'none' : 'auto'};
+  opacity: ${({ disabled }) => disabled ? 0.3 : 1};
+  pointer-events: ${({ disabled }) => disabled ? 'none' : 'auto'};
   width: 100%;
   display: flex;
   justify-content: center;
@@ -21,7 +21,12 @@ const AccountSettingButtonTextWrapper = styled.div`
   font-size: 1.3em;
 `;
 
-export const AccountSettingButton = ({disabled}) => {
+// AccountSettingButtonの引数の型
+type Disabled = {
+  disabled: boolean;
+};
+
+export const AccountSettingButton = ({disabled}: Disabled): JSX.Element => {
   return (
     <>
       <AccountSettingButtonWrapper type="submit" disabled={disabled}>
