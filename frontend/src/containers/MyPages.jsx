@@ -28,7 +28,7 @@ import AdvancedGameContentImage from '../images/advanced_game_content.jpg';
 import { UserContext } from "../context/UserProvider.tsx";
 
 // ログイン状態を確認するAPIコール関数
-import { checkLoginStatus } from '../apis/checkLoginStatus.js';
+import { checkLoginStatus } from '../apis/checkLoginStatus';
 
 // マイページの情報を取得するAPIコール関数
 import { getMyPageInfo } from '../apis/mypage.js';

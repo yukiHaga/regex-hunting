@@ -15,7 +15,7 @@ import { UserContext } from "../context/UserProvider.tsx";
 import { COLORS } from '../style_constants.js';
 
 // ログイン状態を確認するAPIコール関数
-import { checkLoginStatus } from '../apis/checkLoginStatus.js';
+import { checkLoginStatus } from '../apis/checkLoginStatus';
 
 // ランキングを取得するAPIコール関数
 import { getRanking } from '../apis/ranking.js';

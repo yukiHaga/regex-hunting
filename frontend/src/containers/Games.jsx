@@ -34,7 +34,7 @@ import { CircularMask } from '../components/loads/CircularMask.jsx';
 import { UserContext } from "../context/UserProvider.tsx";
 
 // ログイン状態を確認するAPIコール関数
-import { checkLoginStatus } from '../apis/checkLoginStatus.js';
+import { checkLoginStatus } from '../apis/checkLoginStatus';
 
 // ゲームステータス, 問題, モンスターデータを取得する関数
 import { getGameStart } from '../apis/gameManagement.js';

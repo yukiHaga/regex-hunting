@@ -16,7 +16,7 @@ import { WIDTH } from '../style_constants.js';
 import { UserContext } from "../context/UserProvider.tsx";
 
 // ログイン状態を確認するAPIコール関数
-import { checkLoginStatus } from '../apis/checkLoginStatus.js';
+import { checkLoginStatus } from '../apis/checkLoginStatus';
 
 // HTTP_STATUS_CODE
 import { HTTP_STATUS_CODE } from '../constants';

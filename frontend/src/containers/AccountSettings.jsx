@@ -12,7 +12,7 @@ import { CircularMask } from '../components/loads/CircularMask.jsx';
 import { UserContext } from "../context/UserProvider.tsx";
 
 // ログイン状態を確認するAPIコール関数
-import { checkLoginStatus } from '../apis/checkLoginStatus.js';
+import { checkLoginStatus } from '../apis/checkLoginStatus';
 
 // REQUEST_STATE
 import { REQUEST_STATE } from '../constants';
