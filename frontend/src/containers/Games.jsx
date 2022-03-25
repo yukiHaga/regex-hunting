@@ -37,10 +37,10 @@ import { UserContext } from "../context/UserProvider.tsx";
 import { checkLoginStatus } from '../apis/checkLoginStatus';
 
 // ゲームステータス, 問題, モンスターデータを取得する関数
-import { getGameStart } from '../apis/gameManagement.js';
+import { getGameStart } from '../apis/gameManagement';
 
 // ゲーム終了時の状態をサーバーへ送る関数
-import { postGameFinish } from '../apis/gameManagement.js';
+import { postGameFinish } from '../apis/gameManagement';
 
 // HTTP_STATUS_CODE
 import { HTTP_STATUS_CODE } from '../constants';
