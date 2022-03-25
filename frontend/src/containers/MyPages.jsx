@@ -31,7 +31,7 @@ import { UserContext } from "../context/UserProvider.tsx";
 import { checkLoginStatus } from '../apis/checkLoginStatus';
 
 // マイページの情報を取得するAPIコール関数
-import { getMyPageInfo } from '../apis/mypage.js';
+import { getMyPageInfo } from '../apis/mypage';
 
 // HTTP_STATUS_CODE
 import { HTTP_STATUS_CODE } from '../constants';
