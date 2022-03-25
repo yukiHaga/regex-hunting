@@ -2,7 +2,7 @@ import React, { useRef, useContext } from 'react';
 import styled from 'styled-components';
 
 // 新規会員登録関係のAPIコール関数
-import { postUser } from '../../apis/signup.js';
+import { postUser } from '../../apis/signup';
 
 // ダイアログ
 import { DialogContent, Dialog } from '@mui/material';
