@@ -23,7 +23,7 @@ import FilledInput from '@mui/material/FilledInput';
 import { InputErrorSentence } from '../components/Sentences/InputErrorSentence.jsx';
 
 // パスワードリセットを更新するapiコール関数
-import { patchPasswordResetsUpdate } from '../apis/passwordUpdates.js';
+import { patchPasswordResetsUpdate } from '../apis/passwordUpdates';
 
 // HTTP_STATUS_CODE
 import { HTTP_STATUS_CODE } from '../constants';
@@ -67,7 +67,7 @@ const CustomParagraphWrapper = styled.p`
 const PasswordUpdatesFormWrapper = styled.div`
   width: 70%;
   margin: 0 auto;
-  margin-top: 3%; 
+  margin-top: 3%;
 `;
 
 const CustomForm = styled.form`
@@ -100,15 +100,15 @@ export const PasswordUpdates = () => {
   const navigate = useNavigate();
 
   // useForm
-  const { 
-    control, 
-    handleSubmit, 
+  const {
+    control,
+    handleSubmit,
     formState: { errors, isValid },
     watch
   } = useForm({
     mode: 'all',
-    shouldUnregister: false 
-  }); 
+    shouldUnregister: false
+  });
 
   // refObject(password)を定義
   // refObjectのcurrentプロパティにwatchの初期値("")を代入
@@ -144,24 +144,24 @@ export const PasswordUpdates = () => {
         message: "大文字, 小文字, 数字が含まれるパスワードを入力してください。"
       },
       validate: {
-        confirmPassword: (value) => value === password.current || "パスワードが一致しません。" 
-      }  
+        confirmPassword: (value) => value === password.current || "パスワードが一致しません。"
+      }
     }
   };
-  
+
   const search = useLocation().search;
   const query2 = new URLSearchParams(search);
 
   // Formの検証後に呼び出される関数
-  const onSubmit = ({ PasswordBox, PasswordConfirmationBox }) => { 
+  const onSubmit = ({ PasswordBox, PasswordConfirmationBox }) => {
     patchPasswordResetsUpdate({
       user: {
         password: PasswordBox,
         password_confirmation: PasswordConfirmationBox
       },
-      token: query2.get('token') 
+      token: query2.get('token')
     }).then(() => (
-      navigate('/', { 
+      navigate('/', {
         state: { display: true, success: "パスワードを更新しました。"}
       })
     )).catch((e) => {
@@ -174,7 +174,7 @@ export const PasswordUpdates = () => {
 
   return (
     <>
-      <Header /> 
+      <Header />
       <MainWrapper>
         <PasswordUpdatesBoxWrapper>
           <TitleWrapper>
@@ -185,13 +185,13 @@ export const PasswordUpdates = () => {
           </CustomParagraphWrapper>
           <PasswordUpdatesFormWrapper>
             <CustomForm onSubmit={handleSubmit(onSubmit)}>
-              <Controller 
+              <Controller
                 name="PasswordBox"
                 control={control}
                 defaultValue=""
                 rules={registerOptions.password}
                 render={({ field }) => (
-                  <CustomFormControl variant="filled">              
+                  <CustomFormControl variant="filled">
                     <InputLabel htmlFor="password-component-filled">パスワード</InputLabel>
                     <CustomFilledPasswordInput
                       {...field}
@@ -200,19 +200,19 @@ export const PasswordUpdates = () => {
                       label="password"
                       errorsPasswordBox={errors.PasswordBox}
                     />
-                  </CustomFormControl>              
+                  </CustomFormControl>
                 )}
               />
               {errors.PasswordBox && <InputErrorSentence>
                                        {errors.PasswordBox.message}
                                      </InputErrorSentence>}
-              <Controller 
+              <Controller
                 name="PasswordConfirmationBox"
                 control={control}
                 defaultValue=""
                 rules={registerOptions.passwordConfirmation}
                 render={({ field }) => (
-                  <CustomFormControl variant="filled">              
+                  <CustomFormControl variant="filled">
                     <InputLabel htmlFor="password-confirmation-component-filled">
                       パスワード(確認用)
                     </InputLabel>
@@ -223,15 +223,15 @@ export const PasswordUpdates = () => {
                       label="password-confirmation"
                       errorsPasswordConfirmationBox={errors.PasswordConfirmationBox}
                     />
-                  </CustomFormControl>              
+                  </CustomFormControl>
                 )}
               />
               {errors.PasswordConfirmationBox && <InputErrorSentence>
                                                    {errors.PasswordConfirmationBox.message}
                                                  </InputErrorSentence>}
               <PasswordUpdatesButtonWrapper>
-                <PasswordUpdatesButton 
-                  disabled={!isValid} 
+                <PasswordUpdatesButton
+                  disabled={!isValid}
                 />
               </PasswordUpdatesButtonWrapper>
             </CustomForm>
