@@ -13,7 +13,7 @@ import { COLORS } from '../../style_constants.js';
 import { HTTP_STATUS_CODE } from '../../constants';
 
 // タイトルを設定した情報を取得するapiコール関数
-import { patchTitleSetting } from '../../apis/titleSetting.js';
+import { patchTitleSetting } from '../../apis/titleSetting';
 
 const TitleSettingButtonWrapper = styled(BaseLink)`
   border-style: none;
