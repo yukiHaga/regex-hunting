@@ -5,13 +5,13 @@ import {
   initialState,
   requestUserActionTyps,
   requestUserReducer
-} from '../reducers/requestUser.js';
+} from '../reducers/requestUser.ts';
 
 // UserContextというコンテキストオブジェクトを作成
 export const UserContext = createContext();
 
 export const UserProvider = ({children}) => {
- 
+
   // useReducerの第2引数がstateの初期値となる
   // dispatchの第1引数に自動的に入る
   const [requestUserState, dispatch] = useReducer(requestUserReducer, initialState);
