@@ -7,8 +7,8 @@ import { DialogContent, Dialog } from '@mui/material';
 // Colors
 import { COLORS } from '../../style_constants.js';
 
-// DescriptionWrapper 
-import { DescriptionWrapper } from '../shared_style.js'; 
+// DescriptionWrapper
+import { DescriptionWrapper } from '../shared_style.js';
 
 // 戻るボタン
 import { BackToModalButton } from '../Buttons/BackToModalButton.jsx';
@@ -64,7 +64,7 @@ const CustomDialogContentReleaseSentence = styled(CustomDialogContentSentence)`
   padding-bottom: 8%;
 `;
 
-// backボタンのラッパー 
+// backボタンのラッパー
 // backボタンを固定してる
 const BackToModalButtonWrapper = styled.div`
   position: fixed;
@@ -119,21 +119,21 @@ export const ReleaseConditionDialog = ({
   return(
     <Dialog
       open={isOpen}
-      fullWidth="true"
+      fullWidth={true}
       maxWidth="xs"
     >
-      <CustomDialogInnerWrapper 
+      <CustomDialogInnerWrapper
         releaseDate={releaseDate}
         name={name}
-      > 
+      >
         <BackToModalButtonWrapper>
-          <BackToModalButton 
+          <BackToModalButton
             onClick={onClose}
           />
         </BackToModalButtonWrapper>
         <CustomDialogTitleWrapper title="Bad">
           解放条件
-        </CustomDialogTitleWrapper> 
+        </CustomDialogTitleWrapper>
         <CustomDialogContent>
           <CustomDialogContentSentence>
             {releaseCondition}
@@ -150,7 +150,7 @@ export const ReleaseConditionDialog = ({
           </CustomDialogContentReleaseSentence>
         </CustomDialogContentReleaseSentenceWrapper>
         <ButtonsWrapper>
-          <TitleSettingButton 
+          <TitleSettingButton
             name={name}
             setMyPageState={setMyPageState}
             disabled={!releaseDate}
