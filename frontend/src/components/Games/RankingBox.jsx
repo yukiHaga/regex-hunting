@@ -1,4 +1,4 @@
-import React, { memo } from 'react';
+import React, { Fragment, memo } from 'react';
 import styled from 'styled-components';
 
 // MUI
@@ -442,52 +442,54 @@ export const RankingBox = memo(({
                         image
                       }
                     }, index) => (
-                      <tr>
-                        <RankingDataTd>{index + 1}</RankingDataTd>
-                        <TimeDataTd>
-                          {
-                            getClearTime(0, min_result_time)
-                          }
-                        </TimeDataTd>
-                        <HunterDataTd>
-                          <StatusWrapper>
-                            <AvatarWrapper>
-                              <Avatar
-                                alt="Hunter"
-                                src={image || DefaultAvatarImage}
-                                sx={{ width: 110, height: 110 }}
-                              />
-                            </AvatarWrapper>
-                            <HunterTableWrapper>
-                              <HunterTable>
-                                <tbody>
-                                  <tr>
-                                    <HunterTableNameTd colSpan={2}>
-                                      {name}
-                                    </HunterTableNameTd>
-                                  </tr>
-                                  <tr>
-                                    <HunterTableRankMetaTd>
-                                      ランク
-                                    </HunterTableRankMetaTd>
-                                    <HunterTableRankDataTd>
-                                      {rank}
-                                    </HunterTableRankDataTd>
-                                  </tr>
-                                  <tr>
-                                    <HunterTableTitleMetaTd>
-                                      称号
-                                    </HunterTableTitleMetaTd>
-                                    <HunterTableTitleDataTd>
-                                      {active_title}
-                                    </HunterTableTitleDataTd>
-                                  </tr>
-                                </tbody>
-                              </HunterTable>
-                            </HunterTableWrapper>
-                          </StatusWrapper>
-                        </HunterDataTd>
-                      </tr>
+                      <Fragment key={index}>
+                        <tr>
+                          <RankingDataTd>{index + 1}</RankingDataTd>
+                          <TimeDataTd>
+                            {
+                              getClearTime(0, min_result_time)
+                            }
+                          </TimeDataTd>
+                          <HunterDataTd>
+                            <StatusWrapper>
+                              <AvatarWrapper>
+                                <Avatar
+                                  alt="Hunter"
+                                  src={image || DefaultAvatarImage}
+                                  sx={{ width: 110, height: 110 }}
+                                />
+                              </AvatarWrapper>
+                              <HunterTableWrapper>
+                                <HunterTable>
+                                  <tbody>
+                                    <tr>
+                                      <HunterTableNameTd colSpan={2}>
+                                        {name}
+                                      </HunterTableNameTd>
+                                    </tr>
+                                    <tr>
+                                      <HunterTableRankMetaTd>
+                                        ランク
+                                      </HunterTableRankMetaTd>
+                                      <HunterTableRankDataTd>
+                                        {rank}
+                                      </HunterTableRankDataTd>
+                                    </tr>
+                                    <tr>
+                                      <HunterTableTitleMetaTd>
+                                        称号
+                                      </HunterTableTitleMetaTd>
+                                      <HunterTableTitleDataTd>
+                                        {active_title}
+                                      </HunterTableTitleDataTd>
+                                    </tr>
+                                  </tbody>
+                                </HunterTable>
+                              </HunterTableWrapper>
+                            </StatusWrapper>
+                          </HunterDataTd>
+                        </tr>
+                      </Fragment>
                     ))
                   }
                 </tbody>

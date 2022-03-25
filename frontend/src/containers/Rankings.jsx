@@ -18,7 +18,7 @@ import { COLORS } from '../style_constants.js';
 import { checkLoginStatus } from '../apis/checkLoginStatus';
 
 // ランキングを取得するAPIコール関数
-import { getRanking } from '../apis/ranking.js';
+import { getRanking } from '../apis/ranking';
 
 // HTTP_STATUS_CODE
 import { HTTP_STATUS_CODE } from '../constants';
