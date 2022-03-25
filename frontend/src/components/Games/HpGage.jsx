@@ -5,7 +5,7 @@ import styled from 'styled-components';
 import { COLORS } from '../../style_constants.js';
 
 // handleColorType
-import { handleColorType } from '../../functions/handleColorType.ts';
+import { handleColorType } from '../../functions/handleColorType';
 
 const HpGageWrapper = styled.div`
   background-color: ${COLORS.GAGE_GRAY};

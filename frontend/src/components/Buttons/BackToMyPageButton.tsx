@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react'; 
+import React, { Fragment } from 'react';
 import styled from 'styled-components';
 
 import { BaseLink } from '../shared_style';
@@ -29,7 +29,7 @@ const BackToMyPageButtonTextWrapper = styled.div`
   padding-bottom: 8%;
 `;
 
-export const BackToMyPageButton = () => {
+export const BackToMyPageButton = (): JSX.Element => {
   return (
     <>
     <BackToMyPageButtonWrapper to={'/my-page'}>

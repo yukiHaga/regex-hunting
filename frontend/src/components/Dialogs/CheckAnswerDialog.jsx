@@ -12,7 +12,7 @@ import { DescriptionWrapper } from '../shared_style.js';
 
 // handleTitleColorType
 // タイトルカラーを取り扱う関数
-import { handleTitleColorType } from '../../functions/handleTitleColorType.ts'
+import { handleTitleColorType } from '../../functions/handleTitleColorType'
 
 // 戻るボタン
 import { BackToModalButton } from '../Buttons/BackToModalButton.jsx';

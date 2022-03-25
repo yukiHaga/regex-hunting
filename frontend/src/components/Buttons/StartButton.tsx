@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react'; 
+import React, { Fragment } from 'react';
 import styled from 'styled-components';
 
 // Colors
@@ -45,7 +45,7 @@ const StartButtonTextWrapper = styled.div`
   align-items: center;
 `;
 
-export const StartButton = () => {
+export const StartButton = (): JSX.Element => {
   return (
     <>
       <StartButtonWrapper type="button">

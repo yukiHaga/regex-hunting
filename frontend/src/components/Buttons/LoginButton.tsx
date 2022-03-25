@@ -1,13 +1,16 @@
-import React, { Fragment } from 'react'; 
+import React, { Fragment } from 'react';
 import styled from 'styled-components';
 
 import { BlueRoundButton } from '../shared_style';
 
+// LoginButtonの引数の型をインポートしてくる
+import { Disabled } from '../../types/components/buttons';
+
 const LoginButtonWrapper = styled(BlueRoundButton)`
   border-style: none;
   margin-bottom: 3%;
-  opacity: ${(props) => props.disabled ? 0.3 : 1};
-  pointer-events: ${(props) => props.disabled ? 'none' : 'auto'};
+  opacity: ${({ disabled }) => disabled ? 0.3 : 1};
+  pointer-events: ${({ disabled }) => disabled ? 'none' : 'auto'};
   width: 100%;
   padding: 3.3%;
 `;
@@ -20,7 +23,7 @@ const LoginButtonTextWrapper = styled.div`
   text-align: center;
 `;
 
-export const LoginButton = ({disabled}) => {
+export const LoginButton = ({disabled}: Disabled): JSX.Element => {
   return (
     <>
       <LoginButtonWrapper type="submit" disabled={disabled}>

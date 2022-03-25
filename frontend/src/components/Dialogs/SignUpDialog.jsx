@@ -17,18 +17,14 @@ import { useNavigate } from "react-router-dom";
 import { COLORS } from '../../style_constants.js';
 
 // Button
-import { SignUpButton } from '../Buttons/SignUpButton.jsx'
-import { OAuthLoginButton } from '../Buttons/OAuthLoginButton.jsx';
+import { SignUpButton } from '../Buttons/SignUpButton';
+import { OAuthLoginButton } from '../Buttons/OAuthLoginButton';
 import { CloseButton } from '../Buttons/CloseButton.jsx';
 
 // フォーム関係のコンポーネント
 import FormControl from '@mui/material/FormControl';
 import InputLabel from '@mui/material/InputLabel';
 import FilledInput from '@mui/material/FilledInput';
-
-// CustomIcon
-import { ColoredGoogleIcon } from '../Icons/CustomIcon.js';
-import { ColoredGitHubIcon } from '../Icons/CustomIcon.js';
 
 // Sentence
 import { HaveAccountSentence } from '../Sentences/HaveAccountSentence.jsx';
@@ -41,10 +37,10 @@ import { SubmitErrorSentence } from '../Sentences/SubmitErrorSentence.jsx';
 import { HTTP_STATUS_CODE } from '../../constants';
 
 // Contextオブジェクト
-import { UserContext } from "../../context/UserProvider.tsx";
+import { UserContext } from "../../context/UserProvider";
 
 // OAuthのURL
-import { gitHubOAuth, googleOAuth } from '../../urls/index.ts';
+import { gitHubOAuth, googleOAuth } from '../../urls/index';
 
 const CustomDialogInnerWrapper = styled.div`
   padding-top: 3%;
@@ -336,13 +332,11 @@ export const SignUpDialog = ({
           <OAuthLoginButton
             url={googleOAuth}
             color={COLORS.PINK}
-            icon={<ColoredGoogleIcon fontSize="large" />}
             type="Google"
           />
           <OAuthLoginButton
             url={gitHubOAuth}
             color={COLORS.BLACK}
-            icon={<ColoredGitHubIcon fontSize="large" />}
             type="GitHub"
           />
           <HaveAccountSentence onClick={onClick} />

@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
 
 // Contextオブジェクト
-import { UserContext } from "../../context/UserProvider.tsx";
+import { UserContext } from "../../context/UserProvider";
 
 // MUI
 import Avatar from '@mui/material/Avatar';
@@ -32,7 +32,7 @@ import { InputErrorSentence } from '../Sentences/InputErrorSentence.jsx';
 import { SubmitErrorSentence } from '../Sentences/SubmitErrorSentence.jsx';
 
 // Button
-import { AccountSettingButton } from '../Buttons/AccountSettingButton.tsx';
+import { AccountSettingButton } from '../Buttons/AccountSettingButton';
 
 // アカウント情報を更新して、更新した情報を取得する関数
 import { patchAccountSetting } from '../../apis/accountSetting';

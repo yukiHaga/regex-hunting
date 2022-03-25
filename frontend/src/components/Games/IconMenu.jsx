@@ -13,7 +13,7 @@ import Typography from '@mui/material/Typography';
 import { BaseLink } from '../shared_style.js';
 
 // Contextオブジェクト
-import { UserContext } from "../../context/UserProvider.tsx";
+import { UserContext } from "../../context/UserProvider";
 
 // デフォルトのアバター画像
 import DefaultAvatarImage from '../../images/default_avatar.png';

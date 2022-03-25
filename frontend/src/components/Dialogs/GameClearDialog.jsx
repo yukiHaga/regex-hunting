@@ -11,10 +11,10 @@ import { COLORS } from '../../style_constants.js';
 import { DescriptionWrapper } from '../shared_style.js';
 
 // Buttons
-import { BackToTopButton } from '../Buttons/BackToTopButton.jsx';
+import { BackToTopButton } from '../Buttons/BackToTopButton';
 import { RestartGameButton } from '../Buttons/RestartGameButton.jsx';
 import { ResultShareButton } from '../Buttons/ResultShareButton.jsx';
-import { BackToMyPageButton } from '../Buttons/BackToMyPageButton.jsx';
+import { BackToMyPageButton } from '../Buttons/BackToMyPageButton';
 
 // Sentence
 import { CheackAnswerSentence } from '../Sentences/CheackAnswerSentence.jsx';
@@ -23,13 +23,13 @@ import { CheackAnswerSentence } from '../Sentences/CheackAnswerSentence.jsx';
 import { DialogExperienceBox } from '../Games/DialogExperienceBox.jsx';
 
 // 各ゲームの獲得経験値を取得する関数
-import { getExperience } from '../../functions/getExperience.ts';
+import { getExperience } from '../../functions/getExperience';
 
 // モンスター名を取得する関数
-import { getMonsterName } from '../../functions/getMonsterName.ts';
+import { getMonsterName } from '../../functions/getMonsterName';
 
 // クリアタイムを取得する関数
-import { getClearTime } from '../../functions/getClearTime.ts';
+import { getClearTime } from '../../functions/getClearTime';
 
 const CustomDialogInnerWrapper = styled.div`
   width: 40vw;

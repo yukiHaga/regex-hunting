@@ -15,7 +15,7 @@ import AdvancedGameContentImage from '../images/advanced_game_content.jpg';
 // Presentational Components
 import { Header } from '../components/Headers/Header.jsx';
 import { SubText } from '../components/SubText.jsx';
-import { StartButton } from '../components/Buttons/StartButton.jsx'
+import { StartButton } from '../components/Buttons/StartButton'
 import { Footer } from '../components/Footers/Footer.jsx';
 import { LoginDialog } from '../components/Dialogs/LoginDialog.jsx';
 import { SignUpDialog } from '../components/Dialogs/SignUpDialog.jsx';
@@ -29,7 +29,7 @@ import { SubTitleSentence } from '../components/Sentences/SubTitleSentence.jsx';
 import { MobileFlashMessage } from '../components/FlashMessages/MobileFlashMessage.jsx';
 
 // Contextオブジェクト
-import { UserContext } from "../context/UserProvider.tsx";
+import { UserContext } from "../context/UserProvider";
 
 // ログイン状態を確認するAPIコール関数
 import { checkLoginStatus } from '../apis/checkLoginStatus';

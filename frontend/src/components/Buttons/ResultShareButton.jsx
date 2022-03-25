@@ -4,10 +4,10 @@ import styled from 'styled-components';
 // Colors
 import { COLORS } from '../../style_constants.js';
 
-import { ColoredTwitterIcon } from '../Icons/CustomIcon.js';
+import { ColoredTwitterIcon } from '../Icons/CustomIcon';
 
 // モンスター名を取得する関数
-import { getMonsterName } from '../../functions/getMonsterName.ts';
+import { getMonsterName } from '../../functions/getMonsterName';
 
 const ResultShareButtonWrapper = styled.a`
   width: 90%;

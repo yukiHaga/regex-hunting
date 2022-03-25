@@ -1,12 +1,15 @@
-import React, { Fragment } from 'react'; 
+import React, { Fragment } from 'react';
 import styled from 'styled-components';
 
 import { BlueRoundButton } from '../shared_style';
 
+// PasswordUpdatesButtonの引数の型をインポートしてくる
+import { Disabled } from '../../types/components/buttons';
+
 const PasswordUpdatesButtonWrapper = styled(BlueRoundButton)`
   border-style: none;
-  opacity: ${(props) => props.disabled ? 0.3 : 1};
-  pointer-events: ${(props) => props.disabled ? 'none' : 'auto'};
+  opacity: ${({ disabled }) => disabled ? 0.3 : 1};
+  pointer-events: ${({ disabled }) => disabled ? 'none' : 'auto'};
   width: 100%;
   padding-top: 3.2%;
   padding-bottom: 3.2%;
@@ -19,7 +22,7 @@ const PasswordUpdatesButtonTextWrapper = styled.div`
   text-align: center;
 `;
 
-export const PasswordUpdatesButton = ({disabled}) => {
+export const PasswordUpdatesButton = ({disabled}: Disabled): JSX.Element => {
   return (
     <>
       <PasswordUpdatesButtonWrapper type="submit" disabled={disabled}>

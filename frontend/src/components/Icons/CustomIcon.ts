@@ -4,9 +4,9 @@ import styled from 'styled-components';
 import { COLORS } from '../../style_constants.js';
 
 // Icon
-import { GoogleIcon } from './index.js';
-import { TwitterIcon } from './index.js';
-import { GitHubIcon } from './index.js';
+import { GoogleIcon } from './index';
+import { TwitterIcon } from './index';
+import { GitHubIcon } from './index';
 
 // CustomIcon
 export const ColoredGoogleIcon = styled(GoogleIcon)`

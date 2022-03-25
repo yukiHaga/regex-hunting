@@ -7,7 +7,7 @@ import { IconMenu } from '../Games/IconMenu.jsx'
 import { BaseLink } from '../shared_style.js';
 
 // Contextオブジェクト
-import { UserContext } from "../../context/UserProvider.tsx";
+import { UserContext } from "../../context/UserProvider";
 
 // ヘッダーをインポート
 import { HeaderTitle } from '../Sentences/HeaderTitle.jsx';

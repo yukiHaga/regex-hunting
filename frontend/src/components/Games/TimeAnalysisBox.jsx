@@ -12,7 +12,7 @@ import 'react-circular-progressbar/dist/styles.css';
 import { COLORS } from '../../style_constants.js';
 
 // ミリ秒を分に変換する関数
-import { getMinute } from '../../functions/getMinute.ts';
+import { getMinute } from '../../functions/getMinute';
 
 import { WIDTH } from '../../style_constants.js';
 

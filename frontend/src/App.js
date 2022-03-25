@@ -20,10 +20,10 @@ import { SendEmail } from './containers/SendEmail.jsx';
 import { PasswordUpdates } from './containers/PasswordUpdates.jsx';
 import { ExternalAuth } from './containers/ExternalAuth.jsx';
 import { NotFoundPage } from './containers/NotFoundPage.jsx';
-import ScrollToTop from './scroll/ScrollToTop.tsx';
+import ScrollToTop from './scroll/ScrollToTop';
 
 // Provider
-import { UserProvider } from "./context/UserProvider.tsx";
+import { UserProvider } from "./context/UserProvider";
 
 // App Component
 function App() {

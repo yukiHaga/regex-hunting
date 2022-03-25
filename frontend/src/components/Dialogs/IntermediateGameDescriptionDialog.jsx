@@ -22,7 +22,7 @@ import Tooltip from '@mui/material/Tooltip';
 import IconButton from '@mui/material/IconButton';
 
 // スライドアニメーション関係の関数
-import { slideFunction } from '../../functions/slideFunction.ts';
+import { slideFunction } from '../../functions/slideFunction';
 
 // コードブロック関係
 import { CodeBlockWrapper } from '../shared_style.js';

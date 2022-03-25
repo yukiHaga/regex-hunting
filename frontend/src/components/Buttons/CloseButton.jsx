@@ -1,8 +1,8 @@
-import React, { Fragment } from 'react'; 
+import React, { Fragment } from 'react';
 import styled from 'styled-components';
 
 // CloseIcon
-import { CloseIcon } from '../Icons/index.js';
+import { CloseIcon } from '../Icons/index';
 
 // Colors
 import { COLORS } from '../../style_constants.js';
@@ -24,7 +24,7 @@ export const CloseButton = ({onClose, fontSize}) => {
   return (
     <>
       <CloseIconWrapper>
-        <CustomCloseIcon onClick={onClose} fontSize={fontSize} /> 
+        <CustomCloseIcon onClick={onClose} fontSize={fontSize} />
       </CloseIconWrapper>
     </>
   );

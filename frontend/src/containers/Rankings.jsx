@@ -9,7 +9,7 @@ import { LoginDialog } from '../components/Dialogs/LoginDialog.jsx';
 import { SignUpDialog } from '../components/Dialogs/SignUpDialog.jsx';
 
 // Contextオブジェクト
-import { UserContext } from "../context/UserProvider.tsx";
+import { UserContext } from "../context/UserProvider";
 
 // Colors
 import { COLORS } from '../style_constants.js';

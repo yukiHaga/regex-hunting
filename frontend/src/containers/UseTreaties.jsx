@@ -13,7 +13,7 @@ import { COLORS } from '../style_constants.js';
 import { WIDTH } from '../style_constants.js';
 
 // Contextオブジェクト
-import { UserContext } from "../context/UserProvider.tsx";
+import { UserContext } from "../context/UserProvider";
 
 // ログイン状態を確認するAPIコール関数
 import { checkLoginStatus } from '../apis/checkLoginStatus';

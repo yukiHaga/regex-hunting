@@ -7,7 +7,7 @@ import { COLORS } from '../../style_constants.js';
 import IntermediateMonsterImage from '../../images/intermediate.png';
 
 // handleColorType
-import { handleColorType } from '../../functions/handleColorType.ts';
+import { handleColorType } from '../../functions/handleColorType';
 
 // アニメーション
 import { MonsterFlash } from '../shared_style.js';

@@ -8,7 +8,7 @@ import { COLORS } from '../../style_constants.js';
 import ElementaryMonsterImage from '../../images/elementary.png';
 
 // handleColorType
-import { handleColorType } from '../../functions/handleColorType.ts';
+import { handleColorType } from '../../functions/handleColorType';
 
 // アニメーション
 import { MonsterFlash } from '../shared_style.js';

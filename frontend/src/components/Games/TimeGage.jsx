@@ -7,7 +7,7 @@ import { COLORS } from '../../style_constants.js';
 import TackleSound from '../../sounds/tackle_25.mp3';
 
 // calculateDamage
-import { calculateDamage } from '../../functions/calculateDamage.ts';
+import { calculateDamage } from '../../functions/calculateDamage';
 
 const TimeGageWrapper = styled.div`
   background-color: ${COLORS.GAGE_GRAY};

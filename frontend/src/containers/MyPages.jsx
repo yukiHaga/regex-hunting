@@ -25,7 +25,7 @@ import IntermediateGameContentImage from '../images/intermediate_game_content.jp
 import AdvancedGameContentImage from '../images/advanced_game_content.jpg';
 
 // Contextオブジェクト
-import { UserContext } from "../context/UserProvider.tsx";
+import { UserContext } from "../context/UserProvider";
 
 // ログイン状態を確認するAPIコール関数
 import { checkLoginStatus } from '../apis/checkLoginStatus';
@@ -43,7 +43,7 @@ import { REQUEST_STATE } from '../constants';
 import { COLORS } from '../style_constants.js';
 
 // 今月の月を取得する関数
-import { getMonthOfTheMonth } from '../functions/getMonthOfTheMonth.ts';
+import { getMonthOfTheMonth } from '../functions/getMonthOfTheMonth';
 
 import { WIDTH } from '../style_constants.js';
 

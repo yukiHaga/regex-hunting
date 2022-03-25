@@ -1,7 +1,10 @@
-import React, { Fragment } from 'react'; 
+import React, { Fragment } from 'react';
 import styled from 'styled-components';
 
 import { BlueRoundButton } from '../shared_style';
+
+// SignUpButtonの引数の型をインポートしてくる
+import { Disabled } from '../../types/components/buttons';
 
 const SignUpButtonWrapper = styled(BlueRoundButton)`
   border-style: none;
@@ -21,7 +24,7 @@ const SignUpButtonTextWrapper = styled.div`
   text-align: center;
 `;
 
-export const SignUpButton = ({disabled}) => {
+export const SignUpButton = ({disabled}: Disabled): JSX.Element => {
   return (
     <>
       <SignUpButtonWrapper type="submit" disabled={disabled}>

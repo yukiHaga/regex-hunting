@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react'; 
+import React, { Fragment } from 'react';
 import styled from 'styled-components';
 
 // Colors
@@ -6,10 +6,14 @@ import { COLORS } from '../../style_constants.js';
 
 import { AnchorRoundButton } from '../shared_style';
 
+// CustomIcon
+import { ColoredGoogleIcon } from '../Icons/CustomIcon';
+import { ColoredGitHubIcon } from '../Icons/CustomIcon';
+
 const OAuthLoginButtonWrapper = styled(AnchorRoundButton)`
   margin: 0 auto;
   margin-bottom: 2%;
-  background-color: ${(props) => props.backgroundcolor || COLORS.BLUE};
+  background-color: ${({ color }) => color || COLORS.BLUE};
   width: 100%;
   border-style: none;
   display: flex;
@@ -27,12 +31,23 @@ const OAuthLoginButtonIconWrapper = styled.div`
   margin-right: 1%;
 `;
 
-export const OAuthLoginButton = ({url, color, icon, type}) => {
+type OAuthLoginButtonArg = {
+  url: string,
+  color: string,
+  type: string
+};
+
+export const OAuthLoginButton = ({url, color, type}: OAuthLoginButtonArg): JSX.Element => {
   return (
     <>
-      <OAuthLoginButtonWrapper href={url} backgroundcolor={color}>
-        <OAuthLoginButtonIconWrapper> 
-          {icon}
+      <OAuthLoginButtonWrapper href={url} color={color}>
+        <OAuthLoginButtonIconWrapper>
+          {
+            type === "Google" && <ColoredGoogleIcon fontSize="large" />
+          }
+          {
+            type === "GitHub" && <ColoredGitHubIcon fontSize="large" />
+          }
         </OAuthLoginButtonIconWrapper>
         {`${type}で続ける`}
       </OAuthLoginButtonWrapper>

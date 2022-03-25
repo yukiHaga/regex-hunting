@@ -9,7 +9,7 @@ import { AccountSettingBox } from '../components/Games/AccountSettingBox.jsx';
 import { CircularMask } from '../components/loads/CircularMask.jsx';
 
 // Contextオブジェクト
-import { UserContext } from "../context/UserProvider.tsx";
+import { UserContext } from "../context/UserProvider";
 
 // ログイン状態を確認するAPIコール関数
 import { checkLoginStatus } from '../apis/checkLoginStatus';

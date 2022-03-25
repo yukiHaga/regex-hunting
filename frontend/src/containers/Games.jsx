@@ -31,7 +31,7 @@ import { ClawImage } from '../components/Games/ClawImage.jsx';
 import { CircularMask } from '../components/loads/CircularMask.jsx';
 
 // Contextオブジェクト
-import { UserContext } from "../context/UserProvider.tsx";
+import { UserContext } from "../context/UserProvider";
 
 // ログイン状態を確認するAPIコール関数
 import { checkLoginStatus } from '../apis/checkLoginStatus';
@@ -46,7 +46,7 @@ import { postGameFinish } from '../apis/gameManagement';
 import { HTTP_STATUS_CODE } from '../constants';
 
 // モンスター名を取得する関数
-import { getMonsterName } from '../functions/getMonsterName.ts';
+import { getMonsterName } from '../functions/getMonsterName';
 
 // ゲームクリア音
 import GameClearSound from '../sounds/game_clear_25.mp3';

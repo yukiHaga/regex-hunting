@@ -11,7 +11,7 @@ import ArrowRightIcon from '@mui/icons-material/ArrowRight';
 import ArrowLeftIcon from '@mui/icons-material/ArrowLeft';
 
 // クリアタイムを00:00:00のフォーマットで取得する関数
-import { getClearTime } from '../../functions/getClearTime.ts';
+import { getClearTime } from '../../functions/getClearTime';
 
 // Colors
 import { COLORS } from '../../style_constants.js';
@@ -30,7 +30,7 @@ import IconButton from '@mui/material/IconButton';
 import { WIDTH } from '../../style_constants.js';
 
 // スライドアニメーション関係の関数
-import { slideFunction } from '../../functions/slideFunction.ts';
+import { slideFunction } from '../../functions/slideFunction';
 
 const TitleLineWrapper = styled.div`
   display: flex;

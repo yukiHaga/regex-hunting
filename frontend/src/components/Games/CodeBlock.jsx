@@ -12,7 +12,7 @@ import DecisionSound from '../../sounds/decision_25.mp3';
 import CutMonsterSound from '../../sounds/cut_25.mp3';
 
 // calculateDamage
-import { calculateDamage } from '../../functions/calculateDamage.ts';
+import { calculateDamage } from '../../functions/calculateDamage';
 
 const CodeBlockWrapper = styled.div`
   background-color: ${COLORS.LIGHT_BLACK};

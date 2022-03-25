@@ -3,6 +3,9 @@ import styled from 'styled-components';
 
 import { BlueRoundButton } from '../shared_style';
 
+// AccountSettingButtonの引数の型をインポートしてくる
+import { Disabled } from '../../types/components/buttons';
+
 const AccountSettingButtonWrapper = styled(BlueRoundButton)`
   border-style: none;
   opacity: ${({ disabled }) => disabled ? 0.3 : 1};
@@ -20,11 +23,6 @@ const AccountSettingButtonTextWrapper = styled.div`
   font-style: normal;
   font-size: 1.3em;
 `;
-
-// AccountSettingButtonの引数の型
-type Disabled = {
-  disabled: boolean;
-};
 
 export const AccountSettingButton = ({disabled}: Disabled): JSX.Element => {
   return (

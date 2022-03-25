@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import { BaseLink } from '../shared_style';
 
 // Contextオブジェクト
-import { UserContext } from "../../context/UserProvider.tsx";
+import { UserContext } from "../../context/UserProvider";
 
 // Colors
 import { COLORS } from '../../style_constants.js';

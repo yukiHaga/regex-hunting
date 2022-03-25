@@ -13,7 +13,7 @@ import { COLORS } from '../../style_constants.js';
 
 // クリアタイムを取得する関数
 // マイページで使う場合、第1引数は0を指定する
-import { getClearTime } from '../../functions/getClearTime.ts';
+import { getClearTime } from '../../functions/getClearTime';
 
 import { WIDTH } from '../../style_constants.js';
 

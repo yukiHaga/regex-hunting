@@ -11,10 +11,10 @@ import { COLORS } from '../../style_constants.js';
 import { DescriptionWrapper } from '../shared_style.js';
 
 // Buttons
-import { BackToTopButton } from '../Buttons/BackToTopButton.jsx';
+import { BackToTopButton } from '../Buttons/BackToTopButton';
 import { RestartGameButton } from '../Buttons/RestartGameButton.jsx';
 import { ResultShareButton } from '../Buttons/ResultShareButton.jsx';
-import { BackToMyPageButton } from '../Buttons/BackToMyPageButton.jsx';
+import { BackToMyPageButton } from '../Buttons/BackToMyPageButton';
 
 // Sentence
 import { CheackAnswerSentence } from '../Sentences/CheackAnswerSentence.jsx';
@@ -23,7 +23,7 @@ import { CheackAnswerSentence } from '../Sentences/CheackAnswerSentence.jsx';
 import { DialogExperienceBox } from '../Games/DialogExperienceBox.jsx';
 
 // モンスター名を取得する関数
-import { getMonsterName } from '../../functions/getMonsterName.ts';
+import { getMonsterName } from '../../functions/getMonsterName';
 
 const CustomDialogInnerWrapper = styled.div`
   width: 40vw;
