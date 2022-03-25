@@ -23,7 +23,7 @@ import FilledInput from '@mui/material/FilledInput';
 import { InputErrorSentence } from '../components/Sentences/InputErrorSentence.jsx';
 
 // パスワードリセットコントローラへアクセスするapiコール関数
-import { postPasswordResetRequest } from '../apis/passwordResetRequest.js';
+import { postPasswordResetRequest } from '../apis/passwordResetRequest';
 
 // HTTP_STATUS_CODE
 import { HTTP_STATUS_CODE } from '../constants';
@@ -94,19 +94,19 @@ export const PasswordResets = () => {
   const navigate = useNavigate();
 
   // useForm
-  const { 
-    control, 
-    handleSubmit, 
-    formState: { errors, isValid } 
+  const {
+    control,
+    handleSubmit,
+    formState: { errors, isValid }
   } = useForm({
     mode: 'all',
-    shouldUnregister: false 
-  }); 
+    shouldUnregister: false
+  });
 
   // Formのバリデーション
   const registerOptions = {
-    email: { 
-      required: "メールアドレスを入力してください。", 
+    email: {
+      required: "メールアドレスを入力してください。",
       pattern: {
         value: /^[A-Za-z0-9][A-Za-z0-9_.-]*@[A-Za-z0-9_.-]+.[A-Za-z0-9]+$/,
         message: "英数字, @, ドメインを含めて入力してください。"
@@ -116,11 +116,11 @@ export const PasswordResets = () => {
 
   // Formの検証後に呼び出される関数
   // dataにはフォームに入力したデータが入る
-  const onSubmit = ({ EmailBox }) => { 
+  const onSubmit = ({ EmailBox }) => {
     postPasswordResetRequest({
       email: EmailBox
     }).then(() => (
-      navigate('/users/password/sent', { 
+      navigate('/users/password/sent', {
         state: { display: true, success: "パスワード再設定メールを送信しました。"}
       })
     )).catch((e) => {
@@ -133,7 +133,7 @@ export const PasswordResets = () => {
 
   return (
     <>
-      <Header /> 
+      <Header />
       <MainWrapper>
         <PasswordResetsBoxWrapper>
           <TitleWrapper>
@@ -144,13 +144,13 @@ export const PasswordResets = () => {
           </CustomParagraphWrapper>
           <PasswordResetsFormWrapper>
             <CustomForm onSubmit={handleSubmit(onSubmit)}>
-              <Controller 
+              <Controller
                 name="EmailBox"
                 control={control}
                 defaultValue=""
                 rules={registerOptions.email}
                 render={({ field }) => (
-                  <CustomFormControl variant="filled">              
+                  <CustomFormControl variant="filled">
                     <InputLabel htmlFor="email-component-filled">メールアドレス</InputLabel>
                     <CustomFilledEmailInput
                       {...field}
@@ -159,15 +159,15 @@ export const PasswordResets = () => {
                       label="email"
                       errorsEmailBox={errors.EmailBox}
                     />
-                  </CustomFormControl>              
+                  </CustomFormControl>
                 )}
               />
               {errors.EmailBox && <InputErrorSentence>
                                     {errors.EmailBox.message}
                                   </InputErrorSentence>}
               <PasswordResetsButtonWrapper>
-                <PasswordResetRequestButton 
-                  disabled={!isValid} 
+                <PasswordResetRequestButton
+                  disabled={!isValid}
                 />
               </PasswordResetsButtonWrapper>
             </CustomForm>
