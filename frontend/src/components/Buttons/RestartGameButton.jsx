@@ -81,7 +81,6 @@ export const RestartGameButton = ({
         monsterHp: data.monster.max_hp,
         monsterMaxHp: data.monster.max_hp,
         sampleAnswer: data.questions["0"].sample_answer,
-        nextCommentary: data.questions["0"].commentary,
         nextHint: data.questions["0"].hint,
         gameStartTime: performance.now(),
         hasUser: sessionState ?

@@ -186,8 +186,6 @@ export const Games = () => {
     hint: "",
     nextHint: "",
     matchArray: [],
-    commentary: "",
-    nextCommentary: "",
     flashDisplay: false,
     flashTitle: "",
     inputRegex: "",
@@ -280,7 +278,6 @@ export const Games = () => {
           monsterMaxHp: data.monster.max_hp,
           sampleAnswer: data.questions["0"].sample_answer,
           nextHint: data.questions["0"].hint,
-          nextCommentary: data.questions["0"].commentary,
           gameDescriptionOpen: true,
           hasUser: sessionState ?
             true

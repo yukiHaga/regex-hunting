@@ -200,8 +200,6 @@ export const CodeBlock = ({
             monsterHp: currentHp,
             flashDisplay: true,
             flashTitle: "Good",
-            commentary: prev.nextCommentary,
-            nextCommentary: prev?.questions["0"]?.commentary || "no_next_commentary",
             keyAvailable: false,
           }));
           audio.play();

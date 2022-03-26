@@ -115,8 +115,6 @@ export const TimeGage = ({
       questions: prev.questions,
       flashDisplay: true,
       flashTitle: "Bad",
-      commentary: prev.nextCommentary,
-      nextCommentary: prev?.questions["0"]?.commentary || "no_next_commentary",
       keyAvailable: false,
       userHp: currentHp
     }));
