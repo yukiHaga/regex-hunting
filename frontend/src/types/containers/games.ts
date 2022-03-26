@@ -96,3 +96,5 @@ export type GameState = {
     clickDescriptionOpen: boolean;
     clickMetaOpen: boolean;
 };
+
+export type SetGameState = React.Dispatch<React.SetStateAction<GameState>>;
