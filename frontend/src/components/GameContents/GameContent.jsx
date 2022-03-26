@@ -1,7 +1,7 @@
 import React, { memo } from 'react';
 import styled from 'styled-components';
 
-import { GameStartButton } from '../Buttons/GameStartButton.jsx';
+import { GameStartButton } from '../Buttons/GameStartButton';
 
 // Colors
 import { COLORS } from '../../style_constants.js';
@@ -105,7 +105,7 @@ const GameContentStartWrapper = styled.div`
 // LPページの場合、onClickLinkはモーダル管理のstateを更新する関数
 // ログインしている場合、onClickLinkは何もない。
 export const GameContent = memo(({
-  difficulty, 
+  difficulty,
   image,
   setMobileState
 }) => {
@@ -151,7 +151,7 @@ export const GameContent = memo(({
               {(difficultySentence(difficulty))}
             </GameContentSentenceWrapper>
             <GameContentStartWrapper>
-              <GameStartButton 
+              <GameStartButton
                 difficulty={difficulty}
                 setMobileState={setMobileState}
               />

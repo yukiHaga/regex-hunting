@@ -1,4 +1,4 @@
-import React, { Fragment, useMemo } from 'react'; 
+import React, { Fragment, useMemo } from 'react';
 import styled from 'styled-components';
 
 import { BaseLink } from '../shared_style';
@@ -38,25 +38,30 @@ const GameStartButtonTextWrapper = styled.div`
   }
 `;
 
+type GameStartButtonArg = {
+  difficulty: 'elementary' | 'intermediate' | 'advanced';
+  setMobileState: React.Dispatch<React.SetStateAction<{display: boolean; message: string;}>>;
+};
+
 export const GameStartButton = ({
   difficulty,
   setMobileState
-}) => {
+}: GameStartButtonArg): JSX.Element => {
 
   // デバイス幅が640px以下の場合にスマホと判定するようにしている
   // タブレットでもゲームして欲しくないので、1000pxにした
   // デバイス幅が640px以下なら、window.matchMedia('(max-device-width: 640px)').matchesがtrueになる
   const url = useMemo(() => {
     if (window.matchMedia(`(max-device-width: ${WIDTH.PC})`).matches) {
-      return '/'; 
+      return '/';
     } else {
-      return `/games/${difficulty}/start`; 
+      return `/games/${difficulty}/start`;
     }
   }, [
     difficulty
   ]);
 
-  const handleMobileState = () => {
+  const handleMobileState = (): void => {
     setMobileState((prev)=>({
       ...prev,
       display: true,

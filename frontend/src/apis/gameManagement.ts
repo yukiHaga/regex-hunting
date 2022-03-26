@@ -4,7 +4,7 @@ import { gameManagementsStart } from '../urls/index';
 import { gameManagementsFinish } from '../urls/index';
 
 // ゲームをスタートするためのAPI関数の型
-type GetGameStart = (difficulty: string | undefined) => Promise<any>;
+export type GetGameStart = (difficulty: string | undefined) => Promise<any>;
 
 // ゲームを終了させるためのAPI関数の引数の型
 // 関数の型は、関数自体に書いた

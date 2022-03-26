@@ -12,7 +12,7 @@ import { DescriptionWrapper } from '../shared_style.js';
 
 // Buttons
 import { BackToTopButton } from '../Buttons/BackToTopButton';
-import { RestartGameButton } from '../Buttons/RestartGameButton.jsx';
+import { RestartGameButton } from '../Buttons/RestartGameButton';
 import { ResultShareButton } from '../Buttons/ResultShareButton.jsx';
 import { BackToMyPageButton } from '../Buttons/BackToMyPageButton';
 

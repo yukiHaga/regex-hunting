@@ -1,8 +1,11 @@
-import React, { Fragment } from 'react'; 
+import React, { Fragment } from 'react';
 import styled from 'styled-components';
 
 // Colors
 import { COLORS } from '../../style_constants.js';
+
+// gameStateの型
+import { SetGameState } from '../../types/containers/games'
 
 const FinallyGameStartButtonWrapper = styled.div`
   margin-top: 2%;
@@ -29,25 +32,29 @@ const FinallyGameStartButtonTextWrapper = styled.div`
   padding: 5%;
 `;
 
-export const FinallyGameStartButton = ({ 
+type FinallyGameStartButtonArg = {
+  setGameState: SetGameState;
+};
+
+export const FinallyGameStartButton = ({
   setGameState,
-}) => {
+}: FinallyGameStartButtonArg): JSX.Element => {
 
   // スタートを制御する関数
   // このボタンを押したと同時にタイムを測る
   const handleFinallyStart = (
-    setGameState
-  ) => {
+    setGameState: SetGameState
+  ): void => {
     setGameState((prev) => ({
       ...prev,
       gameDescriptionOpen: false,
       gameStartTime: performance.now(),
-    })); 
+    }));
   };
 
   return (
     <>
-    <FinallyGameStartButtonWrapper 
+    <FinallyGameStartButtonWrapper
       onClick={() => handleFinallyStart(setGameState)}
     >
         <FinallyGameStartButtonTextWrapper>

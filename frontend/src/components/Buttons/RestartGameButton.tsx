@@ -13,6 +13,12 @@ import { UserContext } from "../../context/UserProvider";
 // モンスター名を取得する関数
 import { getMonsterName } from '../../functions/getMonsterName';
 
+// gameStateとsetGameStateの型
+import { GameState, SetGameState } from '../../types/containers/games';
+
+// getGameStartの型
+import { GetGameStart } from '../../apis/gameManagement';
+
 const RestartGameButtonWrapper = styled.div`
   border-style: none;
   border-radius: 3px;
@@ -39,12 +45,19 @@ const RestartGameButtonTextWrapper = styled.div`
   padding-bottom: 8%;
 `;
 
+type RestartGameButtonArg = {
+  difficulty: 'elementary' | 'intermediate' | 'advanced';
+  setGameState: SetGameState;
+  getGameStart: GetGameStart;
+  initialState: GameState;
+};
+
 export const RestartGameButton = ({
   difficulty,
   setGameState,
   getGameStart,
   initialState,
-}) => {
+}: RestartGameButtonArg): JSX.Element => {
 
   // useContext
   const {
@@ -55,11 +68,11 @@ export const RestartGameButton = ({
 
   // リスタートを制御する関数
   const handleRestart = (
-    difficulty,
-    setGameState,
-    getGameStart,
-    initialState
-  ) => {
+    difficulty: RestartGameButtonArg['difficulty'],
+    setGameState: RestartGameButtonArg['setGameState'],
+    getGameStart: RestartGameButtonArg['getGameStart'],
+    initialState: RestartGameButtonArg['initialState']
+  ): void => {
     dispatch({
       type: requestUserActionTyps.REQUEST_SUCCESS,
       payload: {

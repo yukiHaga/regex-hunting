@@ -14,7 +14,7 @@ import ArrowRightIcon from '@mui/icons-material/ArrowRight';
 import ArrowLeftIcon from '@mui/icons-material/ArrowLeft';
 
 // Buttons
-import { FinallyGameStartButton } from '../Buttons/FinallyGameStartButton.jsx';
+import { FinallyGameStartButton } from '../Buttons/FinallyGameStartButton';
 import { FinallyGameRestartButton } from '../Buttons/FinallyGameRestartButton';
 
 // ツールチップ
