@@ -12,7 +12,7 @@ import { LandingPages } from './containers/LandingPages.jsx';
 import { MyPages } from './containers/MyPages.jsx';
 import { Rankings } from './containers/Rankings.jsx';
 import { AccountSettings } from './containers/AccountSettings.jsx';
-import { Games } from './containers/Games.jsx';
+import { Games } from './containers/Games';
 import { UseTreaties } from './containers/UseTreaties.jsx';
 import { PrivacyPolicies } from './containers/PrivacyPolicies.jsx';
 import { PasswordResets } from './containers/PasswordResets.jsx';

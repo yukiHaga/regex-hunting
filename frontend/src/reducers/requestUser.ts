@@ -70,7 +70,7 @@ export const requestUserActionTyps = {
 // Actionの型
 // actionの値は、dispatchの実引数の値である
 export type Action = {
-  type: keyof typeof requestUserActionTyps,
+  type: string,
   payload?: {
     session?: boolean,
     user?: {

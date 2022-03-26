@@ -1,4 +1,4 @@
-type GetMonsterName = (difficulty: 'elementary' | 'intermediate' | 'advanced') => string | undefined;
+type GetMonsterName = (difficulty: string | undefined) => string | undefined;
 
 // モンスター名を取得するための関数
 // QuestionBlock.jsx, Games.jsx, RestartButton.jsxでgetMonsterNameを使う

@@ -4,14 +4,14 @@ import { gameManagementsStart } from '../urls/index';
 import { gameManagementsFinish } from '../urls/index';
 
 // ゲームをスタートするためのAPI関数の型
-type GetGameStart = (difficulty: 'elementary' | 'intermediate' | 'advanced') => Promise<any>;
+type GetGameStart = (difficulty: string | undefined) => Promise<any>;
 
 // ゲームを終了させるためのAPI関数の引数の型
 // 関数の型は、関数自体に書いた
 // judgementの部分で暫定的にany[]を使用した
 type PostGameFinish = {
   game_management: {
-    difficulty: 'elementary' | 'intermediate' | 'advanced',
+    difficulty: string | undefined,
     game_result: 'win' | 'lose',
     result_time: number,
   },

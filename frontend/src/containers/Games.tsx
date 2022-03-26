@@ -57,6 +57,8 @@ import GameOverSound from '../sounds/game_over_25.mp3';
 // REQUEST_STATE
 import { REQUEST_STATE } from '../constants';
 
+// gameStateの型
+import { GameState } from '../types/containers/games';
 // MainContentWrapperコンポーネント
 const MainContentWrapper = styled.div`
   position: relative;
@@ -90,7 +92,7 @@ const ShockAnime = keyframes`
 `;
 
 // MainGameContentWrapperコンポーネント
-const MainGameContentWrapper = styled.div`
+const MainGameContentWrapper = styled.div<{questionJudgement: "progress" | "correct" | "incorrect"}>`
   animation: ${
     ({ questionJudgement }) => questionJudgement === "incorrect" && ShockAnime
   } 0.5s linear 1;
@@ -163,15 +165,15 @@ export const Games = () => {
   const { difficulty } = useParams();
 
   // ゲーム初期状態のstate
-  const initialState = {
+  const initialState: GameState = {
     gameManagement: {},
     questions: [],
     userHp: 100,
     userMaxHp: 100,
     userAttack: 20,
     userDefence: 30,
-    monsterAttack: {},
-    monsterDefence: {},
+    monsterAttack: 0,
+    monsterDefence: 0,
     monsterHp: 100,
     monsterMaxHp: 100,
     correctQuestions: [],
@@ -182,7 +184,7 @@ export const Games = () => {
     nextSentenceNum: 0,
     targetSentence: "",
     nextTargetSentence: "",
-    sampleAnswer: [],
+    sampleAnswer: "",
     hint: "",
     nextHint: "",
     matchArray: [],
@@ -386,7 +388,7 @@ export const Games = () => {
         postGameFinish({
           game_management: {
             difficulty: difficulty,
-            game_result: gameState.gameResult,
+            game_result: gameState.gameResult as 'win' | 'lose',
             result_time: gameState.gameEndTime - gameState.gameStartTime
           },
           judgement: {
@@ -489,11 +491,21 @@ export const Games = () => {
 
   console.log(gameState);
 
-  // inputRefObject.current?.completeでゲームの背景画像が完全に読み込まれたかを制御できる
+  // 画像がロードされているかを判定するstate
+  const [ loadState, setLoadState] = useState(false);
+
+  // 画像がロードされていたら、loadStateをtrueにする関数
+  // 最初しか使われない
+　const judgementLoadState = (e: React.SyntheticEvent<HTMLImageElement, Event>) => {
+    if(e) {
+      setLoadState(true);
+    }
+  };
+
   return (
     <>
       {
-        requestState === REQUEST_STATE.LOADING && gameState.gameDescriptionOpen && !inputRefObject.current?.complete ?
+        requestState !== REQUEST_STATE.OK && !gameState.gameDescriptionOpen && !loadState ?
           <CircularMask />
         :
           <>
@@ -506,7 +518,7 @@ export const Games = () => {
                     flashTitle={gameState.flashTitle}
                   />
               }
-              <BackGroundImageCover src={RealBackGroundImage} ref={inputRefObject} />
+              <BackGroundImageCover src={RealBackGroundImage} ref={inputRefObject} onLoad={(e) => judgementLoadState(e)}/>
               <MainGameContentWrapper
                 questionJudgement={gameState.questionJudgement}
               >

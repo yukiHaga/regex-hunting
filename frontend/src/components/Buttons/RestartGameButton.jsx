@@ -74,7 +74,6 @@ export const RestartGameButton = ({
         nextSentence: data.questions["0"].sentence,
         nextSentenceNum: 1,
         nextTargetSentence: data.questions["0"].target_sentence,
-        gameManagement: data.game_management,
         questions: data.questions,
         monsterAttack: data.monster.attack,
         monsterDefence: data.monster.defence,
