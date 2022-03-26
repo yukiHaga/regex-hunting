@@ -19,7 +19,7 @@ import { COLORS } from '../../style_constants.js';
 // Button
 import { SignUpButton } from '../Buttons/SignUpButton';
 import { OAuthLoginButton } from '../Buttons/OAuthLoginButton';
-import { CloseButton } from '../Buttons/CloseButton.jsx';
+import { CloseButton } from '../Buttons/CloseButton';
 
 // フォーム関係のコンポーネント
 import FormControl from '@mui/material/FormControl';

@@ -20,7 +20,12 @@ const CustomCloseIcon = styled(CloseIcon)`
   color: ${COLORS.BLACK};
 `;
 
-export const CloseButton = ({onClose, fontSize}) => {
+type CloseButtonArg = {
+  onClose: () => void;
+  fontSize: "small" | "inherit" | "large" | "medium" | undefined;
+};
+
+export const CloseButton = ({onClose, fontSize}: CloseButtonArg): JSX.Element => {
   return (
     <>
       <CloseIconWrapper>
