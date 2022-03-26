@@ -14,7 +14,7 @@ import { DescriptionWrapper } from '../shared_style.js';
 import { BackToModalButton } from '../Buttons/BackToModalButton';
 
 // Twitterボタン
-import { ResultShareButton } from '../Buttons/ResultShareButton.jsx';
+import { ResultShareButton } from '../Buttons/ResultShareButton';
 
 // ランクアップ音
 import RankUpSound from '../../sounds/rank_up_25.mp3';

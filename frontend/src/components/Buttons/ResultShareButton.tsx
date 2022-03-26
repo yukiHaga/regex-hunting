@@ -39,16 +39,30 @@ const ResultShareButtonTextWrapper = styled.div`
   padding-bottom: 6.9%;
 `;
 
+type ResultShareButtonArg = {
+  difficulty: 'elementary' | 'intermediate' | 'advanced';
+  gameResult: string;
+  rankUp: boolean;
+  rank?: number;
+  clearTime?: string;
+};
+
+type GetTextFn = (
+  difficulty: ResultShareButtonArg['difficulty'],
+  gameResult: ResultShareButtonArg['gameResult'],
+  rankUp: boolean
+) =>  string | undefined;
+
 export const ResultShareButton = ({
   difficulty,
   gameResult,
   rankUp,
   rank,
   clearTime
-}) => {
+}: ResultShareButtonArg): JSX.Element => {
 
   // Twitterカードのセンテンスを取得する関数
-  const getText = (difficulty, gameResult, rankUp) => {
+  const getText: GetTextFn = (difficulty, gameResult, rankUp) => {
     if(gameResult === 'win' && !rankUp) {
       return `${getMonsterName(difficulty)}の討伐に成功しました！ クリアタイムは${clearTime}です。`
     } else if (gameResult === 'lose' && !rankUp) {
