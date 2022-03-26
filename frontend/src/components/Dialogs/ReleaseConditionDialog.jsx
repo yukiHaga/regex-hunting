@@ -14,7 +14,7 @@ import { DescriptionWrapper } from '../shared_style.js';
 import { BackToModalButton } from '../Buttons/BackToModalButton';
 
 // 称号を変更するボタン
-import { TitleSettingButton } from '../Buttons/TitleSettingButton.jsx';
+import { TitleSettingButton } from '../Buttons/TitleSettingButton';
 
 // 背景画像
 import DarkProfessionalBackGround from '../../images/dark_professional_background.png';

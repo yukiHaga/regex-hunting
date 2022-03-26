@@ -1,9 +1,9 @@
 import React, { useState, useEffect, memo } from 'react';
 import styled from 'styled-components';
 
-import { 
-  CircularProgressbarWithChildren, 
-  buildStyles, 
+import {
+  CircularProgressbarWithChildren,
+  buildStyles,
 } from 'react-circular-progressbar';
 
 import 'react-circular-progressbar/dist/styles.css';
@@ -47,7 +47,7 @@ const CustomSpan = styled.span`
 
 export const GameClearCountBox = memo(({
   count
-}) => {
+}: {count: number}): JSX.Element => {
 
   const [countState, setCountState] = useState(0);
 
@@ -63,8 +63,8 @@ export const GameClearCountBox = memo(({
   return (
     <>
       <GameClearCountBoxWrapper>
-        <CircularProgressbarWithChildren 
-          value={countState ? countState : 0} 
+        <CircularProgressbarWithChildren
+          value={countState ? countState : 0}
           strokeWidth={4}
           styles={buildStyles({
             // Rotation of path and trail, in number of turns (0-1)

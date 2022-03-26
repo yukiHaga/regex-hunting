@@ -5,7 +5,7 @@ import styled from 'styled-components';
 import Avatar from '@mui/material/Avatar';
 
 // Presentational Components
-import { StatusExperienceBox } from '../Games/StatusExperienceBox.jsx';
+import { StatusExperienceBox } from '../Games/StatusExperienceBox';
 
 // Colors
 import { COLORS } from '../../style_constants.js';
@@ -43,7 +43,7 @@ const CustomTable = styled.table`
 `;
 
 const CustomTd = styled.td`
-  padding: 2% 3%; 
+  padding: 2% 3%;
   border: none;
   text-align: right;
   border-bottom:solid 1px silver;
@@ -76,6 +76,17 @@ const ExpTd = styled(CustomTd)`
   border: none;
 `;
 
+// UserStatussの引数の型
+type UserStatusArg = {
+  name: string;
+  rank: number;
+  activeTitle: string;
+  temporaryExperience: number;
+  totalExperience: number;
+  maximumExperiencePerRank: number;
+  image: string | null;
+};
+
 export const UserStatus = memo(({
   name,
   rank,
@@ -84,7 +95,7 @@ export const UserStatus = memo(({
   totalExperience,
   maximumExperiencePerRank,
   image
-}) => {
+}: UserStatusArg): JSX.Element => {
 
   // sxを%指定すると、円から楕円形になってしまったのでやめた
   return (
@@ -93,29 +104,29 @@ export const UserStatus = memo(({
         <Avatar
           alt="Hunter"
           src={image || DefaultAvatarImage}
-          sx={{ 
-            width: {xs: 140, sm: 160, md: 180, lg: 213}, 
-            height: {xs: 140, sm: 160, md: 180, lg: 213}, 
-            ml: '0.4%', 
+          sx={{
+            width: {xs: 140, sm: 160, md: 180, lg: 213},
+            height: {xs: 140, sm: 160, md: 180, lg: 213},
+            ml: '0.4%',
             mr: '3.6%'
           }}
         />
         <CustomTable>
           <tbody>
             <tr>
-              <NameTd colSpan={2}>{name}</NameTd> 
+              <NameTd colSpan={2}>{name}</NameTd>
             </tr>
             <tr>
-              <MetaTd>ランク</MetaTd> 
+              <MetaTd>ランク</MetaTd>
               <CustomTd>{rank}</CustomTd>
             </tr>
             <tr>
-              <MetaTd>称号</MetaTd> 
+              <MetaTd>称号</MetaTd>
               <CustomTd>{activeTitle}</CustomTd>
             </tr>
             <tr>
               <ExpTd colSpan={2}>
-                <StatusExperienceBox 
+                <StatusExperienceBox
                   temporaryExperience={temporaryExperience}
                   totalExperience={totalExperience}
                   maximumExperiencePerRank={maximumExperiencePerRank}

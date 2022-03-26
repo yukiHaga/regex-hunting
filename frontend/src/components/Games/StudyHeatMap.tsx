@@ -18,9 +18,15 @@ const InnerStudyHeatMapWrapper = styled.div`
   margin-left: 13%;
 `;
 
+type StudyHeatMapArg = {
+  gameFrequenciesPerDay: {
+    [key: string]: number;
+  }
+};
+
 export const StudyHeatMap = memo(({
   gameFrequenciesPerDay,
-}) => {
+}: StudyHeatMapArg): JSX.Element => {
 
   // 今月の月初
   const thisMonthFirstDay = useMemo(() => new Date(
@@ -69,7 +75,7 @@ export const StudyHeatMap = memo(({
   ])
 
   // ヒートマップの色を返す関数
-  const getColorForHeatMap = (count) => {
+  const getColorForHeatMap = (count: number): string => {
     switch (true){
       case count >= 1 && count <= 4 :
         return `color-github-${count}`
@@ -94,7 +100,7 @@ export const StudyHeatMap = memo(({
           gutterSize={1}
           horizontal={false}
           values={monthObjArray}
-          tooltipDataAttrs={({count, date}) => {
+          tooltipDataAttrs={({count, date}: {count: number, date: string}) => {
             return {
               'data-tip': `ゲーム回数: ${count}, ${
                 date?.replace(/-/g, '/')}`

@@ -9,6 +9,9 @@ import { COLORS } from '../../style_constants.js';
 // Responsive
 import { WIDTH } from '../../style_constants.js';
 
+// setMobileStateの型
+import { SetMobileState } from '../../types/containers/landingPages';
+
 const GameContentWrapper = styled.div`
   padding-top: 2%;
 `;
@@ -102,15 +105,21 @@ const GameContentStartWrapper = styled.div`
   padding-top: 6%;
 `;
 
+type GameContentArg = {
+  difficulty: 'elementary' | 'intermediate' | 'advanced';
+  image: string;
+  setMobileState?: SetMobileState;
+};
+
 // LPページの場合、onClickLinkはモーダル管理のstateを更新する関数
 // ログインしている場合、onClickLinkは何もない。
 export const GameContent = memo(({
   difficulty,
   image,
   setMobileState
-}) => {
+}: GameContentArg): JSX.Element => {
 
-  const difficultySentence = (difficulty) => {
+  const difficultySentence = (difficulty: GameContentArg['difficulty']): string => {
     let sentence;
     switch (difficulty){
       case 'elementary':
@@ -129,7 +138,7 @@ export const GameContent = memo(({
     return sentence;
   };
 
-  const difficultyTitle = (difficulty) => {
+  const difficultyTitle = (difficulty: GameContentArg['difficulty']): string => {
     const difficulty_array = {
       elementary: "初級編",
       intermediate: "中級編",

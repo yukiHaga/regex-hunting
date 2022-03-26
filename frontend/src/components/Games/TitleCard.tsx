@@ -19,7 +19,7 @@ import HeroBackground from '../../images/hero_background.png';
 
 // heigthはpx指定しないとダメ
 // heightをvhにしてみる
-const InnerTitleCardWrapper = styled.div`
+const InnerTitleCardWrapper = styled.div<{name: string}>`
   width: 17%;
   height: 200px;
   border-radius: 3px;
@@ -56,7 +56,7 @@ const TitleCardSentenceWrapper = styled(DescriptionWrapper)`
   color: ${COLORS.WHITE};
 `;
 
-const getImage = (name) => {
+const getImage = (name: string): string | null => {
   switch (name) {
     case '見習いハンター':
       return ApprenticeBackground;
@@ -79,11 +79,17 @@ const getImage = (name) => {
   }
 };
 
+type TitleCardArg = {
+  name: string;
+  releaseDate: string;
+  onClick: () => void;
+};
+
 export const TitleCard = memo(({
   name,
   releaseDate,
   onClick
-}) => {
+}: TitleCardArg): JSX.Element => {
 
   return (
     <>

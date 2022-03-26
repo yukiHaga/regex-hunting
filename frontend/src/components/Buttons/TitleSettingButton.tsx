@@ -15,7 +15,9 @@ import { HTTP_STATUS_CODE } from '../../constants';
 // タイトルを設定した情報を取得するapiコール関数
 import { patchTitleSetting } from '../../apis/titleSetting';
 
-const TitleSettingButtonWrapper = styled(BaseLink)`
+import { SetMyPageState } from '../../types/containers/myPages';
+
+const TitleSettingButtonWrapper = styled(BaseLink)<{disabled: boolean}>`
   border-style: none;
   border-radius: 3px;
   box-shadow: 0 2px 4px rgba(0,0,0,0.3);
@@ -37,11 +39,25 @@ const TitleSettingButtonTextWrapper = styled.div`
   text-align: center;
 `;
 
+/*
+type TitleSettingButtonArg = {
+  name: string;
+  setMyPageState: ;
+  disabled: boolean;
+};
+*/
+
+type TitleSettingButtonArg = {
+  name: string;
+  setMyPageState: SetMyPageState;
+  disabled: boolean;
+};
+
 export const TitleSettingButton = ({
   name,
   setMyPageState,
   disabled
-}) => {
+}: TitleSettingButtonArg): JSX.Element => {
 
   // useContext
   // requestUserStateには、requestState, userState, errorsが格納されている

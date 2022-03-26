@@ -5,17 +5,17 @@ import styled from 'styled-components';
 // Presentational Components
 import { Header } from '../components/Headers/Header.jsx';
 import { SessionFlashMessage } from '../components/FlashMessages/SessionFlashMessage.jsx';
-import { UserStatus } from '../components/Games/UserStatus.jsx';
-import { StudyHeatMap } from '../components/Games/StudyHeatMap.jsx';
+import { UserStatus } from '../components/Games/UserStatus';
+import { StudyHeatMap } from '../components/Games/StudyHeatMap';
 import { DescriptionWrapper } from '../components/shared_style.js';
-import { GameContent } from '../components/GameContents/GameContent.jsx';
-import { TitleCard } from '../components/Games/TitleCard.jsx';
+import { GameContent } from '../components/GameContents/GameContent';
+import { TitleCard } from '../components/Games/TitleCard';
 import { Footer } from '../components/Footers/Footer.jsx';
 import { ReleaseConditionDialog } from '../components/Dialogs/ReleaseConditionDialog.jsx'
 import { CircularMask } from '../components/loads/CircularMask.jsx';
-import { GameClearCountBox } from '../components/Games/GameClearCountBox.jsx';
-import { TimeAnalysisBox } from '../components/Games/TimeAnalysisBox.jsx';
-import { FastAnalysisBox } from '../components/Games/FastAnalysisBox.jsx';
+import { GameClearCountBox } from '../components/Games/GameClearCountBox';
+import { TimeAnalysisBox } from '../components/Games/TimeAnalysisBox';
+import { FastAnalysisBox } from '../components/Games/FastAnalysisBox';
 import { SecondSelectBox } from '../components/Games/SecondSelectBox.jsx';
 import { TitleFlashMessage } from '../components/FlashMessages/TitleFlashMessage.jsx';
 
@@ -46,6 +46,9 @@ import { COLORS } from '../style_constants.js';
 import { getMonthOfTheMonth } from '../functions/getMonthOfTheMonth';
 
 import { WIDTH } from '../style_constants.js';
+
+// myPageStateの型
+import { MyPageState } from '../types/containers/myPages';
 
 // メインのラッパー
 const MainWrapper = styled.div`
@@ -170,7 +173,7 @@ const TitleListWrapper = styled.div`
   margin: 0 auto;
 `;
 
-export const MyPages = () => {
+export const MyPages = (): JSX.Element => {
 
   // useContext
   // requestUserStateには、requestState, userState, errorsが格納されている
@@ -192,7 +195,7 @@ export const MyPages = () => {
   // myPageStateの最初の状態
   // isOpenDialog, name, releaseDate, releaseConditionは
   // タイトルカードのモーダルで使う
-  const initialState = {
+  const initialState: MyPageState = {
     gameFrequenciesPerDay: {},
     fastTimePerDifficulty: {},
     ownedTitles: [],

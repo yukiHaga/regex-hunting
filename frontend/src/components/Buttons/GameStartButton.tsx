@@ -40,7 +40,7 @@ const GameStartButtonTextWrapper = styled.div`
 
 type GameStartButtonArg = {
   difficulty: 'elementary' | 'intermediate' | 'advanced';
-  setMobileState: React.Dispatch<React.SetStateAction<{display: boolean; message: string;}>>;
+  setMobileState?: React.Dispatch<React.SetStateAction<{display: boolean; message: string;}>>;
 };
 
 export const GameStartButton = ({
@@ -62,11 +62,13 @@ export const GameStartButton = ({
   ]);
 
   const handleMobileState = (): void => {
-    setMobileState((prev)=>({
-      ...prev,
-      display: true,
-      message: "PCからご利用ください",
-    }));
+    if(setMobileState) {
+      setMobileState((prev)=>({
+        ...prev,
+        display: true,
+        message: "PCからご利用ください",
+      }));
+    }
   };
 
   return (

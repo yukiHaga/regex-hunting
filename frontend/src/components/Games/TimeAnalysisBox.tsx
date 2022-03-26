@@ -51,7 +51,7 @@ const CustomSpan = styled.span`
 // 単位は分で固定する
 export const TimeAnalysisBox = memo(({
   time
-}) => {
+}: {time: number}): JSX.Element => {
 
   // ゲージと分の関数
   const formatMin = useMemo(() => getMinute(time), [time]);

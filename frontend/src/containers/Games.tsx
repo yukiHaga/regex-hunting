@@ -149,7 +149,7 @@ const GageBlockWrapper = styled.div`
   width: 100%;
 `;
 
-export const Games = () => {
+export const Games = (): JSX.Element => {
 
   // useContext
   const {

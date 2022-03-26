@@ -44,7 +44,7 @@ const ContentPercentWrapper = styled.div`
 
 export const FastAnalysisBox = memo(({
   minutes
-}) => {
+}: {minutes: number}): JSX.Element => {
 
   // 今月の最速タイムを出力する処理
   // minutesに任意の難易度の最速タイムが入っている

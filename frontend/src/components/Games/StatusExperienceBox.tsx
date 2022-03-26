@@ -4,7 +4,7 @@ import styled from 'styled-components';
 // Colors
 import { COLORS } from '../../style_constants.js';
 
-// DescriptionWrapper 
+// DescriptionWrapper
 import { DescriptionWrapper } from '../shared_style.js';
 
 import { WIDTH } from '../../style_constants.js';
@@ -30,9 +30,9 @@ const ExperienceGageWrapper = styled.div`
 
 // ExperienceGageのExperienceの幅を取り扱う関数
 const handleExperienceGage = (
-  temporaryExperience,
-  maximumExperiencePerRank
-) => {
+  temporaryExperience: number,
+  maximumExperiencePerRank: number
+): string => {
   if(temporaryExperience >= maximumExperiencePerRank) {
     return '100%';
   } else {
@@ -40,7 +40,7 @@ const handleExperienceGage = (
   }
 };
 
-const InnerExperienceGageWrapper = styled.div`
+const InnerExperienceGageWrapper = styled.div<{temporaryExperience: number, maximumExperiencePerRank: number}>`
   width: ${({
     temporaryExperience,
     maximumExperiencePerRank
@@ -54,11 +54,18 @@ const InnerExperienceGageWrapper = styled.div`
   border: 1px solid rgba(0,0,0,.2);
 `;
 
+// StatusExperienceBoxの引数の型
+type StatusExperienceBoxArg = {
+  totalExperience: number;
+  maximumExperiencePerRank: number;
+  temporaryExperience: number;
+};
+
 export const StatusExperienceBox = memo(({
   totalExperience,
-  maximumExperiencePerRank, 
+  maximumExperiencePerRank,
   temporaryExperience,
-}) => {
+}: StatusExperienceBoxArg): JSX.Element => {
 
   return (
     <>
@@ -69,18 +76,18 @@ export const StatusExperienceBox = memo(({
         <ExperienceGageWrapper>
           {
             (temporaryExperience / maximumExperiencePerRank) !== 0 &&
-              <InnerExperienceGageWrapper 
+              <InnerExperienceGageWrapper
                 temporaryExperience={temporaryExperience}
                 maximumExperiencePerRank={maximumExperiencePerRank}
               />
           }
         </ExperienceGageWrapper>
         <ExperienceTextWrapper>
-          ランクアップに必要な経験値： { 
+          ランクアップに必要な経験値： {
             temporaryExperience >= maximumExperiencePerRank ?
               0
             :
-              maximumExperiencePerRank - temporaryExperience 
+              maximumExperiencePerRank - temporaryExperience
           }
         </ExperienceTextWrapper>
       </ExperienceBoxWrapper>
