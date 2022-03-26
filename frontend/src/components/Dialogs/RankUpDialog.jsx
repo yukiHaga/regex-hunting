@@ -7,11 +7,11 @@ import { DialogContent, Dialog } from '@mui/material';
 // Colors
 import { COLORS } from '../../style_constants.js';
 
-// DescriptionWrapper 
-import { DescriptionWrapper } from '../shared_style.js'; 
+// DescriptionWrapper
+import { DescriptionWrapper } from '../shared_style.js';
 
 // 戻るボタン
-import { BackToModalButton } from '../Buttons/BackToModalButton.jsx';
+import { BackToModalButton } from '../Buttons/BackToModalButton';
 
 // Twitterボタン
 import { ResultShareButton } from '../Buttons/ResultShareButton.jsx';
@@ -53,7 +53,7 @@ const CustomDialogContentSentence = styled(DescriptionWrapper)`
   text-align: left;
 `;
 
-// backボタンのラッパー 
+// backボタンのラッパー
 // backボタンを固定してる
 const BackToModalButtonWrapper = styled.div`
   position: fixed;
@@ -127,11 +127,11 @@ export const RankUpDialog = ({
   return(
     <Dialog
       open={isOpen}
-      maxWidth='lg'        
+      maxWidth='lg'
     >
-      <CustomDialogInnerWrapper> 
+      <CustomDialogInnerWrapper>
         <BackToModalButtonWrapper>
-          <BackToModalButton 
+          <BackToModalButton
             onClick={
               () => setGameState((prev) => ({
                 ...prev,
@@ -146,7 +146,7 @@ export const RankUpDialog = ({
             RANK UP
           </CustomSpan>
           RANK UP
-        </CustomDialogTitleWrapper> 
+        </CustomDialogTitleWrapper>
         <CustomDialogContent>
           <CustomDialogContentSentence>
             ランクアップおめでとうございます！<br />
@@ -155,17 +155,17 @@ export const RankUpDialog = ({
           <CustomTable>
             <tbody>
               <tr>
-                <MetaTd>ランク</MetaTd> 
+                <MetaTd>ランク</MetaTd>
                 <CustomTd>{rank}</CustomTd>
               </tr>
               <tr>
-                <MetaTd>称号</MetaTd> 
+                <MetaTd>称号</MetaTd>
                 <CustomTd>{activeTitle}</CustomTd>
               </tr>
             </tbody>
           </CustomTable>
           <ButtonsWrapper>
-            <ResultShareButton 
+            <ResultShareButton
               rankUp={rankUp}
               difficulty={difficulty}
               gameResult={gameResult}

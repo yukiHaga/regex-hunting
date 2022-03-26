@@ -33,9 +33,13 @@ const BackToModalButtonTextWrapper = styled.div`
   padding-top: 2%;
 `;
 
+type OnClick = {
+  onClick: () => void;
+};
+
 export const BackToModalButton = ({
   onClick
-}) => {
+}: OnClick): JSX.Element => {
 
   return (
     <>

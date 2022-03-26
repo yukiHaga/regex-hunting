@@ -11,7 +11,7 @@ import { COLORS } from '../../style_constants.js';
 import { DescriptionWrapper } from '../shared_style.js';
 
 // 戻るボタン
-import { BackToModalButton } from '../Buttons/BackToModalButton.jsx';
+import { BackToModalButton } from '../Buttons/BackToModalButton';
 
 // 称号を変更するボタン
 import { TitleSettingButton } from '../Buttons/TitleSettingButton.jsx';

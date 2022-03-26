@@ -15,7 +15,7 @@ import { DescriptionWrapper } from '../shared_style.js';
 import { handleTitleColorType } from '../../functions/handleTitleColorType'
 
 // 戻るボタン
-import { BackToModalButton } from '../Buttons/BackToModalButton.jsx';
+import { BackToModalButton } from '../Buttons/BackToModalButton';
 
 const CustomDialogInnerWrapper = styled.div`
   padding-right: 3%;

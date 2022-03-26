@@ -18,7 +18,7 @@ import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 
 // 戻るボタン
-import { BackToModalButton } from '../Buttons/BackToModalButton.jsx';
+import { BackToModalButton } from '../Buttons/BackToModalButton';
 
 // NextButton
 import ArrowRightIcon from '@mui/icons-material/ArrowRight';
