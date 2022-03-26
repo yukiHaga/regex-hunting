@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import styled from 'styled-components';
 
 // ダイアログ
@@ -235,35 +235,37 @@ export const CheckAnswerDialog = ({
             incorrectQuestions.length ? incorrectQuestions.map(({
               question,
               sentenceNum
-            }) => (
-              <QuestionBlockWrapper>
-                <QuestionWrapper>
-                  <QuestionUpperWrapper>
-                    <QuestionNumWrapper>
-                      {`Q${sentenceNum}`}
-                    </QuestionNumWrapper>
-                    <QuestionNumFakeWrapper />
-                    <QuestionSentenceWrapper>
-                      <QuestionSentenceFlexWrapper>
-                        <CustomSentence>
-                          {question.sentence}
-                        </CustomSentence>
-                      </QuestionSentenceFlexWrapper>
-                    </QuestionSentenceWrapper>
-                  </QuestionUpperWrapper>
-                  <TargetSentenceWrapper>
-                    {question.target_sentence}
-                  </TargetSentenceWrapper>
-                </QuestionWrapper>
-                <CommentaryBlockWrapper>
-                  <CommentaryTitleWrapper>
-                    解説
-                  </CommentaryTitleWrapper>
-                  <CommentaryWrapper>
-                    {question.commentary}
-                  </CommentaryWrapper>
-                </CommentaryBlockWrapper>
-              </QuestionBlockWrapper>
+            }, index) => (
+              <Fragment key={index}>
+                <QuestionBlockWrapper>
+                  <QuestionWrapper>
+                    <QuestionUpperWrapper>
+                      <QuestionNumWrapper>
+                        {`Q${sentenceNum}`}
+                      </QuestionNumWrapper>
+                      <QuestionNumFakeWrapper />
+                      <QuestionSentenceWrapper>
+                        <QuestionSentenceFlexWrapper>
+                          <CustomSentence>
+                            {question.sentence}
+                          </CustomSentence>
+                        </QuestionSentenceFlexWrapper>
+                      </QuestionSentenceWrapper>
+                    </QuestionUpperWrapper>
+                    <TargetSentenceWrapper>
+                      {question.target_sentence}
+                    </TargetSentenceWrapper>
+                  </QuestionWrapper>
+                  <CommentaryBlockWrapper>
+                    <CommentaryTitleWrapper>
+                      解説
+                    </CommentaryTitleWrapper>
+                    <CommentaryWrapper>
+                      {question.commentary}
+                    </CommentaryWrapper>
+                  </CommentaryBlockWrapper>
+                </QuestionBlockWrapper>
+              </Fragment>
             ))
             :
               <DescriptionWrapper>
@@ -280,51 +282,53 @@ export const CheckAnswerDialog = ({
               question,
               sentenceNum,
               inputRegex
-            }) => (
-              <QuestionBlockWrapper>
-                <QuestionWrapper>
-                  <QuestionUpperWrapper>
-                    <QuestionNumWrapper>
-                      {`Q${sentenceNum}`}
-                    </QuestionNumWrapper>
-                    <QuestionNumFakeWrapper />
-                    <QuestionSentenceWrapper>
-                      <QuestionSentenceFlexWrapper>
-                        <CustomSentence>
-                          {question.sentence}
-                        </CustomSentence>
-                      </QuestionSentenceFlexWrapper>
-                    </QuestionSentenceWrapper>
-                  </QuestionUpperWrapper>
-                  <TargetSentenceWrapper>
-                    {question.target_sentence}
-                  </TargetSentenceWrapper>
-                </QuestionWrapper>
-                <OuterCodeBlockWrapper>
-                  <CodeBlockTitleWrapper>
-                    あなたの回答
-                  </CodeBlockTitleWrapper>
-                  <CodeBlockWrapper>
-                    <AnchorWrapper>
-                      /
-                    </AnchorWrapper>
-                    <CodeBlockDiv>
-                      {inputRegex}
-                    </CodeBlockDiv>
-                    <AnchorWrapper>
-                      /g
-                    </AnchorWrapper>
-                  </CodeBlockWrapper>
-                </OuterCodeBlockWrapper>
-                <CommentaryBlockWrapper>
-                  <CommentaryTitleWrapper>
-                    解説
-                  </CommentaryTitleWrapper>
-                  <CommentaryWrapper>
-                    {question.commentary}
-                  </CommentaryWrapper>
-                </CommentaryBlockWrapper>
-              </QuestionBlockWrapper>
+            }, index) => (
+              <Fragment key={index}>
+                <QuestionBlockWrapper>
+                  <QuestionWrapper>
+                    <QuestionUpperWrapper>
+                      <QuestionNumWrapper>
+                        {`Q${sentenceNum}`}
+                      </QuestionNumWrapper>
+                      <QuestionNumFakeWrapper />
+                      <QuestionSentenceWrapper>
+                        <QuestionSentenceFlexWrapper>
+                          <CustomSentence>
+                            {question.sentence}
+                          </CustomSentence>
+                        </QuestionSentenceFlexWrapper>
+                      </QuestionSentenceWrapper>
+                    </QuestionUpperWrapper>
+                    <TargetSentenceWrapper>
+                      {question.target_sentence}
+                    </TargetSentenceWrapper>
+                  </QuestionWrapper>
+                  <OuterCodeBlockWrapper>
+                    <CodeBlockTitleWrapper>
+                      あなたの回答
+                    </CodeBlockTitleWrapper>
+                    <CodeBlockWrapper>
+                      <AnchorWrapper>
+                        /
+                      </AnchorWrapper>
+                      <CodeBlockDiv>
+                        {inputRegex}
+                      </CodeBlockDiv>
+                      <AnchorWrapper>
+                        /g
+                      </AnchorWrapper>
+                    </CodeBlockWrapper>
+                  </OuterCodeBlockWrapper>
+                  <CommentaryBlockWrapper>
+                    <CommentaryTitleWrapper>
+                      解説
+                    </CommentaryTitleWrapper>
+                    <CommentaryWrapper>
+                      {question.commentary}
+                    </CommentaryWrapper>
+                  </CommentaryBlockWrapper>
+                </QuestionBlockWrapper>
+              </Fragment>
             ))
             :
               <DescriptionWrapper>
