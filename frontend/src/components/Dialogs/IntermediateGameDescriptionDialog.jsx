@@ -315,7 +315,7 @@ export const IntermediateGameDescriptionDialog = ({
                             {'//'} matchメソッドを用いることで、文字列中から正規表現にマッチする文字列を取得できます。
                           </ComentLineWrapper>
                           <CodeLineWrapper>
-                            console.<CodeBlueSpan>log</CodeBlueSpan>(target.<CodeBlueSpan>match</CodeBlueSpan>(regex)); <CodeComentSpan>{'//'} => ['メラ', 'メラメラ', 'メラメラメラ']</CodeComentSpan>
+                            console.<CodeBlueSpan>log</CodeBlueSpan>(target.<CodeBlueSpan>match</CodeBlueSpan>(regex)); <CodeComentSpan>{'//'} ={'>'} ['メラ', 'メラメラ', 'メラメラメラ']</CodeComentSpan>
                           </CodeLineWrapper>
                         </CodeBlockDiv>
                       </CodeBlockWrapper>
@@ -341,7 +341,7 @@ export const IntermediateGameDescriptionDialog = ({
                             {'//'} matchメソッドを用いることで、文字列中から正規表現にマッチする文字列を取得できます。
                           </ComentLineWrapper>
                           <CodeLineWrapper>
-                            console.<CodeBlueSpan>log</CodeBlueSpan>(target.<CodeBlueSpan>match</CodeBlueSpan>(regex)); <CodeComentSpan>{'//'} => ['environment', 'enviroment']</CodeComentSpan>
+                            console.<CodeBlueSpan>log</CodeBlueSpan>(target.<CodeBlueSpan>match</CodeBlueSpan>(regex)); <CodeComentSpan>{'//'} ={'>'} ['environment', 'enviroment']</CodeComentSpan>
                           </CodeLineWrapper>
                         </CodeBlockDiv>
                       </CodeBlockWrapper>
@@ -364,10 +364,10 @@ export const IntermediateGameDescriptionDialog = ({
                           </CodeLineWrapper>
                           <BlankLineWrapper />
                           <CodeLineWrapper>
-                            console.<CodeBlueSpan>log</CodeBlueSpan>(target.<CodeBlueSpan>match</CodeBlueSpan>(regex1)); <CodeComentSpan>{'//'} => ['ck', 'cook', 'coook', 'cooook']</CodeComentSpan>
+                            console.<CodeBlueSpan>log</CodeBlueSpan>(target.<CodeBlueSpan>match</CodeBlueSpan>(regex1)); <CodeComentSpan>{'//'} ={'>'} ['ck', 'cook', 'coook', 'cooook']</CodeComentSpan>
                           </CodeLineWrapper>
                           <CodeLineWrapper>
-                            console.<CodeBlueSpan>log</CodeBlueSpan>(target.<CodeBlueSpan>match</CodeBlueSpan>(regex2)); <CodeComentSpan>{'//'} => ['cook', 'coook', 'cooook']</CodeComentSpan>
+                            console.<CodeBlueSpan>log</CodeBlueSpan>(target.<CodeBlueSpan>match</CodeBlueSpan>(regex2)); <CodeComentSpan>{'//'} ={'>'} ['cook', 'coook', 'cooook']</CodeComentSpan>
                           </CodeLineWrapper>
                         </CodeBlockDiv>
                       </CodeBlockWrapper>
@@ -390,10 +390,10 @@ export const IntermediateGameDescriptionDialog = ({
                           </CodeLineWrapper>
                           <BlankLineWrapper />
                           <CodeLineWrapper>
-                            console.<CodeBlueSpan>log</CodeBlueSpan>(target.<CodeBlueSpan>match</CodeBlueSpan>(regex1)); <CodeComentSpan>{'//'} => ['150']</CodeComentSpan>
+                            console.<CodeBlueSpan>log</CodeBlueSpan>(target.<CodeBlueSpan>match</CodeBlueSpan>(regex1)); <CodeComentSpan>{'//'} ={'>'} ['150']</CodeComentSpan>
                           </CodeLineWrapper>
                           <CodeLineWrapper>
-                            console.<CodeBlueSpan>log</CodeBlueSpan>(target.<CodeBlueSpan>match</CodeBlueSpan>(regex2)); <CodeComentSpan>{'//'} => ['150', '15']</CodeComentSpan>
+                            console.<CodeBlueSpan>log</CodeBlueSpan>(target.<CodeBlueSpan>match</CodeBlueSpan>(regex2)); <CodeComentSpan>{'//'} ={'>'} ['150', '15']</CodeComentSpan>
                           </CodeLineWrapper>
                         </CodeBlockDiv>
                       </CodeBlockWrapper>
@@ -416,10 +416,10 @@ export const IntermediateGameDescriptionDialog = ({
                           </CodeLineWrapper>
                           <BlankLineWrapper />
                           <CodeLineWrapper>
-                            console.<CodeBlueSpan>log</CodeBlueSpan>(target.<CodeBlueSpan>match</CodeBlueSpan>(regex1)); <CodeComentSpan>{'//'} => ['1', '112', '11212', '1121212']</CodeComentSpan>
+                            console.<CodeBlueSpan>log</CodeBlueSpan>(target.<CodeBlueSpan>match</CodeBlueSpan>(regex1)); <CodeComentSpan>{'//'} ={'>'} ['1', '112', '11212', '1121212']</CodeComentSpan>
                           </CodeLineWrapper>
                           <CodeLineWrapper>
-                            console.<CodeBlueSpan>log</CodeBlueSpan>(target.<CodeBlueSpan>match</CodeBlueSpan>(regex2)); <CodeComentSpan>{'//'} => ['112', '112', '112']</CodeComentSpan>
+                            console.<CodeBlueSpan>log</CodeBlueSpan>(target.<CodeBlueSpan>match</CodeBlueSpan>(regex2)); <CodeComentSpan>{'//'} ={'>'} ['112', '112', '112']</CodeComentSpan>
                           </CodeLineWrapper>
                         </CodeBlockDiv>
                       </CaptureCodeBlockWrapper>

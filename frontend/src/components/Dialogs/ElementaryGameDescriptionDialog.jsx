@@ -310,7 +310,7 @@ export const ElementaryGameDescriptionDialog = ({
                             {'//'} matchメソッドを用いることで、文字列中から正規表現にマッチする文字列を取得できます。
                           </ComentLineWrapper>
                           <CodeLineWrapper>
-                            console.<CodeBlueSpan>log</CodeBlueSpan>(target.<CodeBlueSpan>match</CodeBlueSpan>(regex)); <CodeComentSpan>{'//'} => [ 'JavaScript', 'React', 'TypeScript' ]</CodeComentSpan>
+                            console.<CodeBlueSpan>log</CodeBlueSpan>(target.<CodeBlueSpan>match</CodeBlueSpan>(regex)); <CodeComentSpan>{'//'} ={'>'} [ 'JavaScript', 'React', 'TypeScript' ]</CodeComentSpan>
                           </CodeLineWrapper>
                         </CodeBlockDiv>
                       </SpecialCodeBlockWrapper>
@@ -336,7 +336,7 @@ export const ElementaryGameDescriptionDialog = ({
                             {'//'} matchメソッドを用いることで、文字列中から正規表現にマッチする文字列を取得できます。
                           </ComentLineWrapper>
                           <CodeLineWrapper>
-                            console.<CodeBlueSpan>log</CodeBlueSpan>(target.<CodeBlueSpan>match</CodeBlueSpan>(regex)); <CodeComentSpan>{'//'} => ['a', 'c', 'z', '#']</CodeComentSpan>
+                            console.<CodeBlueSpan>log</CodeBlueSpan>(target.<CodeBlueSpan>match</CodeBlueSpan>(regex)); <CodeComentSpan>{'//'} ={'>'} ['a', 'c', 'z', '#']</CodeComentSpan>
                           </CodeLineWrapper>
                         </CodeBlockDiv>
                       </SpecialCodeBlockWrapper>
@@ -359,7 +359,7 @@ export const ElementaryGameDescriptionDialog = ({
                           </CodeLineWrapper>
                           <BlankLineWrapper />
                           <CodeLineWrapper>
-                            console.<CodeBlueSpan>log</CodeBlueSpan>(target.<CodeBlueSpan>match</CodeBlueSpan>(regex)); <CodeComentSpan>{'//'} => [ 'gray', 'grey' ]</CodeComentSpan>
+                            console.<CodeBlueSpan>log</CodeBlueSpan>(target.<CodeBlueSpan>match</CodeBlueSpan>(regex)); <CodeComentSpan>{'//'} ={'>'} [ 'gray', 'grey' ]</CodeComentSpan>
                           </CodeLineWrapper>
                         </CodeBlockDiv>
                       </CodeBlockWrapper>

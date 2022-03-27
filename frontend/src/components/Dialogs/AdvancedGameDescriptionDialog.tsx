@@ -38,6 +38,9 @@ import { CodeComentSpan } from '../shared_style.js';
 // 説明スライドのワーニングセンテンス
 import { WarningSentenceWrapper } from '../shared_style.js';
 
+// setGameStateの型
+import { SetGameState } from '../../types/containers/games';
+
 const CustomDialogInnerWrapper = styled.div`
   background-color: ${COLORS.SUB};
   text-align: center;
@@ -62,7 +65,7 @@ const TitleWrapper = styled.div`
 
 // animationプロパティは1つしか存在できない
 // 2個存在する場合、2個目で1個目が上書きされる
-const SlideContentWrapper = styled.div`
+const SlideContentWrapper = styled.div<{slideIn: boolean, slideOut: boolean, direction: 'right' | 'left'}>`
   width: 100%;
   height: 100%;
   margin: 0 auto;
@@ -116,6 +119,23 @@ const CustomCodeBlockDiv = styled(CodeBlockDiv)`
   overflow-x: scroll;
 `;
 
+// AdvancedGameDescriptionDialogの引数の型
+type AdvancedGameDescriptionDialogArg = {
+  isOpen: true;
+  setGameState: SetGameState;
+  gameDescriptionOpen: true,
+  clickDescriptionOpen: boolean;
+};
+
+type SlideState = {
+  title: string;
+  sentence: string;
+  slideNum: number;
+  slideIn: boolean;
+  slideOut: boolean;
+  direction: 'right' | 'left';
+};
+
 // isOpenはgameState.gameDescriptionOpen
 // gameDescriptionOpenは、gameDescriptionOpen
 // clickDescriptionOpenは、ゲーム開始後にスライドを見るをクリックしたかを表すprops
@@ -125,7 +145,7 @@ export const AdvancedGameDescriptionDialog = ({
   setGameState,
   gameDescriptionOpen,
   clickDescriptionOpen
-}) => {
+}: AdvancedGameDescriptionDialogArg): JSX.Element => {
 
   // 第2引数に空の依存配列を渡した場合、初回の1回のみ実行され、
   // 2度目以降のレンダリング時にはキャッシュから値を取得する
@@ -173,13 +193,13 @@ export const AdvancedGameDescriptionDialog = ({
     }
   ], []);
 
-  const initialState = {
+  const initialState: SlideState = {
     title: slideContent[0]["title"],
     sentence: slideContent[0]["sentence"],
     slideNum: slideContent[0]["slideNum"],
     slideIn: false,
     slideOut: false,
-    direction: "",
+    direction: 'right',
   };
 
   const [slideState, setSlideState] = useState(initialState);
@@ -242,13 +262,13 @@ export const AdvancedGameDescriptionDialog = ({
 
   useEffect(() => {
     if(gameDescriptionOpen) {
-      const handleRightkeyPress = (e) => {
+      const handleRightkeyPress = (e: KeyboardEvent) => {
         if(e.key !== 'Enter' && e.key === 'ArrowRight') {
           changeSlideToRight();
         }
       };
 
-      const handleLeftkeyPress = (e) => {
+      const handleLeftkeyPress = (e: KeyboardEvent) => {
         if(e.key !== 'Enter' && e.key === 'ArrowLeft') {
           changeSlideToLeft();
         }
@@ -347,10 +367,10 @@ export const AdvancedGameDescriptionDialog = ({
                           </CodeLineWrapper>
                           <BlankLineWrapper />
                           <CodeLineWrapper>
-                            console.<CodeBlueSpan>log</CodeBlueSpan>(target.<CodeBlueSpan>match</CodeBlueSpan>(regex1)); <CodeComentSpan>{'//'} => ['JavaScript','Script', index: 7, input: 'Python JavaScript Java',groups: undefined]</CodeComentSpan>
+                            console.<CodeBlueSpan>log</CodeBlueSpan>(target.<CodeBlueSpan>match</CodeBlueSpan>(regex1)); <CodeComentSpan>{'//'} ={'>'} ['JavaScript','Script', index: 7, input: 'Python JavaScript Java',groups: undefined]</CodeComentSpan>
                           </CodeLineWrapper>
                           <CodeLineWrapper>
-                            console.<CodeBlueSpan>log</CodeBlueSpan>(target.<CodeBlueSpan>match</CodeBlueSpan>(regex2)); <CodeComentSpan>{'//'} => ['JavaScript', 'Java']</CodeComentSpan>
+                            console.<CodeBlueSpan>log</CodeBlueSpan>(target.<CodeBlueSpan>match</CodeBlueSpan>(regex2)); <CodeComentSpan>{'//'} ={'>'} ['JavaScript', 'Java']</CodeComentSpan>
                           </CodeLineWrapper>
                         </CustomCodeBlockDiv>
                       </CaptureCodeBlockWrapper>
@@ -376,7 +396,7 @@ export const AdvancedGameDescriptionDialog = ({
                           </CodeLineWrapper>
                           <BlankLineWrapper />
                           <CodeLineWrapper>
-                            console.<CodeBlueSpan>log</CodeBlueSpan>(target.<CodeBlueSpan>match</CodeBlueSpan>(regex)); <CodeComentSpan>{'//'} => ['100']</CodeComentSpan>
+                            console.<CodeBlueSpan>log</CodeBlueSpan>(target.<CodeBlueSpan>match</CodeBlueSpan>(regex)); <CodeComentSpan>{'//'} ={'>'} ['100']</CodeComentSpan>
                           </CodeLineWrapper>
                         </CodeBlockDiv>
                       </CaptureCodeBlockWrapper>
@@ -402,7 +422,7 @@ export const AdvancedGameDescriptionDialog = ({
                           </CodeLineWrapper>
                           <BlankLineWrapper />
                           <CodeLineWrapper>
-                            console.<CodeBlueSpan>log</CodeBlueSpan>(target.<CodeBlueSpan>match</CodeBlueSpan>(regex1)); <CodeComentSpan>{'//'} => ['500']</CodeComentSpan>
+                            console.<CodeBlueSpan>log</CodeBlueSpan>(target.<CodeBlueSpan>match</CodeBlueSpan>(regex1)); <CodeComentSpan>{'//'} ={'>'} ['500']</CodeComentSpan>
                           </CodeLineWrapper>
                         </CodeBlockDiv>
                       </CodeBlockWrapper>
@@ -425,10 +445,10 @@ export const AdvancedGameDescriptionDialog = ({
                           </CodeLineWrapper>
                           <BlankLineWrapper />
                           <CodeLineWrapper>
-                            console.<CodeBlueSpan>log</CodeBlueSpan>(target.<CodeBlueSpan>match</CodeBlueSpan>(regex1)); <CodeComentSpan>{'//'} => ['This is React', 'JavaScript']</CodeComentSpan>
+                            console.<CodeBlueSpan>log</CodeBlueSpan>(target.<CodeBlueSpan>match</CodeBlueSpan>(regex1)); <CodeComentSpan>{'//'} ={'>'} ['This is React', 'JavaScript']</CodeComentSpan>
                           </CodeLineWrapper>
                           <CodeLineWrapper>
-                            console.<CodeBlueSpan>log</CodeBlueSpan>(target.<CodeBlueSpan>match</CodeBlueSpan>(regex2)); <CodeComentSpan>{'//'} => ['This is React', 'This is JavaScript']</CodeComentSpan>
+                            console.<CodeBlueSpan>log</CodeBlueSpan>(target.<CodeBlueSpan>match</CodeBlueSpan>(regex2)); <CodeComentSpan>{'//'} ={'>'} ['This is React', 'This is JavaScript']</CodeComentSpan>
                           </CodeLineWrapper>
                         </CodeBlockDiv>
                       </CaptureCodeBlockWrapper>
@@ -461,10 +481,10 @@ export const AdvancedGameDescriptionDialog = ({
                           </CodeLineWrapper>
                           <BlankLineWrapper />
                           <CodeLineWrapper>
-                            console.<CodeBlueSpan>log</CodeBlueSpan>(target.<CodeBlueSpan>match</CodeBlueSpan>(regex1)); <CodeComentSpan>{'//'} => ['cat', 'cat']</CodeComentSpan>
+                            console.<CodeBlueSpan>log</CodeBlueSpan>(target.<CodeBlueSpan>match</CodeBlueSpan>(regex1)); <CodeComentSpan>{'//'} ={'>'} ['cat', 'cat']</CodeComentSpan>
                           </CodeLineWrapper>
                           <CodeLineWrapper>
-                            console.<CodeBlueSpan>log</CodeBlueSpan>(target.<CodeBlueSpan>match</CodeBlueSpan>(regex2)); <CodeComentSpan>{'//'} => ['cat']</CodeComentSpan>
+                            console.<CodeBlueSpan>log</CodeBlueSpan>(target.<CodeBlueSpan>match</CodeBlueSpan>(regex2)); <CodeComentSpan>{'//'} ={'>'} ['cat']</CodeComentSpan>
                           </CodeLineWrapper>
                         </CodeBlockDiv>
                       </CaptureCodeBlockWrapper>
@@ -526,7 +546,7 @@ export const AdvancedGameDescriptionDialog = ({
                     sx={{
                       fontSize: '4.0em',
                       opacity: slideState.slideNum === 7 ? 0.1 : 1,
-                      cursor: slideState.slideNum === 7 && "default"
+                      cursor: slideState.slideNum === 7 ? "default" : "pointer"
                     }}
                     disableRipple={slideState.slideNum === 7}
                   >

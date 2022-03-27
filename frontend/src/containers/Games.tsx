@@ -22,7 +22,7 @@ import { GameOverDialog } from '../components/Dialogs/GameOverDialog'
 import { CheckAnswerDialog } from '../components/Dialogs/CheckAnswerDialog'
 import { ElementaryGameDescriptionDialog } from '../components/Dialogs/ElementaryGameDescriptionDialog.jsx'
 import { IntermediateGameDescriptionDialog } from '../components/Dialogs/IntermediateGameDescriptionDialog.jsx'
-import { AdvancedGameDescriptionDialog } from '../components/Dialogs/AdvancedGameDescriptionDialog.jsx'
+import { AdvancedGameDescriptionDialog } from '../components/Dialogs/AdvancedGameDescriptionDialog'
 
 import { RankUpDialog } from '../components/Dialogs/RankUpDialog';
 import { CheckMetaDialog } from '../components/Dialogs/CheckMetaDialog';
