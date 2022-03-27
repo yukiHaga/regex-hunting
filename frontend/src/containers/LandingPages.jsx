@@ -19,7 +19,7 @@ import { StartButton } from '../components/Buttons/StartButton'
 import { Footer } from '../components/Footers/Footer.jsx';
 import { LoginDialog } from '../components/Dialogs/LoginDialog';
 import { SignUpDialog } from '../components/Dialogs/SignUpDialog';
-import { SessionFlashMessage } from '../components/FlashMessages/SessionFlashMessage.jsx';
+import { SessionFlashMessage } from '../components/FlashMessages/SessionFlashMessage';
 import { GameDescriptionSentence } from '../components/Sentences/GameDescriptionSentence.jsx';
 import { RankingDescriptionSentence } from '../components/Sentences/RankingDescriptionSentence.jsx';
 import { GameStartDescriptionSentence } from '../components/Sentences/GameStartDescriptionSentence.jsx';
@@ -270,9 +270,12 @@ export const LandingPages = () => {
         setMobileState={setMobileState}
       />
       <MainWrapper>
-        <SessionFlashMessage
-          location={location}
-        />
+        {
+          location.state &&
+            <SessionFlashMessage
+              location={location}
+            />
+        }
         <MobileFlashMessage
           display={mobileState.display}
           message={mobileState.message}

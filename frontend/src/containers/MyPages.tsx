@@ -4,7 +4,7 @@ import styled from 'styled-components';
 
 // Presentational Components
 import { Header } from '../components/Headers/Header.jsx';
-import { SessionFlashMessage } from '../components/FlashMessages/SessionFlashMessage.jsx';
+import { SessionFlashMessage } from '../components/FlashMessages/SessionFlashMessage';
 import { UserStatus } from '../components/Games/UserStatus';
 import { StudyHeatMap } from '../components/Games/StudyHeatMap';
 import { DescriptionWrapper } from '../components/shared_style.js';

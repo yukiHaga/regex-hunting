@@ -5,7 +5,7 @@ import { useLocation } from 'react-router-dom';
 // Presentational Components
 import { Header } from '../components/Headers/Header.jsx';
 import { Footer } from '../components/Footers/Footer.jsx';
-import { SessionFlashMessage } from '../components/FlashMessages/SessionFlashMessage.jsx';
+import { SessionFlashMessage } from '../components/FlashMessages/SessionFlashMessage';
 
 // Colors
 import { COLORS } from '../style_constants.js';
@@ -60,7 +60,7 @@ export const SendEmail = () => {
 
   return (
     <>
-      <Header /> 
+      <Header />
       <MainWrapper>
         <SessionFlashMessage
           location={location}

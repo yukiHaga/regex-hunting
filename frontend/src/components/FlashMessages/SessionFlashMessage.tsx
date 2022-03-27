@@ -4,13 +4,23 @@ import React, { Fragment, useState } from 'react';
 import Alert from '@mui/material/Alert';
 import Snackbar from '@mui/material/Snackbar';
 
+// SessionFlashMessagの引数の型
+type SessionFlashMessagArg = {
+  location: {
+    state: {
+      display: boolean;
+      success: string;
+    }
+  }
+};
+
 export const SessionFlashMessage = ({
-  location,
-}) => {
+  location: { state }
+}: SessionFlashMessagArg): JSX.Element => {
 
   // displayが存在するか、user=moblieが存在するときにtrueになる
   // use=mobileからtrueにさせるのは、useEffect実行時である
-  const [open, setOpen] = useState(Boolean(location?.state?.display));
+  const [open, setOpen] = useState(Boolean(state.display));
 
   const handleClose = () => {
     setOpen(false);
@@ -18,12 +28,12 @@ export const SessionFlashMessage = ({
 
   return (
     <>
-      <Snackbar 
-        open={open} 
-        autoHideDuration={3000} 
+      <Snackbar
+        open={open}
+        autoHideDuration={3000}
         anchorOrigin={{
           vertical: 'top',
-          horizontal: 'right' 
+          horizontal: 'right'
         }}
         sx={{
           position: 'fixed',
@@ -35,7 +45,7 @@ export const SessionFlashMessage = ({
         }
       >
         <Alert variant="filled" severity="success">
-          {location?.state?.success}
+          {state.success}
         </Alert>
       </Snackbar>
     </>
