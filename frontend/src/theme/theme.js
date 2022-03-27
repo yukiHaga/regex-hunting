@@ -3,7 +3,7 @@ import { createTheme } from '@mui/material/styles';
 // Colors
 import { COLORS } from '../style_constants.js';
 
-const font_family = [
+const fontFamily = [
   'Avenir',
   '"Helvetica Neue"',
   'Helvetica',
@@ -24,7 +24,19 @@ const theme = createTheme({
     },
   },
   typography: {
-    fontFamily: font_family,
+    fontFamily: fontFamily,
+  },
+  components: {
+    // Name of the component
+    MuiAppBar: {
+      styleOverrides: {
+        // Name of the slot
+        root: {
+          // Some CSS
+          backgroundColor: COLORS.MAIN,
+        },
+      },
+    },
   },
 });
 

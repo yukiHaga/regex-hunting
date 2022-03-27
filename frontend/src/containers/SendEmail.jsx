@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { useLocation } from 'react-router-dom';
 
 // Presentational Components
-import { Header } from '../components/Headers/Header.jsx';
+import { Header } from '../components/Headers/Header';
 import { Footer } from '../components/Footers/Footer';
 import { SessionFlashMessage } from '../components/FlashMessages/SessionFlashMessage';
 

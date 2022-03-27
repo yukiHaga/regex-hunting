@@ -24,11 +24,17 @@ import { deleteUserSession } from '../../apis/login';
 // HTTP_STATUS_CODE
 import { HTTP_STATUS_CODE } from '../../constants';
 
+type IconMenuArg = {
+  anchorElUser: HTMLElement | null;
+  handleOpenUserMenu: (e: React.MouseEvent<HTMLElement>) => void;
+  handleCloseUserMenu: () => void;
+}
+
 export const IconMenu = memo(({
   anchorElUser,
   handleOpenUserMenu,
   handleCloseUserMenu,
-}) => {
+}: IconMenuArg): JSX.Element => {
 
   // useContext
   const {

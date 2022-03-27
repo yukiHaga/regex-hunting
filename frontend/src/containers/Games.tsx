@@ -6,7 +6,7 @@ import styled, { keyframes } from 'styled-components';
 import RealBackGroundImage from '../images/temporary_real_background_image.jpg';
 
 // Presentational Components
-import { Header } from '../components/Headers/Header.jsx';
+import { Header } from '../components/Headers/Header';
 import { HintBar } from '../components/Games/HintBar.jsx';
 import { ElementaryMonster } from '../components/Games/ElementaryMonster.jsx';
 import { IntermediateMonster } from '../components/Games/IntermediateMonster.jsx';

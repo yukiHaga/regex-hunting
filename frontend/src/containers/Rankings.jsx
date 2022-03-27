@@ -2,7 +2,7 @@ import React, { Fragment, useState, useEffect, useLayoutEffect, useContext } fro
 import styled from 'styled-components';
 
 // Presentational Components
-import { Header } from '../components/Headers/Header.jsx';
+import { Header } from '../components/Headers/Header';
 import { Footer } from '../components/Footers/Footer';
 import { RankingBox } from '../components/Games/RankingBox';
 import { LoginDialog } from '../components/Dialogs/LoginDialog';
@@ -64,7 +64,16 @@ export const Rankings = () => {
   const loginInitialState = {
     isOpenDialog: false,
     modalType: ""
-  }
+  };
+
+  // モバイルに関するstateの初期値
+  const mobileInitialState = {
+    display: false,
+    message: ""
+  };
+
+  // モバイルを管理するstate
+  const [setMobileState] = useState(mobileInitialState);
 
   // モーダルを管理するstate
   const [state, setState] = useState(loginInitialState);
@@ -143,6 +152,7 @@ export const Rankings = () => {
           isOpenDialog: true,
           modalType: modalType
         })}
+        setMobileState={setMobileState}
       />
       <MainWrapper>
         <RankingBox

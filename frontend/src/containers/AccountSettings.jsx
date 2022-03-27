@@ -3,7 +3,7 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 
 // Presentational Components
-import { Header } from '../components/Headers/Header.jsx';
+import { Header } from '../components/Headers/Header';
 import { Footer } from '../components/Footers/Footer';
 import { AccountSettingBox } from '../components/Games/AccountSettingBox.jsx';
 import { CircularMask } from '../components/loads/CircularMask';

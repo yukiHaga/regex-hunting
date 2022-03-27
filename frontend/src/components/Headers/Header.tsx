@@ -1,7 +1,7 @@
 import React, { useState, useContext, memo } from 'react';
 
 // アイコン付きメニュー
-import { IconMenu } from '../Games/IconMenu.jsx'
+import { IconMenu } from '../Games/IconMenu'
 
 // BaseLink
 import { BaseLink } from '../shared_style';
@@ -23,27 +23,36 @@ import Container from '@mui/material/Container';
 import Button from '@mui/material/Button';
 import MenuItem from '@mui/material/MenuItem';
 
+// setMobileStateの型
+import { SetMobileState } from '../../types/containers/landingPages';
+
+// Headerのタイプ
+type HeaderArg = {
+  onClickLink?: (modalType: '' | 'login' | 'signUp') => void;
+  setMobileState?: SetMobileState;
+};
+
 // LPページの場合、onClickLinkはモーダル管理のstateを更新する関数
 // ログインしている場合、onClickLinkは何もない。
 // hrefではなく、React RouterのLinkコンポーネントを使う
 export const Header = memo(({
   onClickLink,
   setMobileState
-}) => {
+}: HeaderArg): JSX.Element => {
 
   // useContext
   const {
     requestUserState: { sessionState, userState },
   } = useContext(UserContext);
 
-  const [anchorElNav, setAnchorElNav] = useState(null);
-  const [anchorElUser, setAnchorElUser] = useState(null);
+  const [anchorElNav, setAnchorElNav] = useState<null | HTMLElement>(null);
+  const [anchorElUser, setAnchorElUser] = useState<null | HTMLElement>(null);
 
-  const handleOpenNavMenu = (event) => {
-    setAnchorElNav(event.currentTarget);
+  const handleOpenNavMenu = (e: React.MouseEvent<HTMLElement>) => {
+    setAnchorElNav(e.currentTarget);
   };
-  const handleOpenUserMenu = (event) => {
-    setAnchorElUser(event.currentTarget);
+  const handleOpenUserMenu = (e: React.MouseEvent<HTMLElement>) => {
+    setAnchorElUser(e.currentTarget);
   };
 
   const handleCloseNavMenu = () => {
@@ -56,11 +65,13 @@ export const Header = memo(({
 
   const handleMobileState = () => {
     handleCloseNavMenu();
-    setMobileState((prev)=>({
-      ...prev,
-      display: true,
-      message: "PCからご利用ください",
-    }));
+    if(setMobileState) {
+      setMobileState((prev)=>({
+        ...prev,
+        display: true,
+        message: "PCからご利用ください",
+      }));
+    }
   };
 
   // flexGrowは空いたスペースへの伸び率を表している
@@ -68,7 +79,6 @@ export const Header = memo(({
     <>
       <AppBar
         position="fixed"
-        color="green"
       >
         <Container maxWidth="xl">
           <Toolbar disableGutters>
