@@ -18,10 +18,16 @@ const JudgementMessageTitle = styled.div`
   color: ${COLORS.SUB};
 `;
 
+// JudgementFlashMessageの引数の型
+type JudgementFlashMessageArg = {
+  flashDisplay: boolean;
+  flashTitle: "" | "Good" | "Bad";
+};
+
 export const JudgementFlashMessage = ({
   flashDisplay,
   flashTitle,
-}) => {
+}: JudgementFlashMessageArg): JSX.Element => {
 
   const [display, setDisplay] = useState(flashDisplay);
 
@@ -39,12 +45,12 @@ export const JudgementFlashMessage = ({
 
   return (
     <>
-      <Snackbar 
-        open={display} 
-        autoHideDuration={2000} 
+      <Snackbar
+        open={display}
+        autoHideDuration={2000}
         anchorOrigin={{
           vertical: 'top',
-          horizontal: 'right' 
+          horizontal: 'right'
         }}
         sx={{
           position: 'fixed',
@@ -54,9 +60,9 @@ export const JudgementFlashMessage = ({
         }}
         onClose={handleClose}
       >
-        <Alert 
-          icon={false} 
-          variant="filled" 
+        <Alert
+          icon={false}
+          variant="filled"
           severity={flashTitle === "Good" ? "success" : "error"}
         >
           <JudgementMessageTitle>
