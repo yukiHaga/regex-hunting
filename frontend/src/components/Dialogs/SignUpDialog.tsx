@@ -27,11 +27,11 @@ import InputLabel from '@mui/material/InputLabel';
 import FilledInput from '@mui/material/FilledInput';
 
 // Sentence
-import { HaveAccountSentence } from '../Sentences/HaveAccountSentence.jsx';
-import { OrDirectionSentence } from '../Sentences/OrDirectionSentence.jsx';
-import { InputErrorSentence } from '../Sentences/InputErrorSentence.jsx';
-import { CreateAccountSentence } from '../Sentences/CreateAccountSentence.jsx';
-import { SubmitErrorSentence } from '../Sentences/SubmitErrorSentence.jsx';
+import { HaveAccountSentence } from '../Sentences/HaveAccountSentence';
+import { OrDirectionSentence } from '../Sentences/OrDirectionSentence';
+import { InputErrorSentence } from '../Sentences/InputErrorSentence';
+import { CreateAccountSentence } from '../Sentences/CreateAccountSentence';
+import { SubmitErrorSentence } from '../Sentences/SubmitErrorSentence';
 
 // HTTP_STATUS_CODE
 import { HTTP_STATUS_CODE } from '../../constants';

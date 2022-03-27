@@ -7,14 +7,14 @@ import { WIDTH } from '../style_constants.js';
 // Colors
 import { COLORS } from '../style_constants.js';
 
-// DescriptionWrapper 
-import { DescriptionWrapper } from '../components/shared_style.js';
+// DescriptionWrapper
+import { DescriptionWrapper } from '../components/shared_style';
 
 // リンク
-import { BaseLink } from '../components/shared_style.js';
+import { BaseLink } from '../components/shared_style';
 
 // Image
-import ClawFlashImage from '../images/moment_claw_image.png'; 
+import ClawFlashImage from '../images/moment_claw_image.png';
 import ErrorBackGroundImage from '../images/error_background.png';
 import ErrorCodeImage from '../images/error_code.svg';
 
@@ -111,11 +111,11 @@ const ErrorCodeImageWrapper = styled.img`
 `;
 
 const CustomSentence = styled(DescriptionWrapper)`
-  color: ${COLORS.WHITE}; 
+  color: ${COLORS.WHITE};
 `;
 
 const CustomLink = styled(BaseLink)`
-  color: ${COLORS.WHITE}; 
+  color: ${COLORS.WHITE};
   text-decoration: underline;
 `;
 

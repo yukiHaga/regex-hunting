@@ -28,11 +28,11 @@ import InputLabel from '@mui/material/InputLabel';
 import FilledInput from '@mui/material/FilledInput';
 
 // Sentence
-import { PasswordResetSentence } from '../Sentences/PasswordResetSentence.jsx';
-import { SignUpSentence } from '../Sentences/SignUpSentence.jsx';
-import { OrDirectionSentence } from '../Sentences/OrDirectionSentence.jsx';
-import { InputErrorSentence } from '../Sentences/InputErrorSentence.jsx';
-import { SubmitErrorSentence } from '../Sentences/SubmitErrorSentence.jsx';
+import { PasswordResetSentence } from '../Sentences/PasswordResetSentence';
+import { SignUpSentence } from '../Sentences/SignUpSentence';
+import { OrDirectionSentence } from '../Sentences/OrDirectionSentence';
+import { InputErrorSentence } from '../Sentences/InputErrorSentence';
+import { SubmitErrorSentence } from '../Sentences/SubmitErrorSentence';
 
 // HTTP_STATUS_CODE
 import { HTTP_STATUS_CODE } from '../../constants';

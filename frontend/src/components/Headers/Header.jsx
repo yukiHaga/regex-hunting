@@ -4,13 +4,13 @@ import React, { useState, useContext, memo } from 'react';
 import { IconMenu } from '../Games/IconMenu.jsx'
 
 // BaseLink
-import { BaseLink } from '../shared_style.js';
+import { BaseLink } from '../shared_style';
 
 // Contextオブジェクト
 import { UserContext } from "../../context/UserProvider";
 
 // ヘッダーをインポート
-import { HeaderTitle } from '../Sentences/HeaderTitle.jsx';
+import { HeaderTitle } from '../Sentences/HeaderTitle';
 
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';

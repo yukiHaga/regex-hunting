@@ -8,7 +8,7 @@ import { DialogContent, Dialog } from '@mui/material';
 import { COLORS } from '../../style_constants.js';
 
 // DescriptionWrapper
-import { DescriptionWrapper } from '../shared_style.js';
+import { DescriptionWrapper } from '../shared_style';
 
 // Buttons
 import { BackToTopButton } from '../Buttons/BackToTopButton';
@@ -17,7 +17,7 @@ import { ResultShareButton } from '../Buttons/ResultShareButton';
 import { BackToMyPageButton } from '../Buttons/BackToMyPageButton';
 
 // Sentence
-import { CheackAnswerSentence } from '../Sentences/CheackAnswerSentence.jsx';
+import { CheackAnswerSentence } from '../Sentences/CheackAnswerSentence';
 
 // ExperienceGage
 import { DialogExperienceBox } from '../Games/DialogExperienceBox.jsx';

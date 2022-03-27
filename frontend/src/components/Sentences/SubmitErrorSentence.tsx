@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { ReactNode } from 'react';
 import styled from 'styled-components';
 
 // Colors
@@ -8,7 +8,7 @@ const DangerTextWrapper = styled.div`
   margin: 0 auto;
 `;
 
-const DangerText = styled.p`  
+const DangerText = styled.p<{errors_title: string}>`
   display: inline-block;
   text-align: left;
   margin-top: ${({
@@ -19,10 +19,15 @@ const DangerText = styled.p`
   font-size: 0.9em;
 `;
 
+type SubmitErrorSentenceArg = {
+  children: ReactNode;
+  errors_title: string;
+};
+
 export const SubmitErrorSentence = ({
   children,
   errors_title
-}) => {
+}: SubmitErrorSentenceArg): JSX.Element => {
   return (
     <>
       <DangerTextWrapper>

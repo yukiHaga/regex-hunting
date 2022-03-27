@@ -14,8 +14,8 @@ import ArrowLeftIcon from '@mui/icons-material/ArrowLeft';
 import Tooltip from '@mui/material/Tooltip';
 import IconButton from '@mui/material/IconButton';
 
-// DescriptionWrapper 
-import { DescriptionWrapper } from '../shared_style.js';
+// DescriptionWrapper
+import { DescriptionWrapper } from '../shared_style';
 
 import { WIDTH } from '../../style_constants.js';
 
@@ -91,7 +91,7 @@ export const SecondSelectBox = ({
         handleElementary();
         break;
       case `上級編(${thisMonth}月)`:
-        handleIntermediate(); 
+        handleIntermediate();
         break;
       default:
         handleAdvanced();
@@ -110,13 +110,13 @@ export const SecondSelectBox = ({
         handleElementary();
         break;
       default:
-        handleIntermediate(); 
+        handleIntermediate();
     }
   };
 
   return (
     <TitleLineWrapper>
-      <Tooltip 
+      <Tooltip
         title={prevDifficultyMonthTitle}
         placement="top"
       >
@@ -126,7 +126,7 @@ export const SecondSelectBox = ({
           }}
         >
           <ArrowLeftIcon
-            fontSize='inherit' 
+            fontSize='inherit'
             sx={{ color: `${COLORS.BLACK}` }}
             onClick={() => handleLeftArrow(difficultyMonthTitle)}
           />
@@ -135,7 +135,7 @@ export const SecondSelectBox = ({
       <SecondSelectBoxSentenceWrapper>
         {difficultyMonthTitle}
       </SecondSelectBoxSentenceWrapper>
-      <Tooltip 
+      <Tooltip
         title={nextDifficultyMonthTitle}
         placement="top"
       >
@@ -145,7 +145,7 @@ export const SecondSelectBox = ({
           }}
         >
           <ArrowRightIcon
-            fontSize='inherit' 
+            fontSize='inherit'
             sx={{ color: `${COLORS.BLACK}` }}
             onClick={() => handleRightArrow(difficultyMonthTitle)}
           />

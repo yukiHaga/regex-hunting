@@ -1,11 +1,11 @@
-import React from 'react';
+import React, { ReactNode } from 'react';
 import styled from 'styled-components';
 
 // DescriptonWrapper
-import { DescriptionWrapper } from '../shared_style.js';
+import { DescriptionWrapper } from '../shared_style';
 
 // Responsive
-import { WIDTH } from '../../style_constants.js'; 
+import { WIDTH } from '../../style_constants.js';
 
 const RankingDescriptionWrapper = styled(DescriptionWrapper)`
   text-align: center;
@@ -22,7 +22,7 @@ const RankingDescriptionSentenceWrapper = styled(DescriptionWrapper)`
   }
 `;
 
-export const RankingDescriptionSentence = ({children}) => {
+export const RankingDescriptionSentence = ({children}: {children: ReactNode}): JSX.Element => {
   return (
     <>
       <RankingDescriptionWrapper>

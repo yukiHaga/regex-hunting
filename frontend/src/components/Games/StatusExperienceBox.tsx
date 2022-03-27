@@ -5,7 +5,7 @@ import styled from 'styled-components';
 import { COLORS } from '../../style_constants.js';
 
 // DescriptionWrapper
-import { DescriptionWrapper } from '../shared_style.js';
+import { DescriptionWrapper } from '../shared_style';
 
 import { WIDTH } from '../../style_constants.js';
 

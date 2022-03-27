@@ -2,10 +2,10 @@ import React from 'react';
 import styled from 'styled-components';
 
 // DescriptonWrapper
-import { DescriptionWrapper } from '../shared_style.js';
+import { DescriptionWrapper } from '../shared_style';
 
 // BlueBaseLink
-import { BlueBaseLink } from '../shared_style.js';
+import { BlueBaseLink } from '../shared_style';
 
 const CreateAccountSentenceWrapper = styled(DescriptionWrapper)`
   text-align: center;
@@ -20,7 +20,7 @@ const CreateAccountAgreeSentenceWrapper = styled(DescriptionWrapper)`
   font-size: 0.9em;
 `;
 
-export const CreateAccountSentence = () => {
+export const CreateAccountSentence = (): JSX.Element => {
   return (
     <>
       <CreateAccountSentenceWrapper>

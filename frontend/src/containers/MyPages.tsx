@@ -7,7 +7,7 @@ import { Header } from '../components/Headers/Header.jsx';
 import { SessionFlashMessage } from '../components/FlashMessages/SessionFlashMessage';
 import { UserStatus } from '../components/Games/UserStatus';
 import { StudyHeatMap } from '../components/Games/StudyHeatMap';
-import { DescriptionWrapper } from '../components/shared_style.js';
+import { DescriptionWrapper } from '../components/shared_style';
 import { GameContent } from '../components/GameContents/GameContent';
 import { TitleCard } from '../components/Games/TitleCard';
 import { Footer } from '../components/Footers/Footer';

@@ -4,7 +4,7 @@ import { bounce } from 'react-animations';
 import { COLORS } from '../../style_constants';
 
 // FakeLink
-import { FakeLink } from '../shared_style.js';
+import { FakeLink } from '../shared_style';
 
 // Responsive
 import { WIDTH } from '../../style_constants.js';
@@ -29,7 +29,7 @@ const BouncyDiv = styled.div`
   animation: infinite 5s ${bounceAnimation};
 `;
 
-export const BoundDescriptionSentence = () => {
+export const BoundDescriptionSentence = (): JSX.Element => {
   return (
     <>
       <BouncyDiv>

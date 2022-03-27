@@ -10,7 +10,7 @@ import Box from '@mui/material/Box';
 import Tooltip from '@mui/material/Tooltip';
 import Typography from '@mui/material/Typography';
 
-import { BaseLink } from '../shared_style.js';
+import { BaseLink } from '../shared_style';
 
 // Contextオブジェクト
 import { UserContext } from "../../context/UserProvider";

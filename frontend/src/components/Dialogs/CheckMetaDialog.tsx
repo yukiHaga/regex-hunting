@@ -34,15 +34,17 @@ import IconButton from '@mui/material/IconButton';
 import { slideFunction } from '../../functions/slideFunction';
 
 // コードブロック関係
-import { CodeBlockWrapper } from '../shared_style.js';
-import { CodeBlockDiv } from '../shared_style.js';
-import { CodeLineWrapper } from '../shared_style.js';
-import { BlankLineWrapper } from '../shared_style.js';
-import { ComentLineWrapper } from '../shared_style.js';
-import { CodeRedSpan } from '../shared_style.js';
-import { CodeYellowSpan } from '../shared_style.js';
-import { CodeBlueSpan } from '../shared_style.js';
-import { CodeComentSpan } from '../shared_style.js';
+import {
+  CodeBlockWrapper,
+  CodeBlockDiv,
+  CodeLineWrapper,
+  BlankLineWrapper,
+  ComentLineWrapper,
+  CodeRedSpan,
+  CodeYellowSpan,
+  CodeBlueSpan,
+  CodeComentSpan
+} from '../shared_style';
 
 // テーブルの行のデータ
 import {
@@ -55,7 +57,7 @@ import {
 } from './dataRows';
 
 // 説明スライドのワーニングセンテンス
-import { WarningSentenceWrapper } from '../shared_style.js';
+import { WarningSentenceWrapper } from '../shared_style';
 
 // setGameStateの型
 import { SetGameState } from '../../types/containers/games';

@@ -1,7 +1,9 @@
-import { LeftSlideOutAnime } from '../components/shared_style.js';
-import { LeftSlideInAnime } from '../components/shared_style.js';
-import { RightSlideOutAnime } from '../components/shared_style.js';
-import { RightSlideInAnime } from '../components/shared_style.js';
+import {
+  LeftSlideOutAnime,
+  LeftSlideInAnime,
+  RightSlideOutAnime,
+  RightSlideInAnime
+} from '../components/shared_style';
 import { Keyframes } from 'styled-components';
 
 type SlideFunction = (slideIn: boolean, slideOut: boolean, direction: 'left' | 'right') => false | Keyframes;

@@ -1,13 +1,16 @@
 import styled from 'styled-components';
 
 // DescriptonWrapper
-import { DescriptionWrapper } from '../shared_style.js';
+import { DescriptionWrapper } from '../shared_style';
 
 // BlueBaseLink
-import { BlueBaseLink } from '../shared_style.js';
+import { BlueBaseLink } from '../shared_style';
 
 // Colors
 import { COLORS } from '../../style_constants.js';
+
+// setGameStateの型
+import { SetGameState } from '../../types/containers/games';
 
 // SignUpSentenceWrapepr
 const CheackAnswerSentenceWrapper = styled(DescriptionWrapper)`
@@ -15,9 +18,13 @@ const CheackAnswerSentenceWrapper = styled(DescriptionWrapper)`
   color: ${COLORS.LIGHT_BLUE};
 `;
 
+type CheackAnswerSentenceArg = {
+  setGameState: SetGameState;
+};
+
 export const CheackAnswerSentence = ({
   setGameState
-}) => {
+}: CheackAnswerSentenceArg): JSX.Element => {
 
   const handleAnswer = () => {
     setGameState((prev) => ({

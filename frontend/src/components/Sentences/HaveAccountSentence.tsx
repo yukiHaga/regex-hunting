@@ -2,10 +2,10 @@ import React from 'react';
 import styled from 'styled-components';
 
 // DescriptonWrapper
-import { DescriptionWrapper } from '../shared_style.js';
+import { DescriptionWrapper } from '../shared_style';
 
 // BlueBaseLink
-import { BlueBaseLink } from '../shared_style.js';
+import { BlueBaseLink } from '../shared_style';
 
 // SignUpSentenceWrapepr
 const HaveAccountSentenceWrapper = styled(DescriptionWrapper)`
@@ -13,11 +13,16 @@ const HaveAccountSentenceWrapper = styled(DescriptionWrapper)`
   font-size: 0.9em;
 `;
 
-export const HaveAccountSentence = ({onClick}) => {
+// HaveAccountSentenceの引数の型
+type HaveAccountSentenceArg = {
+  onClick: () => void;
+};
+
+export const HaveAccountSentence = ({onClick}: HaveAccountSentenceArg): JSX.Element => {
   return (
     <>
       <HaveAccountSentenceWrapper>
-        すでにアカウントをお持ちですか？&nbsp;&nbsp; 
+        すでにアカウントをお持ちですか？&nbsp;&nbsp;
         <BlueBaseLink to={'#'} onClick={onClick}>
           ログイン
         </BlueBaseLink>

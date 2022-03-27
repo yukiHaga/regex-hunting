@@ -8,7 +8,7 @@ import { DialogContent, Dialog } from '@mui/material';
 import { COLORS } from '../../style_constants.js';
 
 // DescriptionWrapper
-import { DescriptionWrapper } from '../shared_style.js';
+import { DescriptionWrapper } from '../shared_style';
 
 // handleTitleColorType
 // タイトルカラーを取り扱う関数

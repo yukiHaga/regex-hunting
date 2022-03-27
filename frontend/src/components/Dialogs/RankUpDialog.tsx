@@ -8,7 +8,7 @@ import { DialogContent, Dialog } from '@mui/material';
 import { COLORS } from '../../style_constants.js';
 
 // DescriptionWrapper
-import { DescriptionWrapper } from '../shared_style.js';
+import { DescriptionWrapper } from '../shared_style';
 
 // 戻るボタン
 import { BackToModalButton } from '../Buttons/BackToModalButton';

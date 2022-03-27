@@ -4,8 +4,8 @@ import styled from 'styled-components';
 // Colors
 import { COLORS } from '../../style_constants.js';
 
-// DescriptionWrapper 
-import { DescriptionWrapper } from '../shared_style.js';
+// DescriptionWrapper
+import { DescriptionWrapper } from '../shared_style';
 
 // Sounds
 import GageUpSounds from '../../sounds/gage_up_25.mp3';
@@ -60,20 +60,20 @@ const InnerExperienceGageWrapper = styled.div`
 export const DialogExperienceBox = ({
   rank,
   totalExperience,
-  maximumExperiencePerRank, 
+  maximumExperiencePerRank,
   temporaryExperience,
   prevTemporaryExperience,
   dialogGageUp,
 }) => {
 
   const initialState = {
-    temporaryExperience: 
+    temporaryExperience:
       dialogGageUp ? prevTemporaryExperience : temporaryExperience
   };
 
-  const [ 
-    temporaryExperienceState, 
-    setTemporaryExperienceState 
+  const [
+    temporaryExperienceState,
+    setTemporaryExperienceState
   ] = useState(initialState);
 
   // 最初にマウントされた後に実行されるuseEffect
@@ -101,9 +101,9 @@ export const DialogExperienceBox = ({
     <>
       <ExperienceBoxWrapper>
         <ExperienceTextWrapper>
-          現在の経験値： { 
+          現在の経験値： {
             temporaryExperienceState.temporaryExperience === prevTemporaryExperience ?
-              totalExperience - (temporaryExperience - prevTemporaryExperience ) 
+              totalExperience - (temporaryExperience - prevTemporaryExperience )
             :
               totalExperience
           }
@@ -111,7 +111,7 @@ export const DialogExperienceBox = ({
         <ExperienceGageWrapper>
           {
             (temporaryExperience / maximumExperiencePerRank) !== 0 &&
-              <InnerExperienceGageWrapper 
+              <InnerExperienceGageWrapper
                 temporaryExperience={temporaryExperienceState.temporaryExperience}
                 maximumExperiencePerRank={maximumExperiencePerRank}
                 dialogGageUp={dialogGageUp}
@@ -119,11 +119,11 @@ export const DialogExperienceBox = ({
           }
         </ExperienceGageWrapper>
         <ExperienceTextWrapper>
-          ランクアップに必要な経験値： { 
+          ランクアップに必要な経験値： {
             temporaryExperienceState.temporaryExperience >= maximumExperiencePerRank ?
               0
             :
-              maximumExperiencePerRank - temporaryExperienceState.temporaryExperience 
+              maximumExperiencePerRank - temporaryExperienceState.temporaryExperience
           }
         </ExperienceTextWrapper>
       </ExperienceBoxWrapper>

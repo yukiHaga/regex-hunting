@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { ReactNode } from 'react';
 import styled from 'styled-components';
 
 // Colors
@@ -11,7 +11,7 @@ const DangerText = styled.p`
   font-size: 0.9em;
 `;
 
-export const InputErrorSentence = ({children}) => {
+export const InputErrorSentence = ({children}: {children: ReactNode}): JSX.Element => {
   return (
     <>
       <DangerText>

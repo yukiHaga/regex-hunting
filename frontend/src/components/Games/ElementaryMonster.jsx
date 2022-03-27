@@ -11,9 +11,11 @@ import ElementaryMonsterImage from '../../images/elementary.png';
 import { handleColorType } from '../../functions/handleColorType';
 
 // アニメーション
-import { MonsterFlash } from '../shared_style.js';
-import { FadeInAnime } from '../shared_style.js';
-import { FadeOutAnime } from '../shared_style.js';
+import {
+  MonsterFlash,
+  FadeInAnime,
+  FadeOutAnime
+} from '../shared_style';
 
 const ElementaryWrapper = styled.div`
   animation-name: ${({ gameResult }) => gameResult === "win" && FadeOutAnime};

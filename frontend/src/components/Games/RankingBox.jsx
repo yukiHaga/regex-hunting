@@ -17,7 +17,7 @@ import { getClearTime } from '../../functions/getClearTime';
 import { COLORS } from '../../style_constants.js';
 
 // DescriptionWrapper
-import { DescriptionWrapper } from '../shared_style.js';
+import { DescriptionWrapper } from '../shared_style';
 
 // デフォルトのアバター画像
 import DefaultAvatarImage from '../../images/default_avatar.png';

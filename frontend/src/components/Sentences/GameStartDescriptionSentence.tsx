@@ -1,8 +1,8 @@
-import React from 'react';
+import React, { ReactNode } from 'react';
 import styled from 'styled-components';
 
 // DescriptonWrapper
-import { DescriptionWrapper } from '../shared_style.js';
+import { DescriptionWrapper } from '../shared_style';
 
 // Responsive
 import { WIDTH } from '../../style_constants.js';
@@ -22,7 +22,7 @@ const GameStartDescriptionSentenceWrapper = styled(DescriptionWrapper)`
   }
 `;
 
-export const GameStartDescriptionSentence = ({children}) => {
+export const GameStartDescriptionSentence = ({children}: {children: ReactNode}): JSX.Element => {
   return (
     <>
       <GameStartDescriptionWrapper>

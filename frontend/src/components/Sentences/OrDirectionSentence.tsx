@@ -25,7 +25,7 @@ const OrDirectionSentenceWrapper = styled.div`
   font-size: 0.9em;
 `;
 
-export const OrDirectionSentence = () => {
+export const OrDirectionSentence = (): JSX.Element => {
   return (
     <>
       <OrDirectionSentenceWrapper>

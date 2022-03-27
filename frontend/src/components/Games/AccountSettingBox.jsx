@@ -28,8 +28,8 @@ import InputLabel from '@mui/material/InputLabel';
 import FilledInput from '@mui/material/FilledInput';
 
 // Sentence
-import { InputErrorSentence } from '../Sentences/InputErrorSentence.jsx';
-import { SubmitErrorSentence } from '../Sentences/SubmitErrorSentence.jsx';
+import { InputErrorSentence } from '../Sentences/InputErrorSentence';
+import { SubmitErrorSentence } from '../Sentences/SubmitErrorSentence';
 
 // Button
 import { AccountSettingButton } from '../Buttons/AccountSettingButton';

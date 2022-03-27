@@ -20,12 +20,12 @@ import { Footer } from '../components/Footers/Footer';
 import { LoginDialog } from '../components/Dialogs/LoginDialog';
 import { SignUpDialog } from '../components/Dialogs/SignUpDialog';
 import { SessionFlashMessage } from '../components/FlashMessages/SessionFlashMessage';
-import { GameDescriptionSentence } from '../components/Sentences/GameDescriptionSentence.jsx';
-import { RankingDescriptionSentence } from '../components/Sentences/RankingDescriptionSentence.jsx';
-import { GameStartDescriptionSentence } from '../components/Sentences/GameStartDescriptionSentence.jsx';
+import { GameDescriptionSentence } from '../components/Sentences/GameDescriptionSentence';
+import { RankingDescriptionSentence } from '../components/Sentences/RankingDescriptionSentence';
+import { GameStartDescriptionSentence } from '../components/Sentences/GameStartDescriptionSentence';
 import { GameContent } from '../components/GameContents/GameContent';
-import { BoundDescriptionSentence } from '../components/Sentences/BoundDescriptionSentence.jsx';
-import { SubTitleSentence } from '../components/Sentences/SubTitleSentence.jsx';
+import { BoundDescriptionSentence } from '../components/Sentences/BoundDescriptionSentence';
+import { SubTitleSentence } from '../components/Sentences/SubTitleSentence';
 import { MobileFlashMessage } from '../components/FlashMessages/MobileFlashMessage';
 
 // Contextオブジェクト

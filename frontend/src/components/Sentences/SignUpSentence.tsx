@@ -2,10 +2,10 @@ import React from 'react';
 import styled from 'styled-components';
 
 // DescriptonWrapper
-import { DescriptionWrapper } from '../shared_style.js';
+import { DescriptionWrapper } from '../shared_style';
 
 // BlueBaseLink
-import { BlueBaseLink } from '../shared_style.js';
+import { BlueBaseLink } from '../shared_style';
 
 // SignUpSentenceWrapepr
 const SignUpSentenceWrapper = styled(DescriptionWrapper)`
@@ -13,11 +13,16 @@ const SignUpSentenceWrapper = styled(DescriptionWrapper)`
   font-size: 0.9em;
 `;
 
-export const SignUpSentence = ({onClick}) => {
+// SignUpSentence
+type SignUpSentenceArg = {
+  onClick: () => void;
+};
+
+export const SignUpSentence = ({onClick}: SignUpSentenceArg): JSX.Element => {
   return (
     <>
       <SignUpSentenceWrapper>
-        アカウントをお持ちではないですか？&nbsp;&nbsp; 
+        アカウントをお持ちではないですか？&nbsp;&nbsp;
         <BlueBaseLink to={'#'} onClick={onClick}>
           新規登録
         </BlueBaseLink>

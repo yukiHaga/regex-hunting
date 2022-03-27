@@ -20,7 +20,7 @@ import InputLabel from '@mui/material/InputLabel';
 import FilledInput from '@mui/material/FilledInput';
 
 // Sentence
-import { InputErrorSentence } from '../components/Sentences/InputErrorSentence.jsx';
+import { InputErrorSentence } from '../components/Sentences/InputErrorSentence';
 
 // パスワードリセットを更新するapiコール関数
 import { patchPasswordResetsUpdate } from '../apis/passwordUpdates';

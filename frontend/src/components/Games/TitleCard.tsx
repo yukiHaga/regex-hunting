@@ -2,7 +2,7 @@ import React, { memo } from 'react';
 import styled from 'styled-components';
 
 // DescriptionWrapper
-import { DescriptionWrapper } from '../../components/shared_style.js';
+import { DescriptionWrapper } from '../../components/shared_style';
 
 // Colors
 import { COLORS } from '../../style_constants.js';

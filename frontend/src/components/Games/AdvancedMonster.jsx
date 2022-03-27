@@ -10,9 +10,11 @@ import AdvancedMonsterImage from '../../images/advanced.png';
 import { handleColorType } from '../../functions/handleColorType';
 
 // アニメーション
-import { MonsterFlash } from '../shared_style.js';
-import { FadeInAnime } from '../shared_style.js';
-import { FadeOutAnime } from '../shared_style.js';
+import {
+  MonsterFlash,
+  FadeInAnime,
+  FadeOutAnime
+} from '../shared_style';
 
 const AdvancedWrapper = styled.div`
   animation-name: ${({ gameResult }) => gameResult === "win" && FadeOutAnime};
@@ -28,7 +30,7 @@ const FirstAdvancedMonsterWrapper = styled.img`
   top: 50%;
   left: 50%;
   transform: translateY(-95%) translateX(-50%);
-  -webkit- transform: translateY(-95%) translateX(-50%);
+  -webkit-transform: translateY(-95%) translateX(-50%);
   margin: auto;
   width: 50vw;
   height: 55vh;
@@ -44,7 +46,7 @@ const AdvancedMonsterWrapper = styled.img`
   top: 50%;
   left: 50%;
   transform: translateY(-95%) translateX(-50%);
-  -webkit- transform: translateY(-95%) translateX(-50%);
+  -webkit-transform: translateY(-95%) translateX(-50%);
   margin: auto;
   width: 50vw;
   height: 55vh;

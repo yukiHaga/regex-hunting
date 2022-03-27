@@ -8,7 +8,7 @@ import MainTitleImage from '../../images/main_title.png';
 import { WIDTH } from '../../style_constants.js';
 
 // BaseLink
-import { BaseLink } from '../shared_style.js';
+import { BaseLink } from '../shared_style';
 
 const MainTitleImageCover = styled.img`
   width: 14vw;
@@ -24,7 +24,7 @@ const MainTitleImageCover = styled.img`
 const HeaderTitleLink = styled(BaseLink)`
 `;
 
-export const HeaderTitle = () => {
+export const HeaderTitle = (): JSX.Element => {
   return (
     <>
       <HeaderTitleLink to={`/`}>

@@ -1,4 +1,4 @@
-import React, { memo } from 'react';
+import React, { memo, ReactNode } from 'react';
 import styled from 'styled-components';
 import { COLORS } from '../../style_constants';
 
@@ -11,16 +11,16 @@ const SubTitleSentenceWrapper = styled.div`
   font-style: normal;
   font-weight: bold;
   font-size: 1.9em;
-  color: ${(props) => props.color || COLORS.BLACK};
+  color: ${({ color }) => color || COLORS.BLACK};
   margin: 0 auto;
   @media (max-width: ${WIDTH.MOBILE}) {
     font-size: 1.1em;
-    margin-top: 3%;  
+    margin-top: 3%;
   }
   letter-spacing: 0.04em;
 `;
 
-export const SubTitleSentence = memo(({color, children}) => {
+export const SubTitleSentence = memo(({color, children}: { color: string, children: ReactNode}): JSX.Element => {
   return (
     <>
       <SubTitleSentenceWrapper color={color}>

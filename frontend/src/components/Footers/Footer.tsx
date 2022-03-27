@@ -10,7 +10,7 @@ import Toolbar from '@mui/material/Toolbar';
 import Button from '@mui/material/Button';
 
 // BaseLink
-import { BaseLink } from '../shared_style.js';
+import { BaseLink } from '../shared_style';
 
 const FooterWrapper = styled.div`
   background-color: ${COLORS.BROWN};
