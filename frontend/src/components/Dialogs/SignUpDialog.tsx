@@ -79,17 +79,23 @@ const CustomFormControl = styled(FormControl)`
 `;
 
 // ここのwidthはpx指定しないとレイアウトが崩れるので、pxにした
-const CustomFilledInput = styled(FilledInput)`
+const CustomFilledInput = styled(FilledInput)<{label: string, errors_box: {message: string, ref: object, type: string} | undefined }>`
   margin-bottom: ${({
     errors_box
   }) => typeof errors_box === 'undefined' && '4%' };
 `;
 
+type SignUpDialogArg = {
+  isOpen: true;
+  onClose: () => void;
+  onClick: () => void;
+};
+
 export const SignUpDialog = ({
   isOpen,
   onClose,
   onClick
-}) => {
+}: SignUpDialogArg): JSX.Element => {
 
   // useContext
   const {
@@ -133,7 +139,7 @@ export const SignUpDialog = ({
     EmailBox,
     PasswordBox,
     PasswordConfirmationBox
-  }) => {
+  }: {NameBox: string, EmailBox: string, PasswordBox: string, PasswordConfirmationBox: string}) => {
     postUser({
       user: {
         name: NameBox,
@@ -207,7 +213,7 @@ export const SignUpDialog = ({
         message: "大文字, 小文字, 数字を含めて入力してください。"
       },
       validate: {
-        confirmPassword: (value) => value === password.current || "パスワードが一致しません。"
+        confirmPassword: (value: string) => value === password.current || "パスワードが一致しません。"
       }
     }
   };

@@ -6,7 +6,7 @@ import { Header } from '../components/Headers/Header.jsx';
 import { Footer } from '../components/Footers/Footer.jsx';
 import { RankingBox } from '../components/Games/RankingBox';
 import { LoginDialog } from '../components/Dialogs/LoginDialog';
-import { SignUpDialog } from '../components/Dialogs/SignUpDialog.jsx';
+import { SignUpDialog } from '../components/Dialogs/SignUpDialog';
 
 // Contextオブジェクト
 import { UserContext } from "../context/UserProvider";
