@@ -17,7 +17,7 @@ import { Header } from '../components/Headers/Header.jsx';
 import { SubText } from '../components/SubText.jsx';
 import { StartButton } from '../components/Buttons/StartButton'
 import { Footer } from '../components/Footers/Footer.jsx';
-import { LoginDialog } from '../components/Dialogs/LoginDialog.jsx';
+import { LoginDialog } from '../components/Dialogs/LoginDialog';
 import { SignUpDialog } from '../components/Dialogs/SignUpDialog.jsx';
 import { SessionFlashMessage } from '../components/FlashMessages/SessionFlashMessage.jsx';
 import { GameDescriptionSentence } from '../components/Sentences/GameDescriptionSentence.jsx';

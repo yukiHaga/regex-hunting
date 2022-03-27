@@ -5,7 +5,7 @@ import styled from 'styled-components';
 import { Header } from '../components/Headers/Header.jsx';
 import { Footer } from '../components/Footers/Footer.jsx';
 import { RankingBox } from '../components/Games/RankingBox';
-import { LoginDialog } from '../components/Dialogs/LoginDialog.jsx';
+import { LoginDialog } from '../components/Dialogs/LoginDialog';
 import { SignUpDialog } from '../components/Dialogs/SignUpDialog.jsx';
 
 // Contextオブジェクト

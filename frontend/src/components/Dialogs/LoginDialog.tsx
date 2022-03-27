@@ -80,17 +80,23 @@ const CustomFormControl = styled(FormControl)`
 `;
 
 // ここのwidthはpx指定しないとレイアウトが崩れるので、pxにした
-const CustomFilledInput = styled(FilledInput)`
+const CustomFilledInput = styled(FilledInput)<{label: string, errors_box: {message: string, ref: object, type: string} | undefined }>`
   margin-bottom: ${({
     errors_box
   }) => typeof errors_box === 'undefined' && '4%' };
 `;
 
+type LoginDialogArg = {
+  isOpen: boolean;
+  onClose: () => void;
+  onClick: () => void;
+};
+
 export const LoginDialog = ({
   isOpen,
   onClose,
   onClick
-}) => {
+}: LoginDialogArg): JSX.Element => {
 
   // useContext
   const {
@@ -118,7 +124,7 @@ export const LoginDialog = ({
   // postUserSessionで取得したdataを実引数として、dispatchを実行
   // reducer側でちゃんとstateは更新されている。
   // しかし、この関数内でstateをコンソール出力できない。
-  const onSubmit = ({EmailBox, PasswordBox}) => {
+  const onSubmit = ({EmailBox, PasswordBox}: {EmailBox: string, PasswordBox: string}) => {
     postUserSession({
       user: {
         email: EmailBox,
