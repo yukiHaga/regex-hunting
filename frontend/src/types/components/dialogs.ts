@@ -37,6 +37,6 @@ export type GameOverDialogArg = {
   temporaryExperience: number;
   prevTemporaryExperience: number;
   dialogGageUp: boolean;
-  gameResult: 'lose;'
+  gameResult: 'lose';
   rankUp: boolean;
 };

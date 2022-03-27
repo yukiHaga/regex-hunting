@@ -18,7 +18,7 @@ import { HpGage } from '../components/Games/HpGage.jsx';
 import { GameFooter } from '../components/Footers/GameFooter.jsx';
 import { JudgementFlashMessage } from '../components/FlashMessages/JudgementFlashMessage.jsx'
 import { GameClearDialog } from '../components/Dialogs/GameClearDialog'
-import { GameOverDialog } from '../components/Dialogs/GameOverDialog.jsx'
+import { GameOverDialog } from '../components/Dialogs/GameOverDialog'
 import { CheckAnswerDialog } from '../components/Dialogs/CheckAnswerDialog'
 import { ElementaryGameDescriptionDialog } from '../components/Dialogs/ElementaryGameDescriptionDialog.jsx'
 import { IntermediateGameDescriptionDialog } from '../components/Dialogs/IntermediateGameDescriptionDialog.jsx'

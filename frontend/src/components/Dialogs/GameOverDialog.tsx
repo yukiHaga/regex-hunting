@@ -25,6 +25,9 @@ import { DialogExperienceBox } from '../Games/DialogExperienceBox.jsx';
 // モンスター名を取得する関数
 import { getMonsterName } from '../../functions/getMonsterName';
 
+// GameOverDialogの引数の型
+import { GameOverDialogArg } from '../../types/components/dialogs';
+
 const CustomDialogInnerWrapper = styled.div`
   width: 40vw;
   padding: 3%;
@@ -130,16 +133,14 @@ export const GameOverDialog = ({
   dialogGageUp,
   gameResult,
   rankUp
-}) => {
+}: GameOverDialogArg): JSX.Element => {
 
   return(
     <Dialog
       open={isOpen}
       maxWidth='lg'
     >
-      <CustomDialogInnerWrapper
-        hasUser={hasUser}
-      >
+      <CustomDialogInnerWrapper>
         <CustomDialogTitleWrapper>
           <CustomSpan>GAME OVER</CustomSpan>
           GAME OVER
