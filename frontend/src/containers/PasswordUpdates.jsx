@@ -5,7 +5,7 @@ import { useNavigate, useLocation } from 'react-router-dom';
 
 // Presentational Components
 import { Header } from '../components/Headers/Header.jsx';
-import { Footer } from '../components/Footers/Footer.jsx';
+import { Footer } from '../components/Footers/Footer';
 import { PasswordUpdatesButton } from '../components/Buttons/PasswordUpdatesButton';
 
 // Colors

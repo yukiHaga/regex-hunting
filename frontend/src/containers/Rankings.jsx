@@ -3,7 +3,7 @@ import styled from 'styled-components';
 
 // Presentational Components
 import { Header } from '../components/Headers/Header.jsx';
-import { Footer } from '../components/Footers/Footer.jsx';
+import { Footer } from '../components/Footers/Footer';
 import { RankingBox } from '../components/Games/RankingBox';
 import { LoginDialog } from '../components/Dialogs/LoginDialog';
 import { SignUpDialog } from '../components/Dialogs/SignUpDialog';

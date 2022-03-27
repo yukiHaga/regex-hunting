@@ -15,7 +15,7 @@ import { QuestionBlock } from '../components/Games/QuestionBlock.jsx';
 import { CodeBlock } from '../components/Games/CodeBlock.jsx';
 import { TimeGage } from '../components/Games/TimeGage.jsx';
 import { HpGage } from '../components/Games/HpGage.jsx';
-import { GameFooter } from '../components/Footers/GameFooter.jsx';
+import { GameFooter } from '../components/Footers/GameFooter';
 import { JudgementFlashMessage } from '../components/FlashMessages/JudgementFlashMessage'
 import { GameClearDialog } from '../components/Dialogs/GameClearDialog'
 import { GameOverDialog } from '../components/Dialogs/GameOverDialog'

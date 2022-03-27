@@ -16,7 +16,7 @@ import AdvancedGameContentImage from '../images/advanced_game_content.jpg';
 import { Header } from '../components/Headers/Header.jsx';
 import { SubText } from '../components/SubText.jsx';
 import { StartButton } from '../components/Buttons/StartButton'
-import { Footer } from '../components/Footers/Footer.jsx';
+import { Footer } from '../components/Footers/Footer';
 import { LoginDialog } from '../components/Dialogs/LoginDialog';
 import { SignUpDialog } from '../components/Dialogs/SignUpDialog';
 import { SessionFlashMessage } from '../components/FlashMessages/SessionFlashMessage';

@@ -19,7 +19,7 @@ const FooterWrapper = styled.div`
 // 遷移するスピードが早すぎるから、リップルエフェクトが最後の四角の状態になるまで表示されない
 // 四角の状態になる前にページが遷移する
 // hrefを/#にして検証済
-export const Footer = () => {
+export const Footer = (): JSX.Element => {
   return (
     <>
       <FooterWrapper>

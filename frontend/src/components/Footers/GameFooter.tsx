@@ -8,6 +8,9 @@ import Container from '@mui/material/Container';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
 
+// setGameStateの型
+import { SetGameState } from '../../types/containers/games';
+
 const FooterWrapper = styled.div`
   background-color: ${COLORS.BROWN};
   height: 8.7vh;
@@ -27,15 +30,20 @@ const ModalLinkBlock = styled.div`
   width: 9vw;
 `;
 
+// GameFooterの引数の型
+type GameFooterArg = {
+  setGameState: SetGameState;
+};
+
 export const GameFooter = ({
   setGameState,
-}) => {
+}: GameFooterArg): JSX.Element => {
 
   // gameDescriptionOpenがtrue, clickDescriptionOpenがtrueの時、
   // スライドを見る用の説明モーダルが開く
   const handleGameDescriptionDialog = () => {
     setGameState((prev) => ({
-      ...prev,  
+      ...prev,
       gameDescriptionOpen: true,
       clickDescriptionOpen: true
     }));
@@ -45,7 +53,7 @@ export const GameFooter = ({
   // メタ文字一覧のモーダルが開く
   const handleMetaDialog = () => {
     setGameState((prev) => ({
-      ...prev,  
+      ...prev,
       clickMetaOpen: true
     }));
   }
@@ -67,7 +75,7 @@ export const GameFooter = ({
                 <ModalLinkBlock
                   onClick={handleMetaDialog}
                 >
-                  特殊文字一覧 
+                  特殊文字一覧
                 </ModalLinkBlock>
               </Box>
             </Box>
