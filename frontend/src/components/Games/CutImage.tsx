@@ -2,7 +2,7 @@ import React from 'react';
 import styled, { keyframes } from 'styled-components';
 
 // Image
-import CutFlashImage from '../../images/moment_cut_image.png'; 
+import CutFlashImage from '../../images/moment_cut_image.png';
 
 const Mask = styled.div`
   position:fixed;
@@ -35,7 +35,7 @@ const CustomImage = styled.img`
   animation-fill-mode: forwards;
 `;
 
-export const CutImage = () => {
+export const CutImage = (): JSX.Element => {
   return (
     <>
       <Mask>

@@ -2,7 +2,7 @@ import React from 'react';
 import styled, { keyframes } from 'styled-components';
 
 // Image
-import ClawFlashImage from '../../images/moment_claw_image.png'; 
+import ClawFlashImage from '../../images/moment_claw_image.png';
 
 const Mask = styled.div`
   position:fixed;
@@ -35,7 +35,7 @@ const CustomImage = styled.img`
   animation-fill-mode: forwards;
 `;
 
-export const ClawImage = () => {
+export const ClawImage = (): JSX.Element => {
   return (
     <>
       <Mask>

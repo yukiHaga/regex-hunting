@@ -29,7 +29,7 @@ export type GameState = {
     monsterHp: number;
     monsterMaxHp: number;
     correctQuestions: {
-      inputRegex: string;
+      inputRegex: string | undefined;
       question: {
         commentary: string;
         created_at: string;
@@ -68,11 +68,11 @@ export type GameState = {
     nextHint: string;
     matchArray: {
       match: string;
-      index: number;
+      index: number | undefined;
     }[];
     flashDisplay: boolean;
     flashTitle: "" | 'Good' | 'Bad';
-    inputRegex: string;
+    inputRegex: string | undefined;
     inputRegexObject: RegExp | {};
     keyAvailable: boolean;
     gameResult: '' | 'win' | 'lose' | 'progress';

@@ -14,9 +14,9 @@ type UserContextType = {
   requestUserState: InitialState;
   dispatch: React.Dispatch<Action>;
   requestUserActionTyps: {
-      REQUEST: string;
-      REQUEST_SUCCESS: string;
-      REQUEST_FAILURE: string;
+    REQUEST: string;
+    REQUEST_SUCCESS: string;
+    REQUEST_FAILURE: string;
   };
 };
 

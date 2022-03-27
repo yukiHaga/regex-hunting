@@ -12,7 +12,7 @@ import { ElementaryMonster } from '../components/Games/ElementaryMonster';
 import { IntermediateMonster } from '../components/Games/IntermediateMonster';
 import { AdvancedMonster } from '../components/Games/AdvancedMonster';
 import { QuestionBlock } from '../components/Games/QuestionBlock.jsx';
-import { CodeBlock } from '../components/Games/CodeBlock.jsx';
+import { CodeBlock } from '../components/Games/CodeBlock';
 import { TimeGage } from '../components/Games/TimeGage.jsx';
 import { HpGage } from '../components/Games/HpGage.jsx';
 import { GameFooter } from '../components/Footers/GameFooter';
@@ -26,8 +26,8 @@ import { AdvancedGameDescriptionDialog } from '../components/Dialogs/AdvancedGam
 
 import { RankUpDialog } from '../components/Dialogs/RankUpDialog';
 import { CheckMetaDialog } from '../components/Dialogs/CheckMetaDialog';
-import { CutImage } from '../components/Games/CutImage.jsx';
-import { ClawImage } from '../components/Games/ClawImage.jsx';
+import { CutImage } from '../components/Games/CutImage';
+import { ClawImage } from '../components/Games/ClawImage';
 import { CircularMask } from '../components/loads/CircularMask';
 
 // Contextオブジェクト

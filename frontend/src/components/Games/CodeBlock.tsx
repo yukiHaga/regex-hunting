@@ -14,6 +14,7 @@ import CutMonsterSound from '../../sounds/cut_25.mp3';
 // calculateDamage
 import { calculateDamage } from '../../functions/calculateDamage';
 
+import { GameState, SetGameState} from '../../types/containers/games';
 const CodeBlockWrapper = styled.div`
   background-color: ${COLORS.LIGHT_BLACK};
   border-radius: 3px;
@@ -70,6 +71,32 @@ const CodeBlockDiv = styled.div`
   };
 `;
 
+type CodeBlockArg = {
+  correctQuestions: GameState['correctQuestions'];
+  questions: GameState['questions'];
+  setGameState: SetGameState;
+  targetSentence: GameState['targetSentence'];
+  sampleAnswer: GameState['sampleAnswer'];
+  monsterHp: GameState['monsterHp'];
+  monsterDefence: GameState['monsterDefence'];
+  questionJudgement: GameState['questionJudgement'];
+  keyAvailable: GameState['keyAvailable'];
+  userAttack: GameState['userAttack'];
+  sentenceNum: GameState['sentenceNum'];
+  gameDescriptionOpen: GameState['gameDescriptionOpen'];
+  clickMetaOpen: GameState['clickMetaOpen'];
+};
+
+type InputMatchArray = {
+  match: string;
+  index: number | undefined;
+}[];
+
+type SampleMatchArray = {
+  match: string;
+  index: number | undefined;
+}[];
+
 // 日本語にmaxlengh属性は聞かない
 export const CodeBlock = ({
   correctQuestions,
@@ -85,16 +112,16 @@ export const CodeBlock = ({
   sentenceNum,
   gameDescriptionOpen,
   clickMetaOpen
-}) => {
+}: CodeBlockArg): JSX.Element => {
 
   const [inputState, setCodeState] = useState("");
-  const inputRefObject = useRef("");
+  const inputRefObject = useRef<HTMLDivElement>(null);
 
   // regexObjectを生成する関数
   // テンプレートリテラルの括弧(を無くすと、キャプチャしたものが配列に含まれなくなる。
   // そのため、マッチした文字列がQuestionBlockに正確に反映されない時がある。
   const getRegexObject = (
-    inputRegex
+    inputRegex: string | undefined
   ) => {
     return new RegExp(`(${inputRegex})`, 'g');
   }
@@ -103,8 +130,8 @@ export const CodeBlock = ({
   // matchAllはIteratorを返す
   // indexは、string[1]のように使うために必要
   const getMatchArray = (
-    targetSentence,
-    inputRegex
+    targetSentence: string,
+    inputRegex: string | undefined
   ) => {
     try {
       const regexObject = new RegExp(`${inputRegex}`, 'g');
@@ -125,8 +152,8 @@ export const CodeBlock = ({
   // マッチした配列と答えのマッチした配列が一致しているかを返す関数
   // V2では位置も考慮に入れている
   const getQuestionJudgementV2 = (
-    inputMatchArray,
-    sampleMatchArray
+    inputMatchArray: InputMatchArray,
+    sampleMatchArray: SampleMatchArray
   ) => {
     if(inputMatchArray.length > 0) {
       if(
@@ -168,7 +195,7 @@ export const CodeBlock = ({
   const handleEnter = useCallback((e) => {
     try {
       if(e.key === 'Enter' && questionJudgement === 'progress' && keyAvailable === true) {
-        const inputRegex = inputRefObject.current.innerText;
+        const inputRegex = inputRefObject?.current?.innerText;
         const inputRegexObject = getRegexObject(inputRegex);
         const inputMatchArray = getMatchArray(targetSentence, inputRegex);
         const sampleMatchArray = getMatchArray(targetSentence, sampleAnswer);
