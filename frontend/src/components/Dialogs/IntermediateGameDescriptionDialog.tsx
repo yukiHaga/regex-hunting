@@ -38,6 +38,9 @@ import { CodeComentSpan } from '../shared_style.js';
 // 説明スライドのワーニングセンテンス
 import { WarningSentenceWrapper } from '../shared_style.js';
 
+// スライド関連のコンポーネントやstateの型
+import { GameDescriptionDialogArg, SlideState } from '../../types/components/dialogs';
+
 const CustomDialogInnerWrapper = styled.div`
   background-color: ${COLORS.SUB};
   text-align: center;
@@ -62,7 +65,7 @@ const TitleWrapper = styled.div`
 
 // animationプロパティは1つしか存在できない
 // 2個存在する場合、2個目で1個目が上書きされる
-const SlideContentWrapper = styled.div`
+const SlideContentWrapper = styled.div<{slideIn: boolean, slideOut: boolean, direction: 'right' | 'left'}>`
   width: 100%;
   height: 100%;
   margin: 0 auto;
@@ -116,7 +119,7 @@ export const IntermediateGameDescriptionDialog = ({
   setGameState,
   gameDescriptionOpen,
   clickDescriptionOpen
-}) => {
+}: GameDescriptionDialogArg): JSX.Element => {
 
   // 第2引数に空の依存配列を渡した場合、初回の1回のみ実行され、
   // 2度目以降のレンダリング時にはキャッシュから値を取得する
@@ -159,13 +162,13 @@ export const IntermediateGameDescriptionDialog = ({
     }
   ], []);
 
-  const initialState = {
+  const initialState: SlideState = {
     title: slideContent[0]["title"],
     sentence: slideContent[0]["sentence"],
     slideNum: slideContent[0]["slideNum"],
     slideIn: false,
     slideOut: false,
-    direction: "",
+    direction: 'right',
   };
 
   const [slideState, setSlideState] = useState(initialState);
@@ -228,13 +231,13 @@ export const IntermediateGameDescriptionDialog = ({
 
   useEffect(() => {
     if(gameDescriptionOpen) {
-      const handleRightkeyPress = (e) => {
+      const handleRightkeyPress = (e: KeyboardEvent) => {
         if(e.key !== 'Enter' && e.key === 'ArrowRight') {
           changeSlideToRight();
         }
       };
 
-      const handleLeftkeyPress = (e) => {
+      const handleLeftkeyPress = (e: KeyboardEvent) => {
         if(e.key !== 'Enter' && e.key === 'ArrowLeft') {
           changeSlideToLeft();
         }
@@ -481,7 +484,7 @@ export const IntermediateGameDescriptionDialog = ({
                     sx={{
                       fontSize: '4.0em',
                       opacity: slideState.slideNum === 6 ? 0.1 : 1,
-                      cursor: slideState.slideNum === 6 && "default"
+                      cursor: slideState.slideNum === 6 ? "default" : "pointer"
                     }}
                     disableRipple={slideState.slideNum === 6}
                   >
