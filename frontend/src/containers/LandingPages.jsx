@@ -26,7 +26,7 @@ import { GameStartDescriptionSentence } from '../components/Sentences/GameStartD
 import { GameContent } from '../components/GameContents/GameContent';
 import { BoundDescriptionSentence } from '../components/Sentences/BoundDescriptionSentence.jsx';
 import { SubTitleSentence } from '../components/Sentences/SubTitleSentence.jsx';
-import { MobileFlashMessage } from '../components/FlashMessages/MobileFlashMessage.jsx';
+import { MobileFlashMessage } from '../components/FlashMessages/MobileFlashMessage';
 
 // Contextオブジェクト
 import { UserContext } from "../context/UserProvider";

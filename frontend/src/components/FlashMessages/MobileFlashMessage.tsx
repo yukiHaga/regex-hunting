@@ -4,13 +4,22 @@ import React, { Fragment, useState, useEffect } from 'react';
 import Alert from '@mui/material/Alert';
 import Snackbar from '@mui/material/Snackbar';
 
+type MobileFlashMessageArg = {
+  display: boolean;
+  message: string;
+  setMobileState: React.Dispatch<React.SetStateAction<{
+    display: boolean;
+    message: string;
+  }>>;
+};
+
 export const MobileFlashMessage = ({
   display,
   message,
   setMobileState
-}) => {
+}: MobileFlashMessageArg): JSX.Element => {
 
-  const [open, setOpen] = useState(null);
+  const [open, setOpen] = useState<undefined | boolean>(undefined);
 
   const handleClose = () => {
     setOpen(false);
@@ -31,12 +40,12 @@ export const MobileFlashMessage = ({
 
   return (
     <>
-      <Snackbar 
-        open={open} 
-        autoHideDuration={3000} 
+      <Snackbar
+        open={open}
+        autoHideDuration={3000}
         anchorOrigin={{
           vertical: 'top',
-          horizontal: 'right' 
+          horizontal: 'right'
         }}
         sx={{
           position: 'fixed',
