@@ -5,7 +5,7 @@ import BattleSound from '../sounds/battle_25.mp3';
 
 // reducerのinitialStateの型
 // userとerrorsはオプション?を使った方が良い
-type InitialState = {
+export type InitialState = {
   requestState: string,
   sessionState: boolean,
   userState: {

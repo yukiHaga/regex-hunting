@@ -72,7 +72,7 @@ export const TitleSettingButton = ({
 
   // my-pageじゃなくて、/にすると、フラッシュメッセージが表示された
   const handleTitleSetting = () => {
-    patchTitleSetting(user, name).then((data) => {
+    patchTitleSetting(user.id as number, name).then((data) => {
       dispatch({
         type: requestUserActionTyps.REQUEST_SUCCESS,
         payload: {

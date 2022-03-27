@@ -3,6 +3,7 @@ import React, { createContext, useReducer, ReactNode} from "react";
 // Reducer関連をインポート
 import {
   initialState,
+  InitialState,
   requestUserActionTyps,
   requestUserReducer,
   Action
@@ -10,7 +11,7 @@ import {
 
 // コンテキストのvalueの型
 type UserContextType = {
-  requestUserState: any;
+  requestUserState: InitialState;
   dispatch: React.Dispatch<Action>;
   requestUserActionTyps: {
       REQUEST: string;

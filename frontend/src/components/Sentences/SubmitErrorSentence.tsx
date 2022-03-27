@@ -8,7 +8,7 @@ const DangerTextWrapper = styled.div`
   margin: 0 auto;
 `;
 
-const DangerText = styled.p<{errors_title: string}>`
+const DangerText = styled.p<{errors_title: string | undefined}>`
   display: inline-block;
   text-align: left;
   margin-top: ${({
@@ -21,7 +21,7 @@ const DangerText = styled.p<{errors_title: string}>`
 
 type SubmitErrorSentenceArg = {
   children: ReactNode;
-  errors_title: string;
+  errors_title?: string;
 };
 
 export const SubmitErrorSentence = ({

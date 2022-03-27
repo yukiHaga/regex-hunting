@@ -326,7 +326,7 @@ export const SignUpDialog = ({
             />
             <SignUpButton disabled={!isValid} />
             {
-              requestUserState.errors.title === 'Record Not Found' &&
+              requestUserState?.errors?.title === 'Record Not Found' &&
                 <SubmitErrorSentence
                   errors_title={requestUserState.errors.title}
                 >

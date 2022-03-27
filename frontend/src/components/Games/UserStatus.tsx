@@ -84,7 +84,7 @@ type UserStatusArg = {
   temporaryExperience: number;
   totalExperience: number;
   maximumExperiencePerRank: number;
-  image: string | null;
+  image: string | null | undefined;
 };
 
 export const UserStatus = memo(({

@@ -5,7 +5,7 @@ import styled from 'styled-components';
 // Presentational Components
 import { Header } from '../components/Headers/Header';
 import { Footer } from '../components/Footers/Footer';
-import { AccountSettingBox } from '../components/Games/AccountSettingBox.jsx';
+import { AccountSettingBox } from '../components/Games/AccountSettingBox';
 import { CircularMask } from '../components/loads/CircularMask';
 
 // Contextオブジェクト
@@ -30,7 +30,7 @@ const MainWrapper = styled.div`
   padding-top: 2.95%;
 `;
 
-export const AccountSettings = () => {
+export const AccountSettings = (): JSX.Element => {
 
   // useContext
   // requestUserStateには、requestState, userState, errorsが格納されている

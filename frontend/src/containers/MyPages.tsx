@@ -273,7 +273,7 @@ export const MyPages = (): JSX.Element => {
   // このuseLayoutEffectは機能しないように設定されている
   useLayoutEffect(() => {
     if(!myPageState.getPageInfo && sessionState && Object.keys(user).length){
-      getMyPageInfo(user).then((data) => {
+      getMyPageInfo(user.id as number).then((data) => {
         setMyPageState((prev) => ({
           ...prev,
           gameFrequenciesPerDay: data.game_frequencies_per_day,
@@ -334,7 +334,7 @@ export const MyPages = (): JSX.Element => {
               />
               <MainFirstWrapper>
                 <UserStatus
-                  name={user.name}
+                  name={user.name as string}
                   rank={user.rank}
                   activeTitle={user.active_title}
                   temporaryExperience={user.temporary_experience}

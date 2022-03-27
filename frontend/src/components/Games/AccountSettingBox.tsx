@@ -40,6 +40,9 @@ import { patchAccountSetting } from '../../apis/accountSetting';
 // HTTP_STATUS_CODE
 import { HTTP_STATUS_CODE } from '../../constants';
 
+// InitialStateの型
+import { InitialState } from '../../reducers/requestUser';
+
 const AccountSettingBoxWrapper = styled.div`
   width: 40%;
   background-color: ${COLORS.WHITE};
@@ -69,16 +72,16 @@ const CustomFormControl = styled(FormControl)`
   width: 100%;
 `;
 
-const CustomFilledNameInput = styled(FilledInput)`
+const CustomFilledNameInput = styled(FilledInput)<{label: string, errors_box: {message: string, ref: object, type: string} | undefined }>`
   margin-bottom: ${({
-    errorsnamebox
-  }) => typeof errorsnamebox === 'undefined' && '4%' };
+    errors_box
+  }) => typeof errors_box === 'undefined' && '4%' };
 `;
 
-const CustomFilledEmailInput = styled(FilledInput)`
+const CustomFilledEmailInput = styled(FilledInput)<{label: string, errors_box: {message: string, ref: object, type: string} | undefined }>`
   margin-bottom: ${({
-    errorsemailbox
-  }) => typeof errorsemailbox === 'undefined' && '4%' };
+    errors_box
+  }) => typeof errors_box === 'undefined' && '4%' };
 `;
 
 const AccoutSettingButtonWrapper = styled.div`
@@ -96,10 +99,25 @@ const CustomLabel = styled.label`
   right: 33%;
 `;
 
+// AccountSettingBoxの引数の型
+type AccountSettingBoxArg = {
+  requestUserState: InitialState;
+  user: InitialState['userState']['user'];
+};
+
+type UploadState = {
+  upload: boolean;
+  imageUrl: string;
+  image: {
+    name?: string | null;
+    data?: string | ArrayBuffer | null;
+  };
+};
+
 export const AccountSettingBox = ({
   requestUserState,
   user
-}) => {
+}: AccountSettingBoxArg): JSX.Element => {
 
   // useContext
   // requestUserStateには、requestState, userState, errorsが格納されている
@@ -109,7 +127,7 @@ export const AccountSettingBox = ({
     requestUserActionTyps
   } = useContext(UserContext);
 
-  const initialState = {
+  const initialState: UploadState = {
     upload: false,
     imageUrl: user.image || DefaultAvatarImage,
     image: {}
@@ -141,7 +159,7 @@ export const AccountSettingBox = ({
   // 文字列にしているだけ
   const handleUpload = ({
     target: { files }
-  }) => {
+  }: {target: {files: FileList | null}}) => {
     const reader = new FileReader();
     if(files) {
       reader.onload = () => {
@@ -199,10 +217,10 @@ export const AccountSettingBox = ({
   // patchAccountSettingに対して、catchをチェーンしている
   // patchAccoutSetting内で例外が発生した場合、そのエラーを持つRejectedなPromiseを返されるので、
   // catchで受け取ることができる
-  const onSubmit = ({NameBox, EmailBox, OpenRankBox}) => {
+  const onSubmit = ({NameBox, EmailBox, OpenRankBox}: {NameBox: string, EmailBox: string, OpenRankBox: boolean}) => {
     patchAccountSetting({
       user: {
-        id: user.id,
+        id: user.id as number,
         name: NameBox,
         email: EmailBox,
         open_rank: OpenRankBox,
@@ -274,7 +292,7 @@ export const AccountSettingBox = ({
                     type="text"
                     id="name-component-filled"
                     label="name"
-                    errorsnamebox={errors.NameBox}
+                    errors_box={errors.NameBox}
                   />
                 </CustomFormControl>
               )}
@@ -295,7 +313,7 @@ export const AccountSettingBox = ({
                     type="email"
                     id="email-component-filled"
                     label="email"
-                    errorsemailbox={errors.EmailBox}
+                    errors_box={errors.EmailBox}
                   />
                 </CustomFormControl>
               )}
@@ -327,7 +345,7 @@ export const AccountSettingBox = ({
               />
             </AccoutSettingButtonWrapper>
             {
-              requestUserState.errors.title === 'Bad Request' &&
+              requestUserState?.errors?.title === 'Bad Request' &&
                 <SubmitErrorSentence>
                   {requestUserState.errors.detail}
                 </SubmitErrorSentence>

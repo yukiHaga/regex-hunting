@@ -76,7 +76,7 @@ export const IconMenu = memo(({
   return (
     <>
       <Box sx={{ flexGrow: 0, mx: 2}}>
-        <Tooltip title={user.name} >
+        <Tooltip title={user.name as string} >
           <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
             <Avatar
               alt="user-icon"

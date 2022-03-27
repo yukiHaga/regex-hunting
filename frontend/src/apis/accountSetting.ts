@@ -9,7 +9,10 @@ type AccountArg = {
     email: string,
     open_rank: boolean
   },
-  image: string | null
+  image: {
+    name?: string | null | undefined;
+    data?: string | ArrayBuffer | null | undefined;
+  }
 };
 
 
