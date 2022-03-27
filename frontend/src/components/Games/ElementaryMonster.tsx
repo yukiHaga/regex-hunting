@@ -17,7 +17,9 @@ import {
   FadeOutAnime
 } from '../shared_style';
 
-const ElementaryWrapper = styled.div`
+import { MonsterArg } from '../../types/components/games';
+
+const ElementaryWrapper = styled.div<{gameResult: "" | "progress" | "win" | "lose"}>`
   animation-name: ${({ gameResult }) => gameResult === "win" && FadeOutAnime};
   animation-duration: 3s;
   animation-fill-mode: forwards;
@@ -34,7 +36,7 @@ const FirstElementaryMonsterWrapper = styled.img`
   animation-fill-mode: forwards;
 `;
 
-const ElementaryMonsterWrapper = styled.img`
+const ElementaryMonsterWrapper = styled.img<{questionJudgement: "progress" | "correct" | "incorrect"}>`
   width: 50%;
   height: 50%;
   object-fit: contain;
@@ -44,7 +46,7 @@ const ElementaryMonsterWrapper = styled.img`
   animation-iteration-count: 1;
 `;
 
-const HpGageWrapper = styled.div`
+const HpGageWrapper = styled.div<{firstAppearance: boolean}>`
   width: 50%;
   border-radius: 3px;
   background-color: ${COLORS.LIGHT_BLACK};
@@ -56,7 +58,7 @@ const HpGageWrapper = styled.div`
   margin: 0 auto;
 `;
 
-const InnerHpGageWrapper = styled.div`
+const InnerHpGageWrapper = styled.div<{monsterHp: number, monsterMaxHp: number}>`
   width: ${({ monsterHp, monsterMaxHp }) => `${100 * (monsterHp / monsterMaxHp)}%`};
   transition: 0.5s;
   height: 1.8vh;
@@ -74,7 +76,7 @@ export const ElementaryMonster = ({
   firstAppearance,
   gameResult,
   gameDescriptionOpen
-}) => {
+}: MonsterArg): JSX.Element => {
   return (
     <>
       {

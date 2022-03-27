@@ -8,9 +8,9 @@ import RealBackGroundImage from '../images/temporary_real_background_image.jpg';
 // Presentational Components
 import { Header } from '../components/Headers/Header';
 import { HintBar } from '../components/Games/HintBar.jsx';
-import { ElementaryMonster } from '../components/Games/ElementaryMonster.jsx';
-import { IntermediateMonster } from '../components/Games/IntermediateMonster.jsx';
-import { AdvancedMonster } from '../components/Games/AdvancedMonster.jsx';
+import { ElementaryMonster } from '../components/Games/ElementaryMonster';
+import { IntermediateMonster } from '../components/Games/IntermediateMonster';
+import { AdvancedMonster } from '../components/Games/AdvancedMonster';
 import { QuestionBlock } from '../components/Games/QuestionBlock.jsx';
 import { CodeBlock } from '../components/Games/CodeBlock.jsx';
 import { TimeGage } from '../components/Games/TimeGage.jsx';

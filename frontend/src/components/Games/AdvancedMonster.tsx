@@ -4,7 +4,7 @@ import styled from 'styled-components';
 // Colors
 import { COLORS } from '../../style_constants.js';
 
-import IntermediateMonsterImage from '../../images/intermediate.png';
+import AdvancedMonsterImage from '../../images/advanced.png';
 
 // handleColorType
 import { handleColorType } from '../../functions/handleColorType';
@@ -16,26 +16,43 @@ import {
   FadeOutAnime
 } from '../shared_style';
 
-const IntermediateWrapper = styled.div`
+import { MonsterArg } from '../../types/components/games';
+
+const AdvancedWrapper = styled.div<{gameResult: "" | "progress" | "win" | "lose"}>`
   animation-name: ${({ gameResult }) => gameResult === "win" && FadeOutAnime};
   animation-duration: 3s;
   animation-fill-mode: forwards;
   text-align: center;
+  position: relative;
 `;
 
 // 初登場時のモンスター
-const FirstIntermediateMonsterWrapper = styled.img`
-  width: 26%;
-  height: 26%;
+const FirstAdvancedMonsterWrapper = styled.img`
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translateY(-95%) translateX(-50%);
+  -webkit-transform: translateY(-95%) translateX(-50%);
+  margin: auto;
+  width: 50vw;
+  height: 55vh;
+  z-index: 2;
   object-fit: contain;
   animation-name: ${FadeInAnime};
   animation-duration: 3s;
   animation-fill-mode: forwards;
 `;
 
-const IntermediateMonsterWrapper = styled.img`
-  width: 26%;
-  height: 26%;
+const AdvancedMonsterWrapper = styled.img<{questionJudgement: "progress" | "correct" | "incorrect"}>`
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translateY(-95%) translateX(-50%);
+  -webkit-transform: translateY(-95%) translateX(-50%);
+  margin: auto;
+  width: 50vw;
+  height: 55vh;
+  z-index: 2;
   object-fit: contain;
   animation-name: ${({ questionJudgement }) => questionJudgement === "correct" && MonsterFlash};
   animation-duration: 1s;
@@ -43,8 +60,8 @@ const IntermediateMonsterWrapper = styled.img`
   animation-iteration-count: 1;
 `;
 
-const HpGageWrapper = styled.div`
-  width: 40%;
+const HpGageWrapper = styled.div<{firstAppearance: boolean}>`
+  width: 50vw;
   border-radius: 3px;
   background-color: ${COLORS.LIGHT_BLACK};
   animation-name: ${({ firstAppearance }) => firstAppearance && FadeInAnime};
@@ -55,7 +72,7 @@ const HpGageWrapper = styled.div`
   margin: 0 auto;
 `;
 
-const InnerHpGageWrapper = styled.div`
+const InnerHpGageWrapper = styled.div<{monsterHp: number, monsterMaxHp: number}>`
   width: ${({ monsterHp, monsterMaxHp }) => `${100 * (monsterHp / monsterMaxHp)}%`};
   transition: 0.5s;
   height: 1.8vh;
@@ -66,29 +83,29 @@ const InnerHpGageWrapper = styled.div`
   box-shadow: 0 2px 2px 0 rgba(255,255,255,.2) inset,0 2px 10px 0 rgba(255,255,255,.5) inset,0 -2px 2px 0 rgba(0,0,0,.1) inset;
 `;
 
-export const IntermediateMonster = ({
+export const AdvancedMonster = ({
   monsterHp,
   monsterMaxHp,
   questionJudgement,
   firstAppearance,
   gameResult,
   gameDescriptionOpen
-}) => {
+}: MonsterArg): JSX.Element => {
   return (
     <>
       {
         !gameDescriptionOpen &&
-          <IntermediateWrapper
+          <AdvancedWrapper
             gameResult={gameResult}
           >
             {
               firstAppearance ?
-                <FirstIntermediateMonsterWrapper
-                  src={IntermediateMonsterImage}
+                <FirstAdvancedMonsterWrapper
+                  src={AdvancedMonsterImage}
                 />
               :
-                <IntermediateMonsterWrapper
-                  src={IntermediateMonsterImage}
+                <AdvancedMonsterWrapper
+                  src={AdvancedMonsterImage}
                   questionJudgement={questionJudgement}
                 />
             }
@@ -100,7 +117,7 @@ export const IntermediateMonster = ({
                 monsterMaxHp={monsterMaxHp}
               />
             </HpGageWrapper>
-          </IntermediateWrapper>
+          </AdvancedWrapper>
 
       }
     </>
