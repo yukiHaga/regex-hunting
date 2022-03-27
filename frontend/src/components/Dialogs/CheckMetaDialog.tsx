@@ -45,12 +45,14 @@ import { CodeBlueSpan } from '../shared_style.js';
 import { CodeComentSpan } from '../shared_style.js';
 
 // テーブルの行のデータ
-import { characterClassesRows } from './dataRows.js';
-import { quantifiersRows } from './dataRows.js';
-import { groupsRows } from './dataRows.js';
-import { alternationsRows } from './dataRows.js';
-import { lookAroundsRows } from './dataRows.js';
-import { anchorsRows } from './dataRows.js';
+import {
+  characterClassesRows,
+  quantifiersRows,
+  groupsRows,
+  alternationsRows,
+  lookAroundsRows,
+  anchorsRows
+} from './dataRows';
 
 // 説明スライドのワーニングセンテンス
 import { WarningSentenceWrapper } from '../shared_style.js';

@@ -1,4 +1,4 @@
-type GetExperience = (difficulty: 'elementary' | 'intermediate' | 'advanced') => number | undefined;
+type GetExperience = (difficulty: string | undefined) => number | undefined;
 
 // 各ゲームの獲得経験値を取得するための関数
 export const getExperience: GetExperience = (difficulty) => {

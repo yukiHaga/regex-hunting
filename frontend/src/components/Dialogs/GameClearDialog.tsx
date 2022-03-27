@@ -31,6 +31,9 @@ import { getMonsterName } from '../../functions/getMonsterName';
 // クリアタイムを取得する関数
 import { getClearTime } from '../../functions/getClearTime';
 
+// GameClearDialogの引数の型
+import { GameClearDialogArg } from '../../types/components/dialogs';
+
 const CustomDialogInnerWrapper = styled.div`
   width: 40vw;
   padding: 3%;
@@ -119,9 +122,10 @@ const ButtonsWrapper = styled.div`
   margin-top: 2%;
 `;
 
-const ColorTimeSpan = styled.span`
+const ColorTimeSpan = styled.span<{milliSec: number}>`
   color: ${({ milliSec }) => milliSec < 60000 && COLORS.RED }
 `;
+
 
 export const GameClearDialog = ({
   isOpen,
@@ -142,7 +146,7 @@ export const GameClearDialog = ({
   dialogGageUp,
   gameResult,
   rankUp
-}) => {
+}: GameClearDialogArg): JSX.Element => {
 
   const shareClearTime = useMemo(() => getClearTime(
     gameStartTime,
@@ -160,9 +164,7 @@ export const GameClearDialog = ({
       open={isOpen}
       maxWidth='lg'
     >
-      <CustomDialogInnerWrapper
-        hasUser={hasUser}
-      >
+      <CustomDialogInnerWrapper>
         <CustomDialogTitleWrapper>
           <CustomSpan>GAME CLEAR</CustomSpan>
           GAME CLEAR

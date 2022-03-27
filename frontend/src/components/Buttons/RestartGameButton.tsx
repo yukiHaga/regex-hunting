@@ -46,7 +46,7 @@ const RestartGameButtonTextWrapper = styled.div`
 `;
 
 type RestartGameButtonArg = {
-  difficulty: 'elementary' | 'intermediate' | 'advanced';
+  difficulty: string | undefined;
   setGameState: SetGameState;
   getGameStart: GetGameStart;
   initialState: GameState;

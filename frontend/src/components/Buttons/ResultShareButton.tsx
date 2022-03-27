@@ -40,7 +40,7 @@ const ResultShareButtonTextWrapper = styled.div`
 `;
 
 type ResultShareButtonArg = {
-  difficulty: 'elementary' | 'intermediate' | 'advanced';
+  difficulty: string | undefined;
   gameResult: string;
   rankUp: boolean;
   rank?: number;
