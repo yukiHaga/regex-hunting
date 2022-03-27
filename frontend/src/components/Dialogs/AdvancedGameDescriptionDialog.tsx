@@ -38,8 +38,8 @@ import { CodeComentSpan } from '../shared_style.js';
 // 説明スライドのワーニングセンテンス
 import { WarningSentenceWrapper } from '../shared_style.js';
 
-// setGameStateの型
-import { SetGameState } from '../../types/containers/games';
+// スライド関連のコンポーネントやstateの型
+import { GameDescriptionDialogArg, SlideState } from '../../types/components/dialogs';
 
 const CustomDialogInnerWrapper = styled.div`
   background-color: ${COLORS.SUB};
@@ -119,23 +119,6 @@ const CustomCodeBlockDiv = styled(CodeBlockDiv)`
   overflow-x: scroll;
 `;
 
-// AdvancedGameDescriptionDialogの引数の型
-type AdvancedGameDescriptionDialogArg = {
-  isOpen: true;
-  setGameState: SetGameState;
-  gameDescriptionOpen: true,
-  clickDescriptionOpen: boolean;
-};
-
-type SlideState = {
-  title: string;
-  sentence: string;
-  slideNum: number;
-  slideIn: boolean;
-  slideOut: boolean;
-  direction: 'right' | 'left';
-};
-
 // isOpenはgameState.gameDescriptionOpen
 // gameDescriptionOpenは、gameDescriptionOpen
 // clickDescriptionOpenは、ゲーム開始後にスライドを見るをクリックしたかを表すprops
@@ -145,7 +128,7 @@ export const AdvancedGameDescriptionDialog = ({
   setGameState,
   gameDescriptionOpen,
   clickDescriptionOpen
-}: AdvancedGameDescriptionDialogArg): JSX.Element => {
+}: GameDescriptionDialogArg): JSX.Element => {
 
   // 第2引数に空の依存配列を渡した場合、初回の1回のみ実行され、
   // 2度目以降のレンダリング時にはキャッシュから値を取得する

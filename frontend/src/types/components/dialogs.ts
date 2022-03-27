@@ -40,3 +40,21 @@ export type GameOverDialogArg = {
   gameResult: 'lose';
   rankUp: boolean;
 };
+
+// GameDescriptionDialogの引数の型
+export type GameDescriptionDialogArg = {
+  isOpen: true;
+  setGameState: SetGameState;
+  gameDescriptionOpen: true,
+  clickDescriptionOpen: boolean;
+};
+
+// GameDescriptionDialogで使うslideStateの型
+export type SlideState = {
+  title: string;
+  sentence: string;
+  slideNum: number;
+  slideIn: boolean;
+  slideOut: boolean;
+  direction: 'right' | 'left';
+};

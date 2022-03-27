@@ -20,8 +20,8 @@ import { JudgementFlashMessage } from '../components/FlashMessages/JudgementFlas
 import { GameClearDialog } from '../components/Dialogs/GameClearDialog'
 import { GameOverDialog } from '../components/Dialogs/GameOverDialog'
 import { CheckAnswerDialog } from '../components/Dialogs/CheckAnswerDialog'
-import { ElementaryGameDescriptionDialog } from '../components/Dialogs/ElementaryGameDescriptionDialog.jsx'
-import { IntermediateGameDescriptionDialog } from '../components/Dialogs/IntermediateGameDescriptionDialog.jsx'
+import { ElementaryGameDescriptionDialog } from '../components/Dialogs/ElementaryGameDescriptionDialog'
+import { IntermediateGameDescriptionDialog } from '../components/Dialogs/IntermediateGameDescriptionDialog'
 import { AdvancedGameDescriptionDialog } from '../components/Dialogs/AdvancedGameDescriptionDialog'
 
 import { RankUpDialog } from '../components/Dialogs/RankUpDialog';
