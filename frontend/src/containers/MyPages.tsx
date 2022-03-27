@@ -11,7 +11,7 @@ import { DescriptionWrapper } from '../components/shared_style.js';
 import { GameContent } from '../components/GameContents/GameContent';
 import { TitleCard } from '../components/Games/TitleCard';
 import { Footer } from '../components/Footers/Footer.jsx';
-import { ReleaseConditionDialog } from '../components/Dialogs/ReleaseConditionDialog.jsx'
+import { ReleaseConditionDialog } from '../components/Dialogs/ReleaseConditionDialog'
 import { CircularMask } from '../components/loads/CircularMask.jsx';
 import { GameClearCountBox } from '../components/Games/GameClearCountBox';
 import { TimeAnalysisBox } from '../components/Games/TimeAnalysisBox';

@@ -26,7 +26,9 @@ import DarkManhoodBackground from '../../images/dark_manhood_background.png';
 import DarkSelfEffacementBackground from '../../images/dark_self_effacement_background.png';
 import DarkHeroBackground from '../../images/dark_hero_background.png';
 
-const CustomDialogInnerWrapper = styled.div`
+import { SetMyPageState } from '../../types/containers/myPages';
+
+const CustomDialogInnerWrapper = styled.div<{name: string}>`
   border-radius: 3px;
   text-align: center;
   background-image: url(${({name}) => getImage(name)});
@@ -80,7 +82,7 @@ const ButtonsWrapper = styled.div`
   padding-bottom: 7%;
 `;
 
-const getImage = (name) => {
+const getImage = (name: string): string | null => {
   switch (name) {
     case '見習いハンター':
       return DarkApprenticeBackground;
@@ -103,10 +105,17 @@ const getImage = (name) => {
   }
 };
 
-// gameStateのrank_upがtrueの時に開くモーダル
-// サーバーに送ったゲームデータの戻り値のrank_upがtrueの場合、開く
-// このコンポーネントに渡るpropsは、サーバーに送ったゲームデータの戻り値のデータ
-// このrankはランクアップ後のランク値が格納されている
+// ReleaseConditionDialogの引数の型
+type ReleaseConditionDialogArg = {
+  isOpen: true;
+  onClose: () => void,
+  name: string;
+  releaseDate: string;
+  releaseCondition: string;
+  setMyPageState: SetMyPageState;
+};
+
+// 称号一覧のアイコンをクリックすると開くモーダル
 export const ReleaseConditionDialog = ({
   isOpen,
   onClose,
@@ -114,7 +123,7 @@ export const ReleaseConditionDialog = ({
   releaseDate,
   releaseCondition,
   setMyPageState
-}) => {
+}: ReleaseConditionDialogArg): JSX.Element => {
 
   return(
     <Dialog
@@ -123,7 +132,6 @@ export const ReleaseConditionDialog = ({
       maxWidth="xs"
     >
       <CustomDialogInnerWrapper
-        releaseDate={releaseDate}
         name={name}
       >
         <BackToModalButtonWrapper>
