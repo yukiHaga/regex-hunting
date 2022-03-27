@@ -19,7 +19,7 @@ import { GameFooter } from '../components/Footers/GameFooter.jsx';
 import { JudgementFlashMessage } from '../components/FlashMessages/JudgementFlashMessage.jsx'
 import { GameClearDialog } from '../components/Dialogs/GameClearDialog.jsx'
 import { GameOverDialog } from '../components/Dialogs/GameOverDialog.jsx'
-import { CheckAnswerDialog } from '../components/Dialogs/CheckAnswerDialog.jsx'
+import { CheckAnswerDialog } from '../components/Dialogs/CheckAnswerDialog'
 import { ElementaryGameDescriptionDialog } from '../components/Dialogs/ElementaryGameDescriptionDialog.jsx'
 import { IntermediateGameDescriptionDialog } from '../components/Dialogs/IntermediateGameDescriptionDialog.jsx'
 import { AdvancedGameDescriptionDialog } from '../components/Dialogs/AdvancedGameDescriptionDialog.jsx'

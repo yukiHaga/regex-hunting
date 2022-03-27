@@ -17,6 +17,10 @@ import { handleTitleColorType } from '../../functions/handleTitleColorType'
 // 戻るボタン
 import { BackToModalButton } from '../Buttons/BackToModalButton';
 
+// correctQuestions, incorrectQuestions, setGameStateの型
+import { GameState, SetGameState } from '../../types/containers/games';
+
+
 const CustomDialogInnerWrapper = styled.div`
   padding-right: 3%;
   padding-left: 3%;
@@ -26,7 +30,7 @@ const CustomDialogInnerWrapper = styled.div`
   width: 40vw;
 `;
 
-const CustomDialogTitleWrapper = styled.div`
+const CustomDialogTitleWrapper = styled.div<{title: 'Good' | 'Bad'}>`
   font-size: 2em;
   padding-top: ${({ title }) => title === "Bad" && "10%"};
   font-family: Raleway;
@@ -202,13 +206,21 @@ const CommentaryWrapper = styled.div`
   text-justify: inter-ideograph;
 `;
 
+type CheckAnswerDialogArg = {
+  isOpen: boolean;
+  difficulty: string | undefined;
+  correctQuestions: GameState['correctQuestions'];
+  incorrectQuestions: GameState['incorrectQuestions'];
+  setGameState: SetGameState;
+};
+
 export const CheckAnswerDialog = ({
   isOpen,
   difficulty,
   correctQuestions,
   incorrectQuestions,
   setGameState,
-}) => {
+}: CheckAnswerDialogArg): JSX.Element => {
 
   return(
     <Dialog
