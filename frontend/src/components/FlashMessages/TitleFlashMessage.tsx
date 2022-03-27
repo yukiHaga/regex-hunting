@@ -4,13 +4,21 @@ import React, { Fragment, useState, useEffect } from 'react';
 import Alert from '@mui/material/Alert';
 import Snackbar from '@mui/material/Snackbar';
 
+import { SetMyPageState } from '../../types/containers/myPages';
+
+type TitleFlashMessageArg = {
+  display: boolean;
+  message: string;
+  setMyPageState: SetMyPageState;
+};
+
 export const TitleFlashMessage = ({
   display,
   message,
   setMyPageState
-}) => {
+}: TitleFlashMessageArg): JSX.Element => {
 
-  const [open, setOpen] = useState(null);
+  const [open, setOpen] = useState<undefined | boolean>(undefined);
 
   const handleClose = () => {
     setOpen(false);
@@ -31,12 +39,12 @@ export const TitleFlashMessage = ({
 
   return (
     <>
-      <Snackbar 
-        open={open} 
-        autoHideDuration={3000} 
+      <Snackbar
+        open={open}
+        autoHideDuration={3000}
         anchorOrigin={{
           vertical: 'top',
-          horizontal: 'right' 
+          horizontal: 'right'
         }}
         sx={{
           position: 'fixed',
@@ -45,8 +53,8 @@ export const TitleFlashMessage = ({
         }}
         onClose={handleClose}
       >
-        <Alert 
-          variant="filled" 
+        <Alert
+          variant="filled"
           severity={ message === "称号の変更に失敗しました。" ? "error" : "success" }>
           {message}
         </Alert>

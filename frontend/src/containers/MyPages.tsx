@@ -17,7 +17,7 @@ import { GameClearCountBox } from '../components/Games/GameClearCountBox';
 import { TimeAnalysisBox } from '../components/Games/TimeAnalysisBox';
 import { FastAnalysisBox } from '../components/Games/FastAnalysisBox';
 import { SecondSelectBox } from '../components/Games/SecondSelectBox.jsx';
-import { TitleFlashMessage } from '../components/FlashMessages/TitleFlashMessage.jsx';
+import { TitleFlashMessage } from '../components/FlashMessages/TitleFlashMessage';
 
 // Images
 import ElementaryGameContentImage from '../images/elementary_game_content.jpg';

@@ -20,7 +20,7 @@ export const SessionFlashMessage = ({
 
   // displayが存在するか、user=moblieが存在するときにtrueになる
   // use=mobileからtrueにさせるのは、useEffect実行時である
-  const [open, setOpen] = useState(Boolean(state.display));
+  const [open, setOpen] = useState(Boolean(state?.display));
 
   const handleClose = () => {
     setOpen(false);
@@ -45,7 +45,7 @@ export const SessionFlashMessage = ({
         }
       >
         <Alert variant="filled" severity="success">
-          {state.success}
+          {state?.success}
         </Alert>
       </Snackbar>
     </>
