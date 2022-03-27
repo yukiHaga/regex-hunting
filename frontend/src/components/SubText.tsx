@@ -1,4 +1,4 @@
-import React, { memo } from 'react';
+import React, { memo, ReactNode } from 'react';
 import styled from 'styled-components';
 import { COLORS } from '../style_constants';
 
@@ -11,19 +11,19 @@ const SubTextWrapper = styled.div`
   font-style: normal;
   font-weight: bold;
   font-size: 2.5em;
-  color: ${(props) => props.color || COLORS.BLACK};
+  color: ${COLORS.BLACK};
   margin: 0 auto;
   margin-top: 1%;
   @media (max-width: ${WIDTH.MOBILE}) {
     font-size: 1.1em;
-    margin-top: 3%;  
+    margin-top: 3%;
   }
 `;
 
-export const SubText = memo(({color, children}) => {
+export const SubText = memo(({ children }: {children: ReactNode}): JSX.Element => {
   return (
     <>
-      <SubTextWrapper color={color}>
+      <SubTextWrapper>
         {children}
       </SubTextWrapper>
     </>
