@@ -6,7 +6,7 @@ import styled from 'styled-components';
 import { Header } from '../components/Headers/Header.jsx';
 import { Footer } from '../components/Footers/Footer';
 import { AccountSettingBox } from '../components/Games/AccountSettingBox.jsx';
-import { CircularMask } from '../components/loads/CircularMask.jsx';
+import { CircularMask } from '../components/loads/CircularMask';
 
 // Contextオブジェクト
 import { UserContext } from "../context/UserProvider";

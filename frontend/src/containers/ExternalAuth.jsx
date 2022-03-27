@@ -2,9 +2,9 @@ import React, { useEffect } from "react";
 import { useSearchParams, useNavigate, useParams } from "react-router-dom";
 
 // OAuth関係のAPIコール関数
-import { postExternalAuth } from '../apis/login'; 
+import { postExternalAuth } from '../apis/login';
 
-import { CircularMask } from '../components/loads/CircularMask.jsx';
+import { CircularMask } from '../components/loads/CircularMask';
 
 export const ExternalAuth = () => {
   const navigate = useNavigate();
@@ -18,29 +18,29 @@ export const ExternalAuth = () => {
   // ユーザーをログインさせるかのアクションへリクエストを出す
   useEffect(() => {
     if (callBackState === 'xyz') {
-      postExternalAuth({ 
-        code, 
-        provider 
+      postExternalAuth({
+        code,
+        provider
       }).then((isSuccess) => {
         if (isSuccess) {
-          navigate('/my-page', { 
+          navigate('/my-page', {
             state: { display: true, success: "ログインしました。"}
           });
         } else {
-          navigate('/?user=oauth-login-faliure', { 
+          navigate('/?user=oauth-login-faliure', {
             state: { display: true, success: "アカウントが見つかりません。"}
           });
         }
       });
     } else {
-      navigate('/?user=oauth-login-faliure', { 
+      navigate('/?user=oauth-login-faliure', {
         state: { display: true, success: "アカウントが見つかりません。"}
       });
     }
   }, [
-    callBackState, 
-    code, 
-    provider, 
+    callBackState,
+    code,
+    provider,
     navigate
   ]);
 

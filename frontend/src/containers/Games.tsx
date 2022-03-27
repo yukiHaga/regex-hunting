@@ -28,7 +28,7 @@ import { RankUpDialog } from '../components/Dialogs/RankUpDialog';
 import { CheckMetaDialog } from '../components/Dialogs/CheckMetaDialog';
 import { CutImage } from '../components/Games/CutImage.jsx';
 import { ClawImage } from '../components/Games/ClawImage.jsx';
-import { CircularMask } from '../components/loads/CircularMask.jsx';
+import { CircularMask } from '../components/loads/CircularMask';
 
 // Contextオブジェクト
 import { UserContext } from "../context/UserProvider";

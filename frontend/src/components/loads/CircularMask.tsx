@@ -9,7 +9,7 @@ const CustomDiv = styled.div`
   align-items: center;
 `;
 
-export const CircularMask = () => {
+export const CircularMask = (): JSX.Element => {
 
   return (
     <>
