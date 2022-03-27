@@ -55,6 +55,9 @@ import { anchorsRows } from './dataRows.js';
 // 説明スライドのワーニングセンテンス
 import { WarningSentenceWrapper } from '../shared_style.js';
 
+// setGameStateの型
+import { SetGameState } from '../../types/containers/games';
+
 const CustomDialogInnerWrapper = styled.div`
   padding-right: 3%;
   padding-left: 3%;
@@ -131,7 +134,7 @@ const CustomTitle = styled.div`
 
 // animationプロパティは1つしか存在できない
 // 2個存在する場合、2個目で1個目が上書きされる
-const SlideContentWrapper = styled.div`
+const SlideContentWrapper = styled.div<{slideIn: boolean, slideOut: boolean, direction: 'right' | 'left'}>`
   width: 100%;
   margin: 0 auto;
   transform: translateX(0);
@@ -151,27 +154,67 @@ const CustomCodeBlockDiv = styled(CodeBlockDiv)`
   font-size: 1.0em;
 `;
 
+// CheckMetaDialogの型
+type CheckMetaDialogArg = {
+  isOpen: boolean;
+  setGameState: SetGameState
+};
+
+// nameの型
+type Name = '文字クラス' | '量指定子' | 'キャプチャグループ' | '選択' | '先後読み' | 'アンカー・単語境界';
+
+// データの型
+type DataRows = typeof anchorsRows | typeof characterClassesRows | typeof quantifiersRows | typeof groupsRows | typeof alternationsRows | typeof lookAroundsRows;
+
+// handleDataRowsの引数の型
+type HandleDataRowsArg = (
+  name: Name,
+  prevName: Name,
+  nextName: Name,
+  data: DataRows,
+  direction: 'right' | 'left'
+) => void;
+
+// rowStateの型
+type RowState = {
+  name: Name;
+  prevName: Name;
+  nextName: Name;
+  data: DataRows;
+  slideIn: boolean;
+  slideOut: boolean;
+  direction: 'right' | 'left';
+};
+
+// rowState.data.map((row)のrowの型
+type Row =  {
+  id: number;
+  name: string;
+  data: string;
+  example: string | boolean;
+};
+
 // clickMetaOpenがtrueの時に開くモーダル
 export const CheckMetaDialog = ({
   isOpen,
   setGameState
-}) => {
+}: CheckMetaDialogArg): JSX.Element => {
 
-  const initialState = {
+  const initialState: RowState = {
     name: '文字クラス',
     prevName: 'アンカー・単語境界',
     nextName: '量指定子',
     data: characterClassesRows,
     slideIn: false,
     slideOut: false,
-    direction: "",
+    direction: 'right',
   };
 
   const [rowState, setRowState] = useState(initialState);
 
   // テーブルのデータを制御する関数
   // 右カーソルか左カーソルをクリックするとこれが呼び出される
-  const handleDataRows = (
+  const handleDataRows: HandleDataRowsArg = (
     name,
     prevName,
     nextName,
@@ -200,7 +243,7 @@ export const CheckMetaDialog = ({
 
   // 左矢印のリンクを制御する関数
   // そのため、defaultは上級の関数が実行される
-  const handleLeftArrow = ({name}) => {
+  const handleLeftArrow = ({name}: {name: Name}): void => {
     switch (name){
       case '文字クラス':
         handleDataRows('アンカー・単語境界', '先後読み', '文字クラス', anchorsRows, 'right');
@@ -226,7 +269,7 @@ export const CheckMetaDialog = ({
   };
 
   // 右矢印のリンクを制御する関数
-  const handleRightArrow = ({name}) => {
+  const handleRightArrow = ({name}: {name: Name}): void => {
     switch (name){
       case '文字クラス':
         handleDataRows('量指定子', '文字クラス', 'キャプチャグループ', quantifiersRows, 'left');
@@ -331,7 +374,7 @@ export const CheckMetaDialog = ({
                     </TableRow>
                   </StyledTableHead>
                   <TableBody>
-                    {rowState.data.map((row) => (
+                    {rowState.data.map((row: Row) => (
                       <StyledTableRow key={row.id}>
                         <StyledTableCell align="center" component="th" scope="row">
                           {row.name}

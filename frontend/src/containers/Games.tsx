@@ -25,7 +25,7 @@ import { IntermediateGameDescriptionDialog } from '../components/Dialogs/Interme
 import { AdvancedGameDescriptionDialog } from '../components/Dialogs/AdvancedGameDescriptionDialog.jsx'
 
 import { RankUpDialog } from '../components/Dialogs/RankUpDialog.jsx';
-import { CheckMetaDialog } from '../components/Dialogs/CheckMetaDialog.jsx';
+import { CheckMetaDialog } from '../components/Dialogs/CheckMetaDialog';
 import { CutImage } from '../components/Games/CutImage.jsx';
 import { ClawImage } from '../components/Games/ClawImage.jsx';
 import { CircularMask } from '../components/loads/CircularMask.jsx';
