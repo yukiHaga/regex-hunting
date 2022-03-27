@@ -10,7 +10,7 @@ import { BlueBaseLink } from '../shared_style.js';
 const CreateAccountSentenceWrapper = styled(DescriptionWrapper)`
   text-align: center;
   width: 100%;
-  margin 0 auto;
+  margin: 0 auto;
   margin-bottom: 5%;
 `;
 

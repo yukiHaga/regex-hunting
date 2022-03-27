@@ -24,7 +24,7 @@ import { ElementaryGameDescriptionDialog } from '../components/Dialogs/Elementar
 import { IntermediateGameDescriptionDialog } from '../components/Dialogs/IntermediateGameDescriptionDialog.jsx'
 import { AdvancedGameDescriptionDialog } from '../components/Dialogs/AdvancedGameDescriptionDialog.jsx'
 
-import { RankUpDialog } from '../components/Dialogs/RankUpDialog.jsx';
+import { RankUpDialog } from '../components/Dialogs/RankUpDialog';
 import { CheckMetaDialog } from '../components/Dialogs/CheckMetaDialog';
 import { CutImage } from '../components/Games/CutImage.jsx';
 import { ClawImage } from '../components/Games/ClawImage.jsx';

@@ -19,6 +19,9 @@ import { ResultShareButton } from '../Buttons/ResultShareButton';
 // ランクアップ音
 import RankUpSound from '../../sounds/rank_up_25.mp3';
 
+// setGameStateの型
+import { SetGameState } from '../../types/containers/games';
+
 const CustomDialogInnerWrapper = styled.div`
   padding: 3%;
   padding-top: 1%;
@@ -80,7 +83,7 @@ const ButtonsWrapper = styled.div`
   justify-content: space-around;
   width: 30%;
   align-items: end;
-  margin 0 auto;
+  margin: 0 auto;
 `;
 
 const CustomTd = styled.td`
@@ -100,6 +103,17 @@ const MetaTd = styled(CustomTd)`
   padding-left: 4%;
 `;
 
+// RankUpDialogの引数の型
+type RankUpDialogArg = {
+  isOpen: true;
+  rank: number;
+  activeTitle: string;
+  setGameState: SetGameState;
+  rankUp: true;
+  difficulty: string | undefined;
+  gameResult: "" | "progress" | "win" | "lose";
+};
+
 // gameStateのrankUpがtrueの時に開くモーダル
 // サーバーに送ったゲームデータの戻り値のrankUpがtrueの場合、開く
 // このコンポーネントに渡るpropsは、サーバーに送ったゲームデータの戻り値のデータ
@@ -112,7 +126,7 @@ export const RankUpDialog = ({
   rankUp,
   difficulty,
   gameResult
-}) => {
+}: RankUpDialogArg): JSX.Element => {
 
   // ゲームクリア時の音
   useEffect(() => {
