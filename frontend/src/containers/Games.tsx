@@ -7,7 +7,7 @@ import RealBackGroundImage from '../images/temporary_real_background_image.jpg';
 
 // Presentational Components
 import { Header } from '../components/Headers/Header';
-import { HintBar } from '../components/Games/HintBar.jsx';
+import { HintBar } from '../components/Games/HintBar';
 import { ElementaryMonster } from '../components/Games/ElementaryMonster';
 import { IntermediateMonster } from '../components/Games/IntermediateMonster';
 import { AdvancedMonster } from '../components/Games/AdvancedMonster';
