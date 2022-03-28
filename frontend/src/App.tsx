@@ -26,7 +26,7 @@ import ScrollToTop from './scroll/ScrollToTop';
 import { UserProvider } from "./context/UserProvider";
 
 // App Component
-function App() {
+function App(): JSX.Element {
 
   return (
     <React.StrictMode>
@@ -36,69 +36,69 @@ function App() {
           <Routes>
             {/* LPページ */}
             <Route
-              exact path="/"
+              path="/"
               element={<LandingPages />}
             />
 
             {/* OAuth用のページ */}
             <Route
-              exact path="/callback/:provider/"
+              path="/callback/:provider/"
               element={<ExternalAuth />}
             />
 
             {/* マイページ */}
             {/* ログインユーザー以外は見れないページ*/}
             <Route
-              exact path="/my-page"
+              path="/my-page"
               element={<MyPages />}
             />
 
             {/* ランキングページ */}
             <Route
-              exact path="/rankings"
+              path="/rankings"
               element={<Rankings />}
             />
 
             {/* アカウント設定ページ */}
             {/* ログインユーザー以外は見れないページ*/}
             <Route
-              exact path="/account-settings"
+              path="/account-settings"
               element={<AccountSettings />}
             />
 
             {/* ゲームページ */}
             <Route
-              exact path="/games/:difficulty/start"
+              path="/games/:difficulty/start"
               element={<Games />}
             />
 
             {/* 利用規約ページ */}
             <Route
-              exact path="/policy"
+              path="/policy"
               element={<UseTreaties />}
             />
 
             {/* プライバシーポリシーページ */}
             <Route
-              exact path="/privacy-policy"
+              path="/privacy-policy"
               element={<PrivacyPolicies />}
             />
 
             {/* パスワードリセット申請ページ */}
             <Route
-              exact path="/users/password/new"
+              path="/users/password/new"
               element={<PasswordResets />}
             />
             {/* パスワードリセット申請をした後に遷移するページ*/}
             <Route
-              exact path="/users/password/sent"
+              path="/users/password/sent"
               element={<SendEmail />}
             />
 
             {/* パスワード更新ページ */}
             {/* exactの場合、リセットパスワードトークンがURLに含まれていたら反応ないかも*/}
             <Route
-              exact path="/users/password/edit"
+              path="/users/password/edit"
               element={<PasswordUpdates />}
             />
 
