@@ -13,6 +13,9 @@ import { getExperience } from '../../functions/getExperience';
 // サニタイズ用のライブラリをインポートしてくる
 import DOMPurify from "dompurify";
 
+// gameStateの型
+import { GameState, SetGameState } from '../../types/containers/games';
+
 const QuestionBlockWrapper = styled.div`
   background-color: ${COLORS.SUB};
   border-radius: 3px;
@@ -69,6 +72,31 @@ const TargetSentenceWrapper = styled.div`
   padding-top: 1%;
 `;
 
+type QuestionBlockArg = {
+  difficulty: string | undefined;
+  sentence: string;
+  nextSentence: string;
+  sentenceNum: number;
+  nextSentenceNum: number;
+  targetSentence: string;
+  nextTargetSentence: string;
+  nextHint: string;
+  questionJudgement: "progress" | "correct" | "incorrect";
+  setGameState: SetGameState;
+  inputRegex: string | undefined;
+  inputRegexObject: {} | RegExp;
+  correctQuestions: GameState['correctQuestions'];
+  incorrectQuestions: GameState['incorrectQuestions'];
+  gameDescriptionOpen: boolean;
+  gameResult: "" | "progress" | "win" | "lose";
+  hasUser: boolean;
+  rank: number;
+  totalExperience: number;
+  maximumExperiencePerRank: number;
+  temporaryExperience: number;
+  clickMetaOpen: boolean;
+};
+
 export const QuestionBlock = ({
   difficulty,
   sentence,
@@ -92,10 +120,10 @@ export const QuestionBlock = ({
   maximumExperiencePerRank,
   temporaryExperience,
   clickMetaOpen
-}) => {
+}: QuestionBlockArg): JSX.Element => {
 
   // 難易度を日本語に変換する関数
-  const getJpDifficulty = (difficulty) => {
+  const getJpDifficulty = (difficulty: string | undefined): string | undefined => {
     let jpDifficulty;
     switch (difficulty){
       case 'elementary':
@@ -114,7 +142,7 @@ export const QuestionBlock = ({
   };
 
   // 難易度毎のモンスターからダメージを喰らう時のセンテンス
-  const getDamageSentence = (difficulty) => {
+  const getDamageSentence = (difficulty: string | undefined) => {
     let damageSentence;
     switch (difficulty){
       case 'elementary':
@@ -127,7 +155,8 @@ export const QuestionBlock = ({
         damageSentence = 'ハンターに25ダメージ';
         break;
       default:
-        console.log('エラーが起きました');
+        damageSentence = '';
+        break;
     }
     return damageSentence;
   };
@@ -137,7 +166,7 @@ export const QuestionBlock = ({
 
   // 各難易度における不正解の上限数を出力する関数
   // この関数の値を使用することで、難易度毎のゲームの終了タイミングをコントロールできる
-  const getIncorrectCount = (difficulty) => {
+  const getIncorrectCount = (difficulty: string | undefined) => {
     let incorrectCount;
     switch (difficulty){
       case 'elementary':
@@ -167,13 +196,13 @@ export const QuestionBlock = ({
         setGameState((prev) => ({
           ...prev,
           sentence: nextSentence,
-          nextSentence: prev.questions["1"].sentence,
+          nextSentence: prev.questions[1].sentence,
           sentenceNum: nextSentenceNum,
           nextSentenceNum: prev.nextSentenceNum + 1,
           targetSentence: nextTargetSentence,
-          nextTargetSentence: prev.questions["1"].target_sentence,
+          nextTargetSentence: prev.questions[1].target_sentence,
           hint: nextHint,
-          nextHint: prev.questions["1"].hint,
+          nextHint: prev.questions[1].hint,
           keyAvailable: true,
           firstAppearance: false,
           timeActive: true,
@@ -227,9 +256,9 @@ export const QuestionBlock = ({
             timeActive: false,
             gameEndTime: performance.now(),
             totalExperience: hasUser ?
-              totalExperience + getExperience(difficulty) : prev.totalExperience,
+              totalExperience + getExperience(difficulty) as number : prev.totalExperience,
             temporaryExperience: hasUser ?
-              temporaryExperience + getExperience(difficulty) : prev.temporaryExperience,
+              temporaryExperience + getExperience(difficulty as string) : prev.temporaryExperience,
             dialogGageUp: true,
             flashDisplay: false
           }));
@@ -240,16 +269,16 @@ export const QuestionBlock = ({
           setGameState((prev) => ({
             ...prev,
             sentence: nextSentence,
-            nextSentence: prev?.questions["1"]?.sentence || "no_sentence",
+            nextSentence: prev?.questions[1]?.sentence || "no_sentence",
             sentenceNum: nextSentenceNum,
-            nextSentenceNum: prev?.nextSentenceNum + 1 || "no_sentence_num",
+            nextSentenceNum: prev?.nextSentenceNum + 1 || NaN,
             targetSentence: nextTargetSentence,
-            nextTargetSentence: prev?.questions["1"]?.target_sentence || "no_target_sentence",
+            nextTargetSentence: prev?.questions[1]?.target_sentence || "no_target_sentence",
             questionJudgement: "progress",
             matchArray: [],
-            sampleAnswer: prev?.questions["0"]?.sample_answer || "no_sample_answer",
+            sampleAnswer: prev?.questions[0]?.sample_answer || "no_sample_answer",
             hint: nextHint,
-            nextHint: prev?.questions["1"]?.hint || "no_hint",
+            nextHint: prev?.questions[1]?.hint || "no_hint",
             inputRegexObject: {},
             keyAvailable: true,
             timeActive: true,
@@ -314,16 +343,16 @@ export const QuestionBlock = ({
           setGameState((prev) => ({
             ...prev,
             sentence: nextSentence,
-            nextSentence: prev?.questions["1"]?.sentence || "no_sentence",
+            nextSentence: prev?.questions[1]?.sentence || "no_sentence",
             sentenceNum: nextSentenceNum,
-            nextSentenceNum: prev?.nextSentenceNum + 1 || "no_sentence_num",
+            nextSentenceNum: prev?.nextSentenceNum + 1 || NaN,
             targetSentence: nextTargetSentence,
-            nextTargetSentence: prev?.questions["1"]?.target_sentence || "no_target_sentence",
+            nextTargetSentence: prev?.questions[1]?.target_sentence || "no_target_sentence",
             questionJudgement: "progress",
             matchArray: [],
-            sampleAnswer: prev?.questions["0"]?.sample_answer || "no_sample_answer",
+            sampleAnswer: prev?.questions[0]?.sample_answer || "no_sample_answer",
             hint: nextHint,
-            nextHint: prev?.questions["1"].hint || "no_hint",
+            nextHint: prev?.questions[1].hint || "no_hint",
             inputRegexObject: {},
             keyAvailable: true,
             timeActive: true,
@@ -352,7 +381,7 @@ export const QuestionBlock = ({
   ]);
 
   // マッチした文字列にspanタグを挿入する関数
-  const stringReplace = (target, re) => {
+  const stringReplace = (target: string, re: RegExp) => {
     return target.replace(re, (match) => (
       `<span style='color: ${COLORS.WORD_BLUE}; background-color: ${COLORS.WORD_BACK};'>` + match + "</span>"
     ));

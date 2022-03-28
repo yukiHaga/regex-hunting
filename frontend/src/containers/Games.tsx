@@ -11,7 +11,7 @@ import { HintBar } from '../components/Games/HintBar';
 import { ElementaryMonster } from '../components/Games/ElementaryMonster';
 import { IntermediateMonster } from '../components/Games/IntermediateMonster';
 import { AdvancedMonster } from '../components/Games/AdvancedMonster';
-import { QuestionBlock } from '../components/Games/QuestionBlock.jsx';
+import { QuestionBlock } from '../components/Games/QuestionBlock';
 import { CodeBlock } from '../components/Games/CodeBlock';
 import { TimeGage } from '../components/Games/TimeGage.jsx';
 import { HpGage } from '../components/Games/HpGage';
@@ -59,6 +59,7 @@ import { REQUEST_STATE } from '../constants';
 
 // gameStateの型
 import { GameState } from '../types/containers/games';
+
 // MainContentWrapperコンポーネント
 const MainContentWrapper = styled.div`
   position: relative;
