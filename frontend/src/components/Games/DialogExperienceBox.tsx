@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 
 // Colors
-import { COLORS } from '../../style_constants.js';
+import { COLORS } from '../../style_constants';
 
 // DescriptionWrapper
 import { DescriptionWrapper } from '../shared_style';

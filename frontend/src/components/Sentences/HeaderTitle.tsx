@@ -5,7 +5,7 @@ import styled from 'styled-components';
 import MainTitleImage from '../../images/main_title.png';
 
 // Responsive
-import { WIDTH } from '../../style_constants.js';
+import { WIDTH } from '../../style_constants';
 
 // BaseLink
 import { BaseLink } from '../shared_style';

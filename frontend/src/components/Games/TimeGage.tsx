@@ -1,7 +1,7 @@
 import styled, { keyframes } from 'styled-components';
 
 // Colors
-import { COLORS } from '../../style_constants.js';
+import { COLORS } from '../../style_constants';
 
 // Sounds
 import TackleSound from '../../sounds/tackle_25.mp3';

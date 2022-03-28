@@ -7,10 +7,10 @@ import { Header } from '../components/Headers/Header';
 import { Footer } from '../components/Footers/Footer';
 
 // Colors
-import { COLORS } from '../style_constants.js';
+import { COLORS } from '../style_constants';
 
 // Responsive
-import { WIDTH } from '../style_constants.js';
+import { WIDTH } from '../style_constants';
 
 // Contextオブジェクト
 import { UserContext } from "../context/UserProvider";

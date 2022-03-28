@@ -1,7 +1,7 @@
 import { createTheme } from '@mui/material/styles';
 
 // Colors
-import { COLORS } from '../style_constants.js';
+import { COLORS } from '../style_constants';
 
 const fontFamily = [
   'Avenir',

@@ -7,7 +7,7 @@ import { BaseLink } from '../shared_style';
 import { UserContext } from "../../context/UserProvider";
 
 // Colors
-import { COLORS } from '../../style_constants.js';
+import { COLORS } from '../../style_constants';
 
 // HTTP_STATUS_CODE
 import { HTTP_STATUS_CODE } from '../../constants';

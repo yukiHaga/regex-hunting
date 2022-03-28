@@ -21,7 +21,7 @@ import { REQUEST_STATE } from '../constants';
 import { HTTP_STATUS_CODE } from '../constants';
 
 // Colors
-import { COLORS } from '../style_constants.js';
+import { COLORS } from '../style_constants';
 
 // メインのラッパー
 const MainWrapper = styled.div`

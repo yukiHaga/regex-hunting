@@ -9,12 +9,12 @@ import {
 import 'react-circular-progressbar/dist/styles.css';
 
 // Colors
-import { COLORS } from '../../style_constants.js';
+import { COLORS } from '../../style_constants';
 
 // ミリ秒を分に変換する関数
 import { getMinute } from '../../functions/getMinute';
 
-import { WIDTH } from '../../style_constants.js';
+import { WIDTH } from '../../style_constants';
 
 const TimeAnalysisBoxWrapper = styled.div`
   width: 18%;

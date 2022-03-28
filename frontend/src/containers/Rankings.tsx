@@ -12,7 +12,7 @@ import { SignUpDialog } from '../components/Dialogs/SignUpDialog';
 import { UserContext } from "../context/UserProvider";
 
 // Colors
-import { COLORS } from '../style_constants.js';
+import { COLORS } from '../style_constants';
 
 // ログイン状態を確認するAPIコール関数
 import { checkLoginStatus } from '../apis/checkLoginStatus';

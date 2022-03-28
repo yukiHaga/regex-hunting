@@ -9,7 +9,7 @@ import { Footer } from '../components/Footers/Footer';
 import { PasswordUpdatesButton } from '../components/Buttons/PasswordUpdatesButton';
 
 // Colors
-import { COLORS } from '../style_constants.js';
+import { COLORS } from '../style_constants';
 
 // React Hook Form
 import { useForm, Controller } from "react-hook-form";

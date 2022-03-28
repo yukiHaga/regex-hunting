@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef, useCallback } from 'react';
 import styled, { keyframes } from 'styled-components';
 
 // Colors
-import { COLORS } from '../../style_constants.js';
+import { COLORS } from '../../style_constants';
 
 // Sounds
 import TypeSound from '../../sounds/type_25.mp3';

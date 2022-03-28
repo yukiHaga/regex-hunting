@@ -14,7 +14,7 @@ import ArrowLeftIcon from '@mui/icons-material/ArrowLeft';
 import { getClearTime } from '../../functions/getClearTime';
 
 // Colors
-import { COLORS } from '../../style_constants.js';
+import { COLORS } from '../../style_constants';
 
 // DescriptionWrapper
 import { DescriptionWrapper } from '../shared_style';
@@ -27,7 +27,7 @@ import Tooltip from '@mui/material/Tooltip';
 import IconButton from '@mui/material/IconButton';
 
 // Responsive
-import { WIDTH } from '../../style_constants.js';
+import { WIDTH } from '../../style_constants';
 
 // スライドアニメーション関係の関数
 import { slideFunction } from '../../functions/slideFunction';

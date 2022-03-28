@@ -8,7 +8,7 @@ import { Footer } from '../components/Footers/Footer';
 import { SessionFlashMessage } from '../components/FlashMessages/SessionFlashMessage';
 
 // Colors
-import { COLORS } from '../style_constants.js';
+import { COLORS } from '../style_constants';
 
 // メインのラッパー
 const MainWrapper = styled.div`

@@ -9,13 +9,13 @@ import {
 import 'react-circular-progressbar/dist/styles.css';
 
 // Colors
-import { COLORS } from '../../style_constants.js';
+import { COLORS } from '../../style_constants';
 
 // クリアタイムを取得する関数
 // マイページで使う場合、第1引数は0を指定する
 import { getClearTime } from '../../functions/getClearTime';
 
-import { WIDTH } from '../../style_constants.js';
+import { WIDTH } from '../../style_constants';
 
 const FastAnalysisBoxWrapper = styled.div`
   width: 18%;

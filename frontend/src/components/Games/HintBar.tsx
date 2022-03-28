@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 
 // Colors
-import { COLORS } from '../../style_constants.js';
+import { COLORS } from '../../style_constants';
 
 const HintBarWrapper = styled.div`
   background-color: ${COLORS.GRAY};

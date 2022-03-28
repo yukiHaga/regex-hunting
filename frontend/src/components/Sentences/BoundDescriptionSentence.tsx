@@ -7,7 +7,7 @@ import { COLORS } from '../../style_constants';
 import { FakeLink } from '../shared_style';
 
 // Responsive
-import { WIDTH } from '../../style_constants.js';
+import { WIDTH } from '../../style_constants';
 
 const BoundDescriptionSentenceWrapper = styled(FakeLink)`
   width: 70%;

@@ -38,10 +38,10 @@ import { checkLoginStatus } from '../apis/checkLoginStatus';
 import { HTTP_STATUS_CODE } from '../constants';
 
 // Colors
-import { COLORS } from '../style_constants.js';
+import { COLORS } from '../style_constants';
 
 // Responsive
-import { WIDTH } from '../style_constants.js';
+import { WIDTH } from '../style_constants';
 
 // react-scroll
 import { Link as Scroll } from 'react-scroll';

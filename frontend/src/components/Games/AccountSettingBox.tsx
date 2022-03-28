@@ -14,7 +14,7 @@ import IconButton from '@mui/material/IconButton';
 import PhotoCamera from '@mui/icons-material/PhotoCamera';
 
 // Colors
-import { COLORS } from '../../style_constants.js';
+import { COLORS } from '../../style_constants';
 
 // デフォルトのアバター画像
 import DefaultAvatarImage from '../../images/default_avatar.png';

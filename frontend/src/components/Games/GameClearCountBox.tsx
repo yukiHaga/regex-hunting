@@ -9,9 +9,9 @@ import {
 import 'react-circular-progressbar/dist/styles.css';
 
 // Colors
-import { COLORS } from '../../style_constants.js';
+import { COLORS } from '../../style_constants';
 
-import { WIDTH } from '../../style_constants.js';
+import { WIDTH } from '../../style_constants';
 
 const GameClearCountBoxWrapper = styled.div`
   width: 18%;

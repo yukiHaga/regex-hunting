@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 
 // Colors
-import { COLORS } from '../../style_constants.js';
+import { COLORS } from '../../style_constants';
 
 // NextButton
 import ArrowRightIcon from '@mui/icons-material/ArrowRight';
@@ -17,7 +17,7 @@ import IconButton from '@mui/material/IconButton';
 // DescriptionWrapper
 import { DescriptionWrapper } from '../shared_style';
 
-import { WIDTH } from '../../style_constants.js';
+import { WIDTH } from '../../style_constants';
 
 import { SetMyPageState } from '../../types/containers/myPages';
 

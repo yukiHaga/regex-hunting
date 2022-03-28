@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import { BaseLink } from '../shared_style';
 
 // Colors
-import { COLORS } from '../../style_constants.js';
+import { COLORS } from '../../style_constants';
 
 const BackToMyPageButtonWrapper = styled(BaseLink)`
   border-style: none;

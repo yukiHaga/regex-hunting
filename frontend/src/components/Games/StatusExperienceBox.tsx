@@ -2,12 +2,12 @@ import React, { memo } from 'react';
 import styled from 'styled-components';
 
 // Colors
-import { COLORS } from '../../style_constants.js';
+import { COLORS } from '../../style_constants';
 
 // DescriptionWrapper
 import { DescriptionWrapper } from '../shared_style';
 
-import { WIDTH } from '../../style_constants.js';
+import { WIDTH } from '../../style_constants';
 
 const ExperienceBoxWrapper = styled.div`
 `;

@@ -4,10 +4,10 @@ import styled from 'styled-components';
 import { BaseLink } from '../shared_style';
 
 // Colors
-import { COLORS } from '../../style_constants.js';
+import { COLORS } from '../../style_constants';
 
 // Responsive
-import { WIDTH } from '../../style_constants.js';
+import { WIDTH } from '../../style_constants';
 
 // ここのwidthはpx指定しないとレスポンシブ時にレイアウトが崩れる
 const GameStartButtonWrapper = styled(BaseLink)`

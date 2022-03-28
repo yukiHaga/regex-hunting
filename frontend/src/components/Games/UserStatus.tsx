@@ -8,12 +8,12 @@ import Avatar from '@mui/material/Avatar';
 import { StatusExperienceBox } from '../Games/StatusExperienceBox';
 
 // Colors
-import { COLORS } from '../../style_constants.js';
+import { COLORS } from '../../style_constants';
 
 // デフォルトのアバター画像
 import DefaultAvatarImage from '../../images/default_avatar.png';
 
-import { WIDTH } from '../../style_constants.js';
+import { WIDTH } from '../../style_constants';
 
 // ステータスのラッパー
 const StatusWrapper = styled.div`

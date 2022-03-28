@@ -5,7 +5,7 @@ import styled from 'styled-components';
 import { DescriptionWrapper } from '../../components/shared_style';
 
 // Colors
-import { COLORS } from '../../style_constants.js';
+import { COLORS } from '../../style_constants';
 
 // 背景画像
 import ProfessionalBackGround from '../../images/professional_background.png';

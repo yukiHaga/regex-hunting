@@ -5,7 +5,7 @@ import styled from 'styled-components';
 import { CloseIcon } from '../Icons/index';
 
 // Colors
-import { COLORS } from '../../style_constants.js';
+import { COLORS } from '../../style_constants';
 
 const CloseIconWrapper = styled.div`
   display: flex;

@@ -4,10 +4,10 @@ import styled from 'styled-components';
 import { GameStartButton } from '../Buttons/GameStartButton';
 
 // Colors
-import { COLORS } from '../../style_constants.js';
+import { COLORS } from '../../style_constants';
 
 // Responsive
-import { WIDTH } from '../../style_constants.js';
+import { WIDTH } from '../../style_constants';
 
 // setMobileStateの型
 import { SetMobileState } from '../../types/containers/landingPages';

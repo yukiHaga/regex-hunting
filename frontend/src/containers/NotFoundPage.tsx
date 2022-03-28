@@ -2,10 +2,10 @@ import React, { useState, useEffect } from 'react';
 import styled, { keyframes } from 'styled-components';
 
 // Responsive
-import { WIDTH } from '../style_constants.js';
+import { WIDTH } from '../style_constants';
 
 // Colors
-import { COLORS } from '../style_constants.js';
+import { COLORS } from '../style_constants';
 
 // DescriptionWrapper
 import { DescriptionWrapper } from '../components/shared_style';

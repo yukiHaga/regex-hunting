@@ -5,7 +5,7 @@ import styled from 'styled-components';
 import { DialogContent, Dialog } from '@mui/material';
 
 // Colors
-import { COLORS } from '../../style_constants.js';
+import { COLORS } from '../../style_constants';
 
 // NextButton
 import ArrowRightIcon from '@mui/icons-material/ArrowRight';

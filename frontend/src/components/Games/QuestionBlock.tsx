@@ -2,7 +2,7 @@ import React, { useEffect, useMemo } from 'react';
 import styled from 'styled-components';
 
 // Colors
-import { COLORS } from '../../style_constants.js';
+import { COLORS } from '../../style_constants';
 
 // モンスター名を取得する関数
 import { getMonsterName } from '../../functions/getMonsterName';

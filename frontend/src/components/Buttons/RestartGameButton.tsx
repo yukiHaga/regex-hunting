@@ -2,7 +2,7 @@ import React, { Fragment, useContext } from 'react';
 import styled from 'styled-components';
 
 // Colors
-import { COLORS } from '../../style_constants.js';
+import { COLORS } from '../../style_constants';
 
 // HTTP_STATUS_CODE
 import { HTTP_STATUS_CODE } from '../../constants';

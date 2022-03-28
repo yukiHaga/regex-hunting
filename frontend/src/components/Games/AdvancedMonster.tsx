@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 
 // Colors
-import { COLORS } from '../../style_constants.js';
+import { COLORS } from '../../style_constants';
 
 import AdvancedMonsterImage from '../../images/advanced.png';
 

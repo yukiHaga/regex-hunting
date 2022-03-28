@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 // Colors
-import { COLORS } from '../../style_constants.js';
+import { COLORS } from '../../style_constants';
 
 // Icon
 import { GoogleIcon } from './index';

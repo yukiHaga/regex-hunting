@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { COLORS } from '../../style_constants';
 
 // Responsive
-import { WIDTH } from '../../style_constants.js';
+import { WIDTH } from '../../style_constants';
 
 // 390pxはiphone12
 const SubTitleSentenceWrapper = styled.div`

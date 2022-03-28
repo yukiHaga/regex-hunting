@@ -15,7 +15,7 @@ import { DialogContent, Dialog } from '@mui/material';
 import { useForm, Controller } from "react-hook-form";
 
 // Colors
-import { COLORS } from '../../style_constants.js';
+import { COLORS } from '../../style_constants';
 
 // Button
 import { LoginButton } from '../Buttons/LoginButton'

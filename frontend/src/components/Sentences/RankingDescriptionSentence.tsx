@@ -5,7 +5,7 @@ import styled from 'styled-components';
 import { DescriptionWrapper } from '../shared_style';
 
 // Responsive
-import { WIDTH } from '../../style_constants.js';
+import { WIDTH } from '../../style_constants';
 
 const RankingDescriptionWrapper = styled(DescriptionWrapper)`
   text-align: center;

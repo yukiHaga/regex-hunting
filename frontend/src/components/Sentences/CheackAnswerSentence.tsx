@@ -7,7 +7,7 @@ import { DescriptionWrapper } from '../shared_style';
 import { BlueBaseLink } from '../shared_style';
 
 // Colors
-import { COLORS } from '../../style_constants.js';
+import { COLORS } from '../../style_constants';
 
 // setGameStateの型
 import { SetGameState } from '../../types/containers/games';

@@ -40,12 +40,12 @@ import { HTTP_STATUS_CODE } from '../constants';
 import { REQUEST_STATE } from '../constants';
 
 // Colors
-import { COLORS } from '../style_constants.js';
+import { COLORS } from '../style_constants';
 
 // 今月の月を取得する関数
 import { getMonthOfTheMonth } from '../functions/getMonthOfTheMonth';
 
-import { WIDTH } from '../style_constants.js';
+import { WIDTH } from '../style_constants';
 
 // myPageStateの型
 import { MyPageState } from '../types/containers/myPages';

@@ -12,7 +12,7 @@ import Paper from '@mui/material/Paper';
 import { DialogContent, Dialog } from '@mui/material';
 
 // Colors
-import { COLORS } from '../../style_constants.js';
+import { COLORS } from '../../style_constants';
 
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';

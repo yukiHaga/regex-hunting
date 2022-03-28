@@ -1,5 +1,5 @@
 // Colors
-import { COLORS } from '../style_constants.js';
+import { COLORS } from '../style_constants';
 
 type HandleColorType = (hp: number) => string;
 
