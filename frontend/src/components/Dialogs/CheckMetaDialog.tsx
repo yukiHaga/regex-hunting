@@ -331,11 +331,11 @@ export const CheckMetaDialog = ({
                   sx={{
                     fontSize: '2.5em'
                   }}
+                  onClick={() => handleLeftArrow(rowState)}
                 >
                   <ArrowLeftIcon
                     fontSize='inherit'
                     sx={{ color: `${COLORS.BLACK}` }}
-                    onClick={() => handleLeftArrow(rowState)}
                   />
                 </IconButton>
               </Tooltip>
@@ -355,11 +355,11 @@ export const CheckMetaDialog = ({
                   sx={{
                     fontSize: '2.5em'
                   }}
+                  onClick={() => handleRightArrow(rowState)}
                 >
                   <ArrowRightIcon
                     fontSize='inherit'
                     sx={{ color: `${COLORS.BLACK}` }}
-                    onClick={() => handleRightArrow(rowState)}
                   />
                 </IconButton>
               </Tooltip>

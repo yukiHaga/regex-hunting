@@ -396,11 +396,11 @@ export const RankingBox = memo(({
             sx={{
               fontSize: '4.0em'
             }}
+            onClick={() => handleLeftArrow(difficultyTitle)}
           >
             <ArrowLeftIcon
               fontSize='inherit'
               sx={{ color: `${COLORS.BLACK}` }}
-              onClick={() => handleLeftArrow(difficultyTitle)}
             />
           </IconButton>
         </Tooltip>
@@ -415,11 +415,11 @@ export const RankingBox = memo(({
             sx={{
               fontSize: '4.0em'
             }}
+            onClick={() => handleRightArrow(difficultyTitle)}
           >
             <ArrowRightIcon
               fontSize='inherit'
               sx={{ color: `${COLORS.BLACK}` }}
-              onClick={() => handleRightArrow(difficultyTitle)}
             />
           </IconButton>
         </Tooltip>

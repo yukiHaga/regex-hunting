@@ -134,11 +134,11 @@ export const SecondSelectBox = ({
           sx={{
             fontSize: '2.5em'
           }}
+          onClick={() => handleLeftArrow(difficultyMonthTitle)}
         >
           <ArrowLeftIcon
             fontSize='inherit'
             sx={{ color: `${COLORS.BLACK}` }}
-            onClick={() => handleLeftArrow(difficultyMonthTitle)}
           />
         </IconButton>
       </Tooltip>
@@ -153,11 +153,11 @@ export const SecondSelectBox = ({
           sx={{
             fontSize: '2.5em'
           }}
+          onClick={() => handleRightArrow(difficultyMonthTitle)}
         >
           <ArrowRightIcon
             fontSize='inherit'
             sx={{ color: `${COLORS.BLACK}` }}
-            onClick={() => handleRightArrow(difficultyMonthTitle)}
           />
         </IconButton>
       </Tooltip>
