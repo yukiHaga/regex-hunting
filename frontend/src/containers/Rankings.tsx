@@ -23,6 +23,9 @@ import { getRanking } from '../apis/ranking';
 // HTTP_STATUS_CODE
 import { HTTP_STATUS_CODE } from '../constants';
 
+// rankingStateの型
+import { RankingState } from '../types/containers/rankings';
+
 // メインのラッパー
 const MainWrapper = styled.div`
   background-color: ${COLORS.SUB};
@@ -30,7 +33,7 @@ const MainWrapper = styled.div`
   padding-bottom: 2.65%;
 `;
 
-export const Rankings = () => {
+export const Rankings = (): JSX.Element => {
 
   // useContext
   // requestUserStateには、requestState, userState, errorsが格納されている
@@ -44,7 +47,7 @@ export const Rankings = () => {
     requestUserActionTyps
   } = useContext(UserContext);
 
-  const initialState = {
+  const initialState: RankingState = {
     topTenElementary: [],
     topTenIntermediate: [],
     topTenAdvanced: [],
@@ -73,7 +76,7 @@ export const Rankings = () => {
   };
 
   // モバイルを管理するstate
-  const [setMobileState] = useState(mobileInitialState);
+  const [, setMobileState] = useState(mobileInitialState);
 
   // モーダルを管理するstate
   const [state, setState] = useState(loginInitialState);

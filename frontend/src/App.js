@@ -10,7 +10,7 @@ import {
 // Presentational Components
 import { LandingPages } from './containers/LandingPages.jsx';
 import { MyPages } from './containers/MyPages';
-import { Rankings } from './containers/Rankings.jsx';
+import { Rankings } from './containers/Rankings';
 import { AccountSettings } from './containers/AccountSettings';
 import { Games } from './containers/Games';
 import { UseTreaties } from './containers/UseTreaties.jsx';

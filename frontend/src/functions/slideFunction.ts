@@ -6,7 +6,7 @@ import {
 } from '../components/shared_style';
 import { Keyframes } from 'styled-components';
 
-type SlideFunction = (slideIn: boolean, slideOut: boolean, direction: 'left' | 'right') => false | Keyframes;
+type SlideFunction = (slideIn: boolean, slideOut: boolean, direction: '' | 'left' | 'right') => false | Keyframes;
 
 // スライドアニメーションの関数
 export const slideFunction: SlideFunction = (

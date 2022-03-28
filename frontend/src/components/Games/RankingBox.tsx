@@ -32,6 +32,8 @@ import { WIDTH } from '../../style_constants.js';
 // スライドアニメーション関係の関数
 import { slideFunction } from '../../functions/slideFunction';
 
+import { RankingState, SetRankingState } from '../../types/containers/rankings';
+
 const TitleLineWrapper = styled.div`
   display: flex;
   justify-content: space-evenly;
@@ -248,7 +250,7 @@ const NotRankingWrapper = styled(RankingWrapper)`
 
 // animationプロパティは1つしか存在できない
 // 2個存在する場合、2個目で1個目が上書きされる
-const SlideContentWrapper = styled.div`
+const SlideContentWrapper = styled.div<{slideIn: boolean, slideOut: boolean, direction: "" | "right" | "left"}>`
   width: 100%;
   margin: 0 auto;
   transform: translateX(0);
@@ -259,16 +261,23 @@ const SlideContentWrapper = styled.div`
   }) => slideFunction(slideIn, slideOut, direction)} 0.7s ease forwards;
 `;
 
+type RankingBoxArg = {
+  currentTopTenArray: RankingState['currentTopTenArray'];
+  difficultyTitle: RankingState['difficultyTitle'];
+  rankingState: RankingState;
+  setRankingState: SetRankingState;
+};
+
 export const RankingBox = memo(({
   currentTopTenArray,
   difficultyTitle,
   rankingState,
   setRankingState
-}) => {
+}: RankingBoxArg): JSX.Element => {
 
   // 初級のデータを表示する関数
   const handleElementary = (
-    direction
+    direction: RankingState['direction']
   ) => {
     setRankingState((prev) => ({
       ...prev,
@@ -292,7 +301,7 @@ export const RankingBox = memo(({
 
   // 中級のデータを表示する関数
   const handleIntermediate = (
-    direction
+    direction: RankingState['direction']
   ) => {
     setRankingState((prev) => ({
       ...prev,
@@ -316,7 +325,7 @@ export const RankingBox = memo(({
 
   // 上級のデータを表示する関数
   const handleAdvanced = (
-    direction
+    direction: RankingState['direction']
   ) => {
     setRankingState((prev) => ({
       ...prev,
@@ -341,7 +350,7 @@ export const RankingBox = memo(({
   // 左矢印のリンクを制御する関数
   // difficultyTitleは初め初級が入る
   // そのため、defaultは上級の関数が実行される
-  const handleLeftArrow = (difficultyTitle) => {
+  const handleLeftArrow = (difficultyTitle: RankingState['difficultyTitle']) => {
     switch (difficultyTitle){
       case '初級編':
         handleAdvanced('right');
@@ -360,7 +369,7 @@ export const RankingBox = memo(({
   // 右矢印のリンクを制御する関数
   // difficultyTitleは初め初級が入る
   // そのため、defaultは中級の関数が実行される
-  const handleRightArrow = (difficultyTitle) => {
+  const handleRightArrow = (difficultyTitle: RankingState['difficultyTitle']) => {
     switch (difficultyTitle){
       case '初級編':
         handleIntermediate('left');
