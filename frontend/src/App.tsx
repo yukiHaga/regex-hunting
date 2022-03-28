@@ -3,7 +3,6 @@ import React from "react";
 // React Router
 import {
   BrowserRouter as Router,
-  Routes,
   Route,
 } from "react-router-dom";
 
@@ -25,15 +24,18 @@ import ScrollToTop from './scroll/ScrollToTop';
 // Provider
 import { UserProvider } from "./context/UserProvider";
 
+// Analyticsコンポーネント
+// 内部にGoogleAnalyticsに関する処理と、Routesコンポーネントが記述されている
+import { Analytics } from './analytics/Analytics';
+
 // App Component
 function App(): JSX.Element {
-
   return (
     <React.StrictMode>
       <UserProvider>
         <Router>
           <ScrollToTop />
-          <Routes>
+          <Analytics>
             {/* LPページ */}
             <Route
               path="/"
@@ -107,7 +109,7 @@ function App(): JSX.Element {
               path="/*"
               element={<NotFoundPage />}
             />
-          </Routes>
+          </Analytics>
         </Router>
       </UserProvider>
     </React.StrictMode>
