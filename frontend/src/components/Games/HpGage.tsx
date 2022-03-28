@@ -51,7 +51,7 @@ const GageOuterWrapper = styled.div`
   box-shadow: inset 1px 1px 3px 0 rgba(0, 0, 0, 0.8), 1px 1px 0 0 rgba(255, 255, 255, 0.12);
 `;
 
-const GageWrapper = styled.div`
+const GageWrapper = styled.div<{userMaxHp: number, userHp: number}>`
   height: 100%;
   width: ${({
     userHp,
@@ -69,16 +69,20 @@ const GageWrapper = styled.div`
   border: 1px solid rgba(0,0,0,.2);
 `;
 
+// HpGageの引数の型
+type HpGageArg = {
+  userHp: number;
+  userMaxHp: number;
+};
+
 export const HpGage = ({
   userHp,
   userMaxHp
-}) => {
+}: HpGageArg): JSX.Element => {
   return (
     <>
       <HpGageWrapper>
-        <TypeWrapper
-          userHp={userHp}
-        >
+        <TypeWrapper>
           <Fuchiue>
             HP
           </Fuchiue>

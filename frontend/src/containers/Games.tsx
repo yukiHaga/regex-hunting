@@ -14,7 +14,7 @@ import { AdvancedMonster } from '../components/Games/AdvancedMonster';
 import { QuestionBlock } from '../components/Games/QuestionBlock.jsx';
 import { CodeBlock } from '../components/Games/CodeBlock';
 import { TimeGage } from '../components/Games/TimeGage.jsx';
-import { HpGage } from '../components/Games/HpGage.jsx';
+import { HpGage } from '../components/Games/HpGage';
 import { GameFooter } from '../components/Footers/GameFooter';
 import { JudgementFlashMessage } from '../components/FlashMessages/JudgementFlashMessage'
 import { GameClearDialog } from '../components/Dialogs/GameClearDialog'
