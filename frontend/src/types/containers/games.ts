@@ -1,0 +1,100 @@
+export type GameState = {
+    gameManagement: {
+      created_at?: null;
+      difficulty?: 'elementary' | 'intermediate' | 'advanced';
+      game_result?: string;
+      id?: null;
+      play_date?: string;
+      result_time?: number;
+      updated_at?: null;
+      user_id?: null | number;
+    };
+    questions: {
+      commentary: string;
+      created_at: string;
+      difficulty: 'elementary' | 'intermediate' | 'advanced';
+      hint: string;
+      id: number;
+      sample_answer: string;
+      sentence: string;
+      target_sentence: string;
+      updated_at: string;
+    }[];
+    userHp: number;
+    userMaxHp: number;
+    userAttack: number;
+    userDefence: number;
+    monsterAttack: number;
+    monsterDefence: number;
+    monsterHp: number;
+    monsterMaxHp: number;
+    correctQuestions: {
+      inputRegex: string | undefined;
+      question: {
+        commentary: string;
+        created_at: string;
+        difficulty: 'elementary' | 'intermediate' | 'advanced';
+        hint: string;
+        id: number;
+        sample_answer: string;
+        sentence: string;
+        target_sentence: string;
+        updated_at: string;
+      };
+      sentenceNum: number;
+    }[];
+    incorrectQuestions: {
+      question: {
+        commentary: string;
+        created_at: string;
+        difficulty: 'elementary' | 'intermediate' | 'advanced';
+        hint: string;
+        id: number;
+        sample_answer: string;
+        sentence: string;
+        target_sentence: string;
+        updated_at: string;
+      };
+      sentenceNum: number;
+    }[];
+    sentence: string;
+    nextSentence: string;
+    sentenceNum: number;
+    nextSentenceNum: number;
+    targetSentence: string;
+    nextTargetSentence: string;
+    sampleAnswer: string;
+    hint: string;
+    nextHint: string;
+    matchArray: {
+      match: string;
+      index: number | undefined;
+    }[];
+    flashDisplay: boolean;
+    flashTitle: "" | 'Good' | 'Bad';
+    inputRegex: string | undefined;
+    inputRegexObject: RegExp | {};
+    keyAvailable: boolean;
+    gameResult: '' | 'win' | 'lose' | 'progress';
+    firstAppearance: boolean;
+    questionJudgement: "progress" | "correct" | "incorrect";
+    timeActive: boolean;
+    checkAnswer: boolean;
+    gameStartTime: number;
+    gameEndTime: number;
+    gameDescriptionOpen: boolean;
+    hasUser: boolean;
+    rank: number;
+    totalExperience: number;
+    maximumExperiencePerRank: number;
+    temporaryExperience: number;
+    prevTemporaryExperience: number;
+    dialogGageUp: boolean;
+    sendGameData: boolean;
+    rankUp: boolean;
+    activeTitle: string;
+    clickDescriptionOpen: boolean;
+    clickMetaOpen: boolean;
+};
+
+export type SetGameState = React.Dispatch<React.SetStateAction<GameState>>;
