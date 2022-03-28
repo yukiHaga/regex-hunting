@@ -20,7 +20,7 @@ import { BackToMyPageButton } from '../Buttons/BackToMyPageButton';
 import { CheackAnswerSentence } from '../Sentences/CheackAnswerSentence';
 
 // ExperienceGage
-import { DialogExperienceBox } from '../Games/DialogExperienceBox.jsx';
+import { DialogExperienceBox } from '../Games/DialogExperienceBox';
 
 // モンスター名を取得する関数
 import { getMonsterName } from '../../functions/getMonsterName';

@@ -31,9 +31,9 @@ const ExperienceGageWrapper = styled.div`
 
 // ExperienceGageのExperienceの幅を取り扱う関数
 const handleExperienceGage = (
-  temporaryExperience,
-  maximumExperiencePerRank
-) => {
+  temporaryExperience: number,
+  maximumExperiencePerRank: number
+): string => {
   if(temporaryExperience >= maximumExperiencePerRank) {
     return '100%';
   } else {
@@ -41,7 +41,7 @@ const handleExperienceGage = (
   }
 };
 
-const InnerExperienceGageWrapper = styled.div`
+const InnerExperienceGageWrapper = styled.div<{dialogGageUp: boolean, temporaryExperience: number, maximumExperiencePerRank: number}>`
   width: ${({
     temporaryExperience,
     maximumExperiencePerRank
@@ -57,6 +57,16 @@ const InnerExperienceGageWrapper = styled.div`
   border: 1px solid rgba(0,0,0,.2);
 `;
 
+//  DialogExperienceBoxの引数の型
+type DialogExperienceBoxArg = {
+  rank: number;
+  totalExperience: number;
+  maximumExperiencePerRank: number;
+  temporaryExperience: number;
+  prevTemporaryExperience: number;
+  dialogGageUp: boolean;
+};
+
 export const DialogExperienceBox = ({
   rank,
   totalExperience,
@@ -64,7 +74,7 @@ export const DialogExperienceBox = ({
   temporaryExperience,
   prevTemporaryExperience,
   dialogGageUp,
-}) => {
+}: DialogExperienceBoxArg): JSX.Element => {
 
   const initialState = {
     temporaryExperience:

@@ -20,7 +20,7 @@ import { BackToMyPageButton } from '../Buttons/BackToMyPageButton';
 import { CheackAnswerSentence } from '../Sentences/CheackAnswerSentence';
 
 // ExperienceGage
-import { DialogExperienceBox } from '../Games/DialogExperienceBox.jsx';
+import { DialogExperienceBox } from '../Games/DialogExperienceBox';
 
 // 各ゲームの獲得経験値を取得する関数
 import { getExperience } from '../../functions/getExperience';
