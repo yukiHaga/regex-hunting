@@ -53,7 +53,7 @@ const CustomUl = styled.ul`
   margin: 0 auto;
 `;
 
-export const SendEmail = () => {
+export const SendEmail = (): JSX.Element => {
 
   // location
   const location = useLocation();

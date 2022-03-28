@@ -136,7 +136,7 @@ const CustomEmailWrapper = styled.div`
   }
 `;
 
-export const PrivacyPolicies = () => {
+export const PrivacyPolicies = (): JSX.Element => {
 
   // useContext
   // requestUserStateには、requestState, userState, errorsが格納されている

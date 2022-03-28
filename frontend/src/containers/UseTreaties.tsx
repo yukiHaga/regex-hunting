@@ -101,7 +101,7 @@ const CustomBottomParagraphWrapper = styled(CustomSecondParagraphWrapper)`
   margin-bottom: 3%;
 `;
 
-export const UseTreaties = () => {
+export const UseTreaties = (): JSX.Element => {
 
   // useContext
   // requestUserStateには、requestState, userState, errorsが格納されている
