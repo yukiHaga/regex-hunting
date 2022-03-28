@@ -9,6 +9,8 @@ import TackleSound from '../../sounds/tackle_25.mp3';
 // calculateDamage
 import { calculateDamage } from '../../functions/calculateDamage';
 
+import { GameState, SetGameState } from '../../types/containers/games';
+
 const TimeGageWrapper = styled.div`
   background-color: ${COLORS.GAGE_GRAY};
   border-radius: 10px 10px 0 0;
@@ -65,7 +67,7 @@ const GageOuterWrapper = styled.div`
 // 問題が表示された瞬間、QuestionBlock.jsxによってtimeActiveがtrueになるので、
 // アニメーションが動き出す
 // clickDescriptionOpenがtrueだと、アニメーションが一時停止する
-const GageWrapper = styled.div`
+const GageWrapper = styled.div<{timeActive: boolean, clickDescriptionOpen: boolean, clickMetaOpen: boolean}>`
   height: 100%;
   width: 100%;
   background-color: ${COLORS.YELLOW};
@@ -86,6 +88,18 @@ const GageWrapper = styled.div`
   border: 1px solid rgba(0,0,0,.2);
 `;
 
+type TimeGageArg = {
+  gameState: GameState;
+  setGameState: SetGameState;
+  timeActive: boolean;
+  monsterAttack: number;
+  userDefence: number;
+  userHp: number;
+  sentenceNum: number;
+  clickDescriptionOpen: boolean;
+  clickMetaOpen: boolean;
+};
+
 export const TimeGage = ({
   gameState,
   setGameState,
@@ -96,7 +110,7 @@ export const TimeGage = ({
   sentenceNum,
   clickDescriptionOpen,
   clickMetaOpen
-}) => {
+}: TimeGageArg): JSX.Element => {
 
   // タイムゲージが0になった時に実行される関数
   const timeOut = () => {
