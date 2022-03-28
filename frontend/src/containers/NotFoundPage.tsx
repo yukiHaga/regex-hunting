@@ -40,7 +40,7 @@ const FadeOutAnime = keyframes`
 `;
 
 const FadeFunction = (
-  displayState
+  displayState: string
 ) => {
   switch (true){
     case displayState === "in":
@@ -63,7 +63,7 @@ const Mask = styled.div`
   justify-content: center;
 `;
 
-const CustomImage = styled.img`
+const CustomImage = styled.img<{displayState: string}>`
   width: 100%;
   height: 80%;
   object-fit: contain;
@@ -119,7 +119,7 @@ const CustomLink = styled(BaseLink)`
   text-decoration: underline;
 `;
 
-export const NotFoundPage = () => {
+export const NotFoundPage = (): JSX.Element => {
 
   const [ displayState, setDisplayState ] = useState("in");
 

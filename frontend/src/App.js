@@ -19,7 +19,7 @@ import { PasswordResets } from './containers/PasswordResets.jsx';
 import { SendEmail } from './containers/SendEmail.jsx';
 import { PasswordUpdates } from './containers/PasswordUpdates.jsx';
 import { ExternalAuth } from './containers/ExternalAuth';
-import { NotFoundPage } from './containers/NotFoundPage.jsx';
+import { NotFoundPage } from './containers/NotFoundPage';
 import ScrollToTop from './scroll/ScrollToTop';
 
 // Provider
