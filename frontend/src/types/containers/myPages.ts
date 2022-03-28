@@ -23,6 +23,16 @@ export type MyPageState = {
   display: boolean;
   message: string;
   getPageInfo: boolean;
+  totalTimePerDifficulty: {
+    advanced: number;
+    elementary: number;
+    intermediate: number;
+  };
+  gameClearCountPerDifficulty: {
+    advanced: number;
+    elementary: number;
+    intermediate: number;
+  };
 };
 
 export type SetMyPageState = React.Dispatch<React.SetStateAction<MyPageState>>;

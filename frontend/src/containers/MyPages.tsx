@@ -16,7 +16,7 @@ import { CircularMask } from '../components/loads/CircularMask';
 import { GameClearCountBox } from '../components/Games/GameClearCountBox';
 import { TimeAnalysisBox } from '../components/Games/TimeAnalysisBox';
 import { FastAnalysisBox } from '../components/Games/FastAnalysisBox';
-import { SecondSelectBox } from '../components/Games/SecondSelectBox.jsx';
+import { SecondSelectBox } from '../components/Games/SecondSelectBox';
 import { TitleFlashMessage } from '../components/FlashMessages/TitleFlashMessage';
 
 // Images
@@ -211,7 +211,17 @@ export const MyPages = (): JSX.Element => {
     releaseCondition: "",
     display: false,
     message: "",
-    getPageInfo: false
+    getPageInfo: false,
+    totalTimePerDifficulty: {
+      advanced: 0,
+      elementary: 0,
+      intermediate: 0
+    },
+    gameClearCountPerDifficulty: {
+      advanced: 0,
+      elementary: 0,
+      intermediate: 0
+    }
   };
 
   // MyPageの状態を管理するstate
