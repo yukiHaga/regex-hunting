@@ -78,17 +78,17 @@ const CustomFormControl = styled(FormControl)`
   width: 100%;
 `;
 
-const CustomFilledEmailInput = styled(FilledInput)`
+const CustomFilledEmailInput = styled(FilledInput)<{label: string, errors_box: {message: string, ref: object, type: string} | undefined }>`
   margin-bottom: ${({
-    errorsEmailBox
-  }) => typeof errorsEmailBox === 'undefined' && '5%' };
+    errors_box
+  }) => typeof errors_box === 'undefined' && '5%' };
 `;
 
 const PasswordResetsButtonWrapper = styled.div`
   margin-top: 3%;
 `;
 
-export const PasswordResets = () => {
+export const PasswordResets = (): JSX.Element => {
 
   // navigation
   const navigate = useNavigate();
@@ -116,7 +116,7 @@ export const PasswordResets = () => {
 
   // Formの検証後に呼び出される関数
   // dataにはフォームに入力したデータが入る
-  const onSubmit = ({ EmailBox }) => {
+  const onSubmit = ({ EmailBox }: {EmailBox: string}) => {
     postPasswordResetRequest({
       email: EmailBox
     }).then(() => (
@@ -157,7 +157,7 @@ export const PasswordResets = () => {
                       type="email"
                       id="email-component-filled"
                       label="email"
-                      errorsEmailBox={errors.EmailBox}
+                      errors_box={errors.EmailBox}
                     />
                   </CustomFormControl>
                 )}

@@ -78,23 +78,23 @@ const CustomFormControl = styled(FormControl)`
   width: 100%;
 `;
 
-const CustomFilledPasswordInput = styled(FilledInput)`
+const CustomFilledPasswordInput = styled(FilledInput)<{label: string, errors_box: {message: string, ref: object, type: string} | undefined }>`
   margin-bottom: ${({
-    errorsPasswordBox
-  }) => typeof errorsPasswordBox === 'undefined' && '5%' };
+    errors_box
+  }) => typeof errors_box === 'undefined' && '5%' };
 `;
 
-const CustomFilledPasswordConfirmationInput = styled(FilledInput)`
+const CustomFilledPasswordConfirmationInput = styled(FilledInput)<{label: string, errors_box: {message: string, ref: object, type: string} | undefined }>`
   margin-bottom: ${({
-    errorsPasswordConfirmationBox
-  }) => typeof errorsPasswordConfirmationBox === 'undefined' && '5%' };
+    errors_box
+  }) => typeof errors_box === 'undefined' && '5%' };
 `;
 
 const PasswordUpdatesButtonWrapper = styled.div`
   margin-top: 3%;
 `;
 
-export const PasswordUpdates = () => {
+export const PasswordUpdates = (): JSX.Element => {
 
   // navigation
   const navigate = useNavigate();
@@ -144,7 +144,7 @@ export const PasswordUpdates = () => {
         message: "大文字, 小文字, 数字が含まれるパスワードを入力してください。"
       },
       validate: {
-        confirmPassword: (value) => value === password.current || "パスワードが一致しません。"
+        confirmPassword: (value: string) => value === password.current || "パスワードが一致しません。"
       }
     }
   };
@@ -153,13 +153,13 @@ export const PasswordUpdates = () => {
   const query2 = new URLSearchParams(search);
 
   // Formの検証後に呼び出される関数
-  const onSubmit = ({ PasswordBox, PasswordConfirmationBox }) => {
+  const onSubmit = ({ PasswordBox, PasswordConfirmationBox }: {PasswordBox: string, PasswordConfirmationBox: string}) => {
     patchPasswordResetsUpdate({
       user: {
         password: PasswordBox,
         password_confirmation: PasswordConfirmationBox
       },
-      token: query2.get('token')
+      token: query2.get('token') as string
     }).then(() => (
       navigate('/', {
         state: { display: true, success: "パスワードを更新しました。"}
@@ -198,7 +198,7 @@ export const PasswordUpdates = () => {
                       type="password"
                       id="password-component-filled"
                       label="password"
-                      errorsPasswordBox={errors.PasswordBox}
+                      errors_box={errors.PasswordBox}
                     />
                   </CustomFormControl>
                 )}
@@ -221,7 +221,7 @@ export const PasswordUpdates = () => {
                       type="password"
                       id="password-confirmation-component-filled"
                       label="password-confirmation"
-                      errorsPasswordConfirmationBox={errors.PasswordConfirmationBox}
+                      errors_box={errors.PasswordConfirmationBox}
                     />
                   </CustomFormControl>
                 )}

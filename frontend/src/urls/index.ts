@@ -29,7 +29,7 @@ export const googleOAuth = `https://accounts.google.com/o/oauth2/auth?response_t
 export const rankings = `${DEFAULT_API_URL}/ranking`;
 
 // 動的にURLを生成する関数の型
-type DynamicURL = (userIdOrId: number) => string;
+type DynamicURL = (userIdOrId: number | string) => string;
 
 // ユーザー関係
 export const myPages: DynamicURL = (userId) =>
