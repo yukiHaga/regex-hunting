@@ -490,7 +490,7 @@ export const Games = (): JSX.Element => {
     dispatch
   ]);
 
-  console.log(gameState);
+  // console.log(gameState);
 
   // 画像がロードされているかを判定するstate
   const [ loadState, setLoadState] = useState(false);
