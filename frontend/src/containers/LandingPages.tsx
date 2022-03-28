@@ -183,7 +183,7 @@ const GameContentsWrapper = styled.div`
   flex-wrap: wrap;
 `;
 
-export const LandingPages = () => {
+export const LandingPages = (): JSX.Element => {
 
   // モーダルに関するstateの初期値
   const loginInitialState = {

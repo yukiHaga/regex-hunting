@@ -8,7 +8,7 @@ import {
 } from "react-router-dom";
 
 // Presentational Components
-import { LandingPages } from './containers/LandingPages.jsx';
+import { LandingPages } from './containers/LandingPages';
 import { MyPages } from './containers/MyPages';
 import { Rankings } from './containers/Rankings';
 import { AccountSettings } from './containers/AccountSettings';
@@ -18,7 +18,7 @@ import { PrivacyPolicies } from './containers/PrivacyPolicies.jsx';
 import { PasswordResets } from './containers/PasswordResets.jsx';
 import { SendEmail } from './containers/SendEmail.jsx';
 import { PasswordUpdates } from './containers/PasswordUpdates.jsx';
-import { ExternalAuth } from './containers/ExternalAuth.jsx';
+import { ExternalAuth } from './containers/ExternalAuth';
 import { NotFoundPage } from './containers/NotFoundPage.jsx';
 import ScrollToTop from './scroll/ScrollToTop';
 

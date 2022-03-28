@@ -6,11 +6,11 @@ import { postExternalAuth } from '../apis/login';
 
 import { CircularMask } from '../components/loads/CircularMask';
 
-export const ExternalAuth = () => {
+export const ExternalAuth = (): JSX.Element => {
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
 
-  const code = searchParams.get('code');
+  const code = searchParams.get('code') as string;
   const callBackState = searchParams.get('state');
   const { provider } = useParams();
 

@@ -14,7 +14,7 @@ type PostUserSession = {
 // 戻り値の型は関数自身に書く
 type PostExternalAuth = {
   code: string,
-  provider: string
+  provider: string | undefined;
 };
 
 // ログインするためのAPIコール関数
