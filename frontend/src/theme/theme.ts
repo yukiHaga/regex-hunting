@@ -18,11 +18,6 @@ const fontFamily = [
 ].join(',');
 
 const theme = createTheme({
-  palette: {
-    green: {
-      main: COLORS.MAIN,
-    },
-  },
   typography: {
     fontFamily: fontFamily,
   },
