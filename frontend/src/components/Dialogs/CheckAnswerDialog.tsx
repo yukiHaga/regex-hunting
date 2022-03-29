@@ -268,6 +268,22 @@ export const CheckAnswerDialog = ({
                       {question.target_sentence}
                     </TargetSentenceWrapper>
                   </QuestionWrapper>
+                  <OuterCodeBlockWrapper>
+                    <CodeBlockTitleWrapper>
+                      解答
+                    </CodeBlockTitleWrapper>
+                    <CodeBlockWrapper>
+                      <AnchorWrapper>
+                        /
+                      </AnchorWrapper>
+                      <CodeBlockDiv>
+                        {question.sample_answer}
+                      </CodeBlockDiv>
+                      <AnchorWrapper>
+                        /g
+                      </AnchorWrapper>
+                    </CodeBlockWrapper>
+                  </OuterCodeBlockWrapper>
                   <CommentaryBlockWrapper>
                     <CommentaryTitleWrapper>
                       解説
@@ -317,7 +333,7 @@ export const CheckAnswerDialog = ({
                   </QuestionWrapper>
                   <OuterCodeBlockWrapper>
                     <CodeBlockTitleWrapper>
-                      あなたの回答
+                      あなたの解答
                     </CodeBlockTitleWrapper>
                     <CodeBlockWrapper>
                       <AnchorWrapper>
@@ -325,6 +341,22 @@ export const CheckAnswerDialog = ({
                       </AnchorWrapper>
                       <CodeBlockDiv>
                         {inputRegex}
+                      </CodeBlockDiv>
+                      <AnchorWrapper>
+                        /g
+                      </AnchorWrapper>
+                    </CodeBlockWrapper>
+                  </OuterCodeBlockWrapper>
+                  <OuterCodeBlockWrapper>
+                    <CodeBlockTitleWrapper>
+                      解答
+                    </CodeBlockTitleWrapper>
+                    <CodeBlockWrapper>
+                      <AnchorWrapper>
+                        /
+                      </AnchorWrapper>
+                      <CodeBlockDiv>
+                        {question.sample_answer}
                       </CodeBlockDiv>
                       <AnchorWrapper>
                         /g
