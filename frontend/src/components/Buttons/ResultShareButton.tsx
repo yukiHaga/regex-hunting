@@ -68,7 +68,7 @@ export const ResultShareButton = ({
     } else if (gameResult === 'lose' && !rankUp) {
       return `${getMonsterName(difficulty)}の討伐に失敗しました...`
     } else if (gameResult === 'win' && rankUp) {
-      return `ランクアップしました！現在のランクは${rank}です。`
+      return `レベルアップしました！現在のレベルは${rank}です。`
     }
   };
 

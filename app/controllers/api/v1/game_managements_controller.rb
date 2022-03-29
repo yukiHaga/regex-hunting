@@ -20,10 +20,10 @@ class Api::V1::GameManagementsController < ApplicationController
   before_action :set_incorrect_questions, only: :finish, if: :logged_in?
 
   # タイトルに関する処理
-  # ランクアップしているかつ、
-  # ユーザーのランクが、CONDITION_HASHのバリューのランクを満たすなら、
+  # レベルアップしているかつ、
+  # ユーザーのレベルが、CONDITION_HASHのバリューのレベルを満たすなら、
   # active_titleを更新する
-  # active_titleに代入しているので、ランクが上がるごとに、マイページで設定したタイトルが
+  # active_titleに代入しているので、レベルが上がるごとに、マイページで設定したタイトルが
   # 変更される
   CONDITION_HASH = {
     一人前ハンター: 2,
@@ -70,8 +70,8 @@ class Api::V1::GameManagementsController < ApplicationController
     @game_management.save!
 
     # ログインユーザーのステータスを更新する処理
-    # ランクアップしている場合、temporary_experienceが0になる
-    # さらに、あるランクに到達すると称号を解放する
+    # レベルアップしている場合、temporary_experienceが0になる
+    # さらに、あるレベルに到達すると称号を解放する
     # current_userにsaltやcrypted_passwordなどのカラムを含めてjsonを送ってはダメ
     if rank_up? && CONDITION_HASH.values.include?(params[:current_user][:rank] + 1)
       current_user.release_new_title((Title.find_by(name: CONDITION_HASH.key(params[:current_user][:rank] + 1)))[:id])

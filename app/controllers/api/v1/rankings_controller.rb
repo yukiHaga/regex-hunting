@@ -2,7 +2,7 @@ class Api::V1::RankingsController < ApplicationController
   skip_before_action :require_login, only: :index
   after_action :set_csrf_token_header, only: :index
 
-  # 自分のランクを表示する部分は一旦保留。かなりムズイ
+  # 自分のレベルを表示する部分は一旦保留。かなりムズイ
   def index
     top_ten_elementary = get_top_ten(:elementary)
     top_ten_intermediate = get_top_ten(:intermediate)
