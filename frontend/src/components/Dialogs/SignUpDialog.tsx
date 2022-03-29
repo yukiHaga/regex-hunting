@@ -337,7 +337,7 @@ export const SignUpDialog = ({
           <OrDirectionSentence />
           <OAuthLoginButton
             url={googleOAuth}
-            color={COLORS.PINK}
+            color={COLORS.RED}
             type="Google"
           />
           <OAuthLoginButton
