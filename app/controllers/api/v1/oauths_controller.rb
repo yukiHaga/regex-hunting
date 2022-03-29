@@ -7,7 +7,7 @@ class Api::V1::OauthsController < ApplicationController
   # 登録されていればログインをしtrueを返却する。登録されていなければfalseを返す。
   # create_from・・・login_fromでfalseの場合にユーザ登録をするメソッド。
   # auto_login・・・メールアドレスやパスワードを使わずuserとしてログインする。
-  # 主にユーザー作成後に、自動ログインさせたい時に使う。
+  # 主にユーザー作成後に、自動ログインさせたい場合に使う。
   def callback
     provider = params[:provider]
     if user = login_from(provider)

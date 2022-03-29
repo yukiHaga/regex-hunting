@@ -39,7 +39,7 @@ Question.seed(
     target_sentence: 'class class={Blue}',
     sample_answer: 'class(={Blue})?',
     hint: '文字列, キャプチャグループ, 量指定子を使用して、正規表現を作ってみましょう。',
-    commentary: 'classとclass={Blue}の共通な文字列はclassです。共通ではない文字列は={Blue}です。={Blue}があるかないかの違いなので、={Blue}は(={Blue})?でマッチさせることを考えます。そのため、class(={Blue})?でclass, class={Blue}にマッチするような正規表現を表します。',
+    commentary: 'classとclass={Blue}の共通している文字列はclassです。共通してない文字列は={Blue}です。={Blue}があるかないかの違いの為、={Blue}は(={Blue})?でマッチさせることを考えます。そのため、class(={Blue})?でclass, class={Blue}にマッチするような正規表現を表します。',
     difficulty: 'intermediate'
   },
 
@@ -61,7 +61,7 @@ Question.seed(
     target_sentence: '150 is greater than 15.',
     sample_answer: '\\d{2,3}',
     hint: "1桁の数字にマッチする特殊文字と量指定子({min,max})を使用して、正規表現を作ってみましょう。",
-    commentary: '150は3桁の数字であり、15は2桁の数字です。そのため、正規表現\\d{2,3}でマッチさせることができます。量指定子?は、直前の1文字があればマッチするが、なくてもよいを意味するので、150?でマッチさせることもできます。',
+    commentary: '150は3桁の数字であり、15は2桁の数字です。そのため、正規表現\\d{2,3}でマッチさせることができます。量指定子?は、直前の1文字があればマッチするが、なくてもよいを意味する為、150?でマッチさせることもできます。',
     difficulty: 'intermediate'
   },
 
@@ -116,7 +116,7 @@ Question.seed(
     target_sentence: 'ck cook coook cooook',
     sample_answer: 'co*k',
     hint: '文字列と量指定子(*)を使用して、正規表現を作ってみましょう。',
-    commentary: 'ck, cook, coook, cooookの共通な文字列はc, kです。cとkの間のoの数が単語ごとに違います。任意の数のoは、o*でマッチさせることができます。そのため、co*kでck, cook, coook, cooookにマッチする正規表現を表します。',
+    commentary: 'ck, cook, coook, cooookの共通している文字列はc, kです。cとkの間のoの数が単語ごとに違います。任意の数のoは、o*でマッチさせることができます。そのため、co*kでck, cook, coook, cooookにマッチする正規表現を表します。',
     difficulty: 'intermediate'
   },
 
@@ -138,7 +138,7 @@ Question.seed(
     target_sentence: '123 -110.9',
     sample_answer: '-?\\d{3}(\.\\d)?',
     hint: '\\d, 量指定子を使用して、正規表現を作ってみましょう。',
-    commentary: 'マイナスがあるかないかは-?で表すことができます。マイナスと小数点との間には3桁の数字は、\\d{3}でマッチさせることができます。小数点と小数第一位の数があるかないかは、(\.\\d)?でマッチさせることができます。.自体は任意の1文字にマッチするので、純粋に.として使いたい場合、\\でエスケープします。したがって、-?\\d{3}(\.\\d)?で-123, -110.9にマッチする正規表現を表します。',
+    commentary: 'マイナスがあるかないかは-?で表すことができます。マイナスと小数点の間の3桁の数字は、\\d{3}でマッチさせることができます。小数点と小数第一位の数があるかないかは、(\.\\d)?でマッチさせることができます。.自体は任意の1文字にマッチする為、純粋に.として使いたい場合、\\でエスケープします。したがって、-?\\d{3}(\.\\d)?で-123, -110.9にマッチする正規表現を表します。',
     difficulty: 'intermediate'
   },
 

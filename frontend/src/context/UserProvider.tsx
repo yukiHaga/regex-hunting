@@ -28,7 +28,7 @@ const initialContextValue = {
 };
 
 // UserContextというコンテキストオブジェクトを作成
-// 初期値と型を与えないとエラーが出るので、与えた
+// 初期値と型を与えないとエラーが出る為、与えた
 export const UserContext = createContext<UserContextType>(initialContextValue);
 
 // JSX.Elementは、React.createElementの値の型を表す

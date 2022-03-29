@@ -11,7 +11,7 @@ export const makeThisMonthObj: MakeThisMonthObj = (
   let monthObj: {[key: string]: number} = {};
 
   // UTC(世界の標準時間)と日本時間の差分を分で取得する
-  // 日本時間はUTCより9時間進んでいるので、-540が戻り値になる
+  // 日本時間はUTCより9時間進んでいる為、-540が戻り値になる
   const offset = firstDay.getTimezoneOffset();
 
   const addFirstDay = new Date(firstDay.getTime() - (offset * 60 * 1000));

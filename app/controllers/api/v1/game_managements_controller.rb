@@ -5,7 +5,7 @@ class Api::V1::GameManagementsController < ApplicationController
   after_action :set_csrf_token_header, only: %i[start finish]
 
   # startに関するbefore_action
-  # set_userをfinishで実行すると、ステータスが更新されたデータをフロントに送ることができないので、
+  # set_userをfinishで実行すると、ステータスが更新されたデータをフロントに送ることができない為、
   # finishでset_userを使うことはやめた
   before_action :set_start_game_management, only: :start
   before_action :set_monster, only: :start
@@ -23,7 +23,7 @@ class Api::V1::GameManagementsController < ApplicationController
   # レベルアップしているかつ、
   # ユーザーのレベルが、CONDITION_HASHのバリューのレベルを満たすなら、
   # active_titleを更新する
-  # active_titleに代入しているので、レベルが上がるごとに、マイページで設定したタイトルが
+  # active_titleに代入している為、レベルが上がるごとに、マイページで設定したタイトルが
   # 変更される
   CONDITION_HASH = {
     一人前ハンター: 2,
@@ -57,7 +57,7 @@ class Api::V1::GameManagementsController < ApplicationController
     }, status: :created
   end
 
-  # finishに送る際に作成されたデータを使ってゲーム結果画面を作るので、
+  # finishに送る際に作成されたデータを使ってゲーム結果画面を作る為、
   # finishでゲーム関連のデータを返す必要は特にない
   # ゲームに勝つか負けると、finishアクションが実行される
   def finish
@@ -127,10 +127,10 @@ class Api::V1::GameManagementsController < ApplicationController
     end
 
     # 問題に関する処理
-    # RAND()を使うと、本番のDBによっては使えなかったりするので、
+    # RAND()を使うと、本番のDBによっては使えなかったりする為、
     # sampleを使う。
     # sample(14)でpluck(:id)の配列の中で、要素をランダムに14個、1つの配列として返す
-    # ただ、DBから取得しても、結局小さい順になるので、shuffleメソッドを使う
+    # ただ、DBから取得しても、結局小さい順になるため、shuffleメソッドを使う
     # shuffleで配列の要素をランダムにシャッフルして、その結果を配列として返す
     def set_questions
       indices = Question.where(difficulty: params[:difficulty]).pluck(:id).sample(14)
