@@ -2,7 +2,7 @@ type GetClearTime = (gameStartTime: number, gameEndTime: number) => string;
 
 // タイムを計算してhh:mm:ssのフォーマットで出力する関数
 // マイページで使う場合、第1引数を0にする
-// hhは無くても良いので、やっぱり消す
+// hhは無くても良い為、やっぱり消す
 // hh:mm:ssがmm:ss表記になる
 // const hours=Math.floor(milli_sec/1000/60/60)%24;
 // const hh = ('0' + hours).slice(-2);

@@ -19,7 +19,7 @@ const ExperienceTextWrapper = styled(DescriptionWrapper)`
  padding-bottom: 1%;
 `;
 
-// ここのheightのpx指定を崩すとレイアウトが崩れたので、やめた
+// ここのheightのpx指定を崩すとレイアウトが崩れた為、やめた
 const ExperienceGageWrapper = styled.div`
   width: 100%;
   height: 12px;
@@ -106,7 +106,7 @@ export const DialogExperienceBox = ({
   ]);
 
   // 本当はprevTotalExperience的なのを作ればいいのだが、
-  // 1つの変更に対する影響範囲が大きいので、やめた
+  // 1つの変更に対する影響範囲が大きい為、やめた
   return (
     <>
       <ExperienceBoxWrapper>

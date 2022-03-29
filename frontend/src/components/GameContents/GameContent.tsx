@@ -56,7 +56,7 @@ const GameContentDescriptionWrapper = styled.div`
   }
 `;
 
-// ブロック要素じゃないので、もしかしたら直列に並ばないかも
+// ブロック要素じゃない為、もしかしたら直列に並ばないかも
 // 使用するときに、propsのsrc属性を渡す。
 const GameContentImageWrapper = styled.img`
   box-sizing: border-box;

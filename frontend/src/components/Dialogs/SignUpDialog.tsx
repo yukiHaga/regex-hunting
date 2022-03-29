@@ -78,7 +78,7 @@ const CustomFormControl = styled(FormControl)`
   width: 100%;
 `;
 
-// ここのwidthはpx指定しないとレイアウトが崩れるので、pxにした
+// ここのwidthはpx指定しないとレイアウトが崩れる為、pxにした
 const CustomFilledInput = styled(FilledInput)<{label: string, errors_box: {message: string, ref: object, type: string} | undefined }>`
   margin-bottom: ${({
     errors_box

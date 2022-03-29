@@ -97,7 +97,7 @@ export const UserStatus = memo(({
   image
 }: UserStatusArg): JSX.Element => {
 
-  // sxを%指定すると、円から楕円形になってしまったのでやめた
+  // sxを%指定すると、円から楕円形になってしまった為、やめた
   return (
     <>
       <StatusWrapper>

@@ -222,14 +222,14 @@ export const Games = (): JSX.Element => {
   // 画像用のオブジェクト
   const inputRefObject = useRef(null);
 
-  // React Routerで画面遷移するとユーザーが保持できないので、
+  // React Routerで画面遷移するとユーザーが保持できない為、
   // useEffectで再度リクエストを出す。
   // 初回レンダリング時および、依存配列の要素のどれかが
   // 変化したらuseEffectが実行される。
   // stateが変化しても、依存配列の要素が変化していないなら、
   // useEffectは実行されない
-  // ログインしていたらsessionStateはtrueなので、最初のif文は実行されない。
-  // ログインしててリロードするとsessionStateはfalseなので、最初のif文が実行される。
+  // ログインしていたらsessionStateはtrueな為、最初のif文は実行されない。
+  // ログインしててリロードするとsessionStateはfalseな為、最初のif文が実行される。
   // サーバー側でcurrent_userが存在しない場合、sessionStateはfalseとなる
   // 2個目のif文はログインの有無に関わらず必ず実行される
   // ログインしていない場合は、user等は{}だが、playがtrueになる
@@ -382,7 +382,7 @@ export const Games = (): JSX.Element => {
   // result_timeの単位はミリ秒である。
   // ユーザーがログインしていなくても送る。
   // ログインユーザーの場合、contextを更新する
-  // ログインユーザーしかsessionStateはtrueにならないので、そこを利用する
+  // ログインユーザーしかsessionStateはtrueにならない為、そこを利用する
   useEffect(() => {
     if(!gameState.sendGameData && (gameState.gameResult === "win" || gameState.gameResult === "lose")){
       const timer = setTimeout(() => {

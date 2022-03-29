@@ -161,7 +161,7 @@ export const QuestionBlock = ({
     return damageSentence;
   };
 
-  // 難易度毎のモンスターからダメージを喰らう時のセンテンスは、1回計算すれば十分なので、メモ化する
+  // 難易度毎のモンスターからダメージを喰らう時のセンテンスは、1回計算すれば十分な為、メモ化する
   const memoDamageSentence = useMemo(() => getDamageSentence(difficulty), [difficulty])
 
   // 各難易度における不正解の上限数を出力する関数
@@ -184,7 +184,7 @@ export const QuestionBlock = ({
     return incorrectCount;
   };
 
-  // 各難易度における不正解の上限数は、1回計算すれば十分なので、メモ化する
+  // 各難易度における不正解の上限数は、1回計算すれば十分な為、メモ化する
   const memoIncorrectCount = useMemo(() => getIncorrectCount(difficulty), [difficulty])
 
   // 最初のメッセージからsetTimeOutを制御するif文

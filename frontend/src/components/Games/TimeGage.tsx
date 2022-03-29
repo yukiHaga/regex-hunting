@@ -64,7 +64,7 @@ const GageOuterWrapper = styled.div`
   box-shadow: inset 1px 1px 3px 0 rgba(0, 0, 0, 0.8), 1px 1px 0 0 rgba(255, 255, 255, 0.12);
 `;
 
-// 問題が表示された瞬間、QuestionBlock.jsxによってtimeActiveがtrueになるので、
+// 問題が表示された瞬間、QuestionBlock.jsxによってtimeActiveがtrueになる為、
 // アニメーションが動き出す
 // clickDescriptionOpenがtrueだと、アニメーションが一時停止する
 const GageWrapper = styled.div<{timeActive: boolean, clickDescriptionOpen: boolean, clickMetaOpen: boolean}>`

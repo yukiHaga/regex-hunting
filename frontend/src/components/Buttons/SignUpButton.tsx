@@ -15,7 +15,7 @@ const SignUpButtonWrapper = styled(BlueRoundButton)`
   padding: 3.3%;
 `;
 
-// ここのwidthをpxから変えるとレイアウトが崩れるので、pxにした
+// ここのwidthをpxから変えるとレイアウトが崩れる為、pxにした
 const SignUpButtonTextWrapper = styled.div`
   color: white;
   font-style: normal;

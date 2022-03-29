@@ -216,7 +216,7 @@ export const LandingPages = (): JSX.Element => {
   // location
   const location = useLocation();
 
-  // 初めてLPページに訪れた場合、ログインしていないので、
+  // 初めてLPページに訪れた場合、ログインしていない為、
   // dispatchのdata.sessionはfalseとなる
   useLayoutEffect(() => {
     if(sessionState === false){
