@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React, { Fragment, useContext } from 'react';
 import styled from 'styled-components';
 
 // Colors
@@ -8,6 +8,14 @@ import { ColoredTwitterIcon } from '../Icons/CustomIcon';
 
 // モンスター名を取得する関数
 import { getMonsterName } from '../../functions/getMonsterName';
+
+import { getJpDifficulty } from '../../functions/getJpDifficulty';
+
+// Contextオブジェクト
+import { UserContext } from "../../context/UserProvider";
+
+// InitialStateの型
+import { InitialState } from '../../reducers/requestUser';
 
 const ResultShareButtonWrapper = styled.a`
   width: 90%;
@@ -45,40 +53,61 @@ type ResultShareButtonArg = {
   rankUp: boolean;
   rank?: number;
   clearTime?: string;
+  hasUser: boolean;
 };
 
 type GetTextFn = (
   difficulty: ResultShareButtonArg['difficulty'],
   gameResult: ResultShareButtonArg['gameResult'],
-  rankUp: boolean
+  rankUp: boolean,
+  hasUser: boolean,
+  rank?: number,
+  clearTime?: string,
+  user?: InitialState['userState']['user']
 ) =>  string | undefined;
+
+// Twitterカードのセンテンスを取得する関数
+const getText: GetTextFn = (difficulty, gameResult, rankUp, hasUser, rank, clearTime, user) => {
+  if(hasUser){
+    if(gameResult === 'win' && !rankUp) {
+      return `【${getJpDifficulty(difficulty)}編】%0a${getMonsterName(difficulty)}の討伐に成功しました！%0aクリアタイムは${clearTime}です。%0a%0aハンター: ${user!.name}%0aレベル: ${rank}%0a称号: ${user!.active_title}%0a%0a`
+    } else if (gameResult === 'lose' && !rankUp) {
+      return `【${getJpDifficulty(difficulty)}編】%0a${getMonsterName(difficulty)}の討伐に失敗しました...%0a%0aハンター: ${user!.name}%0aレベル: ${rank}%0a称号: ${user!.active_title}%0a%0a`
+    } else if (gameResult === 'win' && rankUp) {
+      return `【${getJpDifficulty(difficulty)}編】%0aレベルアップしました！現在のレベルは${rank}です。%0a%0aハンター: ${user!.name}%0aレベル: ${rank}%0a称号: ${user!.active_title}%0a%0a`
+    }
+  } else {
+    if(gameResult === 'win' && !rankUp) {
+      return `【${getJpDifficulty(difficulty)}編】%0a${getMonsterName(difficulty)}の討伐に成功しました！%0aクリアタイムは${clearTime}です。%0a%0a`
+    } else if (gameResult === 'lose' && !rankUp) {
+      return `【${getJpDifficulty(difficulty)}編】%0a${getMonsterName(difficulty)}の討伐に失敗しました...%0a%0a`
+    }
+  }
+};
 
 export const ResultShareButton = ({
   difficulty,
   gameResult,
   rankUp,
   rank,
-  clearTime
+  clearTime,
+  hasUser
 }: ResultShareButtonArg): JSX.Element => {
 
-  // Twitterカードのセンテンスを取得する関数
-  const getText: GetTextFn = (difficulty, gameResult, rankUp) => {
-    if(gameResult === 'win' && !rankUp) {
-      return `${getMonsterName(difficulty)}の討伐に成功しました！ クリアタイムは${clearTime}です。`
-    } else if (gameResult === 'lose' && !rankUp) {
-      return `${getMonsterName(difficulty)}の討伐に失敗しました...`
-    } else if (gameResult === 'win' && rankUp) {
-      return `レベルアップしました！現在のレベルは${rank}です。`
-    }
-  };
+  const {
+    requestUserState: {
+      userState: { user }
+    },
+  } = useContext(UserContext);
+
 
   // 取得したセンテンスを変数textに代入
-  const text = getText(difficulty, gameResult, rankUp);
+  const text = getText(difficulty, gameResult, rankUp, hasUser, rank, clearTime, user);
 
   return (
     <>
     <ResultShareButtonWrapper
-      href={`https://twitter.com/share?text=${text}&hashtags=RegexHunting,正規表現,ゲーム&url=https://www.regex-hunting.com/`}
+      href={`https://twitter.com/share?text=${text}&hashtags=RegexHunting,正規表現,ゲーム&url=https://www.regex-hunting.com`}
       target="_blank"
       rel="noopener noreferrer"
     >

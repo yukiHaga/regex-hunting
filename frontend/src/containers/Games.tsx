@@ -745,6 +745,7 @@ export const Games = (): JSX.Element => {
                   difficulty={difficulty}
                   gameResult={gameState.gameResult}
                   rankUp={gameState.rankUp}
+                  hasUser={gameState.hasUser}
                 />
             }
             {

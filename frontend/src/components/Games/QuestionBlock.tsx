@@ -13,6 +13,8 @@ import { getExperience } from '../../functions/getExperience';
 // サニタイズ用のライブラリをインポートしてくる
 import DOMPurify from "dompurify";
 
+import { getJpDifficulty } from '../../functions/getJpDifficulty';
+
 // gameStateの型
 import { GameState, SetGameState } from '../../types/containers/games';
 
@@ -121,25 +123,6 @@ export const QuestionBlock = ({
   temporaryExperience,
   clickMetaOpen
 }: QuestionBlockArg): JSX.Element => {
-
-  // 難易度を日本語に変換する関数
-  const getJpDifficulty = (difficulty: string | undefined): string | undefined => {
-    let jpDifficulty;
-    switch (difficulty){
-      case 'elementary':
-        jpDifficulty = '初級';
-        break;
-      case 'intermediate':
-        jpDifficulty = '中級';
-        break;
-      case 'advanced':
-        jpDifficulty = '上級';
-        break;
-      default:
-        console.log('エラーが起きました');
-    }
-    return jpDifficulty;
-  };
 
   // 難易度毎のモンスターからダメージを喰らう時のセンテンス
   const getDamageSentence = (difficulty: string | undefined) => {

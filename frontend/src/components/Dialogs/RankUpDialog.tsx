@@ -112,6 +112,7 @@ type RankUpDialogArg = {
   rankUp: true;
   difficulty: string | undefined;
   gameResult: "" | "progress" | "win" | "lose";
+  hasUser: boolean;
 };
 
 // gameStateのrankUpがtrueの時に開くモーダル
@@ -125,7 +126,8 @@ export const RankUpDialog = ({
   setGameState,
   rankUp,
   difficulty,
-  gameResult
+  gameResult,
+  hasUser
 }: RankUpDialogArg): JSX.Element => {
 
   // ゲームクリア時の音
@@ -184,6 +186,7 @@ export const RankUpDialog = ({
               difficulty={difficulty}
               gameResult={gameResult}
               rank={rank}
+              hasUser={hasUser}
             />
           </ButtonsWrapper>
         </CustomDialogContent>
