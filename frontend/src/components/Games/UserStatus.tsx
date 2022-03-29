@@ -117,7 +117,7 @@ export const UserStatus = memo(({
               <NameTd colSpan={2}>{name}</NameTd>
             </tr>
             <tr>
-              <MetaTd>ランク</MetaTd>
+              <MetaTd>レベル</MetaTd>
               <CustomTd>{rank}</CustomTd>
             </tr>
             <tr>

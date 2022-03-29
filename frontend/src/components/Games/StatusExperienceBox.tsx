@@ -83,7 +83,7 @@ export const StatusExperienceBox = memo(({
           }
         </ExperienceGageWrapper>
         <ExperienceTextWrapper>
-          ランクアップに必要な経験値： {
+          レベルアップに必要な経験値： {
             temporaryExperience >= maximumExperiencePerRank ?
               0
             :

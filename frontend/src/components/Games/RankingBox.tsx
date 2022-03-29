@@ -478,7 +478,7 @@ export const RankingBox = memo(({
                                     </tr>
                                     <tr>
                                       <HunterTableRankMetaTd>
-                                        ランク
+                                        レベル
                                       </HunterTableRankMetaTd>
                                       <HunterTableRankDataTd>
                                         {rank}
