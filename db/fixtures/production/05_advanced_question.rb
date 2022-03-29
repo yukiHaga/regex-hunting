@@ -123,11 +123,11 @@ Question.seed(
   # 12問目
   {
     id: 40,
-    sentence: 'constとconcat内のconにマッチする正規表現を入力せよ。',
+    sentence: 'const内とconcat内のconにマッチする正規表現を入力せよ。',
     target_sentence: 'const concat concentrate',
     sample_answer: '(?!concentrate)con',
     hint: '否定の先読み, 文字列を使用して、正規表現を作ってみましょう。',
-    commentary: 'constとconcat内のconにマッチさせるとは、つまり、concentrate内のcon以外のconにマッチさせると言い換えることができます。そのような場合、否定の先読み(?!concentrate)を使用することで、concentrateをconのマッチ対象外にすることができます。したがって、(?!concentrate)conでconstとconcat内のconにマッチする正規表現を表します。con(?=st|cat)でマッチさせることもできます。',
+    commentary: 'const内とconcat内のconにマッチさせるとは、つまり、concentrate内のcon以外のconにマッチさせると言い換えることができます。そのような場合、否定の先読み(?!concentrate)を使用することで、concentrateをconのマッチ対象外にすることができます。したがって、(?!concentrate)conでconst内とconcat内のconにマッチする正規表現を表します。con(?=st|cat)でマッチさせることもできます。',
     difficulty: 'advanced'
   },
 
