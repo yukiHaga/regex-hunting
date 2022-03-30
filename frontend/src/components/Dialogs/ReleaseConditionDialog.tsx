@@ -17,14 +17,14 @@ import { BackToModalButton } from '../Buttons/BackToModalButton';
 import { TitleSettingButton } from '../Buttons/TitleSettingButton';
 
 // 背景画像
-import DarkProfessionalBackGround from '../../images/dark_professional_background.png';
-import DarkAntiquityBackGround from '../../images/dark_antiquity_background.png';
-import DarkLegendBackground from '../../images/dark_legend_background.png';
-import DarkGeniusBackground from '../../images/dark_genius_background.png';
-import DarkApprenticeBackground from '../../images/dark_apprentice_background.png';
-import DarkManhoodBackground from '../../images/dark_manhood_background.png';
-import DarkSelfEffacementBackground from '../../images/dark_self_effacement_background.png';
-import DarkHeroBackground from '../../images/dark_hero_background.png';
+import DarkProfessionalBackGround from '../../images/dark_professional_background.jpg';
+import DarkAntiquityBackGround from '../../images/dark_antiquity_background.jpg';
+import DarkLegendBackground from '../../images/dark_legend_background.jpg';
+import DarkGeniusBackground from '../../images/dark_genius_background.jpg';
+import DarkApprenticeBackground from '../../images/dark_apprentice_background.jpg';
+import DarkManhoodBackground from '../../images/dark_manhood_background.jpg';
+import DarkSelfEffacementBackground from '../../images/dark_self_effacement_background.jpg';
+import DarkHeroBackground from '../../images/dark_hero_background.jpg';
 
 import { SetMyPageState } from '../../types/containers/myPages';
 
