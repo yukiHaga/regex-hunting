@@ -13,9 +13,9 @@ import { SetGameState } from '../../types/containers/games';
 
 const FooterWrapper = styled.div`
   background-color: ${COLORS.BROWN};
-  height: 8.7vh;
   display: flex;
   align-items: center;
+  width: 100%;
 `;
 
 const ModalLinkBlock = styled.div`
@@ -27,7 +27,7 @@ const ModalLinkBlock = styled.div`
   color: ${COLORS.WHITE};
   font-size: 0.9em;
   margin-left: 6%;
-  width: 9vw;
+  width: 10vw;
 `;
 
 // GameFooterの引数の型

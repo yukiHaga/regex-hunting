@@ -58,10 +58,11 @@ const HpGageWrapper = styled.div<{firstAppearance: boolean}>`
   margin: 0 auto;
 `;
 
+// レイアウト崩れるから、heightは15pxにした
 const InnerHpGageWrapper = styled.div<{monsterHp: number, monsterMaxHp: number}>`
   width: ${({ monsterHp, monsterMaxHp }) => `${100 * (monsterHp / monsterMaxHp)}%`};
   transition: 0.5s;
-  height: 1.8vh;
+  height: 15px;
   border-radius: 3px;
   background-color: ${({ monsterHp }) => handleColorType(monsterHp)};
   background-image: -webkit-linear-gradient(transparent 0%,rgba(255,255,255,.3) 50%,transparent 50%,rgba(0,0,0,.1) 100%);

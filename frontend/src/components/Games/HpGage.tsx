@@ -7,12 +7,14 @@ import { COLORS } from '../../style_constants';
 // handleColorType
 import { handleColorType } from '../../functions/handleColorType';
 
+// ここのheightは固定しないとダメ
+// vhにすると、画面の高さによってデカくなる。
 const HpGageWrapper = styled.div`
   background-color: ${COLORS.GAGE_GRAY};
   border-radius: 0 0 3px 3px;
   width: 100%;
   display: flex;
-  height: 3.9vh;
+  height: 30px;
   box-sizing: border-box;
   border-left: 5px solid;
   border-right: 5px solid;

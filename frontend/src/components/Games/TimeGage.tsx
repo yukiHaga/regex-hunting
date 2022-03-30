@@ -11,12 +11,14 @@ import { calculateDamage } from '../../functions/calculateDamage';
 
 import { GameState, SetGameState } from '../../types/containers/games';
 
+// ここのheightは固定しないとダメ
+// vhにすると、画面の高さによってデカくなる。
 const TimeGageWrapper = styled.div`
   background-color: ${COLORS.GAGE_GRAY};
   border-radius: 10px 10px 0 0;
   width: 100%;
   display: flex;
-  height: 4.6vh;
+  height: 35px;
   box-sizing: border-box;
   border: 5px solid;
   border-color: ${COLORS.GAGE_GRAY};
