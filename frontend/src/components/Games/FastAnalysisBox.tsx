@@ -12,7 +12,7 @@ import 'react-circular-progressbar/dist/styles.css';
 import { COLORS } from '../../style_constants';
 
 // クリアタイムを取得する関数
-// マイページで使う場合、第1引数は0を指定する
+// マイページで使用する場合、第1引数は0を指定する
 import { getClearTime } from '../../functions/getClearTime';
 
 import { WIDTH } from '../../style_constants';

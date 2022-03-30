@@ -30,7 +30,7 @@ export type InitialState = {
   }
 }
 
-// useReducerで使うinitialStateを定義
+// useReducerで使用するinitialStateを定義
 // REQUEST_STATE.INITIALはrequestStateの初期値である
 // REQUEST_STATE.INITISLはconstants.jsに定義されている
 // APIの取得状況に応じて、requestStateの値が変化する
@@ -58,7 +58,7 @@ export const initialState: InitialState = {
   }
 };
 
-// useReducerで使うActonTypsを定義
+// useReducerで使用するActonTypsを定義
 // dispatch実行時に指定する
 // それに沿って、リデューサ関数のcase文が振り分けられる
 export const requestUserActionTyps = {

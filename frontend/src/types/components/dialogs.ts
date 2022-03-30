@@ -50,7 +50,7 @@ export type GameDescriptionDialogArg = {
   hasUser: boolean;
 };
 
-// GameDescriptionDialogで使うslideStateの型
+// GameDescriptionDialogで使用するslideStateの型
 export type SlideState = {
   title: string;
   sentence: string;

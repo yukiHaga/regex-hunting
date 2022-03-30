@@ -78,7 +78,7 @@ gem 'foreman'
 # Use it to create data
 gem 'faker'
 
-# 環境ごとに分けて定数を使うためのgem
+# 環境ごとに分けて定数を使用するためのgem
 gem 'config'
 
 # シリアライザー

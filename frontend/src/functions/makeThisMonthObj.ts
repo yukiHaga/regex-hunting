@@ -3,7 +3,7 @@ type MakeThisMonthObj = {
 };
 
 // 今月の日付をキー, 0(count)をバリューとするオブジェクトを作る関数
-// ヒートマップで使う
+// ヒートマップで使用する
 export const makeThisMonthObj: MakeThisMonthObj = (
   firstDay,
   endDay

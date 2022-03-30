@@ -155,7 +155,7 @@ export const GameClearDialog = ({
     gameEndTime,
   ]);
 
-  // このミリ秒はタイムに色をつけるために使う
+  // このミリ秒はタイムに色をつけるために使用する
   const milliSec = gameEndTime - gameStartTime;
 
   return(
