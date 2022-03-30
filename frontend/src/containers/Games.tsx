@@ -72,7 +72,7 @@ const MainContentWrapper = styled.div`
 const BackGroundImageCover = styled.img`
   position: absolute;
   width: 100%;
-  height: 80vh;
+  height: 85vh;
   top: 0;
   left: 0;
   right: 0;
@@ -147,6 +147,14 @@ const CodeBlockWrapper = styled.div`
 
 // GageBlockWrapperコンポーネント
 const GageBlockWrapper = styled.div`
+  width: 100%;
+`;
+
+// この中にゲージブロックラッパーとゲームフッターを入れることによて、
+// 画面最下部に固定する。
+const BottomWrapper = styled.div`
+  position: absolute;
+  bottom: 0;
   width: 100%;
 `;
 
@@ -632,28 +640,30 @@ export const Games = (): JSX.Element => {
                     clickMetaOpen={gameState.clickMetaOpen}
                   />
                 </CodeBlockWrapper>
-                <GageBlockWrapper>
-                  <TimeGage
-                    gameState={gameState}
-                    setGameState={setGameState}
-                    timeActive={gameState.timeActive}
-                    monsterAttack={gameState.monsterAttack}
-                    userDefence={gameState.userDefence}
-                    userHp={gameState.userHp}
-                    sentenceNum={gameState.sentenceNum}
-                    clickDescriptionOpen={gameState.clickDescriptionOpen}
-                    clickMetaOpen={gameState.clickMetaOpen}
-                  />
-                  <HpGage
-                    userHp={gameState.userHp}
-                    userMaxHp={gameState.userMaxHp}
-                  />
-                </GageBlockWrapper>
               </MainGameContentWrapper>
             </MainContentWrapper>
-            <GameFooter
-              setGameState={setGameState}
-            />
+            <BottomWrapper>
+              <GageBlockWrapper>
+                <TimeGage
+                  gameState={gameState}
+                  setGameState={setGameState}
+                  timeActive={gameState.timeActive}
+                  monsterAttack={gameState.monsterAttack}
+                  userDefence={gameState.userDefence}
+                  userHp={gameState.userHp}
+                  sentenceNum={gameState.sentenceNum}
+                  clickDescriptionOpen={gameState.clickDescriptionOpen}
+                  clickMetaOpen={gameState.clickMetaOpen}
+                />
+                <HpGage
+                  userHp={gameState.userHp}
+                  userMaxHp={gameState.userMaxHp}
+                />
+              </GageBlockWrapper>
+              <GameFooter
+                setGameState={setGameState}
+              />
+            </BottomWrapper>
             {
               gameState.gameDescriptionOpen && difficulty === 'elementary' &&
                 <ElementaryGameDescriptionDialog

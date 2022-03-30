@@ -18,10 +18,11 @@ import { getJpDifficulty } from '../../functions/getJpDifficulty';
 // gameStateの型
 import { GameState, SetGameState } from '../../types/containers/games';
 
+// ここをpx指定しないと崩れる
 const QuestionBlockWrapper = styled.div`
   background-color: ${COLORS.SUB};
   border-radius: 3px;
-  height: 13.4vh;
+  height: 108px;
   margin: 0 auto;
   width: 60%;
   box-shadow: 0 4px 6px rgba(0,0,0,0.2);
