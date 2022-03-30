@@ -11,7 +11,7 @@ class Api::V1::PasswordResetsController < ApplicationController
   # おそらく、このメソッド実行の中で、有効期限付きのトークンを生成して、
   # UserMailerのreset_password_emailが実行される
   # そのため、メールが送られる
-  # SPAだとdeliver_reset_password_instructions!でなぜかメールが送られなかったので、
+  # SPAだとdeliver_reset_password_instructions!でなぜかメールが送られなかった為、
   # generate_reset_password_token!で期限付きトークンを作成して、直接メイラーのメソッドを呼び出す
   # generate_reset_password_token!でusersテーブルのreset_password_tokenにトークンが入る
   def create
@@ -27,7 +27,7 @@ class Api::V1::PasswordResetsController < ApplicationController
   # editアクションの結果を反映したリセットパスワードフォームを送信したとき、
   # updateアクションが実行される
   # change_passwordでは、一時的なトークンをクリアして、パスワードの更新を行う
-  # このときに更新処理をするので、バリデーションが走る
+  # このときに更新処理をする為、バリデーションが走る
   def update
     user = User.load_from_reset_password_token(params[:token])
     raise ActiveRecord::RecordNotFound unless user

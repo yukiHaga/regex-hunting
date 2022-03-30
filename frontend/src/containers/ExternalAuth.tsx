@@ -16,6 +16,7 @@ export const ExternalAuth = (): JSX.Element => {
 
   // ExternalAuthコンポーネントの初回レンダリング時に、
   // ユーザーをログインさせるかのアクションへリクエストを出す
+  // catchメソッドを追加した
   useEffect(() => {
     if (callBackState === 'xyz') {
       postExternalAuth({
@@ -28,13 +29,17 @@ export const ExternalAuth = (): JSX.Element => {
           });
         } else {
           navigate('/?user=oauth-login-faliure', {
-            state: { display: true, success: "アカウントが見つかりません。"}
+            state: { display: true, success: "ログインに失敗しました。"}
           });
         }
+      }).catch((e) => {
+        navigate('/?user=oauth-login-faliure', {
+          state: { display: true, success: "ログインに失敗しました。"}
+        });
       });
     } else {
       navigate('/?user=oauth-login-faliure', {
-        state: { display: true, success: "アカウントが見つかりません。"}
+        state: { display: true, success: "ログインに失敗しました。"}
       });
     }
   }, [

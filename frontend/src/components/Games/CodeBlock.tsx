@@ -128,7 +128,7 @@ export const CodeBlock = ({
 
   // パターンに一致した文字列を配列として返す関数
   // matchAllはIteratorを返す
-  // indexは、string[1]のように使うために必要
+  // indexは、string[1]のように使用するために必要
   const getMatchArray = (
     targetSentence: string,
     inputRegex: string | undefined

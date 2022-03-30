@@ -34,7 +34,7 @@ type HeaderArg = {
 
 // LPページの場合、onClickLinkはモーダル管理のstateを更新する関数
 // ログインしている場合、onClickLinkは何もない。
-// hrefではなく、React RouterのLinkコンポーネントを使う
+// hrefではなく、React RouterのLinkコンポーネントを使用する
 export const Header = memo(({
   onClickLink,
   setMobileState

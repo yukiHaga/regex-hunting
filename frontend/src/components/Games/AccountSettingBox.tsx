@@ -145,7 +145,7 @@ export const AccountSettingBox = ({
   // reader.onloadで、ファイルの読み込みが成功した後に、アロー関数が実行される
   // onloadはイベントリスナーを定義しているだけで、まだ実行されたわけではない
   // 実際に画像ファイル(バイナリファイル)を読み込むためには、
-  // readAsDataURLメソッドを使う
+  // readAsDataURLメソッドを使用する
   // readAsDataURLメソッドが実行完了後に、onload登録したイベントリスナーが実行される
   // readAsDataURLメソッドは、バイナリファイルを
   // base64 Data URLという形式にエンコードして取得できる
@@ -153,9 +153,9 @@ export const AccountSettingBox = ({
   // FileReader の result プロパティは、ファイルの内容を返す。
   // データの形式は、読み取り操作を開始するために
   // 使用されたメソッドによって異なります。
-  // なので、画像ファイル(バイナリファイル)の場合、base64 Data URLが返ってくる
+  // その為、画像ファイル(バイナリファイル)の場合、base64 Data URLが返ってくる
   // このプロパティは、読み込み操作が完了した後にのみ有効
-  // 文字列データしかやりとりできないので、音声データや画像データをbase64で
+  // 文字列データしかやりとりできない為、音声データや画像データをbase64で
   // 文字列にしているだけ
   const handleUpload = ({
     target: { files }
@@ -215,7 +215,7 @@ export const AccountSettingBox = ({
   // Formの検証後に呼び出される関数
   // dataにはフォームに入力したデータが入る
   // patchAccountSettingに対して、catchをチェーンしている
-  // patchAccoutSetting内で例外が発生した場合、そのエラーを持つRejectedなPromiseを返されるので、
+  // patchAccoutSetting内で例外が発生した場合、そのエラーを持つRejectedなPromiseを返される為、
   // catchで受け取ることができる
   const onSubmit = ({NameBox, EmailBox, OpenRankBox}: {NameBox: string, EmailBox: string, OpenRankBox: boolean}) => {
     patchAccountSetting({

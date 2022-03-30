@@ -412,7 +412,7 @@ Rails.application.config.sorcery.configure do |config|
     # Password reset mailer class.
     # Default: `nil`
     #
-    # 何のメイラーを使うかをここで設定する
+    # 何のメイラーを使用するかをここで設定する
     # UserMailerを設定した
     user.reset_password_mailer = UserMailer
 

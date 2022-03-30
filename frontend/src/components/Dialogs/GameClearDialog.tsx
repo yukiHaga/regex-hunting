@@ -126,7 +126,6 @@ const ColorTimeSpan = styled.span<{milliSec: number}>`
   color: ${({ milliSec }) => milliSec < 60000 && COLORS.RED }
 `;
 
-
 export const GameClearDialog = ({
   isOpen,
   difficulty,
@@ -156,7 +155,7 @@ export const GameClearDialog = ({
     gameEndTime,
   ]);
 
-  // このミリ秒はタイムに色をつけるために使う
+  // このミリ秒はタイムに色をつけるために使用する
   const milliSec = gameEndTime - gameStartTime;
 
   return(
@@ -232,6 +231,7 @@ export const GameClearDialog = ({
               rankUp={rankUp}
               rank={rank}
               clearTime={shareClearTime}
+              hasUser={hasUser}
             />
             {
               hasUser ?

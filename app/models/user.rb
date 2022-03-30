@@ -34,7 +34,7 @@ class User < ApplicationRecord
   validates :password, confirmation: true, if: -> { new_record? || changes[:crypted_password] }
   validates :password_confirmation, presence: true, if: -> { new_record? || changes[:crypted_password] }
 
-  # DBより、rese_password_tokenの初期値はnilなので、
+  # DBより、rese_password_tokenの初期値はnilである為、
   # nilの時はバリデーションをスキップする
   validates :reset_password_token, uniqueness: true, allow_nil: true
   validates :open_rank, inclusion: [true, false]
@@ -43,11 +43,11 @@ class User < ApplicationRecord
   # avatar画像に問題がないかチェックしている
   validate :avatar_type, :avatar_size, if: :avatar_attached?
 
-  # プロフィールユーザー(プロフィールで使うユーザー)をシリアライズするクラスメソッド
+  # プロフィールユーザー(プロフィールで使用するユーザー)をシリアライズするクラスメソッド
   # シリアライズ（serialize）とは、プログラミングでオプジェクト化されたデータを、
   # ファイルやストレージに保存したり、ネットワークで送受信したりできるような形に変換することである。
   # シリアライズ後のデータは、JSON形式になって、ネットワークを使って送受信できるようになる。
-  # コントローラで使うので、privateメソッドにしない
+  # コントローラで使用する為、privateメソッドにしない
   # userデータをJSONに変換後、image: nilをマージしている
   def self.handle_profile_user_serializer(user, image)
     options = { serializer: UserSerializer, type: :profile }
@@ -56,9 +56,9 @@ class User < ApplicationRecord
                                                 .merge({ image: image })
   end
 
-  # ゲームユーザー(ゲーム中で使うユーザー)をシリアライズするクラスメソッド
+  # ゲームユーザー(ゲーム中で使用するユーザー)をシリアライズするクラスメソッド
   # オプションのtypeを指定しないで呼び出すだけだと、rank, total, maxi, tempo, active_title
-  # しかないので、mergeでprev_tempoを追加しとく
+  # しかない為、mergeでprev_tempoを追加しとく
   def self.handle_game_user_serializer(user)
     options = { serializer: UserSerializer }
     ActiveModelSerializers::SerializableResource.new(user, options)

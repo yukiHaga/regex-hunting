@@ -97,7 +97,7 @@ export const UserStatus = memo(({
   image
 }: UserStatusArg): JSX.Element => {
 
-  // sxを%指定すると、円から楕円形になってしまったのでやめた
+  // sxを%指定すると、円から楕円形になってしまった為、やめた
   return (
     <>
       <StatusWrapper>
@@ -117,7 +117,7 @@ export const UserStatus = memo(({
               <NameTd colSpan={2}>{name}</NameTd>
             </tr>
             <tr>
-              <MetaTd>ランク</MetaTd>
+              <MetaTd>レベル</MetaTd>
               <CustomTd>{rank}</CustomTd>
             </tr>
             <tr>

@@ -243,3 +243,10 @@ export const WarningSentenceWrapper = styled.div`
   color: ${COLORS.RED};
 `;
 
+// ゲームディスクリプションの1ページ目のボタンのラッパー
+export const FirstOuterButtonsWrapper = styled.div`
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+  margin-top: 2vh;
+`;

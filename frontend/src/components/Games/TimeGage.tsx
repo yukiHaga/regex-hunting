@@ -11,12 +11,14 @@ import { calculateDamage } from '../../functions/calculateDamage';
 
 import { GameState, SetGameState } from '../../types/containers/games';
 
+// ここのheightは固定しないとダメ
+// vhにすると、画面の高さによってデカくなる。
 const TimeGageWrapper = styled.div`
   background-color: ${COLORS.GAGE_GRAY};
   border-radius: 10px 10px 0 0;
   width: 100%;
   display: flex;
-  height: 4.6vh;
+  height: 35px;
   box-sizing: border-box;
   border: 5px solid;
   border-color: ${COLORS.GAGE_GRAY};
@@ -64,7 +66,7 @@ const GageOuterWrapper = styled.div`
   box-shadow: inset 1px 1px 3px 0 rgba(0, 0, 0, 0.8), 1px 1px 0 0 rgba(255, 255, 255, 0.12);
 `;
 
-// 問題が表示された瞬間、QuestionBlock.jsxによってtimeActiveがtrueになるので、
+// 問題が表示された瞬間、QuestionBlock.jsxによってtimeActiveがtrueになる為、
 // アニメーションが動き出す
 // clickDescriptionOpenがtrueだと、アニメーションが一時停止する
 const GageWrapper = styled.div<{timeActive: boolean, clickDescriptionOpen: boolean, clickMetaOpen: boolean}>`

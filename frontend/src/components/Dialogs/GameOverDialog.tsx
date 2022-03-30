@@ -198,6 +198,8 @@ export const GameOverDialog = ({
               difficulty={difficulty}
               gameResult={gameResult}
               rankUp={rankUp}
+              hasUser={hasUser}
+              rank={rank}
             />
             {
               hasUser ?

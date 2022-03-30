@@ -87,6 +87,7 @@ export const RestartGameButton = ({
         nextSentence: data.questions["0"].sentence,
         nextSentenceNum: 1,
         nextTargetSentence: data.questions["0"].target_sentence,
+        gameManagement: data.game_management,
         questions: data.questions,
         monsterAttack: data.monster.attack,
         monsterDefence: data.monster.defence,
@@ -118,7 +119,11 @@ export const RestartGameButton = ({
         prevTemporaryExperience: sessionState ?
           data.user.prev_temporary_experience
         :
-          initialState.prevTemporaryExperience
+          initialState.prevTemporaryExperience,
+        activeTitle: sessionState ?
+          data.user.active_title
+        :
+          initialState.activeTitle
       });
     }).catch((e) => {
       if(e.response.status === HTTP_STATUS_CODE.NOT_FOUND){

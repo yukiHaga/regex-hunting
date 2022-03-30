@@ -13,7 +13,7 @@ class Api::V1::MyPagesController < ApplicationController
     owned_titles = query_owned_titles
 
     # レンダリング
-    # ユーザー情報はcontextのstateに保管されているので、返す必要はない。
+    # ユーザー情報はcontextのstateに保管されているため、返す必要はない。
     render json: {
       game_frequencies_per_day: game_frequencies_per_day,
       total_time_per_difficulty: total_time_per_difficulty,
@@ -47,7 +47,7 @@ class Api::V1::MyPagesController < ApplicationController
     # win, lose関係なしに取得する
     # SUM(result_time)は、difficultyのグループ毎に実施される
     # selectメソッド内に集約関数を入れた場合、.total_timeでその値を呼び出すことができる
-    # selectメソッドの集約関数の結果は、ARオブジェクトにフィールドとして反映されないので、
+    # selectメソッドの集約関数の結果は、ARオブジェクトにフィールドとして反映されないため、
     # 自分でオブジェクトを作る
     def query_total_time_per_difficulty(this_month)
       current_user.game_managements

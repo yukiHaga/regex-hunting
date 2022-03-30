@@ -78,7 +78,7 @@ const CustomFormControl = styled(FormControl)`
   width: 100%;
 `;
 
-// ここのwidthはpx指定しないとレイアウトが崩れるので、pxにした
+// ここのwidthはpx指定しないとレイアウトが崩れる為、pxにした
 const CustomFilledInput = styled(FilledInput)<{label: string, errors_box: {message: string, ref: object, type: string} | undefined }>`
   margin-bottom: ${({
     errors_box
@@ -121,7 +121,7 @@ export const SignUpDialog = ({
   // refObject(password)を定義
   // refObjectのcurrentプロパティにwatchの初期値("")を代入
   // watchは、PasswordBoxというname属性を持つinput要素を監視している。
-  // useRefを使う理由は、モーダルのコンポーネント内で値を保持する為。
+  // useRefを使用する理由は、モーダルのコンポーネント内で値を保持する為。
   // useRefの場合、変数の値を更新しても再レンダリングは起きない。
   // モーダルコンポーネントが再レンダリングするたびに、
   // password.currentにwatchしている値が代入される。
@@ -337,7 +337,7 @@ export const SignUpDialog = ({
           <OrDirectionSentence />
           <OAuthLoginButton
             url={googleOAuth}
-            color={COLORS.PINK}
+            color={COLORS.RED}
             type="Google"
           />
           <OAuthLoginButton

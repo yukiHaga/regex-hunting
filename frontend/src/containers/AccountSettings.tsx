@@ -107,7 +107,7 @@ export const AccountSettings = (): JSX.Element => {
     battleAudioState.audio
   ]);
 
-  // マウント後、直ぐにuseEffectが実行されるので、
+  // マウント後、直ぐにuseEffectが実行される為、
   // マウント時には、フォームがマウントされるが、すぐにCircularが表示される。
   // その後、フォームがまたマウントされる
   return (

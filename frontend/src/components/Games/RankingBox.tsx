@@ -239,6 +239,7 @@ const HunterTableTitleDataTd = styled.td`
 const NotDescriptionWrapper = styled(DescriptionWrapper)`
 `;
 
+// ここはvhで大丈夫
 const NotRankingWrapper = styled(RankingWrapper)`
   width: 100%;
   height: 59.1vh;
@@ -478,7 +479,7 @@ export const RankingBox = memo(({
                                     </tr>
                                     <tr>
                                       <HunterTableRankMetaTd>
-                                        ランク
+                                        レベル
                                       </HunterTableRankMetaTd>
                                       <HunterTableRankDataTd>
                                         {rank}

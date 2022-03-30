@@ -194,7 +194,7 @@ export const MyPages = (): JSX.Element => {
 
   // myPageStateの最初の状態
   // isOpenDialog, name, releaseDate, releaseConditionは
-  // タイトルカードのモーダルで使う
+  // タイトルカードのモーダルで使用する
   const initialState: MyPageState = {
     gameFrequenciesPerDay: {},
     fastTimePerDifficulty: {},

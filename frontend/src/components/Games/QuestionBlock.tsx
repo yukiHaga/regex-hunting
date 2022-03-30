@@ -13,13 +13,16 @@ import { getExperience } from '../../functions/getExperience';
 // サニタイズ用のライブラリをインポートしてくる
 import DOMPurify from "dompurify";
 
+import { getJpDifficulty } from '../../functions/getJpDifficulty';
+
 // gameStateの型
 import { GameState, SetGameState } from '../../types/containers/games';
 
+// ここをpx指定しないと崩れる
 const QuestionBlockWrapper = styled.div`
   background-color: ${COLORS.SUB};
   border-radius: 3px;
-  height: 13.4vh;
+  height: 108px;
   margin: 0 auto;
   width: 60%;
   box-shadow: 0 4px 6px rgba(0,0,0,0.2);
@@ -122,25 +125,6 @@ export const QuestionBlock = ({
   clickMetaOpen
 }: QuestionBlockArg): JSX.Element => {
 
-  // 難易度を日本語に変換する関数
-  const getJpDifficulty = (difficulty: string | undefined): string | undefined => {
-    let jpDifficulty;
-    switch (difficulty){
-      case 'elementary':
-        jpDifficulty = '初級';
-        break;
-      case 'intermediate':
-        jpDifficulty = '中級';
-        break;
-      case 'advanced':
-        jpDifficulty = '上級';
-        break;
-      default:
-        console.log('エラーが起きました');
-    }
-    return jpDifficulty;
-  };
-
   // 難易度毎のモンスターからダメージを喰らう時のセンテンス
   const getDamageSentence = (difficulty: string | undefined) => {
     let damageSentence;
@@ -161,7 +145,7 @@ export const QuestionBlock = ({
     return damageSentence;
   };
 
-  // 難易度毎のモンスターからダメージを喰らう時のセンテンスは、1回計算すれば十分なので、メモ化する
+  // 難易度毎のモンスターからダメージを喰らう時のセンテンスは、1回計算すれば十分な為、メモ化する
   const memoDamageSentence = useMemo(() => getDamageSentence(difficulty), [difficulty])
 
   // 各難易度における不正解の上限数を出力する関数
@@ -184,7 +168,7 @@ export const QuestionBlock = ({
     return incorrectCount;
   };
 
-  // 各難易度における不正解の上限数は、1回計算すれば十分なので、メモ化する
+  // 各難易度における不正解の上限数は、1回計算すれば十分な為、メモ化する
   const memoIncorrectCount = useMemo(() => getIncorrectCount(difficulty), [difficulty])
 
   // 最初のメッセージからsetTimeOutを制御するif文
@@ -278,7 +262,7 @@ export const QuestionBlock = ({
             matchArray: [],
             sampleAnswer: prev?.questions[0]?.sample_answer || "no_sample_answer",
             hint: nextHint,
-            nextHint: prev?.questions[1]?.hint || "no_hint",
+            nextHint: prev?.questions[1] ? prev?.questions[1].hint : "no_hint",
             inputRegexObject: {},
             keyAvailable: true,
             timeActive: true,
@@ -352,7 +336,7 @@ export const QuestionBlock = ({
             matchArray: [],
             sampleAnswer: prev?.questions[0]?.sample_answer || "no_sample_answer",
             hint: nextHint,
-            nextHint: prev?.questions[1].hint || "no_hint",
+            nextHint: prev?.questions[1] ? prev?.questions[1].hint : "no_hint",
             inputRegexObject: {},
             keyAvailable: true,
             timeActive: true,

@@ -5,8 +5,8 @@ class Api::V1::GameManagementsController < ApplicationController
   after_action :set_csrf_token_header, only: %i[start finish]
 
   # startに関するbefore_action
-  # set_userをfinishで実行すると、ステータスが更新されたデータをフロントに送ることができないので、
-  # finishでset_userを使うことはやめた
+  # set_userをfinishで実行すると、ステータスが更新されたデータをフロントに送ることができない為、
+  # finishでset_userを使用することはやめた
   before_action :set_start_game_management, only: :start
   before_action :set_monster, only: :start
   before_action :set_questions, only: :start
@@ -20,10 +20,10 @@ class Api::V1::GameManagementsController < ApplicationController
   before_action :set_incorrect_questions, only: :finish, if: :logged_in?
 
   # タイトルに関する処理
-  # ランクアップしているかつ、
-  # ユーザーのランクが、CONDITION_HASHのバリューのランクを満たすなら、
+  # レベルアップしているかつ、
+  # ユーザーのレベルが、CONDITION_HASHのバリューのレベルを満たすなら、
   # active_titleを更新する
-  # active_titleに代入しているので、ランクが上がるごとに、マイページで設定したタイトルが
+  # active_titleに代入している為、レベルが上がるごとに、マイページで設定したタイトルが
   # 変更される
   CONDITION_HASH = {
     一人前ハンター: 2,
@@ -47,7 +47,7 @@ class Api::V1::GameManagementsController < ApplicationController
 
   def start
     # レンダリング
-    # このユーザーはゲームに使うユーザー
+    # このユーザーはゲームに使用するユーザー
     # contextのユーザーとは何も関係ない
     render json: {
       game_management: @game_management,
@@ -57,7 +57,7 @@ class Api::V1::GameManagementsController < ApplicationController
     }, status: :created
   end
 
-  # finishに送る際に作成されたデータを使ってゲーム結果画面を作るので、
+  # finishに送る際に作成されたデータを使ってゲーム結果画面を作る為、
   # finishでゲーム関連のデータを返す必要は特にない
   # ゲームに勝つか負けると、finishアクションが実行される
   def finish
@@ -70,8 +70,8 @@ class Api::V1::GameManagementsController < ApplicationController
     @game_management.save!
 
     # ログインユーザーのステータスを更新する処理
-    # ランクアップしている場合、temporary_experienceが0になる
-    # さらに、あるランクに到達すると称号を解放する
+    # レベルアップしている場合、temporary_experienceが0になる
+    # さらに、あるレベルに到達すると称号を解放する
     # current_userにsaltやcrypted_passwordなどのカラムを含めてjsonを送ってはダメ
     if rank_up? && CONDITION_HASH.values.include?(params[:current_user][:rank] + 1)
       current_user.release_new_title((Title.find_by(name: CONDITION_HASH.key(params[:current_user][:rank] + 1)))[:id])
@@ -127,10 +127,10 @@ class Api::V1::GameManagementsController < ApplicationController
     end
 
     # 問題に関する処理
-    # RAND()を使うと、本番のDBによっては使えなかったりするので、
-    # sampleを使う。
+    # RAND()を使用すると、本番のDBによっては使えなかったりする為、
+    # sampleを使用する。
     # sample(14)でpluck(:id)の配列の中で、要素をランダムに14個、1つの配列として返す
-    # ただ、DBから取得しても、結局小さい順になるので、shuffleメソッドを使う
+    # ただ、DBから取得しても、結局小さい順になるため、shuffleメソッドを使用する
     # shuffleで配列の要素をランダムにシャッフルして、その結果を配列として返す
     def set_questions
       indices = Question.where(difficulty: params[:difficulty]).pluck(:id).sample(14)

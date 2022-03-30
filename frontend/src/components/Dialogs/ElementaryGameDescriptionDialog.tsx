@@ -16,6 +16,12 @@ import ArrowLeftIcon from '@mui/icons-material/ArrowLeft';
 // Buttons
 import { FinallyGameStartButton } from '../Buttons/FinallyGameStartButton';
 import { FinallyGameRestartButton } from '../Buttons/FinallyGameRestartButton';
+import { NowGameStartButton } from '../Buttons/NowGameStartButton';
+import { DescriptionBackToTopButton } from '../Buttons/DescriptionBackToTopButton';
+import { DescriptionBackToMyPageButton } from '../Buttons/DescriptionBackToMyPageButton';
+
+// 説明ページのボタンのラッパー
+import { FirstOuterButtonsWrapper } from '../shared_style';
 
 // ツールチップ
 import Tooltip from '@mui/material/Tooltip';
@@ -42,6 +48,9 @@ import { WarningSentenceWrapper } from '../shared_style';
 
 // スライド関連のコンポーネントやstateの型
 import { GameDescriptionDialogArg, SlideState } from '../../types/components/dialogs';
+
+// ゲーム画面の説明画像
+import GameScreenDescription from '../../images/game_screen_description.png';
 
 const CustomDialogInnerWrapper = styled.div`
   background-color: ${COLORS.SUB};
@@ -93,10 +102,12 @@ const SpecialCodeBlockWrapper = styled(CodeBlockWrapper)`
   margin-top: 2%;
 `;
 
+// ここは高さなので、px指定してレイアウトが崩れないようにした
 const ButtonLineWrapper = styled.div`
   width: 80%;
   text-align: right;
   margin: 0 auto;
+  margin-top: 10px;
 `;
 
 const ButtonWrapper = styled.div`
@@ -116,6 +127,13 @@ const SpecialWarningSentenceWrapper = styled(WarningSentenceWrapper)`
   margin-top: 1.5%;
 `;
 
+// ゲーム説明画像のラッパー
+const GameScreenDescriptionWrapper = styled.img`
+  width: 87%;
+  height: 87%;
+  object-fit: contain;
+`;
+
 // isOpenはgameState.gameDescriptionOpen
 // gameDescriptionOpenは、gameDescriptionOpen
 // clickDescriptionOpenは、ゲーム開始後にスライドを見るをクリックしたかを表すprops
@@ -124,7 +142,8 @@ export const ElementaryGameDescriptionDialog = ({
   isOpen,
   setGameState,
   gameDescriptionOpen,
-  clickDescriptionOpen
+  clickDescriptionOpen,
+  hasUser
 }: GameDescriptionDialogArg): JSX.Element => {
 
   // 第2引数に空の依存配列を渡した場合、初回の1回のみ実行され、
@@ -133,7 +152,7 @@ export const ElementaryGameDescriptionDialog = ({
   const slideContent = useMemo(() => [
     {
       title: "初級編",
-      sentence: "初級編を始める前に、正規表現とは何か？、文字クラスとは何か？を学習しましょう！ そして、初級編のゲームを通して、文字クラスを使用した正規表現をマスターしましょう！",
+      sentence: "初級編を始める前に、正規表現、文字クラスについて、スライドで学習しましょう！ そして、初級編のゲームを通して、文字クラスを使用した正規表現をマスターしましょう！",
       slideNum: 0
     },
     {
@@ -143,18 +162,23 @@ export const ElementaryGameDescriptionDialog = ({
     },
     {
       title: "文字クラスとは？",
-      sentence: "文字クラス([...])とは、指定した文字のどれか1文字にマッチする特殊文字です。[...]の...に、現れても良い1文字を複数指定します。例えば、[acz#]と書くと、[acz#]は、a, c, z, #のどれか1文字にマッチします。また、文字クラスの別の使い方として、[...]の中に-を書くと、文字の範囲を指定できます。例えば、[a-z]はaからzの小文字アルファベット1文字にマッチします。[1-9]は、0から9の1桁の数字にマッチします。範囲は複数指定できるので、[a-zA-Z]や[a-zA-Z1-9]と書くこともできます。文字クラス内で文字指定と範囲指定を併用することもできるので、[a-z#%]と書くことも可能です。",
+      sentence: "文字クラス([...])とは、指定した文字のどれか1文字にマッチする特殊文字です。[...]の...に、マッチさせたい1文字を複数指定します。例えば、[acz#]と書くと、[acz#]は、a, c, z, #のどれか1文字にマッチします。また、文字クラスの別の使い方として、[...]の中に-を書くと、文字の範囲を指定できます。例えば、[a-z]はaからzの小文字アルファベット1文字にマッチします。[1-9]は、1から9の1桁の数字にマッチします。範囲は複数指定できる為、[a-zA-Z]や[a-zA-Z1-9]と書くこともできます。文字クラス内で文字指定と範囲指定を併用することもできる為、[a-z#%]と書くことも可能です。",
       slideNum: 2
     },
     {
       title: "正規表現を作るコツ",
-      sentence: "'gray grey'という文字列のgrayとgreyにマッチするような正規表現を求めよ」と言われた場合、1つの文字クラスのみで作られた正規表現ではマッチできません。理由は、文字クラスは指定した1文字を表すだけであり、2文字以上の文字列にマッチさせることができないからです。この場合、まずはgrayとgreyの共通な文字と共通ではない文字を見つけます。共通な文字はg, r, yです。そして、共通ではない文字はa, eです。aとeは、grayとgreyの3番目に位置する文字です。したがって、gr[ae]yという正規表現を用いることで、grayとgreyにマッチさせることができます。",
+      sentence: "「'gray grey'という文字列のgrayとgreyにマッチするような正規表現を求めよ」と言われた場合、1つの文字クラスのみで作られた正規表現ではマッチできません。理由は、文字クラスは指定した1文字にしかマッチしない為です。そのため、2文字以上の文字列にマッチさせることができません。この場合、まずはgrayとgreyの共通している文字と共通していない文字を見つけます。共通している文字はg, r, yです。そして、共通していない文字はa, eです。aとeは、grayとgreyの3番目に位置する文字です。したがって、gr[ae]yという正規表現を用いることで、grayとgreyにマッチさせることができます。",
       slideNum: 3
     },
     {
-      title: "ルール説明",
-      sentence: "初級編では、文字クラスを使用する正規表現を学習していきます。時間内に正しい正規表現を入力すると、モンスターに攻撃できます。モンスターのHPを0にしたらゲームクリアです！",
+      title: "ゲーム画面の説明",
+      sentence: "ルール説明の前に、ゲーム画面の説明をします。ゲーム画面は、ヒント、 問題、コードブロック等、様々な要素で構成されています。重要なポイントを以下にまとめましたので、ご確認していただくようお願いします。",
       slideNum: 4
+    },
+    {
+      title: "ルール説明",
+      sentence: "初級編では、文字クラスを使用する正規表現を学習していきます。時間内に正しい正規表現を入力してエンターキーを押すと、モンスターに攻撃できます。モンスターのHPを0にしたらゲームクリアです！",
+      slideNum: 5
     }
   ], []);
 
@@ -165,20 +189,22 @@ export const ElementaryGameDescriptionDialog = ({
     slideIn: false,
     slideOut: false,
     direction: 'right',
+    keyAndClickAvailable: true
   };
 
   const [slideState, setSlideState] = useState(initialState);
 
   // 右カーソルをクリックで左へずらす
   // スライドが右のスライドになる
-  // slideState.slideNumが4より小さい場合、右カーソルが機能する
+  // slideState.slideNumが5より小さい場合、右カーソルが機能する
   const changeSlideToRight = useCallback(() => {
-    if(slideState.slideNum < 4) {
+    if(slideState.slideNum < 5 && slideState.keyAndClickAvailable) {
       setSlideState((prev) => ({
         ...prev,
         slideIn: false,
         slideOut: true,
-        direction: "left"
+        direction: "left",
+        keyAndClickAvailable: false
       }));
       setTimeout(() => {
         setSlideState((prev) => ({
@@ -189,24 +215,27 @@ export const ElementaryGameDescriptionDialog = ({
           slideIn: true,
           slideOut: false,
           direction: "left",
+          keyAndClickAvailable: true
         }));
       }, 350);
     }
   }, [
     slideContent,
-    slideState.slideNum
+    slideState.slideNum,
+    slideState.keyAndClickAvailable
   ]);
 
   // 左カーソルをクリックで右へずらす
   // スライドが左のスライドになる
   // slideState.slideNumが1より大きくないと、左カーソルが機能しないようにした
   const changeSlideToLeft = useCallback(() => {
-    if(slideState.slideNum > 0) {
+    if(slideState.slideNum > 0 && slideState.keyAndClickAvailable) {
       setSlideState((prev) => ({
         ...prev,
         slideIn: false,
         slideOut: true,
-        direction: "right"
+        direction: "right",
+        keyAndClickAvailable: false
       }));
       setTimeout(() => {
         setSlideState((prev) => ({
@@ -217,16 +246,18 @@ export const ElementaryGameDescriptionDialog = ({
           slideIn: true,
           slideOut: false,
           direction: "right",
+          keyAndClickAvailable: true
         }));
       }, 350);
     }
   }, [
     slideContent,
-    slideState.slideNum
+    slideState.slideNum,
+    slideState.keyAndClickAvailable
   ]);
 
   useEffect(() => {
-    if(gameDescriptionOpen) {
+    if(gameDescriptionOpen && slideState.keyAndClickAvailable) {
       const handleRightkeyPress = (e: KeyboardEvent) => {
         if(e.key !== 'Enter' && e.key === 'ArrowRight') {
           changeSlideToRight();
@@ -255,6 +286,7 @@ export const ElementaryGameDescriptionDialog = ({
     gameDescriptionOpen,
     changeSlideToRight,
     changeSlideToLeft,
+    slideState.keyAndClickAvailable
   ]);
 
   return(
@@ -262,13 +294,14 @@ export const ElementaryGameDescriptionDialog = ({
       <Dialog
         open={isOpen}
         maxWidth='lg'
+        fullWidth={true}
       >
         <CustomDialogInnerWrapper>
           <DialogContent
             sx={{
-              height: "75vh",
               pb: "0",
-              overflowX: "hidden"
+              overflowX: "hidden",
+              height: "77vh"
             }}
           >
             <DynamicSlideContentWrapper>
@@ -289,6 +322,22 @@ export const ElementaryGameDescriptionDialog = ({
                       <WarningSentenceWrapper>
                         ※ JavaScriptにおける正規表現を説明していますが、内容自体は他の言語にも適用できます。
                       </WarningSentenceWrapper>
+                      <FirstOuterButtonsWrapper>
+                        {
+                          hasUser ?
+                            <DescriptionBackToMyPageButton />
+                          :
+                            <DescriptionBackToTopButton />
+                        }
+                        {
+                          clickDescriptionOpen ?
+                            <FinallyGameRestartButton setGameState={setGameState} slideNum={slideState.slideNum}/>
+                          :
+                            <NowGameStartButton
+                              setGameState={setGameState}
+                            />
+                        }
+                      </FirstOuterButtonsWrapper>
                     </>
                 }
                 {
@@ -373,6 +422,12 @@ export const ElementaryGameDescriptionDialog = ({
                 {
                   slideState.slideNum === 4 &&
                     <>
+                      <GameScreenDescriptionWrapper src={GameScreenDescription} />
+                    </>
+                }
+                {
+                  slideState.slideNum === 5 &&
+                    <>
                       <WarningSentenceWrapper>
                         ※ UX向上の為、音が出ます。音量が気になる方は下げて頂くようお願いします。
                       </WarningSentenceWrapper>
@@ -400,7 +455,7 @@ export const ElementaryGameDescriptionDialog = ({
                     >
                       <IconButton
                         sx={{
-                          fontSize: '4.0em'
+                          fontSize: '4.0em',
                         }}
                       >
                         <ArrowLeftIcon
@@ -417,18 +472,18 @@ export const ElementaryGameDescriptionDialog = ({
                 <Tooltip
                   title={<div>進む<br />( 右矢印キー → )</div>}
                   placement="top"
-                  disableHoverListener={slideState.slideNum === 4}
+                  disableHoverListener={slideState.slideNum === 5}
                   sx={{
-                    opacity: slideState.slideNum === 4 ? 0 : 1,
+                    opacity: slideState.slideNum === 5 ? 0 : 1,
                   }}
                 >
                   <IconButton
                     sx={{
                       fontSize: '4.0em',
-                      opacity: slideState.slideNum === 4 ? 0.1 : 1,
-                      cursor: slideState.slideNum === 4 ? "default" : "pointer"
+                      opacity: slideState.slideNum === 5 ? 0.1 : 1,
+                      cursor: slideState.slideNum === 5 ? "default" : "pointer"
                     }}
-                    disableRipple={slideState.slideNum === 4}
+                    disableRipple={slideState.slideNum === 5}
                   >
                     <ArrowRightIcon
                       fontSize='inherit'

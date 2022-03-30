@@ -14,6 +14,13 @@ type SessionFlashMessagArg = {
   }
 };
 
+const collorFunc = (state: SessionFlashMessagArg['location']['state']) => {
+  if(state?.success === 'ログインに失敗しました。') {
+    return 'warning';
+  }
+  return 'success';
+}
+
 export const SessionFlashMessage = ({
   location: { state }
 }: SessionFlashMessagArg): JSX.Element => {
@@ -38,13 +45,13 @@ export const SessionFlashMessage = ({
         sx={{
           position: 'fixed',
           zIndex: 1100,
-          top: { xs: '10%', md: '11%' }
+          top: { xs: '10%', md: '12%' }
         }}
         onClose={
           handleClose
         }
       >
-        <Alert variant="filled" severity="success">
+        <Alert variant="filled" severity={collorFunc(state)}>
           {state?.success}
         </Alert>
       </Snackbar>

@@ -47,9 +47,10 @@ export type GameDescriptionDialogArg = {
   setGameState: SetGameState;
   gameDescriptionOpen: true,
   clickDescriptionOpen: boolean;
+  hasUser: boolean;
 };
 
-// GameDescriptionDialogで使うslideStateの型
+// GameDescriptionDialogで使用するslideStateの型
 export type SlideState = {
   title: string;
   sentence: string;
@@ -57,4 +58,5 @@ export type SlideState = {
   slideIn: boolean;
   slideOut: boolean;
   direction: 'right' | 'left';
+  keyAndClickAvailable: boolean;
 };

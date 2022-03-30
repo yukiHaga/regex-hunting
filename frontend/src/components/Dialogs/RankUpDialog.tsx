@@ -16,7 +16,7 @@ import { BackToModalButton } from '../Buttons/BackToModalButton';
 // Twitterボタン
 import { ResultShareButton } from '../Buttons/ResultShareButton';
 
-// ランクアップ音
+// レベルアップ音
 import RankUpSound from '../../sounds/rank_up_25.mp3';
 
 // setGameStateの型
@@ -112,12 +112,13 @@ type RankUpDialogArg = {
   rankUp: true;
   difficulty: string | undefined;
   gameResult: "" | "progress" | "win" | "lose";
+  hasUser: boolean;
 };
 
 // gameStateのrankUpがtrueの時に開くモーダル
 // サーバーに送ったゲームデータの戻り値のrankUpがtrueの場合、開く
 // このコンポーネントに渡るpropsは、サーバーに送ったゲームデータの戻り値のデータ
-// このrankはランクアップ後のランク値が格納されている
+// このrankはレベルアップ後のレベルの値が格納されている
 export const RankUpDialog = ({
   isOpen,
   rank,
@@ -125,7 +126,8 @@ export const RankUpDialog = ({
   setGameState,
   rankUp,
   difficulty,
-  gameResult
+  gameResult,
+  hasUser
 }: RankUpDialogArg): JSX.Element => {
 
   // ゲームクリア時の音
@@ -157,19 +159,19 @@ export const RankUpDialog = ({
         </BackToModalButtonWrapper>
         <CustomDialogTitleWrapper title="Bad">
           <CustomSpan>
-            RANK UP
+            LEVEL UP
           </CustomSpan>
-          RANK UP
+          LEVEL UP
         </CustomDialogTitleWrapper>
         <CustomDialogContent>
           <CustomDialogContentSentence>
-            ランクアップおめでとうございます！<br />
-            {`ランク${rank - 1}からランク${rank}になりました。`}
+            レベルアップおめでとうございます！<br />
+            {`レベル${rank - 1}からレベル${rank}になりました。`}
           </CustomDialogContentSentence>
           <CustomTable>
             <tbody>
               <tr>
-                <MetaTd>ランク</MetaTd>
+                <MetaTd>レベル</MetaTd>
                 <CustomTd>{rank}</CustomTd>
               </tr>
               <tr>
@@ -184,6 +186,7 @@ export const RankUpDialog = ({
               difficulty={difficulty}
               gameResult={gameResult}
               rank={rank}
+              hasUser={hasUser}
             />
           </ButtonsWrapper>
         </CustomDialogContent>

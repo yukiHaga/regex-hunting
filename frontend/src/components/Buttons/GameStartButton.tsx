@@ -9,7 +9,7 @@ import { COLORS } from '../../style_constants';
 // Responsive
 import { WIDTH } from '../../style_constants';
 
-// ここのwidthはpx指定しないとレスポンシブ時にレイアウトが崩れる
+// ここのwidthはpx指定しないとレスポンシブの場合にレイアウトが崩れる
 const GameStartButtonWrapper = styled(BaseLink)`
   border-style: none;
   border-radius: 3px;
@@ -49,7 +49,7 @@ export const GameStartButton = ({
 }: GameStartButtonArg): JSX.Element => {
 
   // デバイス幅が640px以下の場合にスマホと判定するようにしている
-  // タブレットでもゲームして欲しくないので、1000pxにした
+  // タブレットでもゲームして欲しくない為、1000pxにした
   // デバイス幅が640px以下なら、window.matchMedia('(max-device-width: 640px)').matchesがtrueになる
   const url = useMemo(() => {
     if (window.matchMedia(`(max-device-width: ${WIDTH.PC})`).matches) {

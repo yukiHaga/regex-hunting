@@ -16,6 +16,12 @@ import ArrowLeftIcon from '@mui/icons-material/ArrowLeft';
 // Buttons
 import { FinallyGameStartButton } from '../Buttons/FinallyGameStartButton';
 import { FinallyGameRestartButton } from '../Buttons/FinallyGameRestartButton';
+import { NowGameStartButton } from '../Buttons/NowGameStartButton';
+import { DescriptionBackToTopButton } from '../Buttons/DescriptionBackToTopButton';
+import { DescriptionBackToMyPageButton } from '../Buttons/DescriptionBackToMyPageButton';
+
+// 説明ページのボタンのラッパー
+import { FirstOuterButtonsWrapper } from '../shared_style';
 
 // ツールチップ
 import Tooltip from '@mui/material/Tooltip';
@@ -93,10 +99,12 @@ const CaptureCodeBlockWrapper = styled(CodeBlockWrapper)`
   margin-top: 2%;
 `;
 
+// ここは高さなので、px指定してレイアウトが崩れないようにした
 const ButtonLineWrapper = styled.div`
   width: 80%;
   text-align: right;
   margin: 0 auto;
+  margin-top: 10px;
 `;
 
 const ButtonWrapper = styled.div`
@@ -120,7 +128,8 @@ export const IntermediateGameDescriptionDialog = ({
   isOpen,
   setGameState,
   gameDescriptionOpen,
-  clickDescriptionOpen
+  clickDescriptionOpen,
+  hasUser
 }: GameDescriptionDialogArg): JSX.Element => {
 
   // 第2引数に空の依存配列を渡した場合、初回の1回のみ実行され、
@@ -129,7 +138,7 @@ export const IntermediateGameDescriptionDialog = ({
   const slideContent = useMemo(() => [
     {
       title: "中級編",
-      sentence: "中級編を始める前に、最大量指定子(? * + {min,max})、キャプチャグループについて学習しましょう！ そして、中級編のゲームを通して、これらの特殊文字を使用した正規表現をマスターしましょう！",
+      sentence: "中級編を始める前に、最大量指定子(? * + {min,max})、キャプチャグループについて、スライドで学習しましょう！ そして、中級編のゲームを通して、これらの特殊文字を使用した正規表現をマスターしましょう！",
       slideNum: 0
     },
     {
@@ -139,22 +148,22 @@ export const IntermediateGameDescriptionDialog = ({
     },
     {
       title: "?の使い方",
-      sentence: "最大量指定子?は、直前の1文字があればマッチさせるが、なくてもよいという意味を表します。文字列の直後に?を置くことで、その文字列に?の意味が適用されます。例えば、n?はnがあればマッチさせるが、なくてもよいという意味を表します。n?を使用したenviron?mentという正規表現は、environment, enviromentという文字列にマッチさせることができます。このように、直前の1文字があってもなくてもよいという正規表現を作りたい時に、?を使います。",
+      sentence: "最大量指定子?は、直前の1文字があればマッチさせるが、なくてもよいという意味を表します。文字列の直後に?を置くことで、その文字列に?の意味が適用されます。例えば、n?はnがあればマッチさせるが、なくてもよいという意味を表します。n?を使用したenviron?mentという正規表現は、environment, enviromentという文字列にマッチさせることができます。このように、直前の1文字があってもなくてもよいという正規表現を作りたい場合に、?を使います。",
       slideNum: 2
     },
     {
       title: "+と*の使い方",
-      sentence: "最大量指定子+は、直前の1文字に1回以上の繰り返しマッチという意味を表し、最大量指定子*は、直前の1文字に0回以上の繰り返しマッチという意味を表します。+と*の意味は似ています。大きな違いとして、+の場合は少なくとも1回はマッチしないといけませんが、*の場合はなくても大丈夫です。以下の例のo+は、oの1回以上繰り返しマッチを表すので、cとkの間にoがない単語(ck)にはマッチしないことが分かります。直前の1文字を繰り返したい正規表現を作りたい時に、*や+を使います。",
+      sentence: "最大量指定子+は、直前の1文字に1回以上の繰り返しマッチという意味を表し、最大量指定子*は、直前の1文字に0回以上の繰り返しマッチという意味を表します。+と*の意味は似ています。大きな違いとして、+の場合は少なくとも1回はマッチしないといけませんが、*の場合はなくても大丈夫です。以下の例のo+は、oの1回以上繰り返しマッチを表す為、cとkの間にoがない単語(ck)にはマッチしないことが分かります。直前の1文字を繰り返す正規表現を作りたい場合に、*や+を使います。",
       slideNum: 3
     },
     {
       title: "{min,max}の使い方",
-      sentence: "最大量指定子{min,max}は、直前の1文字にmin回以上、max回以上の繰り返しマッチという意味を表します。例えば、\\dは1桁の数字にマッチするので、\\d{3,5}は3桁以上、5桁以下の数字にマッチします。{min,max}以外にも、{min}や{min,}という書き方があります。{min}は直前の1文字にmin回繰り返しマッチを表し、{min,}は直前の1文字にmin回以上繰り返しマッチを表します。例えば、\\d{3}は3桁の数字、\\d{3,}は3桁以上の数字にマッチします。直前の1文字の繰り返し回数を制御したい時に、{min,max}を使います。",
+      sentence: "最大量指定子{min,max}は、直前の1文字にmin回以上、max回以上の繰り返しマッチという意味を表します。例えば、\\dは1桁の数字にマッチする為、\\d{3,5}は3桁以上、5桁以下の数字にマッチします。{min,max}以外にも、{min}や{min,}という書き方があります。{min}は直前の1文字にmin回繰り返しマッチを表し、{min,}は直前の1文字にmin回以上繰り返しマッチを表します。例えば、\\d{3}は3桁の数字、\\d{3,}は3桁以上の数字にマッチします。直前の1文字の繰り返し回数を制御したい場合に、{min,max}を使います。",
       slideNum: 4
     },
     {
       title: "キャプチャグループとは？",
-      sentence: "最大量指定子(? * + {min,max})は、どれも直前の1文字を対象とする特殊文字です。2文字以上の文字を繰り返したい時はどうすれば良いのでしょうか？ そのような時はキャプチャグループ((...))を使用します。キャプチャグループを使用することで、複数の文字列を1つのグループとして扱うことができます。そのグループに最大量指定子を指定できるので、2文字以上の文字列を繰り返すことができます。本サービスでは、厳密性より見やすさと分かりやすさを重視している為、基本的には非キャプチャグループ((?:...))ではなく、キャプチャグループ((...))を使用します。",
+      sentence: "最大量指定子(? * + {min,max})は、どれも直前の1文字を対象とする特殊文字です。2文字以上の文字を繰り返したい場合はどうすれば良いのでしょうか？ 答えはキャプチャグループ((...))を使用することです。キャプチャグループを使用することで、複数の文字列を1つのグループとして扱うことができます。そのグループに最大量指定子を指定できる為、2文字以上の文字列を繰り返すことができます。本サービスでは、厳密性より見やすさと分かりやすさを重視している為、基本的には非キャプチャグループ((?:...))ではなく、キャプチャグループ((...))を使用します。",
       slideNum: 5
     },
     {
@@ -171,6 +180,7 @@ export const IntermediateGameDescriptionDialog = ({
     slideIn: false,
     slideOut: false,
     direction: 'right',
+    keyAndClickAvailable: true
   };
 
   const [slideState, setSlideState] = useState(initialState);
@@ -179,12 +189,13 @@ export const IntermediateGameDescriptionDialog = ({
   // スライドが右のスライドになる
   // slideState.slideNumが6より小さい場合、右カーソルが機能する
   const changeSlideToRight = useCallback(() => {
-    if(slideState.slideNum < 6) {
+    if(slideState.slideNum < 6 && slideState.keyAndClickAvailable) {
       setSlideState((prev) => ({
         ...prev,
         slideIn: false,
         slideOut: true,
-        direction: "left"
+        direction: "left",
+        keyAndClickAvailable: false
       }));
       setTimeout(() => {
         setSlideState((prev) => ({
@@ -195,24 +206,27 @@ export const IntermediateGameDescriptionDialog = ({
           slideIn: true,
           slideOut: false,
           direction: "left",
+          keyAndClickAvailable: true
         }));
       }, 350);
     }
   }, [
     slideContent,
-    slideState.slideNum
+    slideState.slideNum,
+    slideState.keyAndClickAvailable
   ]);
 
   // 左カーソルをクリックで右へずらす
   // スライドが左のスライドになる
   // slideState.slideNumが1より大きくないと、左カーソルが機能しないようにした
   const changeSlideToLeft = useCallback(() => {
-    if(slideState.slideNum > 0) {
+    if(slideState.slideNum > 0 && slideState.keyAndClickAvailable) {
       setSlideState((prev) => ({
         ...prev,
         slideIn: false,
         slideOut: true,
-        direction: "right"
+        direction: "right",
+        keyAndClickAvailable: false
       }));
       setTimeout(() => {
         setSlideState((prev) => ({
@@ -223,16 +237,18 @@ export const IntermediateGameDescriptionDialog = ({
           slideIn: true,
           slideOut: false,
           direction: "right",
+          keyAndClickAvailable: true
         }));
       }, 350);
     }
   }, [
     slideContent,
-    slideState.slideNum
+    slideState.slideNum,
+    slideState.keyAndClickAvailable
   ]);
 
   useEffect(() => {
-    if(gameDescriptionOpen) {
+    if(gameDescriptionOpen && slideState.keyAndClickAvailable) {
       const handleRightkeyPress = (e: KeyboardEvent) => {
         if(e.key !== 'Enter' && e.key === 'ArrowRight') {
           changeSlideToRight();
@@ -261,6 +277,7 @@ export const IntermediateGameDescriptionDialog = ({
     gameDescriptionOpen,
     changeSlideToRight,
     changeSlideToLeft,
+    slideState.keyAndClickAvailable
   ]);
 
   return(
@@ -268,11 +285,12 @@ export const IntermediateGameDescriptionDialog = ({
       <Dialog
         open={isOpen}
         maxWidth='lg'
+        fullWidth={true}
       >
         <CustomDialogInnerWrapper>
           <DialogContent
             sx={{
-              height: "75vh",
+              height: "77vh",
               pb: "0",
               overflowX: "hidden"
             }}
@@ -295,6 +313,22 @@ export const IntermediateGameDescriptionDialog = ({
                       <WarningSentenceWrapper>
                         ※ JavaScriptにおける正規表現を説明していますが、内容自体は他の言語にも適用できます。
                       </WarningSentenceWrapper>
+                      <FirstOuterButtonsWrapper>
+                        {
+                          hasUser ?
+                            <DescriptionBackToMyPageButton />
+                          :
+                            <DescriptionBackToTopButton />
+                        }
+                        {
+                          clickDescriptionOpen ?
+                            <FinallyGameRestartButton setGameState={setGameState} slideNum={slideState.slideNum}/>
+                          :
+                            <NowGameStartButton
+                              setGameState={setGameState}
+                            />
+                        }
+                      </FirstOuterButtonsWrapper>
                     </>
                 }
                 {
