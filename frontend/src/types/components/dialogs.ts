@@ -47,6 +47,7 @@ export type GameDescriptionDialogArg = {
   setGameState: SetGameState;
   gameDescriptionOpen: true,
   clickDescriptionOpen: boolean;
+  hasUser: boolean;
 };
 
 // GameDescriptionDialogで使うslideStateの型

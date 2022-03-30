@@ -7,7 +7,7 @@ import { COLORS } from '../../style_constants';
 // gameStateの型
 import { SetGameState } from '../../types/containers/games'
 
-const FinallyGameRestartButtonWrapper = styled.div`
+const FinallyGameRestartButtonWrapper = styled.div<{slideNum: number | undefined}>`
   margin-top: 2%;
   border-style: none;
   border-radius: 3px;
@@ -20,6 +20,7 @@ const FinallyGameRestartButtonWrapper = styled.div`
   cursor: pointer;
   text-decoration: none;
   width: 25%;
+  margin-left: ${({slideNum}) => slideNum === 0 ? '2%' : '0%'};
 `;
 
 const FinallyGameRestartButtonTextWrapper = styled.div`
@@ -34,10 +35,12 @@ const FinallyGameRestartButtonTextWrapper = styled.div`
 
 type FinallyGameRestartButtonArg = {
   setGameState: SetGameState;
+  slideNum?: number;
 };
 
 export const FinallyGameRestartButton = ({
   setGameState,
+  slideNum
 }: FinallyGameRestartButtonArg): JSX.Element => {
 
   // スタートを制御する関数
@@ -55,6 +58,7 @@ export const FinallyGameRestartButton = ({
     <>
     <FinallyGameRestartButtonWrapper
       onClick={() => handleFinallyRestart(setGameState)}
+      slideNum={slideNum}
     >
         <FinallyGameRestartButtonTextWrapper>
           ゲームを再開する

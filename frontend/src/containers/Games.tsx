@@ -661,6 +661,7 @@ export const Games = (): JSX.Element => {
                   setGameState={setGameState}
                   gameDescriptionOpen={gameState.gameDescriptionOpen}
                   clickDescriptionOpen={gameState.clickDescriptionOpen}
+                  hasUser={gameState.hasUser}
                 />
             }
             {
@@ -670,6 +671,7 @@ export const Games = (): JSX.Element => {
                   setGameState={setGameState}
                   gameDescriptionOpen={gameState.gameDescriptionOpen}
                   clickDescriptionOpen={gameState.clickDescriptionOpen}
+                  hasUser={gameState.hasUser}
                 />
             }
             {
@@ -679,6 +681,7 @@ export const Games = (): JSX.Element => {
                   setGameState={setGameState}
                   gameDescriptionOpen={gameState.gameDescriptionOpen}
                   clickDescriptionOpen={gameState.clickDescriptionOpen}
+                  hasUser={gameState.hasUser}
                 />
             }
             {

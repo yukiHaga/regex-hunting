@@ -17,6 +17,11 @@ import ArrowLeftIcon from '@mui/icons-material/ArrowLeft';
 import { FinallyGameStartButton } from '../Buttons/FinallyGameStartButton';
 import { FinallyGameRestartButton } from '../Buttons/FinallyGameRestartButton';
 import { NowGameStartButton } from '../Buttons/NowGameStartButton';
+import { DescriptionBackToTopButton } from '../Buttons/DescriptionBackToTopButton';
+import { DescriptionBackToMyPageButton } from '../Buttons/DescriptionBackToMyPageButton';
+
+// 説明ページのボタンのラッパー
+import { FirstOuterButtonsWrapper } from '../shared_style';
 
 // ツールチップ
 import Tooltip from '@mui/material/Tooltip';
@@ -125,7 +130,8 @@ export const ElementaryGameDescriptionDialog = ({
   isOpen,
   setGameState,
   gameDescriptionOpen,
-  clickDescriptionOpen
+  clickDescriptionOpen,
+  hasUser
 }: GameDescriptionDialogArg): JSX.Element => {
 
   // 第2引数に空の依存配列を渡した場合、初回の1回のみ実行され、
@@ -290,16 +296,22 @@ export const ElementaryGameDescriptionDialog = ({
                       <WarningSentenceWrapper>
                         ※ JavaScriptにおける正規表現を説明していますが、内容自体は他の言語にも適用できます。
                       </WarningSentenceWrapper>
-                      <OuterButtonsWrapper>
+                      <FirstOuterButtonsWrapper>
+                        {
+                          hasUser ?
+                            <DescriptionBackToMyPageButton />
+                          :
+                            <DescriptionBackToTopButton />
+                        }
                         {
                           clickDescriptionOpen ?
-                            <FinallyGameRestartButton setGameState={setGameState} />
+                            <FinallyGameRestartButton setGameState={setGameState} slideNum={slideState.slideNum}/>
                           :
                             <NowGameStartButton
                               setGameState={setGameState}
                             />
                         }
-                      </OuterButtonsWrapper>
+                      </FirstOuterButtonsWrapper>
                     </>
                 }
                 {

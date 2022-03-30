@@ -20,6 +20,8 @@ const NowGameStartButtonWrapper = styled.div`
   cursor: pointer;
   text-decoration: none;
   width: 25%;
+  background-color: ${COLORS.BLUE};
+  margin-left: 2%;
 `;
 
 const NowGameStartButtonTextWrapper = styled.div`
@@ -28,7 +30,6 @@ const NowGameStartButtonTextWrapper = styled.div`
   font-size: 1.1em;
   color: ${COLORS.WHITE};
   text-align: center;
-  background-color: ${COLORS.BLUE};
   padding: 5%;
 `;
 
