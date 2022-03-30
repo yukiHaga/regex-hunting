@@ -8,14 +8,14 @@ import { DescriptionWrapper } from '../../components/shared_style';
 import { COLORS } from '../../style_constants';
 
 // 背景画像
-import ProfessionalBackGround from '../../images/professional_background.png';
-import AntiquityBackGround from '../../images/antiquity_background.png';
-import LegendBackground from '../../images/legend_background.png';
-import GeniusBackground from '../../images/genius_background.png';
-import ApprenticeBackground from '../../images/apprentice_background.png';
-import ManhoodBackground from '../../images/manhood_background.png';
-import SelfEffacementBackground from '../../images/self_effacement_background.png';
-import HeroBackground from '../../images/hero_background.png';
+import ProfessionalBackGround from '../../images/professional_background.jpg';
+import AntiquityBackGround from '../../images/antiquity_background.jpg';
+import LegendBackground from '../../images/legend_background.jpg';
+import GeniusBackground from '../../images/genius_background.jpg';
+import ApprenticeBackground from '../../images/apprentice_background.jpg';
+import ManhoodBackground from '../../images/manhood_background.jpg';
+import SelfEffacementBackground from '../../images/self_effacement_background.jpg';
+import HeroBackground from '../../images/hero_background.jpg';
 
 // heigthはpx指定しないとダメ
 // heightをvhにしてみる
