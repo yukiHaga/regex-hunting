@@ -99,10 +99,12 @@ const SpecialCodeBlockWrapper = styled(CodeBlockWrapper)`
   margin-top: 2%;
 `;
 
+// ここは高さなので、px指定してレイアウトが崩れないようにした
 const ButtonLineWrapper = styled.div`
   width: 80%;
   text-align: right;
   margin: 0 auto;
+  margin-top: 10px;
 `;
 
 const ButtonWrapper = styled.div`
@@ -172,6 +174,7 @@ export const ElementaryGameDescriptionDialog = ({
     slideIn: false,
     slideOut: false,
     direction: 'right',
+    keyAndClickAvailable: true
   };
 
   const [slideState, setSlideState] = useState(initialState);
@@ -180,12 +183,13 @@ export const ElementaryGameDescriptionDialog = ({
   // スライドが右のスライドになる
   // slideState.slideNumが4より小さい場合、右カーソルが機能する
   const changeSlideToRight = useCallback(() => {
-    if(slideState.slideNum < 4) {
+    if(slideState.slideNum < 4 && slideState.keyAndClickAvailable) {
       setSlideState((prev) => ({
         ...prev,
         slideIn: false,
         slideOut: true,
-        direction: "left"
+        direction: "left",
+        keyAndClickAvailable: false
       }));
       setTimeout(() => {
         setSlideState((prev) => ({
@@ -196,24 +200,27 @@ export const ElementaryGameDescriptionDialog = ({
           slideIn: true,
           slideOut: false,
           direction: "left",
+          keyAndClickAvailable: true
         }));
       }, 350);
     }
   }, [
     slideContent,
-    slideState.slideNum
+    slideState.slideNum,
+    slideState.keyAndClickAvailable
   ]);
 
   // 左カーソルをクリックで右へずらす
   // スライドが左のスライドになる
   // slideState.slideNumが1より大きくないと、左カーソルが機能しないようにした
   const changeSlideToLeft = useCallback(() => {
-    if(slideState.slideNum > 0) {
+    if(slideState.slideNum > 0 && slideState.keyAndClickAvailable) {
       setSlideState((prev) => ({
         ...prev,
         slideIn: false,
         slideOut: true,
-        direction: "right"
+        direction: "right",
+        keyAndClickAvailable: false
       }));
       setTimeout(() => {
         setSlideState((prev) => ({
@@ -224,16 +231,18 @@ export const ElementaryGameDescriptionDialog = ({
           slideIn: true,
           slideOut: false,
           direction: "right",
+          keyAndClickAvailable: true
         }));
       }, 350);
     }
   }, [
     slideContent,
-    slideState.slideNum
+    slideState.slideNum,
+    slideState.keyAndClickAvailable
   ]);
 
   useEffect(() => {
-    if(gameDescriptionOpen) {
+    if(gameDescriptionOpen && slideState.keyAndClickAvailable) {
       const handleRightkeyPress = (e: KeyboardEvent) => {
         if(e.key !== 'Enter' && e.key === 'ArrowRight') {
           changeSlideToRight();
@@ -262,6 +271,7 @@ export const ElementaryGameDescriptionDialog = ({
     gameDescriptionOpen,
     changeSlideToRight,
     changeSlideToLeft,
+    slideState.keyAndClickAvailable
   ]);
 
   return(
@@ -269,13 +279,14 @@ export const ElementaryGameDescriptionDialog = ({
       <Dialog
         open={isOpen}
         maxWidth='lg'
+        fullWidth={true}
       >
         <CustomDialogInnerWrapper>
           <DialogContent
             sx={{
-              height: "75vh",
               pb: "0",
-              overflowX: "hidden"
+              overflowX: "hidden",
+              height: "77vh"
             }}
           >
             <DynamicSlideContentWrapper>
@@ -423,7 +434,7 @@ export const ElementaryGameDescriptionDialog = ({
                     >
                       <IconButton
                         sx={{
-                          fontSize: '4.0em'
+                          fontSize: '4.0em',
                         }}
                       >
                         <ArrowLeftIcon
