@@ -10,11 +10,13 @@ import { SessionFlashMessage } from '../components/FlashMessages/SessionFlashMes
 // Colors
 import { COLORS } from '../style_constants';
 
+import { BottomWrapper } from '../components/shared_style';
+
 // メインのラッパー
 const MainWrapper = styled.div`
   background-color: ${COLORS.SUB};
-  padding-top: 7.62%;
-  padding-bottom: 7.62%;
+  padding-top: 9.1%;
+  padding-bottom: 10%;
 `;
 
 const SendEmailBoxWrapper = styled.div`
@@ -82,7 +84,9 @@ export const SendEmail = (): JSX.Element => {
           </CustomUl>
         </SendEmailBoxWrapper>
       </MainWrapper>
-      <Footer />
+      <BottomWrapper>
+        <Footer />
+      </BottomWrapper>
     </>
   );
 };

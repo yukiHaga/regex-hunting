@@ -23,11 +23,13 @@ import { HTTP_STATUS_CODE } from '../constants';
 // Colors
 import { COLORS } from '../style_constants';
 
+import { BottomWrapper } from '../components/shared_style';
+
 // メインのラッパー
 const MainWrapper = styled.div`
   background-color: ${COLORS.SUB};
-  padding-bottom: 2.95%;
-  padding-top: 2.95%;
+  padding-bottom: 5%;
+  padding-top: 5%;
 `;
 
 export const AccountSettings = (): JSX.Element => {
@@ -124,7 +126,9 @@ export const AccountSettings = (): JSX.Element => {
                 user={user}
               />
             </MainWrapper>
-            <Footer />
+            <BottomWrapper>
+              <Footer />
+            </BottomWrapper>
           </>
       }
     </>

@@ -167,12 +167,6 @@ export const PrivacyPolicies = (): JSX.Element => {
             user: data.user,
           }
         });
-        if(!data.session && location.key === 'default') {
-          navigate(
-            '/',
-            { state: { display: true, success: "ログインしてください。"}}
-          )
-        }
       }).catch((e) => {
         if(e.response.status === HTTP_STATUS_CODE.NOT_FOUND){
           dispatch({
