@@ -16,6 +16,7 @@ import ArrowLeftIcon from '@mui/icons-material/ArrowLeft';
 // Buttons
 import { FinallyGameStartButton } from '../Buttons/FinallyGameStartButton';
 import { FinallyGameRestartButton } from '../Buttons/FinallyGameRestartButton';
+import { NowGameStartButton } from '../Buttons/NowGameStartButton';
 
 // ツールチップ
 import Tooltip from '@mui/material/Tooltip';
@@ -289,6 +290,16 @@ export const ElementaryGameDescriptionDialog = ({
                       <WarningSentenceWrapper>
                         ※ JavaScriptにおける正規表現を説明していますが、内容自体は他の言語にも適用できます。
                       </WarningSentenceWrapper>
+                      <OuterButtonsWrapper>
+                        {
+                          clickDescriptionOpen ?
+                            <FinallyGameRestartButton setGameState={setGameState} />
+                          :
+                            <NowGameStartButton
+                              setGameState={setGameState}
+                            />
+                        }
+                      </OuterButtonsWrapper>
                     </>
                 }
                 {
