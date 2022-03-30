@@ -58,4 +58,5 @@ export type SlideState = {
   slideIn: boolean;
   slideOut: boolean;
   direction: 'right' | 'left';
+  keyAndClickAvailable: boolean;
 };
