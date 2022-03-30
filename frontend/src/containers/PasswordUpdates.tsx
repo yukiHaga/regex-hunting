@@ -28,11 +28,13 @@ import { patchPasswordResetsUpdate } from '../apis/passwordUpdates';
 // HTTP_STATUS_CODE
 import { HTTP_STATUS_CODE } from '../constants';
 
+import { BottomWrapper } from '../components/shared_style';
+
 // メインのラッパー
 const MainWrapper = styled.div`
   background-color: ${COLORS.SUB};
-  padding-bottom: 7.52%;
-  padding-top: 7.52%;
+  padding-bottom: 9.1%;
+  padding-top: 10%;
 `;
 
 const PasswordUpdatesBoxWrapper = styled.div`
@@ -238,7 +240,9 @@ export const PasswordUpdates = (): JSX.Element => {
           </PasswordUpdatesFormWrapper>
         </PasswordUpdatesBoxWrapper>
       </MainWrapper>
-      <Footer />
+      <BottomWrapper>
+        <Footer />
+      </BottomWrapper>
     </>
   );
 };
