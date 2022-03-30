@@ -7,7 +7,7 @@ import { COLORS } from '../../style_constants';
 // gameStateの型
 import { SetGameState } from '../../types/containers/games'
 
-const FinallyGameRestartButtonWrapper = styled.div<{slideNum: number | undefined}>`
+const NowGameStartButtonWrapper = styled.div`
   margin-top: 2%;
   border-style: none;
   border-radius: 3px;
@@ -20,50 +20,48 @@ const FinallyGameRestartButtonWrapper = styled.div<{slideNum: number | undefined
   cursor: pointer;
   text-decoration: none;
   width: 25%;
-  margin-left: ${({slideNum}) => slideNum === 0 ? '2%' : '0%'};
+  background-color: ${COLORS.BLUE};
+  margin-left: 2%;
 `;
 
-const FinallyGameRestartButtonTextWrapper = styled.div`
+const NowGameStartButtonTextWrapper = styled.div`
   border-radius: 3px;
   font-style: normal;
   font-size: 1.1em;
   color: ${COLORS.WHITE};
   text-align: center;
-  background-color: ${COLORS.BLUE};
   padding: 5%;
 `;
 
-type FinallyGameRestartButtonArg = {
+type NowGameStartButtonArg = {
   setGameState: SetGameState;
-  slideNum?: number;
 };
 
-export const FinallyGameRestartButton = ({
+export const NowGameStartButton = ({
   setGameState,
-  slideNum
-}: FinallyGameRestartButtonArg): JSX.Element => {
+}: NowGameStartButtonArg): JSX.Element => {
 
   // スタートを制御する関数
-  const handleFinallyRestart = (
+  // このボタンを押したと同時にタイムを測る
+  const handleFinallyStart = (
     setGameState: SetGameState
   ): void => {
     setGameState((prev) => ({
       ...prev,
       gameDescriptionOpen: false,
-      clickDescriptionOpen: false
+      gameStartTime: performance.now(),
     }));
   };
 
   return (
     <>
-    <FinallyGameRestartButtonWrapper
-      onClick={() => handleFinallyRestart(setGameState)}
-      slideNum={slideNum}
+    <NowGameStartButtonWrapper
+      onClick={() => handleFinallyStart(setGameState)}
     >
-        <FinallyGameRestartButtonTextWrapper>
-          ゲームを再開する
-        </FinallyGameRestartButtonTextWrapper>
-      </FinallyGameRestartButtonWrapper>
+        <NowGameStartButtonTextWrapper>
+          スライドを見ずに始める
+        </NowGameStartButtonTextWrapper>
+      </NowGameStartButtonWrapper>
     </>
   );
 };
