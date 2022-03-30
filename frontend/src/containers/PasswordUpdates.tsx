@@ -113,7 +113,7 @@ export const PasswordUpdates = (): JSX.Element => {
   // refObject(password)を定義
   // refObjectのcurrentプロパティにwatchの初期値("")を代入
   // watchは、PasswordBoxというname属性を持つinput要素を監視している。
-  // useRefを使う理由は、モーダルのコンポーネント内で値を保持する為。
+  // useRefを使用する理由は、モーダルのコンポーネント内で値を保持する為。
   // useRefの場合、変数の値を更新しても再レンダリングは起きない。
   // モーダルコンポーネントが再レンダリングするたびに、
   // password.currentにwatchしている値が代入される。

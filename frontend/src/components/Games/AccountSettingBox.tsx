@@ -145,7 +145,7 @@ export const AccountSettingBox = ({
   // reader.onloadで、ファイルの読み込みが成功した後に、アロー関数が実行される
   // onloadはイベントリスナーを定義しているだけで、まだ実行されたわけではない
   // 実際に画像ファイル(バイナリファイル)を読み込むためには、
-  // readAsDataURLメソッドを使う
+  // readAsDataURLメソッドを使用する
   // readAsDataURLメソッドが実行完了後に、onload登録したイベントリスナーが実行される
   // readAsDataURLメソッドは、バイナリファイルを
   // base64 Data URLという形式にエンコードして取得できる

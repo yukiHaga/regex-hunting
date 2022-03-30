@@ -6,7 +6,7 @@ class Api::V1::GameManagementsController < ApplicationController
 
   # startに関するbefore_action
   # set_userをfinishで実行すると、ステータスが更新されたデータをフロントに送ることができない為、
-  # finishでset_userを使うことはやめた
+  # finishでset_userを使用することはやめた
   before_action :set_start_game_management, only: :start
   before_action :set_monster, only: :start
   before_action :set_questions, only: :start
@@ -47,7 +47,7 @@ class Api::V1::GameManagementsController < ApplicationController
 
   def start
     # レンダリング
-    # このユーザーはゲームに使うユーザー
+    # このユーザーはゲームに使用するユーザー
     # contextのユーザーとは何も関係ない
     render json: {
       game_management: @game_management,
@@ -127,10 +127,10 @@ class Api::V1::GameManagementsController < ApplicationController
     end
 
     # 問題に関する処理
-    # RAND()を使うと、本番のDBによっては使えなかったりする為、
-    # sampleを使う。
+    # RAND()を使用すると、本番のDBによっては使えなかったりする為、
+    # sampleを使用する。
     # sample(14)でpluck(:id)の配列の中で、要素をランダムに14個、1つの配列として返す
-    # ただ、DBから取得しても、結局小さい順になるため、shuffleメソッドを使う
+    # ただ、DBから取得しても、結局小さい順になるため、shuffleメソッドを使用する
     # shuffleで配列の要素をランダムにシャッフルして、その結果を配列として返す
     def set_questions
       indices = Question.where(difficulty: params[:difficulty]).pluck(:id).sample(14)

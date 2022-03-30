@@ -49,6 +49,9 @@ import { WarningSentenceWrapper } from '../shared_style';
 // スライド関連のコンポーネントやstateの型
 import { GameDescriptionDialogArg, SlideState } from '../../types/components/dialogs';
 
+// ゲーム画面の説明画像
+import GameScreenDescription from '../../images/game_screen_description.png';
+
 const CustomDialogInnerWrapper = styled.div`
   background-color: ${COLORS.SUB};
   text-align: center;
@@ -124,6 +127,13 @@ const SpecialWarningSentenceWrapper = styled(WarningSentenceWrapper)`
   margin-top: 1.5%;
 `;
 
+// ゲーム説明画像のラッパー
+const GameScreenDescriptionWrapper = styled.img`
+  width: 87%;
+  height: 87%;
+  object-fit: contain;
+`;
+
 // isOpenはgameState.gameDescriptionOpen
 // gameDescriptionOpenは、gameDescriptionOpen
 // clickDescriptionOpenは、ゲーム開始後にスライドを見るをクリックしたかを表すprops
@@ -157,13 +167,18 @@ export const ElementaryGameDescriptionDialog = ({
     },
     {
       title: "正規表現を作るコツ",
-      sentence: "「'gray grey'という文字列のgrayとgreyにマッチするような正規表現を求めよ」と言われた場合、1つの文字クラスのみで作られた正規表現ではマッチできません。理由は、文字クラスは指定した1文字を表すだけであり、2文字以上の文字列にマッチさせることができないからです。この場合、まずはgrayとgreyの共通している文字と共通していない文字を見つけます。共通している文字はg, r, yです。そして、共通していない文字はa, eです。aとeは、grayとgreyの3番目に位置する文字です。したがって、gr[ae]yという正規表現を用いることで、grayとgreyにマッチさせることができます。",
+      sentence: "「'gray grey'という文字列のgrayとgreyにマッチするような正規表現を求めよ」と言われた場合、1つの文字クラスのみで作られた正規表現ではマッチできません。理由は、文字クラスは指定した1文字にしかマッチしない為です。そのため、2文字以上の文字列にマッチさせることができません。この場合、まずはgrayとgreyの共通している文字と共通していない文字を見つけます。共通している文字はg, r, yです。そして、共通していない文字はa, eです。aとeは、grayとgreyの3番目に位置する文字です。したがって、gr[ae]yという正規表現を用いることで、grayとgreyにマッチさせることができます。",
       slideNum: 3
     },
     {
-      title: "ルール説明",
-      sentence: "初級編では、文字クラスを使用する正規表現を学習していきます。時間内に正しい正規表現を入力すると、モンスターに攻撃できます。モンスターのHPを0にしたらゲームクリアです！",
+      title: "ゲーム画面の説明",
+      sentence: "ルール説明の前に、ゲーム画面の説明をします。ゲーム画面は、ヒント、 問題、コードブロック等、様々な要素で構成されています。重要なポイントを以下にまとめましたので、ご確認していただくようお願いします。",
       slideNum: 4
+    },
+    {
+      title: "ルール説明",
+      sentence: "初級編では、文字クラスを使用する正規表現を学習していきます。時間内に正しい正規表現を入力してエンターキーを押すと、モンスターに攻撃できます。モンスターのHPを0にしたらゲームクリアです！",
+      slideNum: 5
     }
   ], []);
 
@@ -181,9 +196,9 @@ export const ElementaryGameDescriptionDialog = ({
 
   // 右カーソルをクリックで左へずらす
   // スライドが右のスライドになる
-  // slideState.slideNumが4より小さい場合、右カーソルが機能する
+  // slideState.slideNumが5より小さい場合、右カーソルが機能する
   const changeSlideToRight = useCallback(() => {
-    if(slideState.slideNum < 4 && slideState.keyAndClickAvailable) {
+    if(slideState.slideNum < 5 && slideState.keyAndClickAvailable) {
       setSlideState((prev) => ({
         ...prev,
         slideIn: false,
@@ -407,6 +422,12 @@ export const ElementaryGameDescriptionDialog = ({
                 {
                   slideState.slideNum === 4 &&
                     <>
+                      <GameScreenDescriptionWrapper src={GameScreenDescription} />
+                    </>
+                }
+                {
+                  slideState.slideNum === 5 &&
+                    <>
                       <WarningSentenceWrapper>
                         ※ UX向上の為、音が出ます。音量が気になる方は下げて頂くようお願いします。
                       </WarningSentenceWrapper>
@@ -451,18 +472,18 @@ export const ElementaryGameDescriptionDialog = ({
                 <Tooltip
                   title={<div>進む<br />( 右矢印キー → )</div>}
                   placement="top"
-                  disableHoverListener={slideState.slideNum === 4}
+                  disableHoverListener={slideState.slideNum === 5}
                   sx={{
-                    opacity: slideState.slideNum === 4 ? 0 : 1,
+                    opacity: slideState.slideNum === 5 ? 0 : 1,
                   }}
                 >
                   <IconButton
                     sx={{
                       fontSize: '4.0em',
-                      opacity: slideState.slideNum === 4 ? 0.1 : 1,
-                      cursor: slideState.slideNum === 4 ? "default" : "pointer"
+                      opacity: slideState.slideNum === 5 ? 0.1 : 1,
+                      cursor: slideState.slideNum === 5 ? "default" : "pointer"
                     }}
-                    disableRipple={slideState.slideNum === 4}
+                    disableRipple={slideState.slideNum === 5}
                   >
                     <ArrowRightIcon
                       fontSize='inherit'

@@ -149,7 +149,7 @@ Question.seed(
     target_sentence: 'Java JavaScript Python',
     sample_answer: 'Java(Script)?',
     hint: '文字列, キャプチャグループ, 量指定子(?)を使用して、正規表現を作ってみましょう。',
-    commentary: 'Javaという文字列と、JavaScriptという文字列の違いは、Scriptという文字列があるかないかです。Scriptという文字列があるまたはなしは、(Script)?でマッチさせることができます。そのため、Java(Script)?でJava, JavaScriptにマッチするような正規表現を表します。もしキャプチャグループをつけない場合、正規表現はJavaScript?となります。これは、JavaScript, JavaScripにマッチするだけであり、Javaにはマッチしません。?の対象はあくまで直前の1文字であるためです。キャプチャグループを使うことで、1文字以上の文字列を?の対象にすることができます。',
+    commentary: 'Javaという文字列と、JavaScriptという文字列の違いは、Scriptという文字列があるかないかです。Scriptという文字列があるまたはなしは、(Script)?でマッチさせることができます。そのため、Java(Script)?でJava, JavaScriptにマッチするような正規表現を表します。もしキャプチャグループをつけない場合、正規表現はJavaScript?となります。これは、JavaScript, JavaScripにマッチするだけであり、Javaにはマッチしません。?の対象はあくまで直前の1文字であるためです。キャプチャグループを使用することで、1文字以上の文字列を?の対象にすることができます。',
     difficulty: 'intermediate'
   },
 )
