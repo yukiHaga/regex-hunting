@@ -60,6 +60,8 @@ import { REQUEST_STATE } from '../constants';
 // gameStateの型
 import { GameState } from '../types/containers/games';
 
+import { BottomWrapper } from '../components/shared_style';
+
 // MainContentWrapperコンポーネント
 const MainContentWrapper = styled.div`
   position: relative;
@@ -147,14 +149,6 @@ const CodeBlockWrapper = styled.div`
 
 // GageBlockWrapperコンポーネント
 const GageBlockWrapper = styled.div`
-  width: 100%;
-`;
-
-// この中にゲージブロックラッパーとゲームフッターを入れることによて、
-// 画面最下部に固定する。
-const BottomWrapper = styled.div`
-  position: absolute;
-  bottom: 0;
   width: 100%;
 `;
 

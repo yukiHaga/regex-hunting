@@ -250,3 +250,12 @@ export const FirstOuterButtonsWrapper = styled.div`
   justify-content: center;
   margin-top: 2vh;
 `;
+
+// この中にゲージブロックラッパーとゲームフッターを入れることによて、
+// 画面最下部に固定する。
+export const BottomWrapper = styled.div`
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+`;
+

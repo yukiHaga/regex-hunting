@@ -28,11 +28,13 @@ import { postPasswordResetRequest } from '../apis/passwordResetRequest';
 // HTTP_STATUS_CODE
 import { HTTP_STATUS_CODE } from '../constants';
 
+import { BottomWrapper } from '../components/shared_style';
+
 // メインのラッパー
 const MainWrapper = styled.div`
   background-color: ${COLORS.SUB};
-  padding-bottom: 8.33%;
-  padding-top: 8.33%;
+  padding-bottom: 9.1%;
+  padding-top: 10%;
 `;
 
 const PasswordResetsBoxWrapper = styled.div`
@@ -174,7 +176,9 @@ export const PasswordResets = (): JSX.Element => {
           </PasswordResetsFormWrapper>
         </PasswordResetsBoxWrapper>
       </MainWrapper>
-      <Footer />
+      <BottomWrapper>
+        <Footer />
+      </BottomWrapper>
     </>
   );
 };
