@@ -131,7 +131,7 @@ export const PasswordUpdates = (): JSX.Element => {
         message: "8文字以上のパスワードを入力してください。"
       },
       pattern: {
-        value: /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?\d)[!-~]+$/,
+        value: /^[A-Za-z0-9][A-Za-z0-9_.-]*(\+[A-Za-z0-9_.-]+?)??@[A-Za-z0-9_.-]+\.[A-Za-z0-9]+$/,
         message: "大文字, 小文字, 数字が含まれるパスワードを入力してください。"
       }
     },
