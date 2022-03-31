@@ -49,10 +49,12 @@ const CustomTd = styled.td`
   border-bottom:solid 1px silver;
 `;
 
+// font-sizeを2.0から1.6に変更した
+// 12文字でもレイアウト崩れしなくなった。
 const NameTd = styled(CustomTd)`
   font-style: normal;
   font-weight: bold;
-  font-size: 2.0em;
+  font-size: 1.6em;
   text-align: left;
   color: ${COLORS.BLACK};
   width: 100%;
