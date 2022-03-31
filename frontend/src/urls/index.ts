@@ -1,7 +1,7 @@
 const DEFAULT_API_URL = `${process.env.REACT_APP_SERVER_URL}/api/v1`;
-const GITHUB_APP_ID = '420fbaef8a45fb65c5a9';
+const GITHUB_APP_ID = `${process.env.GITHUB_APP_ID}`;
 const GITHUB_REDIRECT_URL = 'https://www.regex-hunting.com/callback/github/';
-const GOOGLE_APP_ID = '63383229438-hjv5021k3b43jjkf182772mg9mh6uvp9.apps.googleusercontent.com';
+const GOOGLE_APP_ID = `${process.env.GOOGLE_APP_ID}`;
 const GOOGLE_REDIRECT_URL = 'https://www.regex-hunting.com/callback/google/';
 const GOOGLE_SCOPE = 'email profile';
 
@@ -18,10 +18,10 @@ export const userSessionsDestroy = `${DEFAULT_API_URL}/logout`;
 export const userSessionsExist = `${DEFAULT_API_URL}/current_user_logged_in`;
 
 // OAuth
+// このURLを使って、OauthsControllerのcallbackアクションにpostリクエストを出している
+export const defaultOAuthPost = `${DEFAULT_API_URL}/oauth/callback`;
 // Github
 export const gitHubOAuth = `https://github.com/login/oauth/authorize?client_id=${GITHUB_APP_ID}&redirect_url=${GITHUB_REDIRECT_URL}&scope=user:email&state=xyz`;
-export const defaultOAuthPost = `${DEFAULT_API_URL}/oauth/callback`;
-
 // Google
 export const googleOAuth = `https://accounts.google.com/o/oauth2/auth?response_type=code&client_id=${GOOGLE_APP_ID}&redirect_uri=${GOOGLE_REDIRECT_URL}&scope=${GOOGLE_SCOPE}&state=xyz&access_type=offline&approval_prompt=force`;
 
