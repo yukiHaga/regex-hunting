@@ -1,7 +1,7 @@
 const DEFAULT_API_URL = `${process.env.REACT_APP_SERVER_URL}/api/v1`;
-const GITHUB_APP_ID = `${process.env.GITHUB_APP_ID}`;
+const GITHUB_APP_ID = `${process.env.REACT_APP_GITHUB_APP_ID}`;
 const GITHUB_REDIRECT_URL = 'https://www.regex-hunting.com/callback/github/';
-const GOOGLE_APP_ID = `${process.env.GOOGLE_APP_ID}`;
+const GOOGLE_APP_ID = `${process.env.REACT_APP_GOOGLE_APP_ID}`;
 const GOOGLE_REDIRECT_URL = 'https://www.regex-hunting.com/callback/google/';
 const GOOGLE_SCOPE = 'email profile';
 
