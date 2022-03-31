@@ -193,6 +193,10 @@ const HunterTableNameTd = styled(HunterTableTd)`
   font-size: 1.3em;
   text-align: left;
   color: ${COLORS.BLACK};
+  width: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
   @media (max-width: ${WIDTH.MOBILE}) {
     font-size: 0.9em;
     text-align: center;
