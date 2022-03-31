@@ -28,17 +28,17 @@ export const ExternalAuth = (): JSX.Element => {
             state: { display: true, success: "ログインしました。"}
           });
         } else {
-          navigate('/?user=oauth-login-faliure', {
+          navigate('/', {
             state: { display: true, success: "ログインに失敗しました。"}
           });
         }
       }).catch((e) => {
-        navigate('/?user=oauth-login-faliure', {
+        navigate('/', {
           state: { display: true, success: "ログインに失敗しました。"}
         });
       });
     } else {
-      navigate('/?user=oauth-login-faliure', {
+      navigate('/', {
         state: { display: true, success: "ログインに失敗しました。"}
       });
     }

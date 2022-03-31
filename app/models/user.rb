@@ -26,7 +26,7 @@ class User < ApplicationRecord
   }
 
   # 名前の最大文字数を12に変更した
-  validates :name, presence: true, length: { maximum: 12 }
+  validates :name, presence: true, length: { maximum: 39 }
 
   REGEX_PATTERN = /\A[A-Za-z0-9][A-Za-z0-9_.-]*@[A-Za-z0-9_.-]{1,}.[A-Za-z0-9]{1,}\z/
   validates :email, presence: true, format: { with: REGEX_PATTERN }

@@ -5,8 +5,8 @@ import { Routes } from "react-router-dom";
 import { useTracking } from '../hooks/useTracking';
 
 export const Analytics = memo(({children}: {children: ReactNode}) => {
-  useTracking(process.env.G_TRACKING_Id);
-  useTracking(process.env.UA_TRACKING_Id);
+  useTracking(process.env.REACT_APP_G_TRACKING_ID);
+  useTracking(process.env.REACT_APP_UA_TRACKING_ID);
 
   return (
     <Routes>

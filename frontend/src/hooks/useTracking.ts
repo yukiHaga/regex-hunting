@@ -12,7 +12,7 @@ declare global {
 }
 
 export const useTracking = (
-  trackingId: string | undefined = process.env.G_TRACKING_Id
+  trackingId: string | undefined = process.env.REACT_APP_G_TRACKING_ID
 ) => {
   let location = useLocation();
 
