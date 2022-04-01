@@ -52,7 +52,7 @@ import { getMonsterName } from '../functions/getMonsterName';
 import GameClearSound from '../sounds/game_clear_25.mp3';
 
 // ゲームオーバー音
-import GameOverSound from '../sounds/game_over_25.mp3';
+import GameOverSound from '../sounds/game_over_70.mp3';
 
 // REQUEST_STATE
 import { REQUEST_STATE } from '../constants';
