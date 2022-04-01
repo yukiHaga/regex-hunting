@@ -26,11 +26,16 @@ import { HTTP_STATUS_CODE } from '../constants';
 // rankingStateの型
 import { RankingState } from '../types/containers/rankings';
 
+import { BottomWrapper } from '../components/shared_style';
+
 // メインのラッパー
 const MainWrapper = styled.div`
   background-color: ${COLORS.SUB};
   padding-top: 3%;
-  padding-bottom: 2.65%;
+`;
+
+const CustomBottomWrapper = styled(BottomWrapper)`
+  position: fixed;
 `;
 
 export const Rankings = (): JSX.Element => {
@@ -165,7 +170,9 @@ export const Rankings = (): JSX.Element => {
           rankingState={rankingState}
         />
       </MainWrapper>
-      <Footer />
+      <CustomBottomWrapper>
+        <Footer />
+      </CustomBottomWrapper>
       {
         state.isOpenDialog && state.modalType === "login" &&
           <LoginDialog
