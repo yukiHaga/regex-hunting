@@ -300,7 +300,7 @@ export const LandingPages = (): JSX.Element => {
         </SubText>
         <GameDescriptionSentence>
           Regex Huntingは、凶悪なモンスターを倒しながら<br/>
-          正規表現が学べるゲーム型学習サービスです。
+          正規表現が学べる学習ゲームです。
         </GameDescriptionSentence>
         <SecondBattleSceneImageCover width="821" height="450" src={BattleSceneImage} alt="battle-scene"/>
       </SecondWrapper>

@@ -72,10 +72,10 @@ export const SendEmail = (): JSX.Element => {
             メール送信完了
           </TitleWrapper>
           <CustomParagraphWrapper>
-            パスワード再設定用のURLをご入力のメールアドレスに送信しました。記載された内容に従って、パスワードの再設定を行なってください。
+            パスワード再設定用のURLをご入力のメールアドレスに送信しました。記載された内容に従って、パスワードの再設定を行ってください。
           </CustomParagraphWrapper>
           <CustomParagraphWrapper>
-            メールが届かない場合、以下が考えられます
+            メールが届かない場合、以下が考えられます。
           </CustomParagraphWrapper>
           <CustomUl>
             <li>迷惑メールフォルダに入っている</li>
