@@ -28,15 +28,19 @@ import { RankingState } from '../types/containers/rankings';
 
 import { BottomWrapper } from '../components/shared_style';
 
+const CustomWrapper = styled.div`
+  position: relative;
+  padding-bottom: 10vh;
+  box-sizing: border-box;
+  min-height: 100vh;
+  background-color: ${COLORS.SUB};
+`;
+
 // メインのラッパー
 const MainWrapper = styled.div`
-  background-color: ${COLORS.SUB};
   padding-top: 3%;
 `;
 
-const CustomBottomWrapper = styled(BottomWrapper)`
-  position: fixed;
-`;
 
 export const Rankings = (): JSX.Element => {
 
@@ -155,24 +159,26 @@ export const Rankings = (): JSX.Element => {
 
   return (
     <>
-      <Header
-        onClickLink={(modalType) => setState({
-          isOpenDialog: true,
-          modalType: modalType
-        })}
-        setMobileState={setMobileState}
-      />
-      <MainWrapper>
-        <RankingBox
-          currentTopTenArray={rankingState.currentTopTenArray}
-          difficultyTitle={rankingState.difficultyTitle}
-          setRankingState={setRankingState}
-          rankingState={rankingState}
+      <CustomWrapper>
+        <Header
+          onClickLink={(modalType) => setState({
+            isOpenDialog: true,
+            modalType: modalType
+          })}
+          setMobileState={setMobileState}
         />
-      </MainWrapper>
-      <CustomBottomWrapper>
-        <Footer />
-      </CustomBottomWrapper>
+        <MainWrapper>
+          <RankingBox
+            currentTopTenArray={rankingState.currentTopTenArray}
+            difficultyTitle={rankingState.difficultyTitle}
+            setRankingState={setRankingState}
+            rankingState={rankingState}
+          />
+        </MainWrapper>
+        <BottomWrapper>
+          <Footer />
+        </BottomWrapper>
+      </CustomWrapper>
       {
         state.isOpenDialog && state.modalType === "login" &&
           <LoginDialog

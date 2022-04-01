@@ -26,7 +26,7 @@ class User < ApplicationRecord
   }
 
   # 名前の最大文字数を12に変更した
-  validates :name, presence: true, length: { maximum: 39 }
+  validates :name, presence: true, length: { maximum: 25 }
 
   # +の部分はgmail用
   REGEX_PATTERN = /\A[A-Za-z0-9][A-Za-z0-9_.-]*(\+[A-Za-z0-9_.-]+?)??@[A-Za-z0-9_.-]+\.[A-Za-z0-9]+\z/

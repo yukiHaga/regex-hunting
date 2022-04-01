@@ -196,8 +196,8 @@ export const AccountSettingBox = ({
         message: "2文字以上の名前を入力してください。"
       },
       maxLength: {
-        value: 39,
-        message: "39文字以下の名前を入力してください。"
+        value: 25,
+        message: "25文字以下の名前を入力してください。"
       },
     },
     email: {
