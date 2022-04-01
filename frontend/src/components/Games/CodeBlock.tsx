@@ -5,11 +5,11 @@ import styled, { keyframes } from 'styled-components';
 import { COLORS } from '../../style_constants';
 
 // Sounds
-import TypeSound from '../../sounds/type_25.mp3';
-import BackSound from '../../sounds/back_25.mp3';
-import ErrorSound from '../../sounds/error_25.mp3';
-import DecisionSound from '../../sounds/decision_25.mp3';
-import CutMonsterSound from '../../sounds/cut_25.mp3';
+import TypeSound from '../../sounds/type_50.mp3';
+import BackSound from '../../sounds/back_70.mp3';
+import ErrorSound from '../../sounds/error_60.mp3';
+import DecisionSound from '../../sounds/decision_60.mp3';
+import CutMonsterSound from '../../sounds/cut_50.mp3';
 
 // calculateDamage
 import { calculateDamage } from '../../functions/calculateDamage';

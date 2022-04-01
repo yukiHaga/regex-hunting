@@ -17,7 +17,7 @@ import { BackToModalButton } from '../Buttons/BackToModalButton';
 import { ResultShareButton } from '../Buttons/ResultShareButton';
 
 // レベルアップ音
-import RankUpSound from '../../sounds/rank_up_25.mp3';
+import RankUpSound from '../../sounds/rank_up_50.mp3';
 
 // setGameStateの型
 import { SetGameState } from '../../types/containers/games';
