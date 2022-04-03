@@ -10,7 +10,7 @@ import { SessionFlashMessage } from '../components/FlashMessages/SessionFlashMes
 // Colors
 import { COLORS } from '../style_constants';
 
-import { BottomWrapper } from '../components/shared_style';
+import { BottomWrapper, CustomWrapper } from '../components/shared_style';
 
 // メインのラッパー
 const MainWrapper = styled.div`
@@ -62,31 +62,33 @@ export const SendEmail = (): JSX.Element => {
 
   return (
     <>
-      <Header />
-      <MainWrapper>
-        <SessionFlashMessage
-          location={location}
-        />
-        <SendEmailBoxWrapper>
-          <TitleWrapper>
-            メール送信完了
-          </TitleWrapper>
-          <CustomParagraphWrapper>
-            パスワード再設定用のURLをご入力のメールアドレスに送信しました。記載された内容に従って、パスワードの再設定を行ってください。
-          </CustomParagraphWrapper>
-          <CustomParagraphWrapper>
-            メールが届かない場合、以下が考えられます。
-          </CustomParagraphWrapper>
-          <CustomUl>
-            <li>迷惑メールフォルダに入っている</li>
-            <li>メールアドレスが間違っている</li>
-            <li>メールアドレスが登録されていない</li>
-          </CustomUl>
-        </SendEmailBoxWrapper>
-      </MainWrapper>
-      <BottomWrapper>
-        <Footer />
-      </BottomWrapper>
+      <CustomWrapper>
+        <Header />
+        <MainWrapper>
+          <SessionFlashMessage
+            location={location}
+          />
+          <SendEmailBoxWrapper>
+            <TitleWrapper>
+              メール送信完了
+            </TitleWrapper>
+            <CustomParagraphWrapper>
+              パスワード再設定用のURLをご入力のメールアドレスに送信しました。記載された内容に従って、パスワードの再設定を行ってください。
+            </CustomParagraphWrapper>
+            <CustomParagraphWrapper>
+              メールが届かない場合、以下が考えられます。
+            </CustomParagraphWrapper>
+            <CustomUl>
+              <li>迷惑メールフォルダに入っている</li>
+              <li>メールアドレスが間違っている</li>
+              <li>メールアドレスが登録されていない</li>
+            </CustomUl>
+          </SendEmailBoxWrapper>
+        </MainWrapper>
+        <BottomWrapper>
+          <Footer />
+        </BottomWrapper>
+      </CustomWrapper>
     </>
   );
 };

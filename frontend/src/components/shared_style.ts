@@ -259,3 +259,11 @@ export const BottomWrapper = styled.div`
   width: 100%;
 `;
 
+export const CustomWrapper = styled.div`
+  position: relative;
+  padding-bottom: 10vh;
+  box-sizing: border-box;
+  min-height: 100vh;
+  background-color: ${COLORS.SUB};
+`;
+

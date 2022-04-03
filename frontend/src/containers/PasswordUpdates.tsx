@@ -28,7 +28,7 @@ import { patchPasswordResetsUpdate } from '../apis/passwordUpdates';
 // HTTP_STATUS_CODE
 import { HTTP_STATUS_CODE } from '../constants';
 
-import { BottomWrapper } from '../components/shared_style';
+import { BottomWrapper, CustomWrapper } from '../components/shared_style';
 
 // メインのラッパー
 const MainWrapper = styled.div`
@@ -176,73 +176,75 @@ export const PasswordUpdates = (): JSX.Element => {
 
   return (
     <>
-      <Header />
-      <MainWrapper>
-        <PasswordUpdatesBoxWrapper>
-          <TitleWrapper>
-            パスワード再設定
-          </TitleWrapper>
-          <CustomParagraphWrapper>
-            新しいパスワードを入力してください。
-          </CustomParagraphWrapper>
-          <PasswordUpdatesFormWrapper>
-            <CustomForm onSubmit={handleSubmit(onSubmit)}>
-              <Controller
-                name="PasswordBox"
-                control={control}
-                defaultValue=""
-                rules={registerOptions.password}
-                render={({ field }) => (
-                  <CustomFormControl variant="filled">
-                    <InputLabel htmlFor="password-component-filled">パスワード</InputLabel>
-                    <CustomFilledPasswordInput
-                      {...field}
-                      type="password"
-                      id="password-component-filled"
-                      label="password"
-                      errors_box={errors.PasswordBox}
-                    />
-                  </CustomFormControl>
-                )}
-              />
-              {errors.PasswordBox && <InputErrorSentence>
-                                       {errors.PasswordBox.message}
-                                     </InputErrorSentence>}
-              <Controller
-                name="PasswordConfirmationBox"
-                control={control}
-                defaultValue=""
-                rules={registerOptions.passwordConfirmation}
-                render={({ field }) => (
-                  <CustomFormControl variant="filled">
-                    <InputLabel htmlFor="password-confirmation-component-filled">
-                      パスワード(確認用)
-                    </InputLabel>
-                    <CustomFilledPasswordConfirmationInput
-                      {...field}
-                      type="password"
-                      id="password-confirmation-component-filled"
-                      label="password-confirmation"
-                      errors_box={errors.PasswordConfirmationBox}
-                    />
-                  </CustomFormControl>
-                )}
-              />
-              {errors.PasswordConfirmationBox && <InputErrorSentence>
-                                                   {errors.PasswordConfirmationBox.message}
-                                                 </InputErrorSentence>}
-              <PasswordUpdatesButtonWrapper>
-                <PasswordUpdatesButton
-                  disabled={!isValid}
+      <CustomWrapper>
+        <Header />
+        <MainWrapper>
+          <PasswordUpdatesBoxWrapper>
+            <TitleWrapper>
+              パスワード再設定
+            </TitleWrapper>
+            <CustomParagraphWrapper>
+              新しいパスワードを入力してください。
+            </CustomParagraphWrapper>
+            <PasswordUpdatesFormWrapper>
+              <CustomForm onSubmit={handleSubmit(onSubmit)}>
+                <Controller
+                  name="PasswordBox"
+                  control={control}
+                  defaultValue=""
+                  rules={registerOptions.password}
+                  render={({ field }) => (
+                    <CustomFormControl variant="filled">
+                      <InputLabel htmlFor="password-component-filled">パスワード</InputLabel>
+                      <CustomFilledPasswordInput
+                        {...field}
+                        type="password"
+                        id="password-component-filled"
+                        label="password"
+                        errors_box={errors.PasswordBox}
+                      />
+                    </CustomFormControl>
+                  )}
                 />
-              </PasswordUpdatesButtonWrapper>
-            </CustomForm>
-          </PasswordUpdatesFormWrapper>
-        </PasswordUpdatesBoxWrapper>
-      </MainWrapper>
-      <BottomWrapper>
-        <Footer />
-      </BottomWrapper>
+                {errors.PasswordBox && <InputErrorSentence>
+                                        {errors.PasswordBox.message}
+                                      </InputErrorSentence>}
+                <Controller
+                  name="PasswordConfirmationBox"
+                  control={control}
+                  defaultValue=""
+                  rules={registerOptions.passwordConfirmation}
+                  render={({ field }) => (
+                    <CustomFormControl variant="filled">
+                      <InputLabel htmlFor="password-confirmation-component-filled">
+                        パスワード(確認用)
+                      </InputLabel>
+                      <CustomFilledPasswordConfirmationInput
+                        {...field}
+                        type="password"
+                        id="password-confirmation-component-filled"
+                        label="password-confirmation"
+                        errors_box={errors.PasswordConfirmationBox}
+                      />
+                    </CustomFormControl>
+                  )}
+                />
+                {errors.PasswordConfirmationBox && <InputErrorSentence>
+                                                    {errors.PasswordConfirmationBox.message}
+                                                  </InputErrorSentence>}
+                <PasswordUpdatesButtonWrapper>
+                  <PasswordUpdatesButton
+                    disabled={!isValid}
+                  />
+                </PasswordUpdatesButtonWrapper>
+              </CustomForm>
+            </PasswordUpdatesFormWrapper>
+          </PasswordUpdatesBoxWrapper>
+        </MainWrapper>
+        <BottomWrapper>
+          <Footer />
+        </BottomWrapper>
+      </CustomWrapper>
     </>
   );
 };

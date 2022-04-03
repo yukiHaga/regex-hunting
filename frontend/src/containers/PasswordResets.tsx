@@ -28,7 +28,7 @@ import { postPasswordResetRequest } from '../apis/passwordResetRequest';
 // HTTP_STATUS_CODE
 import { HTTP_STATUS_CODE } from '../constants';
 
-import { BottomWrapper } from '../components/shared_style';
+import { BottomWrapper, CustomWrapper } from '../components/shared_style';
 
 // メインのラッパー
 const MainWrapper = styled.div`
@@ -135,50 +135,52 @@ export const PasswordResets = (): JSX.Element => {
 
   return (
     <>
-      <Header />
-      <MainWrapper>
-        <PasswordResetsBoxWrapper>
-          <TitleWrapper>
-            パスワードを忘れた場合
-          </TitleWrapper>
-          <CustomParagraphWrapper>
-            ご登録いただいたメールアドレスを入力してください。メールアドレス宛に、パスワード変更ページのURLが記載されたメールを送信します。
-          </CustomParagraphWrapper>
-          <PasswordResetsFormWrapper>
-            <CustomForm onSubmit={handleSubmit(onSubmit)}>
-              <Controller
-                name="EmailBox"
-                control={control}
-                defaultValue=""
-                rules={registerOptions.email}
-                render={({ field }) => (
-                  <CustomFormControl variant="filled">
-                    <InputLabel htmlFor="email-component-filled">メールアドレス</InputLabel>
-                    <CustomFilledEmailInput
-                      {...field}
-                      type="email"
-                      id="email-component-filled"
-                      label="email"
-                      errors_box={errors.EmailBox}
-                    />
-                  </CustomFormControl>
-                )}
-              />
-              {errors.EmailBox && <InputErrorSentence>
-                                    {errors.EmailBox.message}
-                                  </InputErrorSentence>}
-              <PasswordResetsButtonWrapper>
-                <PasswordResetRequestButton
-                  disabled={!isValid}
+      <CustomWrapper>
+        <Header />
+        <MainWrapper>
+          <PasswordResetsBoxWrapper>
+            <TitleWrapper>
+              パスワードを忘れた場合
+            </TitleWrapper>
+            <CustomParagraphWrapper>
+              ご登録いただいたメールアドレスを入力してください。メールアドレス宛に、パスワード変更ページのURLが記載されたメールを送信します。
+            </CustomParagraphWrapper>
+            <PasswordResetsFormWrapper>
+              <CustomForm onSubmit={handleSubmit(onSubmit)}>
+                <Controller
+                  name="EmailBox"
+                  control={control}
+                  defaultValue=""
+                  rules={registerOptions.email}
+                  render={({ field }) => (
+                    <CustomFormControl variant="filled">
+                      <InputLabel htmlFor="email-component-filled">メールアドレス</InputLabel>
+                      <CustomFilledEmailInput
+                        {...field}
+                        type="email"
+                        id="email-component-filled"
+                        label="email"
+                        errors_box={errors.EmailBox}
+                      />
+                    </CustomFormControl>
+                  )}
                 />
-              </PasswordResetsButtonWrapper>
-            </CustomForm>
-          </PasswordResetsFormWrapper>
-        </PasswordResetsBoxWrapper>
-      </MainWrapper>
-      <BottomWrapper>
-        <Footer />
-      </BottomWrapper>
+                {errors.EmailBox && <InputErrorSentence>
+                                      {errors.EmailBox.message}
+                                    </InputErrorSentence>}
+                <PasswordResetsButtonWrapper>
+                  <PasswordResetRequestButton
+                    disabled={!isValid}
+                  />
+                </PasswordResetsButtonWrapper>
+              </CustomForm>
+            </PasswordResetsFormWrapper>
+          </PasswordResetsBoxWrapper>
+        </MainWrapper>
+        <BottomWrapper>
+          <Footer />
+        </BottomWrapper>
+      </CustomWrapper>
     </>
   );
 };

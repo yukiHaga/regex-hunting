@@ -11,9 +11,6 @@ import { SignUpDialog } from '../components/Dialogs/SignUpDialog';
 // Contextオブジェクト
 import { UserContext } from "../context/UserProvider";
 
-// Colors
-import { COLORS } from '../style_constants';
-
 // ログイン状態を確認するAPIコール関数
 import { checkLoginStatus } from '../apis/checkLoginStatus';
 
@@ -26,15 +23,7 @@ import { HTTP_STATUS_CODE } from '../constants';
 // rankingStateの型
 import { RankingState } from '../types/containers/rankings';
 
-import { BottomWrapper } from '../components/shared_style';
-
-const CustomWrapper = styled.div`
-  position: relative;
-  padding-bottom: 10vh;
-  box-sizing: border-box;
-  min-height: 100vh;
-  background-color: ${COLORS.SUB};
-`;
+import { BottomWrapper, CustomWrapper } from '../components/shared_style';
 
 // メインのラッパー
 const MainWrapper = styled.div`
