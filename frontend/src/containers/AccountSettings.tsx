@@ -23,7 +23,7 @@ import { HTTP_STATUS_CODE } from '../constants';
 // Colors
 import { COLORS } from '../style_constants';
 
-import { BottomWrapper } from '../components/shared_style';
+import { BottomWrapper, CustomWrapper } from '../components/shared_style';
 
 // メインのラッパー
 const MainWrapper = styled.div`
@@ -114,23 +114,25 @@ export const AccountSettings = (): JSX.Element => {
   // その後、フォームがまたマウントされる
   return (
     <>
-      {
-        requestState === REQUEST_STATE.LOADING ?
-          <CircularMask />
-        :
-          <>
-            <Header />
-            <MainWrapper>
-              <AccountSettingBox
-                requestUserState={requestUserState}
-                user={user}
-              />
-            </MainWrapper>
-            <BottomWrapper>
-              <Footer />
-            </BottomWrapper>
-          </>
-      }
+      <CustomWrapper>
+        {
+          requestState === REQUEST_STATE.LOADING ?
+            <CircularMask />
+          :
+            <>
+              <Header />
+              <MainWrapper>
+                <AccountSettingBox
+                  requestUserState={requestUserState}
+                  user={user}
+                />
+              </MainWrapper>
+              <BottomWrapper>
+                <Footer />
+              </BottomWrapper>
+            </>
+        }
+      </CustomWrapper>
     </>
   );
 };
