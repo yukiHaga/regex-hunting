@@ -32,6 +32,8 @@ group :development, :test do
   gem 'sqlite3', '~> 1.4'
   # Call 'binding.pry' anywhere in the code to stop execution and get a debugger console
   gem 'pry-byebug'
+  gem 'rspec-rails', '~> 5.0.0'
+  gem 'factory_bot_rails'
 end
 
 group :development do
