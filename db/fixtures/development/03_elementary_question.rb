@@ -6,7 +6,7 @@ Question.seed(
     target_sentence: '1 5 9',
     sample_answer: '\\d',
     hint: '1桁の数字にマッチする特殊文字を使用して、正規表現を作ってみましょう。',
-    commentary: ' \\dは1桁の数字にマッチします。[0-9]または[159]でマッチさせることもできます。',
+    commentary: '\\dは1桁の数字にマッチします。[0-9]または[159]でマッチさせることもできます。',
     difficulty: 'elementary'
   },
 
