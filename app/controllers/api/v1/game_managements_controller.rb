@@ -54,7 +54,7 @@ class Api::V1::GameManagementsController < ApplicationController
       questions: @questions,
       monster: @monster,
       user: @user
-    }, status: :created
+    }, status: :ok
   end
 
   # finishに送る際に作成されたデータを使ってゲーム結果画面を作る為、
