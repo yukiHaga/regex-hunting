@@ -40,6 +40,7 @@ Regex Huntingは、モンスターを倒しながら正規表現が学ベる学�
 <p align="center">
   <img src="https://user-images.githubusercontent.com/82201718/161946338-0c83596d-9278-4480-8240-5702f38f1d6a.gif" width=70%>
 </p>
+<br>
 
 ## その他の機能
 | 新規会員登録 | ログイン |
@@ -101,13 +102,16 @@ Regex Huntingは、モンスターを倒しながら正規表現が学ベる学�
 - Heroku
 - Amazon S3
 - PostgreSQL
+<br>
 
 ## ER図
 ![regex_hunting (2)](https://user-images.githubusercontent.com/82201718/162002880-e47d523e-4da2-4877-bba7-9b985446d71f.jpg)
+<br>
 
 ## 画面遷移図
 https://www.figma.com/file/VNjsqixD6sQPJy7ljlJiV0/portfolio?node-id=260%3A2
+<br>
 
 ## リリースしてから1週間後の総PV数とUU数
-### 総PV数: 3770
-### UU数: 591
+#### 総PV数: 3770
+#### UU数: 591
