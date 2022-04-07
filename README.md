@@ -113,5 +113,5 @@ https://www.figma.com/file/VNjsqixD6sQPJy7ljlJiV0/portfolio?node-id=260%3A2
 <br>
 
 ## リリースしてから1週間後の総PV数とUU数
-#### 総PV数: 3770
-#### UU数: 591
+#### 総PV数: 3903
+#### UU数: 610
