@@ -125,5 +125,6 @@ https://www.figma.com/file/VNjsqixD6sQPJy7ljlJiV0/portfolio?node-id=260%3A2
 
 ## サービス紹介記事
 <img src="https://img.shields.io/badge/-Qiita-55C500?logo=&style=flat-square">[【個人開発】正規表現を学ぶ狩りに出ませんか？モンスターを倒しながら正規表現が学べるゲーム「Regex Hunting」を作りました](https://qiita.com/yukiHaga/items/8ef2051036e126eb00c6)
+<br>
 <img src="https://img.shields.io/badge/-Zenn-3ea8ff?logo=&style=flat-square">[正規表現学習ゲーム「Regex Hunting」の開発方法について、ざっくりまとめてみた](https://zenn.dev/yukihaga/articles/aafb50df7a08b6)
 <br>
