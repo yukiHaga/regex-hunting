@@ -21,22 +21,29 @@ Regex Huntingは、モンスターを倒しながら正規表現が学ベる学�
 <br>
 
 ## 遊び方
-1. 初級編, 中級編, 上級編の中から、プレイしたいゲームを選択します。
+### 1. ゲーム選択
+初級編, 中級編, 上級編の中から、プレイしたいゲームを選択します。
 <p align="center">
   <img src="https://user-images.githubusercontent.com/82201718/161940100-e1b7bad9-bd36-4964-9591-951c362ad3fb.gif" width=70%>
 </p>
+<br>
 
-2. ゲーム選択後、前半はスライドで学習します。スライド1ページ目の「スライドを見ずに始める」をクリックすると、スライド学習を飛ばしてゲームをプレイすることも可能です。
+### 2. スライド学習
+ゲーム選択後、前半はスライドで学習します。スライド1ページ目の「スライドを見ずに始める」をクリックすると、スライド学習を飛ばしてゲームをプレイすることも可能です。
 <p align="center">
   <img src="https://user-images.githubusercontent.com/82201718/161942598-75c89d48-d27a-4462-99c1-3cf091073cdf.gif" width=70%>
 </p>
+<br>
 
-3. スライド1ページ目の「スライドを見ずに始める」または、最後のスライドの「ゲームを始める」をクリックすると、ゲームがスタートします。制限時間内に問題文を満たすような正規表現を入力してエンターキーを押すと、モンスターに攻撃できます。
+### 3. ゲームスタート 
+スライド1ページ目の「スライドを見ずに始める」または、最後のスライドの「ゲームを始める」をクリックすると、ゲームがスタートします。制限時間内に問題文を満たす正規表現を入力してエンターキーを押すと、モンスターに攻撃できます。
 <p align="center">
   <img src="https://user-images.githubusercontent.com/82201718/161945430-a81ecb6c-1503-4ab5-b56a-1d1e786d5dc8.gif" width=70%>
 </p>
+<br>
 
-4. モンスターのHPを0にしたら、ゲームクリアです。
+### 4. ゲームクリア
+モンスターのHPを0にしたら、ゲームクリアです。
 <p align="center">
   <img src="https://user-images.githubusercontent.com/82201718/161946338-0c83596d-9278-4480-8240-5702f38f1d6a.gif" width=70%>
 </p>
@@ -115,3 +122,9 @@ https://www.figma.com/file/VNjsqixD6sQPJy7ljlJiV0/portfolio?node-id=260%3A2
 ## リリースしてから1週間後の総PV数とUU数
 #### 総PV数: 3903
 #### UU数: 610
+
+## サービス紹介記事
+<img src="https://img.shields.io/badge/-Qiita-55C500?logo=&style=flat-square">[【個人開発】正規表現を学ぶ狩りに出ませんか？モンスターを倒しながら正規表現が学べるゲーム「Regex Hunting」を作りました](https://qiita.com/yukiHaga/items/8ef2051036e126eb00c6)
+<br>
+<img src="https://img.shields.io/badge/-Zenn-3ea8ff?logo=&style=flat-square">[正規表現学習ゲーム「Regex Hunting」の開発方法について、ざっくりまとめてみた](https://zenn.dev/yukihaga/articles/aafb50df7a08b6)
+<br>
