@@ -1,11 +1,11 @@
-import styled, { keyframes } from 'styled-components';
+import styled, { keyframes } from "styled-components";
 //import Button from '@mui/material/Button';
 
 // constants
-import { COLORS } from '../style_constants';
+import { COLORS } from "../style_constants";
 
 // Link
-import { Link } from 'react-router-dom';
+import { Link } from "react-router-dom";
 
 // 基本的なリンクとなるコンポーネント
 export const BaseLink = styled(Link)`
@@ -35,7 +35,7 @@ export const BaseButton = styled.button`
   cursor: pointer;
   :hover {
     opacity: 0.7;
-    box-shadow: 0 0 2px rgba(0,0,0,0.2);
+    box-shadow: 0 0 2px rgba(0, 0, 0, 0.2);
   }
   :focus {
     outline: 0;
@@ -183,7 +183,7 @@ export const CodeBlockWrapper = styled.div`
   width: 100%;
   margin: 0 auto;
   margin-top: 3%;
-  box-shadow: 0 4px 6px rgba(0,0,0,0.2);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
 `;
 
 export const CodeBlockDiv = styled.div`
@@ -267,3 +267,41 @@ export const CustomWrapper = styled.div`
   background-color: ${COLORS.SUB};
 `;
 
+// バルーンのアニメーション
+const AnimateBalloon = keyframes`
+	0%,100% {bottom: 0;}
+	30% {bottom: -4%;}
+	90% {bottom: 0;}
+`;
+
+// バルーン
+export const BalloonWrapper = styled.div`
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  margin: 1.5em 0;
+  padding: 9px 12px;
+  min-width: 120px;
+  max-width: 100%;
+  color: ${COLORS.WHITE};
+  font-size: 0.9em;
+  background-color: ${COLORS.LIGHT_MAIN};
+  z-index: 100000;
+  border-radius: 10px;
+  animation: ${AnimateBalloon} 1.5s ease infinite;
+  &:before {
+    content: "";
+    position: absolute;
+    top: 100%;
+    right: 15%;
+    margin-left: -15px;
+    border: 15px solid transparent;
+    border-top: 15px solid ${COLORS.LIGHT_MAIN};
+  }
+`;
+
+// バルーンの中身
+export const BalloonContentWrapper = styled.span`
+  margin: 0;
+  padding: 0;
+`;
