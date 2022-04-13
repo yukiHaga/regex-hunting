@@ -78,7 +78,7 @@ const BalloonWrapper = styled.div`
   min-width: 120px;
   max-width: 100%;
   color: ${COLORS.WHITE};
-  font-size: 1em;
+  font-size: 0.9em;
   background-color: ${COLORS.LIGHT_MAIN};
   z-index: 100000;
   border-radius: 10px;
