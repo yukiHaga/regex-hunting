@@ -1,11 +1,11 @@
-import styled, { keyframes } from 'styled-components';
+import styled, { keyframes } from "styled-components";
 //import Button from '@mui/material/Button';
 
 // constants
-import { COLORS } from '../style_constants';
+import { COLORS } from "../style_constants";
 
 // Link
-import { Link } from 'react-router-dom';
+import { Link } from "react-router-dom";
 
 // 基本的なリンクとなるコンポーネント
 export const BaseLink = styled(Link)`
@@ -35,7 +35,7 @@ export const BaseButton = styled.button`
   cursor: pointer;
   :hover {
     opacity: 0.7;
-    box-shadow: 0 0 2px rgba(0,0,0,0.2);
+    box-shadow: 0 0 2px rgba(0, 0, 0, 0.2);
   }
   :focus {
     outline: 0;
@@ -183,7 +183,7 @@ export const CodeBlockWrapper = styled.div`
   width: 100%;
   margin: 0 auto;
   margin-top: 3%;
-  box-shadow: 0 4px 6px rgba(0,0,0,0.2);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
 `;
 
 export const CodeBlockDiv = styled.div`
@@ -267,3 +267,35 @@ export const CustomWrapper = styled.div`
   background-color: ${COLORS.SUB};
 `;
 
+// バルーンのアニメーション
+export const AnimateBalloon = keyframes`
+	0%,100% {bottom: 0;}
+	30% {bottom: -4%;}
+	90% {bottom: 0;}
+`;
+
+/*
+	0% {
+		bottom: 0;
+		-webkit-animation-timing-function: ease-out;
+    animation-timing-function: ease-out;
+	}
+	25% {
+		bottom: 4px;
+		-webkit-animation-timing-function: ease-in;
+    animation-timing-function: ease-in;
+	}
+	50% {
+		bottom: 5px;
+		-webkit-animation-timing-function: ease-out;
+    animation-timing-function: ease-out;
+	}
+	75% {
+		bottom: 4px;
+		-webkit-animation-timing-function: ease-in;
+    animation-timing-function: ease-in;
+	}
+	100% {
+		bottom: 0;
+	}
+*/
