@@ -500,13 +500,15 @@ export const ElementaryGameDescriptionDialog = ({
                   </>
                 )}
               </SlideContentWrapper>
-              <BalloonWrapper>
-                <BalloonContentWrapper>
-                  ▶︎をクリックして(または→キーで)
-                  <br />
-                  次のスライドを見ましょう
-                </BalloonContentWrapper>
-              </BalloonWrapper>
+              {slideState.slideNum === 0 && (
+                <BalloonWrapper>
+                  <BalloonContentWrapper>
+                    ▶︎をクリックして(または→キーで)
+                    <br />
+                    次のスライドを見ましょう
+                  </BalloonContentWrapper>
+                </BalloonWrapper>
+              )}
             </DynamicSlideContentWrapper>
             <ButtonLineWrapper>
               {slideState.slideNum !== 0 && (
@@ -534,33 +536,49 @@ export const ElementaryGameDescriptionDialog = ({
                 </ButtonWrapper>
               )}
               <ButtonWrapper onClick={changeSlideToRight}>
-                <Tooltip
-                  title={
-                    <div>
-                      進む
-                      <br />( 右矢印キー → )
-                    </div>
-                  }
-                  placement="top"
-                  disableHoverListener={slideState.slideNum === 5}
-                  sx={{
-                    opacity: slideState.slideNum === 5 ? 0 : 1,
-                  }}
-                >
+                {slideState.slideNum !== 0 ? (
+                  <Tooltip
+                    title={
+                      <div>
+                        進む
+                        <br />( 右矢印キー → )
+                      </div>
+                    }
+                    placement="top"
+                    disableHoverListener={slideState.slideNum === 5}
+                    sx={{
+                      opacity: slideState.slideNum === 5 ? 0 : 1,
+                    }}
+                  >
+                    <IconButton
+                      sx={{
+                        fontSize: "4.0em",
+                        opacity: slideState.slideNum === 5 ? 0.1 : 1,
+                        cursor:
+                          slideState.slideNum === 5 ? "default" : "pointer",
+                      }}
+                      disableRipple={slideState.slideNum === 5}
+                    >
+                      <ArrowRightIcon
+                        fontSize="inherit"
+                        sx={{ color: `${COLORS.BLACK}` }}
+                      />
+                    </IconButton>
+                  </Tooltip>
+                ) : (
                   <IconButton
                     sx={{
                       fontSize: "4.0em",
-                      opacity: slideState.slideNum === 5 ? 0.1 : 1,
-                      cursor: slideState.slideNum === 5 ? "default" : "pointer",
+                      opacity: 1,
+                      cursor: "pointer",
                     }}
-                    disableRipple={slideState.slideNum === 5}
                   >
                     <ArrowRightIcon
                       fontSize="inherit"
                       sx={{ color: `${COLORS.BLACK}` }}
                     />
                   </IconButton>
-                </Tooltip>
+                )}
               </ButtonWrapper>
             </ButtonLineWrapper>
           </DialogContent>
