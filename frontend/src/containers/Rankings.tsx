@@ -1,48 +1,49 @@
-import React, { Fragment, useState, useEffect, useLayoutEffect, useContext } from 'react';
-import styled from 'styled-components';
+import React, {
+  Fragment,
+  useState,
+  useEffect,
+  useLayoutEffect,
+  useContext,
+} from "react";
+import styled from "styled-components";
 
 // Presentational Components
-import { Header } from '../components/Headers/Header';
-import { Footer } from '../components/Footers/Footer';
-import { RankingBox } from '../components/Games/RankingBox';
-import { LoginDialog } from '../components/Dialogs/LoginDialog';
-import { SignUpDialog } from '../components/Dialogs/SignUpDialog';
+import { Header } from "../components/Headers/Header";
+import { Footer } from "../components/Footers/Footer";
+import { RankingBox } from "../components/Rankings/RankingBox";
+import { LoginDialog } from "../components/Dialogs/LoginDialog";
+import { SignUpDialog } from "../components/Dialogs/SignUpDialog";
 
 // Contextオブジェクト
 import { UserContext } from "../context/UserProvider";
 
 // ログイン状態を確認するAPIコール関数
-import { checkLoginStatus } from '../apis/checkLoginStatus';
+import { checkLoginStatus } from "../apis/checkLoginStatus";
 
 // ランキングを取得するAPIコール関数
-import { getRanking } from '../apis/ranking';
+import { getRanking } from "../apis/ranking";
 
 // HTTP_STATUS_CODE
-import { HTTP_STATUS_CODE } from '../constants';
+import { HTTP_STATUS_CODE } from "../constants";
 
 // rankingStateの型
-import { RankingState } from '../types/containers/rankings';
+import { RankingState } from "../types/containers/rankings";
 
-import { BottomWrapper, CustomWrapper } from '../components/shared_style';
+import { BottomWrapper, CustomWrapper } from "../components/shared_style";
 
 // メインのラッパー
 const MainWrapper = styled.div`
   padding-top: 3%;
 `;
 
-
 export const Rankings = (): JSX.Element => {
-
   // useContext
   // requestUserStateには、requestState, userState, errorsが格納されている
   // userStateにはsessionとuserが格納されている
   const {
-    requestUserState: {
-      sessionState,
-      battleAudioState
-    },
+    requestUserState: { sessionState, battleAudioState },
     dispatch,
-    requestUserActionTyps
+    requestUserActionTyps,
   } = useContext(UserContext);
 
   const initialState: RankingState = {
@@ -64,13 +65,13 @@ export const Rankings = (): JSX.Element => {
   // モーダルに関するstateの初期値
   const loginInitialState = {
     isOpenDialog: false,
-    modalType: ""
+    modalType: "",
   };
 
   // モバイルに関するstateの初期値
   const mobileInitialState = {
     display: false,
-    message: ""
+    message: "",
   };
 
   // モバイルを管理するstate
@@ -81,79 +82,81 @@ export const Rankings = (): JSX.Element => {
 
   // ブラウザをリロードしてもログイン状態を維持するためのuseEffect
   useLayoutEffect(() => {
-    if(sessionState === false){
-      checkLoginStatus().then((data) => {
-        dispatch({
-          type: requestUserActionTyps.REQUEST_SUCCESS,
-          payload: {
-            session: data.session,
-            user: data.user,
+    if (sessionState === false) {
+      checkLoginStatus()
+        .then((data) => {
+          dispatch({
+            type: requestUserActionTyps.REQUEST_SUCCESS,
+            payload: {
+              session: data.session,
+              user: data.user,
+            },
+          });
+        })
+        .catch((e) => {
+          if (e.response.status === HTTP_STATUS_CODE.NOT_FOUND) {
+            dispatch({
+              type: requestUserActionTyps.REQUEST_FAILURE,
+              payload: {
+                errors: e.response.data.errors,
+              },
+            });
+          } else {
+            throw e;
           }
         });
-      }).catch((e) => {
-        if(e.response.status === HTTP_STATUS_CODE.NOT_FOUND){
-          dispatch({
-            type: requestUserActionTyps.REQUEST_FAILURE,
-            payload: {
-              errors: e.response.data.errors
-            }
-          });
-        } else {
-          throw e;
-        }
-      })
     }
   }, [
     dispatch,
     sessionState,
     requestUserActionTyps.REQUEST,
     requestUserActionTyps.REQUEST_SUCCESS,
-    requestUserActionTyps.REQUEST_FAILURE
+    requestUserActionTyps.REQUEST_FAILURE,
   ]);
 
   // ランキングデータを取得するためのuseEffect
   useLayoutEffect(() => {
-    getRanking().then((data) => {
-      setRankingState((prev) => ({
-        ...prev,
-        topTenElementary: data.top_ten_elementary,
-        topTenIntermediate: data.top_ten_intermediate,
-        topTenAdvanced: data.top_ten_advanced,
-        currentTopTenArray: data.top_ten_elementary,
-        difficultyTitle: "初級編"
-      }));
-    }).catch((e) => {
-      if(e.response.status === HTTP_STATUS_CODE.NOT_FOUND){
+    getRanking()
+      .then((data) => {
         setRankingState((prev) => ({
           ...prev,
+          topTenElementary: data.top_ten_elementary,
+          topTenIntermediate: data.top_ten_intermediate,
+          topTenAdvanced: data.top_ten_advanced,
+          currentTopTenArray: data.top_ten_elementary,
+          difficultyTitle: "初級編",
         }));
-      } else {
-        throw e;
-      }
-    })
-  }, [
-  ]);
+      })
+      .catch((e) => {
+        if (e.response.status === HTTP_STATUS_CODE.NOT_FOUND) {
+          setRankingState((prev) => ({
+            ...prev,
+          }));
+        } else {
+          throw e;
+        }
+      });
+  }, []);
 
   // ゲーム中のユーザーがトップページに戻ったときに
   // 音を消すuseEffect
   useEffect(() => {
-    if(battleAudioState.play) {
+    if (battleAudioState.play) {
       battleAudioState.audio.pause();
       battleAudioState.audio.currentTime = 0;
     }
-  },[
-    battleAudioState.play,
-    battleAudioState.audio
-  ])
+  }, [battleAudioState.play, battleAudioState.audio]);
 
   return (
     <>
       <CustomWrapper>
         <Header
-          onClickLink={(modalType) => setState({
-            isOpenDialog: true,
-            modalType: modalType
-          })}
+          onClickLink={(modalType) =>
+            setState({
+              isOpenDialog: true,
+              modalType: modalType,
+            })
+          }
           setMobileState={setMobileState}
         />
         <MainWrapper>
@@ -168,34 +171,40 @@ export const Rankings = (): JSX.Element => {
           <Footer />
         </BottomWrapper>
       </CustomWrapper>
-      {
-        state.isOpenDialog && state.modalType === "login" &&
-          <LoginDialog
-            isOpen={state.isOpenDialog}
-            onClose={() => setState({
+      {state.isOpenDialog && state.modalType === "login" && (
+        <LoginDialog
+          isOpen={state.isOpenDialog}
+          onClose={() =>
+            setState({
               isOpenDialog: false,
-              modalType: ""
-            })}
-            onClick={() => setState({
+              modalType: "",
+            })
+          }
+          onClick={() =>
+            setState({
               isOpenDialog: true,
-              modalType: "signUp"
-            })}
-          />
-      }
-      {
-        state.isOpenDialog && state.modalType === "signUp" &&
-          <SignUpDialog
-            isOpen={state.isOpenDialog}
-            onClose={() => setState({
+              modalType: "signUp",
+            })
+          }
+        />
+      )}
+      {state.isOpenDialog && state.modalType === "signUp" && (
+        <SignUpDialog
+          isOpen={state.isOpenDialog}
+          onClose={() =>
+            setState({
               isOpenDialog: false,
-              modalType: ""
-            })}
-            onClick={() => setState({
+              modalType: "",
+            })
+          }
+          onClick={() =>
+            setState({
               isOpenDialog: true,
-              modalType: "login"
-            })}
-          />
-      }
+              modalType: "login",
+            })
+          }
+        />
+      )}
     </>
   );
 };
