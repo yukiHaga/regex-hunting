@@ -268,34 +268,40 @@ export const CustomWrapper = styled.div`
 `;
 
 // バルーンのアニメーション
-export const AnimateBalloon = keyframes`
+const AnimateBalloon = keyframes`
 	0%,100% {bottom: 0;}
 	30% {bottom: -4%;}
 	90% {bottom: 0;}
 `;
 
-/*
-	0% {
-		bottom: 0;
-		-webkit-animation-timing-function: ease-out;
-    animation-timing-function: ease-out;
-	}
-	25% {
-		bottom: 4px;
-		-webkit-animation-timing-function: ease-in;
-    animation-timing-function: ease-in;
-	}
-	50% {
-		bottom: 5px;
-		-webkit-animation-timing-function: ease-out;
-    animation-timing-function: ease-out;
-	}
-	75% {
-		bottom: 4px;
-		-webkit-animation-timing-function: ease-in;
-    animation-timing-function: ease-in;
-	}
-	100% {
-		bottom: 0;
-	}
-*/
+// バルーン
+export const BalloonWrapper = styled.div`
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  margin: 1.5em 0;
+  padding: 9px 12px;
+  min-width: 120px;
+  max-width: 100%;
+  color: ${COLORS.WHITE};
+  font-size: 0.9em;
+  background-color: ${COLORS.LIGHT_MAIN};
+  z-index: 100000;
+  border-radius: 10px;
+  animation: ${AnimateBalloon} 1.5s ease infinite;
+  &:before {
+    content: "";
+    position: absolute;
+    top: 100%;
+    right: 15%;
+    margin-left: -15px;
+    border: 15px solid transparent;
+    border-top: 15px solid ${COLORS.LIGHT_MAIN};
+  }
+`;
+
+// バルーンの中身
+export const BalloonContentWrapper = styled.span`
+  margin: 0;
+  padding: 0;
+`;

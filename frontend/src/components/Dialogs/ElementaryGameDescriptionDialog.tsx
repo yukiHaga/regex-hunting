@@ -44,7 +44,12 @@ import {
 } from "../shared_style";
 
 // 説明スライドのワーニングセンテンス
-import { WarningSentenceWrapper, AnimateBalloon } from "../shared_style";
+// スライド1ページ目の吹き出し
+import {
+  WarningSentenceWrapper,
+  BalloonWrapper,
+  BalloonContentWrapper,
+} from "../shared_style";
 
 // スライド関連のコンポーネントやstateの型
 import {
@@ -67,36 +72,6 @@ const DynamicSlideContentWrapper = styled.div`
   height: 78%;
   margin: 0 auto;
   position: relative;
-`;
-
-const BalloonWrapper = styled.div`
-  position: absolute;
-  bottom: 0;
-  right: 0;
-  margin: 1.5em 0;
-  padding: 9px 12px;
-  min-width: 120px;
-  max-width: 100%;
-  color: ${COLORS.WHITE};
-  font-size: 0.9em;
-  background-color: ${COLORS.LIGHT_MAIN};
-  z-index: 100000;
-  border-radius: 10px;
-  animation: ${AnimateBalloon} 1.5s ease infinite;
-  &:before {
-    content: "";
-    position: absolute;
-    top: 100%;
-    right: 15%;
-    margin-left: -15px;
-    border: 15px solid transparent;
-    border-top: 15px solid ${COLORS.LIGHT_MAIN};
-  }
-`;
-
-const BalloonContentWrapper = styled.span`
-  margin: 0;
-  padding: 0;
 `;
 
 const TitleWrapper = styled.div`
