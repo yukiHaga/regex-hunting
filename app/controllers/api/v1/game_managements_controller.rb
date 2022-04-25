@@ -12,13 +12,9 @@ class Api::V1::GameManagementsController < ApplicationController
   # finishに関するbefore_action
   # current_userが存在するときだけ、実行させる
   # logged_in?は現在ログイン中かどうか、true or falseで返す。
-  before_action :set_finish_game_management, only: :finish, if: :logged_in?
-  before_action :set_correct_questions, only: :finish, if: :logged_in?
-  before_action :set_incorrect_questions, only: :finish, if: :logged_in?
+  before_action :set_finish, only: :finish, if: :logged_in?
 
   def start
-    binding.pry
-    # レンダリング
     # このユーザーはゲームに使用するユーザー
     # contextのユーザーとは何も関係ない
     render json: {
@@ -70,7 +66,6 @@ class Api::V1::GameManagementsController < ApplicationController
       )
     end
 
-    # レンダリング
     # ログインユーザーに返すjson
     # このuserのデータはcontextのユーザーに反映される
     render json: {
@@ -82,11 +77,10 @@ class Api::V1::GameManagementsController < ApplicationController
 
   private
 
-    # set_startは、問題に必要なインスタンス変数を返すプライベートメソッド
+    # set_startは、ゲーム開始に必要なインスタンス変数を返すプライベートメソッド
     # current_userが存在しないなら、@game_managementのuser_idのバリューがnilになる
     # indicesと@questionsは、問題に関する処理
-    # RAND()を使用すると、本番のDBによっては使えなかったりする為、
-    # sampleを使用する。
+    # RAND()を使用すると、本番のDBによっては使えなかったりする為、sampleを使用する。
     # sample(14)でpluck(:id)の配列の中で、要素をランダムに14個、1つの配列として返す
     # ただ、DBから取得しても、結局小さい順になるため、shuffleメソッドを使用する
     # shuffleで配列の要素をランダムにシャッフルして、その結果を配列として返す
@@ -110,8 +104,8 @@ class Api::V1::GameManagementsController < ApplicationController
               end
     end
 
-    # ゲーム終了時のgame_management
-    def set_finish_game_management
+    # set_startは、ゲーム終了に必要なインスタンス変数を返すプライベートメソッド
+    def set_finish
       @game_management = current_user.game_managements
                                      .create(
                                        difficulty: params[:game_management][:difficulty],
@@ -119,15 +113,7 @@ class Api::V1::GameManagementsController < ApplicationController
                                        result_time: params[:game_management][:result_time],
                                        play_date: Time.zone.today
                                      )
-    end
-
-    # ゲーム終了時のcorrect_questions
-    def set_correct_questions
       @correct_questions = params[:judgement][:correct]
-    end
-
-    # ゲーム終了時のincorrect_questions
-    def set_incorrect_questions
       @incorrect_questions = params[:judgement][:incorrect]
     end
 
