@@ -7,10 +7,7 @@ class Api::V1::GameManagementsController < ApplicationController
   # startに関するbefore_action
   # set_userをfinishで実行すると、ステータスが更新されたデータをフロントに送ることができない為、
   # finishでset_userを使用することはやめた
-  before_action :set_start_game_management, only: :start
-  before_action :set_monster, only: :start
-  before_action :set_questions, only: :start
-  before_action :set_user, only: :start
+  before_action :set_start, only: :start
 
   # finishに関するbefore_action
   # current_userが存在するときだけ、実行させる
@@ -19,17 +16,8 @@ class Api::V1::GameManagementsController < ApplicationController
   before_action :set_correct_questions, only: :finish, if: :logged_in?
   before_action :set_incorrect_questions, only: :finish, if: :logged_in?
 
-  # ゲストユーザーのゲーム中のステータス
-  GUEST_USER = {
-    rank: 1,
-    total_experience: 0,
-    maximum_experience_per_rank: 500,
-    temporary_experience: 0,
-    prev_temporary_experience: 0,
-    active_title: '見習いハンター'
-  }
-
   def start
+    binding.pry
     # レンダリング
     # このユーザーはゲームに使用するユーザー
     # contextのユーザーとは何も関係ない
@@ -94,42 +82,31 @@ class Api::V1::GameManagementsController < ApplicationController
 
   private
 
-    # start時にgame_managementを生成する関数
-    # current_userが存在しないなら、user_idのバリューがnilになる
-    def set_start_game_management
+    # set_startは、問題に必要なインスタンス変数を返すプライベートメソッド
+    # current_userが存在しないなら、@game_managementのuser_idのバリューがnilになる
+    # indicesと@questionsは、問題に関する処理
+    # RAND()を使用すると、本番のDBによっては使えなかったりする為、
+    # sampleを使用する。
+    # sample(14)でpluck(:id)の配列の中で、要素をランダムに14個、1つの配列として返す
+    # ただ、DBから取得しても、結局小さい順になるため、shuffleメソッドを使用する
+    # shuffleで配列の要素をランダムにシャッフルして、その結果を配列として返す
+    # ログインユーザーがゲームをプレイする場合、ログインユーザーのデータをJSON形式でシリアライズする
+    # ゲストユーザーがゲームをプレイする場合、ゲストユーザー用のデータを@userに代入する
+    # User.handle_game_user_serializer(nil)で例外が発生する
+    def set_start
       @game_management = GameManagement.new(
         difficulty: params[:difficulty],
         game_result: 'progress',
         play_date: Time.zone.today,
         user_id: current_user ? current_user.id : nil
       )
-    end
-
-    # start時にモンスターを取得する関数
-    def set_monster
       @monster = Monster.find_by(difficulty: params[:difficulty])
-    end
-
-    # 問題に関する処理
-    # RAND()を使用すると、本番のDBによっては使えなかったりする為、
-    # sampleを使用する。
-    # sample(14)でpluck(:id)の配列の中で、要素をランダムに14個、1つの配列として返す
-    # ただ、DBから取得しても、結局小さい順になるため、shuffleメソッドを使用する
-    # shuffleで配列の要素をランダムにシャッフルして、その結果を配列として返す
-    def set_questions
       indices = Question.where(difficulty: params[:difficulty]).pluck(:id).sample(14)
       @questions = Question.where(id: indices, difficulty: params[:difficulty]).shuffle
-    end
-
-    # start時にユーザーを取得する関数
-    # ログインユーザーがゲームをプレイする場合、ログインユーザーのデータをJSON形式でシリアライズする
-    # ゲストユーザーがゲームをプレイする場合、ゲストユーザー用のデータを@userに代入する
-    # User.handle_game_user_serializer(nil)で例外が発生する
-    def set_user
       @user = if current_user
                 User.handle_game_user_serializer(current_user)
               else
-                GUEST_USER
+                Settings.GUEST_USER.to_h
               end
     end
 

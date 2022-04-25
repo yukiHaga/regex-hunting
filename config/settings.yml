@@ -6,3 +6,11 @@ GAME_CONDITION_HASH:
   伝説のハンター: 10
   無我の境地: 12
   語り継がれし英雄: 14
+
+GUEST_USER:
+  rank: 1
+  total_experience: 0
+  maximum_experience_per_rank: 500
+  temporary_experience: 0
+  prev_temporary_experience: 0
+  active_title: "見習いハンター"
