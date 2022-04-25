@@ -19,22 +19,6 @@ class Api::V1::GameManagementsController < ApplicationController
   before_action :set_correct_questions, only: :finish, if: :logged_in?
   before_action :set_incorrect_questions, only: :finish, if: :logged_in?
 
-  # タイトルに関する処理
-  # レベルアップしているかつ、
-  # ユーザーのレベルが、CONDITION_HASHのバリューのレベルを満たすなら、
-  # active_titleを更新する
-  # active_titleに代入している為、レベルが上がるごとに、マイページで設定したタイトルが
-  # 変更される
-  CONDITION_HASH = {
-    一人前ハンター: 2,
-    玄人ハンター: 4,
-    いにしえのハンター: 6,
-    天才と呼ばれしハンター: 8,
-    伝説のハンター: 10,
-    無我の境地: 12,
-    語り継がれし英雄: 14
-  }
-
   # ゲストユーザーのゲーム中のステータス
   GUEST_USER = {
     rank: 1,
@@ -73,14 +57,14 @@ class Api::V1::GameManagementsController < ApplicationController
     # レベルアップしている場合、temporary_experienceが0になる
     # さらに、あるレベルに到達すると称号を解放する
     # current_userにsaltやcrypted_passwordなどのカラムを含めてjsonを送ってはダメ
-    if rank_up? && CONDITION_HASH.values.include?(params[:current_user][:rank] + 1)
-      current_user.release_new_title((Title.find_by(name: CONDITION_HASH.key(params[:current_user][:rank] + 1)))[:id])
+    if rank_up? && Settings.GAME_CONDITION_HASH.to_h.values.include?(params[:current_user][:rank] + 1)
+      current_user.release_new_title((Title.find_by(name: Settings.GAME_CONDITION_HASH.to_h.key(params[:current_user][:rank] + 1)))[:id])
       current_user.update(
         rank: params[:current_user][:rank] + 1,
         total_experience: params[:current_user][:total_experience],
         maximum_experience_per_rank: params[:current_user][:maximum_experience_per_rank] + 100,
         temporary_experience: 0,
-        active_title: CONDITION_HASH.key(params[:current_user][:rank] + 1)
+        active_title: Settings.GAME_CONDITION_HASH.to_h.key(params[:current_user][:rank] + 1)
       )
     elsif rank_up?
       current_user.update(
