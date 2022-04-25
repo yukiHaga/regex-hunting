@@ -7,6 +7,16 @@ GAME_CONDITION_HASH:
   無我の境地: 12
   語り継がれし英雄: 14
 
+TITLE_CONDITION_HASH:
+  見習いハンター: 1
+  一人前ハンター: 2
+  玄人ハンター: 4
+  いにしえのハンター: 6
+  天才と呼ばれしハンター: 8
+  伝説のハンター: 10
+  無我の境地: 12
+  語り継がれし英雄: 14
+
 GUEST_USER:
   rank: 1
   total_experience: 0
