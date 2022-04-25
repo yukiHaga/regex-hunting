@@ -42,7 +42,7 @@ class Api::V1::OauthsController < ApplicationController
         }, status: :ok
       rescue StandardError => e
         # ログ6
-        logger.debug "⑥begin内でエラーが出たので、rescue節にいます"
+        logger.debug '⑥begin内でエラーが出たので、rescue節にいます'
         # ログ7
         logger.debug "⑦エラー, #{e}"
 
