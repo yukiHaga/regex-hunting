@@ -1,19 +1,18 @@
 require 'rails_helper'
 
 # ログインユーザーは存在しないとする
-RSpec.describe "GameManagement", type: :request do
-
+RSpec.describe 'GameManagement', type: :request do
   # 初級編の問題
-  let!(:elementary_question) { create(:question, :elementary) };
+  let!(:elementary_question) { create(:question, :elementary) }
 
   # 初級編のモンスター
-  let!(:elementary_monster) { create(:monster, :elementary) };
+  let!(:elementary_monster) { create(:monster, :elementary) }
 
   # game_managements#startのテスト
   # ゲーム用ユーザーは用意してないので、値があっているかチェックする
   # リクエストスペックは、ステータスコードとレスポンスボディを返す
-  describe "GET /api/v1/start&difficulty=elementary" do
-    it "game_start_data" do
+  describe 'GET /api/v1/start&difficulty=elementary' do
+    it 'game_start_data' do
       get api_v1_start_path(difficulty: :elementary)
       json = JSON.parse(response.body)
       expect(response).to have_http_status(200)

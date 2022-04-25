@@ -132,6 +132,7 @@ Regex Hunting は、モンスターを倒しながら正規表現が学ベる学
 - Heroku
 - Amazon S3
 - PostgreSQL
+- New Relic
   <br>
 
 ## ER 図
