@@ -6,10 +6,10 @@ class Api::V1::MyPagesController < ApplicationController
   # 実際にフロントに送られる問題数は14
 
   def index
-    game_frequencies_per_day = query_game_frequencies_per_day(@this_month)
-    total_time_per_difficulty = query_total_time_per_difficulty(@this_month)
-    game_clear_count_per_difficulty = query_game_clear_count_per_difficulty(@this_month)
-    fast_time_per_difficulty = query_fast_time_per_difficulty(@this_month)
+    game_frequencies_per_day = current_user.query_game_frequencies_per_day(@this_month)
+    total_time_per_difficulty = current_user.query_total_time_per_difficulty(@this_month)
+    game_clear_count_per_difficulty = current_user.query_game_clear_count_per_difficulty(@this_month)
+    fast_time_per_difficulty = current_user.query_fast_time_per_difficulty(@this_month)
     owned_titles = query_owned_titles
 
     # レンダリング
@@ -31,62 +31,6 @@ class Api::V1::MyPagesController < ApplicationController
       beginning_day = today.beginning_of_month
       last_day = today.end_of_month
       @this_month = beginning_day..last_day
-    end
-
-    # 今月の各日におけるゲーム回数
-    # win, lose関係なしに取得する
-    # play_dateをキー、頻度をバリューに持つハッシュが生成される
-    def query_game_frequencies_per_day(this_month)
-      current_user.game_managements
-                  .where(play_date: this_month)
-                  .group(:play_date)
-                  .count
-    end
-
-    # 今月の各難易度のプレイ時間
-    # win, lose関係なしに取得する
-    # SUM(result_time)は、difficultyのグループ毎に実施される
-    # selectメソッド内に集約関数を入れた場合、.total_timeでその値を呼び出すことができる
-    # selectメソッドの集約関数の結果は、ARオブジェクトにフィールドとして反映されないため、
-    # 自分でオブジェクトを作る
-    def query_total_time_per_difficulty(this_month)
-      current_user.game_managements
-                  .where(play_date: this_month)
-                  .group(:difficulty)
-                  .select('difficulty, SUM(result_time) AS total_time')
-                  .to_h do |data|
-        [data.difficulty, data.total_time]
-      end
-    end
-
-    # 今月の各難易度のゲームクリア回数
-    # 難易度がキー、今月の難易度におけるクリア回数がバリューになる
-    # キーバリューを3つ持つ1つのハッシュが作成される
-    def query_game_clear_count_per_difficulty(this_month)
-      current_user.game_managements
-                  .where(
-                    play_date: this_month,
-                    game_result: 'win'
-                  )
-                  .group(:difficulty)
-                  .select('difficulty, COUNT(*) AS total_count')
-                  .to_h do |data|
-        [data.difficulty, data.total_count]
-      end
-    end
-
-    # 今月かつwinかつ各難易度の最速タイム
-    def query_fast_time_per_difficulty(this_month)
-      current_user.game_managements
-                  .where(
-                    play_date: this_month,
-                    game_result: 'win'
-                  )
-                  .group(:difficulty)
-                  .select('difficulty, MIN(result_time) AS fast_time')
-                  .to_h do |data|
-        [data.difficulty, data.fast_time]
-      end
     end
 
     # ユーザーのrelease_titlesのtitle_idとrelease_dateを取得する
