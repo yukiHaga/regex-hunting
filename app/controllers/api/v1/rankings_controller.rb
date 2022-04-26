@@ -17,6 +17,7 @@ class Api::V1::RankingsController < ApplicationController
   private
 
     # joinsメソッドでusersテーブルとgame_managementsテーブルを内部結合させる
+    # モデルに書いたがうまく動かなかったので、コントローラに定義する
     # usersはopen_rankがtrue、game_managementsはdifficultyが実引数の値でgame_resultがwin
     # usersテーブルのidでグループにする
     # users.*, users.name, users.rank, users.active_title,
