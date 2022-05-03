@@ -26,8 +26,10 @@ class Api::V1::UsersController < ApplicationController
         user: User.handle_profile_user_serializer(current_user, current_user.avatar.attached? ? url_for(current_user.avatar) : nil)
       }, status: :created
     else
+      # ログ5
       logger.debug "⑤if文false時のuser: #{@user}"
-      logger.debug "⑤if文false時のエラー内容: #{@user.errors.full_messages}"
+      # ログ6
+      logger.debug "⑥if文false時のエラー内容: #{@user.errors.full_messages}"
       render json: { errors: @user.errors }, status: :bad_request
     end
   end
